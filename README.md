@@ -1,5 +1,5 @@
 ![](https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b)
-# ORM tool for .Net / .Net.Core
+# Fastest ORM tool for .Net / .Net.Core
 
 OrmDB is a simple, fast and lightweight embedded .NET ORM tool which was inspired by the equivalent other tools.
 
