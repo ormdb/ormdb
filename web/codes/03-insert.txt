@@ -1,0 +1,61 @@
+﻿using Odb;
+
+    // create connection
+    var cn = Connection.Manager.Create(); 
+
+    // initialize table alias => (... FROM TableHeader AS h)
+    var h = new TableHeader();
+    var l = new TableLines();
+
+
+
+/* MULTI ROW insert
+
+	INSERT INTO TableHeader AS h (fields...) VALUES (...);
+	INSERT INTO TableHeader AS h (fields...) VALUES (...);
+	... -> 100
+*/
+var sql = SQL.X.Insert(h, SetInitials:true);
+
+for (n = 1; (n <= 100); n++) {
+    var row = sql.AddRow();
+        row(h.Year) = 2017;
+        row(h.Id) = n;
+        row(h.DocDate) = now().ToString("yyyyMMdd");
+		// [Note] is accepted as (string.Empty).
+        // row(h.Note) = "Note -" + n.toString();
+}
+
+sql.Execute(cn);
+
+
+
+/* BATCH TABLE insert
+
+	INSERT INTO TableHeader AS h (fields...) VALUES (...);
+	INSERT INTO TableHeader AS h (fields...) VALUES (...);
+	... -> 100
+
+	INSERT INTO TableLines  AS l (fields...) VALUES (...);
+	... -> 200 (= 100 x 2)
+*/
+var sql = SQL.X.Query();
+
+var header = sql.Insert(h, SetInitials:true);
+var line = sql.Insert(l, SetInitials:true);
+
+for (n = 1; (n <= 100); n++) {
+    var header_row = header.AddRow();
+        header_row(h.Year) = 2017;
+        header_row(h.Id) = n;
+        header_row(h.DocDate) = now().ToString("yyyyMMdd");
+
+	for (m = 1; (m <= 2); m++) {
+		var line_row = line.AddRow();
+			line_row(l.Year) = header_row(h.Year);
+			line_row(l.Id) = header_row(h.Id);
+			line_row(l.LineId) = m;
+	}
+}
+
+sql.Execute(cn);
