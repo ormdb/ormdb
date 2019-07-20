@@ -127,7 +127,8 @@
        }
         $(function () {
             var location_path = location.href.split("/");
-            location_path = location_path.pop().join("/")
+            location_path.pop();
+            location_path = location_path.join("/")
             _load_code(location_path + "/web/codes/01-definition.txt", "#code1-data");
             _load_code(location_path + "/web/codes/02-select.txt", "#code2-data");
             _load_code(location_path + "/web/codes/03-insert.txt", "#code3-data");
