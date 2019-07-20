@@ -1,0 +1,33 @@
+// Table Definition
+using Odb;
+using Odb.Table;
+
+public class TableHeader : Base
+{
+    [ColumnNumeric(4, 0)] public Column Year;
+    [ColumnNumeric(4, 0)] public Column Id;
+    [ColumnString(15)   ] public Column Note;
+    [ColumnNumeric(8, 0)] public Column DocDate;
+    [ColumnBoolean()    ] public Column IsActive;
+
+    protected override void InitKeyInfo()
+    {
+        base.PrimaryKey(new[] { Year, Id });
+    }
+}
+public class TableLines : Base
+{
+    [ColumnNumeric(4, 0)] public Column Year;
+    [ColumnNumeric(4, 0)] public Column Id;
+    [ColumnNumeric(2, 0)] public Column LineId;
+    [ColumnString(15)   ] public Column Note;
+
+    protected override void InitKeyInfo()
+    {
+        base.AddPrimaryKey(new[] { Year, Id, LineId });
+    }
+}
+
+// define connection for once
+Connection.Manager.Register(Provider.Type.MsSql, 
+                            "<host>", "<db>", "<user>", "<pass>");
