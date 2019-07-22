@@ -18,7 +18,6 @@
             <a href="https://github.com/ormdb/ormdb">Fork us on GitHub</a>
         </div>
     </div>
-
     <header>
         <div class="container">
             <img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80" />
@@ -28,7 +27,6 @@
             </ul>
         </div>
     </header>
-
     <div class="banner">
         <h1>Fastest ORM tool for .Net / .Net.Core</h1>
         <h2>is a simple, fast and lightweight embedded .NET ORM tool</h2>
@@ -52,11 +50,9 @@
                 </span>
             </a>
         </div>
-
         <br />
         <h2>One code for all databases. Besides FREE for everyone - including commercial use</h2>
     </div>
-
     <div class="container" style="flex-wrap: wrap; min-width: 250px;">
         <div class="feature">
             <h1><i class="fa fa-check-square-o"></i>No Dependencies</h1>
@@ -85,7 +81,6 @@
             </ul>
         </div>
     </div>
-
     <div class="banner-title">
         <div class="container">
             Samples<h2></h2>
@@ -109,11 +104,9 @@
         <pre class="demo-box" id="code5" style="display: none"><code class="language-csharp" id="code5-data"></code></pre>
         <pre class="demo-box" id="code6" style="display: none"><code class="language-csharp" id="code6-data"></code></pre>
     </div>
-
     <footer>
         OrmDB - MIT License
     </footer>
-
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="js/prism.js"></script>
     <script>
@@ -123,8 +116,9 @@
                 var _code = Prism.highlight(data, Prism.languages.csharp, 'csharp');
                 _dom.html(_code);
             });
-       }
+        }
         $(function () {
+            //-- Examples are being loaded...
             var location_path = location.href.split("/");
             location_path.pop();
             location_path = location_path.join("/")
@@ -134,7 +128,15 @@
             _load_code(location_path + "/codes/04-update.txt", "#code4-data");
             _load_code(location_path + "/codes/05-delete.txt", "#code5-data");
             _load_code(location_path + "/codes/06-datatable.txt", "#code6-data");
+
+            //-- Masked IFrame workaround - FavIcon
+            var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+            link.type = 'image/x-icon';
+            link.rel = 'shortcut icon';
+            link.href = 'https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b';
+            document.getElementsByTagName('head')[0].appendChild(link);
         });
+
     </script>
     <script>
         $(".examples a").click(function () {
@@ -144,25 +146,16 @@
             $($(this).attr("data-code")).show();
         });
     </script>
-    
-    <!-- Masked IFrame workaround - FavIcon -->
-    <script>
-        var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-        link.type = 'image/x-icon';
-        link.rel = 'shortcut icon';
-        link.href = 'https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b';
-        document.getElementsByTagName('head')[0].appendChild(link);
-    </script>
+
     
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144186634-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-      gtag('config', 'UA-144186634-1');
+        gtag('config', 'UA-144186634-1');
     </script>
-
 </body>
 </html>
