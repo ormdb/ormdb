@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/prism.css">
     <link rel="stylesheet" href="css/site.css" />
 </head>
@@ -53,81 +54,98 @@
         <br />
         <h2>One code for all databases. Besides FREE for everyone - including commercial use</h2>
     </div>
-    <div class="container" style="flex-wrap: wrap; min-width: 250px;">
-        <div class="feature">
-            <h1><i class="fa fa-check-square-o"></i>No Dependencies</h1>
-            <p>OrmDb is standalone a single DLL (less than 200kb) fully written in .NET managed code (compatible with .NET 4.x, NETCore 2.2 and above).</p>
-            <br />
-            <p>You can install via NuGet or just copy DLL to your bin project folder.</p>
+    <div class="container">
+        <div class="row">
+            <div class="feature col-md-4 col-sm-12">
+                <h1><i class="fa fa-check-square-o"></i>No Dependencies</h1>
+                <div class="feature-content">
+                    <p>OrmDb is standalone a single DLL (less than 200kb) fully written in .NET managed code (compatible with .NET 4.x, NETCore 2.2 and above).</p>
+                    <br />
+                    <p>You can install via NuGet or just copy DLL to your bin project folder.</p>
+
+                </div>
+            </div>
+            <div class="feature col-md-4 col-sm-12">
+                <h1><i class="fa fa-flash"></i>Fast and lightweight</h1>
+                <div class="feature-content">
+                    <p>OrmDb is a simple and fast ORM solution. Ideal for any applications.</p>
+                    <br />
+                    <p>You can run HUGE queries and read data <b>Fast</b> and <b>low resource consumption</b>.</p>
+                </div>
+            </div>
+            <div class="feature col-md-4 col-sm-12">
+                <h1><i class="fa fa-database"></i>And much more...</h1>
+                <ul>
+                    <li>Many database support such as MsSQL, PostgreSQL, MySQL, MariaDB and Oracle (for now)</li>
+                    <li>DDL(Data Definition Language) support</li>
+                    <li>DML(Data Manipulation Language) support</li>
+                    <li>TCL(transaction Control Language) support</li>
+                    <li>Map your POCO class for queries</li>
+                    <li>Cross column references (ColumnRef)</li>
+                    <li>Aggregate support such as TRIM, SUM, AVG, CONCATE, MAX, CONTAINS and many more</li>
+                    <li>DataTable and CRUD operation support</li>
+                    <li>DataReader support</li>
+                </ul>
+            </div>
         </div>
-        <div class="feature">
-            <h1><i class="fa fa-flash"></i>Fast and lightweight</h1>
-            <p>OrmDb is a simple and fast ORM solution. Ideal for any applications.</p>
-            <br />
-            <p>You can run HUGE queries and read data <b>Fast</b> and <b>low resource consumption</b>.</p>
-        </div>
-        <div class="feature">
-            <h1><i class="fa fa-database"></i>And much more...</h1>
-            <ul>
-                <li>Many database support such as MsSQL, PostgreSQL, MySQL, MariaDB and Oracle (for now)</li>
-                <li>DDL(Data Definition Language) support</li>
-                <li>DML(Data Manipulation Language) support</li>
-                <li>TCL(transaction Control Language) support</li>
-                <li>Map your POCO class for queries</li>
-                <li>Cross column references (ColumnRef)</li>
-                <li>Aggregate support such as TRIM, SUM, AVG, CONCATE, MAX, CONTAINS and many more</li>
-                <li>DataTable and CRUD operation support</li>
-                <li>DataReader support</li>
-            </ul>
-        </div>
+    </div>
     </div>
     <div class="banner-title">
         <div class="container">
             Samples<h2></h2>
         </div>
     </div>
-    <div class="container ex">
-        <div class="examples">
-            <ul>
-                <li class="active"><a href="javascript:;" data-code="#code1"><i class="fa fa-cube"></i>Definition</a></li>
-                <li><a href="javascript:;" data-code="#code2"><i class="fa fa-cube"></i>Select</a></li>
-                <li><a href="javascript:;" data-code="#code3"><i class="fa fa-cube"></i>Insert</a></li>
-                <li><a href="javascript:;" data-code="#code4"><i class="fa fa-cube"></i>Update</a></li>
-                <li><a href="javascript:;" data-code="#code5"><i class="fa fa-cube"></i>Delete</a></li>
-                <li><a href="javascript:;" data-code="#code6"><i class="fa fa-cube"></i>DataTable</a></li>
-            </ul>
-        </div>
-        <pre class="demo-box" id="code1" style="display:normal"><code class="language-csharp" id="code1-data"></code></pre>
-        <pre class="demo-box" id="code2" style="display: none"><code class="language-csharp" id="code2-data"></code></pre>
-        <pre class="demo-box" id="code3" style="display: none"><code class="language-csharp" id="code3-data"></code></pre>
-        <pre class="demo-box" id="code4" style="display: none"><code class="language-csharp" id="code4-data"></code></pre>
-        <pre class="demo-box" id="code5" style="display: none"><code class="language-csharp" id="code5-data"></code></pre>
-        <pre class="demo-box" id="code6" style="display: none"><code class="language-csharp" id="code6-data"></code></pre>
+
+    <div class="container" id="examples">
+        <ul id="examples_menu"></ul>
+        <pre class="w-100 p-4 m-0 d-inline-block"><code class="language-csharp" id="examples_data"></code></pre>
     </div>
+
     <footer>
         OrmDB - MIT License
     </footer>
+
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="js/prism.js"></script>
     <script>
-        function _load_code(url, target) {
-            var _dom = $(target)
-            _dom.load(url, function (data) {
-                var _code = Prism.highlight(data, Prism.languages.csharp, 'csharp');
-                _dom.html(_code);
-            });
+
+        var _examples_data = [];
+        function _example_activate(index) {
+            $("#examples_menu>li").removeClass("active");
+            $("#examples_menu>li:eq(" + index + ")").addClass("active");
+            $("#examples_data").html(_examples_data[index]);
         }
         $(function () {
             //-- Examples are being loaded...
             var location_path = location.href.split("/");
             location_path.pop();
             location_path = location_path.join("/")
-            _load_code(location_path + "/codes/01-definition.txt", "#code1-data");
-            _load_code(location_path + "/codes/02-select.txt", "#code2-data");
-            _load_code(location_path + "/codes/03-insert.txt", "#code3-data");
-            _load_code(location_path + "/codes/04-update.txt", "#code4-data");
-            _load_code(location_path + "/codes/05-delete.txt", "#code5-data");
-            _load_code(location_path + "/codes/06-datatable.txt", "#code6-data");
+
+            var items = [
+                { title: "Definition", file: "01-definition.txt" },
+                { title: "Select", file: "02-select.txt" },
+                { title: "Insert", file: "03-insert.txt" },
+                { title: "Update", file: "04-update.txt" },
+                { title: "Delete", file: "05-delete.txt" },
+                { title: "DataTable", file: "06-datatable.txt" }
+            ];
+
+            var ul = $("#examples_menu");
+            items.forEach(
+                function (item, index) {
+                    ul.append('<li onclick="_example_activate(' + index + ');"><i class="fa fa-cube mr-3"></i>' + item.title + '</li>');
+
+                    var _url = location_path + "/codes/" + item.file;
+                    $.get(_url, function (data) {
+                        _examples_data[index] = Prism.highlight(data, Prism.languages.csharp, 'csharp');
+                        if (index == 0) {
+                            _example_activate(0);
+                        }
+                    });
+
+                }
+            );
+
 
             //-- Masked IFrame workaround - FavIcon
             var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
@@ -136,18 +154,9 @@
             link.href = 'https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b';
             document.getElementsByTagName('head')[0].appendChild(link);
         });
-
-    </script>
-    <script>
-        $(".examples a").click(function () {
-            $(".examples li").removeClass("active");
-            $(this).parent().addClass("active");
-            $("pre.demo-box").hide();
-            $($(this).attr("data-code")).show();
-        });
     </script>
 
-    
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144186634-1"></script>
     <script>
