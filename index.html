@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OrmDB :: Fastest ORM tool for .Net / .Net.Core</title>
+    <meta name="description" content="OrmDB :: OrmDB is the Fastest and best ORM tool for .Net / .Net.Core">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/prism.css">
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <div class="github-fork-ribbon-wrapper right">
+        <div class="github-fork-ribbon">
+            <a href="https://github.com/ormdb/ormdb" target="_blank">Fork us on GitHub</a>
+        </div>
+    </div>
+    <header>
+        <div class="container">
+            <img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80" />
+            <ul class="nav">
+                <li><a href="https://github.com/ormdb/ormdb/wiki" target="_blank" style="">DOCS</a></li>
+                <li><a href="https://github.com/ormdb/ormdb/releases/" target="_blank" style="">Download</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="banner">
+        <h1>Fastest ORM tool for .Net / .Net.Core</h1>
+        <h2>is a simple, fast and lightweight embedded .NET ORM tool</h2>
+        <br />
+        <br />
+        <div style="padding:20px;text-align:center;">
+            <a href="https://www.nuget.org/packages/OrmDb/" target="_blank" style="margin:10px; text-decoration:none;padding:1px;display: inline-flex;align-items: center;background-color: #0e83cd;color: white;">
+                <span style="padding: 10px;background-color: #283542;color: #BCBEC0;">
+                    <img src="images/nuget.png" style="height:25px">&nbsp;&nbsp;Install from Nuget
+                </span>
+                <span style="padding: 10px;">
+                    <i class="fa fa-arrow-right" style="width:30px;"></i>
+                </span>
+            </a>
+            <a href="https://github.com/ormdb/ormdb/releases/" target="_blank" style="margin:10px; text-decoration:none;padding:1px;display: inline-flex;align-items: center;background-color: #0e83cd;color: white;">
+                <span style="padding: 10px;background-color: #283542;color: #BCBEC0;">
+                    <img src="images/GitHub-Mark-Light-64px.png" style="height:25px">&nbsp;&nbsp;Install from Github
+                </span>
+                <span style="padding: 10px;">
+                    <i class="fa fa-arrow-right" style="width: 30px;"></i>
+                </span>
+            </a>
+        </div>
+        <br />
+        <h2>One code for all databases. Besides FREE for everyone - including commercial use</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="feature col-md-4 col-sm-12">
+                <h1><i class="fa fa-check-square-o"></i>No Dependencies</h1>
+                <div class="feature-content">
+                    <p>OrmDb is standalone a single DLL (less than 200kb) fully written in .NET managed code (compatible with .NET 4.x, NETCore 2.2 and above).</p>
+                    <br />
+                    <p>You can install via NuGet or just copy DLL to your bin project folder.</p>
+
+                </div>
+            </div>
+            <div class="feature col-md-4 col-sm-12">
+                <h1><i class="fa fa-flash"></i>Fast and lightweight</h1>
+                <div class="feature-content">
+                    <p>OrmDb is a simple and fast ORM solution. Ideal for any applications.</p>
+                    <br />
+                    <p>You can run HUGE queries and read data <b>Fast</b> and <b>low resource consumption</b>.</p>
+                </div>
+            </div>
+            <div class="feature col-md-4 col-sm-12">
+                <h1><i class="fa fa-database"></i>And much more...</h1>
+                <ul>
+                    <li>Many database support such as MsSQL, PostgreSQL, MySQL, MariaDB and Oracle (for now)</li>
+                    <li>DDL(Data Definition Language) support</li>
+                    <li>DML(Data Manipulation Language) support</li>
+                    <li>TCL(transaction Control Language) support</li>
+                    <li>Map your POCO class for queries</li>
+                    <li>Cross column references (ColumnRef)</li>
+                    <li>Aggregate support such as TRIM, SUM, AVG, CONCATE, MAX, CONTAINS and many more</li>
+                    <li>DataTable and CRUD operation support</li>
+                    <li>DataReader support</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="banner-title">
+        <div class="container">
+            Samples<h2></h2>
+        </div>
+    </div>
+
+    <div class="container" id="examples">
+        <ul id="examples_menu"></ul>
+        <pre class="w-100 p-4 m-0 d-inline-block"><code class="language-csharp" id="examples_data"></code></pre>
+    </div>
+
+    <footer>
+        OrmDB - MIT License
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="js/prism.js"></script>
+    <script>
+
+        var _examples_data = [];
+        function _example_activate(index) {
+            $("#examples_menu>li").removeClass("active");
+            $("#examples_menu>li:eq(" + index + ")").addClass("active");
+            $("#examples_data").html(_examples_data[index]);
+        }
+        $(function () {
+            //-- Examples are being loaded...
+            var location_path = location.href.split("/");
+            location_path.pop();
+            location_path = location_path.join("/")
+
+            var items = [
+                { title: "Definition", file: "01-definition.txt" },
+                { title: "Select", file: "02-select.txt" },
+                { title: "Insert", file: "03-insert.txt" },
+                { title: "Update", file: "04-update.txt" },
+                { title: "Delete", file: "05-delete.txt" },
+                { title: "DataTable", file: "06-datatable.txt" }
+            ];
+
+            var ul = $("#examples_menu");
+            items.forEach(
+                function (item, index) {
+                    ul.append('<li onclick="_example_activate(' + index + ');"><i class="fa fa-cube mr-3"></i>' + item.title + '</li>');
+
+                    var _url = location_path + "/codes/" + item.file;
+                    $.get(_url, function (data) {
+                        _examples_data[index] = Prism.highlight(data, Prism.languages.csharp, 'csharp');
+                        if (index == 0) {
+                            _example_activate(0);
+                        }
+                    });
+
+                }
+            );
+
+
+            //-- Masked IFrame workaround - FavIcon
+            var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+            link.type = 'image/x-icon';
+            link.rel = 'shortcut icon';
+            link.href = 'https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        });
+    </script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144186634-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-144186634-1');
+    </script>
+</body>
+</html>
