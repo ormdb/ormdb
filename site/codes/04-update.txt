@@ -1,0 +1,73 @@
+﻿using Odb;
+
+    // create connection
+    var cn = Connection.Manager.Create(); 
+
+    // initialize table alias => (... FROM TableHeader AS h)
+    var h = new TableHeader();
+    var l = new TableLines();
+
+
+
+/* REGULAR update 
+
+	UPDATE	h 
+	SET		h.Note = 'new note',
+			h.IsActive = NOT h.IsActive,
+			h.DocDate = 20180914
+	FROM	TableHeader AS h
+	WHERE	h.Id = 9999
+*/
+var sql = SQL.X.Update(h, h.Id == 9999);
+
+    var row = sql.Values;
+        row(h.Note) = "new note";
+        row(h.IsActive) = not h.IsActive;			// self NOT 
+        row(h.DocDate) = now.tostring(yyyyMMdd);	// date as numeric
+
+sql.Execute(cn);
+
+
+
+/* JOIN Update : Updates the header records which contain 
+				 DocumentLine that is greather than 3 in lines-table.
+
+	UPDATE		h 
+	SET			h.Note = 'new note',
+				h.IsActive = NOT h.IsActive
+	FROM		TableHeader AS h
+	LEFT JOIN	TableLines  AS l ON l.Year = h.Year AND l.Id = h.Id
+	WHERE		l.LineId > 3
+*/
+var sql = SQL.X.Update(h, l.LineId > 3)
+			.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
+
+    var row = sql.Values;
+        row(h.Note) = "new note";
+        row(h.IsActive) = not h.IsActive;			// self NOT 
+
+sql.Execute(cn);
+
+
+
+/* BATCH Update
+
+	UPDATE	h 
+	SET		h.Note = 'new note',
+	FROM	TableHeader AS h
+	WHERE	h.Id = 9999;
+
+	UPDATE	l 
+	SET		l.Note = 'new note',
+	FROM	TableLines AS l
+	WHERE	l.Id = 9999;
+*/
+var sql = SQL.X.Query;
+
+    var row1 = sql.Update(h, h.Id == 9999).Values;
+        row1(h.Note) = "new note";
+
+    var row2 = sql.Update(l, l.Id == 9999).Values;
+        row2(l.Note) = "new note";
+
+sql.Execute(cn);
