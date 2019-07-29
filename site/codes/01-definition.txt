@@ -1,4 +1,4 @@
-// Table Definition
+﻿// Table Definition
 using Odb;
 using Odb.Table;
 

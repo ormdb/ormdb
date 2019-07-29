@@ -5,15 +5,6 @@
     <title>OrmDB :: Fastest ORM tool for .Net / .Net.Core</title>
     <meta name="description" content="OrmDB :: OrmDB is the Fastest and best ORM tool for .Net / .Net.Core">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<meta name="google-site-verification" content="I6h49Xhynv8r162JJ3R-71BL6DKv1gc0KWwDVDV6Hy8" />
-=======
-    <meta name="google-site-verification" content="I6h49Xhynv8r162JJ3R-71BL6DKv1gc0KWwDVDV6Hy8" />
->>>>>>> a18fe3f9a49e9d8d697e7531debf44cee1cd6c5c
-=======
-    <meta name="google-site-verification" content="I6h49Xhynv8r162JJ3R-71BL6DKv1gc0KWwDVDV6Hy8" />
->>>>>>> a18fe3f9a49e9d8d697e7531debf44cee1cd6c5c
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -25,7 +16,7 @@
 <body>
     <div class="github-fork-ribbon-wrapper right">
         <div class="github-fork-ribbon">
-            <a href="https://github.com/ormdb/ormdb" target="_blank" >Fork us on GitHub</a>
+            <a href="https://github.com/ormdb/ormdb" target="_blank">Fork us on GitHub</a>
         </div>
     </div>
     <header>
@@ -98,14 +89,46 @@
             </div>
         </div>
     </div>
+
+
+    <div class="banner-title">
+        <div class="container">
+            No STRING Statements
+        </div>
     </div>
+    <div class="container">
+        OrmDb does NOT executes the queries as a string statement.
+        <br />
+        <br />
+        <pre class="w-100 p-4 m-0 d-inline-block sample-danger"><code class="language-csharp" id="sample_no_string_1"></code></pre>
+        <br />
+        <br />
+        OrmDb executes the queries as a part of the code like LINQ.
+        <br />
+        <br />
+        <pre class="w-100 p-4 m-0 d-inline-block sample-success"><code class="language-csharp" id="sample_no_string_2"></code></pre>
+    </div>
+
+
+    <div class="banner-title">
+        <div class="container">
+            ONE Statement for All Databases
+        </div>
+    </div>
+    <div class="container">
+        You dont need the multiple queries for different databases with OrmDb. ONE Query can be executed on different connection(s).
+        <br />
+        <br />
+        <pre class="w-100 p-4 m-0 d-inline-block sample-success"><code class="language-csharp" id="sample_one_statement"></code></pre>
+    </div>
+
+
     <div class="banner-title">
         <div class="container">
             Samples<h2></h2>
         </div>
     </div>
-
-    <div class="container" id="examples">
+    <div id="examples" style="display:flex;justify-content: space-between;margin: 0px auto;max-width: 1200px;">
         <ul id="examples_menu"></ul>
         <pre class="w-100 p-4 m-0 d-inline-block"><code class="language-csharp" id="examples_data"></code></pre>
     </div>
@@ -125,11 +148,28 @@
             $("#examples_data").html(_examples_data[index]);
         }
         $(function () {
-            //-- Examples are being loaded...
+            //-- location is being determining...
             var location_path = location.href.split("/");
             location_path.pop();
-            location_path = location_path.join("/")
+            location_path = location_path.join("/");
+            var code_path = location_path + "/site/codes/";
 
+
+            //-- no-string-compare-sample is being loaded...
+            $.get(code_path + "00-no_string_1.txt", function (data) {
+                $("#sample_no_string_1").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));
+            });
+            $.get(code_path + "00-no_string_2.txt", function (data) {
+                $("#sample_no_string_2").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));
+            });
+
+
+            //-- one-statemment-sample is being loaded...
+            $.get(code_path + "00-one_statement.txt", function (data) {
+                $("#sample_one_statement").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));
+            });
+
+            //-- Samples are being loaded...
             var items = [
                 { title: "Definition", file: "01-definition.txt" },
                 { title: "Select", file: "02-select.txt" },
@@ -144,7 +184,7 @@
                 function (item, index) {
                     ul.append('<li onclick="_example_activate(' + index + ');"><i class="fa fa-cube mr-3"></i>' + item.title + '</li>');
 
-                    var _url = location_path + "/site/codes/" + item.file;
+                    var _url = code_path + item.file;
                     $.get(_url, function (data) {
                         _examples_data[index] = Prism.highlight(data, Prism.languages.csharp, 'csharp');
                         if (index == 0) {

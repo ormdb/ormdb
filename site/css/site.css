@@ -1,4 +1,4 @@
-body {
+﻿body {
     font-family: Lato,Helvetica Neue,Helvetica,Arial,sans-serif !important;
     margin: 0px;
 }
@@ -10,17 +10,11 @@ header {
     justify-content: center;
 }
 
-.container {
-    display: flex;
-    max-width: 1200px;
-    justify-content: space-between;
-    margin: 0px auto;
-}
 
-header .container {
-    max-width: 1100px;
-    flex: 1;
-}
+    header .container {
+        max-width: 1100px;
+        flex: 1;
+    }
 
 .logo {
     height: 50px;
@@ -80,7 +74,22 @@ header .container {
 
 
 /* -- */
+.sample {
+}
 
+.sample-danger {
+    background: rgba(255,0,0,.09) !important;
+    border: 2px solid red;
+    padding: 10px !important;
+}
+
+.sample-success {
+    background: rgba(0,255,0,.09) !important;
+    border: 2px solid green;
+    padding: 10px !important;
+}
+
+/* -- */
 .feature {
     padding: 20px !important;
 }
@@ -111,14 +120,15 @@ header .container {
 
 .banner-title {
     background-color: #f3f3f3;
-    padding: 40px;
-    margin-bottom: 40px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     font-size: 36px;
     color: #171F26;
 }
 
     .banner-title .container {
-        justify-content: flex-start;
+        text-align: center;
     }
 
     .banner-title h2 {
