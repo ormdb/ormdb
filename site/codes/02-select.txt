@@ -1,19 +1,20 @@
 ﻿using Odb;
 
-    // create connection
-    var cn = Connection.Manager.Create(); 
+// create connection
+var cn = Connection.Manager.Create(); 
 
-    // initialize table alias => (... FROM TableHeader AS h)
-    var h = new TableHeader();
-    var l = new TableLines();
+// initialize table alias => (... FROM TableHeader AS h)
+var h = new TableHeader();
+var l = new TableLines();
 
 
 
-    var sql = SQL.X.Select().From(h, h.Year > 2018)
-                            .LeftJoin( l, l.Year==h.Year & l.Id == h.Id )
-                            .Skip(5)
-                            .Top(10)
-                            .OrderBy( h.Year, h.Id.DESC() ) ;
+// ------------------------------------------------------
+var sql = SQL.X.Select().From(h, h.Year > 2018)
+                          .LeftJoin( l, l.Year==h.Year & l.Id == h.Id )
+                          .Skip(5)
+                          .Top(10)
+                          .OrderBy( h.Year, h.Id.DESC() ) ;
 
     // reading with DataReader
     using(var dr = sql.ExecuteReader())

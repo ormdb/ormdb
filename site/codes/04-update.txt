@@ -1,14 +1,15 @@
 ﻿using Odb;
 
-    // create connection
-    var cn = Connection.Manager.Create(); 
+// create connection
+var cn = Connection.Manager.Create(); 
 
-    // initialize table alias => (... FROM TableHeader AS h)
-    var h = new TableHeader();
-    var l = new TableLines();
+// initialize table alias => (... FROM TableHeader AS h)
+var h = new TableHeader();
+var l = new TableLines();
 
 
 
+// ------------------------------------------------------
 /* REGULAR update 
 
 	UPDATE	h 
@@ -18,17 +19,17 @@
 	FROM	TableHeader AS h
 	WHERE	h.Id = 9999
 */
-var sql = SQL.X.Update(h, h.Id == 9999);
+var sql = SQL.X.Update<TableHeader>().Where(h.Id == 9999);
 
     var row = sql.Values;
-        row(h.Note) = "new note";
-        row(h.IsActive) = not h.IsActive;			// self NOT 
-        row(h.DocDate) = now.tostring(yyyyMMdd);	// date as numeric
+        row.Note = "new note";
+        row.DocDate = DateTime.Now();
 
 sql.Execute(cn);
 
 
 
+// ------------------------------------------------------
 /* JOIN Update : Updates the header records which contain 
 				 DocumentLine that is greather than 3 in lines-table.
 
@@ -39,17 +40,18 @@ sql.Execute(cn);
 	LEFT JOIN	TableLines  AS l ON l.Year = h.Year AND l.Id = h.Id
 	WHERE		l.LineId > 3
 */
-var sql = SQL.X.Update(h, l.LineId > 3)
-			.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
+var sql = SQL.X.Update<TableHeader>().Where(l.LineId > 3)
+			   .InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
 
     var row = sql.Values;
-        row(h.Note) = "new note";
-        row(h.IsActive) = not h.IsActive;			// self NOT 
+        row.Note = "new note";
+        row.DocDate = DateTime.Now();
 
 sql.Execute(cn);
 
 
 
+// ------------------------------------------------------
 /* BATCH Update
 
 	UPDATE	h 
@@ -64,10 +66,10 @@ sql.Execute(cn);
 */
 var sql = SQL.X.Query;
 
-    var row1 = sql.Update(h, h.Id == 9999).Values;
-        row1(h.Note) = "new note";
+    var r1 = sql.Update<TableHeader>.Where(h.Id == 9999).Values;
+        r1.Note = "new note";
 
-    var row2 = sql.Update(l, l.Id == 9999).Values;
-        row2(l.Note) = "new note";
+    var r2 = sql.Update<TableLines>.Where(l.Id == 9999).Values;
+        r2.Note = "new note";
 
 sql.Execute(cn);

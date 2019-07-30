@@ -1,35 +1,32 @@
 ﻿using Odb;
 
-    // create connection
-    var cn = Connection.Manager.Create(); 
-
-    // initialize table alias => (... FROM TableHeader AS h)
-    var h = new TableHeader();
-    var l = new TableLines();
+// create connection
+var cn = Connection.Manager.Create(); 
 
 
-
+// ------------------------------------------------------
 /* MULTI ROW insert
 
 	INSERT INTO TableHeader AS h (fields...) VALUES (...);
 	INSERT INTO TableHeader AS h (fields...) VALUES (...);
 	... -> 100
 */
-var sql = SQL.X.Insert(h, SetInitials:true);
+var sql = SQL.X.Insert<TableHeader>(SetInitials:true);
 
 for (n = 1; (n <= 100); n++) {
     var row = sql.AddRow();
-        row(h.Year) = 2017;
-        row(h.Id) = n;
-        row(h.DocDate) = now().ToString("yyyyMMdd");
+        row.Year = 2017;
+        row.Id = n;
+        row.DocDate = DateTime.Now();
 		// [Note] is accepted as (string.Empty).
-        // row(h.Note) = "Note -" + n.toString();
+        // row.Note = "Note -" + n.toString();
 }
 
 sql.Execute(cn);
 
 
 
+// ------------------------------------------------------
 /* BATCH TABLE insert
 
 	INSERT INTO TableHeader AS h (fields...) VALUES (...);
@@ -41,20 +38,20 @@ sql.Execute(cn);
 */
 var sql = SQL.X.Query();
 
-var header = sql.Insert(h, SetInitials:true);
-var line = sql.Insert(l, SetInitials:true);
+var header = sql.Insert<TableHeader>(SetInitials:true);
+var line = sql.Insert<TableLines>(SetInitials:true);
 
 for (n = 1; (n <= 100); n++) {
-    var header_row = header.AddRow();
-        header_row(h.Year) = 2017;
-        header_row(h.Id) = n;
-        header_row(h.DocDate) = now().ToString("yyyyMMdd");
+    var r1 = header.AddRow();
+        r1.Year = 2017;
+        r1.Id = n;
+        r1.DocDate = now().ToString("yyyyMMdd");
 
 	for (m = 1; (m <= 2); m++) {
-		var line_row = line.AddRow();
-			line_row(l.Year) = header_row(h.Year);
-			line_row(l.Id) = header_row(h.Id);
-			line_row(l.LineId) = m;
+		var r2 = line.AddRow();
+			r2.Year = header_row(h.Year);
+			r2.Id = header_row(h.Id);
+			r2.LineId = m;
 	}
 }
 
