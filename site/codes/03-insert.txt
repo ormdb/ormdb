@@ -45,7 +45,7 @@ for (n = 1; (n <= 100); n++) {
     var r1 = header.AddRow();
         r1.Year = 2017;
         r1.Id = n;
-        r1.DocDate = now().ToString("yyyyMMdd");
+        r1.DocDate = DateTime.Now();
 
 	for (m = 1; (m <= 2); m++) {
 		var r2 = line.AddRow();
