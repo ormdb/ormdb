@@ -7,13 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="site/css/prism.css">
     <link rel="stylesheet" href="site/css/site.css" />
 
     <style>
         #wiki {
         }
+
 
             #wiki > #wiki-menu {
                 padding: 0 0 10px 0;
@@ -24,31 +25,45 @@
                 box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
             }
 
-                #wiki > #wiki-menu li {
-                    text-decoration: none;
-                    color: #0056b3;
-                    cursor: pointer;
-                }
+        .wiki-menu-visible {
+            min-width: 270px !important;
+            max-width: 270px !important;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            display: block !important;
+        }
 
-                    #wiki > #wiki-menu li:hover {
-                        text-decoration: underline;
-                        color: #0056b3;
-                    }
+        .wiki-menu-hidden {
+            display: none !important;
+        }
 
-                #wiki > #wiki-menu li {
-                    padding: 5px 10px;
-                    white-space: nowrap;
-                }
+        #wiki > #wiki-menu li {
+            text-decoration: none;
+            color: #0056b3;
+            cursor: pointer;
+        }
 
-                #wiki > #wiki-menu .wiki-menu-active {
-                    background: #f3f9ff;
-                    border: 1px solid #a9caea;
-                }
-
-            #wiki > #wiki-body {
-                padding: 25px 15px 0 25px !important;
+            #wiki > #wiki-menu li:hover {
+                text-decoration: underline;
+                color: #0056b3;
             }
 
+        #wiki > #wiki-menu li {
+            padding: 5px 10px;
+            white-space: nowrap;
+        }
+
+        #wiki > #wiki-menu .wiki-menu-active {
+            background: #f3f9ff;
+            border: 1px solid #a9caea;
+        }
+
+        #wiki > #wiki-body {
+            padding: 25px 15px 0 25px !important;
+        }
+        /*-----------------------------------------*/
+        /*-- MARK-DOWN --*/
+        /*-----------------------------------------*/
         .markdown-body {
             font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
             font-size: 16px;
@@ -139,8 +154,9 @@
                 border-bottom: 1px solid #eaecef;
                 padding-bottom: .3em;
             }
-
+            /*-----------------------------------------*/
             /*-- CODE --*/
+            /*-----------------------------------------*/
             .markdown-body pre {
                 word-wrap: normal;
             }
@@ -158,8 +174,9 @@
                 overflow: auto;
                 padding: 16px;
             }
-
-
+        /*-----------------------------------------*/
+        /*-- SCROLL-BAR --*/
+        /*-----------------------------------------*/
         ::-webkit-scrollbar-button {
             display: none;
             height: 13px;
@@ -193,12 +210,16 @@
 
         ::-webkit-scrollbar {
             width: 8px;
+            height: 8px;
         }
     </style>
 </head>
 <body>
     <div class="d-flex flex-column w-100 h-100" style="position: absolute;top: 0; right: 0; bottom: 0; left: 0;">
         <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" onclick="toggleNav()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <a class="navbar-brand" href="/"><img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80" /></a>
 
             <h1 class="navbar-text">
@@ -207,9 +228,10 @@
         </nav>
 
         <div id="wiki" class="flex-grow-1 d-flex overflow-hidden">
-            <div id="wiki-menu" class="p-3" style="min-width: 270px !important;overflow-x: hidden !important; overflow-y: auto !important;"></div>
+            <div id="wiki-menu" class="p-3 wiki-menu-visible"></div>
             <div id="wiki-body" class="p-3 flex-grow-1 overflow-auto markdown-body"></div>
         </div>
+        <div id="is_small" class="d-none d-md-block"></div>
 
         <nav class="navbar navbar-dark bg-dark">
             <span class="navbar-text">
@@ -230,7 +252,23 @@
         var code_path = location_path + "/site/codes/";
         var wiki_path = location_path + "/site/wiki/";
 
-
+        var _wiki_menu = $("#wiki-menu");
+        var _wiki_body = $("#wiki-body");
+        //----------------------------------------------------------------
+        //-- SIDE-NAV
+        function openNav() {
+            _wiki_menu.removeClass("wiki-menu-hidden")
+        }
+        function closeNav() {
+            _wiki_menu.addClass("wiki-menu-hidden")
+        }
+        function toggleNav() {
+            if (_wiki_menu.css("display") === "none") {
+                openNav();
+            } else {
+                closeNav();
+            }
+        }
         //----------------------------------------------------------------
         //-- MENU
         var _menu_groups = {
@@ -297,7 +335,6 @@
         for (var g in _menu_groups) {
             var _menu_group = _menu_groups[g];
 
-
             _menu.push('<p><strong>' + _menu_group.title + '</strong></p>');
             _menu.push('<ul>');
 
@@ -309,22 +346,11 @@
 
         }
         // menu is being rendered...
-        $("#wiki-menu").html(_menu.join(''));
+        _wiki_menu.html(_menu.join(''));
         function menu_click(obj) {
             window.location.hash = '##' + $(obj).data()["hash"];
         }
         //----------------------------------------------------------------
-
-        $(function () {
-            load_page();
-
-            //-- Masked IFrame workaround - FavIcon
-            var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-            link.type = 'image/x-icon';
-            link.rel = 'shortcut icon';
-            link.href = 'https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b';
-            document.getElementsByTagName('head')[0].appendChild(link);
-        });
 
         // full options list (defaults)
         var md = markdownit({
@@ -358,7 +384,6 @@
                     default:
                         return str;
                 }
-
                 return '<pre class="language-' + lang + '"><code>' + Prism.highlight(str, Prism.languages.csharp, lang) + '</code></pre>';
             }
         });
@@ -367,7 +392,9 @@
         $(window).on('popstate', function (e) {
             load_page();
         });
-
+        function is_small() {
+            return $("#is_small").css("display") === "none";
+        }
         function load_page() {
             var _home_page = "GEN-Home";
 
@@ -384,17 +411,32 @@
                 var _menu_group_key = _file.split("-")[0];
                 var _menu_group = _menu_groups[_menu_group_key];
                 var _menu_group_item = _menu_group.items[_file];
-                _title = '<div style="font-weight:bold;line-height:1.125;word-wrap: break-word;font-size: 1.5em;"><span style="color:#8f9092;">' + _menu_group.title + '</span> / <span style="color:#5b6065;">' + _menu_group_item + '</span></div><hr/>';
+                if (_menu_group_item !== undefined) {
+                    _title = '<div style="font-weight:bold;line-height:1.125;word-wrap: break-word;font-size: 1.5em;"><span style="color:#8f9092;">' + _menu_group.title + '</span> / <span style="color:#5b6065;">' + _menu_group_item + '</span></div><hr/>';
+                }
             }
 
             //-- content
+            _wiki_body.scrollTop(0);
+            if (is_small()) closeNav();
             $.get(wiki_path + _file + ".txt", function (data) {
-                $("#wiki-body").html(_title + md.render(data));
+                _wiki_body.html(_title + md.render(data));
             }).fail(function () {
-                $("#wiki-body").html(_title + '<div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div>');
+                _wiki_body.html(_title + '<div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div>');
             });
-            $("#wiki-body").scrollTop(0);
         }
+
+        $(function () {
+            load_page();
+            if (is_small()) closeNav();
+
+            //-- Masked IFrame workaround - FavIcon
+            var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+            link.type = 'image/x-icon';
+            link.rel = 'shortcut icon';
+            link.href = 'https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        });
 
     </script>
 
