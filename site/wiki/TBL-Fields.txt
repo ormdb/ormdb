@@ -7,6 +7,7 @@
 |ColumnNumeric |Any .NET numeric types such as `int`, `sigle`, `double`, `decimal` etc.  |
 |ColumnBoolean |`System.Boolean`                                                         |
 |ColumnBinary  |`System.Byte[]`                                                          |
+|ColumnDate    |`System.DateTime`                                                        |
 |ColumnRef     |Reference for `User PreDefined` column                                   |
 
 ### ColumnString
@@ -40,18 +41,18 @@ is used for bool type, no additional properties can be specified for this type.
     [ColumnBinary()]public Column col_bin;
 ```
 
+### ColumnDate
+
+.Net types such as **`System.Date`** or **`System.TimeSpan`**,  are stored as **`ColumnNumeric`** in database. By using this approach **`System.Date`** columns can be sorted easily by all database engines.
+
+```C#
+    [ColumnDate(<is long date ?>)]public Column col_dat;
+```
+
 ### ColumnRef
 
 is used for repeated column types and `Length` properties cannot be specified for this type.
 
 ```C#
     [ColumnRef(<reference>)]public Column col_ref;
-```
-
-### System.Date
-
-.Net types such as **`System.Date`** or **`System.TimeSpan`**,  are stored as **`ColumnNumeric`** in database. By using this approach **`System.Date`** columns can be sorted easily by all database engines.
-
-```C#
-    DateTime _long_date = Now.ToString("yyyMMdd");
 ```
