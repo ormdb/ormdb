@@ -1,0 +1,91 @@
+﻿To retrieve data using a **`DataTableReader`**, create an instance of a SQL.IQueryable object, and then create a reader by calling **`ExecuteReader`** to retrieve rows from a data source. The **`DataTableReader`** provides an **unbuffered** stream of data that allows procedural logic to efficiently process results from a data source sequentially. 
+
+>The DataTableReader is a good choice when you're retrieving large amounts of data because the data is not cached in memory.
+
+
+|Operation                                        |DataTable            |DataTableReader|
+|-------------------------------------------------|---------------------|---------------|
+|Schema Information                               | Yes                 | Yes           |
+|CRUD operations can be operate as offline.       | Yes                 | No            |
+|Moving the cursor on the records.                | Yes                 | No            |
+|Getting RecordCount                              | Yes                 | No            |
+|ToDataTable support                              | Yes                 | No            |
+|Reading By One Binded-Column-Info                | No                  | Yes           |
+|Cursor Mode                                      | READ_ONLY or UPDATE | FORWARD_ONLY  |
+
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following example iterates through a DataReader object and returns two columns from each row.
+
+```C#
+var sql = SQL.X.Select(h.Note, h.DocDate).From(h);
+var dr = sql.ExecuteReader(cn);
+```
+
+<br/>
+
+>iterate by column-name
+```C#
+foreach (var row in dr) {
+    Console.WriteLine("Note={0}, Date={1}", 
+                       row("Note").ToString(), 
+                       row("DocDate").ToDateTime());
+}
+```
+
+<br/>
+
+>iterate by column-info. (faster than before) <= **REGULAR**
+```C#
+foreach (var row in dr) {
+    Console.WriteLine("Note={0}, Date={1}", 
+                       row(h.Note).ToString(), 
+                       row(h.DocDate).ToDateTime());
+}
+```
+
+<br/>
+
+>iterate by selection index info. (faster than before)
+```C#
+foreach (var row in dr) {
+    Console.WriteLine("Note={0}, Date={1}", 
+                       row(0).ToString(), 
+                       row(1).ToDateTime());
+}
+```
+
+<br/>
+
+>iterate by binded-column. (faster than before)
+```C#
+var f1 = dr(h.Note);
+var f2 = dr(h.DocDate);
+
+foreach (var row in dr) {
+    Console.WriteLine("Note={0}, Date={1}", 
+                       f1.ToString(), 
+                       f2.ToDateTime());
+}
+```
+
+<br/>
+
+|Reading By             | Performance    | Memory Consumption          |
+|-----------------------|----------------|-----------------------------|
+|column-name            | 0.0000057 ms   | new instance for per column  |
+|column-info            | 0.0000035 ms   | new instance for per column (REGULAR)|
+|index info             | 0.0000028 ms   | new instance for per column  |
+|binded                 | 0.0000025 ms   | one instance for all columns |
+
+> Record Count= 1200, Network= CAT6 gigabit, Server= MsSQL 2016
+
+
+
+<br/>

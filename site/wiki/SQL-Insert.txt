@@ -1,0 +1,87 @@
+﻿**`Insert`** method is used to insert new records to a table.
+
+<br/>
+
+**Definition**
+```C#
+namespace SQL {
+    public class X {
+
+        public static Insert<T> Insert<T>(bool SetInitials = false) 
+                                    where T : Table.Base
+```
+<br/>
+
+**Remarks**
+
+Some columns need to be inserted with their default/initial values. **`SetInitials`** parameter is set **`true`** for setting columns with their initial-value. This parameter is **`false`** by default.
+
+Columns which are specified **`SetInitials = true`**, accepts values shown below.
+
+|ColumnType    |.NET type                                                                |Value         |
+|--------------|-------------------------------------------------------------------------|--------------|
+|ColumnString  |`System.String`                                                          |String.Empty  |
+|ColumnNumeric |Any .NET numeric types such as `int`, `sigle`, `double`, `decimal` etc.  |0             |
+|ColumnBoolean |`System.Boolean`                                                         |false         |
+|ColumnBinary  |`System.Byte[]`                                                          |x0            |
+|ColumnRef     |Reference for `User PreDefined` column                                   |depends on reference ColumnType|
+
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following section demonstrates **single table insertion**. DocDate is accepted as 0(zero).
+
+```C#
+var sql = SQL.X.Insert<TableHeader>(SetInitials:true);
+
+for (n = 1; (n <= 100); n++) {
+    var row = sql.AddRow();
+        row.Year = 2017;
+        row.Id = 1000;
+        row.Note = "Note -" + n.toString();
+        //row.DocDate = DateTime.Now();
+}
+
+sql.Execute(cn);
+```
+> In this sample, the column **`h.EnteredDate`** was not specified. Sql engine of **`OrmDb`** sets the column with its inital value according to its type.
+
+<br/>
+
+Following section demonstrates **multiple table insertion**.
+
+```C#
+var sql = SQL.X.Query();
+
+var _header = sql.Insert<TableHeader>();
+var _line = sql.Insert<TableLines>();
+
+for (n = 1; n <= 100; n++) {
+   var year = 2017;
+   var id= 1000;
+   var note= "Note -" + n.toString();
+
+    var r1 = _header.AddRow();
+        r1.Year = year;
+        r1.Id = id;
+        r1.Note = note;
+        r1.DocDate = DateTime.Now();
+
+    for (m = 1; m <= 2; m++) {
+        var r2 = _line.AddRow();
+            r2.FiscalYear = year;
+            r2.CompanyId = id;
+            r2.LineId = m;
+            r2.Note = note;
+    }
+}
+
+// All commands in query, are being executed as batch.
+sql.Execute(cn)
+
+```

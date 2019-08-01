@@ -1,0 +1,57 @@
+﻿You can use the column-types as shown below, in the table definitions by **OrmDB**.
+
+
+|ColumnType    |.NET type                                                                |
+|-------------|--------------------------------------------------------------------------|
+|ColumnString  |`System.String`                                                          |
+|ColumnNumeric |Any .NET numeric types such as `int`, `sigle`, `double`, `decimal` etc.  |
+|ColumnBoolean |`System.Boolean`                                                         |
+|ColumnBinary  |`System.Byte[]`                                                          |
+|ColumnRef     |Reference for `User PreDefined` column                                   |
+
+### ColumnString
+is used for text type, only `Length` property can be specified for this type.
+
+```C#
+    [ColumnString(10)]public Column col_char;
+```
+
+### ColumnNumeric
+
+is used for all numeric types, `Precision` and `Scale` properties can be specified for this type.
+
+```C#
+    [ColumnString(15, 2)]public Column col_num;
+```
+
+### ColumnBoolean
+
+is used for bool type, no additional properties can be specified for this type.
+
+```C#
+    [ColumnBoolean()]public Column col_bool;
+```
+
+### ColumnBinary
+
+**`System.Byte[]`** or **`Long Text`** are stored as **`ColumnBinary`** in database, and `Length` properties cannot be specified for this type.
+
+```C#
+    [ColumnBinary()]public Column col_bin;
+```
+
+### ColumnRef
+
+is used for repeated column types and `Length` properties cannot be specified for this type.
+
+```C#
+    [ColumnRef(<reference>)]public Column col_ref;
+```
+
+### System.Date
+
+.Net types such as **`System.Date`** or **`System.TimeSpan`**,  are stored as **`ColumnNumeric`** in database. By using this approach **`System.Date`** columns can be sorted easily by all database engines.
+
+```C#
+    DateTime _long_date = Now.ToString("yyyMMdd");
+```

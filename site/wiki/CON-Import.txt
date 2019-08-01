@@ -1,0 +1,47 @@
+﻿Import data is used for transferring records from one connection to another.
+
+There are several ways to import data to database. Some methods let you import data in a single step directly from **`Source Connection`**; other methods require you to read your data as **`Query`** before you can import it. 
+
+<br/>
+
+**Definition**
+```C#
+namespace Connection {
+    public class Connection {
+
+        public void ImportData(string TableName,
+                               Connection SourceConnection,
+                               ImportDataCalback CallBack = null,
+                               int BatchSize = 1000,
+                               bool TruncateBefore = true){}
+
+        public void ImportData(string TableName,
+                               DbDataReader Reader,
+                               ImportDataCalback CallBack = null,
+                               int BatchSize = 1000,
+                               bool TruncateBefore = true)
+```
+
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+Following section demonstrates importing data in table(h) from one connection to another.
+```C#
+// cn1 : Target connection.
+// cn2 : Source connection which has the data.
+
+cn1.ImportData(TableName: h.Name, 
+                SourceConnection: cn2 , 
+                CallBack: (string TableName, string Message, long Count, long TotalCount) =>
+                {
+                    if (Count == (long)0)
+                        Debug.WriteLine($"{TableName} ==> {Message}");
+                    else
+                        Debug.WriteLine($"{Message} ==> Import={Count}, Total={TotalCount}");
+                });
+}
+
+```

@@ -1,0 +1,69 @@
+﻿**`Transaction`** methods are used with the connection object to save or cancel changes made to the data source.
+
+### BeginTrans
+BeginTrans method starts a new transaction. A Transaction cannot be created , if there is an another transaction already in progress.
+
+```C#
+cn.BeginTrans();
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+You can set the **`AutoTrans`** property in order to start **`Transaction`** automatically.
+
+```C#
+using Odb;
+
+var cn = Connection.Manager.Create("MSSQL", AutoTrans:true);
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+This means that each time a transaction is committed or rolled-back, a new transaction is started and all queries are automatically executed in this transaction.
+
+
+### CommitTrans
+CommitTrans method saves all the changes made since the last BeginTrans method call and ends current transaction.
+
+If a **connection** is opened as **`AutoTrans = true`** then each time **`CommitTrans`** method is invoked, a new transaction is created automatically.
+
+```C#
+cn.CommitTrans();
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+If a **connection** is opened as **`AutoTrans = false`**, you can always start a new transaction as shown below.
+
+```C#
+cn.CommitTrans(AutoStartTrans:true);
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+
+### RollbackTrans
+RollbackTrans method cancels all changes made since the last BeginTrans method call and ends current transaction.
+
+If a **connection** is opened as **`AutoTrans = true`** , then each time **`RollbackTrans`** method is invoked, a new transaction is created automatically.
+
+```C#
+cn.RollbackTrans();
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+If a **connection** is opened as **`AutoTrans = false`**, you can always start a new transaction as shown below.
+
+```C#
+cn.RollbackTrans(AutoStartTrans:true);
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+

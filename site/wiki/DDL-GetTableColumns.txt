@@ -1,0 +1,57 @@
+﻿Obtains [TableColumnSchema-Information] according to provider for specified [Table] via [Database] connected.
+
+<br/>
+
+**Definition**
+```C#
+namespace Connection {
+    public class DDL {
+
+        public List<SchemaTableColumnInfo> GetTableColumns(Table.Base Table){}
+        public List<SchemaTableColumnInfo> GetTableColumns(string TableName){}
+```
+
+<br/>
+
+**Return**
+
+| COLUMN_INFO     | Description                                                              |
+|-----------------|--------------------------------------------------------------------------|
+|Catalog          | Table qualifier                                                          |
+|Schema           | Name of schema that contains the table.                                  |
+|Table            | Table name.                                                              |
+|Name             | Column name.                                                             |
+|Ordinal          | Column identification number.                                            |
+|AllowDBNull      | Nullability of the column.                                               |
+|DefaultValue     | Default value of the column.                                             |
+|NumericPrecision | Precision of approximate numeric columns. This value describes the Maximum length, in characters, for binary data, character data, or text and image data.                                         |
+|NumericScale     | Scale of approximate numeric data.                                       |
+|IsKey            | Is Column in primary-key.                                                |
+|DataTypeName     | Database type name of the column.                                        |
+|DataType         | .Net system type of the column.                                          |
+|TableColumnType   | Table definition type of the column.                                     |
+
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following section demonstrates reading the columns of a table **by its instance**.
+
+```C#
+foreach (var col in cn.DDL.GetTableColumns(h))
+    Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
+
+```
+
+<br/>
+
+Following section demonstrates reading the columns a of table **by its name**.
+
+```C#
+foreach (var col in cn.DDL.GetTableColumns("table_name"))
+    Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
+```

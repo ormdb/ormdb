@@ -13,21 +13,16 @@
     <link rel="stylesheet" href="site/css/prism.css">
     <link rel="stylesheet" href="site/css/site.css" />
 </head>
+
+
 <body>
-    <div class="github-fork-ribbon-wrapper right">
-        <div class="github-fork-ribbon">
-            <a href="https://github.com/ormdb/ormdb" target="_blank">Fork us on GitHub</a>
+    <nav class="navbar navbar-dark bg-dark d-flex">
+        <a class="navbar-brand" href="/"><img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80" /></a>
+        <div class="flex-grow-1 navbar-nav d-flex flex-row" id="navbarNav">
+            <a class="nav-link px-3 fa-lg" href="/wiki.html" style="">Wiki&nbsp;&nbsp;<i class="fa fa-book"></i></a>
         </div>
-    </div>
-    <header>
-        <div class="container">
-            <img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80" />
-            <ul class="nav">
-                <li><a href="https://github.com/ormdb/ormdb/wiki" target="_blank" style="">DOCS</a></li>
-                <li><a href="https://github.com/ormdb/ormdb/releases/" target="_blank" style="">Download</a></li>
-            </ul>
-        </div>
-    </header>
+    </nav>
+
     <div class="banner">
         <h1>Fastest ORM tool for .Net / .Net.Core</h1>
         <h2>is a simple, fast and lightweight embedded .NET ORM tool</h2>
@@ -90,7 +85,6 @@
         </div>
     </div>
 
-
     <div class="banner-title">
         <div class="container">
             No STRING Statements
@@ -139,7 +133,15 @@
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="site/js/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/9.0.1/markdown-it.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-linkify/2.1.8/linkify.min.js"></script>
     <script>
+        //-- location is being determining...
+        var location_path = location.href.split("/");
+        location_path.pop();
+        location_path = location_path.join("/");
+        var code_path = location_path + "/site/codes/";
+        var wiki_path = location_path + "/site/wiki/";
 
         var _examples_data = [];
         function _example_activate(index) {
@@ -147,14 +149,8 @@
             $("#examples_menu>li:eq(" + index + ")").addClass("active");
             $("#examples_data").html(_examples_data[index]);
         }
+
         $(function () {
-            //-- location is being determining...
-            var location_path = location.href.split("/");
-            location_path.pop();
-            location_path = location_path.join("/");
-            var code_path = location_path + "/site/codes/";
-
-
             //-- no-string-compare-sample is being loaded...
             $.get(code_path + "00-no_string_1.txt", function (data) {
                 $("#sample_no_string_1").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));

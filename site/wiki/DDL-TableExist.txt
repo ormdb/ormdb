@@ -1,0 +1,28 @@
+﻿**`TableExist`** is used to test for the existence of a table.
+
+<br/>
+
+**Definition**
+```C#
+namespace Connection {
+    public class DDL {
+
+        public bool TableExist(Table.Base Table){}
+        public bool TableExist(string TableName){}
+```
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following section demonstrates determining whether the specified [Table] exists.
+
+```C#
+
+Debug.WriteLine($"[table1] = { (cn.DDL.TableExist("table1") ? "exists" : "N/A") }");
+
+Debug.WriteLine($"[{h.Name}] = { (cn.DDL.TableExist(h) ? "exists " : "N/A") }");
+```

@@ -1,0 +1,79 @@
+﻿In **`OrmDb`** you use a Connection object to connect to a data source by supplying necessary authentication information in a connection string. This information is defined in **`Register`** for once.
+
+<br/>
+
+**Definition**
+```C#
+namespace Connection {
+    public class Manager {
+
+        public static void Register(Provider.Type Provider.Type, 
+                                    string Host, 
+                                    string DatabaseName, 
+                                    string UserName, 
+                                    string Password, 
+                                    string Id = DefaultRegisterID, 
+                                    string SchemaPrefix = DefaultSchemaPrefix){}
+```
+<br/>
+
+**Remarks**
+
+Providers can be used with **`Register`** as shown below.
+
+| Type        | Description                                 | Driver                              |
+|-------------|-------------------------------------------- |------------------------------------ |
+|MsSql        | is used for `MsSql` server(s).              | System.Data.SqlClient               |
+|PostgreSql   | is used for `PostgreSQL` server(s).         | Npgsq                               |
+|MySql        | is used for `MySQL` or `MariaDB` server(s). | MySql.Data                          |
+|Oracle       | is used for `Oracle` server(s).             | ODP.Net (Oracle ManagedDataAccess)  |
+
+<br/>
+
+Each register operation initializes a connection-information. This information can be read by using **`Item`**.
+
+|              |Description                                                    |
+|--------------|-------------------------------------------------------------- |
+|RegisterId    |is Name/Id of the registration.                                |
+|ProviderType  |is one of the types in `Odb.Connection.Provider.Type`.          |
+|HostName      |is `host-info` of the database-server to be connected.         |
+|DatabaseName  |is `name` of the database to be connected.                     |
+|UserName      |is `user-name` to use when making the connection.              |
+|Password      |is `password` to use when making the connection.               |
+|SchemaPrefix  |is used for making group the tables in database.               |
+
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following section demonstrate how to register a connection.
+
+```C#
+using OrmDB.Connection;
+
+
+Manager.Register(Id:"MSSQL", Provider.Type.MsSql,
+                 "host,<port>", "<database>", "user", "****");
+
+Manager.Register(Id:"MYSQL", Provider.Type.MySql,
+                 "host,<port>", "<database>", "user", "****");
+
+Manager.Register(Id:"PGSQL", Provider.Type.PostgreSql,
+                 "host,<port>", "<database>", "user", "****");
+
+Manager.Register(Id:"ORACL", Provider.Type.Oracle,
+                 "host,<port>", "<database>", "user", "****");
+
+```
+
+<br/>
+
+Following section demonstrate reading register information.
+
+```C#
+var ci = Manager.Item("MSSQL");
+```

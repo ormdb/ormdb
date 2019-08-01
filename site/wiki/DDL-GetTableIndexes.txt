@@ -1,0 +1,56 @@
+﻿Obtains [SchemaIndexInfo] according to provider for specified [Table] via [Database] connected.
+
+<br/>
+
+**Definition**
+```C#
+namespace Connection {
+    public class DDL {
+
+        public List<SchemaIndexInfo> GeTableIndexes(string TableName){}
+```
+<br/>
+
+**Return**
+
+| SchemaIndexInfo   | Description                                            |
+|-------------------|--------------------------------------------------------|
+|Name               | Name of the index.                                     |
+|IsPrimary          | Is primary key index.                                  |
+|IsUnique           | Is index unique.                                       |
+|IsClustered        | Is index clustered.                                    |
+|IsUniqueConstraint | Is index unique-constraint.                            |
+|Columns            | Columns of the index.                                  |
+
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following section demonstrates reading the indexes of table **by its instance**.
+
+```C#
+foreach (var index in cn.DDL.GeTableIndexes("table_name")){
+
+    Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
+
+    Debug.WriteLine($"Columns");
+    Debug.WriteLine($"----------------------------");
+
+    foreach (var column in index.Columns){
+        Debug.WriteLine($"{column .Name} {(index.IsDescending? "DESC" : "ASC")}");
+    }
+}
+```
+
+<br/>
+
+Following section demonstrates reading the indexes of table **by its name**.
+
+```C#
+foreach (var index in h.Indexes)
+    Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
+```

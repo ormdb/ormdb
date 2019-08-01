@@ -1,0 +1,49 @@
+﻿**`CreateTable`** function is used to create a new table in a database.
+
+<br/>
+
+**Definition**
+```C#
+namespace Connection {
+    public class DDL {
+
+       public List<string> CreateTables(IEnumerable<Table.Base> Tables,
+                                 SchemaPrefix = Manager.DefaultSchemaPrefix,
+                                 CreateIndexes = true,
+                                 OnlyGenerateScript = false){}
+
+       public List<string> CreateTable(Table.Base Table,
+                                SchemaPrefix = Manager.DefaultSchemaPrefix,
+                                CreateIndexes = true,
+                                OnlyGenerateScript = false){}
+
+       public string CreateTable(string TableName,
+                          IEnumerable<Table.Column> Columns, 
+                         .IndexInfo PrimaryKeyInfo = null, 
+                          SchemaPrefix = Manager.DefaultSchemaPrefix, 
+                          OnlyGenerateScript = false){}
+```
+>**`SchemaPrefix`** is a prefix for table-name. (Exm. Name="table-name" , NameWithPrefix="[pfx]table-name").
+
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following section demonstrates creating a table.
+
+```C#
+
+// create the table.
+cn.DDL.GetTableScript(h);
+
+```
+
+Following section demonstrates how to generate **`CREATE TABLE`** script.
+
+```C#
+var script1 = cn.DDL.GetTableScript(h, OnlyGenerateScript:true);
+```

@@ -1,0 +1,45 @@
+﻿**`DropTable`** is used to drop an existing table in a database.
+
+<br/>
+
+**Definition**
+```C#
+namespace Connection {
+    public class DDL {
+
+        public List<string> DropTable(IEnumerable<Table.Base> Tables,
+                                      bool OnlyGenerateScript = false){}
+
+        public List<string> DropTable(IEnumerable<string> TableNames,
+                                      bool OnlyGenerateScript = false){}
+
+        public string DropTable(Table.Base Table,
+                                bool OnlyGenerateScript = false){}
+
+        public string DropTable(string TableName,
+                                bool OnlyGenerateScript = false){}
+```
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following section demonstrates how to drop table.
+
+```C#
+cn.DDL.DropTable(h);              // single table by instance
+
+cn.DDL.DropTable({h, l});         // multi table by instance
+
+cn.DDL.DropTable("table1");       // single table by name
+
+```
+
+Following section demonstrates how to generate **`DROP TABLE`** script.
+
+```C#
+var script = cn.DDL.DropTable(h, true);
+```

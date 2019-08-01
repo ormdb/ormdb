@@ -1,0 +1,41 @@
+﻿Obtains database [Table-Information] according to provider via [Database] currently connected.
+
+<br/>
+
+**Definition**
+```C#
+namespace Connection {
+    public class DDL {
+
+        public List<SchemaTableInfo> GetTables(string TableName = null){}
+```
+<br/>
+
+**Return**
+
+| SchemaTableInfo | Description                                                              |
+|-----------------|--------------------------------------------------------------------------|
+| Catalog         | Database or Catalog name which has the table.                            |
+| Schema          | Name of schema that contains the table.                                  |
+| Table           | Table name.                                                              |
+
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following section demonstrates retrieving the tables from database.
+
+```C#
+var tables = cn.DDL.GetTables();
+
+var table_count = tables.Count;
+
+foreach (var table in tables) {
+    System.Diagnostics.Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}");
+}
+
+```

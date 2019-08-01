@@ -1,0 +1,411 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OrmDB :: Fastest ORM tool for .Net / .Net.Core</title>
+    <meta name="description" content="OrmDB :: OrmDB is the Fastest and best ORM tool for .Net / .Net.Core">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="site/css/prism.css">
+    <link rel="stylesheet" href="site/css/site.css" />
+
+    <style>
+        #wiki {
+        }
+
+            #wiki > #wiki-menu {
+                padding: 0 0 10px 0;
+                border-right: 2px solid #f5f2f0;
+                -webkit-box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
+                -moz-box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
+                box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
+            }
+
+                #wiki > #wiki-menu li {
+                    text-decoration: none;
+                    color: #0056b3;
+                    cursor: pointer;
+                }
+
+                    #wiki > #wiki-menu li:hover {
+                        text-decoration: underline;
+                        color: #0056b3;
+                    }
+
+                #wiki > #wiki-menu li {
+                    padding: 5px 10px;
+                    white-space: nowrap;
+                }
+
+                #wiki > #wiki-menu .wiki-menu-active {
+                    background: #f3f9ff;
+                    border: 1px solid #a9caea;
+                }
+
+            #wiki > #wiki-body {
+                padding: 25px 15px 0 25px !important;
+            }
+
+        .markdown-body {
+            font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+            font-size: 16px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+            .markdown-body blockquote, .markdown-body details, .markdown-body dl, .markdown-body ol, .markdown-body p, .markdown-body pre, .markdown-body table, .markdown-body ul {
+                margin-bottom: 16px;
+                margin-top: 0;
+            }
+
+            .markdown-body table {
+                display: block;
+                overflow: auto;
+                width: 100%;
+            }
+
+                .markdown-body table > thead {
+                    display: table-header-group;
+                    vertical-align: middle;
+                    border-color: inherit;
+                }
+
+                .markdown-body table > tbody {
+                    display: table-row-group;
+                    vertical-align: middle;
+                    border-color: inherit;
+                }
+
+                .markdown-body table tr {
+                    background-color: #fff;
+                    border-top: 1px solid #c6cbd1;
+                }
+
+                    .markdown-body table tr:nth-child(2n) {
+                        background-color: #f6f8fa;
+                    }
+
+                .markdown-body table td, .markdown-body table th {
+                    border: 1px solid #dfe2e5;
+                    padding: 6px 13px;
+                }
+
+                .markdown-body table th {
+                    font-weight: 600;
+                }
+
+            .markdown-body h1, .markdown-body h2 {
+                border-bottom: 1px solid #eaecef;
+                padding-bottom: .3em;
+            }
+
+
+            .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 {
+                font-weight: 600;
+                line-height: 1.25;
+                margin-bottom: 16px;
+                margin-top: 24px;
+            }
+
+            .markdown-body h1 {
+                font-size: 2em;
+            }
+
+            .markdown-body h2 {
+                font-size: 1.5em;
+            }
+
+            .markdown-body h3 {
+                font-size: 1.25em;
+            }
+
+            .markdown-body h4 {
+                font-size: 1em;
+            }
+
+            .markdown-body h5 {
+                font-size: .875em;
+            }
+
+            .markdown-body h6 {
+                color: #6a737d;
+                font-size: .85em;
+            }
+
+            .markdown-body h1, .markdown-body h2 {
+                border-bottom: 1px solid #eaecef;
+                padding-bottom: .3em;
+            }
+
+            /*-- CODE --*/
+            .markdown-body pre {
+                word-wrap: normal;
+            }
+
+            .markdown-body .highlight pre {
+                margin-bottom: 0;
+                word-break: normal;
+            }
+
+            .markdown-body .highlight pre, .markdown-body pre {
+                background-color: #f6f8fa;
+                border-radius: 3px;
+                font-size: 85%;
+                line-height: 1.45;
+                overflow: auto;
+                padding: 16px;
+            }
+
+
+        ::-webkit-scrollbar-button {
+            display: none;
+            height: 13px;
+            border-radius: 0px;
+            background-color: #808080;
+        }
+
+            ::-webkit-scrollbar-button:hover {
+                background-color: #808080;
+            }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #808080;
+            border-radius: 5px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background-color: #808080;
+                border-radius: 5px;
+            }
+
+        ::-webkit-scrollbar-track {
+            background-color: #efefef;
+            border-radius: 10px;
+        }
+
+            ::-webkit-scrollbar-track:hover {
+                background-color: #808080;
+                border-radius: 10px;
+            }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex flex-column w-100 h-100" style="position: absolute;top: 0; right: 0; bottom: 0; left: 0;">
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="/"><img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80" /></a>
+
+            <h1 class="navbar-text">
+                Wiki
+            </h1>
+        </nav>
+
+        <div id="wiki" class="flex-grow-1 d-flex overflow-hidden">
+            <div id="wiki-menu" class="p-3" style="min-width: 270px !important;overflow-x: hidden !important; overflow-y: auto !important;"></div>
+            <div id="wiki-body" class="p-3 flex-grow-1 overflow-auto markdown-body"></div>
+        </div>
+
+        <nav class="navbar navbar-dark bg-dark">
+            <span class="navbar-text">
+                OrmDB - MIT License
+            </span>
+        </nav>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="site/js/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/9.0.1/markdown-it.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-linkify/2.1.8/linkify.min.js"></script>
+    <script>
+        //-- location is being determining...
+        var location_path = location.href.split("/");
+        location_path.pop();
+        location_path = location_path.join("/");
+        var code_path = location_path + "/site/codes/";
+        var wiki_path = location_path + "/site/wiki/";
+
+
+        //----------------------------------------------------------------
+        //-- MENU
+        var _menu_groups = {
+            "GEN": {
+                title: "Home",
+                items: {
+                    "GEN-Home": "Home"
+                }
+            },
+            "TBL": {
+                title: "Table",
+                items: {
+                    "TBL-Fields": "Fields",
+                    "TBL-Definition": "Definition",
+                    "TBL-Serialize": "Serialize & Deserialize"
+                }
+            },
+            "CON": {
+                title: "Connection",
+                items: {
+                    "CON-Register": "Register",
+                    "CON-Create": "Create",
+                    "CON-Transaction": "Transaction",
+                    "CON-Import": "Import Data"
+                }
+            },
+            "SQL": {
+                title: "SQL",
+                items: {
+                    "SQL-Operators": "Operators & Functions",
+                    "SQL-Select": "Select",
+                    "SQL-Insert": "Insert",
+                    "SQL-InsertInto": "InsertInto",
+                    "SQL-Update": "Update",
+                    "SQL-Delete": "Delete",
+                    "SQL-Query": "Query"
+                }
+            },
+            "DDL": {
+                title: "DDL",
+                items: {
+                    "DDL-GetTables": "GetTables",
+                    "DDL-GetTableInstance": "GetTableInstance",
+                    "DDL-GetTableIndexes": "GetTableIndexes",
+                    "DDL-TableExist": "TableExist",
+                    "DDL-GetTableColumns": "GetTableColumns",
+                    "DDL-CreateTable": "CreateTable",
+                    "DDL-DropTable": "DropTable",
+                    "DDL-CreateIndex": "CreateIndex",
+                    "DDL-DropIndex": "DropIndex",
+                    "DDL-Truncate": "Truncate"
+                }
+            },
+            "OTH": {
+                title: "Other",
+                items: {
+                    "OTH-DataReader": "DataReader",
+                    "OTH-DataTable": "DataTable"
+                }
+            }
+        }
+
+        var _menu = [];
+        for (var g in _menu_groups) {
+            var _menu_group = _menu_groups[g];
+
+
+            _menu.push('<p><strong>' + _menu_group.title + '</strong></p>');
+            _menu.push('<ul>');
+
+            for (var i in _menu_group.items) {
+                _menu.push('<li onclick=menu_click(this) data-hash="' + i + '">' + _menu_group.items[i] + '</li>');
+
+            }
+            _menu.push('</ul>');
+
+        }
+        // menu is being rendered...
+        $("#wiki-menu").html(_menu.join(''));
+        function menu_click(obj) {
+            window.location.hash = '##' + $(obj).data()["hash"];
+        }
+        //----------------------------------------------------------------
+
+        $(function () {
+            load_page();
+
+            //-- Masked IFrame workaround - FavIcon
+            var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+            link.type = 'image/x-icon';
+            link.rel = 'shortcut icon';
+            link.href = 'https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        });
+
+        // full options list (defaults)
+        var md = markdownit({
+            html: true,             // Enable HTML tags in source
+            xhtmlOut: true,         // Use '/' to close single tags (<br />).
+            // This is only for full CommonMark compatibility.
+            breaks: false,              // Convert '\n' in paragraphs into <br>
+            langPrefix: 'language-',    // CSS language prefix for fenced blocks.
+            // Can be useful for external highlighters.
+            linkify: false,              // Autoconvert URL-like text to links
+
+            // Enable some language-neutral replacement + quotes beautification
+            typographer: false,
+
+            // Double + single quotes replacement pairs, when typographer enabled,
+            // and smartquotes on. Could be either a String or an Array.
+            //
+            // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
+            // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
+            quotes: '“”‘’',
+
+            // Highlighter function. Should return escaped HTML,
+            // or '' if the source string is not changed and should be escaped externally.
+            // If result starts with <pre... internal wrapper is skipped.
+            highlight: function (str, lang) {
+                switch (lang.toLowerCase()) {
+                    case "c#":
+                    case "csharp":
+                        lang = "csharp";
+                        break
+                    default:
+                        return str;
+                }
+
+                return '<pre class="language-' + lang + '"><code>' + Prism.highlight(str, Prism.languages.csharp, lang) + '</code></pre>';
+            }
+        });
+
+
+        $(window).on('popstate', function (e) {
+            load_page();
+        });
+
+        function load_page() {
+            var _home_page = "GEN-Home";
+
+            var _file = window.location.hash.replace("##", "");
+            if (_file === "") _file = _home_page;
+
+            //-- set active-class for selected-menu-item
+            $("#wiki > #wiki-menu li").removeClass("wiki-menu-active");
+            $('#wiki > #wiki-menu li[data-hash="' + _file + '"]').addClass("wiki-menu-active");
+
+            //-- title
+            var _title = "";
+            if (_file !== _home_page) {
+                var _menu_group_key = _file.split("-")[0];
+                var _menu_group = _menu_groups[_menu_group_key];
+                var _menu_group_item = _menu_group.items[_file];
+                _title = '<div style="font-weight:bold;line-height:1.125;word-wrap: break-word;font-size: 1.5em;"><span style="color:#8f9092;">' + _menu_group.title + '</span> / <span style="color:#5b6065;">' + _menu_group_item + '</span></div><hr/>';
+            }
+
+            //-- content
+            $.get(wiki_path + _file + ".txt", function (data) {
+                $("#wiki-body").html(_title + md.render(data));
+            }).fail(function () {
+                $("#wiki-body").html(_title + '<div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div>');
+            });
+            $("#wiki-body").scrollTop(0);
+        }
+
+    </script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144186634-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-144186634-1');
+    </script>
+</body>
+</html>

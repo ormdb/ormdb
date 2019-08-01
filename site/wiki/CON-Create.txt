@@ -1,0 +1,49 @@
+﻿Instance of a registered connection can be initialized with **`Create`** or **`CreateAndOpen`**.
+
+<br/>
+
+**Definition**
+```C#
+namespace Connection {
+    public class Manager {
+
+        public static Connection Create(string Id = DefaultRegisterID, 
+                                        bool AutoStartTrans = false, 
+                                        bool AutoConnect = true){}
+
+        public static Connection CreateAndOpen(string Name = DefaultRegisterID, 
+                                               bool AutoStartTrans = false)
+```
+
+<br/>
+
+**Examples**
+
+
+Following section demonstrates how to create a connection as **`ImmediatelyConnect`**.
+```C#
+// connection is initialized and opened immediately.
+var cn = OrmDB.Connection.Manager.CreateAndOpen("MSSQL");  
+```
+
+<br/>
+
+Following section demonstrates how to create a connection as **`AutoConnection`**.
+```C#
+// Initializing the connection.
+var cn = OrmDB.Connection.Manager.Create("MSSQL"); 
+
+// Connection is opened for first execution.
+   ...
+```
+<br/>
+
+Following section demonstrates how to create a connection as **`AutoConnection`**.
+```C#
+// Initializing the connection.
+var cn = OrmDB.Connection.Manager.Create("MSSQL", AutoConnect:false); 
+
+// Connection is NOT opened for first execution; must be opened manually.
+cn.Open();
+
+```

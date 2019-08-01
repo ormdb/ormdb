@@ -1,0 +1,60 @@
+﻿
+>Definition of the header-table:
+```C#
+using Odb;
+using Odb.Table;
+
+public class TableHeader : Base
+{
+    [ColumnNumeric(4, 0)] public Column Year;
+    [ColumnNumeric(4, 0)] public Column Id;
+    [ColumnString(15)]    public Column Note;
+    [ColumnNumeric(8, 0)] public Column DocDate;
+    [ColumnBoolean()]     public Column IsActive;
+
+    protected override void InitKeyInfo() {
+        base.PrimaryKey(new[] {Year, Id});
+    }
+}
+```
+>Definition of the lines-table:
+```C#
+using Odb;
+using Odb.Table;
+
+public class TableLines : Base
+{
+    [ColumnNumeric(4, 0)] public Column Year;
+    [ColumnNumeric(4, 0)] public Column Id;
+    [ColumnNumeric(2, 0)] public Column LineId;
+    [ColumnString(15)]    public Column Note;
+
+    protected override void InitKeyInfo() {
+        base.AddPrimaryKey(new[] {Year, Id, LineId});
+    }
+}
+```
+>main:
+```C#
+
+using Odb; /* for extensions */
+using Odb.Connection;
+using System.Diagnostics;
+
+public class test
+{
+    private TableHeader h = new TableHeader();
+    private TableHeader l = new TableLines();
+    private Connection cn;
+
+    public void main()
+    {
+        // connection is being registered...
+        Manager.Register("MSSQL_1", Provider.Type.MsSql, 
+                         "localhost,1433", "db01", "uname", "****");
+
+        // connection is being initialized...
+        cn = Manager.Create("MSSQL_1");
+    }
+}
+```

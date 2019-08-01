@@ -1,0 +1,144 @@
+﻿### Where Operator
+WHERE clause is used to filter records. WHERE clause is used to extract only records that fulfill a specified condition.
+
+```C#
+var _sql = SQL.X.Select().From(_h);
+    _sql.Where = (_h.Year == 2018) & 
+                 (_h.DocDate>= DateTime.Now.ToString("yyyyMMdd")) & 
+                 (_h.DocDate<= DateTime.Now.ToString("yyyyMMdd"));
+
+SQL.X.Select().From(_h, _h.Year == 2018);
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+### As Operator
+**`AS`** operator renames a column or table with an alias.
+
+```C#
+SQL.X.Select(_h.Year.As("year")).From(_h);
+
+
+SQL.X.Select(_h.Const("X").AS("flag"), _h.Year).From(_h);
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+### In Operator
+**`IN`** command allows you to specify multiple values in a WHERE clause.
+**`IN`** operator is a shorthand for multiple OR conditions.
+
+```C#
+SQL.X.Select().From(_h, _h.Year.In(new[] { 2017, 2018 }));
+
+SQL.X.Select().From(_h, _h.Id.NotIn(new[] { "A", "B", "C" }))
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+### Is Null / Is Not Null Operators
+```C#
+SQL.X.Select().From(_h, _h.Note.IsNull());
+
+
+SQL.X.Select().From(_h, _h.Note.IsNotNull());
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+### Like Operator
+**`LIKE`** command is used in a WHERE clause to search for a specified pattern in a column.
+
+```C#
+//  LIKE '%ASD%';
+SQL.X.Select().From(_h, _h.Note.CONTAINS("ASD"));
+
+
+//  LIKE 'ASD%';
+SQL.X.Select().From(_h, _h.Note.STARTS_WITH("ASD"));
+
+
+//  LIKE '%ASD';
+SQL.X.Select().From(_h, _h.Note.ENDS_WITH("ASD"));
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+### Asc / Desc Operators
+**`ASC`** / **`DESC`** command is used to sort the data returned in ascending/descending  order.
+```C#
+SQL.X.Select().From(_h).OrderBy(_h.Year, _h.DocDate.Desc());
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+### Aggregate Functions 
+
+```C#
+SQL.X.Select(_h.All.COUNT()).From(_h);
+
+
+SQL.X.Select(_h.Id.DISTINCT()).From(_h);
+
+
+SQL.X.Select(_h.Id.COALESCE(9999)).From(_h);
+
+
+SQL.X.Select(_h.Year, _h.Id.AVG()).From(_h).GroupBy(_h.Year);
+
+
+SQL.X.Select(_h.Year, _h.Id.MIN()).From(_h).GroupBy(_h.Year);
+
+
+SQL.X.Select(_h.Year, _h.Id.MAX()).From(_h).GroupBy(_h.Year);
+
+
+SQL.X.Select(_h.Year, _h.Id.SUM()).From(_h).GroupBy(_h.Year);
+
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+### String Functions 
+
+```C#
+SQL.X.Select(_h.Note.LEFT(4).RIGHT(2)).From(_h);
+
+
+SQL.X.Select(_h.Note.SUBSTRING(2, 4)).From(_h);
+
+
+SQL.X.Select(_h.Note.UPPER()).From(_h);
+
+
+SQL.X.Select(_h.Note.LOWER()).From(_h);
+
+
+SQL.X.Select(_h.Note.RTRIM().LTRIM()).From(_h);
+
+
+SQL.X.Select(_h.Year.CONCAT(_h.Id).CONCAT("X")).From(_h);
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+### DbNull
+```C#
+// UPDATE h 
+//    SET h.DocumentId = Null 
+// FROM TableHeader AS h 
+//    WHERE h.DocumentId Is Not Null;
+var u = SQL.X.Update(_h, _h.str.IsNotNull()).Values;
+    u.Value(_h.str) = System.DbNull
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>

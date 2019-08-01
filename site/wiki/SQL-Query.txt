@@ -1,0 +1,29 @@
+﻿**`QUERY`** statement is used to execution for multiple commands.
+
+All Select, Insert, Delete, and Update commands (also free text sql commands) can be execute in same query. 
+
+```C#
+var sql = SQL.X.Query;
+
+    sql.Delete(h);
+    sql.Delete(l);
+
+var header_inserter = sql.Insert(h, SetInitials:true);
+
+for (n = 1; (n <= 100); n++) {
+    var row = header_inserter.AddRow;
+        row(h.Year) = 2017;
+        row(h.Id) = 9999;
+        row(h.Note) = "note - " + n.toString();
+        row(h.DocDate) = now().ToString("yyyyMMdd");
+        row(h.IsActive) = true;
+}
+
+var row1 = sql.Update(h, h.Year == 2017).Values;
+    row1(h.Id) = 9999;
+
+    sql.ExecuteAsync(cn).Wait();
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>

@@ -1,0 +1,42 @@
+﻿**`TRUNCATE`** method is used to delete existing records in a table like **`DELETE`**. 
+
+> **`TRUNCATE`** process also executes the **`UPDATE STATISTICS`** for tables, after "DELETE" operation.
+
+<br/>
+
+**Definition**
+```C#
+namespace Connection {
+    public class DDL {
+
+        public List<string> Truncate(IEnumerable<Table.Base> Tables, bool OnlyGenerateScript = false){}
+        public List<string> Truncate(IEnumerable<string> TableNames, bool OnlyGenerateScript = false){}
+
+        public string Truncate(Table.Base Table, bool OnlyGenerateScript = false){}
+        public string Truncate(string TableName, bool OnlyGenerateScript = false){}
+```
+
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following section demonstrates **`TRUNCATE`** the table(s).
+
+```C#
+cn.DDL.Truncate(h);             // single table by instance
+
+cn.DDL.Truncate({h, l});        // multi table by instance
+
+cn.DDL.Truncate("table1");      // single table by name
+
+```
+
+Following section demonstrates how to generate **`TRUNCATE`** script.
+
+```C#
+var script = cn.DDL.Truncate(h, true);
+```

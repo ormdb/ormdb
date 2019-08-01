@@ -1,0 +1,54 @@
+﻿**`CreateIndex`** is used to create indexes in tables. Indexes are used to speed up searches/queries.
+
+<br/>
+
+>**`PRIMARY KEY cannot be created independent from a table, it can only be during table creation or deletion.`**
+
+<br/>
+
+**Definition**
+```C#
+namespace Connection {
+    public class DDL {
+
+        public string CreateIndex(Table.Base Table,
+                                  Table.IndexInfo IndexInfo,
+                                  string IndexName = null,
+                                  bool OnlyGenerateScript = false){}
+
+        public string CreateIndex(string TableName,
+                                  Table.IndexInfo IndexInfo,
+                                  string IndexName = null,
+                                  bool OnlyGenerateScript = false){}
+
+        public string CreateIndex(string TableName,
+                                  bool IsUnique,
+                                  IEnumerable<string> ColumnNames,
+                                  string IndexName = null,
+                                  bool OnlyGenerateScript = false){}
+```
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following section demonstrates how to create index for a table.
+
+```C#
+
+// by table instance
+cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index");
+
+// by table name
+cn.DDL.CreateIndex("table1", true, new[] { "column1", "column2" }, "my_index");
+
+```
+
+Following section demonstrates how to generate **`DROP INDEX`** script.
+
+```C#
+var script = cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index", true);
+```

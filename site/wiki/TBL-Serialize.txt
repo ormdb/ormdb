@@ -1,0 +1,27 @@
+﻿All tables can be serialized and deserialized as shown below.
+
+```C#
+    // Serialization of a header table
+    var _data = Table.Base.Serialize(_h);
+
+    // Deserialization of a header table
+    var _new_table = Table.Base.Deserialize(_data);
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+You can also serialize and deserialize a table with its table-name. 
+```C#
+    // Initializing a table with its name
+    var _table = _cn.DDL.GetTableInstance(<_tb_name>);
+
+    // Serializing the table
+    var _data = Table.Base.Serialize(_table);
+
+    // Deserializing the table from a string
+    var _new_table = Table.Base.Deserialize(_data);
+```
+>This example needs the [Example Header](##OTH-Example-Header).
+
+<br/>

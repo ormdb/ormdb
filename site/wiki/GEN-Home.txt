@@ -1,0 +1,40 @@
+﻿![](https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b)
+
+Welcome to OrmDb documentation Wiki pages. Here you will find all information you need to know better OrmDb and how you can work.
+
+> This documentation is for latest version.
+
+<br/>
+
+## Download
+
+OrmDB has no dependencies. You can [**DOWNLOAD**](/) from releases, into your Bin folder and add it as Reference.
+
+<br/>
+
+## What is it?
+OrmDB is a simple, fast and lightweight embedded .NET ORM tool which was inspired by the equivalent other tools.
+OrmDB works across .NET ADO providers as shown below.
+
+|Type             | Driver                              |
+|-----------------|-------------------------------------|
+|Ms SQL           | System.Data.SqlClient               |
+|Postgre SQL      | Npgsql                              |
+|MySQL / MariaDB  | MySql.Data                          |
+|Oracle           | ODP.Net (Oracle ManagedDataAccess)  |
+
+<br/>
+
+## Where to use?
+* All desktop/web applications need to communicate with a database 
+* Multi database operation
+* Multi client application
+* .Net / Asp.Net / .Net Core / Asp.Net Core
+
+<br/>
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2017 - OrmDb

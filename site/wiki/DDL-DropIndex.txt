@@ -1,0 +1,44 @@
+﻿**`DropIndex`** is used to drop an existing index of a table in a database.
+
+<br/>
+
+**Definition**
+```C#
+namespace Connection {
+    public class DDL {
+
+        public string DropIndex(Table.Base Table,
+                                Table.IndexInfo IndexInfo,
+                                bool OnlyGenerateScript = false){}
+
+        public string DropIndex(string TableName,
+                                Table.IndexInfo IndexInfo,
+                                bool OnlyGenerateScript = false){}
+
+        public string DropIndex(string TableName,
+                                string IndexName,
+                                bool OnlyGenerateScript = false){}
+```
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following section demonstrates how to drop index of a table.
+
+```C#
+
+cn.DDL.DropIndex(h, h.Indexes.First());       // by table instance
+
+cn.DDL.DropIndex("table1", "index_name");       // by table name
+
+```
+
+Following section demonstrates how to generate **`DROP INDEX`** script.
+
+```C#
+var script = cn.DDL.DropIndex("table1", "index_name", true);
+```

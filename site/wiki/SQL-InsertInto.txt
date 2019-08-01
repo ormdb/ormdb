@@ -1,0 +1,41 @@
+﻿**`InserInto`** function copies data from one table and inserts into same or another table.
+
+<br/>
+
+**Definition**
+```C#
+namespace SQL {
+    public class X {
+
+        public static InsertInto InsertInto(Table.Base Table, 
+                                            SQL.Select From){}
+
+        public static InsertInto InsertInto(SQL.TempTable Table, 
+                                            SQL.Select From){}
+```
+
+<br/>
+
+**Remarks**
+
+Make sure the order of the values is in the same order as the columns in the target table.
+
+<br/>
+
+**Examples**
+
+>Examples shown below needs the [Example Header](##OTH-Example-Header).
+
+<br/>
+
+Following section demonstrates **regular insertion from select**.
+
+```C#
+var sql = SQL.X.Select(h.Const(2018).AS(h.Year), 
+                       h.Id,
+                       h.Note,
+                       h.DocDate).From(h, h.Year == 2017);
+
+//copies records in 2017 into same table as 2018
+SQL.X.InsertInto(h, sql).Execute(cn);
+```
