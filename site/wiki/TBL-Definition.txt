@@ -13,7 +13,7 @@ public class TableHeader : Base
     [ColumnNumeric(4, 0)] public Column Year;
     [ColumnNumeric(4, 0)] public Column Id;
     [ColumnString(15)]    public Column Note;
-    [ColumnNumeric(8, 0)] public Column DocDate;
+    [ColumnDate(false)]   public Column DocDate;
     [ColumnBoolean()]     public Column IsActive;
 
     protected override void InitKeyInfo() {
@@ -42,7 +42,7 @@ public sealed class tables {
         [ColumnRef(ColumnTypes._year)] public Column Year;
         [ColumnRef(ColumnTypes._id)]   public Column Id;
         [ColumnString(15)]             public Column Note;
-        [ColumnNumeric(8, 0)]          public Column DocDate;
+        [ColumnDate(false)]            public Column DocDate;
         [ColumnBoolean()]              public Column IsActive;
 
        
