@@ -222,15 +222,26 @@
 </head>
 <body>
     <div class="d-flex flex-column w-100 h-100" style="position: absolute;top: 0; right: 0; bottom: 0; left: 0;">
-        <nav class="navbar navbar-dark bg-dark">
+
+
+        <nav class="navbar navbar-dark bg-dark d-sm-flex d-md-none">
             <button class="navbar-toggler" type="button" onclick="toggleNav()">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="/"><img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80" /></a>
 
-            <h1 class="navbar-text">
-                Wiki
-            </h1>
+            <a class="navbar-brand" href="/" style="height:30px;">
+                <img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80" style="margin-top:-25px;">
+            </a>
+            <div class="navbar-text" style="padding:0;font-size: 6vw;">Wiki</div>
+        </nav>
+        <nav class="navbar navbar-dark bg-dark d-none d-md-flex ">
+            <button class="navbar-toggler" type="button" onclick="toggleNav()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/" style="height:30px;">
+                <img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80" style="margin-top:-25px;">
+            </a>
+            <div class="navbar-text" style="padding:0;font-size:calc(32px + 6 * ((1000px - 320px) / 680));">Wiki</div>
         </nav>
 
         <div id="wiki" class="flex-grow-1 d-flex overflow-hidden">
@@ -239,7 +250,7 @@
         </div>
         <div id="is_small" class="d-none d-md-block"></div>
 
-        <nav class="navbar navbar-dark bg-dark">
+        <nav class="navbar navbar-dark bg-dark d-none d-md-block">
             <span class="navbar-text">
                 OrmDB - MIT License
             </span>
