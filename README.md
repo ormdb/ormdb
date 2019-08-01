@@ -3,13 +3,13 @@
 
 OrmDB is a simple, fast and lightweight embedded .NET ORM tool which was inspired by the equivalent other tools.
 
-**You can read documentation for more detail. [Wiki](https://github.com/ormdb/ormdb/wiki).**
+**You can read documentation for more detail. [Wiki](http://ormdb.net/wiki.html).**
 
 <br/>
 
 ## Download
 
-OrmDB has no no dependencies. You can [**DOWNLOAD**](https://github.com/ormdb/ormdb/releases) from releases, into your Bin folder and add it as Reference.
+OrmDB has no no dependencies. You can [**DOWNLOAD**](http://ormdb.net) from releases, into your Bin folder and add it as Reference.
 
 <br/>
 
@@ -27,7 +27,7 @@ foreach (var row in sql.ExecuteReader(_cn))
     Console.WriteLine( "Id={0}", row(h.Id).ToString() );
 }
 ```
-**You can read documentation for more detail. [Wiki](https://github.com/ormdb/ormdb/wiki).**
+**You can read documentation for more detail. [Wiki](http://ormdb.net/wiki.html).**
 
 <br/>
 
