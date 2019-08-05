@@ -7,6 +7,7 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace Connection {
     public class DDL {
@@ -27,6 +28,28 @@ namespace Connection {
                                   string IndexName = null,
                                   bool OnlyGenerateScript = false){}
 ```
+```VB
+NameSpace Connection
+    Public Class DDL
+
+        Public Function CreateIndex(Table As Table.Base,
+                                    IndexInfo As Table.IndexInfo,
+                                    IndexName As String = Nothing,
+                                    OnlyGenerateScript As Boolean = False) As String
+
+        Public Function CreateIndex(TableName As String,
+                                    IndexInfo As Table.IndexInfo,
+                                    IndexName As String = Nothing,
+                                    OnlyGenerateScript As Boolean = False) As String
+
+        Public Function CreateIndex(TableName As String,
+                                    IsUnique As Boolean,
+                                    ColumnNames As IEnumerable(Of string),
+                                    IndexName As String = Nothing,
+                                    OnlyGenerateScript As Boolean = False) As String
+```
+``````
+
 <br/>
 
 **Examples**
@@ -37,18 +60,34 @@ namespace Connection {
 
 Following section demonstrates how to create index for a table.
 
+``````XXX
 ```C#
-
 // by table instance
 cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index");
 
 // by table name
 cn.DDL.CreateIndex("table1", true, new[] { "column1", "column2" }, "my_index");
-
 ```
+```VB
+' by table instance
+cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index")
+
+' by table name
+cn.DDL.CreateIndex("table1", True, { "column1", "column2" }, "my_index")
+```
+``````
+
+<br/>
 
 Following section demonstrates how to generate **`DROP INDEX`** script.
 
+``````XXX
 ```C#
 var script = cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index", true);
 ```
+```VB
+Dim script = cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index", True)
+```
+``````
+
+<br/>

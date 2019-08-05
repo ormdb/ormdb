@@ -2,28 +2,55 @@
 
 All Select, Insert, Delete, and Update commands (also free text sql commands) can be execute in same query. 
 
+``````XXX
 ```C#
-var sql = SQL.X.Query;
+var sql = SQL.X.Query();
 
     sql.Delete(h);
     sql.Delete(l);
 
-var header_inserter = sql.Insert(h, SetInitials:true);
+var header_inserter = sql.Insert<TableHeader>(true);
 
 for (n = 1; (n <= 100); n++) {
     var row = header_inserter.AddRow;
-        row(h.Year) = 2017;
-        row(h.Id) = 9999;
-        row(h.Note) = "note - " + n.toString();
-        row(h.DocDate) = now().ToString("yyyyMMdd");
-        row(h.IsActive) = true;
+        row.Year = 2017;
+        row.Id = 9999;
+        row.Note = String.Concat("Note -", n.toString());
+        row.DocDate = DateTime.Now();
+        row.IsActive = true;
 }
 
-var row1 = sql.Update(h, h.Year == 2017).Values;
-    row1(h.Id) = 9999;
+var row1 = sql.Update<TableHeader>.Where( h.Id == 5 ).Values;
+    row1.Note = String.Empty;
 
-    sql.ExecuteAsync(cn).Wait();
+    sql.ExecuteAsync(cn);
 ```
+```VB
+With  SQL.X.Query()
+
+    .Delete(h)
+    .Delete(l)
+
+	With .Insert(Of TableHeader)(true)
+		For n=1 to 100
+			Dim row = .AddRow()
+				row.Year = 2017
+				row.Id = n
+				row.Note = String.Concat("Note -", n.toString())
+				row.DocDate = DateTime.Now()
+				row.IsActive = True
+		End If
+	End With
+
+	With sql.Update(Of TableHeader).Where( h.Id = 5).Values
+		.Note = String.Empty
+	End With
+
+	.Execute(cn)
+End With
+```
+``````
+
 >This example needs the [Example Header](##OTH-Example-Header).
 
 <br/>

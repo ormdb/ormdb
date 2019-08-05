@@ -3,13 +3,21 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace Connection {
     public class DDL {
 
         public Table.Base.Generic GetTableInstance(string TableName){}
-
 ```
+```VB
+NameSpace Connection
+    Public Class DDL
+
+        Public Function GetTableInstance(TableName As String) As Table.Base.Generic
+```
+``````
+
 <br/>
 
 **Examples**
@@ -20,16 +28,20 @@ namespace Connection {
 
 Following section demonstrates generating the instance of the table.
 
+``````XXX
 ```C#
-
 var tb = cn.DDL.GetTableInstance("table1");
-
 ```
+```VB
+Dim tb = cn.DDL.GetTableInstance("table1")
+```
+``````
 
 <br/>
 
 Following section demonstrates reading the informations from table-instance.
 
+``````XXX
 ```C#
 // Reading table columns...
 foreach ( var col in tb.GetColumns() ){
@@ -37,7 +49,7 @@ foreach ( var col in tb.GetColumns() ){
 }
 
 // Reading table indexes...
-foreach ( var index in tb.Indexes ){
+foreach ( var index in tb.GetIndexes() ){
 
     Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
 
@@ -48,11 +60,26 @@ foreach ( var index in tb.Indexes ){
         Debug.WriteLine($"{col.Name} {(index.IsDescending? "DESC" : "ASC")}");
     }
 }
-
-// Serializing table...
-var data = tb.Serialize();
-
-// Initializing a new table instance from serialized string
-var new_instance = Table.Base.Deserialize(data);
-
 ```
+```VB
+' Reading table columns...
+For Each col In tb.GetColumns()
+    Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
+Next
+
+' Reading table indexes...
+For Each index In tb.GetIndexes()
+
+    Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
+
+    Debug.WriteLine($"Columns")
+    Debug.WriteLine($"----------------------------")
+
+    For Each col In index.Columns
+        Debug.WriteLine($"{col.Name} {(index.IsDescending? "DESC" : "ASC")}")
+    Next
+Next
+```
+``````
+
+<br/>

@@ -3,6 +3,7 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace Connection {
     public class DDL {
@@ -10,6 +11,14 @@ namespace Connection {
         public List<SchemaTableColumnInfo> GetTableColumns(Table.Base Table){}
         public List<SchemaTableColumnInfo> GetTableColumns(string TableName){}
 ```
+```VB
+NameSpace Connection
+    Public Class DDL
+	
+        public Function GetTableColumns(Table As Table.Base) As List(Of SchemaTableColumnInfo)
+        public Function GetTableColumns(TableName As String) As List(Of SchemaTableColumnInfo)
+```
+``````
 
 <br/>
 
@@ -41,17 +50,34 @@ namespace Connection {
 
 Following section demonstrates reading the columns of a table **by its instance**.
 
+``````XXX
 ```C#
-foreach (var col in cn.DDL.GetTableColumns(h))
+foreach (var col in cn.DDL.GetTableColumns(h)) {
     Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
-
+}
 ```
+```VB
+For Each col In cn.DDL.GetTableColumns(h)
+    Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
+Next
+```
+``````
 
 <br/>
 
 Following section demonstrates reading the columns a of table **by its name**.
 
+``````XXX
 ```C#
-foreach (var col in cn.DDL.GetTableColumns("table_name"))
+foreach (var col in cn.DDL.GetTableColumns("table_name")) {
     Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
+}
 ```
+```VB
+For Each col In cn.DDL.GetTableColumns("table_name")
+    Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
+Next
+```
+``````
+
+<br/>

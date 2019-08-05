@@ -3,6 +3,7 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace Connection {
     public class Manager {
@@ -12,8 +13,20 @@ namespace Connection {
                                         bool AutoConnect = true){}
 
         public static Connection CreateAndOpen(string Name = DefaultRegisterID, 
-                                               bool AutoStartTrans = false)
+                                               bool AutoStartTrans = false){}
 ```
+```VB
+NameSpace Connection
+    Public Class Manager
+
+        Public Shared Function Create(Id As string = DefaultRegisterID, 
+									  AutoStartTrans As Boolean= False, 
+									  AutoConnect As Boolean = True) As Connection
+
+        Public Shared Function CreateAndOpen(Name As String = DefaultRegisterID, 
+											 AutoStartTrans As Boolean = False) As Connection
+```
+``````
 
 <br/>
 
@@ -21,29 +34,55 @@ namespace Connection {
 
 
 Following section demonstrates how to create a connection as **`ImmediatelyConnect`**.
+``````XXX
 ```C#
-// connection is initialized and opened immediately.
-var cn = OrmDB.Connection.Manager.CreateAndOpen("MSSQL");  
+// Connection is being initialized and opened immediately.
+var cn = OrmDB.Connection.Manager.CreateAndOpen("MSSQL");
 ```
+```VB
+' Connection is being initialized and opened immediately.
+Dim cn = OrmDB.Connection.Manager.CreateAndOpen("MSSQL")
+```
+``````
 
 <br/>
 
 Following section demonstrates how to create a connection as **`AutoConnection`**.
+``````XXX
 ```C#
-// Initializing the connection.
-var cn = OrmDB.Connection.Manager.Create("MSSQL"); 
+// Connection is being initialized.
+var cn = OrmDB.Connection.Manager.Create("MSSQL");
 
 // Connection is opened for first execution.
    ...
 ```
+```VB
+' Connection is being initialized.
+Dim cn = OrmDB.Connection.Manager.Create("MSSQL")
+
+' Connection is opened for first execution.
+   ...
+```
+``````
+
 <br/>
 
 Following section demonstrates how to create a connection as **`AutoConnection`**.
+``````XXX
 ```C#
-// Initializing the connection.
-var cn = OrmDB.Connection.Manager.Create("MSSQL", AutoConnect:false); 
+// Connection is being initialized.
+var cn = OrmDB.Connection.Manager.Create("MSSQL", AutoConnect:false);
 
 // Connection is NOT opened for first execution; must be opened manually.
 cn.Open();
-
 ```
+```VB
+' Connection is being initialized.
+Dim cn = OrmDB.Connection.Manager.Create("MSSQL", AutoConnect:=false)
+
+' Connection is NOT opened for first execution; must be opened manually.
+cn.Open()
+```
+``````
+
+<br/>

@@ -3,12 +3,21 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace Connection {
     public class DDL {
 
         public List<SchemaIndexInfo> GeTableIndexes(string TableName){}
 ```
+```VB
+NameSpace Connection
+    Public Class DDL
+
+        Public Function GeTableIndexes(TableName As String) As List(Of SchemaIndexInfo)
+```
+``````
+
 <br/>
 
 **Return**
@@ -32,6 +41,7 @@ namespace Connection {
 
 Following section demonstrates reading the indexes of table **by its instance**.
 
+``````XXX
 ```C#
 foreach (var index in cn.DDL.GeTableIndexes("table_name")){
 
@@ -41,16 +51,40 @@ foreach (var index in cn.DDL.GeTableIndexes("table_name")){
     Debug.WriteLine($"----------------------------");
 
     foreach (var column in index.Columns){
-        Debug.WriteLine($"{column .Name} {(index.IsDescending? "DESC" : "ASC")}");
+        Debug.WriteLine(column.Name.ToString());
     }
 }
 ```
+```VB
+For Each index In cn.DDL.GeTableIndexes("table_name")
+
+    Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
+
+    Debug.WriteLine($"Columns")
+    Debug.WriteLine($"----------------------------")
+
+    For Each column In index.Columns
+        Debug.WriteLine(column.Name.ToString())
+    Next
+Next
+```
+``````
 
 <br/>
 
 Following section demonstrates reading the indexes of table **by its name**.
 
+``````XXX
 ```C#
-foreach (var index in h.Indexes)
+foreach (var index in h.GetIndexes()) {
     Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
+}
 ```
+```VB
+For Each index In h.GetIndexes()
+    Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
+Next
+```
+``````
+
+<br/>

@@ -3,16 +3,28 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace SQL {
     public class X {
 
-        public static Update<T> Update<T>() 
+        public static SQL.Update<T> Update<T>() 
                                     where T : Table.Base
 
-        public static Update<T> Update<T>(Table.Field Where) 
+        public static SQL.Update<T> Update<T>(Table.Field Where) 
                                     where T : Table.Base
 ```
+```VB
+NameSpace SQL
+    Public Class X
+
+		Public Shared Function Update(Of T As Table.Base)() 
+									As SQL.Update(Of T)
+
+		Public Shared Function Update(Of T As Table.Base)(Where As Table.Column) 
+									As SQL.Update(Of T)
+```
+``````
 
 <br/>
 
@@ -24,6 +36,7 @@ namespace SQL {
 
 Following section demonstrates **regular update**.
 
+``````XXX
 ```C#
 var sql = SQL.X.Update<TableHeader>(h.Id == 9999);
 
@@ -32,11 +45,21 @@ var sql = SQL.X.Update<TableHeader>(h.Id == 9999);
 
 sql.Execute(cn);
 ```
+```VB
+Dim sql = SQL.X.Update(Of TableHeader)(h.Id = 9999)
+
+    Dim row = sql.Values
+        row.Note = "new note"
+
+sql.Execute(cn)
+```
+``````
 
 <br/>
 
 Following section demonstrates **multiple update**.
 
+``````XXX
 ```C#
 var sql = SQL.X.Query;
 
@@ -48,11 +71,24 @@ var sql = SQL.X.Query;
 
 sql.Execute(cn);
 ```
+```VB
+Dim sql = SQL.X.Query
+
+    Dim r1 = sql.Update(Of TableHeader)(h.Id = 9999).Values
+        r1.Note = "new note"
+
+    Dim r2 = sql.Update(Of TableLines)(l.Id = 9999).Values
+        r2.Note = "new note"
+
+sql.Execute(cn)
+```
+``````
 
 <br/>
 
 Following section demonstrates **update with join**.
 
+``````XXX
 ```C#
 var sql = SQL.X.Update<TableHeader>;
     sql.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
@@ -63,6 +99,17 @@ var sql = SQL.X.Update<TableHeader>;
 
 sql.Execute(cn);
 ```
+```VB
+Dim sql = SQL.X.Update(Of TableHeader)
+    sql.InnerJoin(l, l.Year = h.Year And l.Id = h.Id )
+    sql.Where(l.LineId > 3)
+
+    Dim row = sql.Values
+        row.Note = "new note"
+
+sql.Execute(cn)
+```
+``````
 >This sample updates the header records which contain DocumentLine that is greather than 3 in lines-table.
 
 <br/>

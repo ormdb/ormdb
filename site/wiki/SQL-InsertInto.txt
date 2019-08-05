@@ -3,6 +3,7 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace SQL {
     public class X {
@@ -13,6 +14,17 @@ namespace SQL {
         public static InsertInto InsertInto(SQL.TempTable Table, 
                                             SQL.Select From){}
 ```
+```VB
+NameSpace SQL
+    Public Class X
+
+		Public Shared Function InsertInto(Table As Table.Base, 
+										  From As SQL.Select) As SQL.InsertInto
+
+		Public Shared Function InsertInto(Table As SQL.TempTable, 
+										  From As SQL.Select) As SQL.InsertInto
+```
+``````
 
 <br/>
 
@@ -30,12 +42,27 @@ Make sure the order of the values is in the same order as the columns in the tar
 
 Following section demonstrates **regular insertion from select**.
 
+``````XXX
 ```C#
+// copies records in 2017 into same table as 2018
+
 var sql = SQL.X.Select(h.Const(2018).AS(h.Year), 
                        h.Id,
                        h.Note,
                        h.DocDate).From(h, h.Year == 2017);
 
-//copies records in 2017 into same table as 2018
 SQL.X.InsertInto(h, sql).Execute(cn);
 ```
+```VB
+' copies records in 2017 into same table as 2018
+
+Dim sql = SQL.X.Select(h.Const(2018).AS(h.Year), 
+                       h.Id,
+                       h.Note,
+                       h.DocDate).From(h, h.Year = 2017)
+
+SQL.X.InsertInto(h, sql).Execute(cn)
+```
+``````
+
+<br/>

@@ -2,88 +2,39 @@
 
 Tables must be defined before usage. Each table to be defined, is inherited from **`Odb.Table.Base`**. Fields of the table are the type of **`Odb.Table.Field`** while its' data-type is specified with a property.
 
-Tables are defined as simple as it is shown below.
-
-```C#
-using Odb;
-using Odb.Table;
-
-public class TableHeader : Base
-{
-    [ColumnNumeric(4, 0)] public Column Year;
-    [ColumnNumeric(4, 0)] public Column Id;
-    [ColumnString(15)]    public Column Note;
-    [ColumnDate(false)]   public Column DocDate;
-    [ColumnBoolean()]     public Column IsActive;
-
-    protected override void InitKeyInfo() {
-        base.PrimaryKey({Year, Id);
-    }
-}
-```
-
 If a field-type is often used in many of your tables, you can use a field as a reference.
 
-Field **`year`** is defined once and then is used as **`FieldRef`** in 2 tables, as shown below.
-
-```C#
-using Odb;
-using Odb.Table;
-
-public sealed class tables {
-
-    public enum ColumnTypes {
-        [ColumnNumeric(4, 0, Description = "Year", MinValue = 1900, MaxValue = 2100)] _year,
-        [ColumnNumeric(4, 0] _id
-    }
-
-    public class TableHeader : Base
-    {
-        [ColumnRef(ColumnTypes._year)] public Column Year;
-        [ColumnRef(ColumnTypes._id)]   public Column Id;
-        [ColumnString(15)]             public Column Note;
-        [ColumnDate(false)]            public Column DocDate;
-        [ColumnBoolean()]              public Column IsActive;
-
-       
-        protected override void InitKeyInfo() {
-            // Primary Key
-            base.PrimaryKey({Year, Id); 
-
-            //Unique Index
-            base.AddIndex(new[] { FieldX}, true); 
-
-            //Non-Unique + Descending Sorted Index
-            base.AddIndex(new[] { DocDate.DESC(), FieldX }); 
-        }
-    }
-
-    public class TableLines : Base
-    {
-        [ColumnRef(ColumnTypes._year)] public Column Year;
-        [ColumnRef(ColumnTypes._id)]   public Column Id;
-        [ColumnNumeric(2, 0)]          public Column LineId;
-        [ColumnString(15)]             public Column LineNote;
-
-        protected override void InitKeyInfo() {
-            base.PrimaryKey({Year, Id, LineId);
-        }
-    }
-}
-```
+Please refer to [Example Header](##OTH-Example-Header) for usage.
 
 ### Declaration
 Instances of the tables are being initialized.
 
+``````XXX
 ```C#
-    private TableHeader _h = new TableHeader();
-    private TableLines  _l = new TableLines();
+    private TableHeader h = new TableHeader();
+    private TableLines  l = new TableLines();
 ```
+```VB
+    Private h As New TableHeader()
+    Private l As New TableLines()
+```
+``````
+
+<br/>
 
 If you would like to join a table with itself, same table can be initialized twice as shown below.
 
+``````XXX
 ```C#
-    private TableHeader _h  = new TableHeader();
-    private TableLines  _l  = new TableLines();
-    private TableHeader _h2 = new TableHeader();
+    private TableHeader h  = new TableHeader();
+    private TableLines  l  = new TableLines();
+    private TableHeader h2 = new TableHeader();
 ```
+```VB
+    Private h  As New TableHeader()
+    Private l  As New TableLines()
+    Private h2 As New TableHeader()
+```
+``````
+
+<br/>

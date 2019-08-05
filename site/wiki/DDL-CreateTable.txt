@@ -3,26 +3,48 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace Connection {
     public class DDL {
 
        public List<string> CreateTables(IEnumerable<Table.Base> Tables,
-                                 SchemaPrefix = Manager.DefaultSchemaPrefix,
-                                 CreateIndexes = true,
-                                 OnlyGenerateScript = false){}
+								string SchemaPrefix = Manager.DefaultSchemaPrefix,
+								bool CreateIndexes = true,
+								bool OnlyGenerateScript = false){}
 
        public List<string> CreateTable(Table.Base Table,
-                                SchemaPrefix = Manager.DefaultSchemaPrefix,
-                                CreateIndexes = true,
-                                OnlyGenerateScript = false){}
+                                string SchemaPrefix = Manager.DefaultSchemaPrefix,
+                                bool CreateIndexes = true,
+                                bool OnlyGenerateScript = false){}
 
        public string CreateTable(string TableName,
-                          IEnumerable<Table.Column> Columns, 
-                         .IndexInfo PrimaryKeyInfo = null, 
-                          SchemaPrefix = Manager.DefaultSchemaPrefix, 
-                          OnlyGenerateScript = false){}
+								IEnumerable<Table.Column> Columns, 
+								IndexInfo PrimaryKeyInfo = null, 
+								string SchemaPrefix = Manager.DefaultSchemaPrefix, 
+								bool OnlyGenerateScript = false){}
 ```
+```VB
+NameSpace Connection
+    Public Class DDL
+	
+       Public Function CreateTables(Tables As IEnumerable(Of Table.Base),
+                                    SchemaPrefix As String = Manager.DefaultSchemaPrefix,
+                                    CreateIndexes As Boolean = True,
+                                    OnlyGenerateScript As Boolean = False) As List(Of String)
+
+       Public Function CreateTable(Table As Table.Base,
+                                   SchemaPrefix As String = Manager.DefaultSchemaPrefix,
+                                   CreateIndexes As Boolean = True,
+                                   OnlyGenerateScript As Boolean = False) As List(Of String)
+
+       Public Function CreateTable(TableName As String,
+								   Columns As IEnumerable(Of Table.Column), 
+								   PrimaryKeyInfo As IndexInfo = Nothing, 
+								   SchemaPrefix As String = Manager.DefaultSchemaPrefix, 
+								   OnlyGenerateScript As Boolean = False) As String
+```
+``````
 >**`SchemaPrefix`** is a prefix for table-name. (Exm. Name="table-name" , NameWithPrefix="[pfx]table-name").
 
 <br/>
@@ -35,15 +57,28 @@ namespace Connection {
 
 Following section demonstrates creating a table.
 
+``````XXX
 ```C#
-
 // create the table.
 cn.DDL.GetTableScript(h);
-
 ```
+```VB
+' create the table.
+cn.DDL.GetTableScript(h)
+```
+``````
+
+<br/>
 
 Following section demonstrates how to generate **`CREATE TABLE`** script.
 
+``````XXX
 ```C#
 var script1 = cn.DDL.GetTableScript(h, OnlyGenerateScript:true);
 ```
+```VB
+Dim script1 = cn.DDL.GetTableScript(h, OnlyGenerateScript:=True)
+```
+``````
+
+<br/>

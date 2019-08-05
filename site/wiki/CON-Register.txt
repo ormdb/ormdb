@@ -3,6 +3,7 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace Connection {
     public class Manager {
@@ -15,6 +16,20 @@ namespace Connection {
                                     string Id = DefaultRegisterID, 
                                     string SchemaPrefix = DefaultSchemaPrefix){}
 ```
+```VB
+NameSpace Connection
+    Public Class Manager {
+
+        Public Shared Sub Register(Provider.Type AS Provider.Type, 
+							       Host As String, 
+							       DatabaseName As String, 
+							       UserName As String, 
+							       Password As String, 
+							       Id As String = DefaultRegisterID, 
+							       SchemaPrefix As String = DefaultSchemaPrefix)
+```
+``````
+
 <br/>
 
 **Remarks**
@@ -52,6 +67,7 @@ Each register operation initializes a connection-information. This information c
 
 Following section demonstrate how to register a connection.
 
+``````XXX
 ```C#
 using OrmDB.Connection;
 
@@ -67,13 +83,36 @@ Manager.Register(Id:"PGSQL", Provider.Type.PostgreSql,
 
 Manager.Register(Id:"ORACL", Provider.Type.Oracle,
                  "host,<port>", "<database>", "user", "****");
-
 ```
+```VB
+Imports OrmDB.Connection
+
+
+Manager.Register(Id:="MSSQL", Provider.Type.MsSql,
+                 "host,<port>", "<database>", "user", "****")
+
+Manager.Register(Id:="MYSQL", Provider.Type.MySql,
+                 "host,<port>", "<database>", "user", "****")
+
+Manager.Register(Id:="PGSQL", Provider.Type.PostgreSql,
+                 "host,<port>", "<database>", "user", "****")
+
+Manager.Register(Id:="ORACL", Provider.Type.Oracle,
+                 "host,<port>", "<database>", "user", "****")
+```
+``````
 
 <br/>
 
 Following section demonstrate reading register information.
 
+``````XXX
 ```C#
 var ci = Manager.Item("MSSQL");
 ```
+```VB
+Dim ci = Manager.Item("MSSQL")
+```
+``````
+
+<br/>

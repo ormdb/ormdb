@@ -3,6 +3,7 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace Connection {
     public class DDL {
@@ -19,6 +20,25 @@ namespace Connection {
                                 string IndexName,
                                 bool OnlyGenerateScript = false){}
 ```
+```VB
+NameSpace Connection
+    Public Class DDL
+
+        Public Function DropIndex(Table As Table.Base,
+                                  IndexInfo As Table.IndexInfo,
+                                  OnlyGenerateScript As Boolean = False) As String
+
+        Public Function DropIndex(TableName As String,
+                                  IndexInfo As Table.IndexInfo,
+                                  OnlyGenerateScript As Boolean = False) As String
+
+        Public Function DropIndex(TableName As String,
+                                  IndexName As String,
+                                  OnlyGenerateScript As Boolean = False) As String
+
+```
+``````
+
 <br/>
 
 **Examples**
@@ -29,16 +49,34 @@ namespace Connection {
 
 Following section demonstrates how to drop index of a table.
 
+``````XXX
 ```C#
+// by table instance
+cn.DDL.DropIndex(h, h.Indexes.First());
 
-cn.DDL.DropIndex(h, h.Indexes.First());       // by table instance
-
-cn.DDL.DropIndex("table1", "index_name");       // by table name
-
+// by table name
+cn.DDL.DropIndex("table1", "index_name");
 ```
+```VB
+' by table instance
+cn.DDL.DropIndex(h, h.Indexes.First())
+
+' by table name
+cn.DDL.DropIndex("table1", "index_name")
+```
+``````
+
+<br/>
 
 Following section demonstrates how to generate **`DROP INDEX`** script.
 
+``````XXX
 ```C#
 var script = cn.DDL.DropIndex("table1", "index_name", true);
 ```
+```VB
+Dim script = cn.DDL.DropIndex("table1", "index_name", Rrue)
+```
+``````
+
+<br/>

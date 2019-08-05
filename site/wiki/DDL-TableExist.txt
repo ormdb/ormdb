@@ -3,6 +3,7 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace Connection {
     public class DDL {
@@ -10,6 +11,15 @@ namespace Connection {
         public bool TableExist(Table.Base Table){}
         public bool TableExist(string TableName){}
 ```
+```VB
+NameSpace Connection
+    Public Class DDL
+
+        Public FunctionTableExist(Table As Table.Base) As Boolean
+        Public FunctionTableExist(TableName As String) As Boolean
+```
+``````
+
 <br/>
 
 **Examples**
@@ -20,9 +30,17 @@ namespace Connection {
 
 Following section demonstrates determining whether the specified [Table] exists.
 
+``````XXX
 ```C#
+Debug.WriteLine("[table1] = " + (cn.DDL.TableExist("table1") ? "Exists" : "N/A") );
 
-Debug.WriteLine($"[table1] = { (cn.DDL.TableExist("table1") ? "exists" : "N/A") }");
-
-Debug.WriteLine($"[{h.Name}] = { (cn.DDL.TableExist(h) ? "exists " : "N/A") }");
+Debug.WriteLine($"[{h.Name}] = " + (cn.DDL.TableExist(h) ? "Exists " : "N/A") );
 ```
+```VB
+Debug.WriteLine("[table1] = " + If(cn.DDL.TableExist("table1"), "Exists", "N/A") )
+
+Debug.WriteLine($"[{h.Name}] = " + If(cn.DDL.TableExist(h), "Exists", "N/A") )
+```
+``````
+
+<br/>

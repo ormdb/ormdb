@@ -1,60 +1,118 @@
-﻿
->Definition of the header-table:
+﻿``````XXX
 ```C#
-using Odb;
+using Odb; /* for extensions */
 using Odb.Table;
+using Odb.Connection;
 
+public enum FieldTypes
+{
+	[ColumnNumeric(4, 0, Description = "Year", MinValue = 1900, MaxValue = 2100)] year,
+	[ColumnNumeric(4, 0)] id
+}
+
+// Definition of the header-table
 public class TableHeader : Base
 {
-    [ColumnNumeric(4, 0)] public Column Year;
-    [ColumnNumeric(4, 0)] public Column Id;
-    [ColumnString(15)]    public Column Note;
-    [ColumnDate(false)]   public Column DocDate;
-    [ColumnBoolean()]     public Column IsActive;
+    [ColumnRef(FieldTypes.year)] public Column Year;
+    [ColumnRef(FieldTypes.id)]   public Column Id;
+    [ColumnString(100)]          public Column Note;
+    [ColumnDate(false)]			 public Column DocDate;
+    [ColumnBoolean()]			 public Column IsActive;
 
     protected override void InitKeyInfo() {
+		// keys of the table are being defined.
         base.PrimaryKey(new[] {Year, Id});
     }
 }
-```
->Definition of the lines-table:
-```C#
-using Odb;
-using Odb.Table;
 
+
+// Definition of the lines-table:
 public class TableLines : Base
 {
-    [ColumnNumeric(4, 0)] public Column Year;
-    [ColumnNumeric(4, 0)] public Column Id;
-    [ColumnNumeric(2, 0)] public Column LineId;
-    [ColumnString(15)]    public Column Note;
+    [ColumnRef(FieldTypes.year)] public Column Year;
+    [ColumnRef(FieldTypes.id)]   public Column Id;
+    [ColumnNumeric(2, 0)]		 public Column LineId;
+    [ColumnString(100)]          public Column Note;
 
     protected override void InitKeyInfo() {
+		// keys of the table are being defined.
         base.AddPrimaryKey(new[] {Year, Id, LineId});
     }
 }
-```
->main:
-```C#
 
-using Odb; /* for extensions */
-using Odb.Connection;
-using System.Diagnostics;
-
-public class test
+//--------------------------------------------------------------------
+// MAIN
+public void main()
 {
-    private TableHeader h = new TableHeader();
-    private TableHeader l = new TableLines();
-    private Connection cn;
+    TableHeader h = new TableHeader();
+    TableHeader l = new TableLines();
+    Connection cn;
 
-    public void main()
-    {
-        // connection is being registered...
-        Manager.Register("MSSQL_1", Provider.Type.MsSql, 
-                         "localhost,1433", "db01", "uname", "****");
+    // connection is being registered...
+    Manager.Register("MSSQL_1", Provider.Type.MsSql, 
+                     "localhost,1433", "db01", "uname", "****");
 
-        // connection is being initialized...
-        cn = Manager.Create("MSSQL_1");
-    }
+    // connection is being initialized...
+    cn = Manager.Create("MSSQL_1");
 }
 ```
+```VB
+Imports Odb ' for extensions
+Imports Odb.Table
+Imports Odb.Connection
+
+Public Enum FieldTypes
+    <ColumnNumeric(4, 0, Description:="Year", MinValue:= 1900, MaxValue:= 2100)> year
+    <ColumnNumeric(4, 0)> id
+End Enum
+
+' Definition of the header-table
+Public Class TableHeader
+    Inherits Base
+
+    <ColumnRef(FieldTypes.year)> Public Year	 As Column
+    <ColumnRef(FieldTypes.id)>   Public Id		 As Column
+    <ColumnString(100)>		     Public Note	 As Column
+    <ColumnDate(False)>          Public DocDate  As Column
+    <ColumnBoolean()>            Public IsActive As Column
+
+    Protected Overrides Sub InitKeyInfo()
+		' keys of the table are being defined.
+        MyBase.PrimaryKey({Year, Id})
+    End Sub
+End Class
+
+' Definition of the lines-table:
+Public Class TableLines
+    Inherits Base
+
+    <ColumnRef(FieldTypes.year)> Public Year	 As Column
+    <ColumnRef(FieldTypes.id)>   Public Id		 As Column
+    <ColumnNumeric(2, 0)>        Public LineId	 As Column
+    <ColumnString(100)>		     Public Note	 As Column
+
+    Protected Overrides Sub InitKeyInfo()
+		' keys of the table are being defined.
+        MyBase.AddPrimaryKey({Year, Id, LineId})
+    End Sub
+End Class
+
+'--------------------------------------------------------------------
+' MAIN
+Public Sub main()
+    Dim h As TableHeader = New TableHeader()
+    Dim l As TableHeader = New TableLines()
+    Dim cn As Connection
+
+    ' connection is being registered...
+    Manager.Register("MSSQL_1", Provider.Type.MsSql, 
+					 "localhost,1433", "db01", "uname", "****")
+
+    ' connection is being initialized...
+    cn = Manager.Create("MSSQL_1")
+End Sub
+
+```
+``````
+
+<br/>

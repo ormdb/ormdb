@@ -3,6 +3,7 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace SQL {
     public class X {
@@ -10,6 +11,15 @@ namespace SQL {
         public static Insert<T> Insert<T>(bool SetInitials = false) 
                                     where T : Table.Base
 ```
+```VB
+NameSpace SQL
+    Public Class X
+
+        Public Shared Function Insert(Of T As Table.Base)(SetInitials As Boolean = False) 
+									As SQL.Insert(Of T)
+```
+``````
+
 <br/>
 
 **Remarks**
@@ -36,25 +46,41 @@ Columns which are specified **`SetInitials = true`**, accepts values shown below
 
 Following section demonstrates **single table insertion**. DocDate is accepted as 0(zero).
 
+``````XXX
 ```C#
-var sql = SQL.X.Insert<TableHeader>(SetInitials:true);
+var insert = SQL.X.Insert<TableHeader>(true);
 
 for (n = 1; (n <= 100); n++) {
-    var row = sql.AddRow();
+    var row = insert.AddRow();
         row.Year = 2017;
-        row.Id = 1000;
-        row.Note = "Note -" + n.toString();
-        //row.DocDate = DateTime.Now();
+        row.Id = n;
+        row.Note = String.Concat("Note -", n.toString());
+        // row.DocDate = DateTime.Now();
 }
 
 sql.Execute(cn);
 ```
+```VB
+With SQL.X.Insert(Of TableHeader)(True)
+	For n = 1 To 100
+		With sql.AddRow()
+			.Year = 2017
+			.Id = n
+			.Note = String.Concat("Note -", n.toString())
+			' .DocDate = DateTime.Now()
+		End With
+	Next
+	.Execute(cn)
+End With
+```
+``````
 > In this sample, the column **`h.EnteredDate`** was not specified. Sql engine of **`OrmDb`** sets the column with its inital value according to its type.
 
 <br/>
 
 Following section demonstrates **multiple table insertion**.
 
+``````XXX
 ```C#
 var sql = SQL.X.Query();
 
@@ -62,20 +88,18 @@ var _header = sql.Insert<TableHeader>();
 var _line = sql.Insert<TableLines>();
 
 for (n = 1; n <= 100; n++) {
-   var year = 2017;
-   var id= 1000;
-   var note= "Note -" + n.toString();
+   var note= String.Concat("Note -", n.toString());
 
     var r1 = _header.AddRow();
-        r1.Year = year;
-        r1.Id = id;
+        r1.Year = 2017;
+        r1.Id = n;
         r1.Note = note;
         r1.DocDate = DateTime.Now();
 
     for (m = 1; m <= 2; m++) {
         var r2 = _line.AddRow();
-            r2.FiscalYear = year;
-            r2.CompanyId = id;
+            r2.Year = r1.Year;
+            r2.Id = r1.Id;
             r2.LineId = m;
             r2.Note = note;
     }
@@ -83,5 +107,34 @@ for (n = 1; n <= 100; n++) {
 
 // All commands in query, are being executed as batch.
 sql.Execute(cn)
-
 ```
+```VB
+With SQL.X.Query()
+	Dim _header = .Insert(Of TableHeader)()
+	Dim _line = .Insert(Of TableLines)()
+
+	For n = 1 To 100
+	   var note= String.Concat("Note -", n.toString())
+
+		Dim r1 = _header.AddRow();
+			r1.Year = 2017
+			r1.Id = n
+			r1.Note = note
+			r1.DocDate = DateTime.Now()
+
+		For m = 1 To 2
+			Dim r2 = _line.AddRow()
+				r2.Year = r1.Year
+				r2.Id = r1.Id
+				r2.LineId = m
+				r2.Note = note
+		Next
+	Next
+
+	' All commands in query, are being executed as batch.
+	.Execute(cn)
+End With
+```
+``````
+
+<br/>

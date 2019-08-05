@@ -1,27 +1,57 @@
 ﻿All tables can be serialized and deserialized as shown below.
 
+
+>Examples need the [Example Header](##OTH-Example-Header).
+
+``````XXX
 ```C#
-    // Serialization of a header table
-    var _data = Table.Base.Serialize(_h);
+	//---------------------------------------------------
+	// get instance of a table
 
-    // Deserialization of a header table
-    var _new_table = Table.Base.Deserialize(_data);
+	// from definition
+	var t1 = new TableHeader();
+
+	// from database
+	var t2 = cn.DDL.GetTableInstance(<tb_name>);
+
+
+	//---------------------------------------------------
+	// Serialization
+
+    string serialize_data = "";
+
+    serialize_data = Table.Base.Serialize(t1);
+    serialize_data = Table.Base.Serialize(t2);
+
+
+	//---------------------------------------------------
+	// Deserialization
+    var new_instance = Table.Base.Deserialize(serialize_data);
 ```
->This example needs the [Example Header](##OTH-Example-Header).
+```VB
+	'---------------------------------------------------
+	' get instance of a table
 
-<br/>
+	' from definition
+	Dim t1 = new TableHeader()
 
-You can also serialize and deserialize a table with its table-name. 
-```C#
-    // Initializing a table with its name
-    var _table = _cn.DDL.GetTableInstance(<_tb_name>);
+	' from database
+	Dim t2 = cn.DDL.GetTableInstance(<tb_name>)
 
-    // Serializing the table
-    var _data = Table.Base.Serialize(_table);
 
-    // Deserializing the table from a string
-    var _new_table = Table.Base.Deserialize(_data);
+	'---------------------------------------------------
+	' Serialization
+
+    Dim serialize_data As String = ""
+
+    serialize_data = Table.Base.Serialize(t1)
+    serialize_data = Table.Base.Serialize(t2)
+
+
+	'---------------------------------------------------
+	' Deserialization
+    Dim new_instance = Table.Base.Deserialize(serialize_data)
 ```
->This example needs the [Example Header](##OTH-Example-Header).
+``````
 
 <br/>

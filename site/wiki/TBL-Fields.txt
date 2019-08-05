@@ -1,5 +1,6 @@
 ﻿You can use the column-types as shown below, in the table definitions by **OrmDB**.
 
+<br/>
 
 |ColumnType    |.NET type                                                                |
 |-------------|--------------------------------------------------------------------------|
@@ -10,49 +11,85 @@
 |ColumnDate    |`System.DateTime`                                                        |
 |ColumnRef     |Reference for `User PreDefined` column                                   |
 
+Please refer to [Example Header](##OTH-Example-Header) for usage.
+
+<br/>
+
 ### ColumnString
 is used for text type, only `Length` property can be specified for this type.
 
+``````XXX
 ```C#
     [ColumnString(10)]public Column col_char;
 ```
+```VB
+    <ColumnString(10)>Public col_char AS Column
+```
+``````
 
 ### ColumnNumeric
 
 is used for all numeric types, `Precision` and `Scale` properties can be specified for this type.
 
+``````XXX
 ```C#
     [ColumnString(15, 2)]public Column col_num;
 ```
+```VB
+    <ColumnString(15, 2)>Public col_num AS Column
+```
+``````
 
 ### ColumnBoolean
 
 is used for bool type, no additional properties can be specified for this type.
 
+``````XXX
 ```C#
     [ColumnBoolean()]public Column col_bool;
 ```
+```VB
+    <ColumnBoolean()>Public col_bool AS Column
+```
+``````
 
 ### ColumnBinary
 
 **`System.Byte[]`** or **`Long Text`** are stored as **`ColumnBinary`** in database, and `Length` properties cannot be specified for this type.
 
+``````XXX
 ```C#
     [ColumnBinary()]public Column col_bin;
 ```
+```VB
+    <ColumnBinary()>Public col_bin AS Column
+```
+``````
 
 ### ColumnDate
 
 .Net types such as **`System.Date`** or **`System.TimeSpan`**,  are stored as **`ColumnNumeric`** in database. By using this approach **`System.Date`** columns can be sorted easily by all database engines.
 
+``````XXX
 ```C#
-    [ColumnDate(<is long date ?>)]public Column col_dat;
+    [ColumnDate(LongDate?)]public Column col_dat;
 ```
+```VB
+    <ColumnDate(LongDate?)>Public col_bin AS Column
+```
+``````
 
 ### ColumnRef
 
 is used for repeated column types and `Length` properties cannot be specified for this type.
 
+``````XXX
 ```C#
-    [ColumnRef(<reference>)]public Column col_ref;
+    [ColumnRef( reference )]public Column col_ref;
 ```
+```VB
+    <ColumnRef( reference )>Public col_ref AS Column
+```
+``````
+
+<br/>

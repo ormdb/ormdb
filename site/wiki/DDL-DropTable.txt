@@ -3,6 +3,7 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace Connection {
     public class DDL {
@@ -19,6 +20,24 @@ namespace Connection {
         public string DropTable(string TableName,
                                 bool OnlyGenerateScript = false){}
 ```
+```VB
+NameSpace Connection
+    Public Class DDL
+
+        Public Function DropTable(Tables As IEnumerable(Of Table.Base),
+                                  OnlyGenerateScript As Boolean = False) As List(Of String)
+
+        Public Function DropTable(TableNames As IEnumerable(Of string),
+                                  OnlyGenerateScript As Boolean = False) As List(Of String)
+
+        Public Function DropTable(Table As Table.Base,
+                                  OnlyGenerateScript As Boolean = False) As String
+
+        Public Function DropTable(TableName As String,
+                                  OnlyGenerateScript As Boolean = False) As String
+```
+``````
+
 <br/>
 
 **Examples**
@@ -29,17 +48,40 @@ namespace Connection {
 
 Following section demonstrates how to drop table.
 
+``````XXX
 ```C#
-cn.DDL.DropTable(h);              // single table by instance
+// single table by instance
+cn.DDL.DropTable(h);
 
-cn.DDL.DropTable({h, l});         // multi table by instance
+// multi table by instance
+cn.DDL.DropTable({h, l});
 
-cn.DDL.DropTable("table1");       // single table by name
-
+// single table by name
+cn.DDL.DropTable("table1");
 ```
+```VB
+' single table by instance
+cn.DDL.DropTable(h)
+
+' multi table by instance
+cn.DDL.DropTable({h, l})
+
+' single table by name
+cn.DDL.DropTable("table1")
+```
+``````
+
+<br/>
 
 Following section demonstrates how to generate **`DROP TABLE`** script.
 
+``````XXX
 ```C#
 var script = cn.DDL.DropTable(h, true);
 ```
+```VB
+Dim script = cn.DDL.DropTable(h, true)
+```
+``````
+
+<br/>

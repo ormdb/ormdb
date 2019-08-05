@@ -393,18 +393,73 @@
             // or '' if the source string is not changed and should be escaped externally.
             // If result starts with <pre... internal wrapper is skipped.
             highlight: function (str, lang) {
+                var _lang_obj = null;
+                var _lang_nam = null;
                 switch (lang.toLowerCase()) {
                     case "c#":
                     case "csharp":
-                        lang = "csharp";
+                        _lang_obj = Prism.languages.cs;
+                        _lang_nam = "csharp";
                         break
+                    case "vb":
+                    case "visualbasic":
+                    case "visual-basic":
+                        _lang_obj = Prism.languages.vb;
+                        _lang_nam = "vb";
+                        break
+
+                    case "xxx":
+                        return _code_init(md.parse(str));
+
                     default:
                         return str;
                 }
-                return '<pre class="language-' + lang + '"><code>' + Prism.highlight(str, Prism.languages.csharp, lang) + '</code></pre>';
+                return '<pre class="language-"><code>' + Prism.highlight(str, _lang_obj, _lang_nam) + '</code></pre>';
             }
         });
 
+        var _codes = [];
+        var _codes_length = 0;
+        function _code_init(items) {
+
+            var _grp = [];
+            var _tbar = '';
+            items.forEach(function (item, index) {
+                var _lng = item.info;
+                _grp[index] = md.render("```" + _lng + "\n" + item.content + "\n```");
+                _tbar += '<li class="btn ' + (index === 0 ? 'active' : '') + '" data-lng="' + index + '" onclick="_code_show(this);">' + _lng + '</li>'
+            });
+
+            _codes_length += 1;
+            var _grp_id = 'C_' + _codes_length;
+            _codes[_grp_id] = _grp;
+
+            return '' +
+                '<pre id="' + _grp_id + '" class="tab_strip">' +
+                '   <ul>' +
+                _tbar +
+                '   <li style="flex-grow: 1;"></li>' +
+                '   <li class="btn copy" onclick="_code_copy(\'' + _grp_id + '\');"><i class="fa fa-copy"></i>&nbsp;Copy</li>' +
+                '   </ul>' +
+                '   <div class="flex-grow-1">' + _grp[0] + '</div>' +
+                '</pre>';
+        }
+        function _code_show(e) {
+            var _lng = $(e).data("lng");
+            $('.tab_strip>ul>li').removeClass("active");
+            $('.tab_strip>ul>li[data-lng="' + _lng + '"]').addClass("active");
+            for (var key in _codes) {
+                $("#" + key + ">div").html(_codes[key][_lng]);
+            }
+        }
+        function _code_copy(grp_id) {
+            var $temp = $("<textarea>");
+            var brRegex = /<br\s*[\/]?>/gi;
+            $("body").append($temp);
+            $temp.val($("#" + grp_id + ">div").text().replace(brRegex, "\r\n")).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
 
         $(window).on('popstate', function (e) {
             load_page();
@@ -454,7 +509,10 @@
             link.href = 'https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b';
             document.getElementsByTagName('head')[0].appendChild(link);
         });
-
+        $.ajaxSetup({
+            // Disable caching of AJAX responses
+            cache: false
+        });
     </script>
 
 

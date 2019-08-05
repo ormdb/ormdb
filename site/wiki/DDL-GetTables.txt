@@ -3,12 +3,21 @@
 <br/>
 
 **Definition**
+``````XXX
 ```C#
 namespace Connection {
     public class DDL {
 
         public List<SchemaTableInfo> GetTables(string TableName = null){}
 ```
+```VB
+NameSpace Connection
+    Public Class DDL
+
+        Public Function GetTables(TableName As String = Nothing) As List(Of SchemaTableInfo)
+```
+``````
+
 <br/>
 
 **Return**
@@ -29,6 +38,7 @@ namespace Connection {
 
 Following section demonstrates retrieving the tables from database.
 
+``````XXX
 ```C#
 var tables = cn.DDL.GetTables();
 
@@ -37,5 +47,16 @@ var table_count = tables.Count;
 foreach (var table in tables) {
     System.Diagnostics.Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}");
 }
-
 ```
+```VB
+Dim tables = cn.DDL.GetTables()
+
+Dim table_count = tables.Count
+
+For Each table In tables
+    System.Diagnostics.Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}")
+Next
+```
+``````
+
+<br/>

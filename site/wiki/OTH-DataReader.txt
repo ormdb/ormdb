@@ -23,14 +23,21 @@
 
 Following example iterates through a DataReader object and returns two columns from each row.
 
+``````XXX
 ```C#
 var sql = SQL.X.Select(h.Note, h.DocDate).From(h);
 var dr = sql.ExecuteReader(cn);
 ```
+```VB
+Dim sql = SQL.X.Select(h.Note, h.DocDate).From(h)
+Dim dr = sql.ExecuteReader(cn)
+```
+``````
 
 <br/>
 
 >iterate by column-name
+``````XXX
 ```C#
 foreach (var row in dr) {
     Console.WriteLine("Note={0}, Date={1}", 
@@ -38,10 +45,19 @@ foreach (var row in dr) {
                        row("DocDate").ToDateTime());
 }
 ```
+```VB
+For Each row In dr
+    Console.WriteLine("Note={0}, Date={1}", 
+                       row("Note").ToString(), 
+                       row("DocDate").ToDateTime())
+Next
+```
+``````
 
 <br/>
 
 >iterate by column-info. (faster than before) <= **REGULAR**
+``````XXX
 ```C#
 foreach (var row in dr) {
     Console.WriteLine("Note={0}, Date={1}", 
@@ -49,10 +65,19 @@ foreach (var row in dr) {
                        row(h.DocDate).ToDateTime());
 }
 ```
+```VB
+For Each row In dr
+    Console.WriteLine("Note={0}, Date={1}", 
+                       row(h.Note).ToString(), 
+                       row(h.DocDate).ToDateTime())
+Next
+```
+``````
 
 <br/>
 
 >iterate by selection index info. (faster than before)
+``````XXX
 ```C#
 foreach (var row in dr) {
     Console.WriteLine("Note={0}, Date={1}", 
@@ -60,10 +85,19 @@ foreach (var row in dr) {
                        row(1).ToDateTime());
 }
 ```
+```VB
+For Each row In dr
+    Console.WriteLine("Note={0}, Date={1}", 
+                       row(0).ToString(), 
+                       row(1).ToDateTime())
+Next
+```
+``````
 
 <br/>
 
 >iterate by binded-column. (faster than before)
+``````XXX
 ```C#
 var f1 = dr(h.Note);
 var f2 = dr(h.DocDate);
@@ -74,6 +108,17 @@ foreach (var row in dr) {
                        f2.ToDateTime());
 }
 ```
+```VB
+Dim f1 = dr(h.Note)
+Dim f2 = dr(h.DocDate)
+
+For Each row In dr
+    Console.WriteLine("Note={0}, Date={1}", 
+                       f1.ToString(), 
+                       f2.ToDateTime())
+Next
+```
+``````
 
 <br/>
 
