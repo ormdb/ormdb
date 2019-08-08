@@ -46,14 +46,12 @@ public void main()
 {
     TableHeader h = new TableHeader();
     TableHeader l = new TableLines();
-    Connection cn;
 
-    // connection is being registered...
-    Manager.Register("MSSQL_1", Provider.Type.MsSql, 
-                     "localhost,1433", "db01", "uname", "****");
+    // provider is being defined...
+	var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name");
 
     // connection is being initialized...
-    cn = Manager.Create("MSSQL_1");
+    var cn = ms_db.Create();
 }
 ```
 ```VB
@@ -102,14 +100,12 @@ End Class
 Public Sub main()
     Dim h As TableHeader = New TableHeader()
     Dim l As TableHeader = New TableLines()
-    Dim cn As Connection
 
-    ' connection is being registered...
-    Manager.Register("MSSQL_1", Provider.Type.MsSql, 
-					 "localhost,1433", "db01", "uname", "****")
+    ' provider is being defined...
+	var ms_db = New Odb.Connection.Provider.MsSql("host", "database-name")
 
     ' connection is being initialized...
-    cn = Manager.Create("MSSQL_1")
+    var cn = ms_db.Create()
 End Sub
 
 ```

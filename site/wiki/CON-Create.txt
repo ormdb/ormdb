@@ -1,30 +1,63 @@
-﻿Instance of a registered connection can be initialized with **`Create`** or **`CreateAndOpen`**.
+﻿### Defining Provider
+
+**`OrmDb`** uses a **Connection.Provider** shown below, to connect to a data source by supplying necessary authentication information in a **provider**. 
 
 <br/>
 
-**Definition**
+| Providers     |Description                                            |
+|---------------|-------------------------------------------------------|
+|MsSql			|Microsoft SQL Server. (System.Data.SqlClient)			|
+|MySql			|MySQL / MariaDB (MySql.Data.MySqlClient)				|
+|PostgreSql		|PostgreSQL (Npgsql)									|
+|Oracle			|Oracle (Oracle.ManagedDataAccess.Client)				|
+
+<br/>
+
+| Parameters     |Description                                                              |
+|----------------|-------------------------------------------------------------------------|
+|Host			 |is `host-info` of the database-server to be connected.				   |
+|Catalog		 |is `name` of the **database** to be connected. is `name` of the **service** for Oracle.		   |
+|*User*          |Optional. is `user-name` to use when making the connection. is NOT necessary for **trusted-connection** |
+|*Password*      |Optional. is `password` to use when making the connection. is NOT necessary for **trusted-connection** |
+|*Port*          |Optional. is `port-info` of the database-server to be connected.         |
+|*SchemaPrefix*  |Optional. is used for making group the tables in database.               |
+|*DBA_Privilege* |Optional. provides the connection with SYSDBA privileges. (for Oracle)   |
+
+
+<br/>
+
+Following section defines a provider.
 ``````XXX
 ```C#
-namespace Connection {
-    public class Manager {
+var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name", "user", "****");
 
-        public static Connection Create(string Id = DefaultRegisterID, 
-                                        bool AutoStartTrans = false, 
-                                        bool AutoConnect = true){}
-
-        public static Connection CreateAndOpen(string Name = DefaultRegisterID, 
-                                               bool AutoStartTrans = false){}
+// for trusted
+var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name");
 ```
 ```VB
-NameSpace Connection
-    Public Class Manager
+Dim ms_db = New Odb.Connection.Provider.MsSql("host", "database-name", "user", "****")
 
-        Public Shared Function Create(Id As string = DefaultRegisterID, 
-									  AutoStartTrans As Boolean= False, 
-									  AutoConnect As Boolean = True) As Connection
+' for trusted
+var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name");
+```
+``````
 
-        Public Shared Function CreateAndOpen(Name As String = DefaultRegisterID, 
-											 AutoStartTrans As Boolean = False) As Connection
+<br/>
+
+### Creation Conenction
+
+A connection can be initialized with **`Create`** or **`CreateAndOpen`** via **provider** already created.
+
+``````XXX
+```C#
+Connection CreateAndOpen(bool AutoStartTrans = false)
+
+Connection Create(bool AutoStartTrans = false, bool AutoConnect = true)
+```
+```VB
+CreateAndOpen(Optional AutoStartTrans As Boolean = False) As Connection
+
+Create(Optional AutoStartTrans As Boolean = False, Optional AutoConnect As Boolean = True) As Connection
 ```
 ``````
 
@@ -32,16 +65,15 @@ NameSpace Connection
 
 **Examples**
 
-
 Following section demonstrates how to create a connection as **`ImmediatelyConnect`**.
 ``````XXX
 ```C#
 // Connection is being initialized and opened immediately.
-var cn = OrmDB.Connection.Manager.CreateAndOpen("MSSQL");
+var cn = ms_db.CreateAndOpen();
 ```
 ```VB
 ' Connection is being initialized and opened immediately.
-Dim cn = OrmDB.Connection.Manager.CreateAndOpen("MSSQL")
+Dim cn = ms_db.CreateAndOpen()
 ```
 ``````
 
@@ -51,14 +83,14 @@ Following section demonstrates how to create a connection as **`AutoConnection`*
 ``````XXX
 ```C#
 // Connection is being initialized.
-var cn = OrmDB.Connection.Manager.Create("MSSQL");
+var cn = ms_db.Create();
 
 // Connection is opened for first execution.
    ...
 ```
 ```VB
 ' Connection is being initialized.
-Dim cn = OrmDB.Connection.Manager.Create("MSSQL")
+Dim cn = ms_db.Create()
 
 ' Connection is opened for first execution.
    ...
@@ -71,18 +103,37 @@ Following section demonstrates how to create a connection as **`AutoConnection`*
 ``````XXX
 ```C#
 // Connection is being initialized.
-var cn = OrmDB.Connection.Manager.Create("MSSQL", AutoConnect:false);
+var cn = ms_db.Create(AutoConnect:false);
 
 // Connection is NOT opened for first execution; must be opened manually.
 cn.Open();
 ```
 ```VB
 ' Connection is being initialized.
-Dim cn = OrmDB.Connection.Manager.Create("MSSQL", AutoConnect:=false)
+Dim cn = ms_db.Create(AutoConnect:=false)
 
 ' Connection is NOT opened for first execution; must be opened manually.
 cn.Open()
 ```
 ``````
+
+<br/>
+
+Following section demonstrates how to create a connection as **`AutoTrans`**. Please refer to [Transaction](##CON-Transaction) for further information.
+
+``````XXX
+```C#
+// Initialize transaction automatically on every Commit and Roolback.
+var cn = ms_db.Create(AutoTrans:false);
+```
+```VB
+' Initialize transaction automatically on every Commit and Roolback.
+Dim cn = ms_db.Create(AutoTrans:=false)
+```
+``````
+
+<br/>
+
+This means that each time a transaction is committed or rolled-back, a new transaction is started and all queries are automatically executed in this transaction.
 
 <br/>

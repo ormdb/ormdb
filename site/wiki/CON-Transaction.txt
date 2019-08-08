@@ -1,6 +1,5 @@
-﻿**`Transaction`** methods are used with the connection object to save or cancel changes made to the data source.
-
->All Examples need the [Example Header](##OTH-Example-Header).
+﻿**`Transaction`** methods are used with the [Connection](##CON-Create) object to save or cancel changes made to the data source.
+Please refer to [Connection](##CON-Create) for further information.
 
 <br/>
 
@@ -15,23 +14,6 @@ cn.BeginTrans();
 cn.BeginTrans()
 ```
 ``````
-
-<br/>
-
-You can set the **`AutoTrans`** property in [Connection](##CON-Create) to start **`Transaction`** automatically. Please refer to [Connection](##CON-Create) for details.
-
-``````XXX
-```C#
-var cn = Connection.Manager.Create("MSSQL", AutoTrans:true);
-```
-```VB
-Dim cn = Connection.Manager.Create("MSSQL", AutoTrans:=true)
-```
-``````
-
-<br/>
-
-This means that each time a transaction is committed or rolled-back, a new transaction is started and all queries are automatically executed in this transaction.
 
 <br/>
 
