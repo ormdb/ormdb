@@ -20,7 +20,6 @@
 |*User*          |Optional. is `user-name` to use when making the connection. is NOT necessary for **trusted-connection** |
 |*Password*      |Optional. is `password` to use when making the connection. is NOT necessary for **trusted-connection** |
 |*Port*          |Optional. is `port-info` of the database-server to be connected.         |
-|*SchemaPrefix*  |Optional. is used for making group the tables in database.               |
 |*DBA_Privilege* |Optional. provides the connection with SYSDBA privileges. (for Oracle)   |
 
 
@@ -38,13 +37,25 @@ var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name");
 Dim ms_db = New Odb.Connection.Provider.MsSql("host", "database-name", "user", "****")
 
 ' for trusted
-var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name");
+Dim ms_db = new Odb.Connection.Provider.MsSql("host", "database-name")
 ```
 ``````
 
 <br/>
 
 ### Creation Conenction
+
+
+<br/>
+
+| Parameters        |Description                                                              |
+|-------------------|-------------------------------------------------------------------------|
+|*AutoStartTrans*   |Optional. Every sql are executed in transaction as automatically. Transactions are initialized again automatically after COMMIT or ROLLBACK commands. |
+|*AutoConnect*      |Optional. Connection is opened automatically on first sql execution.         |
+|*SchemaPrefix*     |Optional. is used for making group the tables in database. If it specified then the prefix appends for every tables before sql execution. |
+
+
+<br/>
 
 A connection can be initialized with **`Create`** or **`CreateAndOpen`** via **provider** already created.
 
