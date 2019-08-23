@@ -1,0 +1,53 @@
+﻿**`ExecuteReader`** method is used to execute a **query** as FORWARD_ONLY.
+
+<br/>
+
+**Definition**
+``````XXX
+```C#
+public static DataReader ExecuteReader(this SQL.IQueryable o, 
+									   Connection.Connection Connection, 
+									   Connection.ExecuteIn ExecuteIn = Connection.ExecuteIn.ActualConnection)
+```
+```VB
+Public Function ExecuteReader(o As SQL.IQueryable, 
+							  Connection As Connection.Connection, 
+							  Optional ExecuteIn As Connection.ExecuteIn = Connection.ExecuteIn.ActualConnection) As DataReader
+```
+``````
+
+<br/>
+
+**Remarks**
+
+These methods are come as an extension methods. So you have to **include** or **import** to use them.
+
+
+<br/>
+
+**Examples**
+
+>Please refer to [Example Header](##OTH-Example-Header) for usage.
+
+<br/>
+
+
+``````XXX
+```C#
+using Odb; /* for extensions */
+
+/* ... */
+// to get the query result as DataReader. (SQL.IQueryable)
+var dt = sql.ExecuteReader(cn);
+```
+```VB
+Imports Odb ' for extensions
+
+' ...
+
+' to get the query result as DataReader. (SQL.IQueryable)
+Dim dt = sql.ExecuteReader(cn, ForUpdate:=true)
+```
+``````
+
+<br/>
