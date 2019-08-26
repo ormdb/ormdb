@@ -4,7 +4,7 @@ using Odb; /* for extensions */
 using Odb.Table;
 using Odb.Connection;
 
-public enum FieldTypes
+public enum MyColumns
 {
 	[ColumnNumeric(4, 0, Description = "Year", MinValue = 1900, MaxValue = 2100)] year,
 	[ColumnNumeric(4, 0)] id
@@ -13,10 +13,10 @@ public enum FieldTypes
 // Definition of the header-table
 public class TableHeader : Base
 {
-    [ColumnRef(FieldTypes.year)] public Column Year;
-    [ColumnRef(FieldTypes.id)]   public Column Id;
+    [ColumnRef(MyColumns.year)]  public Column Year;
+    [ColumnRef(MyColumns.id)]    public Column Id;
     [ColumnString(100)]          public Column Note;
-    [ColumnDate(false)]			 public Column DocDate;
+    [ColumnDate()]		    	 public Column DocDate;
     [ColumnBoolean()]			 public Column IsActive;
 
     protected override void InitKeyInfo() {
@@ -29,8 +29,8 @@ public class TableHeader : Base
 // Definition of the lines-table:
 public class TableLines : Base
 {
-    [ColumnRef(FieldTypes.year)] public Column Year;
-    [ColumnRef(FieldTypes.id)]   public Column Id;
+    [ColumnRef(MyColumns.year)]  public Column Year;
+    [ColumnRef(MyColumns.id)]    public Column Id;
     [ColumnNumeric(2, 0)]		 public Column LineId;
     [ColumnString(100)]          public Column Note;
 
@@ -59,7 +59,7 @@ Imports Odb ' for extensions
 Imports Odb.Table
 Imports Odb.Connection
 
-Public Enum FieldTypes
+Public Enum MyColumns
     <ColumnNumeric(4, 0, Description:="Year", MinValue:= 1900, MaxValue:= 2100)> year
     <ColumnNumeric(4, 0)> id
 End Enum
@@ -68,10 +68,10 @@ End Enum
 Public Class TableHeader
     Inherits Base
 
-    <ColumnRef(FieldTypes.year)> Public Year	 As Column
-    <ColumnRef(FieldTypes.id)>   Public Id		 As Column
+    <ColumnRef(MyColumns.year)>  Public Year	 As Column
+    <ColumnRef(MyColumns.id)>    Public Id		 As Column
     <ColumnString(100)>		     Public Note	 As Column
-    <ColumnDate(False)>          Public DocDate  As Column
+    <ColumnDate()>				 Public DocDate  As Column
     <ColumnBoolean()>            Public IsActive As Column
 
     Protected Overrides Sub InitKeyInfo()
@@ -84,8 +84,8 @@ End Class
 Public Class TableLines
     Inherits Base
 
-    <ColumnRef(FieldTypes.year)> Public Year	 As Column
-    <ColumnRef(FieldTypes.id)>   Public Id		 As Column
+    <ColumnRef(MyColumns.year)>  Public Year	 As Column
+    <ColumnRef(MyColumns.id)>    Public Id		 As Column
     <ColumnNumeric(2, 0)>        Public LineId	 As Column
     <ColumnString(100)>		     Public Note	 As Column
 
