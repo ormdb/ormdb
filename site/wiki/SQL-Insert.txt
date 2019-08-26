@@ -8,15 +8,13 @@
 namespace SQL {
     public class X {
 
-        public static Insert Insert(Table.Base Table,
-                                    bool SetInitials = false) 
+        public static Insert Insert(bool SetInitials = false) 
 ```
 ```VB
 NameSpace SQL
     Public Class X
 
-        Public Shared Function Insert(Table As Table.Base, 
-									  SetInitials As Boolean = False) As SQL.Insert
+        Public Shared Function Insert(SetInitials As Boolean = False) As SQL.Insert
 ```
 ``````
 
@@ -50,10 +48,10 @@ Following section demonstrates **single table insertion**. DocDate is accepted a
 
 ``````XXX
 ```C#
-var insert = SQL.X.Insert(h, true);
+var _insert = SQL.X.Insert(true);
 
 for (n = 1; (n <= 100); n++) {
-    var row = insert.AddRow(h.NewModel());
+    var row = _insert.AddRow(h.NewModel());
         row.Year = 2017;
         row.Id = n;
         row.Note = String.Concat("Note -", n.toString());
@@ -63,7 +61,7 @@ for (n = 1; (n <= 100); n++) {
 sql.Execute(cn);
 ```
 ```VB
-With SQL.X.Insert(h, True)
+With SQL.X.Insert(True)
 	For n = 1 To 100
 		With sql.AddRow(h.NewModel())
 			.Year = 2017
@@ -86,20 +84,19 @@ Following section demonstrates **multiple table insertion**.
 ```C#
 var sql = SQL.X.Query();
 
-var _header = sql.Insert(h);
-var _line = sql.Insert(l);
+var _insert = sql.Insert();
 
 for (n = 1; n <= 100; n++) {
    var note= String.Concat("Note -", n.toString());
 
-    var r1 = _header.AddRow(h.NewModel());
+    var r1 = _insert.AddRow(h.NewModel());
         r1.Year = 2017;
         r1.Id = n;
         r1.Note = note;
         r1.DocDate = DateTime.Now();
 
     for (m = 1; m <= 2; m++) {
-        var r2 = _line.AddRow(l.NewModel());
+        var r2 = _insert.AddRow(l.NewModel());
             r2.Year = r1.Year;
             r2.Id = r1.Id;
             r2.LineId = m;
@@ -112,20 +109,19 @@ sql.Execute(cn)
 ```
 ```VB
 With SQL.X.Query()
-	Dim _header = .Insert(h)
-	Dim _line = .Insert(l)
+	Dim _insert = sql.Insert()
 
 	For n = 1 To 100
 	   var note= String.Concat("Note -", n.toString())
 
-		Dim r1 = _header.AddRow(h.NewModel());
+		Dim r1 = _insert.AddRow(h.NewModel());
 			r1.Year = 2017
 			r1.Id = n
 			r1.Note = note
 			r1.DocDate = DateTime.Now()
 
 		For m = 1 To 2
-			Dim r2 = _line.AddRow(l.NewModel())
+			Dim r2 = _insert.AddRow(l.NewModel())
 				r2.Year = r1.Year
 				r2.Id = r1.Id
 				r2.LineId = m
