@@ -263,12 +263,12 @@ SQL.X.Select(h.Year.CONCAT(h.Id).CONCAT("X")).From(h)
 
 ``````XXX
 ```C#
-var u = SQL.X.Update(h).Where( h.str.IsNotNull()).Values;
-    u.Value(h.str) = System.DbNull
+var _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel());
+    _row.str = System.DbNull;
 ```
 ```VB
-Dim u = SQL.X.Update(h).Where( h.str.IsNotNull()).Values
-    u.Value(h.str) = System.DbNull
+Dim _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel())
+    _row.str = System.DbNull
 ```
 ``````
 <o>
