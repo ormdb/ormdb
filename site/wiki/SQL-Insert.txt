@@ -46,7 +46,7 @@ Columns which are specified **`SetInitials = true`**, accepts values shown below
 
 <br/>
 
-Following section demonstrates **single table insertion**. DocDate is accepted as 0(zero).
+Following section demonstrates **single table insertion**. DocDate is accepted as **`Date.MinValue`**.
 
 ``````XXX
 ```C#
