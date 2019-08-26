@@ -8,21 +8,19 @@
 namespace SQL {
     public class X {
 
-        public static SQL.Update<T> Update<T>() 
-                                    where T : Table.Base
+        public static SQL.Update Update(Table.Base from) 
 
-        public static SQL.Update<T> Update<T>(Table.Field Where) 
-                                    where T : Table.Base
+        public static SQL.Update Update(Table.Base from, Table.Field Where) 
 ```
 ```VB
 NameSpace SQL
     Public Class X
 
-		Public Shared Function Update(Of T As Table.Base)() 
-									As SQL.Update(Of T)
+		Public Shared Function Update(from As Table.Base)() 
+									As SQL.Update
 
-		Public Shared Function Update(Of T As Table.Base)(Where As Table.Column) 
-									As SQL.Update(Of T)
+		Public Shared Function Update(from As Table.Base, Where As Table.Column) 
+									As SQL.Update
 ```
 ``````
 
@@ -38,18 +36,19 @@ Following section demonstrates **regular update**.
 
 ``````XXX
 ```C#
-var sql = SQL.X.Update<TableHeader>(h.Id == 9999);
+var sql = SQL.X.Update(h, h.Id == 9999);
 
-    var row = sql.Values;
+    var row = sql.Set(h.NewModel());
         row.Note = "new note";
 
 sql.Execute(cn);
 ```
 ```VB
-Dim sql = SQL.X.Update(Of TableHeader)(h.Id = 9999)
+Dim sql = SQL.X.Update(h, h.Id = 9999)
 
-    Dim row = sql.Values
-        row.Note = "new note"
+    With sql.Set(h.NewModel())
+        .Note = "new note"
+	End With
 
 sql.Execute(cn)
 ```
@@ -63,10 +62,10 @@ Following section demonstrates **multiple update**.
 ```C#
 var sql = SQL.X.Query;
 
-    var r1 = sql.Update<TableHeader>(h.Id == 9999).Values;
+    var r1 = sql.Update(h, h.Id == 9999).Set(h.NewModel());
         r1.Note = "new note";
 
-    var r2 = sql.Update<TableLines>(l.Id == 9999).Values;
+    var r2 = sql.Update(l, l.Id == 9999).Set(l.NewModel());
         r2.Note = "new note";
 
 sql.Execute(cn);
@@ -74,10 +73,10 @@ sql.Execute(cn);
 ```VB
 Dim sql = SQL.X.Query
 
-    Dim r1 = sql.Update(Of TableHeader)(h.Id = 9999).Values
+    Dim r1 = sql.Update(h, h.Id = 9999).Set(h.NewModel())
         r1.Note = "new note"
 
-    Dim r2 = sql.Update(Of TableLines)(l.Id = 9999).Values
+    Dim r2 = sql.Update(l, l.Id = 9999).Set(l.NewModel())
         r2.Note = "new note"
 
 sql.Execute(cn)
@@ -90,21 +89,21 @@ Following section demonstrates **update with join**.
 
 ``````XXX
 ```C#
-var sql = SQL.X.Update<TableHeader>;
+var sql = SQL.X.Update(h);
     sql.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
     sql.Where(l.LineId > 3);
 
-    var row = sql.Values;
+    var row = sql.Set(h.NewModel());
         row.Note = "new note";
 
 sql.Execute(cn);
 ```
 ```VB
-Dim sql = SQL.X.Update(Of TableHeader)
+Dim sql = SQL.X.Update(h)
     sql.InnerJoin(l, l.Year = h.Year And l.Id = h.Id )
     sql.Where(l.LineId > 3)
 
-    Dim row = sql.Values
+    Dim row = sql.Set(h.NewModel())
         row.Note = "new note"
 
 sql.Execute(cn)
