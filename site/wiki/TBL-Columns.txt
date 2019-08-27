@@ -5,12 +5,13 @@
 |ColumnType    |.NET type                                                                |
 |-------------|--------------------------------------------------------------------------|
 |ColumnString  |`System.String`                                                          |
-|ColumnNumeric |Any .NET numeric types such as `int`, `sigle`, `double`, `decimal` etc.  |
+|ColumnNumeric |Any .NET numeric types such as `int[16/32/64]`, `sigle`, `double`, `decimal` etc.  |
 |ColumnBoolean |`System.Boolean`                                                         |
-|ColumnBinary  |`System.Byte[]`                                                          |
+|ColumnBinary  |Array of `System.Byte`                                                   |
+|ColumnTime    |`System.TimeSpan`                                                        |
 |ColumnDate    |`System.DateTime`                                                        |
 |ColumnDateTime|`System.DateTime`                                                        |
-|ColumnRef     |Reference for `User PreDefined` column                                   |
+|ColumnRef     |Reference column                                   |
 
 Please refer to [Example Header](##OTH-Example-Header) for usage.
 
@@ -67,18 +68,20 @@ is used for bool type, no additional properties can be specified for this type.
 ```
 ``````
 
-### ColumnDate / ColumnDateTime
+### ColumnTime / ColumnDate / ColumnDateTime
 
-.Net types such as **`System.Date`** are stored as **`DATE`** or **`DATETIME`** in database. By using this approach **`System.Date`** columns can be sorted easily by all database engines.
+.Net types such as **`System.Date`** and **`System.TimeSpan`** are stored as **`TIME`**, **`DATE`** or **`DATETIME`** in database.
 
-**ColumnDate** stores the only DATE value of **`System.Date`** as "yyyy-MM-dd". If you want to store FULL DATE value then use **ColumnDateTime** as "yyyy-MM-dd hh-mm-ss".
+**ColumnTime** stores the only value of **`System.TimeSpan`** as "hh:mm:dd"; **ColumnDate** stores the only value of **`System.Date`** as "yyyy-MM-dd". If you want to store FULL DATE value then use **ColumnDateTime** as "yyyy-MM-dd hh-mm-ss".
 
 ``````XXX
 ```C#
+    [ColumnTime()]public Column col_tim;
     [ColumnDate()]public Column col_dat;
     [ColumnDateTime()]public Column col_dattim;
 ```
 ```VB
+    <ColumnTime()>Public col_tim AS Column
     <ColumnDate()>Public col_dat AS Column
     <ColumnDateTime()>Public col_dattim AS Column
 ```

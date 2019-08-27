@@ -6,12 +6,10 @@
 ``````XXX
 ```C#
 	//---------------------------------------------------
-	// get instance of a table
-
-	// from definition
+	// new instance of a table from definition
 	var t1 = new TableHeader();
 
-	// from database
+	// new instance of a table from database
 	var t2 = cn.DDL.GetTableInstance(<tb_name>);
 
 
@@ -30,12 +28,10 @@
 ```
 ```VB
 	'---------------------------------------------------
-	' get instance of a table
-
-	' from definition
+	' new instance of a table from definition
 	Dim t1 = new TableHeader()
 
-	' from database
+	' new instance of a table from database
 	Dim t2 = cn.DDL.GetTableInstance(<tb_name>)
 
 

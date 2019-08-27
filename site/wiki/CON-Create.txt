@@ -4,12 +4,12 @@
 
 <br/>
 
-| Providers     |Description                                            |
-|---------------|-------------------------------------------------------|
-|MsSql			|Microsoft SQL Server. (System.Data.SqlClient)			|
-|MySql			|MySQL / MariaDB (MySql.Data.MySqlClient)				|
-|PostgreSql		|PostgreSQL (Npgsql)									|
-|Oracle			|Oracle (Oracle.ManagedDataAccess.Client)				|
+| Provider     | | Factory                                            |
+|---------------|---------------------|----------------------------------|
+|Odb.Connection.Provider.`MsSql`		|Microsoft SQL Server | System.Data.SqlClient|
+|Odb.Connection.Provider.`MySql`		|MySQL / MariaDB | MySql.Data.MySqlClient	|
+|Odb.Connection.Provider.`PostgreSql	`|PostgreSQL | Npgsql						|
+|Odb.Connection.Provider.`Oracle`		|Oracle | Oracle.ManagedDataAccess.Client	|
 
 <br/>
 
