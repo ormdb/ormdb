@@ -16,7 +16,7 @@ var l = new TableLines();
 	FROM	TableHeader AS h
 	WHERE	h.Id = 9999
 */
-SQL.X.Delete(h, h.Id == 9999).Execute(cn);
+SQL.X.Delete(h).Where(h.Id == 9999).Execute(cn);
 
 
 
@@ -29,7 +29,7 @@ SQL.X.Delete(h, h.Id == 9999).Execute(cn);
 	LEFT JOIN	TableLines  AS l ON l.Year = h.Year AND l.Id = h.Id
 	WHERE		l.LineId > 3
 */
-SQL.X.Delete(h, l.LineId > 3)
+SQL.X.Delete(h).Where(l.LineId > 3)
 	 .InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) )
 	 .Execute(cn);
 

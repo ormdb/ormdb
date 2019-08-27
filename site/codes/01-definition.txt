@@ -7,7 +7,7 @@ public class TableHeader : Base
     [ColumnNumeric(4, 0)] public Column Year;
     [ColumnNumeric(4, 0)] public Column Id;
     [ColumnString(15)   ] public Column Note;
-    [ColumnNumeric(8, 0)] public Column DocDate;
+    [ColumnDate()]		  public Column DocDate;
     [ColumnBoolean()    ] public Column IsActive;
 
     protected override void InitKeyInfo()
@@ -29,5 +29,4 @@ public class TableLines : Base
 }
 
 // define connection for once
-Connection.Manager.Register(Provider.Type.MsSql, 
-                            "<host>", "<db>", "<user>", "<pass>");
+var _provider = new Odb.Connection.Provider.MsSql("host", "database-name", "user", "****");

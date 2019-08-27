@@ -1,7 +1,12 @@
 ﻿using Odb;
 
 // create connection
-var cn = Connection.Manager.Create(); 
+var cn = Connection.Manager.Create();
+
+// initialize table alias => (... FROM TableHeader AS h)
+var h = new TableHeader();
+var l = new TableLines();
+
 
 
 // ------------------------------------------------------
@@ -11,15 +16,14 @@ var cn = Connection.Manager.Create();
 	INSERT INTO TableHeader AS h (fields...) VALUES (...);
 	... -> 100
 */
-var sql = SQL.X.Insert<TableHeader>(SetInitials:true);
+var sql = SQL.X.Insert(SetInitials:true);
 
 for (n = 1; (n <= 100); n++) {
-    var row = sql.AddRow();
-        row.Year = 2017;
-        row.Id = n;
-        row.DocDate = DateTime.Now();
-		// [Note] is accepted as (string.Empty).
-        // row.Note = "Note -" + n.toString();
+    var _model = h.NewModel();
+        _model.Year = 2017;
+        _model.Id = n;
+        _model.DocDate = DateTime.Now();
+    sql.AddRow(_model);
 }
 
 sql.Execute(cn);
@@ -36,19 +40,16 @@ sql.Execute(cn);
 	INSERT INTO TableLines  AS l (fields...) VALUES (...);
 	... -> 200 (= 100 x 2)
 */
-var sql = SQL.X.Query();
-
-var header = sql.Insert<TableHeader>(SetInitials:true);
-var line = sql.Insert<TableLines>(SetInitials:true);
+var sql = SQL.X.Insert(SetInitials:true);
 
 for (n = 1; (n <= 100); n++) {
-    var r1 = header.AddRow();
+    var r1 = sql.AddRow(h.NewModel());
         r1.Year = 2017;
         r1.Id = n;
         r1.DocDate = DateTime.Now();
 
 	for (m = 1; (m <= 2); m++) {
-		var r2 = line.AddRow();
+		var r2 = sql.AddRow(l.NewModel());
 			r2.Year = header_row(h.Year);
 			r2.Id = header_row(h.Id);
 			r2.LineId = m;

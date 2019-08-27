@@ -1,7 +1,7 @@
 ﻿using Odb;
 
 // create connection
-var cn = Connection.Manager.Create(); 
+var cn = _provider.Create();
 
 // initialize table alias => (... FROM TableHeader AS h)
 var h = new TableHeader();

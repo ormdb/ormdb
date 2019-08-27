@@ -19,9 +19,9 @@ var l = new TableLines();
 	FROM	TableHeader AS h
 	WHERE	h.Id = 9999
 */
-var sql = SQL.X.Update<TableHeader>().Where(h.Id == 9999);
+var sql = SQL.X.Update().Where(h.Id == 9999);
 
-    var row = sql.Values;
+    var row = sql.Set(h.NewModel());
         row.Note = "new note";
         row.DocDate = DateTime.Now();
 
@@ -40,10 +40,10 @@ sql.Execute(cn);
 	LEFT JOIN	TableLines  AS l ON l.Year = h.Year AND l.Id = h.Id
 	WHERE		l.LineId > 3
 */
-var sql = SQL.X.Update<TableHeader>().Where(l.LineId > 3)
+var sql = SQL.X.Update().Where(l.LineId > 3)
 			   .InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
 
-    var row = sql.Values;
+    var row = sql.Set(h.NewModel());
         row.Note = "new note";
         row.DocDate = DateTime.Now();
 
@@ -66,10 +66,10 @@ sql.Execute(cn);
 */
 var sql = SQL.X.Query;
 
-    var r1 = sql.Update<TableHeader>.Where(h.Id == 9999).Values;
+    var r1 = sql.Update.Where(h.Id == 9999).Set(h.NewModel());
         r1.Note = "new note";
 
-    var r2 = sql.Update<TableLines>.Where(l.Id == 9999).Values;
+    var r2 = sql.Update.Where(l.Id == 9999).Set(l.NewModel());
         r2.Note = "new note";
 
 sql.Execute(cn);
