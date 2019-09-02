@@ -1,4 +1,4 @@
-﻿To retrieve data using a **`DataTableReader`**, create an instance of a SQL.IQueryable object, and then create a reader by calling **`ExecuteReader`** to retrieve rows from a data source. The **`DataTableReader`** provides an **unbuffered** stream of data that allows procedural logic to efficiently process results from a data source sequentially. 
+﻿To retrieve data using a **`DataTableReader`**, create an instance of a SQL.IQueryable object, and then create a reader by calling **`ExecuteReader`**. The **`DataTableReader`** provides an **unbuffered** stream of data that allows procedural logic to efficiently process results from a data source sequentially. 
 
 >The DataTableReader is a good choice when you're retrieving large amounts of data because the data is not cached in memory.
 
@@ -8,9 +8,8 @@
 |Schema Information                               | Yes                 | Yes           |
 |CRUD operations can be operate as offline.       | Yes                 | No            |
 |Moving the cursor on the records.                | Yes                 | No            |
-|Getting RecordCount                              | Yes                 | No            |
-|ToDataTable support                              | Yes                 | No            |
-|Reading By One Binded-Column-Info                | No                  | Yes           |
+|Getting RecordCount                              | Yes                 | is the number of rows iterated  |
+|ToDataTable support                              | Yes                 | Yes            |
 |Cursor Mode                                      | READ_ONLY or UPDATE | FORWARD_ONLY  |
 
 <br/>

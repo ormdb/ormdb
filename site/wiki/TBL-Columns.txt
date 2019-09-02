@@ -17,8 +17,20 @@ Please refer to [Example Header](##OTH-Example-Header) for usage.
 
 <br/>
 
-### ColumnString
-is used for text type, only `Length` property can be specified for this type.
+All column types has the properties as shown below.
+
+<br/>
+
+|ColumnType     |.NET type                                                                |
+|---------------|-------------------------------------------------------------------------|
+|Name			| is the name of the column.|
+|Description	| is the description of the column.|
+|Nullable		| This constraint enforces a column to accept or NOT accept NULL values. |
+
+<br/>
+
+### ColumnString (Length)
+is used for .NET **`System.String`** data type.
 
 ``````XXX
 ```C#
@@ -29,22 +41,20 @@ is used for text type, only `Length` property can be specified for this type.
 ```
 ``````
 
-### ColumnNumeric
-
-is used for all numeric types, `Precision` and `Scale` properties can be specified for this type.
+### ColumnNumeric (Precision, Scale)
+is used for any .NET numeric types such as `int[16/32/64]`, `sigle`, `double`, `decimal` etc.
 
 ``````XXX
 ```C#
-    [ColumnString(15, 2)]public Column col_num;
+    [ColumnNumeric(15, 2)]public Column col_num;
 ```
 ```VB
-    <ColumnString(15, 2)>Public col_num AS Column
+    <ColumnNumeric(15, 2)>Public col_num AS Column
 ```
 ``````
 
 ### ColumnBoolean
-
-is used for bool type, no additional properties can be specified for this type.
+is used for .NET **`System.Boolean`** data type.
 
 ``````XXX
 ```C#
@@ -56,8 +66,7 @@ is used for bool type, no additional properties can be specified for this type.
 ``````
 
 ### ColumnBinary
-
-**`System.Byte[]`** or **`Long Text`** are stored as **`ColumnBinary`** in database, and `Length` properties cannot be specified for this type.
+is used for .NET **`System.Byte[]`** data type.
 
 ``````XXX
 ```C#
@@ -68,28 +77,45 @@ is used for bool type, no additional properties can be specified for this type.
 ```
 ``````
 
-### ColumnTime / ColumnDate / ColumnDateTime
-
-.Net types such as **`System.Date`** and **`System.TimeSpan`** are stored as **`TIME`**, **`DATE`** or **`DATETIME`** in database.
-
-**ColumnTime** stores the only value of **`System.TimeSpan`** as "hh:mm:dd"; **ColumnDate** stores the only value of **`System.Date`** as "yyyy-MM-dd". If you want to store FULL DATE value then use **ColumnDateTime** as "yyyy-MM-dd hh-mm-ss".
+### ColumnTime
+is used for .NET **`System.TimeSpan`** data type. This type of column stores only **TIME** value of **`System.TimeSpan`** as "24hh:mm:dd".
 
 ``````XXX
 ```C#
     [ColumnTime()]public Column col_tim;
-    [ColumnDate()]public Column col_dat;
-    [ColumnDateTime()]public Column col_dattim;
 ```
 ```VB
     <ColumnTime()>Public col_tim AS Column
+```
+``````
+
+### ColumnDate
+is used for .NET **`System.Date`** data type. This type of column stores only **DATE** value of **`System.Date`** as "yyyy-MM-dd".
+
+``````XXX
+```C#
+    [ColumnDate()]public Column col_dat;
+```
+```VB
     <ColumnDate()>Public col_dat AS Column
+```
+``````
+
+### ColumnDateTime
+is used for .NET **`System.Date`** data type. This type of column stores **DATE** and **TIME** value of **`System.Date`** as "yyyy-MM-dd 24hh-mm-ss".
+
+``````XXX
+```C#
+    [ColumnDateTime()]public Column col_dattim;
+```
+```VB
     <ColumnDateTime()>Public col_dattim AS Column
 ```
 ``````
 
 ### ColumnRef
 
-is used for repeated column types and `Length` properties cannot be specified for this type.
+is used for columns used repeatedly. **Name**, **Description** and **Nullable** properties can be redefiend.
 
 ``````XXX
 ```C#

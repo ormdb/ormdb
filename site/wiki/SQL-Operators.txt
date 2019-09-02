@@ -3,7 +3,7 @@
 <br/>
 
 ### Where Operator
-WHERE clause is used to filter records. WHERE clause is used to extract only records that fulfill a specified condition.
+WHERE clause is used to filter and extract only records that fulfill a specified condition.
 
 <br/>
 
@@ -40,7 +40,7 @@ SELECT * FROM TableHeader AS h <u><x>WHERE</x> (h.Year = 2018)</u>
 <br/>
 
 ### As Operator
-Renames a column or table with an alias.
+Renames a column with an alias.
 
 <br/>
 
@@ -255,23 +255,4 @@ SQL.X.Select(h.Year.CONCAT(h.Id).CONCAT("X")).From(h)
 ```
 ``````
 
-<br/>
-
-### DbNull
-
-<br/>
-
-``````XXX
-```C#
-var _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel());
-    _row.str = System.DbNull;
-```
-```VB
-Dim _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel())
-    _row.str = System.DbNull
-```
-``````
-<o>
-UPDATE h SET <u><x>h.DocumentId = Null</x></u> FROM TableHeader AS h WHERE h.DocumentId IS NOT NULL
-</o>
 <br/>

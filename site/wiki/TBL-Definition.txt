@@ -1,6 +1,8 @@
 ﻿### Definition
 
-Tables must be defined before usage. Each table to be defined, is inherited from **`Odb.Table.Base`**. Column(s) of the table are the type of **`Odb.Table.Column`** while its' data-type is specified with a property.
+Table to be defined, is inherited from **`Odb.Table.Base`**. 
+
+Column(s) type of **`Odb.Table.Column`** are also defined by supplying necessary type information in the attribute.
 
 If a column-type is often used in many of your tables, you can use a column as a reference.
 

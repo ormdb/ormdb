@@ -16,7 +16,7 @@
 | Parameters     |Description                                                              |
 |----------------|-------------------------------------------------------------------------|
 |Host			 |is `host-info` of the database-server to be connected.				   |
-|Catalog		 |is `name` of the **database** to be connected. is `name` of the **service** for Oracle.		   |
+|Catalog		 |is `name` of the **database** (or **service** for Oracle) to be connected. |
 |*User*          |Optional. is `user-name` to use when making the connection. is NOT necessary for **trusted-connection** |
 |*Password*      |Optional. is `password` to use when making the connection. is NOT necessary for **trusted-connection** |
 |*Port*          |Optional. is `port-info` of the database-server to be connected.         |
@@ -43,7 +43,7 @@ Dim ms_db = new Odb.Connection.Provider.MsSql("host", "database-name")
 
 <br/>
 
-### Creation Conenction
+### Creating Connection
 
 
 <br/>
@@ -57,7 +57,7 @@ Dim ms_db = new Odb.Connection.Provider.MsSql("host", "database-name")
 
 <br/>
 
-A connection can be initialized with **`Create`** or **`CreateAndOpen`** via **provider** already created.
+A connection can be created with **`Create`** or **`CreateAndOpen`** via **provider** already defined.
 
 ``````XXX
 ```C#

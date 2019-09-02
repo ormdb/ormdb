@@ -32,6 +32,7 @@ Columns which are specified **`SetInitials = true`**, accepts values shown below
 |ColumnNumeric |Any .NET numeric types such as `int`, `sigle`, `double`, `decimal` etc.  |0             |
 |ColumnBoolean |`System.Boolean`                                                         |false         |
 |ColumnBinary  |`System.Byte[]`                                                          |x0            |
+|ColumnTime    |`System.TimeSpan`                                                        |TimeSpan.Zero |
 |ColumnDate    |`System.Date`                                                            |Date.MinValue |
 |ColumnDateTime|`System.Date`                                                            |Date.MinValue |
 |ColumnRef     |Reference for `User PreDefined` column                                   |depends on reference ColumnType|

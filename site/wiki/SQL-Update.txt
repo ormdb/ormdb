@@ -112,3 +112,21 @@ sql.Execute(cn)
 >This sample updates the header records which contain DocumentLine that is greather than 3 in lines-table.
 
 <br/>
+
+Following section demonstrates to set value of **DbNull**.
+
+``````XXX
+```C#
+var _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel());
+    _row.str = System.DbNull;
+```
+```VB
+Dim _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel())
+    _row.str = System.DbNull
+```
+``````
+<o>
+UPDATE h SET <u><x>h.DocumentId = Null</x></u> FROM TableHeader AS h WHERE h.DocumentId IS NOT NULL
+</o>
+
+<br/>
