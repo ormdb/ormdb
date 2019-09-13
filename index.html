@@ -16,18 +16,22 @@
 
 <body>
     <nav class="navbar navbar-dark bg-dark d-flex">
-        <a class="navbar-brand" href="/"><img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80" /></a>
+        <a class="navbar-brand" href="/">
+            <div style="background-image: url('https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80');width: 100px;height: 40px;background-position: center center;background-repeat: no-repeat;"></div>
+        </a>
         <div class="flex-grow-1 navbar-nav d-flex flex-row" id="navbarNav">
             <a class="nav-link px-3 fa-lg" href="/wiki.html" style="">Wiki&nbsp;&nbsp;<i class="fa fa-book"></i></a>
         </div>
     </nav>
 
-    <div class="banner">
-        <h1>Fastest ORM tool for .Net / .Net.Core</h1>
-        <h2>is a simple, fast and lightweight embedded .NET ORM tool</h2>
-        <br />
-        <br />
-        <div style="padding:20px;text-align:center;">
+    <div class="table-dark text-center">
+        <div class="text-light h1 pt-5">
+            Fastest ORM tool for .Net / .Net.Core
+        </div>
+        <div class="text-secondary pt-1">
+            is a simple, fast and lightweight embedded .NET ORM tool
+        </div>
+        <div class="p-5">
             <a href="https://www.nuget.org/packages/OrmDb/" target="_blank" style="margin:10px; text-decoration:none;padding:1px;display: inline-flex;align-items: center;background-color: #0e83cd;color: white;">
                 <span style="padding: 10px;background-color: #283542;color: #BCBEC0;">
                     <img src="site/images/nuget.png" style="height:25px">&nbsp;&nbsp;Install from Nuget
@@ -38,81 +42,55 @@
             </a>
 
         </div>
-        <br />
-        <h2>One code for all databases. Besides FREE for everyone - including commercial use</h2>
+        <div class="text-secondary p-4">
+            One code for all databases. Besides FREE for everyone - including commercial use
+        </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="feature col-md-4 col-sm-12">
-                <h1><i class="fa fa-check-square-o"></i>No Dependencies</h1>
-                <div class="feature-content">
-                    <p>OrmDb is standalone a single DLL (less than 200kb) fully written in .NET managed code (compatible with .NET 4.x, NETCore 2.2 and above).</p>
-                    <br />
-                    <p>You can install via NuGet or just copy DLL to your bin project folder.</p>
-
-                </div>
-            </div>
-            <div class="feature col-md-4 col-sm-12">
-                <h1><i class="fa fa-flash"></i>Fast and lightweight</h1>
-                <div class="feature-content">
-                    <p>OrmDb is a simple and fast ORM solution. Ideal for any applications.</p>
-                    <br />
-                    <p>You can run HUGE queries and read data <b>Fast</b> and <b>low resource consumption</b>.</p>
-                </div>
-            </div>
-            <div class="feature col-md-4 col-sm-12">
-                <h1><i class="fa fa-database"></i>And much more...</h1>
-                <ul>
-                    <li>Many database support such as MsSQL, PostgreSQL, MySQL, MariaDB and Oracle (for now)</li>
-                    <li>DDL(Data Definition Language) support</li>
-                    <li>DML(Data Manipulation Language) support</li>
-                    <li>TCL(transaction Control Language) support</li>
-                    <li>Map your POCO class for queries</li>
-                    <li>Cross column references (ColumnRef)</li>
-                    <li>Aggregate support such as TRIM, SUM, AVG, CONCATE, MAX, CONTAINS and many more</li>
-                    <li>DataTable and CRUD operation support</li>
-                    <li>DataReader support</li>
-                </ul>
-            </div>
+        <div class="text-center">
+            <span class="d-inline-block" style="background-image: url('https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80');width: 100px;height:100px;background-position: center center;background-repeat: no-repeat;"></span>
+        </div>
+        <div>
+            OrmDb is standalone a single DLL (less than 200kb) fully written in .NET managed code (compatible with .NET 4.x, NETCore 2.2 and above).
+            <code>You can install via NuGet or just copy DLL to your bin project folder.</code>
+        </div>
+        <div class="bs-callout bs-callout-warning table-warning">
+            You can run HUGE queries and read data <b>Fast</b> and <b>low resource consumption</b>.
         </div>
     </div>
 
-    <div class="banner-title">
-        <div class="container">
+    <div class="mt-5">
+        <div class="bg-dark text-light text-center h2 p-4 font-weight-bold">
             No STRING Statements
         </div>
-    </div>
-    <div class="container">
-        OrmDb does NOT executes the queries as a string statement.
-        <br />
-        <br />
-        <pre class="w-100 p-4 m-0 d-inline-block sample-danger"><code class="language-csharp" id="sample_no_string_1"></code></pre>
-        <br />
-        <br />
-        OrmDb executes the queries as a part of the code like LINQ.
-        <br />
-        <br />
-        <pre class="w-100 p-4 m-0 d-inline-block sample-success"><code class="language-csharp" id="sample_no_string_2"></code></pre>
-    </div>
-
-
-    <div class="banner-title">
         <div class="container">
+            <div class="bs-callout bs-callout-danger table-danger">
+                OrmDb does NOT executes the queries as a string statement.
+            </div>
+            <pre class="border border-danger"><code class="language-csharp" id="sample_no_string_1"></code></pre>
+
+            <div class="bs-callout bs-callout-success table-success">
+                OrmDb executes the queries as a part of the code like LINQ.
+            </div>
+            <pre class="border border-success"><code class="language-csharp" id="sample_no_string_2"></code></pre>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <div class="bg-dark text-light text-center h2 p-4 font-weight-bold">
             ONE Statement for All Databases
         </div>
-    </div>
-    <div class="container">
-        You dont need the multiple queries for different databases with OrmDb. ONE Query can be executed on different connection(s).
-        <br />
-        <br />
-        <pre class="w-100 p-4 m-0 d-inline-block sample-success"><code class="language-csharp" id="sample_one_statement"></code></pre>
-    </div>
-
-
-    <div class="banner-title">
         <div class="container">
-            Samples<h2></h2>
+            <div class="bs-callout bs-callout-success table-success">
+                You dont need the multiple queries for different databases with OrmDb. ONE Query can be executed on different connection(s).
+            </div>
+            <pre class="border border-success"><code class="language-csharp" id="sample_one_statement"></code></pre>
         </div>
+    </div>
+
+
+    <div class="table-secondary text-center h2 p-4 font-weight-bold">
+        Samples<h2></h2>
     </div>
     <div id="examples" style="display:flex;justify-content: space-between;margin: 0px auto;max-width: 1200px;">
         <ul id="examples_menu"></ul>

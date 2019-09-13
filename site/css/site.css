@@ -22,45 +22,6 @@ header {
 }
 /*--*/
 
-.banner {
-    background-color: #171F26;
-    padding: 20px;
-}
-
-    .banner h1 {
-        text-align: center;
-        color: #BCBEC0;
-        font-size: 40px;
-        line-height: 1.15;
-        padding: 40px 0px 20px;
-    }
-
-    .banner h2 {
-        text-align: center;
-        color: #BCBEC0;
-        font-size: 20px;
-        line-height: 1.15;
-        font-weight: 300;
-        margin: 0px;
-    }
-
-
-/* -- */
-.sample {
-}
-
-.sample-danger {
-    background: rgba(255,0,0,.09) !important;
-    border: 2px solid red;
-    padding: 10px !important;
-}
-
-.sample-success {
-    background: rgba(0,255,0,.09) !important;
-    border: 2px solid green;
-    padding: 10px !important;
-}
-
 /* -- */
 .feature {
     padding: 20px !important;
@@ -89,26 +50,77 @@ header {
 }
 
 /* -- */
-
-.banner-title {
-    background-color: #f3f3f3;
+.bs-callout {
     padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 36px;
-    color: #171F26;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
 }
 
-    .banner-title .container {
-        text-align: center;
+    .bs-callout h4 {
+        margin-top: 0;
+        margin-bottom: 5px;
     }
 
-    .banner-title h2 {
-        display: inline-block;
-        font-size: 18px;
-        color: gray;
-        font-weight: 300;
-        margin-left: 30px;
+    .bs-callout p:last-child {
+        margin-bottom: 0;
+    }
+
+    .bs-callout code {
+        border-radius: 3px;
+    }
+
+    .bs-callout + .bs-callout {
+        margin-top: -5px;
+    }
+
+.bs-callout-default {
+    border-left-color: #777;
+}
+
+    .bs-callout-default h4 {
+        color: #777;
+    }
+
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+
+    .bs-callout-primary h4 {
+        color: #428bca;
+    }
+
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+
+    .bs-callout-success h4 {
+        color: #5cb85c;
+    }
+
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+
+    .bs-callout-danger h4 {
+        color: #d9534f;
+    }
+
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+
+    .bs-callout-warning h4 {
+        color: #f0ad4e;
+    }
+
+.bs-callout-info {
+    border-left-color: #5bc0de;
+}
+
+    .bs-callout-info h4 {
+        color: #5bc0de;
     }
 /* -- */
 
