@@ -3,6 +3,33 @@
     margin: 0px;
 }
 
+.header-bg {
+    position: relative;
+    overflow: hidden;
+    z-index: 0
+}
+
+    .header-bg:before {
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        opacity: 0.2;
+        background-image: url('/site/images/code.png');
+        background-position: center center;
+        background-repeat: no-repeat;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+        overflow: hidden;
+    }
+
+}
+
 header {
     background-color: #171F26;
     padding: 0px 0px;
