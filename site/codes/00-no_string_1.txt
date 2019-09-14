@@ -3,9 +3,3 @@
 	           + " WHERE h.year > @param1 and l.type = @param2";
 	
 	var headers = connection.Query(sql, new {param1 = 1, param2 = "X"});
-
-	foreach (var row in headers) {
-	
-	    var id =  row.Id;
-	
-	}

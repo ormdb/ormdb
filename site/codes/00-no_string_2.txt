@@ -2,9 +2,3 @@
 	var l = new Lines();
 	
 	var sql = SQL.X.Select().From(h, h.Year > 2018).InnerJoin(l, l.id = h.id);
-	
-	foreach (var row in sql.ExecuteReader(connection)) {
-	
-	    var id =  row(h.Id);
-	
-	}
