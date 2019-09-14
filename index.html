@@ -5,11 +5,11 @@
     <title>OrmDB :: Fastest ORM tool for .Net / .Net.Core</title>
     <meta name="description" content="OrmDB :: OrmDB is the Fastest and best ORM tool for .Net / .Net.Core">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="site/css/prism.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="site/css/prism.css">
     <link rel="stylesheet" href="site/css/site.css" />
 </head>
 
@@ -57,48 +57,51 @@
     </div>
 
     <div class="mt-5">
-        <div class="bg-dark text-light text-center h2 p-4 font-weight-bold">
-            No STRING Statements
+        <div class="bg-light text-center border-top border-bottom p-4">
+            <div class="text-dark h2 font-weight-bold">
+                No STRING Statements
+            </div>
+            <div class="text-secondary">
+                OrmDb does NOT executes the queries as a string statement. OrmDb executes the queries as a part of the code like LINQ.
+                <div class="mt-3 small">
+                    Please refer to <a href="/wiki.html">Wiki</a> for further information.
+                </div>
+            </div>
         </div>
         <div class="container">
-            <div class="bs-callout bs-callout-danger table-danger">
-                OrmDb does NOT executes the queries as a string statement.
-            </div>
             <pre class="border border-danger"><code class="language-csharp" id="sample_no_string_1"></code></pre>
-
-            <div class="bs-callout bs-callout-success table-success">
-                OrmDb executes the queries as a part of the code like LINQ.
-            </div>
-            <pre class="border border-success"><code class="language-csharp" id="sample_no_string_2"></code></pre>
-
-            <div class="text-center">
-                Please refer to <a href="/wiki.html">Wiki</a> for further information.
-            </div>
+            <pre class="mt-5 border border-success"><code class="language-csharp" id="sample_no_string_2"></code></pre>
         </div>
     </div>
 
     <div class="mt-5">
-        <div class="bg-dark text-light text-center h2 p-4 font-weight-bold">
-            ONE Statement for All Databases
+        <div class="bg-light text-center border-top border-bottom p-4">
+            <div class="text-dark h2 font-weight-bold">
+                ONE Statement for All Databases
+            </div>
+            <div class="text-secondary">
+                You dont need the multiple queries for different databases with OrmDb. ONE Query can be executed on different connection(s).
+                <div class="mt-3 small">
+                    Please refer to <a href="/wiki.html">Wiki</a> for further information.
+                </div>
+            </div>
         </div>
         <div class="container">
-            <div class="bs-callout bs-callout-success table-success">
-                You dont need the multiple queries for different databases with OrmDb. ONE Query can be executed on different connection(s).
-            </div>
             <pre class="border border-success"><code class="language-csharp" id="sample_one_statement"></code></pre>
-
-            <div class="text-center">
-                Please refer to <a href="/wiki.html">Wiki</a> for further information.
-            </div>
         </div>
     </div>
 
     <div class="mt-5">
-        <div class="bg-dark text-light text-center h2 p-4 font-weight-bold">
-            Samples
-        </div>
-        <div class="text-center py-3">
-            Please refer to <a href="/wiki.html">Wiki</a> for further information.
+        <div class="bg-light text-center border-top border-bottom p-4">
+            <div class="text-dark h2 font-weight-bold">
+                Samples
+            </div>
+            <div class="text-secondary">
+                You can look out our samples which are shown below, to understand better how to use.
+                <div class="mt-3 small">
+                    Please refer to <a href="/wiki.html">Wiki</a> for further information.
+                </div>
+            </div>
         </div>
         <div id="examples" style="display:flex;justify-content: space-between;margin: 0px auto;max-width: 1200px;">
             <ul id="examples_menu"></ul>
