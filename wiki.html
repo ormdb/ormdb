@@ -14,14 +14,25 @@
     <style>
         /* code output/result */
         O {
-            display :block;
-            color: green;
-            background-color: #e7ffe7;
+            display: block;
+            margin-top:5px;
             padding: 5px;
+
             font-size: 10pt;
+            font-family: consolas;
+
+            background-color: #f8f9fa !important;
+            color: rgba(0,0,0,.4) !important;
+            
+            border: 1px solid #eee;
+            border-left-width: 5px;
+            border-radius: 3px;
+            border-left-color: #5cb85c;
         }
         X {
-            color: red;
+            background-color: #ffefa3 !important;
+            border-radius: 3px;
+            padding: 2px;
         }
 
         #wiki {
@@ -185,7 +196,7 @@
             }
 
             .markdown-body .highlight pre, .markdown-body pre {
-                background-color: #f6f8fa;
+                background-color: #f8f9fa;
                 border-radius: 3px;
                 font-size: 85%;
                 line-height: 1.45;
@@ -448,13 +459,13 @@
             _codes[_grp_id] = _grp;
 
             return '' +
-                '<pre id="' + _grp_id + '" class="tab_strip">' +
+                '<pre id="' + _grp_id + '" class="border tab_strip">' +
                 '   <ul>' +
                 _tbar +
                 '   <li style="flex-grow: 1;"></li>' +
                 '   <li class="btn copy" onclick="_code_copy(\'' + _grp_id + '\');"><i class="fa fa-copy"></i>&nbsp;Copy</li>' +
                 '   </ul>' +
-                '   <div class="flex-grow-1">' + _grp[0] + '</div>' +
+                '   <div class="flex-grow-1 p-0 m-0">' + _grp[0] + '</div>' +
                 '</pre>';
         }
         function _code_show(e) {
@@ -466,6 +477,7 @@
             }
         }
         function _code_copy(grp_id) {
+            debugger;
             var $temp = $("<textarea>");
             var brRegex = /<br\s*[\/]?>/gi;
             $("body").append($temp);

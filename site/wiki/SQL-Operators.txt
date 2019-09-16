@@ -20,7 +20,7 @@ SQL.X.Select().From(h).Where( h.Year = 2018 And
 ```
 ``````
 <o>
-SELECT * FROM TableHeader AS h <u><x>WHERE</x> (h.Year = 2018) <x>AND</x> (h.DocDate >= 'DateValue') <x>AND</x> (h.DocDate <= 'DateValue')</u>
+	SELECT * FROM TableHeader AS h <x>WHERE</x> (h.Year = 2018) <x>AND</x> (h.DocDate >= 'DateValue') <x>AND</x> (h.DocDate <= 'DateValue')
 </o>
 <br/>
 
@@ -28,14 +28,14 @@ Also you can use WHERE clause as shortness within specified as a parameter in **
 
 ``````XXX
 ```C#
-SQL.X.Select().From(h, h.Year = 2018);
+SQL.X.Select().From(h, h.Year = 2018 & h.IsActive = true );
 ```
 ```VB
-SQL.X.Select().From(h, h.Year = 2018)
+SQL.X.Select().From(h, h.Year = 2018 And h.IsActive = True)
 ```
 ``````
 <o>
-SELECT * FROM TableHeader AS h <u><x>WHERE</x> (h.Year = 2018)</u>
+SELECT * FROM TableHeader AS h <x>WHERE</x> (h.Year = 2018 <x>AND</x> h.IsActive = 1)
 </o>
 <br/>
 
@@ -53,7 +53,7 @@ SQL.X.Select(h.Const("X").AS("flag"), h.Year.As("y1")).From(h)
 ```
 ``````
 <o>
-SELECT <u>'X' <x>AS</x> flag, h.Year <x>AS</x> y1</u> FROM TableHeader AS h
+SELECT 'X' <x>AS</x> flag, h.Year <x>AS</x> y1 FROM TableHeader AS h
 </o>
 <br/>
 
@@ -75,8 +75,8 @@ SQL.X.Select().From(h).Where( h.Year.In({2017, 2018}) )
 SQL.X.Select().From(h).Where( h.Id.NotIn({"A", "B", "C"}) )
 ``````
 <o>
-SELECT * FROM TableHeader AS h WHERE <u>h.Year <x>IN</x> (2017, 2018)</u> <br/>
-SELECT * FROM TableHeader AS h WHERE <u>h.Year <x>NOT IN</x> ('A', 'B', 'C')</u>
+SELECT * FROM TableHeader AS h WHERE h.Year <x>IN</x> (2017, 2018) <br/>
+SELECT * FROM TableHeader AS h WHERE h.Year <x>NOT IN</x> ('A', 'B', 'C')
 </o>
 <br/>
 
@@ -95,8 +95,8 @@ SQL.X.Select().From(h).Where( h.Note.IsNotNull() )
 ```
 ``````
 <o>
-SELECT * FROM TableHeader AS h WHERE <u>h.Note <x>IS NULL</x></u> <br/>
-SELECT * FROM TableHeader AS h WHERE <u>h.Note <x>IS NOT NULL</x></u> <br/>
+SELECT * FROM TableHeader AS h WHERE h.Note <x>IS NULL</x> <br/>
+SELECT * FROM TableHeader AS h WHERE h.Note <x>IS NOT NULL</x> <br/>
 </o>
 <br/>
 
@@ -121,9 +121,9 @@ SQL.X.Select().From(h).Where( h.Note.STARTS_WITH("ASD") )
 SQL.X.Select().From(h).Where( h.Note.ENDS_WITH("ASD") )
 ``````
 <o>
-SELECT * FROM TableHeader AS h WHERE h.Note <u><x>LIKE</x> '<x>%</x>ASD<x>%</x>'</u> <br/>
-SELECT * FROM TableHeader AS h WHERE h.Note <u><x>LIKE</x> 'ASD<x>%</x>'</u> <br/>
-SELECT * FROM TableHeader AS h WHERE h.Note <u><x>LIKE</x> '<x>%</x>ASD'</u> <br/>
+SELECT * FROM TableHeader AS h WHERE h.Note <x>LIKE</x> '<x>%</x>ASD<x>%</x>' <br/>
+SELECT * FROM TableHeader AS h WHERE h.Note <x>LIKE</x> 'ASD<x>%</x>' <br/>
+SELECT * FROM TableHeader AS h WHERE h.Note <x>LIKE</x> '<x>%</x>ASD' <br/>
 </o>
 <br/>
 
@@ -141,7 +141,7 @@ SQL.X.Select().From(h).OrderBy(h.Year, h.DocDate.Desc())
 ```
 ``````
 <o>
-SELECT * FROM TableHeader AS h  <u><x>ORDER BY</x> h.Year, h.DocDate <x>DESC</x></u>
+SELECT * FROM TableHeader AS h  <x>ORDER BY</x> h.Year, h.DocDate <x>DESC</x>
 </o>
 <br/>
 
@@ -156,7 +156,7 @@ SQL.X.Select(h.All.COUNT()).From(h)
 ```
 ``````
 <o>
-SELECT <u><x>COUNT(*)</x></u> FROM TableHeader AS h
+SELECT <x>COUNT(*)</x> FROM TableHeader AS h
 </o>
 <br/>
 
@@ -171,7 +171,7 @@ SQL.X.Select(h.Id.DISTINCT()).From(h)
 ```
 ``````
 <o>
-SELECT <u><x>DISTINCT(h.Id)</x></u> FROM TableHeader AS h
+SELECT <x>DISTINCT(h.Id)</x> FROM TableHeader AS h
 </o>
 <br/>
 
@@ -186,8 +186,8 @@ SQL.X.Select(h.Id.COALESCE(9999)).From(h)
 ```
 ``````
 <o>
-SELECT <u><x>COALESCE(h.Id, 9999)</x></u> FROM TableHeader AS h<br/>
-SELECT <u><x>IFNULL(h.Id, 9999)</x></u> FROM TableHeader AS h<br/>
+SELECT <x>COALESCE(h.Id, 9999)</x> FROM TableHeader AS h<br/>
+SELECT <x>IFNULL(h.Id, 9999)</x> FROM TableHeader AS h<br/>
 </o>
 <br/>
 
@@ -215,10 +215,10 @@ SQL.X.Select(h.Year, h.Id.SUM()).From(h).GroupBy(h.Year)
 ```
 ``````
 <o>
-SELECT <u>h.Year, <x>AVG(h.Id)</x></u> FROM TableHeader AS h <x>GROUP BY</x> h.Year <br/>
-SELECT <u>h.Year, <x>MIN(h.Id)</x></u> FROM TableHeader AS h <x>GROUP BY</x> h.Year <br/>
-SELECT <u>h.Year, <x>MAX(h.Id)</x></u> FROM TableHeader AS h <x>GROUP BY</x> h.Year <br/>
-SELECT <u>h.Year, <x>SUM(h.Id)</x></u> FROM TableHeader AS h <x>GROUP BY</x> h.Year <br/>
+SELECT h.Year, <x>AVG(h.Id)</x> FROM TableHeader AS h <x>GROUP BY</x> h.Year <br/>
+SELECT h.Year, <x>MIN(h.Id)</x> FROM TableHeader AS h <x>GROUP BY</x> h.Year <br/>
+SELECT h.Year, <x>MAX(h.Id)</x> FROM TableHeader AS h <x>GROUP BY</x> h.Year <br/>
+SELECT h.Year, <x>SUM(h.Id)</x> FROM TableHeader AS h <x>GROUP BY</x> h.Year <br/>
 </o>
 <br/>
 

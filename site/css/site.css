@@ -149,6 +149,14 @@ header {
     .bs-callout-info h4 {
         color: #5bc0de;
     }
+
+.bs-callout-secondary {
+    border-left-color: #5bc0de;
+}
+
+    .bs-callout-info h4 {
+        color: #5bc0de;
+    }
 /* -- */
 
 #examples_menu {
