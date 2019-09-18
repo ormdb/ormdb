@@ -14,7 +14,7 @@
 </code-tab>
 
 
-<st>Returns</st>
+<st>Return</st>
 <table>
 	<thead>
 		<th>SchemaTableInfo</th>
