@@ -40,7 +40,7 @@ BeginTrans method starts a new transaction. A Transaction cannot be created , if
 
 <st>CommitTrans</st>
 CommitTrans method saves all the changes made since the last BeginTrans method call and ends current transaction.
-If a [Connection](##CON-Create) is opened as <k>AutoTrans=true</k> then each time <k>CommitTrans</k> method is invoked, a new transaction is created automatically.
+If a <a href="##CON-Create">Connection</a> is opened as <k>AutoTrans=true</k> then each time <k>CommitTrans</k> method is invoked, a new transaction is created automatically.
 <br/>
 <br/>
 <code-tab>
@@ -54,7 +54,7 @@ If a [Connection](##CON-Create) is opened as <k>AutoTrans=true</k> then each tim
 
 <br/>
 
-If a [Connection](##CON-Create) is opened as <k>AutoTrans=false</k>, you can always start a new transaction as shown below.
+If a <a href="##CON-Create">Connection</a> is opened as <k>AutoTrans=false</k>, you can always start a new transaction as shown below.
 <br/>
 <br/>
 <code-tab>
