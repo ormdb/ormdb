@@ -130,22 +130,6 @@ Following section defines a provider.
 
 <br/>
 
-A connection can be created with <k>Create</k> or <k>CreateAndOpen</k> via <b>provider</b> already defined.
-<code-tab>
-	<code lang="c#">
-		Connection CreateAndOpen(bool AutoStartTrans = false)
-
-		Connection Create(bool AutoStartTrans = false, bool AutoConnect = true)
-	</code>
-	<code lang="vb">
-		CreateAndOpen(Optional AutoStartTrans As Boolean = False) As Connection
-
-		Create(Optional AutoStartTrans As Boolean = False, Optional AutoConnect As Boolean = True) As Connection
-	</code>
-</code-tab>
-
-<br/>
-
 Following section demonstrates how to create a connection as <k>ImmediatelyConnect</k>.
 <code-tab>
 	<code lang="c#">
