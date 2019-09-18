@@ -1,16 +1,20 @@
-﻿<st>Definition</st>
-Table to be defined, is inherited from <k>Odb.Table.Base</k>. 
-
+﻿Table to be defined, is inherited from <k>Odb.Table.Base</k>. 
 Column(s) type of <k>Odb.Table.Column</k> are also defined by supplying necessary type information in the attribute.
-
 If a column-type is often used in many of your tables, you can use a column as a reference.
 
+
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Table</small>
+</co>
+
+
+<st>Examples</st>
 <ew/>
+<br/>
+<br/>
 
-
-<st>Declaration</st>
 Instances of the tables are being initialized.
-
 <code-tab>
 	<code lang="c#">
 			private TableHeader h = new TableHeader();
@@ -25,7 +29,6 @@ Instances of the tables are being initialized.
 <br/>
 
 If you would like to join a table with itself, same table can be initialized twice as shown below.
-
 <code-tab>
 	<code lang="c#">
 			private TableHeader h  = new TableHeader();

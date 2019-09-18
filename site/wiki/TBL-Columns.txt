@@ -1,6 +1,9 @@
 ﻿You can use the column-types as shown below, in the table definitions by <b>OrmDB</b>.
-<br/>
-<br/>
+
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Table</small>
+</co>
 <table>
 	<thead>
 		<tr>

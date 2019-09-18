@@ -1,7 +1,26 @@
 ﻿All tables can be serialized and deserialized as shown below.
 
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Table.Base</small>
+</co>
+<code-tab>
+	<code lang="c#">
+		public static string Serialize(Table.Base Table)
 
+		public static Table.Base Deserialize(string data)
+	</code>
+	<code lang="vb">
+		Public Shared Function Serialize(Table As Table.Base) As String
+
+		Public Shared Function Deserialize(data As String) As Table.Base
+	</code>
+</code-tab>
+
+<st>Examples</st>
 <ew/>
+<br/>
+<br/>
 
 <code-tab>
 	<code lang="c#">
