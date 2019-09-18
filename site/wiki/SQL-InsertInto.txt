@@ -7,9 +7,9 @@
 </co>
 <code-tab>
 	<code lang="c#">
-		public static InsertInto InsertInto(Table.Base Table, SQL.Select From){}
+		public static SQL.InsertInto InsertInto(Table.Base Table, SQL.Select From)
 
-		public static InsertInto InsertInto(SQL.TempTable Table, SQL.Select From){}
+		public static SQL.InsertInto InsertInto(SQL.TempTable Table, SQL.Select From)
 	</code>
 	<code lang="vb">
 		Public Shared Function InsertInto(Table As Table.Base, From As SQL.Select) As SQL.InsertInto

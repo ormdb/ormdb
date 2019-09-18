@@ -14,10 +14,10 @@ You can access each column of the returned row by passing the name or ordinal nu
 </co>
 <code-tab>
 	<code lang="c#">
-		public static Select Select(params Table.Column[] items)
+		public static SQL.Select Select(params Table.Column[] items)
 	</code>
 	<code lang="vb">
-		Public Shared Function Select(ParamArray items() As Table.Column) As Select
+		Public Shared Function Select(ParamArray items() As Table.Column) As SQL.Select
 	</code>
 </code-tab>
 

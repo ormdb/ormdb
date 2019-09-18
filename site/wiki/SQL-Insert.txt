@@ -6,7 +6,7 @@
 </co>
 <code-tab>
 	<code lang="c#">
-		public static Insert Insert(bool SetInitials = false) 
+		public static SQL.Insert Insert(bool SetInitials = false) 
 	</code>
 	<code lang="vb">
 		Public Shared Function Insert(SetInitials As Boolean = False) As SQL.Insert
