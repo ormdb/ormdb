@@ -2,23 +2,21 @@
 
 
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Connection.DDL</small>
+</co>
 <code-tab>
 	<code lang="c#">
-		namespace Connection {
-			public class DDL {
-
-				public Table.Base.Generic GetTableInstance(string TableName){}
+		public Table.Base.Generic GetTableInstance(string TableName)
 	</code>
 	<code lang="vb">
-		NameSpace Connection
-			Public Class DDL
-
-				Public Function GetTableInstance(TableName As String) As Table.Base.Generic
+		Public Function GetTableInstance(TableName As String) As Table.Base.Generic
 	</code>
 </code-tab>
 
 <st>Examples</st>
 <ew/>
+<br/>
 <br/>
 
 Following section demonstrates generating the instance of the table.

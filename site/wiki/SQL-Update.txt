@@ -1,22 +1,20 @@
 ﻿<k>Update</k> method is used to update existing records in a table.
 
+
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.SQL.X</small>
+</co>
 <code-tab>
 	<code lang="c#">
-		namespace SQL
-			public class X
-
-				SQL.Update Update(Table.Base from) 
-
-				SQL.Update Update(Table.Base from, Table.Field Where) 
+		public static SQL.Update Update(Table.Base from) 
+		
+		public static SQL.Update Update(Table.Base from, Table.Field Where) 
 	</code>
 	<code lang="vb">
-		NameSpace SQL
-			Public Class X
-
-				Update(from As Table.Base)() As SQL.Update
-
-				Update(from As Table.Base, Where As Table.Column) As SQL.Update
+		Public Shared Function Update(from As Table.Base) As SQL.Update
+		
+		Public Shared Function Update(from As Table.Base, Where As Table.Column) As SQL.Update
 	</code>
 </code-tab>
 

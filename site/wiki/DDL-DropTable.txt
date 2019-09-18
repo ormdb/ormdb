@@ -1,49 +1,41 @@
 ﻿<k>DropTable</k> is used to drop an existing table in a database.
 
-<br/>
-
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Connection.DDL</small>
+</co>
 <code-tab>
 	<code lang="c#">
-		namespace Connection
-			public class DDL
+		public List<string> DropTable(IEnumerable<Table.Base> Tables,
+									  bool OnlyGenerateScript = false)
 
-				public List<string> DropTable(IEnumerable<Table.Base> Tables,
-											  bool OnlyGenerateScript = false)
+		public List<string> DropTable(IEnumerable<string> TableNames,
+									  bool OnlyGenerateScript = false)
 
-				public List<string> DropTable(IEnumerable<string> TableNames,
-											  bool OnlyGenerateScript = false)
+		public string DropTable(Table.Base Table,
+								bool OnlyGenerateScript = false)
 
-				public string DropTable(Table.Base Table,
-										bool OnlyGenerateScript = false)
-
-				public string DropTable(string TableName,
-										bool OnlyGenerateScript = false)
+		public string DropTable(string TableName,
+								bool OnlyGenerateScript = false)
 	</code>
 	<code lang="vb">
-		NameSpace Connection
-			Public Class DDL
+		Public Function DropTable(Tables As IEnumerable(Of Table.Base),
+								  OnlyGenerateScript As Boolean = False) As List(Of String)
 
-				Public Function DropTable(Tables As IEnumerable(Of Table.Base),
-										  OnlyGenerateScript As Boolean = False) As List(Of String)
+		Public Function DropTable(TableNames As IEnumerable(Of string),
+								  OnlyGenerateScript As Boolean = False) As List(Of String)
 
-				Public Function DropTable(TableNames As IEnumerable(Of string),
-										  OnlyGenerateScript As Boolean = False) As List(Of String)
+		Public Function DropTable(Table As Table.Base,
+								  OnlyGenerateScript As Boolean = False) As String
 
-				Public Function DropTable(Table As Table.Base,
-										  OnlyGenerateScript As Boolean = False) As String
-
-				Public Function DropTable(TableName As String,
-										  OnlyGenerateScript As Boolean = False) As String
+		Public Function DropTable(TableName As String,
+								  OnlyGenerateScript As Boolean = False) As String
 	</code>
 </code-tab>
 
-<br/>
-
 <st>Examples</st>
-
 <ew/>
-
+<br/>
 <br/>
 
 Following section demonstrates how to drop table.

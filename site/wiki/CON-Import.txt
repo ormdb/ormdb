@@ -3,43 +3,43 @@
 There are several ways to import data to database. Some methods let you import data in a single step directly from <k>Source Connection</k>; other methods require you to read your data as <k>Query</k> before you can import it. 
 
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Connection.Connection</small>
+</co>
 <code-tab>
 	<code lang="c#">
-		namespace Connection {
-			public class Connection {
+		public void ImportData(string TableName,
+							   Connection SourceConnection,
+							   ImportDataCalback CallBack = null,
+							   int BatchSize = 1000,
+							   bool TruncateBefore = true)
 
-				public void ImportData(string TableName,
-									   Connection SourceConnection,
-									   ImportDataCalback CallBack = null,
-									   int BatchSize = 1000,
-									   bool TruncateBefore = true){}
-
-				public void ImportData(string TableName,
-									   DbDataReader Reader,
-									   ImportDataCalback CallBack = null,
-									   int BatchSize = 1000,
-									   bool TruncateBefore = true){}
+		public void ImportData(string TableName,
+							   DbDataReader Reader,
+							   ImportDataCalback CallBack = null,
+							   int BatchSize = 1000,
+							   bool TruncateBefore = true)
 	</code>
 	<code lang="vb">
-		NameSpace Connection
-			Public Class Manager
+		Public Shared Sub ImportData(TableName As String,
+									 SourceConnection As Connection,
+									 CallBack As ImportDataCalback = Nothing,
+									 BatchSize As Integer= 1000,
+									 TruncateBefore As Boolean = True)
 
-				Public Shared Sub ImportData(TableName As String,
-											 SourceConnection As Connection,
-											 CallBack As ImportDataCalback = Nothing,
-											 BatchSize As Integer= 1000,
-											 TruncateBefore As Boolean = True)
-
-				Public Shared Sub ImportData(TableName As String,
-											 Reader As DbDataReader,
-											 CallBack As ImportDataCalback= Nothing,
-											 BatchSize As Integer= 1000,
-											 TruncateBefore As Boolean = True)
+		Public Shared Sub ImportData(TableName As String,
+									 Reader As DbDataReader,
+									 CallBack As ImportDataCalback= Nothing,
+									 BatchSize As Integer= 1000,
+									 TruncateBefore As Boolean = True)
 	</code>
 </code-tab>
 
 <st>Examples</st>
 <ew/>
+<br/>
+<br/>
+
 Following section demonstrates importing data in table(h) from one connection to another.
 <code-tab>
 	<code lang="c#">

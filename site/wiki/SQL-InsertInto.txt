@@ -2,22 +2,19 @@
 
 
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.SQL.X</small>
+</co>
 <code-tab>
 	<code lang="c#">
-		namespace SQL
-			public class X
+		public static InsertInto InsertInto(Table.Base Table, SQL.Select From){}
 
-				InsertInto InsertInto(Table.Base Table, SQL.Select From){}
-
-				InsertInto InsertInto(SQL.TempTable Table, SQL.Select From){}
+		public static InsertInto InsertInto(SQL.TempTable Table, SQL.Select From){}
 	</code>
 	<code lang="vb">
-		NameSpace SQL
-			Public Class X
+		Public Shared Function InsertInto(Table As Table.Base, From As SQL.Select) As SQL.InsertInto
 
-				InsertInto(Table As Table.Base, From As SQL.Select) As SQL.InsertInto
-
-				InsertInto(Table As SQL.TempTable, From As SQL.Select) As SQL.InsertInto
+		Public Shared Function InsertInto(Table As SQL.TempTable, From As SQL.Select) As SQL.InsertInto
 	</code>
 </code-tab>
 

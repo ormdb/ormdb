@@ -2,23 +2,19 @@
 
 
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Connection.DDL</small>
+</co>
 <code-tab>
 	<code lang="c#">
-		namespace Connection {
-			public class DDL {
-
-				public List<SchemaTableColumnInfo> GetTableColumns(Table.Base Table){}
-				public List<SchemaTableColumnInfo> GetTableColumns(string TableName){}
+		public List<SchemaTableColumnInfo> GetTableColumns(Table.Base Table)
+		public List<SchemaTableColumnInfo> GetTableColumns(string TableName)
 	</code>
 	<code lang="vb">
-		NameSpace Connection
-			Public Class DDL
-	
-				public Function GetTableColumns(Table As Table.Base) As List(Of SchemaTableColumnInfo)
-				public Function GetTableColumns(TableName As String) As List(Of SchemaTableColumnInfo)
+		Public Function GetTableColumns(Table As Table.Base) As List(Of SchemaTableColumnInfo)
+		Public Function GetTableColumns(TableName As String) As List(Of SchemaTableColumnInfo)
 	</code>
 </code-tab>
-
 
 <st>Return</st>
 <table>
@@ -44,6 +40,7 @@
 
 <st>Examples</st>
 <ew/>
+<br/>
 <br/>
 
 Following section demonstrates reading the columns of a table <b>by its instance</b>.

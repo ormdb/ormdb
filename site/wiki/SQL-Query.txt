@@ -2,8 +2,21 @@
 
 All Select, Insert, Delete, and Update commands (also free text sql commands) can be execute in same query. 
 
-<br/>
-<br/>
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.SQL.X</small>
+</co>
+<code-tab>
+	<code lang="c#">
+		public static SQL.Query Query()
+	</code>
+	<code lang="vb">
+		Public Shared Function Query() As SQL.Query
+	</code>
+</code-tab>
+
+
+<st>Examples</st>
 <ew/>
 <br/>
 <br/>

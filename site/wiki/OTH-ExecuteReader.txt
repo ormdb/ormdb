@@ -4,6 +4,9 @@
 </co>
 
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Extensions</small>
+</co>
 <code-tab>
 	<code lang="c#">
 		DataReader ExecuteReader(this SQL.IQueryable o, 

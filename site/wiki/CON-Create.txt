@@ -1,36 +1,37 @@
 ﻿<b><k>OrmDb</k></b> uses a <b>Connection.Provider</b> shown below, to connect to a data source by supplying necessary authentication information in a <b>provider</b>. 
-<br/>
-<br/>
-<table>
-	<thead>
-		<th>Provider</th>
-		<th></th>
-		<th>Factory</th>
-	</thead>
-	<tr>
-		<td>Odb.Connection.Provider.<k>MsSql</k></td>
-		<td>Microsoft SQL Server</td>
-		<td>System.Data.SqlClient</td>
-	</tr>
-	<tr>
-		<td>Odb.Connection.Provider.<k>MySql</k></td>
-		<td>MySQL / MariaDB</td>
-		<td>MySql.Data.MySqlClient</td>
-	</tr>
-	<tr>
-		<td>Odb.Connection.Provider.<k>PostgreSql</k></td>
-		<td>PostgreSQL</td>
-		<td>Npgsql</td>
-	</tr>
-	<tr>
-		<td>Odb.Connection.Provider.<k>Oracle</k></td>
-		<td>Oracle</td>
-		<td>Oracle.ManagedDataAccess.Client</td>
-	</tr>
-</table>
 
-<br/>
-
+<st>Provider Create</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Connection.Provider</small>
+</co>
+<code-tab>
+	<code lang="c#">
+		// Microsoft SQL Server
+		new MsSql( <parameters> )
+		
+		// MySQL / MariaDB
+		new MySql( <parameters> )
+		
+		// PostgreSQL
+		new PostgreSql( <parameters> )
+		
+		// Oracle
+		new Oracle( <parameters> )
+	</code>
+	<code lang="vb">
+		' Microsoft SQL Server
+		New MsSql( <parameters> )
+		
+		' MySQL / MariaDB
+		New MySql( <parameters> )
+		
+		' PostgreSQL
+		New PostgreSql( <parameters> )
+		
+		' Oracle
+		New Oracle( <parameters> )
+	</code>
+</code-tab>
 <table>
 	<thead>
 		<th>Parameters</th>
@@ -62,29 +63,29 @@
 	</tr>
 </table>
 
-<br/>
 
-<co type="warning">
-	Following section defines a provider.
+<st>Connection Create</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Connection.Provider</small>
 </co>
-
 <code-tab>
 	<code lang="c#">
-		var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name", "user", "****");
-
-		// for trusted
-		var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name");
+		public Connection Create(bool AutoStartTrans = false, 
+							     bool AutoConnect = true, 
+							     string SchemaPrefix = Connection.DefaultSchemaPrefix)
+		
+		public Connection CreateAndOpen(bool AutoStartTrans = false, 
+									    string SchemaPrefix = Connection.DefaultSchemaPrefix)
 	</code>
 	<code lang="vb">
-		Dim ms_db = New Odb.Connection.Provider.MsSql("host", "database-name", "user", "****")
-
-		' for trusted
-		Dim ms_db = new Odb.Connection.Provider.MsSql("host", "database-name")
+		Public Function Create(Optional AutoStartTrans As Boolean = False, 
+							   Optional AutoConnect As Boolean = True, 
+							   Optional SchemaPrefix As String = Connection.DefaultSchemaPrefix) As Connection
+		
+		Public Function CreateAndOpen(Optional AutoStartTrans As Boolean = False, 
+									  Optional SchemaPrefix As String = Connection.DefaultSchemaPrefix) As Connection
 	</code>
 </code-tab>
-
-
-<st>Creating Connection</st>
 <table>
 	<thead>
 		<th>Parameters</th>
@@ -104,10 +105,32 @@
 	</tr>
 </table>
 
+
+
+<st>Examples</st>
+<ew/>
+<br/>
 <br/>
 
-A connection can be created with <k>Create</k> or <k>CreateAndOpen</k> via **provider** already defined.
+Following section defines a provider.
+<code-tab>
+	<code lang="c#">
+		var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name", "user", "****");
 
+		// for trusted
+		var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name");
+	</code>
+	<code lang="vb">
+		Dim ms_db = New Odb.Connection.Provider.MsSql("host", "database-name", "user", "****")
+
+		' for trusted
+		Dim ms_db = new Odb.Connection.Provider.MsSql("host", "database-name")
+	</code>
+</code-tab>
+
+<br/>
+
+A connection can be created with <k>Create</k> or <k>CreateAndOpen</k> via <b>provider</b> already defined.
 <code-tab>
 	<code lang="c#">
 		Connection CreateAndOpen(bool AutoStartTrans = false)
@@ -122,9 +145,6 @@ A connection can be created with <k>Create</k> or <k>CreateAndOpen</k> via **pro
 </code-tab>
 
 <br/>
-
-
-<st>Examples</st>
 
 Following section demonstrates how to create a connection as <k>ImmediatelyConnect</k>.
 <code-tab>
@@ -181,7 +201,6 @@ Following section demonstrates how to create a connection as <k>AutoConnection</
 <br/>
 
 Following section demonstrates how to create a connection as <k>AutoTrans</k>. Please refer to <a href="##CON-Transaction">Transaction</a> for further information.
-
 <code-tab>
 	<code lang="c#">
 		// Initialize transaction automatically on every Commit and Roolback.
@@ -196,5 +215,3 @@ Following section demonstrates how to create a connection as <k>AutoTrans</k>. P
 <br/>
 
 This means that each time a transaction is committed or rolled-back, a new transaction is started and all queries are automatically executed in this transaction.
-
-<br/>

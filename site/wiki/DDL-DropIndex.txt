@@ -1,50 +1,42 @@
 ﻿<k>DropIndex</k> is used to drop an existing index of a table in a database.
 
-<br/>
-
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Connection.DDL</small>
+</co>
 <code-tab>
 	<code lang="c#">
-		namespace Connection {
-			public class DDL {
+		public string DropIndex(Table.Base Table,
+								Table.IndexInfo IndexInfo,
+								bool OnlyGenerateScript = false)
 
-				public string DropIndex(Table.Base Table,
-										Table.IndexInfo IndexInfo,
-										bool OnlyGenerateScript = false){}
+		public string DropIndex(string TableName,
+								Table.IndexInfo IndexInfo,
+								bool OnlyGenerateScript = false)
 
-				public string DropIndex(string TableName,
-										Table.IndexInfo IndexInfo,
-										bool OnlyGenerateScript = false){}
-
-				public string DropIndex(string TableName,
-										string IndexName,
-										bool OnlyGenerateScript = false){}
+		public string DropIndex(string TableName,
+								string IndexName,
+								bool OnlyGenerateScript = false)
 	</code>
 	<code lang="vb">
-		NameSpace Connection
-			Public Class DDL
+		Public Function DropIndex(Table As Table.Base,
+								  IndexInfo As Table.IndexInfo,
+								  OnlyGenerateScript As Boolean = False) As String
 
-				Public Function DropIndex(Table As Table.Base,
-										  IndexInfo As Table.IndexInfo,
-										  OnlyGenerateScript As Boolean = False) As String
+		Public Function DropIndex(TableName As String,
+								  IndexInfo As Table.IndexInfo,
+								  OnlyGenerateScript As Boolean = False) As String
 
-				Public Function DropIndex(TableName As String,
-										  IndexInfo As Table.IndexInfo,
-										  OnlyGenerateScript As Boolean = False) As String
-
-				Public Function DropIndex(TableName As String,
-										  IndexName As String,
-										  OnlyGenerateScript As Boolean = False) As String
+		Public Function DropIndex(TableName As String,
+								  IndexName As String,
+								  OnlyGenerateScript As Boolean = False) As String
 
 	</code>
 </code-tab>
 
-<br/>
-
 <st>Examples</st>
-
 <ew/>
-
+<br/>
 <br/>
 
 Following section demonstrates how to drop index of a table.

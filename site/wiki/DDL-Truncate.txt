@@ -1,51 +1,41 @@
-﻿<k>TRUNCATE</k> method is used to delete existing records in a table like <k>DELETE</k>. 
-
-> <k>TRUNCATE</k> process also executes the <k>UPDATE STATISTICS</k> for tables, after "DELETE" operation.
-
-<br/>
+﻿<k>TRUNCATE</k> method is used to delete existing records in a table like <k>DELETE</k>. This process also executes the <k>UPDATE STATISTICS</k> for tables, after <b>DELETE</b> operation.
 
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Connection.DDL</small>
+</co>
 <code-tab>
 	<code lang="c#">
-		namespace Connection {
-			public class DDL {
+		public List<string> Truncate(IEnumerable<Table.Base> Tables, 
+									 bool OnlyGenerateScript = false)
+		public List<string> Truncate(IEnumerable<string> TableNames, 
+									 bool OnlyGenerateScript = false)
 
-				public List<string> Truncate(IEnumerable<Table.Base> Tables, 
-											 bool OnlyGenerateScript = false){}
-				public List<string> Truncate(IEnumerable<string> TableNames, 
-											 bool OnlyGenerateScript = false){}
-
-				public string Truncate(Table.Base Table, 
-									   bool OnlyGenerateScript = false){}
-				public string Truncate(string TableName, 
-									   bool OnlyGenerateScript = false){}
+		public string Truncate(Table.Base Table, 
+							   bool OnlyGenerateScript = false)
+		public string Truncate(string TableName, 
+							   bool OnlyGenerateScript = false)
 	</code>
 	<code lang="vb">
-		NameSpace Connection
-			Public Class DDL
+		Public Function Truncate(Tables As IEnumerable(Of Table.Base), 
+								 OnlyGenerateScript As Boolean = False) As List(Of String)
+		Public Function Truncate(TableNames As IEnumerable(Of String), 
+								 OnlyGenerateScript As Boolean = False) As List(Of String)
 
-				Public Function Truncate(Tables As IEnumerable(Of Table.Base), 
-										 OnlyGenerateScript As Boolean = False) As List(Of String)
-				Public Function Truncate(TableNames As IEnumerable(Of String), 
-										 OnlyGenerateScript As Boolean = False) As List(Of String)
-
-				Public Function Truncate(Table As Table.Base, 
-										 OnlyGenerateScript As Boolean = False) As String
-				Public Function Truncate(TableName As String, 
-										 OnlyGenerateScript As Boolean = False) As String
+		Public Function Truncate(Table As Table.Base, 
+								 OnlyGenerateScript As Boolean = False) As String
+		Public Function Truncate(TableName As String, 
+								 OnlyGenerateScript As Boolean = False) As String
 	</code>
 </code-tab>
 
-<br/>
 
 <st>Examples</st>
-
 <ew/>
-
+<br/>
 <br/>
 
 Following section demonstrates <k>TRUNCATE</k> the table(s).
-
 <code-tab>
 	<code lang="c#">
 		// single table by instance
@@ -72,7 +62,6 @@ Following section demonstrates <k>TRUNCATE</k> the table(s).
 <br/>
 
 Following section demonstrates how to generate <k>TRUNCATE</k> script.
-
 <code-tab>
 	<code lang="c#">
 		var script = cn.DDL.Truncate(h, true);

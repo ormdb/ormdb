@@ -1,28 +1,25 @@
 ﻿<k>Delete</k> method is used to delete existing records in a table.
 
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.SQL.X</small>
+</co>
 <code-tab>
 	<code lang="c#">
-		namespace SQL {
-			public class X {
+		public static SQL.Delete Delete(Table.Base Table,
+										bool OptimizeTable = false)
 
-				SQL.Delete Delete(Table.Base Table,
-								  bool OptimizeTable = false)
-
-				SQL.Delete Delete(Table.Base Table,
-								  Table.Field Where,
-								  bool OptimizeTable = false)
+		public static SQL.Delete Delete(Table.Base Table,
+										Table.Field Where,
+										bool OptimizeTable = false)
 	</code>
 	<code lang="vb">
-		NameSpace SQL
-			Public Class X
+		Public Shared Function Delete(Table As Table.Base, 
+									  OptimizeTable As Boolean = False) As SQL.Delete
 
-				Delete(Table As Table.Base, 
-					   OptimizeTable As Boolean = False) As SQL.Delete
-
-				Delete(Table As Table.Base,
-					   Where As Table.Column,
-					   OptimizeTable As Boolean = False) As SQL.Delete
+		Public Shared Function Delete(Table As Table.Base,
+									  Where As Table.Column,
+									  OptimizeTable As Boolean = False) As SQL.Delete
 	</code>
 </code-tab>
 

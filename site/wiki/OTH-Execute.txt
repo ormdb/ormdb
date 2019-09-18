@@ -5,6 +5,9 @@
 
 
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Extensions</small>
+</co>
 <code-tab>
 	<code lang="c#">
 		Task ExecuteAsync(this SQL.IExecutable o, 

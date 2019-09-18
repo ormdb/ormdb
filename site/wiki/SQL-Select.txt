@@ -9,18 +9,15 @@ You can access each column of the returned row by passing the name or ordinal nu
 
 
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.SQL.X</small>
+</co>
 <code-tab>
 	<code lang="c#">
-		namespace SQL
-			public class X
-
-				Select Select(params Table.Column[] items)
+		public static Select Select(params Table.Column[] items)
 	</code>
 	<code lang="vb">
-		NameSpace SQL
-			Public Class X
-
-				Select(ParamArray items() As Table.Column) As Select
+		Public Shared Function Select(ParamArray items() As Table.Column) As Select
 	</code>
 </code-tab>
 

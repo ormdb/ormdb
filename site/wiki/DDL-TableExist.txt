@@ -1,31 +1,24 @@
 ﻿<k>TableExist</k> is used to test for the existence of a table.
 
-<br/>
 
 <st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Connection.DDL</small>
+</co>
 <code-tab>
 	<code lang="c#">
-		namespace Connection {
-			public class DDL {
-
-				public bool TableExist(Table.Base Table){}
-				public bool TableExist(string TableName){}
+		public bool TableExist(Table.Base Table)
+		public bool TableExist(string TableName)
 	</code>
 	<code lang="vb">
-		NameSpace Connection
-			Public Class DDL
-
-				Public FunctionTableExist(Table As Table.Base) As Boolean
-				Public FunctionTableExist(TableName As String) As Boolean
+		Public FunctionTableExist(Table As Table.Base) As Boolean
+		Public FunctionTableExist(TableName As String) As Boolean
 	</code>
 </code-tab>
 
-<br/>
-
 <st>Examples</st>
-
 <ew/>
-
+<br/>
 <br/>
 
 Following section demonstrates determining whether the specified [Table] exists.
