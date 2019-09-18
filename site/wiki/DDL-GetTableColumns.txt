@@ -19,7 +19,7 @@
 <st>Return</st>
 <table>
 	<thead>
-		<th>COLUMN_INFO</th>
+		<th>SchemaTableColumnInfo</th>
 		<th>Description</th>
 	</thead>
 	<tr><td>Catalog			</td><td>Table qualifier</td></tr>
