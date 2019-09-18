@@ -1,62 +1,56 @@
 ﻿Obtains database [Table-Information] according to provider via [Database] currently connected.
 
-<br/>
+<st>Definition</st>
+<code-tab>
+	<code lang="c#">
+		namespace Connection {
+			public class DDL {
 
-**Definition**
-``````XXX
-```C#
-namespace Connection {
-    public class DDL {
+				public List<SchemaTableInfo> GetTables(string TableName = null){}
+	</code>
+	<code lang="vb">
+		NameSpace Connection
+			Public Class DDL
 
-        public List<SchemaTableInfo> GetTables(string TableName = null){}
-```
-```VB
-NameSpace Connection
-    Public Class DDL
+				Public Function GetTables(TableName As String = Nothing) As List(Of SchemaTableInfo)
+	</code>
+</code-tab>
 
-        Public Function GetTables(TableName As String = Nothing) As List(Of SchemaTableInfo)
-```
-``````
 
-<br/>
+<st>Returns</st>
+<table>
+	<thead>
+		<th>SchemaTableInfo</th>
+		<th>Description</th>
+	</thead>
+	<tr><td>Catalog</td><td>Database or Catalog name which has the table</td></tr>
+	<tr><td>Schema </td><td>Name of schema that contains the table.     </td></tr>
+	<tr><td>Table  </td><td>Table name.                                 </td></tr>
+</table>
 
-**Return**
-
-| SchemaTableInfo | Description                                                              |
-|-----------------|--------------------------------------------------------------------------|
-| Catalog         | Database or Catalog name which has the table.                            |
-| Schema          | Name of schema that contains the table.                                  |
-| Table           | Table name.                                                              |
-
-<br/>
-
-**Examples**
-
->Examples shown below needs the [Example Header](##OTH-Example-Header).
-
+<st>Examples</st>
+<ew/>
 <br/>
 
 Following section demonstrates retrieving the tables from database.
 
-``````XXX
-```C#
-var tables = cn.DDL.GetTables();
+<code-tab>
+	<code lang="c#">
+		var tables = cn.DDL.GetTables();
 
-var table_count = tables.Count;
+		var table_count = tables.Count;
 
-foreach (var table in tables) {
-    System.Diagnostics.Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}");
-}
-```
-```VB
-Dim tables = cn.DDL.GetTables()
+		foreach (var table in tables) {
+			System.Diagnostics.Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}");
+		}
+	</code>
+	<code lang="vb">
+		Dim tables = cn.DDL.GetTables()
 
-Dim table_count = tables.Count
+		Dim table_count = tables.Count
 
-For Each table In tables
-    System.Diagnostics.Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}")
-Next
-```
-``````
-
-<br/>
+		For Each table In tables
+			System.Diagnostics.Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}")
+		Next
+	</code>
+</code-tab>

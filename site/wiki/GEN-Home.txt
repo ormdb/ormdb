@@ -1,40 +1,41 @@
-﻿![](https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b)
-
+﻿<img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b)"/>
+<br/>
+<br/>
 Welcome to OrmDb documentation Wiki pages. Here you will find all information you need to know better OrmDb and how you can work.
 
-> This documentation is for latest version.
+<div class="bs-callout bs-callout-warning table-warning">
+    This documentation is for latest version.
+</div>
 
-<br/>
 
-## Download
+<st>Download</st>
+OrmDB has no dependencies. You can <a href="/">DOWNLOAD</a> from releases, into your Bin folder and add it as Reference.
 
-OrmDB has no dependencies. You can [**DOWNLOAD**](/) from releases, into your Bin folder and add it as Reference.
 
-<br/>
-
-## What is it?
+<st>What is it?</st>
 OrmDB is a simple, fast and lightweight embedded .NET ORM tool which was inspired by the equivalent other tools.
 OrmDB works across .NET ADO providers as shown below.
 
-|Type             | Driver                              |
-|-----------------|-------------------------------------|
-|Ms SQL           | System.Data.SqlClient               |
-|Postgre SQL      | Npgsql                              |
-|MySQL / MariaDB  | MySql.Data                          |
-|Oracle           | ODP.Net (Oracle ManagedDataAccess)  |
+<table>
+	<thead>
+		<th>Type</th>
+		<th>Driver</th>
+	</thead>
+	<tr><td>Ms SQL         </td><td>System.Data.SqlClient             </td></tr>
+	<tr><td>Postgre SQL    </td><td>Npgsql                            </td></tr>
+	<tr><td>MySQL / MariaDB</td><td>MySql.Data                        </td></tr>
+	<tr><td>Oracle         </td><td>ODP.Net (Oracle ManagedDataAccess)</td></tr>
+</table>
 
-<br/>
 
-## Where to use?
-* All desktop/web applications need to communicate with a database 
-* Multi database operation
-* Multi client application
-* .Net / Asp.Net / .Net Core / Asp.Net Core
+<st>Where to use?</st>
+<ul>
+	<li>All desktop/web applications need to communicate with a database</li>
+	<li>Multi database operation</li>
+	<li>Multi client application</li>
+	<li>.Net / Asp.Net / .Net Core / Asp.Net Core</li>
+</ul>
 
-<br/>
 
-## License
-
-[MIT](http://opensource.org/licenses/MIT)
-
-Copyright (c) 2017 - OrmDb
+<st>License</st>
+<a href="http://opensource.org/licenses/MIT" target="_blank">MIT</a>

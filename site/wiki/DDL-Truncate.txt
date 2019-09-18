@@ -1,85 +1,83 @@
-﻿**`TRUNCATE`** method is used to delete existing records in a table like **`DELETE`**. 
+﻿<k>TRUNCATE</k> method is used to delete existing records in a table like <k>DELETE</k>. 
 
-> **`TRUNCATE`** process also executes the **`UPDATE STATISTICS`** for tables, after "DELETE" operation.
-
-<br/>
-
-**Definition**
-``````XXX
-```C#
-namespace Connection {
-    public class DDL {
-
-        public List<string> Truncate(IEnumerable<Table.Base> Tables, 
-									 bool OnlyGenerateScript = false){}
-        public List<string> Truncate(IEnumerable<string> TableNames, 
-									 bool OnlyGenerateScript = false){}
-
-        public string Truncate(Table.Base Table, 
-							   bool OnlyGenerateScript = false){}
-        public string Truncate(string TableName, 
-							   bool OnlyGenerateScript = false){}
-```
-```VB
-NameSpace Connection
-    Public Class DDL
-
-        Public Function Truncate(Tables As IEnumerable(Of Table.Base), 
-								 OnlyGenerateScript As Boolean = False) As List(Of String)
-        Public Function Truncate(TableNames As IEnumerable(Of String), 
-								 OnlyGenerateScript As Boolean = False) As List(Of String)
-
-        Public Function Truncate(Table As Table.Base, 
-								 OnlyGenerateScript As Boolean = False) As String
-        Public Function Truncate(TableName As String, 
-								 OnlyGenerateScript As Boolean = False) As String
-```
-``````
+> <k>TRUNCATE</k> process also executes the <k>UPDATE STATISTICS</k> for tables, after "DELETE" operation.
 
 <br/>
 
-**Examples**
+<st>Definition</st>
+<code-tab>
+	<code lang="c#">
+		namespace Connection {
+			public class DDL {
 
->Examples shown below needs the [Example Header](##OTH-Example-Header).
+				public List<string> Truncate(IEnumerable<Table.Base> Tables, 
+											 bool OnlyGenerateScript = false){}
+				public List<string> Truncate(IEnumerable<string> TableNames, 
+											 bool OnlyGenerateScript = false){}
+
+				public string Truncate(Table.Base Table, 
+									   bool OnlyGenerateScript = false){}
+				public string Truncate(string TableName, 
+									   bool OnlyGenerateScript = false){}
+	</code>
+	<code lang="vb">
+		NameSpace Connection
+			Public Class DDL
+
+				Public Function Truncate(Tables As IEnumerable(Of Table.Base), 
+										 OnlyGenerateScript As Boolean = False) As List(Of String)
+				Public Function Truncate(TableNames As IEnumerable(Of String), 
+										 OnlyGenerateScript As Boolean = False) As List(Of String)
+
+				Public Function Truncate(Table As Table.Base, 
+										 OnlyGenerateScript As Boolean = False) As String
+				Public Function Truncate(TableName As String, 
+										 OnlyGenerateScript As Boolean = False) As String
+	</code>
+</code-tab>
+
+<br/>
+
+<st>Examples</st>
+
+<ew/>
 
 <br/>
 
-Following section demonstrates **`TRUNCATE`** the table(s).
+Following section demonstrates <k>TRUNCATE</k> the table(s).
 
-``````XXX
-```C#
-// single table by instance
-cn.DDL.Truncate(h);
+<code-tab>
+	<code lang="c#">
+		// single table by instance
+		cn.DDL.Truncate(h);
 
-// multi table by instance
-cn.DDL.Truncate({h, l});
+		// multi table by instance
+		cn.DDL.Truncate({h, l});
 
-// single table by name
-cn.DDL.Truncate("table1");
-```
-```VB
-' single table by instance
-cn.DDL.Truncate(h)
+		// single table by name
+		cn.DDL.Truncate("table1");
+	</code>
+	<code lang="vb">
+		' single table by instance
+		cn.DDL.Truncate(h)
 
-' multi table by instance
-cn.DDL.Truncate({h, l})
+		' multi table by instance
+		cn.DDL.Truncate({h, l})
 
-' single table by name
-cn.DDL.Truncate("table1")
-```
-``````
-
-<br/>
-
-Following section demonstrates how to generate **`TRUNCATE`** script.
-
-``````XXX
-```C#
-var script = cn.DDL.Truncate(h, true);
-```
-```VB
-Dim script = cn.DDL.Truncate(h, True)
-```
-``````
+		' single table by name
+		cn.DDL.Truncate("table1")
+	</code>
+</code-tab>
 
 <br/>
+
+Following section demonstrates how to generate <k>TRUNCATE</k> script.
+
+<code-tab>
+	<code lang="c#">
+		var script = cn.DDL.Truncate(h, true);
+	</code>
+	<code lang="vb">
+		Dim script = cn.DDL.Truncate(h, True)
+	</code>
+</code-tab>

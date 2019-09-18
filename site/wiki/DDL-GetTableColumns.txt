@@ -1,83 +1,77 @@
 ﻿Obtains [TableColumnSchema-Information] according to provider for specified [Table] via [Database] connected.
 
-<br/>
 
-**Definition**
-``````XXX
-```C#
-namespace Connection {
-    public class DDL {
+<st>Definition</st>
+<code-tab>
+	<code lang="c#">
+		namespace Connection {
+			public class DDL {
 
-        public List<SchemaTableColumnInfo> GetTableColumns(Table.Base Table){}
-        public List<SchemaTableColumnInfo> GetTableColumns(string TableName){}
-```
-```VB
-NameSpace Connection
-    Public Class DDL
+				public List<SchemaTableColumnInfo> GetTableColumns(Table.Base Table){}
+				public List<SchemaTableColumnInfo> GetTableColumns(string TableName){}
+	</code>
+	<code lang="vb">
+		NameSpace Connection
+			Public Class DDL
 	
-        public Function GetTableColumns(Table As Table.Base) As List(Of SchemaTableColumnInfo)
-        public Function GetTableColumns(TableName As String) As List(Of SchemaTableColumnInfo)
-```
-``````
+				public Function GetTableColumns(Table As Table.Base) As List(Of SchemaTableColumnInfo)
+				public Function GetTableColumns(TableName As String) As List(Of SchemaTableColumnInfo)
+	</code>
+</code-tab>
+
+
+<st>Return</st>
+<table>
+	<thead>
+		<th>COLUMN_INFO</th>
+		<th>Description</th>
+	</thead>
+	<tr><td>Catalog			</td><td>Table qualifier</td></tr>
+	<tr><td>Schema			</td><td>Name of schema that contains the table.</td></tr>
+	<tr><td>Table			</td><td>Table name.</td></tr>
+	<tr><td>Name			</td><td>Column name.</td></tr>
+	<tr><td>Ordinal			</td><td>Column identification number.</td></tr>
+	<tr><td>AllowDBNull     </td><td>Nullability of the column.</td></tr>
+	<tr><td>DefaultValue    </td><td>Default value of the column.</td></tr>
+	<tr><td>NumericPrecision</td><td>Precision of approximate numeric columns. This value describes the Maximum length, in characters, for binary data, character data, or text and image data.</td></tr>
+	<tr><td>NumericScale	</td><td>Scale of approximate numeric data.</td></tr>
+	<tr><td>IsKey			</td><td>Is Column in primary-key.</td></tr>
+	<tr><td>DataTypeName	</td><td>Database type name of the column.</td></tr>
+	<tr><td>DataType		</td><td>.Net system type of the column.</td></tr>
+	<tr><td>TableColumnType	</td><td>Table definition type of the column.</td></tr>
+</table>
+
+
+<st>Examples</st>
+<ew/>
+<br/>
+
+Following section demonstrates reading the columns of a table <b>by its instance</b>.
+<code-tab>
+	<code lang="c#">
+		foreach (var col in cn.DDL.GetTableColumns(h)) {
+			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
+		}
+	</code>
+	<code lang="vb">
+		For Each col In cn.DDL.GetTableColumns(h)
+			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
+		Next
+	</code>
+</code-tab>
 
 <br/>
 
-**Return**
-
-| COLUMN_INFO     | Description                                                              |
-|-----------------|--------------------------------------------------------------------------|
-|Catalog          | Table qualifier                                                          |
-|Schema           | Name of schema that contains the table.                                  |
-|Table            | Table name.                                                              |
-|Name             | Column name.                                                             |
-|Ordinal          | Column identification number.                                            |
-|AllowDBNull      | Nullability of the column.                                               |
-|DefaultValue     | Default value of the column.                                             |
-|NumericPrecision | Precision of approximate numeric columns. This value describes the Maximum length, in characters, for binary data, character data, or text and image data.                                         |
-|NumericScale     | Scale of approximate numeric data.                                       |
-|IsKey            | Is Column in primary-key.                                                |
-|DataTypeName     | Database type name of the column.                                        |
-|DataType         | .Net system type of the column.                                          |
-|TableColumnType   | Table definition type of the column.                                     |
-
-<br/>
-
-**Examples**
-
->Examples shown below needs the [Example Header](##OTH-Example-Header).
-
-<br/>
-
-Following section demonstrates reading the columns of a table **by its instance**.
-
-``````XXX
-```C#
-foreach (var col in cn.DDL.GetTableColumns(h)) {
-    Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
-}
-```
-```VB
-For Each col In cn.DDL.GetTableColumns(h)
-    Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
-Next
-```
-``````
-
-<br/>
-
-Following section demonstrates reading the columns a of table **by its name**.
-
-``````XXX
-```C#
-foreach (var col in cn.DDL.GetTableColumns("table_name")) {
-    Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
-}
-```
-```VB
-For Each col In cn.DDL.GetTableColumns("table_name")
-    Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
-Next
-```
-``````
-
-<br/>
+Following section demonstrates reading the columns a of table <b>by its name</b>.
+<code-tab>
+	<code lang="c#">
+		foreach (var col in cn.DDL.GetTableColumns("table_name")) {
+			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
+		}
+	</code>
+	<code lang="vb">
+		For Each col In cn.DDL.GetTableColumns("table_name")
+			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
+		Next
+	</code>
+</code-tab>

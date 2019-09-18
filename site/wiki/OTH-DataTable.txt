@@ -1,90 +1,85 @@
-﻿**`DataTable`** is similar to [DataReader](##OTH-DataReader). Main difference is **`DataTable`** retrieves 
-the all records from server to local memory. In this way you can operate the **CRUD** operations as offline and then modifications can be send to the server as bulk.
+﻿<k>DataTable</k> is similar to <a href="##OTH-DataReader">DataReader</a>. Main difference is <k>DataTable</k> retrieves 
+the all records from server to local memory. In this way you can operate the <b>CRUD</b> operations as offline and then modifications can be send to the server as bulk.
 
->Please read [DataReader](##OTH-DataReader) for the differences with **DataTable**.
+<co type="warning">
+	Please read <a href="##OTH-DataReader">DataReader</a> for the differences with <b>DataTable</b>.
+</co>
 
 
+<st>Examples</st>
+<ew/>
+<br/>
+<br/>
+Following section demonstrates <b>reading by DataTable</b>.
+<code-tab>
+	<code lang="c#">
+		var sql = SQL.X.Select(h.Note, h.DocDate).From(h);
+		var dt = sql.Execute(cn);
+
+			foreach (var row in dt) {
+				Console.WriteLine("Note={0}, Date={1}", 
+								   row(h.Note).ToString(), 
+								   row(h.DocDate).ToDateTime());
+			}
+			var record_count = dt.count();
+	</code>
+	<code lang="vb">
+		Dim sql = SQL.X.Select(h.Note, h.DocDate).From(h)
+		Dim dt = sql.Execute(cn)
+
+			For Each row In dt
+				Console.WriteLine("Note={0}, Date={1}", 
+								   row(h.Note).ToString(), 
+								   row(h.DocDate).ToDateTime())
+			Next
+			Dim record_count = dt.count()
+	</code>
+</code-tab>
 
 <br/>
 
-**Examples**
+Following section demonstrates <b>CRUD</b> operation using by <b>DataTable</b>.
+<code-tab>
+	<code lang="c#">
+		var sql = SQL.X.Select().From(h);
+		var dt = sql.Execute(cn, ForUpdate:true);
 
->Examples shown below needs the [Example Header](##OTH-Example-Header).
+		// deleting the row at position 1
+		dt.Delete(1);
 
-<br/>
+		// updating the row at position 5
+		dt(5, h.Note)="NEW VALUE";
 
-Following section demonstrates **reading by DataTable**.
-``````XXX
-```C#
-var sql = SQL.X.Select(h.Note, h.DocDate).From(h);
-var dt = sql.Execute(cn);
+		// appending new row.
+		var row = dt.AddRow();
+			row(h.Year) = 2017;
+			row(h.Id) = 1000;
+			row(h.Note) = "REC-01872-HF";
+			row(h.Date) = DateTime.Now();
+			row(h.IsActive) = false;
 
-    foreach (var row in dt) {
-        Console.WriteLine("Note={0}, Date={1}", 
-                           row(h.Note).ToString(), 
-                           row(h.DocDate).ToDateTime());
-    }
-    var record_count = dt.count();
-```
-```VB
-Dim sql = SQL.X.Select(h.Note, h.DocDate).From(h)
-Dim dt = sql.Execute(cn)
+		// datatable modification is being pushed to the server.
+		dt.Update();
+	</code>
+	<code lang="vb">
+		Dim sql = SQL.X.Select().From(h)
+		Dim dt = sql.Execute(cn, ForUpdate:=True)
 
-    For Each row In dt
-        Console.WriteLine("Note={0}, Date={1}", 
-                           row(h.Note).ToString(), 
-                           row(h.DocDate).ToDateTime())
-    Next
-    Dim record_count = dt.count()
-```
-``````
+		' deleting the row at position 1
+		dt.Delete(1)
 
-<br/>
+		' updating the row at position 5
+		dt(5, h.Note)="NEW VALUE"
 
-Following section demonstrates **CRUD** operation using by **DataTable**.
-``````XXX
-```C#
-var sql = SQL.X.Select().From(h);
-var dt = sql.Execute(cn, ForUpdate:true);
+		' appending new row.
+		var row = dt.AddRow()
+			row(h.Year) = 2017
+			row(h.Id) = 1000
+			row(h.Note) = "REC-01872-HF"
+			row(h.Date) = DateTime.Now()
+			row(h.IsActive) = False
 
-// deleting the row at position 1
-dt.Delete(1);
-
-// updating the row at position 5
-dt(5, h.Note)="NEW VALUE";
-
-// appending new row.
-var row = dt.AddRow();
-    row(h.Year) = 2017;
-    row(h.Id) = 1000;
-    row(h.Note) = "REC-01872-HF";
-    row(h.Date) = DateTime.Now();
-    row(h.IsActive) = false;
-
-// datatable modification is being pushed to the server.
-dt.Update();
-```
-```VB
-Dim sql = SQL.X.Select().From(h)
-Dim dt = sql.Execute(cn, ForUpdate:=True)
-
-' deleting the row at position 1
-dt.Delete(1)
-
-' updating the row at position 5
-dt(5, h.Note)="NEW VALUE"
-
-' appending new row.
-var row = dt.AddRow()
-    row(h.Year) = 2017
-    row(h.Id) = 1000
-    row(h.Note) = "REC-01872-HF"
-    row(h.Date) = DateTime.Now()
-    row(h.IsActive) = False
-
-' datatable modification is being pushed to the server.
-dt.Update()
-```
-``````
-
-<br/>
+		' datatable modification is being pushed to the server.
+		dt.Update()
+	</code>
+</code-tab>

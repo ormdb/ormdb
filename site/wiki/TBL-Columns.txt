@@ -1,145 +1,199 @@
-﻿You can use the column-types as shown below, in the table definitions by **OrmDB**.
-
+﻿You can use the column-types as shown below, in the table definitions by <b>OrmDB</b>.
 <br/>
-
-|																													| MsSql				| MySql			| PostgreSql	| Oracle						|
-|-------------------------------------------------------------------------------------------------------------------|-------------------|---------------|---------------|-------------------------------|
-|**ColumnString**  <br/><br/> `System.String`																		| varchar			| VARCHAR		| VARCHAR		| NVARCHAR2	/ CLOB				|
-|**ColumnNumeric**  <br/><br/> Any .NET numeric types such as `int[16/32/64]`, `sigle`, `double`, `decimal` etc.	| numeric			| DECIMAL		| NUMERIC		| NUMBER						|
-|**ColumnBoolean**  <br/><br/> `System.Boolean`																		| bit				| TINYINT(1)	| BOOLEAN		| NUMBER(1)						|
-|**ColumnBinary**  <br/><br/> Array of `System.Byte`																| image				| BLOB			| BYTEA			| BLOB							|
-|**ColumnTime**  <br/><br/> `System.TimeSpan`																		| time				| TIME			| TIME			| INTERVAL DAY(0) TO SECOND(0)	|
-|**ColumnDate**  <br/><br/> `System.DateTime`																		| date				| DATE			| DATE			| DATE							|
-|**ColumnDateTime**  <br/><br/> `System.DateTime` (with NO fractional_seconds)										| datetime2(0)		| DATETIME(0)	| TIMESTAMP(0)	| TIMESTAMP(0)					|
-|**ColumnRef**  <br/><br/> Reference column																			|					|				|				|								|
-
 <br/>
+<table>
+	<thead>
+		<tr>
+			<th></th>
+			<th>MsSql</th>
+			<th>MySql</th>
+			<th>PostgreSql</th>
+			<th>Oracle</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><b>ColumnString</b><br/><br/> <k>System.String</k></td>
+			<td>varchar</td>
+			<td>VARCHAR</td>
+			<td>VARCHAR</td>
+			<td>NVARCHAR2 / CLOB</td>
+		</tr>
+		<tr>
+			<td><b>ColumnNumeric</b><br/><br/> Any .NET numeric types such as <k>int[16/32/64]</k>, <k>sigle</k>, <k>double</k>, <k>decimal</k> etc.</td>
+			<td>numeric</td>
+			<td>DECIMAL</td>
+			<td>NUMERIC</td>
+			<td>NUMBER</td>
+		</tr>
+		<tr>
+			<td><b>ColumnBoolean</b><br/><br/> <k>System.Boolean</k></td>
+			<td>bit</td>
+			<td>TINYINT(1)</td>
+			<td>BOOLEAN</td>
+			<td>NUMBER(1)</td>
+		</tr>
+		<tr>
+			<td><b>ColumnBinary</b><br/><br/> Array of <k>System.Byte</k></td>
+			<td>image</td>
+			<td>BLOB</td>
+			<td>BYTEA</td>
+			<td>BLOB</td>
+		</tr>
+		<tr>
+			<td><b>ColumnTime</b><br/><br/> <k>System.TimeSpan</k></td>
+			<td>time</td>
+			<td>TIME</td>
+			<td>TIME</td>
+			<td>INTERVAL DAY(0) TO SECOND(0)</td>
+		</tr>
+		<tr>
+			<td><b>ColumnDate</b><br/><br/> <k>System.DateTime</k></td>
+			<td>date</td>
+			<td>DATE</td>
+			<td>DATE</td>
+			<td>DATE</td>
+		</tr>
+		<tr>
+			<td><b>ColumnDateTime</b><br/><br/> <k>System.DateTime</k> (with NO fractional_seconds)</td>
+			<td>datetime2(0)</td>
+			<td>DATETIME(0)</td>
+			<td>TIMESTAMP(0)</td>
+			<td>TIMESTAMP(0)</td>
+		</tr>
+		<tr>
+			<td><b>ColumnRef</b><br/><br/> Reference column</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
 
-
-Please refer to [Example Header](##OTH-Example-Header) for usage.
+<ew/>
 
 <br/>
 
 All column types has the properties as shown below.
 
-<br/>
+<table>
+	<thead>
+		<th>ColumnType</th>
+		<th>.NET type</th>
+	</thead>
+	<tr>
+		<td>Name</td>
+		<td>Optional. It is the name of the column.</td>
+	</tr>
+	<tr>
+		<td>Description</td>
+		<td>Optional. It is the description of the column.</td>
+	</tr>
+	<tr>
+		<td>Nullable</td>
+		<td>Optional. This constraint enforces a column to accept or NOT accept NULL values.</td>
+	</tr>
+</table>
 
-|ColumnType     |.NET type                                                                |
-|---------------|-------------------------------------------------------------------------|
-|Name			| is the name of the column.|
-|Description	| is the description of the column.|
-|Nullable		| This constraint enforces a column to accept or NOT accept NULL values. |
-
-<br/>
 
 
-### ColumnString (Length)
-is used for .NET **`System.String`** data type.
+<st>ColumnString (Length)</st>
+is used for .NET <k>System.String</k> data type.
 
-``````XXX
-```C#
-    [ColumnString(10)]public Column col_char;
-```
-```VB
-    <ColumnString(10)>Public col_char AS Column
-```
-``````
+<code-tab>
+	<code lang="c#">
+			[ColumnString(10)]public Column col_char;
+	</code>
+	<code lang="vb">
+			<ColumnString(10)>Public col_char AS Column
+	</code>
+</code-tab>
 
-<br/>
 
-### ColumnNumeric (Precision, Scale)
-is used for any .NET numeric types such as `int[16/32/64]`, `sigle`, `double`, `decimal` etc.
+<st>ColumnNumeric (Precision, Scale)</st>
+is used for any .NET numeric types such as <k>int[16/32/64]</k>, <k>sigle</k>, <k>double</k>, <k>decimal</k> etc.
 
-``````XXX
-```C#
-    [ColumnNumeric(15, 2)]public Column col_num;
-```
-```VB
-    <ColumnNumeric(15, 2)>Public col_num AS Column
-```
-``````
+<code-tab>
+	<code lang="c#">
+			[ColumnNumeric(15, 2)]public Column col_num;
+	</code>
+	<code lang="vb">
+			<ColumnNumeric(15, 2)>Public col_num AS Column
+	</code>
+</code-tab>
 
-### ColumnBoolean
-is used for .NET **`System.Boolean`** data type.
+<st>ColumnBoolean</st>
+is used for .NET <k>System.Boolean</k> data type.
 
-``````XXX
-```C#
-    [ColumnBoolean()]public Column col_bool;
-```
-```VB
-    <ColumnBoolean()>Public col_bool AS Column
-```
-``````
+<code-tab>
+	<code lang="c#">
+			[ColumnBoolean()]public Column col_bool;
+	</code>
+	<code lang="vb">
+			<ColumnBoolean()>Public col_bool AS Column
+	</code>
+</code-tab>
 
-<br/>
 
-### ColumnBinary
-is used for .NET **`System.Byte[]`** data type. 
+<st>ColumnBinary</st>
+is used for .NET <k>System.Byte[]</k> data type. 
 
-``````XXX
-```C#
-    [ColumnBinary()]public Column col_bin;
-```
-```VB
-    <ColumnBinary()>Public col_bin AS Column
-```
-``````
+<code-tab>
+	<code lang="c#">
+			[ColumnBinary()]public Column col_bin;
+	</code>
+	<code lang="vb">
+			<ColumnBinary()>Public col_bin AS Column
+	</code>
+</code-tab>
 
-<br/>
+<st>ColumnTime</st>
+is used for .NET <k>System.TimeSpan</k> data type. This type of column stores only <b>TIME</b> value of <k>System.TimeSpan</k> as "24hh:mm:dd".
 
-### ColumnTime
-is used for .NET **`System.TimeSpan`** data type. This type of column stores only **TIME** value of **`System.TimeSpan`** as "24hh:mm:dd".
+<code-tab>
+	<code lang="c#">
+			[ColumnTime()]public Column col_tim;
+	</code>
+	<code lang="vb">
+			<ColumnTime()>Public col_tim AS Column
+	</code>
+</code-tab>
 
-``````XXX
-```C#
-    [ColumnTime()]public Column col_tim;
-```
-```VB
-    <ColumnTime()>Public col_tim AS Column
-```
-``````
 
-<br/>
+<st>ColumnDate</st>
+is used for .NET <k>System.Date</k> data type. This type of column stores only <b>DATE</b> value of <k>System.Date</k> as "yyyy-MM-dd".
 
-### ColumnDate
-is used for .NET **`System.Date`** data type. This type of column stores only **DATE** value of **`System.Date`** as "yyyy-MM-dd".
+<code-tab>
+	<code lang="c#">
+			[ColumnDate()]public Column col_dat;
+	</code>
+	<code lang="vb">
+			<ColumnDate()>Public col_dat AS Column
+	</code>
+</code-tab>
 
-``````XXX
-```C#
-    [ColumnDate()]public Column col_dat;
-```
-```VB
-    <ColumnDate()>Public col_dat AS Column
-```
-``````
 
-<br/>
+<st>ColumnDateTime</st>
+is used for .NET <k>System.Date</k> data type. This type of column stores <b>DATE</b> and <b>TIME</b> value of <k>System.Date</k> as "yyyy-MM-dd 24hh-mm-ss".
 
-### ColumnDateTime
-is used for .NET **`System.Date`** data type. This type of column stores **DATE** and **TIME** value of **`System.Date`** as "yyyy-MM-dd 24hh-mm-ss".
+<code-tab>
+	<code lang="c#">
+			[ColumnDateTime()]public Column col_dattim;
+	</code>
+	<code lang="vb">
+			<ColumnDateTime()>Public col_dattim AS Column
+	</code>
+</code-tab>
 
-``````XXX
-```C#
-    [ColumnDateTime()]public Column col_dattim;
-```
-```VB
-    <ColumnDateTime()>Public col_dattim AS Column
-```
-``````
 
-<br/>
-
-### ColumnRef
-
-is used for columns used repeatedly. **Name**, **Description** and **Nullable** properties can be redefiend.
-
-``````XXX
-```C#
-    [ColumnRef( reference )]public Column col_ref;
-```
-```VB
-    <ColumnRef( reference )>Public col_ref AS Column
-```
-``````
-
-<br/>
+<st>ColumnRef</st>
+is used for columns used repeatedly. <b>Name</b>, <b>Description</b> and <b>Nullable</b> properties can be redefiend.
+<code-tab>
+	<code lang="c#">
+			[ColumnRef( reference )]public Column col_ref;
+	</code>
+	<code lang="vb">
+			<ColumnRef( reference )>Public col_ref AS Column
+	</code>
+</code-tab>

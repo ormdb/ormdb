@@ -15,21 +15,23 @@
         /* code output/result */
         O {
             display: block;
-            margin-top:5px;
+            margin-top: 5px;
             padding: 5px;
-
             font-size: 10pt;
             font-family: consolas;
-
             background-color: #f8f9fa !important;
             color: rgba(0,0,0,.4) !important;
-            
             border: 1px solid #eee;
             border-left-width: 5px;
             border-radius: 3px;
             border-left-color: #5cb85c;
         }
-        X {
+        /* keyword */
+        k {
+            color: red;
+        }
+        /* high-light the code */
+        hl {
             background-color: #ffefa3 !important;
             border-radius: 3px;
             padding: 2px;
@@ -82,165 +84,69 @@
         }
 
         #wiki > #wiki-body {
-            padding: 25px 15px 0 25px !important;
-        }
-        /*-----------------------------------------*/
-        /*-- MARK-DOWN --*/
-        /*-----------------------------------------*/
-        .markdown-body {
+            padding: 25px 15px 50px 25px !important;
             font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
             font-size: 16px;
             line-height: 1.5;
             word-wrap: break-word;
         }
 
-            .markdown-body blockquote, .markdown-body details, .markdown-body dl, .markdown-body ol, .markdown-body p, .markdown-body pre, .markdown-body table, .markdown-body ul {
-                margin-bottom: 16px;
-                margin-top: 0;
+        /*-----------------------------------------*/
+        /* -code-tab- */
+        /*-----------------------------------------*/
+        .code-tab {
+            margin: 0 !important;
+            padding: 0 !important;
+            white-space: nowrap !important;
+            font-size: 1em !important;
+            overflow: hidden !important;
+            background-color: #f8f9fa;
+        }
+
+            .code-tab > ul {
+                display: flex;
+                list-style: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                border-bottom: 1px solid rgba(0,0,0,.2) !important;
+                font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol !important;
             }
 
-            .markdown-body blockquote {
-                border-left: .25em solid #dfe2e5;
-                color: #6a737d;
-                padding: 0 1em;
-            }
-
-            .markdown-body table {
-                display: block;
-                overflow: auto;
-                width: 100%;
-            }
-
-                .markdown-body table > thead {
-                    display: table-header-group;
-                    vertical-align: middle;
-                    border-color: inherit;
+                .code-tab > ul > li.btn {
+                    cursor: pointer;
+                    padding: 5px 15px;
                 }
 
-                .markdown-body table > tbody {
-                    display: table-row-group;
-                    vertical-align: middle;
-                    border-color: inherit;
-                }
-
-                .markdown-body table tr {
-                    background-color: #fff;
-                    border-top: 1px solid #c6cbd1;
-                }
-
-                    .markdown-body table tr:nth-child(2n) {
-                        background-color: #f6f8fa;
+                    .code-tab > ul > li.btn.copy {
+                        background-color: transparent;
+                        border-left-width: 1px;
+                        cursor: pointer;
+                        align-items: center;
+                        border-left: 1px solid rgba(0,0,0,.2) !important;
                     }
 
-                .markdown-body table td, .markdown-body table th {
-                    border: 1px solid #dfe2e5;
-                    padding: 6px 13px;
-                }
-
-                .markdown-body table th {
-                    font-weight: 600;
-                }
-
-            .markdown-body h1, .markdown-body h2 {
-                border-bottom: 1px solid #eaecef;
-                padding-bottom: .3em;
-            }
-
-
-            .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 {
-                font-weight: 600;
-                line-height: 1.25;
-                margin-bottom: 16px;
-                margin-top: 24px;
-            }
-
-            .markdown-body h1 {
-                font-size: 2em;
-            }
-
-            .markdown-body h2 {
-                font-size: 1.5em;
-            }
-
-            .markdown-body h3 {
-                font-size: 1.25em;
-            }
-
-            .markdown-body h4 {
-                font-size: 1em;
-            }
-
-            .markdown-body h5 {
-                font-size: .875em;
-            }
-
-            .markdown-body h6 {
-                color: #6a737d;
-                font-size: .85em;
-            }
-
-            .markdown-body h1, .markdown-body h2 {
-                border-bottom: 1px solid #eaecef;
-                padding-bottom: .3em;
-            }
-            /*-----------------------------------------*/
-            /*-- CODE --*/
-            /*-----------------------------------------*/
-            .markdown-body pre {
-                word-wrap: normal;
-            }
-
-            .markdown-body .highlight pre {
-                margin-bottom: 0;
-                word-break: normal;
-            }
-
-            .markdown-body .highlight pre, .markdown-body pre {
-                background-color: #f8f9fa;
-                border-radius: 3px;
-                font-size: 85%;
-                line-height: 1.45;
-                overflow: auto;
-                padding: 16px;
+            .code-tab pre {
+                margin: 0 !important;
             }
         /*-----------------------------------------*/
-        /*-- SCROLL-BAR --*/
-        /*-----------------------------------------*/
-        ::-webkit-scrollbar-button {
-            display: none;
-            height: 13px;
-            border-radius: 0px;
-            background-color: #808080;
+        .copyright {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            padding: 5px;
+            opacity: .2;
+            background-color: transparent;
+            border: none;
         }
 
-            ::-webkit-scrollbar-button:hover {
-                background-color: #808080;
+            .copyright:hover {
+                opacity: 1;
+                color: gray;
+                background-color: white;
+                border: 1px solid rgba(0,0,0,.3);
             }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: #808080;
-            border-radius: 5px;
-        }
-
-            ::-webkit-scrollbar-thumb:hover {
-                background-color: #808080;
-                border-radius: 5px;
-            }
-
-        ::-webkit-scrollbar-track {
-            background-color: #efefef;
-            border-radius: 10px;
-        }
-
-            ::-webkit-scrollbar-track:hover {
-                background-color: #efefef;
-                border-radius: 10px;
-            }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
     </style>
 </head>
 <body>
@@ -269,22 +175,19 @@
 
         <div id="wiki" class="flex-grow-1 d-flex overflow-hidden">
             <div id="wiki-menu" class="p-3 wiki-menu-visible"></div>
-            <div id="wiki-body" class="p-3 flex-grow-1 overflow-auto markdown-body"></div>
+            <div id="wiki-body" class="p-3 flex-grow-1 overflow-auto"></div>
         </div>
         <div id="is_small" class="d-none d-md-block"></div>
-
-        <!--<nav class="navbar navbar-dark bg-dark d-none d-md-block">
-            <span class="navbar-text">
-                OrmDB - MIT License
-            </span>
-        </nav>-->
     </div>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="site/js/prism.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/9.0.1/markdown-it.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-linkify/2.1.8/linkify.min.js"></script>
     <script>
+        String.prototype.replaceAll = function (search, replacement) {
+            var target = this;
+            return target.replace(new RegExp(search, 'g'), replacement);
+        };
+
         //-- location is being determining...
         var location_path = location.href.split("/");
         location_path.pop();
@@ -294,7 +197,7 @@
 
         var _wiki_menu = $("#wiki-menu");
         var _wiki_body = $("#wiki-body");
-        //----------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         //-- SIDE-NAV
         function openNav() {
             _wiki_menu.removeClass("wiki-menu-hidden")
@@ -309,7 +212,7 @@
                 closeNav();
             }
         }
-        //----------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         //-- MENU
         var _menu_groups = {
             "GEN": {
@@ -391,101 +294,7 @@
         function menu_click(obj) {
             window.location.hash = '##' + $(obj).data()["hash"];
         }
-        //----------------------------------------------------------------
-
-        // full options list (defaults)
-        var md = markdownit({
-            html: true,             // Enable HTML tags in source
-            xhtmlOut: true,         // Use '/' to close single tags (<br />).
-            // This is only for full CommonMark compatibility.
-            breaks: false,              // Convert '\n' in paragraphs into <br>
-            langPrefix: 'language-',    // CSS language prefix for fenced blocks.
-            // Can be useful for external highlighters.
-            linkify: false,              // Autoconvert URL-like text to links
-
-            // Enable some language-neutral replacement + quotes beautification
-            typographer: false,
-
-            // Double + single quotes replacement pairs, when typographer enabled,
-            // and smartquotes on. Could be either a String or an Array.
-            //
-            // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
-            // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
-            quotes: '“”‘’',
-
-            // Highlighter function. Should return escaped HTML,
-            // or '' if the source string is not changed and should be escaped externally.
-            // If result starts with <pre... internal wrapper is skipped.
-            highlight: function (str, lang) {
-                var _lang_obj = null;
-                var _lang_nam = null;
-                switch (lang.toLowerCase()) {
-                    case "c#":
-                    case "csharp":
-                        _lang_obj = Prism.languages.cs;
-                        _lang_nam = "csharp";
-                        break
-                    case "vb":
-                    case "visualbasic":
-                    case "visual-basic":
-                        _lang_obj = Prism.languages.vb;
-                        _lang_nam = "vb";
-                        break
-
-                    case "xxx":
-                        return _code_init(md.parse(str));
-
-                    default:
-                        return str;
-                }
-                return '<pre class="language-"><code>' + Prism.highlight(str, _lang_obj, _lang_nam) + '</code></pre>';
-            }
-        });
-
-        var _codes = [];
-        var _codes_length = 0;
-        function _code_init(items) {
-
-            var _grp = [];
-            var _tbar = '';
-            items.forEach(function (item, index) {
-                var _lng = item.info;
-                _grp[index] = md.render("```" + _lng + "\n" + item.content + "\n```");
-                _tbar += '<li class="btn ' + (index === 0 ? 'active' : '') + '" data-lng="' + index + '" onclick="_code_show(this);">' + _lng + '</li>'
-            });
-
-            _codes_length += 1;
-            var _grp_id = 'C_' + _codes_length;
-            _codes[_grp_id] = _grp;
-
-            return '' +
-                '<pre id="' + _grp_id + '" class="border tab_strip">' +
-                '   <ul>' +
-                _tbar +
-                '   <li style="flex-grow: 1;"></li>' +
-                '   <li class="btn copy" onclick="_code_copy(\'' + _grp_id + '\');"><i class="fa fa-copy"></i>&nbsp;Copy</li>' +
-                '   </ul>' +
-                '   <div class="flex-grow-1 p-0 m-0">' + _grp[0] + '</div>' +
-                '</pre>';
-        }
-        function _code_show(e) {
-            var _lng = $(e).data("lng");
-            $('.tab_strip>ul>li').removeClass("active");
-            $('.tab_strip>ul>li[data-lng="' + _lng + '"]').addClass("active");
-            for (var key in _codes) {
-                $("#" + key + ">div").html(_codes[key][_lng]);
-            }
-        }
-        function _code_copy(grp_id) {
-            debugger;
-            var $temp = $("<textarea>");
-            var brRegex = /<br\s*[\/]?>/gi;
-            $("body").append($temp);
-            $temp.val($("#" + grp_id + ">div").text().replace(brRegex, "\r\n")).select();
-            document.execCommand("copy");
-            $temp.remove();
-        }
-
+        //-------------------------------------------------------------------------------------
         $(window).on('popstate', function (e) {
             load_page();
         });
@@ -514,15 +323,186 @@
             }
 
             //-- content
+
+            var _copyright = '<small class="copyright">Copyright(c) ' + (new Date()).getFullYear() + ' - OrmDb</small>';
+            var _not_found = '<div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div>';
+
+            var _regex_cod = /<\s*code(?:\s[^>]*|)>(.*?)<\s*\/\s*code>/gmis
+            var _regex_cod_bgn = /<\s*code(?:\s[^>]*|)>/gmis
+            var _regex_cod_end = /<\s*\/\s*code>/gmis
+
             _wiki_body.scrollTop(0);
             if (is_small()) closeNav();
             $.get(wiki_path + _file + ".txt", function (data) {
-                _wiki_body.html(_title + md.render(data));
+
+                //-- The CODE block(s), are determined with its attributes.
+                var _code_blocks = data.match(_regex_cod_bgn);
+                var _code_block_inx = -1;
+                var _blocks = data.split(_regex_cod);
+                data = "";
+                _blocks.forEach(function (block, index) {
+                    if ((index % 2) == 0) {
+                        data += block;
+                    } else {
+                        //-- The CODE block, is taken with its attributes such as  (lang="", data-xyz="" etc.)
+                        _code_block_inx += 1;
+                        data += _code_blocks[_code_block_inx] + block.replace(_regex_cod_bgn, "").replace(_regex_cod_end, "").replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "</code>"
+                    }
+                });
+
+                _wiki_body.html(_title + data + _copyright);
+                load_page_render();
             }).fail(function () {
-                _wiki_body.html(_title + '<div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div>');
+                _wiki_body.html(_title + _not_found + _copyright);
+            });
+
+        }
+        //-- Rendering
+        function load_page_render() {
+            $("table").addClass("table table-striped table-bordered");
+            $("table>thead").addClass("thead-dark");
+            $("table th").addClass("thead-dark");
+
+            load_page_code_render();
+            load_page_code_render_tab();
+            load_page_render_EW();
+            load_page_render_ST();
+            load_page_render_CO();
+
+            //-- to remove left white-spaces from code block
+            $("pre code").each(function () {
+                var html = $(this).html();
+                var pattern = html.match(/\s*\n[\t\s]*/);
+                $(this).html(html.replace(new RegExp(pattern, "g"), '\n').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'));
             });
         }
+        //-------------------------------------------------------------------------------------
+        //-- Code Tab
+        var _sel_lang_inx = 0;
+        function load_page_code_render_tab() {
+            var _tabs = $("#wiki-body code-tab");
+            for (n = 0; n < _tabs.length; n++) {
+                var _codes = '';
+                var _retval = '<div class="code-tab border rounded"><ul class="bg-dark">';
+                var _tab = $(_tabs[n]);
+                var _tab_codes = _tab.children();
 
+                for (m = 0; m < _tab_codes.length; m++) {
+                    var _tab_code = _tab_codes[m];
+                    //var _title = (_tab_code.attributes.title.value || "").toLowerCase();
+                    var _title = (_tab_code.attributes.lang.value || "").toLowerCase();
+                    _retval += '<li class="text-white btn ' + (m === 0 ? 'bg-secondary' : '') + '" onclick="load_page_code_tab_select(' + m + ');">' + _title + '</li>';
+                    _codes += _tab_code.outerHTML;
+                }
+                _retval += '<li style="flex-grow: 1;"></li><li class="text-white btn copy" onclick="load_page_code_copy(' + n + ');"><i class="fa fa-copy"></i>&nbsp;Copy</li>';
+                _retval += '</ul>' + _codes + '</div>';
+
+                _tab.replaceWith(_retval);
+            }
+            load_page_code_tab_select(0);
+        }
+        function load_page_code_tab_select(inx) {
+            $('#wiki-body .code-tab>ul>li').removeClass("bg-secondary");
+            $('#wiki-body .code-tab>ul>li:nth-child(' + (inx + 1) + ')').addClass("bg-secondary");
+
+            //
+            $("#wiki-body .code-tab pre").hide();
+            $('#wiki-body .code-tab').each(function (index) {
+                $(this).find('pre:eq(' + inx + ')').show();
+            });
+            //
+            _sel_lang_inx = inx;
+        }
+        function load_page_code_copy(grp) {
+            var _grp = $("#wiki-body .code-tab")[grp]
+            var _itm = $(_grp).children("pre")[_sel_lang_inx];
+            var _txt = (_itm ? _itm.textContent : "").replace(brRegex, "\r\n")
+
+            var $temp = $("<textarea>");
+            var brRegex = /<br\s*[\/]?>/gi;
+            $("body").append($temp);
+            $temp.val(_txt.replace(brRegex, "\r\n")).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+        function load_page_code_render() {
+            var _items = $("#wiki-body code");
+            if (_items.length == 0) return;
+
+            for (n = 0; n < _items.length; n++) {
+                var _item = $(_items[n]);
+                var _lang = (_item.attr("lang") || "").toLowerCase();
+                var _lang_obj = null;
+                var _lang_nam = null;
+                switch (_lang) {
+                    case "c#":
+                    case "csharp":
+                        _lang_obj = Prism.languages.cs;
+                        _lang_nam = "csharp";
+                        break
+                    case "vb":
+                    case "visualbasic":
+                    case "visual-basic":
+                        _lang_obj = Prism.languages.vb;
+                        _lang_nam = "vb";
+                        break
+                    default:
+                        _lang_obj = Prism.languages.vb;
+                        _lang_nam = "vb";
+                        break
+                }
+                var _attrbs = _items[n].attributes;
+                var _atrb_val = '';
+                for (m = 0; m < _attrbs.length; m++) {
+                    _atrb_val += ' ' + _attrbs[m].name + '="' + _attrbs[m].value + '"';
+                }
+                //console.log(_item.html());
+                _item.replaceWith('<pre ' + _atrb_val + '><code>' + Prism.highlight(_item.text(), _lang_obj, _lang_nam) + '</code></pre>');
+            }
+        }
+        //-------------------------------------------------------------------------------------
+        //-- Example-Warning
+        function load_page_render_EW() {
+            while (true) {
+                var _items = $("#wiki-body ew");
+                if (_items.length == 0) return;
+
+                var _item = $(_items[0]);
+
+                _item.replaceWith('<div class="bs-callout bs-callout-warning table-warning">All Examples needs the <a href="##OTH-Example-Header">Example Header</a>. Please refer to <a href="##OTH-Example-Header">Example Header</a> for further information.</div>');
+            }
+        }
+        //-------------------------------------------------------------------------------------
+        //-- SubTitle
+        function load_page_render_ST() {
+            while (true) {
+                var _items = $("#wiki-body st");
+                if (_items.length == 0) return;
+
+                var _item = $(_items[0]);
+
+                _item.replaceWith('<h5 class="mt-5 mb-4">' + _item.html() + '</h5>');
+            }
+        }
+        //-------------------------------------------------------------------------------------
+        //-- Callout
+        function load_page_render_CO() {
+            while (true) {
+                var _items = $("#wiki-body co");
+                if (_items.length == 0) return;
+
+                var _item = $(_items[0]);
+                var _type = _item.attr("type");
+                var _text = "";
+                switch (_type) {
+                    case "light":
+                        _text = "text-muted"
+                }
+
+                _item.replaceWith('<div class="bs-callout bs-callout-' + _type + ' table-' + _type + ' ' + _text + '">' + _item.html() + '</div>');
+            }
+        }
+        //-------------------------------------------------------------------------------------
         $(function () {
             load_page();
             if (is_small()) closeNav();

@@ -1,114 +1,111 @@
-﻿``````XXX
-```C#
-using Odb; /* for extensions */
-using Odb.Table;
-using Odb.Connection;
+﻿<code-tab>
+	<code lang="c#">
+		using Odb; /* for extensions */
+		using Odb.Table;
+		using Odb.Connection;
 
-public enum MyColumns
-{
-	[ColumnNumeric(4, 0, Description = "Year", MinValue = 1900, MaxValue = 2100)] year,
-	[ColumnNumeric(4, 0)] id
-}
+		public enum MyColumns
+		{
+			[ColumnNumeric(4, 0, Description = "Year", MinValue = 1900, MaxValue = 2100)] year,
+			[ColumnNumeric(4, 0)] id
+		}
 
-// Definition of the header-table
-public class TableHeader : Base
-{
-    [ColumnRef(MyColumns.year)]  public Column Year;
-    [ColumnRef(MyColumns.id)]    public Column Id;
-    [ColumnString(100)]          public Column Note;
-    [ColumnDate()]		    	 public Column DocDate;
-    [ColumnBoolean()]			 public Column IsActive;
+		// Definition of the header-table
+		public class TableHeader : Base
+		{
+			[ColumnRef(MyColumns.year)] public Column Year;
+			[ColumnRef(MyColumns.id)]   public Column Id;
+			[ColumnString(100)]         public Column Note;
+			[ColumnDate()]              public Column DocDate;
+			[ColumnBoolean()]           public Column IsActive;
 
-    protected override void InitKeyInfo() {
-		// keys of the table are being defined.
-        base.PrimaryKey(new[] {Year, Id});
-    }
-}
+			protected override void InitKeyInfo() {
+				// keys of the table are being defined.
+				base.PrimaryKey(new[] {Year, Id});
+			}
+		}
 
 
-// Definition of the lines-table:
-public class TableLines : Base
-{
-    [ColumnRef(MyColumns.year)]  public Column Year;
-    [ColumnRef(MyColumns.id)]    public Column Id;
-    [ColumnNumeric(2, 0)]		 public Column LineId;
-    [ColumnString(100)]          public Column Note;
+		// Definition of the lines-table:
+		public class TableLines : Base
+		{
+			[ColumnRef(MyColumns.year)] public Column Year;
+			[ColumnRef(MyColumns.id)]   public Column Id;
+			[ColumnNumeric(2, 0)]       public Column LineId;
+			[ColumnString(100)]         public Column Note;
 
-    protected override void InitKeyInfo() {
-		// keys of the table are being defined.
-        base.AddPrimaryKey(new[] {Year, Id, LineId});
-    }
-}
+			protected override void InitKeyInfo() {
+				// keys of the table are being defined.
+				base.AddPrimaryKey(new[] {Year, Id, LineId});
+			}
+		}
 
-//--------------------------------------------------------------------
-// MAIN
-public void main()
-{
-    TableHeader h = new TableHeader();
-    TableHeader l = new TableLines();
+		//--------------------------------------------------------------------
+		// MAIN
+		public void main()
+		{
+			TableHeader h = new TableHeader();
+			TableHeader l = new TableLines();
 
-    // provider is being defined...
-	var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name");
+			// provider is being defined...
+			var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name");
 
-    // connection is being initialized...
-    var cn = ms_db.Create();
-}
-```
-```VB
-Imports Odb ' for extensions
-Imports Odb.Table
-Imports Odb.Connection
+			// connection is being initialized...
+			var cn = ms_db.Create();
+		}
+	</code>
+	<code lang="vb">
+		Imports Odb ' for extensions
+		Imports Odb.Table
+		Imports Odb.Connection
 
-Public Enum MyColumns
-    <ColumnNumeric(4, 0, Description:="Year", MinValue:= 1900, MaxValue:= 2100)> year
-    <ColumnNumeric(4, 0)> id
-End Enum
+		Public Enum MyColumns
+			<ColumnNumeric(4, 0, Description:="Year", MinValue:= 1900, MaxValue:= 2100)> year
+			<ColumnNumeric(4, 0)> id
+		End Enum
 
-' Definition of the header-table
-Public Class TableHeader
-    Inherits Base
+		' Definition of the header-table
+		Public Class TableHeader
+			Inherits Base
 
-    <ColumnRef(MyColumns.year)>  Public Year	 As Column
-    <ColumnRef(MyColumns.id)>    Public Id		 As Column
-    <ColumnString(100)>		     Public Note	 As Column
-    <ColumnDate()>				 Public DocDate  As Column
-    <ColumnBoolean()>            Public IsActive As Column
+			<ColumnRef(MyColumns.year)> Public Year     As Column
+			<ColumnRef(MyColumns.id)>   Public Id       As Column
+			<ColumnString(100)>         Public Note     As Column
+			<ColumnDate()>              Public DocDate  As Column
+			<ColumnBoolean()>           Public IsActive As Column
 
-    Protected Overrides Sub InitKeyInfo()
-		' keys of the table are being defined.
-        MyBase.PrimaryKey({Year, Id})
-    End Sub
-End Class
+			Protected Overrides Sub InitKeyInfo()
+				' keys of the table are being defined.
+				MyBase.PrimaryKey({Year, Id})
+			End Sub
+		End Class
 
-' Definition of the lines-table:
-Public Class TableLines
-    Inherits Base
+		' Definition of the lines-table:
+		Public Class TableLines
+			Inherits Base
 
-    <ColumnRef(MyColumns.year)>  Public Year	 As Column
-    <ColumnRef(MyColumns.id)>    Public Id		 As Column
-    <ColumnNumeric(2, 0)>        Public LineId	 As Column
-    <ColumnString(100)>		     Public Note	 As Column
+			<ColumnRef(MyColumns.year)> Public Year    As Column
+			<ColumnRef(MyColumns.id)>   Public Id      As Column
+			<ColumnNumeric(2, 0)>       Public LineId  As Column
+			<ColumnString(100)>         Public Note    As Column
 
-    Protected Overrides Sub InitKeyInfo()
-		' keys of the table are being defined.
-        MyBase.AddPrimaryKey({Year, Id, LineId})
-    End Sub
-End Class
+			Protected Overrides Sub InitKeyInfo()
+				' keys of the table are being defined.
+				MyBase.AddPrimaryKey({Year, Id, LineId})
+			End Sub
+		End Class
 
-'--------------------------------------------------------------------
-' MAIN
-Public Sub main()
-    Dim h As TableHeader = New TableHeader()
-    Dim l As TableHeader = New TableLines()
+		'--------------------------------------------------------------------
+		' MAIN
+		Public Sub main()
+			Dim h As TableHeader = New TableHeader()
+			Dim l As TableHeader = New TableLines()
 
-    ' provider is being defined...
-	var ms_db = New Odb.Connection.Provider.MsSql("host", "database-name")
+			' provider is being defined...
+			var ms_db = New Odb.Connection.Provider.MsSql("host", "database-name")
 
-    ' connection is being initialized...
-    var cn = ms_db.Create()
-End Sub
-
-```
-``````
-
-<br/>
+			' connection is being initialized...
+			var cn = ms_db.Create()
+		End Sub
+	</code>
+</code-tab>

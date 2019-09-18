@@ -1,81 +1,73 @@
 ﻿Import data is used for transferring records from one connection to another.
 
-There are several ways to import data to database. Some methods let you import data in a single step directly from **`Source Connection`**; other methods require you to read your data as **`Query`** before you can import it. 
+There are several ways to import data to database. Some methods let you import data in a single step directly from <k>Source Connection</k>; other methods require you to read your data as <k>Query</k> before you can import it. 
 
-<br/>
+<st>Definition</st>
+<code-tab>
+	<code lang="c#">
+		namespace Connection {
+			public class Connection {
 
-**Definition**
-``````XXX
-```C#
-namespace Connection {
-    public class Connection {
+				public void ImportData(string TableName,
+									   Connection SourceConnection,
+									   ImportDataCalback CallBack = null,
+									   int BatchSize = 1000,
+									   bool TruncateBefore = true){}
 
-        public void ImportData(string TableName,
-                               Connection SourceConnection,
-                               ImportDataCalback CallBack = null,
-                               int BatchSize = 1000,
-                               bool TruncateBefore = true){}
+				public void ImportData(string TableName,
+									   DbDataReader Reader,
+									   ImportDataCalback CallBack = null,
+									   int BatchSize = 1000,
+									   bool TruncateBefore = true){}
+	</code>
+	<code lang="vb">
+		NameSpace Connection
+			Public Class Manager
 
-        public void ImportData(string TableName,
-                               DbDataReader Reader,
-                               ImportDataCalback CallBack = null,
-                               int BatchSize = 1000,
-                               bool TruncateBefore = true){}
-```
-```VB
-NameSpace Connection
-    Public Class Manager
+				Public Shared Sub ImportData(TableName As String,
+											 SourceConnection As Connection,
+											 CallBack As ImportDataCalback = Nothing,
+											 BatchSize As Integer= 1000,
+											 TruncateBefore As Boolean = True)
 
-        Public Shared Sub ImportData(TableName As String,
-									 SourceConnection As Connection,
-									 CallBack As ImportDataCalback = Nothing,
-									 BatchSize As Integer= 1000,
-									 TruncateBefore As Boolean = True)
+				Public Shared Sub ImportData(TableName As String,
+											 Reader As DbDataReader,
+											 CallBack As ImportDataCalback= Nothing,
+											 BatchSize As Integer= 1000,
+											 TruncateBefore As Boolean = True)
+	</code>
+</code-tab>
 
-        Public Shared Sub ImportData(TableName As String,
-									 Reader As DbDataReader,
-									 CallBack As ImportDataCalback= Nothing,
-									 BatchSize As Integer= 1000,
-									 TruncateBefore As Boolean = True)
-```
-``````
-
-<br/>
-
-**Examples**
-
->Examples shown below needs the [Example Header](##OTH-Example-Header).
-
+<st>Examples</st>
+<ew/>
 Following section demonstrates importing data in table(h) from one connection to another.
-``````XXX
-```C#
-// cn1 : Target connection.
-// cn2 : Source connection which has the data.
+<code-tab>
+	<code lang="c#">
+		// cn1 : Target connection.
+		// cn2 : Source connection which has the data.
 
-cn1.ImportData(TableName: h.Name, 
-               SourceConnection: cn2 , 
-               CallBack: (string TableName, string Message, long Count, long TotalCount) =>
-               {
-                   if (Count == (long)0)
-                       Debug.WriteLine($"{TableName} ==> {Message}");
-                   else
-                       Debug.WriteLine($"{Message} ==> Import={Count}, Total={TotalCount}");
-               });
-```
-```VB
-' cn1 : Target connection.
-' cn2 : Source connection which has the data.
+		cn1.ImportData(TableName: h.Name, 
+					   SourceConnection: cn2 , 
+					   CallBack: (string TableName, string Message, long Count, long TotalCount) =>
+					   {
+						   if (Count == (long)0)
+							   Debug.WriteLine($"{TableName} ==> {Message}");
+						   else
+							   Debug.WriteLine($"{Message} ==> Import={Count}, Total={TotalCount}");
+					   });
+	</code>
+	<code lang="vb">
+		' cn1 : Target connection.
+		' cn2 : Source connection which has the data.
 
-cn1.ImportData(TableName:= h.Name, 
-               SourceConnection:= cn2, 
-               CallBack:=Sub(TableName As String, Message As String, Count As Long, TotalCount As Long)
-                   If (Count = 0L) Then
-                       Debug.WriteLine($"{TableName} ==> {Message}")
-                   Else
-                       Debug.WriteLine($"{Message} ==> Import={Count}, Total={TotalCount}")
-					End If
-               End Sub)
-```
-``````
-
-<br/>
+		cn1.ImportData(TableName:= h.Name, 
+					   SourceConnection:= cn2, 
+					   CallBack:=Sub(TableName As String, Message As String, Count As Long, TotalCount As Long)
+						   If (Count = 0L) Then
+							   Debug.WriteLine($"{TableName} ==> {Message}")
+						   Else
+							   Debug.WriteLine($"{Message} ==> Import={Count}, Total={TotalCount}")
+							End If
+					   End Sub)
+	</code>
+</code-tab>

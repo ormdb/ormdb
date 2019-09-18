@@ -1,237 +1,228 @@
-﻿**`Select`** method is used to select data from a database. 
+﻿<k>Select</k> method is used to select data from a database. 
 
-You can access each column of the returned row by passing the name or ordinal number of the column to the [DataReader](##OTH-DataReader) or [DataTable](##OTH-DataTable). 
+You can access each column of the returned row by passing the name or ordinal number of the column to the 
+<a href="##OTH-DataReader">DataReader</a> or <a href="##OTH-DataTable">DataTable</a>. 
 
->Please read [DataReader](##OTH-DataReader) or [DataTable](##OTH-DataTable) for further information.
+<co type="warning">
+	Please read <a href="##OTH-DataReader">DataReader</a> or <a href="##OTH-DataTable">DataTable</a> for further information.
+</co>
 
+
+<st>Definition</st>
+<code-tab>
+	<code lang="c#">
+		namespace SQL
+			public class X
+
+				Select Select(params Table.Column[] items)
+	</code>
+	<code lang="vb">
+		NameSpace SQL
+			Public Class X
+
+				Select(ParamArray items() As Table.Column) As Select
+	</code>
+</code-tab>
+
+<st>Examples</st>
+<ew/>
+<br/>
 <br/>
 
-**Definition**
+Following section demonstrates <hl>Reqular Select</hl>.
+<code-tab>
+	<code lang="c#">
+		var sql = SQL.X.Select(h.Year, h.Id).From(h);
 
-``````XXX
-```C#
-namespace SQL {
-    public class X {
+		// ... Read by [DataReader] or [DataTable]
+	</code>
+	<code lang="vb">
+		Dim sql = SQL.X.Select(h.Year, h.Id).From(h)
 
-        public static Select Select(params Table.Column[] items){}
-```
-```VB
-NameSpace SQL
-    Public Class X
-
-        Public Shared Function Select(ParamArray items() As Table.Column) As Select
-```
-``````
-
+		' ... Read by [DataReader] or [DataTable]
+	</code>
+</code-tab>
 <br/>
 
-**Examples**
+Following section demonstrates using <hl>Conditional Where</hl> clause.
+<code-tab>
+	<code lang="c#">
+		var _where = (h.Year == 2017);
 
->Examples shown below needs the [Example Header](##OTH-Example-Header).
->All SQL statments uses [DataReader](##OTH-DataReader) or [DataTable](##OTH-DataTable).
+		var _condition = true;
+		if( _condition ){
+			_where = _where & (h.IsActive == true)
+		}
 
+		var sql = SQL.X.Select(h.Year, h.Id).From(h, _where);
+
+		// ... Read by [DataReader] or [DataTable]
+	</code>
+	<code lang="vb">
+		Dim _where = (h.Year = 2017)
+
+		Dim _condition = True
+		If _condition Then
+			_where = _where And (h.IsActive = True)
+		End If
+
+		Dim sql = SQL.X.Select(h.Year, h.Id).From(h, _where)
+
+		' ... Read by [DataReader] or [DataTable]
+	</code>
+</code-tab>
 <br/>
 
-Following section demonstrates **Reqular Select**.
+Following section demonstrates using <hl>COUNT</hl> clause.
+<code-tab>
+	<code lang="c#">
+		var sql = SQL.X.Select().From(h).Where( 
+								h.Year.In( new[] {2018, 2019} ) &
+								h.Id.IsNotNull()) ;
 
-``````XXX
-```C#
-var sql = SQL.X.Select(h.Year, h.Id).From(h);
+		var count = sql.ExecuteCount(cn);
+	</code>
+	<code lang="vb">
+		Dim sql = SQL.X.Select().From(h).Where( 
+								h.Year.In( {2018, 2019} ) And
+								h.Id.IsNotNull())
 
-// ... Read by [DataReader] or [DataTable]
-```
-```VB
-Dim sql = SQL.X.Select(h.Year, h.Id).From(h)
-
-' ... Read by [DataReader] or [DataTable]
-```
-``````
-<br/>
-
-Following section demonstrates using **Conditional Where** clause.
-``````XXX
-```C#
-var _where = (h.Year == 2017);
-
-var _condition = true;
-if( _condition ){
-    _where = _where & (h.IsActive == true)
-}
-
-var sql = SQL.X.Select(h.Year, h.Id).From(h, _where);
-
-// ... Read by [DataReader] or [DataTable]
-```
-```VB
-Dim _where = (h.Year = 2017)
-
-Dim _condition = True
-If _condition Then
-    _where = _where And (h.IsActive = True)
-End If
-
-Dim sql = SQL.X.Select(h.Year, h.Id).From(h, _where)
-
-' ... Read by [DataReader] or [DataTable]
-```
-``````
-<br/>
-
-Following section demonstrates using **COUNT** clause.
-``````XXX
-```C#
-var sql = SQL.X.Select().From(h).Where( 
-						h.Year.In( new[] {2018, 2019} ) &
-						h.Id.IsNotNull()) ;
-
-var count = sql.ExecuteCount(cn);
-```
-```VB
-Dim sql = SQL.X.Select().From(h).Where( 
-						h.Year.In( {2018, 2019} ) And
-						h.Id.IsNotNull())
-
-Dim count = sql.ExecuteCount(cn)
-```
-``````
+		Dim count = sql.ExecuteCount(cn)
+	</code>
+</code-tab>
 <br/>
 
 
-Following section demonstrates using **JOIN** clause.
-``````XXX
-```C#
-var sql = SQL.X.Select().From(h)
-	sql.LeftJoin(l, l.Year==h.Year & l.Id == h.Id )
-    sql.Where( h.Year.In(new[] {2018, 2019}) & h.Id.IsNotNull() );
+Following section demonstrates using <hl>JOIN</hl> clause.
+<code-tab>
+	<code lang="c#">
+		var sql = SQL.X.Select().From(h)
+			sql.LeftJoin(l, l.Year==h.Year & l.Id == h.Id )
+			sql.Where( h.Year.In(new[] {2018, 2019}) & h.Id.IsNotNull() );
 
-// ... Read by [DataReader] or [DataTable]
+		// ... Read by [DataReader] or [DataTable]
+	</code>
+	<code lang="vb">
+		With SQL.X.Select().From(h)
+			.LeftJoin(l, l.Year=h.Year And l.Id = h.Id )
+			.Where( h.Year.In( {2018, 2019} ) And h.Id.IsNotNull() )
 
-```
-```VB
-With SQL.X.Select().From(h)
-	.LeftJoin(l, l.Year=h.Year And l.Id = h.Id )
-    .Where( h.Year.In( {2018, 2019} ) And h.Id.IsNotNull() )
-
-	' ... Read by [DataReader] or [DataTable]
-End With
-```
-``````
-
-<br/>
-
-Following section demonstrates using **SKIP** and **TOP** clause.
-``````XXX
-```C#
-var sql = SQL.X.Select().From(h).Skip(5).Top(10).OrderBy(h.Year);
-
-// ... Read by [DataReader] or [DataTable]
-```
-```VB
-Dim sql = SQL.X.Select().From(h).Skip(5).Top(10).OrderBy(h.Year)
-
-' ... Read by [DataReader] or [DataTable]
-```
-``````
+			' ... Read by [DataReader] or [DataTable]
+		End With
+	</code>
+</code-tab>
 
 <br/>
 
-Following section demonstrates using **GROUP BY** clause.
-``````XXX
-```C#
-var _yr_min = h.Year.MIN().AS("_date_min");
-var _yr_max = h.Year.MAX().AS("_date_max");
+Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
+<code-tab>
+	<code lang="c#">
+		var sql = SQL.X.Select().From(h).Skip(5).Top(10).OrderBy(h.Year);
 
-var sql = SQL.X.Select(h.Id, _yr_min, _yr_max).From(h).GroupBy(h.Id);
+		// ... Read by [DataReader] or [DataTable]
+	</code>
+	<code lang="vb">
+		Dim sql = SQL.X.Select().From(h).Skip(5).Top(10).OrderBy(h.Year)
 
-// ... Read by [DataReader] or [DataTable]
-```
-```VB
-Dim _yr_min = h.Year.MIN().AS("_date_min")
-Dim _yr_max = h.Year.MAX().AS("_date_max")
-
-Dim sql = SQL.X.Select(h.Id, _yr_min, _yr_max).From(h).GroupBy(h.Id)
-
-' ... Read by [DataReader] or [DataTable]
-```
-``````
+		' ... Read by [DataReader] or [DataTable]
+	</code>
+</code-tab>
 
 <br/>
 
-Following section demonstrates using **UNION** clause.
-``````XXX
-```C#
-var sql= SQL.X.Union();
-    sql.RemoveDuplicates = true;
+Following section demonstrates using <hl>GROUP BY</hl> clause.
+<code-tab>
+	<code lang="c#">
+		var _yr_min = h.Year.MIN().AS("_date_min");
+		var _yr_max = h.Year.MAX().AS("_date_max");
 
-    sql.Select().From(h, h.Id == 1000).Top(1).OrderBy(h.Id);
-    sql.Select().From(h, h.Id == 2000).Top(1).OrderBy(h.Id);
-    sql.OrderBy(h.DocDate);
+		var sql = SQL.X.Select(h.Id, _yr_min, _yr_max).From(h).GroupBy(h.Id);
 
-// ... Read by [DataReader] or [DataTable]
+		// ... Read by [DataReader] or [DataTable]
+	</code>
+	<code lang="vb">
+		Dim _yr_min = h.Year.MIN().AS("_date_min")
+		Dim _yr_max = h.Year.MAX().AS("_date_max")
 
-```
-```VB
-With SQL.X.Union()
-    .RemoveDuplicates = True
+		Dim sql = SQL.X.Select(h.Id, _yr_min, _yr_max).From(h).GroupBy(h.Id)
 
-	.Select().From(h, h.Id = 1000).Top(1).OrderBy(h.Id)
-	.Select().From(h, h.Id = 2000).Top(1).OrderBy(h.Id)
-	.OrderBy(h.DocDate)
-
-	' ... Read by [DataReader] or [DataTable]
-End With
-```
-``````
+		' ... Read by [DataReader] or [DataTable]
+	</code>
+</code-tab>
 
 <br/>
 
-Following section demonstrates using **SUB SELECT** clause.
-``````XXX
-```C#
-var sq1 = SQL.X.Select().From(h, h.Id == 1000).ToSubQuery();
-var sq2 = SQL.X.Select().From(h, h.Id == 2000).ToSubQuery();
+Following section demonstrates using <hl>UNION</hl> clause.
+<code-tab>
+	<code lang="c#">
+		var sql= SQL.X.Union();
+			sql.RemoveDuplicates = true;
 
-var sql = SQL.X.Select();
-    sql.From(sq1);
-    sql.LeftJoin(sq2, sq2(h.Id) == sq1(l.Id));
-    sql.Where( sq1(h.Year) == 2017) ;
+			sql.Select().From(h, h.Id == 1000).Top(1).OrderBy(h.Id);
+			sql.Select().From(h, h.Id == 2000).Top(1).OrderBy(h.Id);
+			sql.OrderBy(h.DocDate);
 
-// ... Read by [DataReader] or [DataTable]
+		// ... Read by [DataReader] or [DataTable]
+	</code>
+	<code lang="vb">
+		With SQL.X.Union()
+			.RemoveDuplicates = True
 
-```
-```VB
-Dim sq1 = SQL.X.Select().From(h, h.Id = 1000).ToSubQuery()
-Dim sq2 = SQL.X.Select().From(h, h.Id = 2000).ToSubQuery()
+			.Select().From(h, h.Id = 1000).Top(1).OrderBy(h.Id)
+			.Select().From(h, h.Id = 2000).Top(1).OrderBy(h.Id)
+			.OrderBy(h.DocDate)
 
-With SQL.X.Select()
-    .From(sq1)
-    .LeftJoin(sq2, sq2(h.Id) = sq1(l.Id))
-    .Where( sq1(h.Year) = 2017 )
-
-	' ... Read by [DataReader] or [DataTable]
-End With
-```
-``````
+			' ... Read by [DataReader] or [DataTable]
+		End With
+	</code>
+</code-tab>
 
 <br/>
 
-Following section demonstrates using **SUB SELECT** in a **WHERE** block.
+Following section demonstrates using <hl>SUB SELECT</hl> clause.
+<code-tab>
+	<code lang="c#">
+		var sq1 = SQL.X.Select().From(h, h.Id == 1000).ToSubQuery();
+		var sq2 = SQL.X.Select().From(h, h.Id == 2000).ToSubQuery();
 
-``````XXX
-```C#
-var sq = SQL.X.Select(h.DocumentId.DISTINCT()).From(h, h.Id == 1000).ToSubQuery();
+		var sql = SQL.X.Select();
+			sql.From(sq1);
+			sql.LeftJoin(sq2, sq2(h.Id) == sq1(l.Id));
+			sql.Where( sq1(h.Year) == 2017) ;
 
-var sql = SQL.X.Select().From(h, h.Id == sq);
+		// ... Read by [DataReader] or [DataTable]
+	</code>
+	<code lang="vb">
+		Dim sq1 = SQL.X.Select().From(h, h.Id = 1000).ToSubQuery()
+		Dim sq2 = SQL.X.Select().From(h, h.Id = 2000).ToSubQuery()
 
-// ... Read by [DataReader] or [DataTable]
-```
-```VB
-Dim sq = SQL.X.Select(h.DocumentId.DISTINCT()).From(h, h.Id = 1000).ToSubQuery()
+		With SQL.X.Select()
+			.From(sq1)
+			.LeftJoin(sq2, sq2(h.Id) = sq1(l.Id))
+			.Where( sq1(h.Year) = 2017 )
 
-Dim sql = SQL.X.Select().From(h, h.Id = sq)
-
-' ... Read by [DataReader] or [DataTable]
-```
-``````
+			' ... Read by [DataReader] or [DataTable]
+		End With
+	</code>
+</code-tab>
 
 <br/>
+
+Following section demonstrates using <hl>SUB SELECT</hl> in a <hl>WHERE</hl> block.
+
+<code-tab>
+	<code lang="c#">
+		var sq = SQL.X.Select(h.DocumentId.DISTINCT()).From(h, h.Id == 1000).ToSubQuery();
+
+		var sql = SQL.X.Select().From(h, h.Id == sq);
+
+		// ... Read by [DataReader] or [DataTable]
+	</code>
+	<code lang="vb">
+		Dim sq = SQL.X.Select(h.DocumentId.DISTINCT()).From(h, h.Id = 1000).ToSubQuery()
+
+		Dim sql = SQL.X.Select().From(h, h.Id = sq)
+
+		' ... Read by [DataReader] or [DataTable]
+	</code>
+</code-tab>

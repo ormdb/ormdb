@@ -1,132 +1,121 @@
-﻿**`Update`** method is used to update existing records in a table.
+﻿<k>Update</k> method is used to update existing records in a table.
+
+<st>Definition</st>
+<code-tab>
+	<code lang="c#">
+		namespace SQL
+			public class X
+
+				SQL.Update Update(Table.Base from) 
+
+				SQL.Update Update(Table.Base from, Table.Field Where) 
+	</code>
+	<code lang="vb">
+		NameSpace SQL
+			Public Class X
+
+				Update(from As Table.Base)() As SQL.Update
+
+				Update(from As Table.Base, Where As Table.Column) As SQL.Update
+	</code>
+</code-tab>
+
+<st>Examples</st>
+<ew/>
+<br/>
+<br/>
+
+Following section demonstrates <b>regular update</b>.
+<code-tab>
+	<code lang="c#">
+		var sql = SQL.X.Update(h, h.Id == 9999);
+
+			var row = sql.Set(h.NewModel());
+				row.Note = "new note";
+
+		sql.Execute(cn);
+	</code>
+	<code lang="vb">
+		Dim sql = SQL.X.Update(h, h.Id = 9999)
+
+			With sql.Set(h.NewModel())
+				.Note = "new note"
+			End With
+
+		sql.Execute(cn)
+	</code>
+</code-tab>
 
 <br/>
 
-**Definition**
-``````XXX
-```C#
-namespace SQL {
-    public class X {
+Following section demonstrates <b>multiple update</b>.
+<code-tab>
+	<code lang="c#">
+		var sql = SQL.X.Query;
 
-        public static SQL.Update Update(Table.Base from) 
+			var r1 = sql.Update(h, h.Id == 9999).Set(h.NewModel());
+				r1.Note = "new note";
 
-        public static SQL.Update Update(Table.Base from, Table.Field Where) 
-```
-```VB
-NameSpace SQL
-    Public Class X
+			var r2 = sql.Update(l, l.Id == 9999).Set(l.NewModel());
+				r2.Note = "new note";
 
-		Public Shared Function Update(from As Table.Base)() 
-									As SQL.Update
+		sql.Execute(cn);
+	</code>
+	<code lang="vb">
+		Dim sql = SQL.X.Query
 
-		Public Shared Function Update(from As Table.Base, Where As Table.Column) 
-									As SQL.Update
-```
-``````
+			Dim r1 = sql.Update(h, h.Id = 9999).Set(h.NewModel())
+				r1.Note = "new note"
 
-<br/>
+			Dim r2 = sql.Update(l, l.Id = 9999).Set(l.NewModel())
+				r2.Note = "new note"
 
-**Examples**
-
->Examples shown below needs the [Example Header](##OTH-Example-Header).
+		sql.Execute(cn)
+	</code>
+</code-tab>
 
 <br/>
 
-Following section demonstrates **regular update**.
+Following section demonstrates <b>update with join</b>.
+<code-tab>
+	<code lang="c#">
+		var sql = SQL.X.Update(h);
+			sql.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
+			sql.Where(l.LineId > 3);
 
-``````XXX
-```C#
-var sql = SQL.X.Update(h, h.Id == 9999);
+			var row = sql.Set(h.NewModel());
+				row.Note = "new note";
 
-    var row = sql.Set(h.NewModel());
-        row.Note = "new note";
+		sql.Execute(cn);
+	</code>
+	<code lang="vb">
+		Dim sql = SQL.X.Update(h)
+			sql.InnerJoin(l, l.Year = h.Year And l.Id = h.Id )
+			sql.Where(l.LineId > 3)
 
-sql.Execute(cn);
-```
-```VB
-Dim sql = SQL.X.Update(h, h.Id = 9999)
+			Dim row = sql.Set(h.NewModel())
+				row.Note = "new note"
 
-    With sql.Set(h.NewModel())
-        .Note = "new note"
-	End With
-
-sql.Execute(cn)
-```
-``````
-
-<br/>
-
-Following section demonstrates **multiple update**.
-
-``````XXX
-```C#
-var sql = SQL.X.Query;
-
-    var r1 = sql.Update(h, h.Id == 9999).Set(h.NewModel());
-        r1.Note = "new note";
-
-    var r2 = sql.Update(l, l.Id == 9999).Set(l.NewModel());
-        r2.Note = "new note";
-
-sql.Execute(cn);
-```
-```VB
-Dim sql = SQL.X.Query
-
-    Dim r1 = sql.Update(h, h.Id = 9999).Set(h.NewModel())
-        r1.Note = "new note"
-
-    Dim r2 = sql.Update(l, l.Id = 9999).Set(l.NewModel())
-        r2.Note = "new note"
-
-sql.Execute(cn)
-```
-``````
-
-<br/>
-
-Following section demonstrates **update with join**.
-
-``````XXX
-```C#
-var sql = SQL.X.Update(h);
-    sql.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
-    sql.Where(l.LineId > 3);
-
-    var row = sql.Set(h.NewModel());
-        row.Note = "new note";
-
-sql.Execute(cn);
-```
-```VB
-Dim sql = SQL.X.Update(h)
-    sql.InnerJoin(l, l.Year = h.Year And l.Id = h.Id )
-    sql.Where(l.LineId > 3)
-
-    Dim row = sql.Set(h.NewModel())
-        row.Note = "new note"
-
-sql.Execute(cn)
-```
-``````
->This sample updates the header records which contain DocumentLine that is greather than 3 in lines-table.
-
-<br/>
-
-Following section demonstrates to set value of **DbNull**.
-
-``````XXX
-```C#
-var _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel());
-    _row.str = System.DbNull;
-```
-```VB
-Dim _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel())
-    _row.str = System.DbNull
-```
-``````
+		sql.Execute(cn)
+	</code>
+</code-tab>
 <o>
-UPDATE h SET <u><x>h.DocumentId = Null</x></u> FROM TableHeader AS h WHERE h.DocumentId IS NOT NULL
+This sample updates the header records which contain DocumentLine that is greather than 3 in lines-table.
 </o>
 
 <br/>
+
+Following section demonstrates to set value of <b>DbNull</b>.
+<code-tab>
+	<code lang="c#">
+		var _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel());
+			_row.str = System.DbNull;
+	</code>
+	<code lang="vb">
+		Dim _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel())
+			_row.str = System.DbNull
+	</code>
+</code-tab>
+<o>
+UPDATE h SET <u><hl>h.DocumentId = Null</hl></u> FROM TableHeader AS h WHERE h.DocumentId IS NOT NULL
+</o>

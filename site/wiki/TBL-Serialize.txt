@@ -1,53 +1,51 @@
 ﻿All tables can be serialized and deserialized as shown below.
 
 
->Examples need the [Example Header](##OTH-Example-Header).
+<ew/>
 
-``````XXX
-```C#
-	//---------------------------------------------------
-	// new instance of a table from definition
-	var t1 = new TableHeader();
+<code-tab>
+	<code lang="c#">
+			//---------------------------------------------------
+			// new instance of a table from definition
+			var t1 = new TableHeader();
 
-	// new instance of a table from database
-	var t2 = cn.DDL.GetTableInstance(<tb_name>);
-
-
-	//---------------------------------------------------
-	// Serialization
-
-    string serialize_data = "";
-
-    serialize_data = Table.Base.Serialize(t1);
-    serialize_data = Table.Base.Serialize(t2);
+			// new instance of a table from database
+			var t2 = cn.DDL.GetTableInstance(<tb_name>);
 
 
-	//---------------------------------------------------
-	// Deserialization
-    var new_instance = Table.Base.Deserialize(serialize_data);
-```
-```VB
-	'---------------------------------------------------
-	' new instance of a table from definition
-	Dim t1 = new TableHeader()
+			//---------------------------------------------------
+			// Serialization
 
-	' new instance of a table from database
-	Dim t2 = cn.DDL.GetTableInstance(<tb_name>)
+			string serialize_data = "";
+
+			serialize_data = Table.Base.Serialize(t1);
+			serialize_data = Table.Base.Serialize(t2);
 
 
-	'---------------------------------------------------
-	' Serialization
+			//---------------------------------------------------
+			// Deserialization
+			var new_instance = Table.Base.Deserialize(serialize_data);
+	</code>
+	<code lang="vb">
+			'---------------------------------------------------
+			' new instance of a table from definition
+			Dim t1 = new TableHeader()
 
-    Dim serialize_data As String = ""
-
-    serialize_data = Table.Base.Serialize(t1)
-    serialize_data = Table.Base.Serialize(t2)
+			' new instance of a table from database
+			Dim t2 = cn.DDL.GetTableInstance(<tb_name>)
 
 
-	'---------------------------------------------------
-	' Deserialization
-    Dim new_instance = Table.Base.Deserialize(serialize_data)
-```
-``````
+			'---------------------------------------------------
+			' Serialization
 
-<br/>
+			Dim serialize_data As String = ""
+
+			serialize_data = Table.Base.Serialize(t1)
+			serialize_data = Table.Base.Serialize(t2)
+
+
+			'---------------------------------------------------
+			' Deserialization
+			Dim new_instance = Table.Base.Deserialize(serialize_data)
+	</code>
+</code-tab>

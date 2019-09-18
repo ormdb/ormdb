@@ -1,42 +1,40 @@
-﻿### Definition
+﻿<st>Definition</st>
+Table to be defined, is inherited from <k>Odb.Table.Base</k>. 
 
-Table to be defined, is inherited from **`Odb.Table.Base`**. 
-
-Column(s) type of **`Odb.Table.Column`** are also defined by supplying necessary type information in the attribute.
+Column(s) type of <k>Odb.Table.Column</k> are also defined by supplying necessary type information in the attribute.
 
 If a column-type is often used in many of your tables, you can use a column as a reference.
 
-Please refer to [Example Header](##OTH-Example-Header) for usage.
+<ew/>
 
-### Declaration
+
+<st>Declaration</st>
 Instances of the tables are being initialized.
 
-``````XXX
-```C#
-    private TableHeader h = new TableHeader();
-    private TableLines  l = new TableLines();
-```
-```VB
-    Private h As New TableHeader()
-    Private l As New TableLines()
-```
-``````
+<code-tab>
+	<code lang="c#">
+			private TableHeader h = new TableHeader();
+			private TableLines  l = new TableLines();
+	</code>
+	<code lang="vb">
+			Private h As New TableHeader()
+			Private l As New TableLines()
+	</code>
+</code-tab>
 
 <br/>
 
 If you would like to join a table with itself, same table can be initialized twice as shown below.
 
-``````XXX
-```C#
-    private TableHeader h  = new TableHeader();
-    private TableLines  l  = new TableLines();
-    private TableHeader h2 = new TableHeader();
-```
-```VB
-    Private h  As New TableHeader()
-    Private l  As New TableLines()
-    Private h2 As New TableHeader()
-```
-``````
-
-<br/>
+<code-tab>
+	<code lang="c#">
+			private TableHeader h  = new TableHeader();
+			private TableLines  l  = new TableLines();
+			private TableHeader h2 = new TableHeader();
+	</code>
+	<code lang="vb">
+			Private h  As New TableHeader()
+			Private l  As New TableLines()
+			Private h2 As New TableHeader()
+	</code>
+</code-tab>

@@ -2,89 +2,82 @@
 
 <br/>
 
-**Definition**
-``````XXX
-```C#
-namespace Connection {
-    public class DDL {
+<st>Definition</st>
+<code-tab>
+	<code lang="c#">
+		namespace Connection {
+			public class DDL {
 
-        public List<SchemaIndexInfo> GeTableIndexes(string TableName){}
-```
-```VB
-NameSpace Connection
-    Public Class DDL
+				public List<SchemaIndexInfo> GeTableIndexes(string TableName){}
+	</code>
+	<code lang="vb">
+		NameSpace Connection
+			Public Class DDL
 
-        Public Function GeTableIndexes(TableName As String) As List(Of SchemaIndexInfo)
-```
-``````
+				Public Function GeTableIndexes(TableName As String) As List(Of SchemaIndexInfo)
+	</code>
+</code-tab>
+
+<st>Return</st>
+<table>
+	<thead>
+		<th>SchemaIndexInfo</th>
+		<th>Description</th>
+	</thead>
+	<tr><td>Name              </td><td>Name of the index.         </td></tr>
+	<tr><td>IsPrimary         </td><td>Is primary key index.      </td></tr>
+	<tr><td>IsUnique          </td><td>Is index unique.           </td></tr>
+	<tr><td>IsClustered       </td><td>Is index clustered.        </td></tr>
+	<tr><td>IsUniqueConstraint</td><td>Is index unique-constraint.</td></tr>
+	<tr><td>Columns           </td><td>Columns of the index.      </td></tr>
+</table>
+
+<st>Examples</st>
+<ew/>
+<br/>
+
+Following section demonstrates reading the indexes of table <b>by its instance</b>.
+<code-tab>
+	<code lang="c#">
+		foreach (var index in cn.DDL.GeTableIndexes("table_name")){
+
+			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
+
+			Debug.WriteLine($"Columns");
+			Debug.WriteLine($"----------------------------");
+
+			foreach (var column in index.Columns){
+				Debug.WriteLine(column.Name.ToString());
+			}
+		}
+	</code>
+	<code lang="vb">
+		For Each index In cn.DDL.GeTableIndexes("table_name")
+
+			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
+
+			Debug.WriteLine($"Columns")
+			Debug.WriteLine($"----------------------------")
+
+			For Each column In index.Columns
+				Debug.WriteLine(column.Name.ToString())
+			Next
+		Next
+	</code>
+</code-tab>
 
 <br/>
 
-**Return**
-
-| SchemaIndexInfo   | Description                                            |
-|-------------------|--------------------------------------------------------|
-|Name               | Name of the index.                                     |
-|IsPrimary          | Is primary key index.                                  |
-|IsUnique           | Is index unique.                                       |
-|IsClustered        | Is index clustered.                                    |
-|IsUniqueConstraint | Is index unique-constraint.                            |
-|Columns            | Columns of the index.                                  |
-
-<br/>
-
-**Examples**
-
->Examples shown below needs the [Example Header](##OTH-Example-Header).
-
-<br/>
-
-Following section demonstrates reading the indexes of table **by its instance**.
-
-``````XXX
-```C#
-foreach (var index in cn.DDL.GeTableIndexes("table_name")){
-
-    Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
-
-    Debug.WriteLine($"Columns");
-    Debug.WriteLine($"----------------------------");
-
-    foreach (var column in index.Columns){
-        Debug.WriteLine(column.Name.ToString());
-    }
-}
-```
-```VB
-For Each index In cn.DDL.GeTableIndexes("table_name")
-
-    Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
-
-    Debug.WriteLine($"Columns")
-    Debug.WriteLine($"----------------------------")
-
-    For Each column In index.Columns
-        Debug.WriteLine(column.Name.ToString())
-    Next
-Next
-```
-``````
-
-<br/>
-
-Following section demonstrates reading the indexes of table **by its name**.
-
-``````XXX
-```C#
-foreach (var index in h.GetIndexes()) {
-    Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
-}
-```
-```VB
-For Each index In h.GetIndexes()
-    Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
-Next
-```
-``````
-
-<br/>
+Following section demonstrates reading the indexes of table <b>by its name</b>.
+<code-tab>
+	<code lang="c#">
+		foreach (var index in h.GetIndexes()) {
+			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
+		}
+	</code>
+	<code lang="vb">
+		For Each index In h.GetIndexes()
+			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
+		Next
+	</code>
+</code-tab>

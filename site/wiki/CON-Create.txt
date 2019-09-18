@@ -1,147 +1,197 @@
-﻿### Defining Provider
-
-**`OrmDb`** uses a **Connection.Provider** shown below, to connect to a data source by supplying necessary authentication information in a **provider**. 
+﻿<b><k>OrmDb</k></b> uses a <b>Connection.Provider</b> shown below, to connect to a data source by supplying necessary authentication information in a <b>provider</b>. 
+<br/>
+<br/>
+<table>
+	<thead>
+		<th>Provider</th>
+		<th></th>
+		<th>Factory</th>
+	</thead>
+	<tr>
+		<td>Odb.Connection.Provider.<k>MsSql</k></td>
+		<td>Microsoft SQL Server</td>
+		<td>System.Data.SqlClient</td>
+	</tr>
+	<tr>
+		<td>Odb.Connection.Provider.<k>MySql</k></td>
+		<td>MySQL / MariaDB</td>
+		<td>MySql.Data.MySqlClient</td>
+	</tr>
+	<tr>
+		<td>Odb.Connection.Provider.<k>PostgreSql</k></td>
+		<td>PostgreSQL</td>
+		<td>Npgsql</td>
+	</tr>
+	<tr>
+		<td>Odb.Connection.Provider.<k>Oracle</k></td>
+		<td>Oracle</td>
+		<td>Oracle.ManagedDataAccess.Client</td>
+	</tr>
+</table>
 
 <br/>
 
-| Provider     | | Factory                                            |
-|---------------|---------------------|----------------------------------|
-|Odb.Connection.Provider.`MsSql`		|Microsoft SQL Server | System.Data.SqlClient|
-|Odb.Connection.Provider.`MySql`		|MySQL / MariaDB | MySql.Data.MySqlClient	|
-|Odb.Connection.Provider.`PostgreSql`	|PostgreSQL | Npgsql						|
-|Odb.Connection.Provider.`Oracle`		|Oracle | Oracle.ManagedDataAccess.Client	|
+<table>
+	<thead>
+		<th>Parameters</th>
+		<th>Description</th>
+	</thead>
+	<tr>
+		<td>Host</td>
+		<td>is <k>host-info</k> of the database-server to be connected.</td>
+	</tr>
+	<tr>
+		<td>Catalog</td>
+		<td>is <k>name</k> of the <b>database</b> (or <b>service</b> for Oracle) to be connected.</td>
+	</tr>
+	<tr>
+		<td><i>User</i></td>
+		<td>Optional. is <k>user-name</k> to use when making the connection. is NOT necessary for <b>trusted-connection</b></td>
+	</tr>
+	<tr>
+		<td><i>Password</i></td>
+		<td>Optional. is <k>password</k> to use when making the connection. is NOT necessary for <b>trusted-connection</b></td>
+	</tr>
+	<tr>
+		<td><i>Port</i></td>
+		<td>Optional. is <k>port-info</k> of the database-server to be connected.</td>
+	</tr>
+	<tr>
+		<td><i>DBA_Privilege</i></td>
+		<td>Optional. provides the connection with SYSDBA privileges. (for Oracle)</td>
+	</tr>
+</table>
 
 <br/>
 
-| Parameters     |Description                                                              |
-|----------------|-------------------------------------------------------------------------|
-|Host			 |is `host-info` of the database-server to be connected.				   |
-|Catalog		 |is `name` of the **database** (or **service** for Oracle) to be connected. |
-|*User*          |Optional. is `user-name` to use when making the connection. is NOT necessary for **trusted-connection** |
-|*Password*      |Optional. is `password` to use when making the connection. is NOT necessary for **trusted-connection** |
-|*Port*          |Optional. is `port-info` of the database-server to be connected.         |
-|*DBA_Privilege* |Optional. provides the connection with SYSDBA privileges. (for Oracle)   |
+<co type="warning">
+	Following section defines a provider.
+</co>
+
+<code-tab>
+	<code lang="c#">
+		var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name", "user", "****");
+
+		// for trusted
+		var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name");
+	</code>
+	<code lang="vb">
+		Dim ms_db = New Odb.Connection.Provider.MsSql("host", "database-name", "user", "****")
+
+		' for trusted
+		Dim ms_db = new Odb.Connection.Provider.MsSql("host", "database-name")
+	</code>
+</code-tab>
 
 
-<br/>
-
-Following section defines a provider.
-``````XXX
-```C#
-var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name", "user", "****");
-
-// for trusted
-var ms_db = new Odb.Connection.Provider.MsSql("host", "database-name");
-```
-```VB
-Dim ms_db = New Odb.Connection.Provider.MsSql("host", "database-name", "user", "****")
-
-' for trusted
-Dim ms_db = new Odb.Connection.Provider.MsSql("host", "database-name")
-```
-``````
-
-<br/>
-
-### Creating Connection
-
-
-<br/>
-
-| Parameters        |Description                                                              |
-|-------------------|-------------------------------------------------------------------------|
-|*AutoStartTrans*   |Optional. Every sql are executed in transaction as automatically. Transactions are initialized again automatically after COMMIT or ROLLBACK commands. |
-|*AutoConnect*      |Optional. Connection is opened automatically on first sql execution.         |
-|*SchemaPrefix*     |Optional. is used for making group the tables in database. If it is specified then the prefix appends for every tables before sql execution. |
-
+<st>Creating Connection</st>
+<table>
+	<thead>
+		<th>Parameters</th>
+		<th>Description</th>
+	</thead>
+	<tr>
+		<td><b>AutoStartTrans</b></td>
+		<td>Optional. Every sql are executed in transaction as automatically. Transactions are initialized again automatically after COMMIT or ROLLBACK commands.</td>
+	</tr>
+	<tr>
+		<td><b>AutoConnect</b></td>
+		<td>Optional. Connection is opened automatically on first sql execution.</td>
+	</tr>
+	<tr>
+		<td><b>SchemaPrefix</b></td>
+		<td>Optional. is used for making group the tables in database. If it is specified then the prefix appends for every tables before sql execution</td>
+	</tr>
+</table>
 
 <br/>
 
-A connection can be created with **`Create`** or **`CreateAndOpen`** via **provider** already defined.
+A connection can be created with <k>Create</k> or <k>CreateAndOpen</k> via **provider** already defined.
 
-``````XXX
-```C#
-Connection CreateAndOpen(bool AutoStartTrans = false)
+<code-tab>
+	<code lang="c#">
+		Connection CreateAndOpen(bool AutoStartTrans = false)
 
-Connection Create(bool AutoStartTrans = false, bool AutoConnect = true)
-```
-```VB
-CreateAndOpen(Optional AutoStartTrans As Boolean = False) As Connection
+		Connection Create(bool AutoStartTrans = false, bool AutoConnect = true)
+	</code>
+	<code lang="vb">
+		CreateAndOpen(Optional AutoStartTrans As Boolean = False) As Connection
 
-Create(Optional AutoStartTrans As Boolean = False, Optional AutoConnect As Boolean = True) As Connection
-```
-``````
-
-<br/>
-
-**Examples**
-
-Following section demonstrates how to create a connection as **`ImmediatelyConnect`**.
-``````XXX
-```C#
-// Connection is being initialized and opened immediately.
-var cn = ms_db.CreateAndOpen();
-```
-```VB
-' Connection is being initialized and opened immediately.
-Dim cn = ms_db.CreateAndOpen()
-```
-``````
+		Create(Optional AutoStartTrans As Boolean = False, Optional AutoConnect As Boolean = True) As Connection
+	</code>
+</code-tab>
 
 <br/>
 
-Following section demonstrates how to create a connection as **`AutoConnection`**.
-``````XXX
-```C#
-// Connection is being initialized.
-var cn = ms_db.Create();
 
-// Connection is opened for first execution.
-   ...
-```
-```VB
-' Connection is being initialized.
-Dim cn = ms_db.Create()
+<st>Examples</st>
 
-' Connection is opened for first execution.
-   ...
-```
-``````
+Following section demonstrates how to create a connection as <k>ImmediatelyConnect</k>.
+<code-tab>
+	<code lang="c#">
+		// Connection is being initialized and opened immediately.
+		var cn = ms_db.CreateAndOpen();
+	</code>
+	<code lang="vb">
+		' Connection is being initialized and opened immediately.
+		Dim cn = ms_db.CreateAndOpen()
+	</code>
+</code-tab>
 
 <br/>
 
-Following section demonstrates how to create a connection as **`AutoConnection`**.
-``````XXX
-```C#
-// Connection is being initialized.
-var cn = ms_db.Create(AutoConnect:false);
+Following section demonstrates how to create a connection as <k>AutoConnection</k>.
+<code-tab>
+	<code lang="c#">
+		// Connection is being initialized.
+		var cn = ms_db.Create();
 
-// Connection is NOT opened for first execution; must be opened manually.
-cn.Open();
-```
-```VB
-' Connection is being initialized.
-Dim cn = ms_db.Create(AutoConnect:=false)
+		// Connection is opened for first execution.
+		   ...
+	</code>
+	<code lang="vb">
+		' Connection is being initialized.
+		Dim cn = ms_db.Create()
 
-' Connection is NOT opened for first execution; must be opened manually.
-cn.Open()
-```
-``````
+		' Connection is opened for first execution.
+		   ...
+	</code>
+</code-tab>
 
 <br/>
 
-Following section demonstrates how to create a connection as **`AutoTrans`**. Please refer to [Transaction](##CON-Transaction) for further information.
+Following section demonstrates how to create a connection as <k>AutoConnection</k>.
+<code-tab>
+	<code lang="c#">
+		// Connection is being initialized.
+		var cn = ms_db.Create(AutoConnect:false);
 
-``````XXX
-```C#
-// Initialize transaction automatically on every Commit and Roolback.
-var cn = ms_db.Create(AutoTrans:false);
-```
-```VB
-' Initialize transaction automatically on every Commit and Roolback.
-Dim cn = ms_db.Create(AutoTrans:=false)
-```
-``````
+		// Connection is NOT opened for first execution; must be opened manually.
+		cn.Open();
+	</code>
+	<code lang="vb">
+		' Connection is being initialized.
+		Dim cn = ms_db.Create(AutoConnect:=false)
+
+		' Connection is NOT opened for first execution; must be opened manually.
+		cn.Open()
+	</code>
+</code-tab>
+
+<br/>
+
+Following section demonstrates how to create a connection as <k>AutoTrans</k>. Please refer to <a href="##CON-Transaction">Transaction</a> for further information.
+
+<code-tab>
+	<code lang="c#">
+		// Initialize transaction automatically on every Commit and Roolback.
+		var cn = ms_db.Create(AutoTrans:false);
+	</code>
+	<code lang="vb">
+		' Initialize transaction automatically on every Commit and Roolback.
+		Dim cn = ms_db.Create(AutoTrans:=false)
+	</code>
+</code-tab>
 
 <br/>
 

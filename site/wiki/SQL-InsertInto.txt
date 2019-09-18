@@ -1,68 +1,55 @@
-﻿**`InserInto`** function copies data from one table and inserts into same or another table.
+﻿<k>InserInto</k> function copies data from one table and inserts into same or another table.
 
-<br/>
 
-**Definition**
-``````XXX
-```C#
-namespace SQL {
-    public class X {
+<st>Definition</st>
+<code-tab>
+	<code lang="c#">
+		namespace SQL
+			public class X
 
-        public static InsertInto InsertInto(Table.Base Table, 
-                                            SQL.Select From){}
+				InsertInto InsertInto(Table.Base Table, SQL.Select From){}
 
-        public static InsertInto InsertInto(SQL.TempTable Table, 
-                                            SQL.Select From){}
-```
-```VB
-NameSpace SQL
-    Public Class X
+				InsertInto InsertInto(SQL.TempTable Table, SQL.Select From){}
+	</code>
+	<code lang="vb">
+		NameSpace SQL
+			Public Class X
 
-		Public Shared Function InsertInto(Table As Table.Base, 
-										  From As SQL.Select) As SQL.InsertInto
+				InsertInto(Table As Table.Base, From As SQL.Select) As SQL.InsertInto
 
-		Public Shared Function InsertInto(Table As SQL.TempTable, 
-										  From As SQL.Select) As SQL.InsertInto
-```
-``````
+				InsertInto(Table As SQL.TempTable, From As SQL.Select) As SQL.InsertInto
+	</code>
+</code-tab>
 
-<br/>
 
-**Remarks**
-
+<st>Remarks</st>
 Make sure the order of the values is in the same order as the columns in the target table.
 
+<st>Examples</st>
+<ew/>
+<br/>
 <br/>
 
-**Examples**
+Following section demonstrates <b>regular insertion from select</b>.
+<code-tab>
+	<code lang="c#">
+		// copies records in 2017 into same table as 2018
 
->Examples shown below needs the [Example Header](##OTH-Example-Header).
+		var sql = SQL.X.Select(h.Const(2018).AS(h.Year), 
+							   h.Id,
+							   h.Note,
+							   h.DocDate).From(h, h.Year == 2017);
 
-<br/>
+		SQL.X.InsertInto(h, sql).Execute(cn);
+	</code>
+	<code lang="vb">
+		' copies records in 2017 into same table as 2018
 
-Following section demonstrates **regular insertion from select**.
+		Dim sql = SQL.X.Select(h.Const(2018).AS(h.Year), 
+							   h.Id,
+							   h.Note,
+							   h.DocDate).From(h, h.Year = 2017)
 
-``````XXX
-```C#
-// copies records in 2017 into same table as 2018
-
-var sql = SQL.X.Select(h.Const(2018).AS(h.Year), 
-                       h.Id,
-                       h.Note,
-                       h.DocDate).From(h, h.Year == 2017);
-
-SQL.X.InsertInto(h, sql).Execute(cn);
-```
-```VB
-' copies records in 2017 into same table as 2018
-
-Dim sql = SQL.X.Select(h.Const(2018).AS(h.Year), 
-                       h.Id,
-                       h.Note,
-                       h.DocDate).From(h, h.Year = 2017)
-
-SQL.X.InsertInto(h, sql).Execute(cn)
-```
-``````
-
-<br/>
+		SQL.X.InsertInto(h, sql).Execute(cn)
+	</code>
+</code-tab>

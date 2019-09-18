@@ -1,135 +1,109 @@
-﻿To retrieve data using a **`DataTableReader`**, create an instance of a SQL.IQueryable object, and then create a reader by calling **`ExecuteReader`**. The **`DataTableReader`** provides an **unbuffered** stream of data that allows procedural logic to efficiently process results from a data source sequentially. 
+﻿To retrieve data using a <k>DataTableReader</k>, create an instance of a SQL.IQueryable object, and then create a reader by calling <k>ExecuteReader</k>. 
+The <k>DataTableReader</k> provides an <b>unbuffered</b> stream of data that allows procedural logic to efficiently process results from a data source sequentially. 
 
->The DataTableReader is a good choice when you're retrieving large amounts of data because the data is not cached in memory.
+<co type="success">
+	The DataTableReader is a good choice when you're retrieving large amounts of data because the data is not cached in memory.
+</co>
 
 
-|Operation                                        |DataTable            |DataTableReader|
-|-------------------------------------------------|---------------------|---------------|
-|Schema Information                               | Yes                 | Yes           |
-|CRUD operations can be operate as offline.       | Yes                 | No            |
-|Moving the cursor on the records.                | Yes                 | No            |
-|Getting RecordCount                              | Yes                 | is the number of rows iterated  |
-|ToDataTable support                              | Yes                 | Yes            |
-|Cursor Mode                                      | READ_ONLY or UPDATE | FORWARD_ONLY  |
+<table>
+	<thead>
+		<th>Operation</th>
+		<th>DataTable</th>
+		<th>DataTableReader</th>
+	</thead>
+	<tr><td>Schema Information                        </td><td>Yes					</td><td>Yes							</td></tr>
+	<tr><td>CRUD operations can be operate as offline.</td><td>Yes					</td><td>No								</td></tr>
+	<tr><td>Moving the cursor on the records.         </td><td>Yes					</td><td>No								</td></tr>
+	<tr><td>Getting RecordCount                       </td><td>Yes					</td><td>is the number of rows iterated	</td></tr>
+	<tr><td>ToDataTable support                       </td><td>Yes					</td><td>Yes							</td></tr>
+	<tr><td>Cursor Mode                               </td><td>READ_ONLY or UPDATE	</td><td>FORWARD_ONLY					</td></tr>
+</table>
 
+
+<st>Examples</st>
+<ew/>
 <br/>
-
-**Examples**
-
->Examples shown below needs the [Example Header](##OTH-Example-Header).
-
 <br/>
-
 Following example iterates through a DataReader object and returns two columns from each row.
 
-``````XXX
-```C#
-var sql = SQL.X.Select(h.Note, h.DocDate).From(h);
-var dr = sql.ExecuteReader(cn);
-```
-```VB
-Dim sql = SQL.X.Select(h.Note, h.DocDate).From(h)
-Dim dr = sql.ExecuteReader(cn)
-```
-``````
+<code-tab>
+	<code lang="c#">
+		var sql = SQL.X.Select(h.Note, h.DocDate).From(h);
+		var dr = sql.ExecuteReader(cn);
+	</code>
+	<code lang="vb">
+		Dim sql = SQL.X.Select(h.Note, h.DocDate).From(h)
+		Dim dr = sql.ExecuteReader(cn)
+	</code>
+</code-tab>
 
 <br/>
 
->iterate by column-name
-``````XXX
-```C#
-foreach (var row in dr) {
-    Console.WriteLine("Note={0}, Date={1}", 
-                       row("Note").ToString(), 
-                       row("DocDate").ToDateTime());
-}
-```
-```VB
-For Each row In dr
-    Console.WriteLine("Note={0}, Date={1}", 
-                       row("Note").ToString(), 
-                       row("DocDate").ToDateTime())
-Next
-```
-``````
+<code-tab>
+	<code lang="c#">
+		foreach (var r in dr) {
+
+			// read by column-name.
+			Console.WriteLine("{0}, {1}", r("Note").ToString(), 
+										  r("DocDate").ToString());
+
+			// read by column. (REGULAR)
+			Console.WriteLine("{0}, {1}", r(h.Note).ToString(), 
+										  r(h.DocDate).ToString());
+
+			// read by column-index. (more faster)
+			Console.WriteLine("{0}, {1}", r(0).ToString(), 
+										  r(1).ToString());
+		}
+
+		// read by binded-column. (more faster)
+		var f1 = dr(h.Note);
+		var f2 = dr(h.DocDate);
+		foreach (var r in dr) {
+			Console.WriteLine("{0}, {1}", f1.ToString(), f2.ToString());
+		}
+	</code>
+	<code lang="vb">
+		For Each r In dr
+
+			' read by column-name.
+			Console.WriteLine("{0}, {1}", r("Note").ToString(), 
+										  r("DocDate").ToString())
+
+			' read by column. (REGULAR)
+			Console.WriteLine("{0}, {1}", r(h.Note).ToString(), 
+										  r(h.DocDate).ToString())
+
+			' read by column-index. (more faster)
+			Console.WriteLine("{0}, {1}", r(0).ToString(), 
+										  r(1).ToString())
+		Next
+
+		' read by binded-column. (more faster)
+		Dim f1 = dr(h.Note)
+		Dim f2 = dr(h.DocDate)
+		For Each r In dr
+			Console.WriteLine("{0}, {1}", f1.ToString(),  f2.ToString())
+		Next
+	</code>
+	</code>
+</code-tab>
 
 <br/>
 
->iterate by column-info. (faster than before) <= **REGULAR**
-``````XXX
-```C#
-foreach (var row in dr) {
-    Console.WriteLine("Note={0}, Date={1}", 
-                       row(h.Note).ToString(), 
-                       row(h.DocDate).ToDateTime());
-}
-```
-```VB
-For Each row In dr
-    Console.WriteLine("Note={0}, Date={1}", 
-                       row(h.Note).ToString(), 
-                       row(h.DocDate).ToDateTime())
-Next
-```
-``````
+<table>
+	<thead>
+		<th>Reading By</th>
+		<th>Performance</th>
+		<th>Memory Consumption</th>
+	</thead>
+	<tr><td>column-name		</td><td>0.0000057 ms		</td><td>new instance for per column</td></tr>
+	<tr><td>column-info		</td><td>0.0000035 ms		</td><td>new instance for per column (REGULAR)</td></tr>
+	<tr><td>index info		</td><td>0.0000028 ms		</td><td>new instance for per column</td></tr>
+	<tr><td>binded			</td><td>0.0000025 ms		</td><td>one instance for all columns</td></tr>
+</table>
 
-<br/>
-
->iterate by selection index info. (faster than before)
-``````XXX
-```C#
-foreach (var row in dr) {
-    Console.WriteLine("Note={0}, Date={1}", 
-                       row(0).ToString(), 
-                       row(1).ToDateTime());
-}
-```
-```VB
-For Each row In dr
-    Console.WriteLine("Note={0}, Date={1}", 
-                       row(0).ToString(), 
-                       row(1).ToDateTime())
-Next
-```
-``````
-
-<br/>
-
->iterate by binded-column. (faster than before)
-``````XXX
-```C#
-var f1 = dr(h.Note);
-var f2 = dr(h.DocDate);
-
-foreach (var row in dr) {
-    Console.WriteLine("Note={0}, Date={1}", 
-                       f1.ToString(), 
-                       f2.ToDateTime());
-}
-```
-```VB
-Dim f1 = dr(h.Note)
-Dim f2 = dr(h.DocDate)
-
-For Each row In dr
-    Console.WriteLine("Note={0}, Date={1}", 
-                       f1.ToString(), 
-                       f2.ToDateTime())
-Next
-```
-``````
-
-<br/>
-
-|Reading By             | Performance    | Memory Consumption          |
-|-----------------------|----------------|-----------------------------|
-|column-name            | 0.0000057 ms   | new instance for per column  |
-|column-info            | 0.0000035 ms   | new instance for per column (REGULAR)|
-|index info             | 0.0000028 ms   | new instance for per column  |
-|binded                 | 0.0000025 ms   | one instance for all columns |
-
-> Record Count= 1200, Network= CAT6 gigabit, Server= MsSQL 2016
-
-
-
-<br/>
+<co type="light">
+	Record Count= 1200, Network= CAT6 gigabit, Server= MsSQL 2016
+</co>

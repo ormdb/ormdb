@@ -1,93 +1,84 @@
-﻿**`Delete`** method is used to delete existing records in a table.
+﻿<k>Delete</k> method is used to delete existing records in a table.
+
+<st>Definition</st>
+<code-tab>
+	<code lang="c#">
+		namespace SQL {
+			public class X {
+
+				SQL.Delete Delete(Table.Base Table,
+								  bool OptimizeTable = false)
+
+				SQL.Delete Delete(Table.Base Table,
+								  Table.Field Where,
+								  bool OptimizeTable = false)
+	</code>
+	<code lang="vb">
+		NameSpace SQL
+			Public Class X
+
+				Delete(Table As Table.Base, 
+					   OptimizeTable As Boolean = False) As SQL.Delete
+
+				Delete(Table As Table.Base,
+					   Where As Table.Column,
+					   OptimizeTable As Boolean = False) As SQL.Delete
+	</code>
+</code-tab>
+
+<st>Examples</st>
+<ew/>
+<br/>
+<br/>
+
+Following section demonstrates <b>regular deletion</b>.
+<code-tab>
+	<code lang="c#">
+		SQL.X.Delete(h, h.Id == 9999).Execute(cn);
+	</code>
+	<code lang="vb">
+		SQL.X.Delete(h, h.Id = 9999).Execute(cn)
+	</code>
+</code-tab>
+
+<br/>
+Following section demonstrates <b>multiple deletion</b>.
+<code-tab>
+	<code lang="c#">
+		var sql = SQL.X.Query();
+			sql.Delete(h, h.Id == 9999);
+			sql.Delete(l, l.Id == 9999);
+
+			sql.Execute(cn);
+	</code>
+	<code lang="vb">
+		Dim sql = SQL.X.Query()
+			sql.Delete(h, h.Id = 9999)
+			sql.Delete(l, l.Id = 9999)
+
+			sql.Execute(cn)
+	</code>
+</code-tab>
 
 <br/>
 
-**Definition**
-``````XXX
-```C#
-namespace SQL {
-    public class X {
+Following section demonstrates <b>deletion with join</b>.
+<code-tab>
+	<code lang="c#">
+		var sql = SQL.X.Delete(h);
+			sql.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
+			sql.Where(l.LineId > 3);
 
-        public static SQL.Delete Delete(Table.Base Table,
-                                        bool OptimizeTable = false)
+			sql.Execute(cn);
+	</code>
+	<code lang="vb">
+		Dim sql = SQL.X.Delete(h)
+			sql.InnerJoin(l, l.Year = h.Year And l.Id = h.Id )
+			sql.Where(l.LineId > 3)
 
-        public static SQL.Delete Delete(Table.Base Table,
-                                        Table.Field Where,
-                                        bool OptimizeTable = false)
-```
-```VB
-NameSpace SQL
-    Public Class X
-
-		Public Shared Function Delete(Table As Table.Base, 
-									  OptimizeTable As Boolean = False) As SQL.Delete
-
-		Public Shared Function Delete(Table As Table.Base,
-									  Where As Table.Column,
-									  OptimizeTable As Boolean = False) As SQL.Delete
-```
-``````
-
-<br/>
-
-**Examples**
-
->Examples shown below needs the [Example Header](##OTH-Example-Header).
-
-<br/>
-
-Following section demonstrates **regular deletion**.
-
-``````XXX
-```C#
-SQL.X.Delete(h, h.Id == 9999).Execute(cn);
-```
-```VB
-SQL.X.Delete(h, h.Id = 9999).Execute(cn)
-```
-``````
-
-<br/>
-
-Following section demonstrates **multiple deletion**.
-
-``````XXX
-```C#
-var sql = SQL.X.Query();
-    sql.Delete(h, h.Id == 9999);
-    sql.Delete(l, l.Id == 9999);
-
-    sql.Execute(cn);
-```
-```VB
-Dim sql = SQL.X.Query()
-    sql.Delete(h, h.Id = 9999)
-    sql.Delete(l, l.Id = 9999)
-
-    sql.Execute(cn)
-```
-``````
-
-<br/>
-
-Following section demonstrates **deletion with join**.
-
-``````XXX
-```C#
-var sql = SQL.X.Delete(h);
-    sql.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
-    sql.Where(l.LineId > 3);
-
-    sql.Execute(cn);
-```
-```VB
-Dim sql = SQL.X.Delete(h)
-    sql.InnerJoin(l, l.Year = h.Year And l.Id = h.Id )
-    sql.Where(l.LineId > 3)
-
-    sql.Execute(cn)
-```
-``````
->This sample deletes the header records which contain DocumentLine that is greather than 3 in lines-table.
-
-<br/>
+			sql.Execute(cn)
+	</code>
+</code-tab>
+<o>
+	This sample deletes the header records which contain DocumentLine that is greather than 3 in lines-table.
+</o>

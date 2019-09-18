@@ -1,85 +1,76 @@
-﻿**`GetTableInstance`** is used to initialize the instance of **[Table.Base.Generic]**, according to table-information in database.
+﻿<k>GetTableInstance</k> is used to initialize the instance of <b>[Table.Base.Generic]</b>, according to table-information in database.
 
-<br/>
 
-**Definition**
-``````XXX
-```C#
-namespace Connection {
-    public class DDL {
+<st>Definition</st>
+<code-tab>
+	<code lang="c#">
+		namespace Connection {
+			public class DDL {
 
-        public Table.Base.Generic GetTableInstance(string TableName){}
-```
-```VB
-NameSpace Connection
-    Public Class DDL
+				public Table.Base.Generic GetTableInstance(string TableName){}
+	</code>
+	<code lang="vb">
+		NameSpace Connection
+			Public Class DDL
 
-        Public Function GetTableInstance(TableName As String) As Table.Base.Generic
-```
-``````
+				Public Function GetTableInstance(TableName As String) As Table.Base.Generic
+	</code>
+</code-tab>
 
-<br/>
-
-**Examples**
-
->Examples shown below needs the [Example Header](##OTH-Example-Header).
-
+<st>Examples</st>
+<ew/>
 <br/>
 
 Following section demonstrates generating the instance of the table.
-
-``````XXX
-```C#
-var tb = cn.DDL.GetTableInstance("table1");
-```
-```VB
-Dim tb = cn.DDL.GetTableInstance("table1")
-```
-``````
+<code-tab>
+	<code lang="c#">
+		var tb = cn.DDL.GetTableInstance("table1");
+	</code>
+	<code lang="vb">
+		Dim tb = cn.DDL.GetTableInstance("table1")
+	</code>
+</code-tab>
 
 <br/>
 
 Following section demonstrates reading the informations from table-instance.
+<code-tab>
+	<code lang="c#">
+		// Reading table columns...
+		foreach ( var col in tb.GetColumns() ){
+			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
+		}
 
-``````XXX
-```C#
-// Reading table columns...
-foreach ( var col in tb.GetColumns() ){
-    Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
-}
+		// Reading table indexes...
+		foreach ( var index in tb.GetIndexes() ){
 
-// Reading table indexes...
-foreach ( var index in tb.GetIndexes() ){
+			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
 
-    Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
+			Debug.WriteLine($"Columns");
+			Debug.WriteLine($"----------------------------");
 
-    Debug.WriteLine($"Columns");
-    Debug.WriteLine($"----------------------------");
+			foreach (var col in index.Columns){
+				Debug.WriteLine($"{col.Name} {(index.IsDescending? "DESC" : "ASC")}");
+			}
+		}
+	</code>
+	<code lang="vb">
+		' Reading table columns...
+		For Each col In tb.GetColumns()
+			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
+		Next
 
-    foreach (var col in index.Columns){
-        Debug.WriteLine($"{col.Name} {(index.IsDescending? "DESC" : "ASC")}");
-    }
-}
-```
-```VB
-' Reading table columns...
-For Each col In tb.GetColumns()
-    Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
-Next
+		' Reading table indexes...
+		For Each index In tb.GetIndexes()
 
-' Reading table indexes...
-For Each index In tb.GetIndexes()
+			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
 
-    Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
+			Debug.WriteLine($"Columns")
+			Debug.WriteLine($"----------------------------")
 
-    Debug.WriteLine($"Columns")
-    Debug.WriteLine($"----------------------------")
-
-    For Each col In index.Columns
-        Debug.WriteLine($"{col.Name} {(index.IsDescending? "DESC" : "ASC")}")
-    Next
-Next
-```
-``````
-
-<br/>
+			For Each col In index.Columns
+				Debug.WriteLine($"{col.Name} {(index.IsDescending? "DESC" : "ASC")}")
+			Next
+		Next
+	</code>
+</code-tab>

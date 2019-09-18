@@ -1,87 +1,85 @@
-﻿**`DropTable`** is used to drop an existing table in a database.
+﻿<k>DropTable</k> is used to drop an existing table in a database.
 
 <br/>
 
-**Definition**
-``````XXX
-```C#
-namespace Connection {
-    public class DDL {
+<st>Definition</st>
+<code-tab>
+	<code lang="c#">
+		namespace Connection
+			public class DDL
 
-        public List<string> DropTable(IEnumerable<Table.Base> Tables,
-                                      bool OnlyGenerateScript = false){}
+				public List<string> DropTable(IEnumerable<Table.Base> Tables,
+											  bool OnlyGenerateScript = false)
 
-        public List<string> DropTable(IEnumerable<string> TableNames,
-                                      bool OnlyGenerateScript = false){}
+				public List<string> DropTable(IEnumerable<string> TableNames,
+											  bool OnlyGenerateScript = false)
 
-        public string DropTable(Table.Base Table,
-                                bool OnlyGenerateScript = false){}
+				public string DropTable(Table.Base Table,
+										bool OnlyGenerateScript = false)
 
-        public string DropTable(string TableName,
-                                bool OnlyGenerateScript = false){}
-```
-```VB
-NameSpace Connection
-    Public Class DDL
+				public string DropTable(string TableName,
+										bool OnlyGenerateScript = false)
+	</code>
+	<code lang="vb">
+		NameSpace Connection
+			Public Class DDL
 
-        Public Function DropTable(Tables As IEnumerable(Of Table.Base),
-                                  OnlyGenerateScript As Boolean = False) As List(Of String)
+				Public Function DropTable(Tables As IEnumerable(Of Table.Base),
+										  OnlyGenerateScript As Boolean = False) As List(Of String)
 
-        Public Function DropTable(TableNames As IEnumerable(Of string),
-                                  OnlyGenerateScript As Boolean = False) As List(Of String)
+				Public Function DropTable(TableNames As IEnumerable(Of string),
+										  OnlyGenerateScript As Boolean = False) As List(Of String)
 
-        Public Function DropTable(Table As Table.Base,
-                                  OnlyGenerateScript As Boolean = False) As String
+				Public Function DropTable(Table As Table.Base,
+										  OnlyGenerateScript As Boolean = False) As String
 
-        Public Function DropTable(TableName As String,
-                                  OnlyGenerateScript As Boolean = False) As String
-```
-``````
+				Public Function DropTable(TableName As String,
+										  OnlyGenerateScript As Boolean = False) As String
+	</code>
+</code-tab>
 
 <br/>
 
-**Examples**
+<st>Examples</st>
 
->Examples shown below needs the [Example Header](##OTH-Example-Header).
+<ew/>
 
 <br/>
 
 Following section demonstrates how to drop table.
 
-``````XXX
-```C#
-// single table by instance
-cn.DDL.DropTable(h);
+<code-tab>
+	<code lang="c#">
+		// single table by instance
+		cn.DDL.DropTable(h);
 
-// multi table by instance
-cn.DDL.DropTable({h, l});
+		// multi table by instance
+		cn.DDL.DropTable({h, l});
 
-// single table by name
-cn.DDL.DropTable("table1");
-```
-```VB
-' single table by instance
-cn.DDL.DropTable(h)
+		// single table by name
+		cn.DDL.DropTable("table1");
+	</code>
+	<code lang="vb">
+		' single table by instance
+		cn.DDL.DropTable(h)
 
-' multi table by instance
-cn.DDL.DropTable({h, l})
+		' multi table by instance
+		cn.DDL.DropTable({h, l})
 
-' single table by name
-cn.DDL.DropTable("table1")
-```
-``````
-
-<br/>
-
-Following section demonstrates how to generate **`DROP TABLE`** script.
-
-``````XXX
-```C#
-var script = cn.DDL.DropTable(h, true);
-```
-```VB
-Dim script = cn.DDL.DropTable(h, true)
-```
-``````
+		' single table by name
+		cn.DDL.DropTable("table1")
+	</code>
+</code-tab>
 
 <br/>
+
+Following section demonstrates how to generate <k>DROP TABLE</k> script.
+
+<code-tab>
+	<code lang="c#">
+		var script = cn.DDL.DropTable(h, true);
+	</code>
+	<code lang="vb">
+		Dim script = cn.DDL.DropTable(h, true)
+	</code>
+</code-tab>
