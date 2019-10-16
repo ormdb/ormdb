@@ -6,21 +6,6 @@ The <k>DataReader</k> provides an <b>unbuffered</b> stream of data that allows p
 </co>
 
 
-<table>
-	<thead>
-		<th>Operation</th>
-		<th>DataTable</th>
-		<th>DataReader</th>
-	</thead>
-	<tr><td>Schema Information                        </td><td>Yes					</td><td>Yes							</td></tr>
-	<tr><td>CRUD operations can be operate as offline.</td><td>Yes					</td><td>No								</td></tr>
-	<tr><td>Moving the cursor on the records.         </td><td>Yes					</td><td>No								</td></tr>
-	<tr><td>Getting RecordCount                       </td><td>Yes					</td><td>is the number of rows iterated	</td></tr>
-	<tr><td>ToDataTable support                       </td><td>Yes					</td><td>Yes							</td></tr>
-	<tr><td>Cursor Mode                               </td><td>READ_ONLY or UPDATE	</td><td>FORWARD_ONLY					</td></tr>
-</table>
-
-
 <st>Examples</st>
 <ew/>
 <br/>
@@ -30,11 +15,11 @@ Following example iterates through a DataReader object and returns two columns f
 <code-tab>
 	<code lang="c#">
 		var sql = SQL.X.Select(h.Note, h.DocDate).From(h);
-		var dr = sql.ExecuteReader(cn);
+		var dr = sql.Execute(cn);
 	</code>
 	<code lang="vb">
 		Dim sql = SQL.X.Select(h.Note, h.DocDate).From(h)
-		Dim dr = sql.ExecuteReader(cn)
+		Dim dr = sql.Execute(cn)
 	</code>
 </code-tab>
 
