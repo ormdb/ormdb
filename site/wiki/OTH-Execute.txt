@@ -18,9 +18,9 @@
 					 Connection.Connection Connection, 
 					 Connection.ExecuteIn ExecuteIn = Connection.ExecuteIn.ActualConnection)
 
-		DataTable Execute(this SQL.IQueryable o, 
-						  Connection.Connection Connection, 
-						  bool ForUpdate = false)
+		DataReader Execute(this SQL.IQueryable o, 
+						   Connection.Connection Connection, 
+						   Connection.ExecuteIn ExecuteIn = Connection.ExecuteIn.ActualConnection)
 	</code>
 	<code lang="vb">
 		ExecuteAsync(o As SQL.IExecutable, 
@@ -30,10 +30,10 @@
 		Execute(o As SQL.IExecutable, 
 				Connection As Connection.Connection,
 				Optional ExecuteIn As Connection.ExecuteIn = Connection.ExecuteIn.ActualConnection)
-
+				
 		Execute(o As SQL.IQueryable, 
 				Connection As Connection.Connection, 
-				Optional ByVal ForUpdate As Boolean = False) As DataTable
+				Optional ExecuteIn As Connection.ExecuteIn = Connection.ExecuteIn.ActualConnection) As DataReader
 	</code>
 </code-tab>
 
@@ -51,7 +51,7 @@
 		sql.Execute(cn);
 
 		// to get the query result as DataReader. (SQL.IQueryable)
-		var dt = sql.Execute(cn, ForUpdate:true);
+		var dr = sql.Execute(cn);
 	</code>
 	<code lang="vb">
 		Imports Odb ' for extensions
@@ -62,6 +62,6 @@
 		Call sql.Execute(cn)
 
 		' to get the query result as DataReader. (SQL.IQueryable)
-		Dim dt = sql.Execute(cn, ForUpdate:=true)
+		Dim dr = sql.Execute(cn)
 	</code>
 </code-tab>

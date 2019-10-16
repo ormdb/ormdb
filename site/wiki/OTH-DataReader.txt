@@ -1,8 +1,8 @@
-﻿To retrieve data using a <k>DataTableReader</k>, create an instance of a SQL.IQueryable object, and then create a reader by calling <k>ExecuteReader</k>. 
-The <k>DataTableReader</k> provides an <b>unbuffered</b> stream of data that allows procedural logic to efficiently process results from a data source sequentially. 
+﻿To retrieve data using a <k>DataReader</k>, create an instance of a SQL.IQueryable object, and then create a reader by calling <k>ExecuteReader</k>. 
+The <k>DataReader</k> provides an <b>unbuffered</b> stream of data that allows procedural logic to efficiently process results from a data source sequentially. 
 
 <co type="success">
-	The DataTableReader is a good choice when you're retrieving large amounts of data because the data is not cached in memory.
+	The DataReader is a good choice when you're retrieving large amounts of data because the data is not cached in memory.
 </co>
 
 
@@ -10,7 +10,7 @@ The <k>DataTableReader</k> provides an <b>unbuffered</b> stream of data that all
 	<thead>
 		<th>Operation</th>
 		<th>DataTable</th>
-		<th>DataTableReader</th>
+		<th>DataReader</th>
 	</thead>
 	<tr><td>Schema Information                        </td><td>Yes					</td><td>Yes							</td></tr>
 	<tr><td>CRUD operations can be operate as offline.</td><td>Yes					</td><td>No								</td></tr>

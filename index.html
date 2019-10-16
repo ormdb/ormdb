@@ -69,8 +69,7 @@
             </div>
         </div>
         <div class="container">
-            <pre class="border border-danger"><code class="language-csharp" id="sample_no_string_1"></code></pre>
-            <pre class="mt-5 border border-success"><code class="language-csharp" id="sample_no_string_2"></code></pre>
+            <pre class="mt-4 border border-success"><code class="language-csharp" id="sample_no_string_2"></code></pre>
         </div>
     </div>
 
@@ -87,7 +86,7 @@
             </div>
         </div>
         <div class="container">
-            <pre class="border border-success"><code class="language-csharp" id="sample_one_statement"></code></pre>
+            <pre class="mt-4 border border-success"><code class="language-csharp" id="sample_one_statement"></code></pre>
         </div>
     </div>
 
@@ -103,7 +102,7 @@
                 </div>
             </div>
         </div>
-        <div id="examples" style="display:flex;justify-content: space-between;margin: 0px auto;max-width: 1200px;">
+        <div id="examples" style="display:flex;justify-content: space-between;margin:20px auto;max-width: 1200px;">
             <ul id="examples_menu"></ul>
             <pre class="w-100 p-4 m-0 d-inline-block"><code class="language-csharp" id="examples_data"></code></pre>
         </div>
@@ -133,15 +132,10 @@
         }
 
         $(function () {
-            //-- no-string-compare-sample is being loaded...
-            $.get(code_path + "00-no_string_1.txt", function (data) {
-                $("#sample_no_string_1").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));
-            });
             $.get(code_path + "00-no_string_2.txt", function (data) {
                 $("#sample_no_string_2").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));
             });
-
-
+        
             //-- one-statemment-sample is being loaded...
             $.get(code_path + "00-one_statement.txt", function (data) {
                 $("#sample_one_statement").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));
@@ -153,8 +147,7 @@
                 { title: "Select", file: "02-select.txt" },
                 { title: "Insert", file: "03-insert.txt" },
                 { title: "Update", file: "04-update.txt" },
-                { title: "Delete", file: "05-delete.txt" },
-                { title: "DataTable", file: "06-datatable.txt" }
+                { title: "Delete", file: "05-delete.txt" }
             ];
 
             var ul = $("#examples_menu");
