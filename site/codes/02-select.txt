@@ -17,7 +17,7 @@ var sql = SQL.X.Select().From(h, h.Year > 2018)
                           .OrderBy( h.Year, h.Id.DESC() ) ;
 
     // reading with DataReader
-    using(var dr = sql.ExecuteReader())
+    using(var dr = sql.Execute())
     {
         // iterating rows
         foreach (var r in dr) {

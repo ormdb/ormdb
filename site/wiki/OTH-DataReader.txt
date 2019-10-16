@@ -1,4 +1,4 @@
-﻿To retrieve data using a <k>DataReader</k>, create an instance of a SQL.IQueryable object, and then create a reader by calling <k>ExecuteReader</k>. 
+﻿To retrieve data using a <k>DataReader</k>, create an instance of a SQL.IQueryable object, and then create a reader by calling <k>Execute</k>. 
 The <k>DataReader</k> provides an <b>unbuffered</b> stream of data that allows procedural logic to efficiently process results from a data source sequentially. 
 
 <co type="success">
