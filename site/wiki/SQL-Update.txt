@@ -98,7 +98,7 @@ Following section demonstrates <b>update with join</b>.
 	</code>
 </code-tab>
 <o>
-This sample updates the header records which contain DocumentLine that is greather than 3 in lines-table.
+This sample updates the [header-table] records which contain record(s) that is greather than 3 in [line-table].
 </o>
 
 <br/>

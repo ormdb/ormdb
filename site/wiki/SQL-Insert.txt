@@ -71,7 +71,7 @@ Following section demonstrates <b>single table insertion</b>. DocDate is accepte
 	</code>
 </code-tab>
 <o>
-In this sample, the column <k>h.EnteredDate</k> was not specified. Sql engine of <k>OrmDb</k> sets the column with its inital value according to its type.
+In this sample, the column <k>h.DocDate</k> was not specified. Sql engine of <k>OrmDb</k> sets the column with its inital value according to its type.
 </o>
 
 <br/>

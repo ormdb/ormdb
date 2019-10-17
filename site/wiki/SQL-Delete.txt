@@ -77,5 +77,5 @@ Following section demonstrates <b>deletion with join</b>.
 	</code>
 </code-tab>
 <o>
-	This sample deletes the header records which contain DocumentLine that is greather than 3 in lines-table.
+	This sample deletes from [header-table] records which contain record(s) that is greather than 3 in [line-table].
 </o>
