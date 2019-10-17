@@ -1,10 +1,10 @@
 ﻿<k>Select</k> method is used to select data from a database. 
 
 You can access each column of the returned row by passing the name or ordinal number of the column to the 
-<a href="##OTH-DataReader">DataReader</a> or <a href="##OTH-DataTable">DataTable</a>. 
+<a href="##OTH-DataReader">DataReader</a>. 
 
 <co type="warning">
-	Please read <a href="##OTH-DataReader">DataReader</a> or <a href="##OTH-DataTable">DataTable</a> for further information.
+	Please read <a href="##OTH-DataReader">DataReader</a> for further information.
 </co>
 
 
@@ -31,12 +31,12 @@ Following section demonstrates <hl>Reqular Select</hl>.
 	<code lang="c#">
 		var sql = SQL.X.Select(h.Year, h.Id).From(h);
 
-		// ... Read by [DataReader] or [DataTable]
+		// ... Read by [DataReader]
 	</code>
 	<code lang="vb">
 		Dim sql = SQL.X.Select(h.Year, h.Id).From(h)
 
-		' ... Read by [DataReader] or [DataTable]
+		' ... Read by [DataReader]
 	</code>
 </code-tab>
 <br/>
@@ -53,7 +53,7 @@ Following section demonstrates using <hl>Conditional Where</hl> clause.
 
 		var sql = SQL.X.Select(h.Year, h.Id).From(h, _where);
 
-		// ... Read by [DataReader] or [DataTable]
+		// ... Read by [DataReader]
 	</code>
 	<code lang="vb">
 		Dim _where = (h.Year = 2017)
@@ -65,7 +65,7 @@ Following section demonstrates using <hl>Conditional Where</hl> clause.
 
 		Dim sql = SQL.X.Select(h.Year, h.Id).From(h, _where)
 
-		' ... Read by [DataReader] or [DataTable]
+		' ... Read by [DataReader]
 	</code>
 </code-tab>
 <br/>
@@ -97,14 +97,14 @@ Following section demonstrates using <hl>JOIN</hl> clause.
 			sql.LeftJoin(l, l.Year==h.Year & l.Id == h.Id )
 			sql.Where( h.Year.In(new[] {2018, 2019}) & h.Id.IsNotNull() );
 
-		// ... Read by [DataReader] or [DataTable]
+		// ... Read by [DataReader]
 	</code>
 	<code lang="vb">
 		With SQL.X.Select().From(h)
 			.LeftJoin(l, l.Year=h.Year And l.Id = h.Id )
 			.Where( h.Year.In( {2018, 2019} ) And h.Id.IsNotNull() )
 
-			' ... Read by [DataReader] or [DataTable]
+			' ... Read by [DataReader]
 		End With
 	</code>
 </code-tab>
@@ -116,12 +116,12 @@ Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
 	<code lang="c#">
 		var sql = SQL.X.Select().From(h).Skip(5).Top(10).OrderBy(h.Year);
 
-		// ... Read by [DataReader] or [DataTable]
+		// ... Read by [DataReader]
 	</code>
 	<code lang="vb">
 		Dim sql = SQL.X.Select().From(h).Skip(5).Top(10).OrderBy(h.Year)
 
-		' ... Read by [DataReader] or [DataTable]
+		' ... Read by [DataReader]
 	</code>
 </code-tab>
 
@@ -135,7 +135,7 @@ Following section demonstrates using <hl>GROUP BY</hl> clause.
 
 		var sql = SQL.X.Select(h.Id, _yr_min, _yr_max).From(h).GroupBy(h.Id);
 
-		// ... Read by [DataReader] or [DataTable]
+		// ... Read by [DataReader]
 	</code>
 	<code lang="vb">
 		Dim _yr_min = h.Year.MIN().AS("_date_min")
@@ -143,7 +143,7 @@ Following section demonstrates using <hl>GROUP BY</hl> clause.
 
 		Dim sql = SQL.X.Select(h.Id, _yr_min, _yr_max).From(h).GroupBy(h.Id)
 
-		' ... Read by [DataReader] or [DataTable]
+		' ... Read by [DataReader]
 	</code>
 </code-tab>
 
@@ -159,7 +159,7 @@ Following section demonstrates using <hl>UNION</hl> clause.
 			sql.Select().From(h, h.Id == 2000).Top(1).OrderBy(h.Id);
 			sql.OrderBy(h.DocDate);
 
-		// ... Read by [DataReader] or [DataTable]
+		// ... Read by [DataReader]
 	</code>
 	<code lang="vb">
 		With SQL.X.Union()
@@ -169,7 +169,7 @@ Following section demonstrates using <hl>UNION</hl> clause.
 			.Select().From(h, h.Id = 2000).Top(1).OrderBy(h.Id)
 			.OrderBy(h.DocDate)
 
-			' ... Read by [DataReader] or [DataTable]
+			' ... Read by [DataReader]
 		End With
 	</code>
 </code-tab>
@@ -187,7 +187,7 @@ Following section demonstrates using <hl>SUB SELECT</hl> clause.
 			sql.LeftJoin(sq2, sq2(h.Id) == sq1(l.Id));
 			sql.Where( sq1(h.Year) == 2017) ;
 
-		// ... Read by [DataReader] or [DataTable]
+		// ... Read by [DataReader]
 	</code>
 	<code lang="vb">
 		Dim sq1 = SQL.X.Select().From(h, h.Id = 1000).ToSubQuery()
@@ -198,7 +198,7 @@ Following section demonstrates using <hl>SUB SELECT</hl> clause.
 			.LeftJoin(sq2, sq2(h.Id) = sq1(l.Id))
 			.Where( sq1(h.Year) = 2017 )
 
-			' ... Read by [DataReader] or [DataTable]
+			' ... Read by [DataReader]
 		End With
 	</code>
 </code-tab>
@@ -213,13 +213,13 @@ Following section demonstrates using <hl>SUB SELECT</hl> in a <hl>WHERE</hl> blo
 
 		var sql = SQL.X.Select().From(h, h.Id == sq);
 
-		// ... Read by [DataReader] or [DataTable]
+		// ... Read by [DataReader]
 	</code>
 	<code lang="vb">
 		Dim sq = SQL.X.Select(h.DocumentId.DISTINCT()).From(h, h.Id = 1000).ToSubQuery()
 
 		Dim sql = SQL.X.Select().From(h, h.Id = sq)
 
-		' ... Read by [DataReader] or [DataTable]
+		' ... Read by [DataReader]
 	</code>
 </code-tab>
