@@ -115,5 +115,5 @@ Following section demonstrates to set value of <b>DbNull</b>.
 	</code>
 </code-tab>
 <o>
-UPDATE h SET <u><hl>h.DocumentId = Null</hl></u> FROM TableHeader AS h WHERE h.DocumentId IS NOT NULL
+UPDATE h SET <u><hl>h.str = NULL</hl></u> FROM TableHeader AS h WHERE <u><hl>h.str IS NOT NULL</hl></u>
 </o>
