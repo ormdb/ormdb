@@ -58,7 +58,7 @@
 			<td>DATE</td>
 		</tr>
 		<tr>
-			<td><b>ColumnDateTime</b><br/><br/> <k>System.DateTime</k> (with NO fractional_seconds)</td>
+			<td><b>ColumnDateTime</b><br/><br/> <k>System.DateTime</k></td>
 			<td>datetime2(0)</td>
 			<td>DATETIME(0)</td>
 			<td>TIMESTAMP(0)</td>
@@ -71,39 +71,62 @@
 			<td></td>
 			<td></td>
 		</tr>
+		<tr>
+			<td colspan="5" class="table-muted">
+				<b>ColumnInt</b>&nbsp;&nbsp;<span class="bg-danger text-white p-1">Deprecated</span>
+				<br/><br/>
+				<co type="danger">
+					There is no INTEGER data type for all databases because an INTEGER is a number with no decimal precision in ANSI standards.
+				</co>
+				<br/>
+				<table class="table table-light table-bordered" style="max-width:450px;">
+					<thead class="thead-dark">
+						<tr><th>SubType</th>			<th>Accept As</th>				<th>Byte Size</th>	</tr>
+					</thead>
+					<tbody>
+						<tr><td>Int8 / tinyint</td>		<td>ColumnNumeric(3, 0)</td>	<td>3</td>			</tr>
+						<tr><td>Int16 / smallint</td>	<td>ColumnNumeric(5, 0)</td>	<td>5</td>			</tr>
+						<tr><td>Int32 / int</td>		<td>ColumnNumeric(10, 0)</td>	<td>9</td>			</tr>
+						<tr><td>Int64 / bigint</td>		<td>ColumnNumeric(19, 0)</td>	<td>9</td>			</tr>
+					</tbody>
+				</table>
+				These types are not supported only for definition. But you can allways use these types in database. 
+			</td>
+		</tr>
 	</tbody>
 </table>
 
-<ew/>
-
-<br/>
+<br/><br/>
 
 All column types has the properties as shown below.
-
 <table>
 	<thead>
-		<th>ColumnType</th>
-		<th>.NET type</th>
+		<th>Property Name</th>
+		<th>Description</th>
 	</thead>
 	<tr>
-		<td>Name</td>
+		<td class="text-nowrap"><b>c</b> - ColumnName</td>
 		<td>Optional. It is the name of the column.</td>
 	</tr>
 	<tr>
-		<td>Description</td>
+		<td class="text-nowrap"><b>d</b> - Description</td>
 		<td>Optional. It is the description of the column.</td>
 	</tr>
 	<tr>
-		<td>Nullable</td>
+		<td class="text-nowrap"><b>n</b> - Nullable</td>
 		<td>Optional. This constraint enforces a column to accept or NOT accept NULL values.</td>
 	</tr>
 </table>
 
 
+<br/><br/>
+<ew/>
 
 <st>ColumnString (Length)</st>
 is used for .NET <k>System.String</k> data type.
+Variable-size string data. <b>Length</b> is the size in bytes, NOT in char. Max value of <b>Length</b> can be different according to databases.
 
+<br/><br/>
 <code-tab>
 	<code lang="c#">
 			[ColumnString(10)]public Column col_char;
@@ -116,7 +139,9 @@ is used for .NET <k>System.String</k> data type.
 
 <st>ColumnNumeric (Precision, Scale)</st>
 is used for any .NET numeric types such as <k>int[16/32/64]</k>, <k>sigle</k>, <k>double</k>, <k>decimal</k> etc.
-
+Precision is an integer that represents the total number of digits allowed in this column.
+The scale, also an integer value, represents the number of decimal places to right of the decimal point.
+<br/><br/>
 <code-tab>
 	<code lang="c#">
 			[ColumnNumeric(15, 2)]public Column col_num;
@@ -128,7 +153,7 @@ is used for any .NET numeric types such as <k>int[16/32/64]</k>, <k>sigle</k>, <
 
 <st>ColumnBoolean</st>
 is used for .NET <k>System.Boolean</k> data type.
-
+<br/><br/>
 <code-tab>
 	<code lang="c#">
 			[ColumnBoolean()]public Column col_bool;
@@ -141,7 +166,7 @@ is used for .NET <k>System.Boolean</k> data type.
 
 <st>ColumnBinary</st>
 is used for .NET <k>System.Byte[]</k> data type. 
-
+<br/><br/>
 <code-tab>
 	<code lang="c#">
 			[ColumnBinary()]public Column col_bin;
@@ -153,7 +178,7 @@ is used for .NET <k>System.Byte[]</k> data type.
 
 <st>ColumnTime</st>
 is used for .NET <k>System.TimeSpan</k> data type. This type of column stores only <b>TIME</b> value of <k>System.TimeSpan</k> as "24hh:mm:dd".
-
+<br/><br/>
 <code-tab>
 	<code lang="c#">
 			[ColumnTime()]public Column col_tim;
@@ -166,7 +191,7 @@ is used for .NET <k>System.TimeSpan</k> data type. This type of column stores on
 
 <st>ColumnDate</st>
 is used for .NET <k>System.Date</k> data type. This type of column stores only <b>DATE</b> value of <k>System.Date</k> as "yyyy-MM-dd".
-
+<br/><br/>
 <code-tab>
 	<code lang="c#">
 			[ColumnDate()]public Column col_dat;
@@ -179,7 +204,7 @@ is used for .NET <k>System.Date</k> data type. This type of column stores only <
 
 <st>ColumnDateTime</st>
 is used for .NET <k>System.Date</k> data type. This type of column stores <b>DATE</b> and <b>TIME</b> value of <k>System.Date</k> as "yyyy-MM-dd 24hh-mm-ss".
-
+<br/><br/>
 <code-tab>
 	<code lang="c#">
 			[ColumnDateTime()]public Column col_dattim;
@@ -192,6 +217,7 @@ is used for .NET <k>System.Date</k> data type. This type of column stores <b>DAT
 
 <st>ColumnRef</st>
 is used for columns used repeatedly. <b>Name</b>, <b>Description</b> and <b>Nullable</b> properties can be redefiend.
+<br/><br/>
 <code-tab>
 	<code lang="c#">
 			[ColumnRef( reference )]public Column col_ref;

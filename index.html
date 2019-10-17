@@ -52,7 +52,7 @@
             <code>You can install via NuGet or just copy DLL to your bin project folder.</code>
         </div>
         <div class="bs-callout bs-callout-warning table-warning">
-            One code for all databases. Besides FREE for everyone - including commercial use
+            One code for all databases. Besides FREE for everyone - including commercial use.&nbsp;&nbsp;<a href="http://opensource.org/licenses/MIT" target="_blank">MIT</a>
         </div>
     </div>
 
@@ -107,10 +107,8 @@
             <pre class="w-100 p-4 m-0 d-inline-block"><code class="language-csharp" id="examples_data"></code></pre>
         </div>
     </div>
-
-    <footer>
-        OrmDB - MIT License
-    </footer>
+    
+    <small class="copyright"></small>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="site/js/prism.js"></script>
@@ -135,7 +133,7 @@
             $.get(code_path + "00-no_string_2.txt", function (data) {
                 $("#sample_no_string_2").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));
             });
-        
+
             //-- one-statemment-sample is being loaded...
             $.get(code_path + "00-one_statement.txt", function (data) {
                 $("#sample_one_statement").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));
@@ -172,6 +170,9 @@
             link.rel = 'shortcut icon';
             link.href = 'https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b';
             document.getElementsByTagName('head')[0].appendChild(link);
+
+
+            $(".copyright").html('Copyright(c) ' + (new Date()).getFullYear() + ' - OrmDb');
         });
     </script>
 
