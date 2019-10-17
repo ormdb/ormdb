@@ -1,9 +1,13 @@
-﻿You can use the column-types as shown below, in the table definitions by <b>OrmDB</b>.
+﻿Column(s) type of <k>Odb.Table.Column</k> are also defined by supplying necessary type information in the attribute.
+If a column-type is often used in many of your tables, you can use a column as a reference.
+You can use the column-types as shown below, in the table definitions by <b>OrmDB</b>.
 
 <st>Definition</st>
 <co type="light">
 	<small><b>Namespace : </b>Odb.Table</small>
 </co>
+
+<st>Column Types</st>
 <table>
 	<thead>
 		<tr>
