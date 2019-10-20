@@ -6,10 +6,11 @@
     <meta name="description" content="OrmDB :: OrmDB is the Fastest and best ORM tool for .Net / .Net.Core">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="site/css/prism.css">
-    <link rel="stylesheet" href="site/css/site.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/site/resources/css/prism.css">
+    <link rel="stylesheet" href="/site/resources/css/site.css" />
 
     <style>
         /* code output/result */
@@ -38,6 +39,7 @@
         }
 
         #wiki {
+            overflow: hidden;
         }
 
 
@@ -48,7 +50,22 @@
                 -webkit-box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
                 -moz-box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
                 box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
+                overflow: auto;
             }
+                #wiki > #wiki-menu a {
+                    display: block;
+                    text-decoration: none;
+                    color: #0056b3;
+                    cursor: pointer;
+                    padding: 5px 10px 5px 20px;
+                    white-space: nowrap;
+                }
+
+                    #wiki > #wiki-menu a:hover {
+                        text-decoration: underline;
+                        color: #0056b3;
+                    }
+
 
         .wiki-menu-visible {
             min-width: 270px !important;
@@ -62,21 +79,6 @@
             display: none !important;
         }
 
-        #wiki > #wiki-menu li {
-            text-decoration: none;
-            color: #0056b3;
-            cursor: pointer;
-        }
-
-            #wiki > #wiki-menu li:hover {
-                text-decoration: underline;
-                color: #0056b3;
-            }
-
-        #wiki > #wiki-menu li {
-            padding: 5px 10px;
-            white-space: nowrap;
-        }
 
         #wiki > #wiki-menu .wiki-menu-active {
             background: #f3f9ff;
@@ -89,6 +91,7 @@
             font-size: 16px;
             line-height: 1.5;
             word-wrap: break-word;
+            overflow: auto;
         }
 
         /*-----------------------------------------*/
@@ -132,8 +135,6 @@
 </head>
 <body>
     <div class="d-flex flex-column w-100 h-100" style="position: absolute;top: 0; right: 0; bottom: 0; left: 0;">
-
-
         <nav class="navbar navbar-dark bg-dark d-sm-flex d-md-none">
             <button class="navbar-toggler" type="button" onclick="toggleNav()">
                 <span class="navbar-toggler-icon"></span>
@@ -162,7 +163,8 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="site/js/prism.js"></script>
+    <script src="site/resources/js/prism.js"></script>
+    <script src="site/resources/js/site.js"></script>
     <script>
         String.prototype.replaceAll = function (search, replacement) {
             var target = this;
@@ -170,12 +172,6 @@
         };
 
         //-- location is being determining...
-        var location_path = location.href.split("/");
-        location_path.pop();
-        location_path = location_path.join("/");
-        var code_path = location_path + "/site/codes/";
-        var wiki_path = location_path + "/site/wiki/";
-
         var _wiki_menu = $("#wiki-menu");
         var _wiki_body = $("#wiki-body");
         //-------------------------------------------------------------------------------------
@@ -258,21 +254,22 @@
         for (var g in _menu_groups) {
             var _menu_group = _menu_groups[g];
 
-            _menu.push('<p><strong>' + _menu_group.title + '</strong></p>');
-            _menu.push('<ul>');
+            _menu.push('<p class="mt-4 mb-1"><strong>' + _menu_group.title + '</strong></p>');
+           // _menu.push('<ul>');
 
             for (var i in _menu_group.items) {
-                _menu.push('<li onclick=menu_click(this) data-hash="' + i + '">' + _menu_group.items[i] + '</li>');
+                //_menu.push('<li onclick=menu_click(this) data-hash="' + i + '">' + _menu_group.items[i] + '</li>');
+                _menu.push('<a href="##' + i + '">' + _menu_group.items[i] + '</a>');
 
             }
-            _menu.push('</ul>');
+           // _menu.push('</ul>');
 
         }
         // menu is being rendered...
         _wiki_menu.html(_menu.join(''));
-        function menu_click(obj) {
-            window.location.hash = '##' + $(obj).data()["hash"];
-        }
+        //function menu_click(obj) {
+        //    window.location.hash = '##' + $(obj).data()["hash"];
+        //}
         //-------------------------------------------------------------------------------------
         $(window).on('popstate', function (e) {
             load_page();
@@ -303,7 +300,7 @@
 
             //-- content
 
-            var _copyright = '<small class="copyright">Copyright(c) ' + (new Date()).getFullYear() + ' - OrmDb</small>';
+            var _copyright = '<small class="copyright">' + site.copyright + '</small>';
             var _not_found = '<div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div>';
 
             var _regex_cod = /<\s*code(?:\s[^>]*|)>(.*?)<\s*\/\s*code>/gmis
@@ -312,7 +309,7 @@
 
             _wiki_body.scrollTop(0);
             if (is_small()) closeNav();
-            $.get(wiki_path + _file + ".txt", function (data) {
+            $.get(site.wiki_path + _file + ".html", function (data) {
 
                 //-- The CODE block(s), are determined with its attributes.
                 var _code_blocks = data.match(_regex_cod_bgn);

@@ -5,12 +5,12 @@
     <title>OrmDB :: Fastest ORM tool for .Net / .Net.Core</title>
     <meta name="description" content="OrmDB :: OrmDB is the Fastest and best ORM tool for .Net / .Net.Core">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="site/css/prism.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="site/css/site.css" />
+    <link rel="stylesheet" href="/site/resources/css/prism.css">
+    <link rel="stylesheet" href="/site/resources/css/site.css" />
 </head>
 
 
@@ -34,7 +34,7 @@
         <div class="p-5">
             <a href="https://www.nuget.org/packages/OrmDb/" target="_blank" style="margin:10px; text-decoration:none;padding:1px;display: inline-flex;align-items: center;background-color: #0e83cd;color: white;">
                 <div class="p-3 text-light bg-dark">
-                    <img src="site/images/nuget.png" style="height:25px">&nbsp;&nbsp;Install from Nuget
+                    <img src="site/resources/images/nuget.png" style="height:25px">&nbsp;&nbsp;Install from Nuget
                 </div>
                 <span style="padding: 10px;">
                     <i class="fa fa-arrow-right" style="width:30px;"></i>
@@ -107,21 +107,13 @@
             <pre class="w-100 p-4 m-0 d-inline-block"><code class="language-csharp" id="examples_data"></code></pre>
         </div>
     </div>
-    
+
     <small class="copyright"></small>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="site/js/prism.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/9.0.1/markdown-it.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-linkify/2.1.8/linkify.min.js"></script>
+    <script src="site/resources/js/prism.js"></script>
+    <script src="site/resources/js/site.js"></script>
     <script>
-        //-- location is being determining...
-        var location_path = location.href.split("/");
-        location_path.pop();
-        location_path = location_path.join("/");
-        var code_path = location_path + "/site/codes/";
-        var wiki_path = location_path + "/site/wiki/";
-
         var _examples_data = [];
         function _example_activate(index) {
             $("#examples_menu>li").removeClass("active");
@@ -130,22 +122,22 @@
         }
 
         $(function () {
-            $.get(code_path + "00-no_string_2.txt", function (data) {
+            $.get(site.code_path + "00-no_string_2.html", function (data) {
                 $("#sample_no_string_2").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));
             });
 
             //-- one-statemment-sample is being loaded...
-            $.get(code_path + "00-one_statement.txt", function (data) {
+            $.get(site.code_path + "00-one_statement.html", function (data) {
                 $("#sample_one_statement").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));
             });
 
             //-- Samples are being loaded...
             var items = [
-                { title: "Definition", file: "01-definition.txt" },
-                { title: "Select", file: "02-select.txt" },
-                { title: "Insert", file: "03-insert.txt" },
-                { title: "Update", file: "04-update.txt" },
-                { title: "Delete", file: "05-delete.txt" }
+                { title: "Definition", file: "01-definition.html" },
+                { title: "Select", file: "02-select.html" },
+                { title: "Insert", file: "03-insert.html" },
+                { title: "Update", file: "04-update.html" },
+                { title: "Delete", file: "05-delete.html" }
             ];
 
             var ul = $("#examples_menu");
@@ -153,7 +145,7 @@
                 function (item, index) {
                     ul.append('<li onclick="_example_activate(' + index + ');"><i class="fa fa-cube mr-3"></i>' + item.title + '</li>');
 
-                    var _url = code_path + item.file;
+                    var _url = site.code_path + item.file;
                     $.get(_url, function (data) {
                         _examples_data[index] = Prism.highlight(data, Prism.languages.csharp, 'csharp');
                         if (index == 0) {
@@ -172,7 +164,7 @@
             document.getElementsByTagName('head')[0].appendChild(link);
 
 
-            $(".copyright").html('Copyright(c) ' + (new Date()).getFullYear() + ' - OrmDb');
+            $(".copyright").html(site.copyright);
         });
     </script>
 
