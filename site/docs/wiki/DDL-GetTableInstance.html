@@ -6,12 +6,12 @@
 	<small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public Table.Base.Generic GetTableInstance(string TableName)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Function GetTableInstance(TableName As String) As Table.Base.Generic
-	</code>
+	</pre>
 </code-tab>
 
 <st>Examples</st>
@@ -21,19 +21,19 @@
 
 Following section demonstrates generating the instance of the table.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var tb = cn.DDL.GetTableInstance("table1");
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim tb = cn.DDL.GetTableInstance("table1")
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 Following section demonstrates reading the informations from table-instance.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		// Reading table columns...
 		foreach ( var col in tb.GetColumns() ){
 			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
@@ -51,8 +51,8 @@ Following section demonstrates reading the informations from table-instance.
 				Debug.WriteLine($"{col.Name} {(index.IsDescending? "DESC" : "ASC")}");
 			}
 		}
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		' Reading table columns...
 		For Each col In tb.GetColumns()
 			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
@@ -70,5 +70,5 @@ Following section demonstrates reading the informations from table-instance.
 				Debug.WriteLine($"{col.Name} {(index.IsDescending? "DESC" : "ASC")}")
 			Next
 		Next
-	</code>
+	</pre>
 </code-tab>

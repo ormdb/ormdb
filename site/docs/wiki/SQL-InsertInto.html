@@ -6,16 +6,16 @@
 	<small><b>Namespace : </b>Odb.SQL.X</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public static SQL.InsertInto InsertInto(Table.Base Table, SQL.Select From)
 
 		public static SQL.InsertInto InsertInto(SQL.TempTable Table, SQL.Select From)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Shared Function InsertInto(Table As Table.Base, From As SQL.Select) As SQL.InsertInto
 
 		Public Shared Function InsertInto(Table As SQL.TempTable, From As SQL.Select) As SQL.InsertInto
-	</code>
+	</pre>
 </code-tab>
 
 
@@ -29,7 +29,7 @@ Make sure the order of the values is in the same order as the columns in the tar
 
 Following section demonstrates <b>regular insertion from select</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		// copies records in 2017 into same table as 2018
 
 		var sql = SQL.X.Select(h.Const(2018).AS(h.Year), 
@@ -38,8 +38,8 @@ Following section demonstrates <b>regular insertion from select</b>.
 							   h.DocDate).From(h, h.Year == 2017);
 
 		SQL.X.InsertInto(h, sql).Execute(cn);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		' copies records in 2017 into same table as 2018
 
 		Dim sql = SQL.X.Select(h.Const(2018).AS(h.Year), 
@@ -48,5 +48,5 @@ Following section demonstrates <b>regular insertion from select</b>.
 							   h.DocDate).From(h, h.Year = 2017)
 
 		SQL.X.InsertInto(h, sql).Execute(cn)
-	</code>
+	</pre>
 </code-tab>

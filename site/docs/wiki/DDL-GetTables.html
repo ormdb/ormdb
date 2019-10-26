@@ -5,20 +5,22 @@
 	<small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public List<SchemaTableInfo> GetTables(string TableName = null)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Function GetTables(TableName As String = Nothing) As List(Of SchemaTableInfo)
-	</code>
+	</pre>
 </code-tab>
 
 
 <st>Return</st>
 <table>
 	<thead>
-		<th>SchemaTableInfo</th>
-		<th>Description</th>
+        <tr>
+            <th>SchemaTableInfo</th>
+            <th>Description</th>
+        </tr>
 	</thead>
 	<tr><td>Catalog</td><td>Database or Catalog name which has the table</td></tr>
 	<tr><td>Schema </td><td>Name of schema that contains the table.     </td></tr>
@@ -33,7 +35,7 @@
 Following section demonstrates retrieving the tables from database.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var tables = cn.DDL.GetTables();
 
 		var table_count = tables.Count;
@@ -41,8 +43,8 @@ Following section demonstrates retrieving the tables from database.
 		foreach (var table in tables) {
 			System.Diagnostics.Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}");
 		}
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim tables = cn.DDL.GetTables()
 
 		Dim table_count = tables.Count
@@ -50,5 +52,5 @@ Following section demonstrates retrieving the tables from database.
 		For Each table In tables
 			System.Diagnostics.Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}")
 		Next
-	</code>
+	</pre>
 </code-tab>

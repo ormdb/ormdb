@@ -5,12 +5,12 @@
 	<small><b>Namespace : </b>Odb.SQL.X</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public static SQL.Insert Insert(bool SetInitials = false) 
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Shared Function Insert(SetInitials As Boolean = False) As SQL.Insert
-	</code>
+	</pre>
 </code-tab>
 
 
@@ -22,9 +22,11 @@ Columns which are specified <k>SetInitials = true</k>, accepts values shown belo
 <br/>
 <table>
 	<thead>
-		<th>ColumnType</th>
-		<th>.NET type</th>
-		<th>Value</th>
+        <tr>
+            <th>ColumnType</th>
+            <th>.NET type</th>
+            <th>Value</th>
+        </tr>
 	</thead>
 	<tr><td>ColumnString  </td><td><k>System.String</k>																			</td><td>String.Empty					</td></tr>
 	<tr><td>ColumnNumeric </td><td>Any .NET numeric types such as <k>int</k>, <k>sigle</k>, <k>double</k>, <k>decimal</k> etc.	</td><td>0								</td></tr>
@@ -44,7 +46,7 @@ Columns which are specified <k>SetInitials = true</k>, accepts values shown belo
 
 Following section demonstrates <b>single table insertion</b>. DocDate is accepted as <k>Date.MinValue</k>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var _insert = SQL.X.Insert(true);
 
 		for (n = 1; (n <= 100); n++) {
@@ -55,8 +57,8 @@ Following section demonstrates <b>single table insertion</b>. DocDate is accepte
 				// row.DocDate = DateTime.Now();
 		}
 		sql.Execute(cn);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		With SQL.X.Insert(True)
 			For n = 1 To 100
 				With sql.AddRow(h.NewModel())
@@ -68,7 +70,7 @@ Following section demonstrates <b>single table insertion</b>. DocDate is accepte
 			Next
 			.Execute(cn)
 		End With
-	</code>
+	</pre>
 </code-tab>
 <o>
 In this sample, the column <k>h.DocDate</k> was not specified. Sql engine of <k>OrmDb</k> sets the column with its inital value according to its type.
@@ -78,7 +80,7 @@ In this sample, the column <k>h.DocDate</k> was not specified. Sql engine of <k>
 
 Following section demonstrates <b>multiple table insertion</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Query();
 
 		var _insert = sql.Insert();
@@ -103,8 +105,8 @@ Following section demonstrates <b>multiple table insertion</b>.
 
 		// All commands in query, are being executed as batch.
 		sql.Execute(cn)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		With SQL.X.Query()
 			Dim _insert = sql.Insert()
 
@@ -129,7 +131,7 @@ Following section demonstrates <b>multiple table insertion</b>.
 			' All commands in query, are being executed as batch.
 			.Execute(cn)
 		End With
-	</code>
+	</pre>
 </code-tab>
 
 <br/>

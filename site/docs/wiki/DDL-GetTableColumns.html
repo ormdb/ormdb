@@ -6,21 +6,23 @@
 	<small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public List<SchemaTableColumnInfo> GetTableColumns(Table.Base Table)
 		public List<SchemaTableColumnInfo> GetTableColumns(string TableName)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Function GetTableColumns(Table As Table.Base) As List(Of SchemaTableColumnInfo)
 		Public Function GetTableColumns(TableName As String) As List(Of SchemaTableColumnInfo)
-	</code>
+	</pre>
 </code-tab>
 
 <st>Return</st>
 <table>
 	<thead>
-		<th>SchemaTableColumnInfo</th>
-		<th>Description</th>
+        <tr>
+            <th>SchemaTableColumnInfo</th>
+            <th>Description</th>
+        </tr>
 	</thead>
 	<tr><td>Catalog			</td><td>Table qualifier</td></tr>
 	<tr><td>Schema			</td><td>Name of schema that contains the table.</td></tr>
@@ -45,30 +47,30 @@
 
 Following section demonstrates reading the columns of a table <b>by its instance</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		foreach (var col in cn.DDL.GetTableColumns(h)) {
 			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
 		}
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		For Each col In cn.DDL.GetTableColumns(h)
 			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
 		Next
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 Following section demonstrates reading the columns a of table <b>by its name</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		foreach (var col in cn.DDL.GetTableColumns("table_name")) {
 			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
 		}
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		For Each col In cn.DDL.GetTableColumns("table_name")
 			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
 		Next
-	</code>
+	</pre>
 </code-tab>

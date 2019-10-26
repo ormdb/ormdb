@@ -6,14 +6,14 @@
 	<small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public bool TableExist(Table.Base Table)
 		public bool TableExist(string TableName)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public FunctionTableExist(Table As Table.Base) As Boolean
 		Public FunctionTableExist(TableName As String) As Boolean
-	</code>
+	</pre>
 </code-tab>
 
 <st>Examples</st>
@@ -24,14 +24,14 @@
 Following section demonstrates determining whether the specified [Table] exists.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		Debug.WriteLine("[table1] = " + (cn.DDL.TableExist("table1") ? "Exists" : "N/A") );
 
 		Debug.WriteLine($"[{h.Name}] = " + (cn.DDL.TableExist(h) ? "Exists " : "N/A") );
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Debug.WriteLine("[table1] = " + If(cn.DDL.TableExist("table1"), "Exists", "N/A") )
 
 		Debug.WriteLine($"[{h.Name}] = " + If(cn.DDL.TableExist(h), "Exists", "N/A") )
-	</code>
+	</pre>
 </code-tab>

@@ -1,25 +1,25 @@
-﻿<k>Transaction</k> methods are used with the <a href="##CON-Create">Connection</a> object to save or cancel changes made to the data source.
-Please refer to <a href="##CON-Create">Connection</a> for further information.
+﻿<k>Transaction</k> methods are used with the <a href="##CON-Connection">Connection</a> object to save or cancel changes made to the data source.
+Please refer to <a href="##CON-Connection">Connection</a> for further information.
 
 <st>Definition</st>
 <co type="light">
 	<small><b>Namespace : </b>Odb.Connection.Connection</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public void BeginTrans()
 
 		public void CommitTrans(bool AutoStartTrans = false)
 
 		public void RollbackTrans(bool AutoStartTrans = false)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Shared Sub BeginTrans()
 
 		Public Shared Sub CommitTrans(Optional AutoStartTrans As Boolean = False)
 
 		Public Shared Sub RollbackTrans(Optional AutoStartTrans As Boolean = False)
-	</code>
+	</pre>
 </code-tab>
 
 
@@ -28,69 +28,69 @@ BeginTrans method starts a new transaction. A Transaction cannot be created , if
 <br/>
 <br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		cn.BeginTrans();
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		cn.BeginTrans()
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 <st>CommitTrans</st>
 CommitTrans method saves all the changes made since the last BeginTrans method call and ends current transaction.
-If a <a href="##CON-Create">Connection</a> is opened as <k>AutoTrans=true</k> then each time <k>CommitTrans</k> method is invoked, a new transaction is created automatically.
+If a <a href="##CON-Connection">Connection</a> is opened as <k>AutoTrans=true</k> then each time <k>CommitTrans</k> method is invoked, a new transaction is created automatically.
 <br/>
 <br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		cn.CommitTrans();
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		cn.CommitTrans()
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
-If a <a href="##CON-Create">Connection</a> is opened as <k>AutoTrans=false</k>, you can always start a new transaction as shown below.
+If a <a href="##CON-Connection">Connection</a> is opened as <k>AutoTrans=false</k>, you can always start a new transaction as shown below.
 <br/>
 <br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		cn.CommitTrans(AutoStartTrans:true);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		cn.CommitTrans(AutoStartTrans:=true)
-	</code>
+	</pre>
 </code-tab>
 
 
 <st>RollbackTrans</st>
 RollbackTrans method cancels all changes made since the last BeginTrans method call and ends current transaction.
-If a <a href="##CON-Create">Connection</a> is opened as <k>AutoTrans = true</k> , then each time <k>RollbackTrans</k> method is invoked, a new transaction is created automatically.
+If a <a href="##CON-Connection">Connection</a> is opened as <k>AutoTrans = true</k> , then each time <k>RollbackTrans</k> method is invoked, a new transaction is created automatically.
 <br/>
 <br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		cn.RollbackTrans();
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		cn.RollbackTrans()
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
-If a <a href="##CON-Create">Connection</a> is opened as <k>AutoTrans = false</k>, you can always start a new transaction as shown below.
+If a <a href="##CON-Connection">Connection</a> is opened as <k>AutoTrans = false</k>, you can always start a new transaction as shown below.
 <br/>
 <br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		cn.RollbackTrans(AutoStartTrans:true);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		cn.RollbackTrans(AutoStartTrans:=true)
-	</code>
+	</pre>
 </code-tab>

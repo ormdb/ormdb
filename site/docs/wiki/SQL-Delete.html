@@ -5,22 +5,22 @@
 	<small><b>Namespace : </b>Odb.SQL.X</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public static SQL.Delete Delete(Table.Base Table,
 										bool OptimizeTable = false)
 
 		public static SQL.Delete Delete(Table.Base Table,
 										Table.Field Where,
 										bool OptimizeTable = false)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Shared Function Delete(Table As Table.Base, 
 									  OptimizeTable As Boolean = False) As SQL.Delete
 
 		Public Shared Function Delete(Table As Table.Base,
 									  Where As Table.Column,
 									  OptimizeTable As Boolean = False) As SQL.Delete
-	</code>
+	</pre>
 </code-tab>
 
 <st>Examples</st>
@@ -30,51 +30,51 @@
 
 Following section demonstrates <b>regular deletion</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Delete(h, h.Id == 9999).Execute(cn);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Delete(h, h.Id = 9999).Execute(cn)
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 Following section demonstrates <b>multiple deletion</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Query();
 			sql.Delete(h, h.Id == 9999);
 			sql.Delete(l, l.Id == 9999);
 
 			sql.Execute(cn);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim sql = SQL.X.Query()
 			sql.Delete(h, h.Id = 9999)
 			sql.Delete(l, l.Id = 9999)
 
 			sql.Execute(cn)
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 Following section demonstrates <b>deletion with join</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Delete(h);
 			sql.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
 			sql.Where(l.LineId > 3);
 
 			sql.Execute(cn);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim sql = SQL.X.Delete(h)
 			sql.InnerJoin(l, l.Year = h.Year And l.Id = h.Id )
 			sql.Where(l.LineId > 3)
 
 			sql.Execute(cn)
-	</code>
+	</pre>
 </code-tab>
 <o>
 	This sample deletes from [header-table] records which contain record(s) that is greather than 3 in [line-table].

@@ -6,16 +6,16 @@
 	<small><b>Namespace : </b>Odb.SQL.X</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public static SQL.Update Update(Table.Base from) 
 		
 		public static SQL.Update Update(Table.Base from, Table.Field Where) 
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Shared Function Update(from As Table.Base) As SQL.Update
 		
 		Public Shared Function Update(from As Table.Base, Where As Table.Column) As SQL.Update
-	</code>
+	</pre>
 </code-tab>
 
 <st>Examples</st>
@@ -25,15 +25,15 @@
 
 Following section demonstrates <b>regular update</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Update(h, h.Id == 9999);
 
 			var row = sql.Set(h.NewModel());
 				row.Note = "new note";
 
 		sql.Execute(cn);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim sql = SQL.X.Update(h, h.Id = 9999)
 
 			With sql.Set(h.NewModel())
@@ -41,14 +41,14 @@ Following section demonstrates <b>regular update</b>.
 			End With
 
 		sql.Execute(cn)
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 Following section demonstrates <b>multiple update</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Query;
 
 			var r1 = sql.Update(h, h.Id == 9999).Set(h.NewModel());
@@ -58,8 +58,8 @@ Following section demonstrates <b>multiple update</b>.
 				r2.Note = "new note";
 
 		sql.Execute(cn);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim sql = SQL.X.Query
 
 			Dim r1 = sql.Update(h, h.Id = 9999).Set(h.NewModel())
@@ -69,14 +69,14 @@ Following section demonstrates <b>multiple update</b>.
 				r2.Note = "new note"
 
 		sql.Execute(cn)
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 Following section demonstrates <b>update with join</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Update(h);
 			sql.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
 			sql.Where(l.LineId > 3);
@@ -85,8 +85,8 @@ Following section demonstrates <b>update with join</b>.
 				row.Note = "new note";
 
 		sql.Execute(cn);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim sql = SQL.X.Update(h)
 			sql.InnerJoin(l, l.Year = h.Year And l.Id = h.Id )
 			sql.Where(l.LineId > 3)
@@ -95,7 +95,7 @@ Following section demonstrates <b>update with join</b>.
 				row.Note = "new note"
 
 		sql.Execute(cn)
-	</code>
+	</pre>
 </code-tab>
 <o>
 This sample updates the [header-table] records which contain record(s) that is greather than 3 in [line-table].
@@ -105,14 +105,14 @@ This sample updates the [header-table] records which contain record(s) that is g
 
 Following section demonstrates to set value of <b>DbNull</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel());
 			_row.str = System.DbNull;
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel())
 			_row.str = System.DbNull
-	</code>
+	</pre>
 </code-tab>
 <o>
 UPDATE h SET <u><hl>h.str = NULL</hl></u> FROM TableHeader AS h WHERE <u><hl>h.str IS NOT NULL</hl></u>

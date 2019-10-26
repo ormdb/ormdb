@@ -5,7 +5,7 @@
 	<small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public List<string> DropTable(IEnumerable<Table.Base> Tables,
 									  bool OnlyGenerateScript = false)
 
@@ -17,8 +17,8 @@
 
 		public string DropTable(string TableName,
 								bool OnlyGenerateScript = false)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Function DropTable(Tables As IEnumerable(Of Table.Base),
 								  OnlyGenerateScript As Boolean = False) As List(Of String)
 
@@ -30,7 +30,7 @@
 
 		Public Function DropTable(TableName As String,
 								  OnlyGenerateScript As Boolean = False) As String
-	</code>
+	</pre>
 </code-tab>
 
 <st>Examples</st>
@@ -41,7 +41,7 @@
 Following section demonstrates how to drop table.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		// single table by instance
 		cn.DDL.DropTable(h);
 
@@ -50,8 +50,8 @@ Following section demonstrates how to drop table.
 
 		// single table by name
 		cn.DDL.DropTable("table1");
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		' single table by instance
 		cn.DDL.DropTable(h)
 
@@ -60,7 +60,7 @@ Following section demonstrates how to drop table.
 
 		' single table by name
 		cn.DDL.DropTable("table1")
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
@@ -68,10 +68,10 @@ Following section demonstrates how to drop table.
 Following section demonstrates how to generate <k>DROP TABLE</k> script.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var script = cn.DDL.DropTable(h, true);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim script = cn.DDL.DropTable(h, true)
-	</code>
+	</pre>
 </code-tab>

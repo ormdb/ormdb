@@ -16,28 +16,28 @@ If a column-type is often used in many of your tables, you can use a column as a
 
 Instances of the tables are being initialized.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 			private TableHeader h = new TableHeader();
 			private TableLines  l = new TableLines();
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 			Private h As New TableHeader()
 			Private l As New TableLines()
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 If you would like to join a table with itself, same table can be initialized twice as shown below.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 			private TableHeader h  = new TableHeader();
 			private TableLines  l  = new TableLines();
 			private TableHeader h2 = new TableHeader();
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 			Private h  As New TableHeader()
 			Private l  As New TableLines()
 			Private h2 As New TableHeader()
-	</code>
+	</pre>
 </code-tab>

@@ -13,20 +13,20 @@ The <k>DataReader</k> provides an <b>unbuffered</b> stream of data that allows p
 Following example iterates through a DataReader object and returns two columns from each row.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Select(h.Note, h.DocDate).From(h);
 		var dr = sql.Execute(cn);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim sql = SQL.X.Select(h.Note, h.DocDate).From(h)
 		Dim dr = sql.Execute(cn)
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		foreach (var r in dr) {
 
 			// read by column-name.
@@ -48,8 +48,8 @@ Following example iterates through a DataReader object and returns two columns f
 		foreach (var r in dr) {
 			Console.WriteLine("{0}, {1}", f1.ToString(), f2.ToString());
 		}
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		For Each r In dr
 
 			' read by column-name.
@@ -71,17 +71,18 @@ Following example iterates through a DataReader object and returns two columns f
 		For Each r In dr
 			Console.WriteLine("{0}, {1}", f1.ToString(),  f2.ToString())
 		Next
-	</code>
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 <table>
 	<thead>
-		<th>Reading By</th>
-		<th>Performance</th>
-		<th>Memory Consumption</th>
+        <tr>
+            <th>Reading By</th>
+            <th>Performance</th>
+            <th>Memory Consumption</th>
+        </tr>
 	</thead>
 	<tr><td>column-name		</td><td>0.0000057 ms		</td><td>new instance for per column</td></tr>
 	<tr><td>column-info		</td><td>0.0000035 ms		</td><td>new instance for per column (REGULAR)</td></tr>

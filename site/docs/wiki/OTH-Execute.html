@@ -9,7 +9,7 @@
 	<small><b>Namespace : </b>Odb.Extensions</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		Task ExecuteAsync(this SQL.IExecutable o, 
 						  Connection.Connection Connection, 
 						  Connection.ExecuteIn ExecuteIn = Connection.ExecuteIn.ActualConnection)
@@ -21,8 +21,8 @@
 		DataReader Execute(this SQL.IQueryable o, 
 						   Connection.Connection Connection, 
 						   Connection.ExecuteIn ExecuteIn = Connection.ExecuteIn.ActualConnection)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		ExecuteAsync(o As SQL.IExecutable, 
 					 Connection As Connection.Connection, 
 					 Optional ExecuteIn As Connection.ExecuteIn = Connection.ExecuteIn.ActualConnection) As Task
@@ -34,7 +34,7 @@
 		Execute(o As SQL.IQueryable, 
 				Connection As Connection.Connection, 
 				Optional ExecuteIn As Connection.ExecuteIn = Connection.ExecuteIn.ActualConnection) As DataReader
-	</code>
+	</pre>
 </code-tab>
 
 <st>Examples</st>
@@ -42,7 +42,7 @@
 <br/>
 <br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		using Odb; /* for extensions */
 
 		/* ... */
@@ -52,8 +52,8 @@
 
 		// to get the query result as DataReader. (SQL.IQueryable)
 		var dr = sql.Execute(cn);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Imports Odb ' for extensions
 
 		' ...
@@ -63,5 +63,5 @@
 
 		' to get the query result as DataReader. (SQL.IQueryable)
 		Dim dr = sql.Execute(cn)
-	</code>
+	</pre>
 </code-tab>

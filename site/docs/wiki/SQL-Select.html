@@ -13,12 +13,12 @@ You can access each column of the returned row by passing the name or ordinal nu
 	<small><b>Namespace : </b>Odb.SQL.X</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public static SQL.Select Select(params Table.Column[] items)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Shared Function Select(ParamArray items() As Table.Column) As SQL.Select
-	</code>
+	</pre>
 </code-tab>
 
 <st>Examples</st>
@@ -28,22 +28,22 @@ You can access each column of the returned row by passing the name or ordinal nu
 
 Following section demonstrates <hl>Reqular Select</hl>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Select(h.Year, h.Id).From(h);
 
 		// ... Read by [DataReader]
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim sql = SQL.X.Select(h.Year, h.Id).From(h)
 
 		' ... Read by [DataReader]
-	</code>
+	</pre>
 </code-tab>
 <br/>
 
 Following section demonstrates using <hl>Conditional Where</hl> clause.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var _where = (h.Year == 2017);
 
 		var _condition = true;
@@ -54,8 +54,8 @@ Following section demonstrates using <hl>Conditional Where</hl> clause.
 		var sql = SQL.X.Select(h.Year, h.Id).From(h, _where);
 
 		// ... Read by [DataReader]
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim _where = (h.Year = 2017)
 
 		Dim _condition = True
@@ -66,92 +66,92 @@ Following section demonstrates using <hl>Conditional Where</hl> clause.
 		Dim sql = SQL.X.Select(h.Year, h.Id).From(h, _where)
 
 		' ... Read by [DataReader]
-	</code>
+	</pre>
 </code-tab>
 <br/>
 
 Following section demonstrates using <hl>COUNT</hl> clause.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Select().From(h).Where( 
 								h.Year.In( new[] {2018, 2019} ) &
 								h.Id.IsNotNull()) ;
 
 		var count = sql.ExecuteCount(cn);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim sql = SQL.X.Select().From(h).Where( 
 								h.Year.In( {2018, 2019} ) And
 								h.Id.IsNotNull())
 
 		Dim count = sql.ExecuteCount(cn)
-	</code>
+	</pre>
 </code-tab>
 <br/>
 
 
 Following section demonstrates using <hl>JOIN</hl> clause.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Select().From(h)
 			sql.LeftJoin(l, l.Year==h.Year & l.Id == h.Id )
 			sql.Where( h.Year.In(new[] {2018, 2019}) & h.Id.IsNotNull() );
 
 		// ... Read by [DataReader]
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		With SQL.X.Select().From(h)
 			.LeftJoin(l, l.Year=h.Year And l.Id = h.Id )
 			.Where( h.Year.In( {2018, 2019} ) And h.Id.IsNotNull() )
 
 			' ... Read by [DataReader]
 		End With
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Select().From(h).Skip(5).Top(10).OrderBy(h.Year);
 
 		// ... Read by [DataReader]
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim sql = SQL.X.Select().From(h).Skip(5).Top(10).OrderBy(h.Year)
 
 		' ... Read by [DataReader]
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 Following section demonstrates using <hl>GROUP BY</hl> clause.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var _yr_min = h.Year.MIN().AS("_date_min");
 		var _yr_max = h.Year.MAX().AS("_date_max");
 
 		var sql = SQL.X.Select(h.Id, _yr_min, _yr_max).From(h).GroupBy(h.Id);
 
 		// ... Read by [DataReader]
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim _yr_min = h.Year.MIN().AS("_date_min")
 		Dim _yr_max = h.Year.MAX().AS("_date_max")
 
 		Dim sql = SQL.X.Select(h.Id, _yr_min, _yr_max).From(h).GroupBy(h.Id)
 
 		' ... Read by [DataReader]
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 Following section demonstrates using <hl>UNION</hl> clause.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql= SQL.X.Union();
 			sql.RemoveDuplicates = true;
 
@@ -160,8 +160,8 @@ Following section demonstrates using <hl>UNION</hl> clause.
 			sql.OrderBy(h.DocDate);
 
 		// ... Read by [DataReader]
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		With SQL.X.Union()
 			.RemoveDuplicates = True
 
@@ -171,14 +171,14 @@ Following section demonstrates using <hl>UNION</hl> clause.
 
 			' ... Read by [DataReader]
 		End With
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 Following section demonstrates using <hl>SUB SELECT</hl> clause.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sq1 = SQL.X.Select().From(h, h.Id == 1000).ToSubQuery();
 		var sq2 = SQL.X.Select().From(h, h.Id == 2000).ToSubQuery();
 
@@ -188,8 +188,8 @@ Following section demonstrates using <hl>SUB SELECT</hl> clause.
 			sql.Where( sq1(h.Year) == 2017) ;
 
 		// ... Read by [DataReader]
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim sq1 = SQL.X.Select().From(h, h.Id = 1000).ToSubQuery()
 		Dim sq2 = SQL.X.Select().From(h, h.Id = 2000).ToSubQuery()
 
@@ -200,7 +200,7 @@ Following section demonstrates using <hl>SUB SELECT</hl> clause.
 
 			' ... Read by [DataReader]
 		End With
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
@@ -208,18 +208,18 @@ Following section demonstrates using <hl>SUB SELECT</hl> clause.
 Following section demonstrates using <hl>SUB SELECT</hl> in a <hl>WHERE</hl> block.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sq = SQL.X.Select(h.DocumentId.DISTINCT()).From(h, h.Id == 1000).ToSubQuery();
 
 		var sql = SQL.X.Select().From(h, h.Id == sq);
 
 		// ... Read by [DataReader]
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim sq = SQL.X.Select(h.DocumentId.DISTINCT()).From(h, h.Id = 1000).ToSubQuery()
 
 		Dim sql = SQL.X.Select().From(h, h.Id = sq)
 
 		' ... Read by [DataReader]
-	</code>
+	</pre>
 </code-tab>

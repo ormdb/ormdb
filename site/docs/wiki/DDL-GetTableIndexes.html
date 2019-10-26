@@ -5,19 +5,21 @@
 	<small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public List<SchemaIndexInfo> GeTableIndexes(string TableName)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Function GeTableIndexes(TableName As String) As List(Of SchemaIndexInfo)
-	</code>
+	</pre>
 </code-tab>
 
 <st>Return</st>
 <table>
 	<thead>
-		<th>SchemaIndexInfo</th>
-		<th>Description</th>
+        <tr>
+            <th>SchemaIndexInfo</th>
+            <th>Description</th>
+        </tr>
 	</thead>
 	<tr><td>Name              </td><td>Name of the index.         </td></tr>
 	<tr><td>IsPrimary         </td><td>Is primary key index.      </td></tr>
@@ -34,7 +36,7 @@
 
 Following section demonstrates reading the indexes of table <b>by its instance</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		foreach (var index in cn.DDL.GeTableIndexes("table_name")){
 
 			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
@@ -46,8 +48,8 @@ Following section demonstrates reading the indexes of table <b>by its instance</
 				Debug.WriteLine(column.Name.ToString());
 			}
 		}
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		For Each index In cn.DDL.GeTableIndexes("table_name")
 
 			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
@@ -59,21 +61,21 @@ Following section demonstrates reading the indexes of table <b>by its instance</
 				Debug.WriteLine(column.Name.ToString())
 			Next
 		Next
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 Following section demonstrates reading the indexes of table <b>by its name</b>.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		foreach (var index in h.GetIndexes()) {
 			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
 		}
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		For Each index In h.GetIndexes()
 			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
 		Next
-	</code>
+	</pre>
 </code-tab>

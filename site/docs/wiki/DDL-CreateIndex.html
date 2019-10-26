@@ -9,7 +9,7 @@
 	<small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public string CreateIndex(Table.Base Table,
 								  Table.IndexInfo IndexInfo,
 								  string IndexName = null,
@@ -25,8 +25,8 @@
 								  IEnumerable<string> ColumnNames,
 								  string IndexName = null,
 								  bool OnlyGenerateScript = false)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Function CreateIndex(Table As Table.Base,
 									IndexInfo As Table.IndexInfo,
 									IndexName As String = Nothing,
@@ -42,7 +42,7 @@
 									ColumnNames As IEnumerable(Of string),
 									IndexName As String = Nothing,
 									OnlyGenerateScript As Boolean = False) As String
-	</code>
+	</pre>
 </code-tab>
 
 <st>Examples</st>
@@ -53,20 +53,20 @@
 Following section demonstrates how to create index for a table.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		// by table instance
 		cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index");
 
 		// by table name
 		cn.DDL.CreateIndex("table1", true, new[] { "column1", "column2" }, "my_index");
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		' by table instance
 		cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index")
 
 		' by table name
 		cn.DDL.CreateIndex("table1", True, { "column1", "column2" }, "my_index")
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
@@ -74,10 +74,10 @@ Following section demonstrates how to create index for a table.
 Following section demonstrates how to generate <k>DROP INDEX</k> script.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var script = cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index", true);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim script = cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index", True)
-	</code>
+	</pre>
 </code-tab>

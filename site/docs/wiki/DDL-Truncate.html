@@ -5,7 +5,7 @@
 	<small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public List<string> Truncate(IEnumerable<Table.Base> Tables, 
 									 bool OnlyGenerateScript = false)
 		public List<string> Truncate(IEnumerable<string> TableNames, 
@@ -15,8 +15,8 @@
 							   bool OnlyGenerateScript = false)
 		public string Truncate(string TableName, 
 							   bool OnlyGenerateScript = false)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Function Truncate(Tables As IEnumerable(Of Table.Base), 
 								 OnlyGenerateScript As Boolean = False) As List(Of String)
 		Public Function Truncate(TableNames As IEnumerable(Of String), 
@@ -26,7 +26,7 @@
 								 OnlyGenerateScript As Boolean = False) As String
 		Public Function Truncate(TableName As String, 
 								 OnlyGenerateScript As Boolean = False) As String
-	</code>
+	</pre>
 </code-tab>
 
 
@@ -37,7 +37,7 @@
 
 Following section demonstrates <k>TRUNCATE</k> the table(s).
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		// single table by instance
 		cn.DDL.Truncate(h);
 
@@ -46,8 +46,8 @@ Following section demonstrates <k>TRUNCATE</k> the table(s).
 
 		// single table by name
 		cn.DDL.Truncate("table1");
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		' single table by instance
 		cn.DDL.Truncate(h)
 
@@ -56,17 +56,17 @@ Following section demonstrates <k>TRUNCATE</k> the table(s).
 
 		' single table by name
 		cn.DDL.Truncate("table1")
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
 
 Following section demonstrates how to generate <k>TRUNCATE</k> script.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var script = cn.DDL.Truncate(h, true);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim script = cn.DDL.Truncate(h, True)
-	</code>
+	</pre>
 </code-tab>

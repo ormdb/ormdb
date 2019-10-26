@@ -7,12 +7,12 @@ All Select, Insert, Delete, and Update commands (also free text sql commands) ca
 	<small><b>Namespace : </b>Odb.SQL.X</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public static SQL.Query Query()
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Shared Function Query() As SQL.Query
-	</code>
+	</pre>
 </code-tab>
 
 
@@ -22,7 +22,7 @@ All Select, Insert, Delete, and Update commands (also free text sql commands) ca
 <br/>
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Query();
 
 			sql.Delete(h);
@@ -43,8 +43,8 @@ All Select, Insert, Delete, and Update commands (also free text sql commands) ca
 			row1.Note = String.Empty;
 
 			sql.ExecuteAsync(cn);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		With  SQL.X.Query()
 
 			.Delete(h)
@@ -67,5 +67,5 @@ All Select, Insert, Delete, and Update commands (also free text sql commands) ca
 
 			.Execute(cn)
 		End With
-	</code>
+	</pre>
 </code-tab>

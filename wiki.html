@@ -209,7 +209,8 @@
             "CON": {
                 title: "Connection",
                 items: {
-                    "CON-Create": "Create",
+                    "CON-Provider": "Provider",
+                    "CON-Connection": "Connection",
                     "CON-Transaction": "Transaction",
                     "CON-Import": "Import Data"
                 }
@@ -402,7 +403,7 @@
             $temp.remove();
         }
         function load_page_code_render() {
-            var _items = $("#wiki-body code");
+            var _items = $("#wiki-body pre");
             if (_items.length == 0) return;
 
             for (n = 0; n < _items.length; n++) {
@@ -433,7 +434,7 @@
                     _atrb_val += ' ' + _attrbs[m].name + '="' + _attrbs[m].value + '"';
                 }
                 //console.log(_item.html());
-                _item.replaceWith('<pre ' + _atrb_val + '><code>' + Prism.highlight(_item.text(), _lang_obj, _lang_nam) + '</code></pre>');
+                _item.replaceWith('<pre ' + _atrb_val + '><code>\n' + Prism.highlight(_item.text(), _lang_obj, _lang_nam) + '</code></pre>');
             }
         }
         //-------------------------------------------------------------------------------------

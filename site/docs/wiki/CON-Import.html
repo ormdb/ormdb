@@ -9,7 +9,7 @@ There are several ways to import data to database. Some methods let you import d
 	<small><b>Namespace : </b>Odb.Connection.Connection</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public void ImportData(string TableName,
 							   Connection SourceConnection,
 							   ImportDataCalback CallBack = null,
@@ -21,8 +21,8 @@ There are several ways to import data to database. Some methods let you import d
 							   ImportDataCalback CallBack = null,
 							   int BatchSize = 1000,
 							   bool TruncateBefore = true)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Shared Sub ImportData(TableName As String,
 									 SourceConnection As Connection,
 									 CallBack As ImportDataCalback = Nothing,
@@ -34,7 +34,7 @@ There are several ways to import data to database. Some methods let you import d
 									 CallBack As ImportDataCalback= Nothing,
 									 BatchSize As Integer= 1000,
 									 TruncateBefore As Boolean = True)
-	</code>
+	</pre>
 </code-tab>
 
 <st>Examples</st>
@@ -44,7 +44,7 @@ There are several ways to import data to database. Some methods let you import d
 
 Following section demonstrates importing data in table(h) from one connection to another.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		// cn1 : Target connection.
 		// cn2 : Source connection which has the data.
 
@@ -57,8 +57,8 @@ Following section demonstrates importing data in table(h) from one connection to
 						   else
 							   Debug.WriteLine($"{Message} ==> Import={Count}, Total={TotalCount}");
 					   });
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		' cn1 : Target connection.
 		' cn2 : Source connection which has the data.
 
@@ -71,5 +71,5 @@ Following section demonstrates importing data in table(h) from one connection to
 							   Debug.WriteLine($"{Message} ==> Import={Count}, Total={TotalCount}")
 							End If
 					   End Sub)
-	</code>
+	</pre>
 </code-tab>

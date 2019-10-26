@@ -3,16 +3,16 @@
 <st>Where Operator</st>
 <k>WHERE</k> clause is used to filter and extract only records that fulfill a specified condition.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Select().From(h).Where( h.Year == 2018 & 
 									  h.DocDate >= DateTime.Now & 
 									  h.DocDate <= DateTime.Now );
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Select().From(h).Where( h.Year = 2018 And
 									  h.DocDate >= DateTime.Now And
 									  h.DocDate <= DateTime.Now )
-	</code>
+	</pre>
 </code-tab>
 <o>
 	SELECT * FROM TableHeader AS h <hl>WHERE</hl> (h.Year = 2018) <hl>AND</hl> (h.DocDate >= 'DateValue') <hl>AND</hl> (h.DocDate <= 'DateValue')
@@ -22,12 +22,12 @@
 Also you can use <k>WHERE</k> clause as shortness within specified as a parameter in <b>FROM</b>.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Select().From(h, h.Year = 2018 & h.IsActive = true );
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Select().From(h, h.Year = 2018 And h.IsActive = True)
-	</code>
+	</pre>
 </code-tab>
 <o>
 SELECT * FROM TableHeader AS h <hl>WHERE</hl> (h.Year = 2018 <hl>AND</hl> h.IsActive = 1)
@@ -36,12 +36,12 @@ SELECT * FROM TableHeader AS h <hl>WHERE</hl> (h.Year = 2018 <hl>AND</hl> h.IsAc
 <st>As Operator</st>
 Renames a column with an alias.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Select(h.Const("X").AS("flag"), h.Year.As("y1")).From(h);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Select(h.Const("X").AS("flag"), h.Year.As("y1")).From(h)
-	</code>
+	</pre>
 </code-tab>
 <o>
 SELECT 'X' <hl>AS</hl> flag, h.Year <hl>AS</hl> y1 FROM TableHeader AS h
@@ -51,16 +51,16 @@ SELECT 'X' <hl>AS</hl> flag, h.Year <hl>AS</hl> y1 FROM TableHeader AS h
 <st>In Operator</st>
 <k>IN</k> command allows you to specify multiple values in a <b>WHERE</b> clause.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Select().From(h).Where( h.Year.In(new[] {2017, 2018}) );
  
 		SQL.X.Select().From(h).Where( h.Id.NotIn(new[] {"A", "B", "C"}) );
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Select().From(h).Where( h.Year.In({2017, 2018}) )
 
 		SQL.X.Select().From(h).Where( h.Id.NotIn({"A", "B", "C"}) )
-	</code>
+	</pre>
 </code-tab>
 <o>
 SELECT * FROM TableHeader AS h WHERE h.Year <hl>IN</hl> (2017, 2018) <br/>
@@ -70,16 +70,16 @@ SELECT * FROM TableHeader AS h WHERE h.Year <hl>NOT IN</hl> ('A', 'B', 'C')
 
 <st>Is Null / Is Not Null Operators</st>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Select().From(h).Where( h.Note.IsNull() );
 
 		SQL.X.Select().From(h).Where( h.Note.IsNotNull() );
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Select().From(h).Where( h.Note.IsNull() )
 
 		SQL.X.Select().From(h).Where( h.Note.IsNotNull() )
-	</code>
+	</pre>
 </code-tab>
 <o>
 SELECT * FROM TableHeader AS h WHERE h.Note <hl>IS NULL</hl> <br/>
@@ -91,20 +91,20 @@ SELECT * FROM TableHeader AS h WHERE h.Note <hl>IS NOT NULL</hl> <br/>
 <k>LIKE</k> command is used in a WHERE clause to search for a specified pattern in a column.
 <br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Select().From(h).Where( h.Note.CONTAINS("ASD") );
 
 		SQL.X.Select().From(h).Where( h.Note.STARTS_WITH("ASD") );
 
 		SQL.X.Select().From(h).Where( h.Note.ENDS_WITH("ASD") );
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Select().From(h).Where( h.Note.CONTAINS("ASD") )
 
 		SQL.X.Select().From(h).Where( h.Note.STARTS_WITH("ASD") )
 
 		SQL.X.Select().From(h).Where( h.Note.ENDS_WITH("ASD") )
-	</code>
+	</pre>
 </code-tab>
 <o>
 SELECT * FROM TableHeader AS h WHERE h.Note <hl>LIKE</hl> '<hl>%</hl>ASD<hl>%</hl>' <br/>
@@ -116,12 +116,12 @@ SELECT * FROM TableHeader AS h WHERE h.Note <hl>LIKE</hl> '<hl>%</hl>ASD' <br/>
 <st>Asc / Desc Operators</st>
 <k>ASC</k> / <k>DESC</k> command is used to sort the data returned in ascending/descending  order.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Select().From(h).OrderBy(h.Year, h.DocDate.Desc());
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Select().From(h).OrderBy(h.Year, h.DocDate.Desc())
-	</code>
+	</pre>
 </code-tab>
 <o>
 SELECT * FROM TableHeader AS h  <hl>ORDER BY</hl> h.Year, h.DocDate <hl>DESC</hl>
@@ -131,12 +131,12 @@ SELECT * FROM TableHeader AS h  <hl>ORDER BY</hl> h.Year, h.DocDate <hl>DESC</hl
 <st>Count</st>
 The <k>COUNT</k> function returns the number of rows that matches a specified criteria.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Select(h.All.COUNT()).From(h);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Select(h.All.COUNT()).From(h)
-	</code>
+	</pre>
 </code-tab>
 <o>
 SELECT <hl>COUNT(*)</hl> FROM TableHeader AS h
@@ -147,12 +147,12 @@ SELECT <hl>COUNT(*)</hl> FROM TableHeader AS h
 Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
 The <k>DISTINCT</k> statement is used to return only distinct (different) values.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Select(h.Id.DISTINCT()).From(h);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Select(h.Id.DISTINCT()).From(h)
-	</code>
+	</pre>
 </code-tab>
 <o>
 SELECT <hl>DISTINCT(h.Id)</hl> FROM TableHeader AS h
@@ -162,12 +162,12 @@ SELECT <hl>DISTINCT(h.Id)</hl> FROM TableHeader AS h
 <st>Coalesce</st>
 Return the specified value, if the field value is NULL, otherwise return the field value.
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Select(h.Id.COALESCE(9999)).From(h);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Select(h.Id.COALESCE(9999)).From(h)
-	</code>
+	</pre>
 </code-tab>
 <o>
 SELECT <hl>COALESCE(h.Id, 9999)</hl> FROM TableHeader AS h<br/>
@@ -177,7 +177,7 @@ SELECT <hl>IFNULL(h.Id, 9999)</hl> FROM TableHeader AS h<br/>
 
 <st>Aggregate Functions</st>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Select(h.Year, h.Id.AVG()).From(h).GroupBy(h.Year);
 
 		SQL.X.Select(h.Year, h.Id.MIN()).From(h).GroupBy(h.Year);
@@ -185,8 +185,8 @@ SELECT <hl>IFNULL(h.Id, 9999)</hl> FROM TableHeader AS h<br/>
 		SQL.X.Select(h.Year, h.Id.MAX()).From(h).GroupBy(h.Year);
 
 		SQL.X.Select(h.Year, h.Id.SUM()).From(h).GroupBy(h.Year);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Select(h.Year, h.Id.AVG()).From(h).GroupBy(h.Year)
 
 		SQL.X.Select(h.Year, h.Id.MIN()).From(h).GroupBy(h.Year)
@@ -194,7 +194,7 @@ SELECT <hl>IFNULL(h.Id, 9999)</hl> FROM TableHeader AS h<br/>
 		SQL.X.Select(h.Year, h.Id.MAX()).From(h).GroupBy(h.Year)
 
 		SQL.X.Select(h.Year, h.Id.SUM()).From(h).GroupBy(h.Year)
-	</code>
+	</pre>
 </code-tab>
 <o>
 SELECT h.Year, <hl>AVG(h.Id)</hl> FROM TableHeader AS h <hl>GROUP BY</hl> h.Year <br/>
@@ -206,7 +206,7 @@ SELECT h.Year, <hl>SUM(h.Id)</hl> FROM TableHeader AS h <hl>GROUP BY</hl> h.Year
 
 <st>String Functions</st>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		SQL.X.Select(h.Note.LEFT(4).RIGHT(2)).From(h);
 
 		SQL.X.Select(h.Note.SUBSTRING(2, 4)).From(h);
@@ -218,8 +218,8 @@ SELECT h.Year, <hl>SUM(h.Id)</hl> FROM TableHeader AS h <hl>GROUP BY</hl> h.Year
 		SQL.X.Select(h.Note.RTRIM().LTRIM()).From(h);
 
 		SQL.X.Select(h.Year.CONCAT(h.Id).CONCAT("X")).From(h);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		SQL.X.Select(h.Note.LEFT(4).RIGHT(2)).From(h)
 
 		SQL.X.Select(h.Note.SUBSTRING(2, 4)).From(h)
@@ -231,5 +231,5 @@ SELECT h.Year, <hl>SUM(h.Id)</hl> FROM TableHeader AS h <hl>GROUP BY</hl> h.Year
 		SQL.X.Select(h.Note.RTRIM().LTRIM()).From(h)
 
 		SQL.X.Select(h.Year.CONCAT(h.Id).CONCAT("X")).From(h)
-	</code>
+	</pre>
 </code-tab>

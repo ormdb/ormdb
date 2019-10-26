@@ -5,7 +5,7 @@
 	<small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public string DropIndex(Table.Base Table,
 								Table.IndexInfo IndexInfo,
 								bool OnlyGenerateScript = false)
@@ -17,8 +17,8 @@
 		public string DropIndex(string TableName,
 								string IndexName,
 								bool OnlyGenerateScript = false)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Function DropIndex(Table As Table.Base,
 								  IndexInfo As Table.IndexInfo,
 								  OnlyGenerateScript As Boolean = False) As String
@@ -31,7 +31,7 @@
 								  IndexName As String,
 								  OnlyGenerateScript As Boolean = False) As String
 
-	</code>
+	</pre>
 </code-tab>
 
 <st>Examples</st>
@@ -42,20 +42,20 @@
 Following section demonstrates how to drop index of a table.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		// by table instance
 		cn.DDL.DropIndex(h, h.Indexes.First());
 
 		// by table name
 		cn.DDL.DropIndex("table1", "index_name");
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		' by table instance
 		cn.DDL.DropIndex(h, h.Indexes.First())
 
 		' by table name
 		cn.DDL.DropIndex("table1", "index_name")
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
@@ -63,10 +63,10 @@ Following section demonstrates how to drop index of a table.
 Following section demonstrates how to generate <k>DROP INDEX</k> script.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var script = cn.DDL.DropIndex("table1", "index_name", true);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim script = cn.DDL.DropIndex("table1", "index_name", True)
-	</code>
+	</pre>
 </code-tab>

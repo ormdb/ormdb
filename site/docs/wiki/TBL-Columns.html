@@ -132,12 +132,12 @@ Variable-size string data. <b>Length</b> is the size in bytes, NOT in char. Max 
 
 <br/><br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 			[ColumnString(10)]public Column col_char;
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 			<ColumnString(10)>Public col_char AS Column
-	</code>
+	</pre>
 </code-tab>
 
 
@@ -147,24 +147,24 @@ Precision is an integer that represents the total number of digits allowed in th
 The scale, also an integer value, represents the number of decimal places to right of the decimal point.
 <br/><br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 			[ColumnNumeric(15, 2)]public Column col_num;
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 			<ColumnNumeric(15, 2)>Public col_num AS Column
-	</code>
+	</pre>
 </code-tab>
 
 <st>ColumnBoolean</st>
 is used for .NET <k>System.Boolean</k> data type.
 <br/><br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 			[ColumnBoolean()]public Column col_bool;
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 			<ColumnBoolean()>Public col_bool AS Column
-	</code>
+	</pre>
 </code-tab>
 
 
@@ -172,24 +172,24 @@ is used for .NET <k>System.Boolean</k> data type.
 is used for .NET <k>System.Byte[]</k> data type. 
 <br/><br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 			[ColumnBinary()]public Column col_bin;
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 			<ColumnBinary()>Public col_bin AS Column
-	</code>
+	</pre>
 </code-tab>
 
 <st>ColumnTime</st>
 is used for .NET <k>System.TimeSpan</k> data type. This type of column stores only <b>TIME</b> value of <k>System.TimeSpan</k> as "24hh:mm:dd".
 <br/><br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 			[ColumnTime()]public Column col_tim;
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 			<ColumnTime()>Public col_tim AS Column
-	</code>
+	</pre>
 </code-tab>
 
 
@@ -197,12 +197,12 @@ is used for .NET <k>System.TimeSpan</k> data type. This type of column stores on
 is used for .NET <k>System.Date</k> data type. This type of column stores only <b>DATE</b> value of <k>System.Date</k> as "yyyy-MM-dd".
 <br/><br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 			[ColumnDate()]public Column col_dat;
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 			<ColumnDate()>Public col_dat AS Column
-	</code>
+	</pre>
 </code-tab>
 
 
@@ -210,12 +210,12 @@ is used for .NET <k>System.Date</k> data type. This type of column stores only <
 is used for .NET <k>System.Date</k> data type. This type of column stores <b>DATE</b> and <b>TIME</b> value of <k>System.Date</k> as "yyyy-MM-dd 24hh-mm-ss".
 <br/><br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 			[ColumnDateTime()]public Column col_dattim;
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 			<ColumnDateTime()>Public col_dattim AS Column
-	</code>
+	</pre>
 </code-tab>
 
 
@@ -223,10 +223,10 @@ is used for .NET <k>System.Date</k> data type. This type of column stores <b>DAT
 is used for columns used repeatedly. <b>Name</b>, <b>Description</b> and <b>Nullable</b> properties can be redefiend.
 <br/><br/>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 			[ColumnRef( reference )]public Column col_ref;
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 			<ColumnRef( reference )>Public col_ref AS Column
-	</code>
+	</pre>
 </code-tab>

@@ -7,7 +7,7 @@
 	<small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		public List<string> CreateTables(IEnumerable<Table.Base> Tables,
 										string SchemaPrefix = Manager.DefaultSchemaPrefix,
 										bool CreateIndexes = true,
@@ -23,8 +23,8 @@
 								  IndexInfo PrimaryKeyInfo = null, 
 								  string SchemaPrefix = Manager.DefaultSchemaPrefix, 
 								  bool OnlyGenerateScript = false)
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Public Function CreateTables(Tables As IEnumerable(Of Table.Base),
 									SchemaPrefix As String = Manager.DefaultSchemaPrefix,
 									CreateIndexes As Boolean = True,
@@ -40,7 +40,7 @@
 									PrimaryKeyInfo As IndexInfo = Nothing, 
 									SchemaPrefix As String = Manager.DefaultSchemaPrefix, 
 									OnlyGenerateScript As Boolean = False) As String
-	</code>
+	</pre>
 </code-tab>
 <o>
 	<k>SchemaPrefix</k> is a prefix for table-name. (Exm. Name="table-name" , NameWithPrefix="[pfx]table-name").
@@ -54,14 +54,14 @@
 Following section demonstrates creating a table.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		// create the table.
 		cn.DDL.GetTableScript(h);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		' create the table.
 		cn.DDL.GetTableScript(h)
-	</code>
+	</pre>
 </code-tab>
 
 <br/>
@@ -69,10 +69,10 @@ Following section demonstrates creating a table.
 Following section demonstrates how to generate <k>CREATE TABLE</k> script.
 
 <code-tab>
-	<code lang="c#">
+	<pre lang="c#">
 		var script1 = cn.DDL.GetTableScript(h, OnlyGenerateScript:true);
-	</code>
-	<code lang="vb">
+	</pre>
+	<pre lang="vb">
 		Dim script1 = cn.DDL.GetTableScript(h, OnlyGenerateScript:=True)
-	</code>
+	</pre>
 </code-tab>
