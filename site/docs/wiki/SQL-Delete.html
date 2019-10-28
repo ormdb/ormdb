@@ -90,7 +90,7 @@ Following section demonstrates <b>deletion with join</b>.
 Following section demonstrates <b>deletion with chunks</b>.
 <code-tab>
     <pre lang="c#">
-        var _ids = new List<string>();
+        var _ids = new List&lt;string>();
         // collection the Ids of the records to be deleted...
         using (var _dr = SQL.X.Select(h.Id).From(h, h.Year &lt; 2018))
         {
@@ -100,18 +100,18 @@ Following section demonstrates <b>deletion with chunks</b>.
 
         // records are being deleted in chunks, by supplying record Id information.
         int _index = 0;
-        int _size = 3000;
+        int _chunk_size = 3000;
 
         var sql = Core.Ado.SQL.X.Query;
         do {
-            var _items = _ids.Skip(_index).Take(_size);
+            var _items = _ids.Skip(_index).Take(_chunk_size);
             if (_items.Count == 0) break;
 
             sql.Delete(h, h.Id.In(_items));  // headers are being deleted
             sql.Delete(l, l.Id.In(_items));  // lines are being deleted
             sql.Execute(cn, ClearQue: true);
 
-            _index += _size;
+            _index += _chunk_size;
         }
 	</pre>
     <pre lang="vb">
@@ -125,18 +125,18 @@ Following section demonstrates <b>deletion with chunks</b>.
 
         ' records are being deleted in chunks, by supplying record Id information.
         Dim _index As Integer = 0
-        Dim _size As Integer = 3000
+        Dim _chunk_size As Integer = 3000
 
         Dim sql = Core.Ado.SQL.X.Query
         Do
-            Dim _items = _ids.Skip(_index).Take(_size)
+            Dim _items = _ids.Skip(_index).Take(_chunk_size)
             If (_items.Count = 0) Exit Do
 
             sql.Delete(h, h.Id.In(_items))  ' headers are being deleted
             sql.Delete(l, l.Id.In(_items))  ' lines are being deleted
             sql.Execute(cn, ClearQue:= True)
 
-            _index += _size
+            _index += _chunk_size
         Loop
 	</pre>
 </code-tab>
