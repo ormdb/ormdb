@@ -2,10 +2,10 @@
 
 <st>Definition</st>
 <co type="light">
-	<small><b>Namespace : </b>Odb.SQL.X</small>
+    <small><b>Namespace : </b>Odb.SQL.X</small>
 </co>
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		public static SQL.Delete Delete(Table.Base Table,
 										bool OptimizeTable = false)
 
@@ -13,7 +13,7 @@
 										Table.Field Where,
 										bool OptimizeTable = false)
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		Public Shared Function Delete(Table As Table.Base, 
 									  OptimizeTable As Boolean = False) As SQL.Delete
 
@@ -24,31 +24,31 @@
 </code-tab>
 
 <st>Examples</st>
-<ew/>
-<br/>
-<br/>
+<ew />
+<br />
+<br />
 
 Following section demonstrates <b>regular deletion</b>.
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		SQL.X.Delete(h, h.Id == 9999).Execute(cn);
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		SQL.X.Delete(h, h.Id = 9999).Execute(cn)
 	</pre>
 </code-tab>
 
-<br/>
+<br />
 Following section demonstrates <b>multiple deletion</b>.
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		var sql = SQL.X.Query();
 			sql.Delete(h, h.Id == 9999);
 			sql.Delete(l, l.Id == 9999);
 
 			sql.Execute(cn);
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		Dim sql = SQL.X.Query()
 			sql.Delete(h, h.Id = 9999)
 			sql.Delete(l, l.Id = 9999)
@@ -57,18 +57,18 @@ Following section demonstrates <b>multiple deletion</b>.
 	</pre>
 </code-tab>
 
-<br/>
+<br />
 
 Following section demonstrates <b>deletion with join</b>.
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		var sql = SQL.X.Delete(h);
 			sql.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
 			sql.Where(l.LineId > 3);
 
 			sql.Execute(cn);
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		Dim sql = SQL.X.Delete(h)
 			sql.InnerJoin(l, l.Year = h.Year And l.Id = h.Id )
 			sql.Where(l.LineId > 3)
@@ -77,5 +77,66 @@ Following section demonstrates <b>deletion with join</b>.
 	</pre>
 </code-tab>
 <o>
-	This sample deletes from [header-table] records which contain record(s) that is greather than 3 in [line-table].
+    This sample deletes from [header-table] records which contain record(s) that is greather than 3 in [line-table].
 </o>
+
+
+<br />
+<br />
+<co type="warning">
+    <k>Delete</k> operation is always a problem for the large records. But you can break the large delete operation into chunks.
+</co>
+
+Following section demonstrates <b>deletion with chunks</b>.
+<code-tab>
+    <pre lang="c#">
+        var _ids = new List<string>();
+        // collection the Ids of the records to be deleted...
+        using (var _dr = SQL.X.Select(h.Id).From(h, h.Year &lt; 2018))
+        {
+            foreach (var _r in _dr)
+                _ids.Add(_r(0).ToString());
+        }
+
+        // records are being deleted in chunks, by supplying record Id information.
+        int _index = 0;
+        int _size = 3000;
+
+        var sql = Core.Ado.SQL.X.Query;
+        do {
+            var _items = _ids.Skip(_index).Take(_size);
+            if (_items.Count == 0) break;
+
+            sql.Delete(h, h.Id.In(_items));  // headers are being deleted
+            sql.Delete(l, l.Id.In(_items));  // lines are being deleted
+            sql.Execute(cn, ClearQue: true);
+
+            _index += _size;
+        }
+	</pre>
+    <pre lang="vb">
+        Dim _ids = new List(Of String)
+        ' collection the Ids of the records to be deleted...
+        Using _dr = SQL.X.Select(h.Id).From(h, h.Year &lt; 2018)
+            For Each _r In _dr
+                _ids.Add(_r(0).ToString())
+            Next
+        End Using
+
+        ' records are being deleted in chunks, by supplying record Id information.
+        Dim _index As Integer = 0
+        Dim _size As Integer = 3000
+
+        Dim sql = Core.Ado.SQL.X.Query
+        Do
+            Dim _items = _ids.Skip(_index).Take(_size)
+            If (_items.Count = 0) Exit Do
+
+            sql.Delete(h, h.Id.In(_items))  ' headers are being deleted
+            sql.Delete(l, l.Id.In(_items))  ' lines are being deleted
+            sql.Execute(cn, ClearQue:= True)
+
+            _index += _size
+        Loop
+	</pre>
+</code-tab>
