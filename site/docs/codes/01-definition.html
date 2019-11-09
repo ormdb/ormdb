@@ -29,4 +29,6 @@ public class TableLines : Base
 }
 
 // define db-provider for once
-var _provider = new Odb.Connection.Provider(ProviderType.MsSql, "System.Data.SqlClient", "Your-ConnectionString");
+var _provider = new Connection.Provider(ProviderType.MsSql, 
+                                        "System.Data.SqlClient", 
+                                        "Your-ConnectionString");
