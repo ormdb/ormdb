@@ -29,12 +29,24 @@
 	</pre>
 </code-tab>
 
+<st>Syntax</st>
+<co type="light" class="p-0">
+    <pre lang="sql">
+        DELETE ( table_alias, [ &lt;where_condition&gt; ], [ optimize_option ] )
+            [ { INNER | LEFT | RIGHT } JOIN (
+                table_alias,
+                &lt;join_condition&gt;
+            )]  
+            [ WHERE ( &lt;where_condition&gt; ) ]   
+    </pre>
+</co>
+
 <st>Examples</st>
 <ew />
 <br />
 <br />
 
-Following section demonstrates <b>regular deletion</b>.
+    Following section demonstrates <b>regular deletion</b>.
 <code-tab>
     <pre lang="c#">
 		SQL.X.Delete(h, h.Id == 9999).Execute(cn);
@@ -45,7 +57,7 @@ Following section demonstrates <b>regular deletion</b>.
 </code-tab>
 
 <br />
-Following section demonstrates <b>multiple deletion</b>.
+    Following section demonstrates <b>multiple deletion</b>.
 <code-tab>
     <pre lang="c#">
 		var sql = SQL.X.Query();
@@ -65,7 +77,7 @@ Following section demonstrates <b>multiple deletion</b>.
 
 <br />
 
-Following section demonstrates <b>deletion with join</b>.
+    Following section demonstrates <b>deletion with join</b>.
 <code-tab>
     <pre lang="c#">
 		var sql = SQL.X.Delete(h);
@@ -93,7 +105,7 @@ Following section demonstrates <b>deletion with join</b>.
     <k>Delete</k> operation is always a problem for the large records. But you can break the large delete operation into chunks.
 </co>
 
-Following section demonstrates <b>deletion with chunks</b>.
+    Following section demonstrates <b>deletion with chunks</b>.
 <code-tab>
     <pre lang="c#">
         var _ids = new List&lt;string>();

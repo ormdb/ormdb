@@ -52,6 +52,7 @@
                 box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
                 overflow: auto;
             }
+
                 #wiki > #wiki-menu a {
                     display: block;
                     text-decoration: none;
@@ -256,14 +257,14 @@
             var _menu_group = _menu_groups[g];
 
             _menu.push('<p class="mt-4 mb-1"><strong>' + _menu_group.title + '</strong></p>');
-           // _menu.push('<ul>');
+            // _menu.push('<ul>');
 
             for (var i in _menu_group.items) {
                 //_menu.push('<li onclick=menu_click(this) data-hash="' + i + '">' + _menu_group.items[i] + '</li>');
                 _menu.push('<a href="##' + i + '">' + _menu_group.items[i] + '</a>');
 
             }
-           // _menu.push('</ul>');
+            // _menu.push('</ul>');
 
         }
         // menu is being rendered...
@@ -412,6 +413,10 @@
                 var _lang_obj = null;
                 var _lang_nam = null;
                 switch (_lang) {
+                    case "sql":
+                        _lang_obj = Prism.languages.sql;
+                        _lang_nam = "sql";
+                        break
                     case "c#":
                     case "csharp":
                         _lang_obj = Prism.languages.cs;
@@ -467,7 +472,7 @@
             while (true) {
                 var _items = $("#wiki-body co");
                 if (_items.length == 0) return;
-
+                
                 var _item = $(_items[0]);
                 var _type = _item.attr("type");
                 var _text = "";
@@ -475,8 +480,7 @@
                     case "light":
                         _text = "text-muted"
                 }
-
-                _item.replaceWith('<div class="bs-callout bs-callout-' + _type + ' table-' + _type + ' ' + _text + '">' + _item.html() + '</div>');
+                _item.replaceWith('<div class="bs-callout bs-callout-' + _type + ' table-' + _type + ' ' + _text + ' ' + _item[0].classList.value + '" style="' + _item[0].style.cssText + '">' + _item.html() + '</div>');
             }
         }
         //-------------------------------------------------------------------------------------

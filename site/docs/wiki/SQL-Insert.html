@@ -2,51 +2,59 @@
 
 <st>Definition</st>
 <co type="light">
-	<small><b>Namespace : </b>Odb.SQL.X</small>
+    <small><b>Namespace : </b>Odb.SQL.X</small>
 </co>
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		public static SQL.Insert Insert(bool SetInitials = false) 
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		Public Shared Function Insert(SetInitials As Boolean = False) As SQL.Insert
 	</pre>
 </code-tab>
+
+<st>Syntax</st>
+<co type="light" class="p-0">
+    <pre lang="sql">
+        INSERT ( [ initial_option ] )
+            ADDROW ( model )
+    </pre>
+</co>
 
 
 <st>Remarks</st>
 Some columns need to be inserted with their default/initial values. <k>SetInitials</k> parameter is set <k>true</k> for setting columns with their initial-value. This parameter is <k>false</k> by default.
 
 Columns which are specified <k>SetInitials = true</k>, accepts values shown below.
-<br/>
-<br/>
+<br />
+<br />
 <table>
-	<thead>
+    <thead>
         <tr>
             <th>ColumnType</th>
             <th>.NET type</th>
             <th>Value</th>
         </tr>
-	</thead>
-	<tr><td>ColumnString  </td><td><k>System.String</k>																			</td><td>String.Empty					</td></tr>
-	<tr><td>ColumnNumeric </td><td>Any .NET numeric types such as <k>int</k>, <k>sigle</k>, <k>double</k>, <k>decimal</k> etc.	</td><td>0								</td></tr>
-	<tr><td>ColumnBoolean </td><td><k>System.Boolean</k>																		</td><td>false							</td></tr>
-	<tr><td>ColumnBinary  </td><td><k>System.Byte[]</k>																			</td><td>x0								</td></tr>
-	<tr><td>ColumnTime    </td><td><k>System.TimeSpan</k>																		</td><td>TimeSpan.Zero					</td></tr>
-	<tr><td>ColumnDate    </td><td><k>System.Date</k>																			</td><td>Date.MinValue					</td></tr>
-	<tr><td>ColumnDateTime</td><td><k>System.Date</k>																			</td><td>Date.MinValue					</td></tr>
-	<tr><td>ColumnRef     </td><td>Reference for <k>User PreDefined</k> column													</td><td>depends on reference ColumnType </td></tr>
+    </thead>
+    <tr><td>ColumnString  </td><td><k>System.String</k>																			</td><td>String.Empty					</td></tr>
+    <tr><td>ColumnNumeric </td><td>Any .NET numeric types such as <k>int</k>, <k>sigle</k>, <k>double</k>, <k>decimal</k> etc.	</td><td>0								</td></tr>
+    <tr><td>ColumnBoolean </td><td><k>System.Boolean</k>																		</td><td>false							</td></tr>
+    <tr><td>ColumnBinary  </td><td><k>System.Byte[]</k>																			</td><td>x0								</td></tr>
+    <tr><td>ColumnTime    </td><td><k>System.TimeSpan</k>																		</td><td>TimeSpan.Zero					</td></tr>
+    <tr><td>ColumnDate    </td><td><k>System.Date</k>																			</td><td>Date.MinValue					</td></tr>
+    <tr><td>ColumnDateTime</td><td><k>System.Date</k>																			</td><td>Date.MinValue					</td></tr>
+    <tr><td>ColumnRef     </td><td>Reference for <k>User PreDefined</k> column													</td><td>depends on reference ColumnType </td></tr>
 </table>
 
 
 <st>Examples</st>
-<ew/>
-<br/>
-<br/>
+<ew />
+<br />
+<br />
 
 Following section demonstrates <b>single table insertion</b>. DocDate is accepted as <k>Date.MinValue</k>.
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		var _insert = SQL.X.Insert(true);
 
 		for (n = 1; (n <= 100); n++) {
@@ -58,7 +66,7 @@ Following section demonstrates <b>single table insertion</b>. DocDate is accepte
 		}
 		sql.Execute(cn);
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		With SQL.X.Insert(True)
 			For n = 1 To 100
 				With sql.AddRow(h.NewModel())
@@ -73,14 +81,14 @@ Following section demonstrates <b>single table insertion</b>. DocDate is accepte
 	</pre>
 </code-tab>
 <o>
-In this sample, the column <k>h.DocDate</k> was not specified. Sql engine of <k>OrmDb</k> sets the column with its inital value according to its type.
+    In this sample, the column <k>h.DocDate</k> was not specified. Sql engine of <k>OrmDb</k> sets the column with its inital value according to its type.
 </o>
 
-<br/>
+<br />
 
 Following section demonstrates <b>multiple table insertion</b>.
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		var sql = SQL.X.Query();
 
 		var _insert = sql.Insert();
@@ -106,7 +114,7 @@ Following section demonstrates <b>multiple table insertion</b>.
 		// All commands in query, are being executed as batch.
 		sql.Execute(cn)
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		With SQL.X.Query()
 			Dim _insert = sql.Insert()
 
@@ -134,4 +142,4 @@ Following section demonstrates <b>multiple table insertion</b>.
 	</pre>
 </code-tab>
 
-<br/>
+<br />
