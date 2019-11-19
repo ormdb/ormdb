@@ -105,21 +105,25 @@ You can use the column-types as shown below, in the table definitions by <b>OrmD
 All column types has the properties as shown below.
 <table>
 	<thead>
-		<th>Property Name</th>
-		<th>Description</th>
+        <tr>
+            <th>Property Name</th>
+            <th>Description</th>
+        </tr>
 	</thead>
-	<tr>
-		<td class="text-nowrap"><b>c</b> - ColumnName</td>
-		<td>Optional. It is the name of the column.</td>
-	</tr>
-	<tr>
-		<td class="text-nowrap"><b>d</b> - Description</td>
-		<td>Optional. It is the description of the column.</td>
-	</tr>
-	<tr>
-		<td class="text-nowrap"><b>n</b> - Nullable</td>
-		<td>Optional. This constraint enforces a column to accept or NOT accept NULL values.</td>
-	</tr>
+    <tbody>
+        <tr>
+            <td class="text-nowrap"><b>c</b> - ColumnName</td>
+            <td>Optional. It is the name of the column.</td>
+        </tr>
+        <tr>
+            <td class="text-nowrap"><b>d</b> - Description</td>
+            <td>Optional. It is the description of the column.</td>
+        </tr>
+        <tr>
+            <td class="text-nowrap"><b>n</b> - Nullable</td>
+            <td>Optional. This constraint enforces a column to accept or NOT accept NULL values.</td>
+        </tr>
+    </tbody>
 </table>
 
 
@@ -135,8 +139,8 @@ Variable-size string data. <b>Length</b> is the size in bytes, NOT in char. Max 
 	<pre lang="c#">
 			[ColumnString(10)]public Column col_char;
 	</pre>
-	<pre lang="vb">
-			<ColumnString(10)>Public col_char AS Column
+    <pre lang="vb">
+			&lt;ColumnString(10)&gt;Public col_char AS Column
 	</pre>
 </code-tab>
 
@@ -150,8 +154,8 @@ The scale, also an integer value, represents the number of decimal places to rig
 	<pre lang="c#">
 			[ColumnNumeric(15, 2)]public Column col_num;
 	</pre>
-	<pre lang="vb">
-			<ColumnNumeric(15, 2)>Public col_num AS Column
+    <pre lang="vb">
+			&lt;ColumnNumeric(15, 2)&gt;Public col_num AS Column
 	</pre>
 </code-tab>
 
@@ -162,8 +166,8 @@ is used for .NET <k>System.Boolean</k> data type.
 	<pre lang="c#">
 			[ColumnBoolean()]public Column col_bool;
 	</pre>
-	<pre lang="vb">
-			<ColumnBoolean()>Public col_bool AS Column
+    <pre lang="vb">
+			&lt;ColumnBoolean()&gt;Public col_bool AS Column
 	</pre>
 </code-tab>
 
@@ -175,8 +179,8 @@ is used for .NET <k>System.Byte[]</k> data type.
 	<pre lang="c#">
 			[ColumnBinary()]public Column col_bin;
 	</pre>
-	<pre lang="vb">
-			<ColumnBinary()>Public col_bin AS Column
+    <pre lang="vb">
+			&lt;ColumnBinary()&gt;Public col_bin AS Column
 	</pre>
 </code-tab>
 
@@ -187,8 +191,8 @@ is used for .NET <k>System.TimeSpan</k> data type. This type of column stores on
 	<pre lang="c#">
 			[ColumnTime()]public Column col_tim;
 	</pre>
-	<pre lang="vb">
-			<ColumnTime()>Public col_tim AS Column
+    <pre lang="vb">
+			&lt;ColumnTime()&gt;Public col_tim AS Column
 	</pre>
 </code-tab>
 
@@ -200,8 +204,8 @@ is used for .NET <k>System.Date</k> data type. This type of column stores only <
 	<pre lang="c#">
 			[ColumnDate()]public Column col_dat;
 	</pre>
-	<pre lang="vb">
-			<ColumnDate()>Public col_dat AS Column
+    <pre lang="vb">
+			&lt;ColumnDate()&gt;Public col_dat AS Column
 	</pre>
 </code-tab>
 
@@ -213,8 +217,8 @@ is used for .NET <k>System.Date</k> data type. This type of column stores <b>DAT
 	<pre lang="c#">
 			[ColumnDateTime()]public Column col_dattim;
 	</pre>
-	<pre lang="vb">
-			<ColumnDateTime()>Public col_dattim AS Column
+    <pre lang="vb">
+			&lt;ColumnDateTime()&gt;Public col_dattim AS Column
 	</pre>
 </code-tab>
 
@@ -226,7 +230,7 @@ is used for columns used repeatedly. <b>Name</b>, <b>Description</b> and <b>Null
 	<pre lang="c#">
 			[ColumnRef( reference )]public Column col_ref;
 	</pre>
-	<pre lang="vb">
-			<ColumnRef( reference )>Public col_ref AS Column
+    <pre lang="vb">
+			&lt;ColumnRef( reference )&gt;Public col_ref AS Column
 	</pre>
 </code-tab>

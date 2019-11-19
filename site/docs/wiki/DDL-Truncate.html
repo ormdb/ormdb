@@ -2,21 +2,21 @@
 
 <st>Definition</st>
 <co type="light">
-	<small><b>Namespace : </b>Odb.Connection.DDL</small>
+    <small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<pre lang="c#">
-		public List<string> Truncate(IEnumerable<Table.Base> Tables, 
+    <pre lang="c#">
+		public List&lt;string&gt; Truncate(IEnumerable&lt;Table.Base&gt; Tables, 
 									 bool OnlyGenerateScript = false)
-		public List<string> Truncate(IEnumerable<string> TableNames, 
+		public List&lt;string&gt; Truncate(IEnumerable&lt;string&gt; TableNames,
 									 bool OnlyGenerateScript = false)
 
-		public string Truncate(Table.Base Table, 
+		public string Truncate(Table.Base Table,
 							   bool OnlyGenerateScript = false)
-		public string Truncate(string TableName, 
+		public string Truncate(string TableName,
 							   bool OnlyGenerateScript = false)
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		Public Function Truncate(Tables As IEnumerable(Of Table.Base), 
 								 OnlyGenerateScript As Boolean = False) As List(Of String)
 		Public Function Truncate(TableNames As IEnumerable(Of String), 
@@ -31,13 +31,13 @@
 
 
 <st>Examples</st>
-<ew/>
-<br/>
-<br/>
+<ew />
+<br />
+<br />
 
 Following section demonstrates <k>TRUNCATE</k> the table(s).
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		// single table by instance
 		cn.DDL.Truncate(h);
 
@@ -47,7 +47,7 @@ Following section demonstrates <k>TRUNCATE</k> the table(s).
 		// single table by name
 		cn.DDL.Truncate("table1");
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		' single table by instance
 		cn.DDL.Truncate(h)
 
@@ -59,14 +59,14 @@ Following section demonstrates <k>TRUNCATE</k> the table(s).
 	</pre>
 </code-tab>
 
-<br/>
+<br />
 
 Following section demonstrates how to generate <k>TRUNCATE</k> script.
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		var script = cn.DDL.Truncate(h, true);
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		Dim script = cn.DDL.Truncate(h, True)
 	</pre>
 </code-tab>

@@ -7,19 +7,19 @@
 	<small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<pre lang="c#">
-		public List<string> CreateTables(IEnumerable<Table.Base> Tables,
+    <pre lang="c#">
+		public List&lt;string&gt; CreateTables(IEnumerable&lt;Table.Base&gt; Tables,
 										string SchemaPrefix = Manager.DefaultSchemaPrefix,
 										bool CreateIndexes = true,
 										bool OnlyGenerateScript = false)
 
-		public List<string> CreateTable(Table.Base Table,
+		public List&lt;string&gt; CreateTable(Table.Base Table,
 										string SchemaPrefix = Manager.DefaultSchemaPrefix,
 										bool CreateIndexes = true,
 										bool OnlyGenerateScript = false)
 
 		public string CreateTable(string TableName,
-								  IEnumerable<Table.Column> Columns, 
+								  IEnumerable&lt;Table.Column&gt; Columns, 
 								  IndexInfo PrimaryKeyInfo = null, 
 								  string SchemaPrefix = Manager.DefaultSchemaPrefix, 
 								  bool OnlyGenerateScript = false)

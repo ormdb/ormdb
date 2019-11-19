@@ -58,19 +58,19 @@
         Imports Odb.Connection
 
         Public Enum MyColumns
-            &lt;ColumnNumeric(4, 0, Description:="Year" , MinValue:=1900, MaxValue:=2100)> year
-            &lt;ColumnNumeric(4, 0)> id
+            &lt;ColumnNumeric(4, 0, Description:="Year" , MinValue:=1900, MaxValue:=2100)&gt; year
+            &lt;ColumnNumeric(4, 0)&gt; id
         End Enum
 
         ' Definition of the header-table
         Public Class TableHeader
             Inherits Base
 
-            &lt;ColumnRef(MyColumns.year)> Public Year     As Column
-            &lt;ColumnRef(MyColumns.id)>   Public Id       As Column
-            &lt;ColumnString(100)>         Public Note     As Column
-            &lt;ColumnDate()>              Public DocDate  As Column
-            &lt;ColumnBoolean()>           Public IsActive As Column
+            &lt;ColumnRef(MyColumns.year)&gt; Public Year     As Column
+            &lt;ColumnRef(MyColumns.id)&gt;   Public Id       As Column
+            &lt;ColumnString(100)&gt;         Public Note     As Column
+            &lt;ColumnDate()&gt;              Public DocDate  As Column
+            &lt;ColumnBoolean()&gt;           Public IsActive As Column
             
             Protected Overrides Sub InitKeyInfo()
                 MyBase.PrimaryKey({Year, Id})
@@ -81,10 +81,10 @@
         Public Class TableLines
             Inherits Base
 
-            &lt;ColumnRef(MyColumns.year)> Public Year    As Column
-            &lt;ColumnRef(MyColumns.id)>   Public Id      As Column
-            &lt;ColumnNumeric(2, 0)>       Public LineId  As Column
-            &lt;ColumnString(100)>         Public Note    As Column
+            &lt;ColumnRef(MyColumns.year)&gt; Public Year    As Column
+            &lt;ColumnRef(MyColumns.id)&gt;   Public Id      As Column
+            &lt;ColumnNumeric(2, 0)&gt;       Public LineId  As Column
+            &lt;ColumnString(100)&gt;         Public Note    As Column
 
             Protected Overrides Sub InitKeyInfo()
                 MyBase.AddPrimaryKey({Year, Id, LineId})

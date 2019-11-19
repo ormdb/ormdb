@@ -1,15 +1,15 @@
 ﻿<k>CreateIndex</k> is used to create indexes in tables. Indexes are used to speed up searches/queries.
 
 <co type="warning">
-<k>PRIMARY KEY</k> cannot be created independent from a table, it can only be during table creation or deletion.
+    <k>PRIMARY KEY</k> cannot be created independent from a table, it can only be during table creation or deletion.
 </co>
 
 <st>Definition</st>
 <co type="light">
-	<small><b>Namespace : </b>Odb.Connection.DDL</small>
+    <small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		public string CreateIndex(Table.Base Table,
 								  Table.IndexInfo IndexInfo,
 								  string IndexName = null,
@@ -22,11 +22,11 @@
 
 		public string CreateIndex(string TableName,
 								  bool IsUnique,
-								  IEnumerable<string> ColumnNames,
+								  IEnumerable&lt;string&gt; ColumnNames,
 								  string IndexName = null,
 								  bool OnlyGenerateScript = false)
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		Public Function CreateIndex(Table As Table.Base,
 									IndexInfo As Table.IndexInfo,
 									IndexName As String = Nothing,
@@ -46,21 +46,21 @@
 </code-tab>
 
 <st>Examples</st>
-<ew/>
-<br/>
-<br/>
+<ew />
+<br />
+<br />
 
 Following section demonstrates how to create index for a table.
 
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		// by table instance
 		cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index");
 
 		// by table name
 		cn.DDL.CreateIndex("table1", true, new[] { "column1", "column2" }, "my_index");
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		' by table instance
 		cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index")
 
@@ -69,15 +69,15 @@ Following section demonstrates how to create index for a table.
 	</pre>
 </code-tab>
 
-<br/>
+<br />
 
 Following section demonstrates how to generate <k>DROP INDEX</k> script.
 
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		var script = cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index", true);
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		Dim script = cn.DDL.CreateIndex(h, h.Indexes.First(), "my_index", True)
 	</pre>
 </code-tab>
