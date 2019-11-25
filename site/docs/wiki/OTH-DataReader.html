@@ -1,32 +1,32 @@
-﻿To retrieve data using a <k>DataReader</k>, create an instance of a SQL.IQueryable object, and then create a reader by calling <k>Execute</k>. 
-The <k>DataReader</k> provides an <b>unbuffered</b> stream of data that allows procedural logic to efficiently process results from a data source sequentially. 
+﻿To retrieve data using a <k>DataReader</k>, create an instance of a SQL.IQueryable object, and then create a reader by calling <k>Execute</k>.
+The <k>DataReader</k> provides an <b>unbuffered</b> stream of data that allows procedural logic to efficiently process results from a data source sequentially.
 
 <co type="success">
-	The DataReader is a good choice when you're retrieving large amounts of data because the data is not cached in memory.
+    The DataReader is a good choice when you're retrieving large amounts of data because the data is not cached in memory.
 </co>
 
 
 <st>Examples</st>
-<ew/>
-<br/>
-<br/>
+<ew />
+<br />
+<br />
 Following example iterates through a DataReader object and returns two columns from each row.
 
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		var sql = SQL.X.Select(h.Note, h.DocDate).From(h);
 		var dr = sql.Execute(cn);
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		Dim sql = SQL.X.Select(h.Note, h.DocDate).From(h)
 		Dim dr = sql.Execute(cn)
 	</pre>
 </code-tab>
 
-<br/>
+<br />
 
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		foreach (var r in dr) {
 
 			// read by column-name.
@@ -49,7 +49,7 @@ Following example iterates through a DataReader object and returns two columns f
 			Console.WriteLine("{0}, {1}", f1.ToString(), f2.ToString());
 		}
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		For Each r In dr
 
 			' read by column-name.
@@ -74,21 +74,23 @@ Following example iterates through a DataReader object and returns two columns f
 	</pre>
 </code-tab>
 
-<br/>
-<table class="table-responsive">
-    <thead>
-        <tr>
-            <th>Reading By</th>
-            <th>Performance</th>
-            <th>Memory Consumption</th>
-        </tr>
-    </thead>
-    <tr><td>column-name		</td><td>0.0000057 ms		</td><td>new instance for per column</td></tr>
-    <tr><td>column-info		</td><td>0.0000035 ms		</td><td>new instance for per column (REGULAR)</td></tr>
-    <tr><td>index info		</td><td>0.0000028 ms		</td><td>new instance for per column</td></tr>
-    <tr><td>binded			</td><td>0.0000025 ms		</td><td>one instance for all columns</td></tr>
-</table>
+<br />
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th>Reading By</th>
+                <th>Performance</th>
+                <th>Memory Consumption</th>
+            </tr>
+        </thead>
+        <tr><td>column-name		</td><td>0.0000057 ms		</td><td>new instance for per column</td></tr>
+        <tr><td>column-info		</td><td>0.0000035 ms		</td><td>new instance for per column (REGULAR)</td></tr>
+        <tr><td>index info		</td><td>0.0000028 ms		</td><td>new instance for per column</td></tr>
+        <tr><td>binded			</td><td>0.0000025 ms		</td><td>one instance for all columns</td></tr>
+    </table>
+</div>
 
 <co type="light">
-	Record Count= 1200, Network= CAT6 gigabit, Server= MsSQL 2016
+    Record Count= 1200, Network= CAT6 gigabit, Server= MsSQL 2016
 </co>

@@ -8,124 +8,127 @@ You can use the column-types as shown below, in the table definitions by <b>OrmD
 </co>
 
 <st>Column Types</st>
-<table class="table-responsive">
-    <thead>
-        <tr>
-            <th></th>
-            <th>MsSql</th>
-            <th>MySql</th>
-            <th>PostgreSql</th>
-            <th>Oracle</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><b>ColumnString</b><br /><br /> <k>System.String</k></td>
-            <td>varchar</td>
-            <td>VARCHAR</td>
-            <td>VARCHAR</td>
-            <td>NVARCHAR2 / CLOB</td>
-        </tr>
-        <tr>
-            <td><b>ColumnNumeric</b><br /><br /> Any .NET numeric types such as <k>int[16/32/64]</k>, <k>sigle</k>, <k>double</k>, <k>decimal</k> etc.</td>
-            <td>numeric</td>
-            <td>DECIMAL</td>
-            <td>NUMERIC</td>
-            <td>NUMBER</td>
-        </tr>
-        <tr>
-            <td><b>ColumnBoolean</b><br /><br /> <k>System.Boolean</k></td>
-            <td>bit</td>
-            <td>TINYINT(1)</td>
-            <td>BOOLEAN</td>
-            <td>NUMBER(1)</td>
-        </tr>
-        <tr>
-            <td><b>ColumnBinary</b><br /><br /> Array of <k>System.Byte</k></td>
-            <td>image</td>
-            <td>BLOB</td>
-            <td>BYTEA</td>
-            <td>BLOB</td>
-        </tr>
-        <tr>
-            <td><b>ColumnTime</b><br /><br /> <k>System.TimeSpan</k></td>
-            <td>time</td>
-            <td>TIME</td>
-            <td>TIME</td>
-            <td>INTERVAL DAY(0) TO SECOND(0)</td>
-        </tr>
-        <tr>
-            <td><b>ColumnDate</b><br /><br /> <k>System.DateTime</k></td>
-            <td>date</td>
-            <td>DATE</td>
-            <td>DATE</td>
-            <td>DATE</td>
-        </tr>
-        <tr>
-            <td><b>ColumnDateTime</b><br /><br /> <k>System.DateTime</k></td>
-            <td>datetime2(0)</td>
-            <td>DATETIME(0)</td>
-            <td>TIMESTAMP(0)</td>
-            <td>TIMESTAMP(0)</td>
-        </tr>
-        <tr>
-            <td><b>ColumnRef</b><br /><br /> Reference column</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="5" class="table-muted">
-                <b>ColumnInt</b>&nbsp;&nbsp;<span class="bg-danger text-white p-1">Deprecated</span>
-                <br /><br />
-                <co type="danger">
-                    There is no INTEGER data type for all databases because an INTEGER is a number with no decimal precision in ANSI standards.
-                </co>
-                <br />
-                <table class="table table-light table-bordered" style="max-width:450px;">
-                    <thead class="thead-dark">
-                        <tr><th>SubType</th>			<th>Accept As</th>				<th>Byte Size</th>	</tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Int8 / tinyint</td>		<td>ColumnNumeric(3, 0)</td>	<td>3</td>			</tr>
-                        <tr><td>Int16 / smallint</td>	<td>ColumnNumeric(5, 0)</td>	<td>5</td>			</tr>
-                        <tr><td>Int32 / int</td>		<td>ColumnNumeric(10, 0)</td>	<td>9</td>			</tr>
-                        <tr><td>Int64 / bigint</td>		<td>ColumnNumeric(19, 0)</td>	<td>9</td>			</tr>
-                    </tbody>
-                </table>
-                These types are not supported for definition only. But you can allways use these types in database.
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>MsSql</th>
+                <th>MySql</th>
+                <th>PostgreSql</th>
+                <th>Oracle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>ColumnString</b><br /><br /> <k>System.String</k></td>
+                <td>varchar</td>
+                <td>VARCHAR</td>
+                <td>VARCHAR</td>
+                <td>NVARCHAR2 / CLOB</td>
+            </tr>
+            <tr>
+                <td><b>ColumnNumeric</b><br /><br /> Any .NET numeric types such as <k>int[16/32/64]</k>, <k>sigle</k>, <k>double</k>, <k>decimal</k> etc.</td>
+                <td>numeric</td>
+                <td>DECIMAL</td>
+                <td>NUMERIC</td>
+                <td>NUMBER</td>
+            </tr>
+            <tr>
+                <td><b>ColumnBoolean</b><br /><br /> <k>System.Boolean</k></td>
+                <td>bit</td>
+                <td>TINYINT(1)</td>
+                <td>BOOLEAN</td>
+                <td>NUMBER(1)</td>
+            </tr>
+            <tr>
+                <td><b>ColumnBinary</b><br /><br /> Array of <k>System.Byte</k></td>
+                <td>image</td>
+                <td>BLOB</td>
+                <td>BYTEA</td>
+                <td>BLOB</td>
+            </tr>
+            <tr>
+                <td><b>ColumnTime</b><br /><br /> <k>System.TimeSpan</k></td>
+                <td>time</td>
+                <td>TIME</td>
+                <td>TIME</td>
+                <td>INTERVAL DAY(0) TO SECOND(0)</td>
+            </tr>
+            <tr>
+                <td><b>ColumnDate</b><br /><br /> <k>System.DateTime</k></td>
+                <td>date</td>
+                <td>DATE</td>
+                <td>DATE</td>
+                <td>DATE</td>
+            </tr>
+            <tr>
+                <td><b>ColumnDateTime</b><br /><br /> <k>System.DateTime</k></td>
+                <td>datetime2(0)</td>
+                <td>DATETIME(0)</td>
+                <td>TIMESTAMP(0)</td>
+                <td>TIMESTAMP(0)</td>
+            </tr>
+            <tr>
+                <td><b>ColumnRef</b><br /><br /> Reference column</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="5" class="table-muted">
+                    <b>ColumnInt</b>&nbsp;&nbsp;<span class="bg-danger text-white p-1">Deprecated</span>
+                    <br /><br />
+                    <co type="danger">
+                        There is no INTEGER data type for all databases because an INTEGER is a number with no decimal precision in ANSI standards.
+                    </co>
+                    <br />
+                    <table class="table table-light table-bordered" style="max-width:450px;">
+                        <thead class="thead-dark">
+                            <tr><th>SubType</th>			<th>Accept As</th>				<th>Byte Size</th>	</tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Int8 / tinyint</td>		<td>ColumnNumeric(3, 0)</td>	<td>3</td>			</tr>
+                            <tr><td>Int16 / smallint</td>	<td>ColumnNumeric(5, 0)</td>	<td>5</td>			</tr>
+                            <tr><td>Int32 / int</td>		<td>ColumnNumeric(10, 0)</td>	<td>9</td>			</tr>
+                            <tr><td>Int64 / bigint</td>		<td>ColumnNumeric(19, 0)</td>	<td>9</td>			</tr>
+                        </tbody>
+                    </table>
+                    These types are not supported for definition only. But you can allways use these types in database.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <br /><br />
 
 All column types has the properties as shown below.
-<table class="table-responsive">
-    <thead>
-        <tr>
-            <th>Property Name</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="text-nowrap"><b>c</b> - ColumnName</td>
-            <td>Optional. It is the name of the column.</td>
-        </tr>
-        <tr>
-            <td class="text-nowrap"><b>d</b> - Description</td>
-            <td>Optional. It is the description of the column.</td>
-        </tr>
-        <tr>
-            <td class="text-nowrap"><b>n</b> - Nullable</td>
-            <td>Optional. This constraint enforces a column to accept or NOT accept NULL values.</td>
-        </tr>
-    </tbody>
-</table>
-
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th>Property Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-nowrap"><b>c</b> - ColumnName</td>
+                <td>Optional. It is the name of the column.</td>
+            </tr>
+            <tr>
+                <td class="text-nowrap"><b>d</b> - Description</td>
+                <td>Optional. It is the description of the column.</td>
+            </tr>
+            <tr>
+                <td class="text-nowrap"><b>n</b> - Nullable</td>
+                <td>Optional. This constraint enforces a column to accept or NOT accept NULL values.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <br /><br />
 <ew />

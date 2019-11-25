@@ -18,74 +18,76 @@
 </code-tab>
 
 <st>Parameters</st>
-<table class="table-responsive">
-    <thead>
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th>Parameters</th>
+                <th>Description</th>
+            </tr>
+        </thead>
         <tr>
-            <th>Parameters</th>
-            <th>Description</th>
+            <td>Type</td>
+            <td>is <k>type</k> of the DbProvider.</td>
         </tr>
-    </thead>
-    <tr>
-        <td>Type</td>
-        <td>is <k>type</k> of the DbProvider.</td>
-    </tr>
-    <tr>
-        <td>Name [1..n]</td>
-        <td>
-            is <k>name</k> of the <b>DbFactory</b> to be created. Can be specify as <k>[InvariantName]</k> or <k>[AssemblyQualifiedName]</k> or <k>both</k>.
-            <br /><br />
-            <k>[InvariantName]</k> is the name of the factory in GAC; and the factory initialized from GAC by this name.
-            <br /><br />
-            <k>[AssemblyQualifiedName]</k> initialize the factory from references in memory of current process.
+        <tr>
+            <td>Name [1..n]</td>
+            <td>
+                is <k>name</k> of the <b>DbFactory</b> to be created. Can be specify as <k>[InvariantName]</k> or <k>[AssemblyQualifiedName]</k> or <k>both</k>.
+                <br /><br />
+                <k>[InvariantName]</k> is the name of the factory in GAC; and the factory initialized from GAC by this name.
+                <br /><br />
+                <k>[AssemblyQualifiedName]</k> initialize the factory from references in memory of current process.
 
-            <br /><br />
-            <b>Examples:</b>
-            <table class="table-responsive">
-                <thead>
-                    <tr>
-                        <th>InvariantName</th>
-                        <th>AssemblyQualifiedName</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>System.Data.SqlClient</td><td>System.Data.SqlClient.SqlClientFactory, System.Data</td></tr>
-                    <tr><td>MySql.Data.MySqlClient</td><td>MySql.Data.MySqlClient.MySqlClientFactory, MySql.Data</td></tr>
-                    <tr><td>Oracle.ManagedDataAccess.Client</td><td>Oracle.ManagedDataAccess.Client.OracleClientFactory, Oracle.ManagedDataAccess</td></tr>
-                    <tr><td>Npgsql</td><td>Npgsql.NpgsqlFactory, Npgsql</td></tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td>ConnectionString</td>
-        <td>The connection string that includes the source database name, and other parameters needed to establish the initial connection.</td>
-    </tr>
-</table>
+                <br /><br />
+                <b>Examples:</b>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>InvariantName</th>
+                            <th>AssemblyQualifiedName</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>System.Data.SqlClient</td><td>System.Data.SqlClient.SqlClientFactory, System.Data</td></tr>
+                        <tr><td>MySql.Data.MySqlClient</td><td>MySql.Data.MySqlClient.MySqlClientFactory, MySql.Data</td></tr>
+                        <tr><td>Oracle.ManagedDataAccess.Client</td><td>Oracle.ManagedDataAccess.Client.OracleClientFactory, Oracle.ManagedDataAccess</td></tr>
+                        <tr><td>Npgsql</td><td>Npgsql.NpgsqlFactory, Npgsql</td></tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>ConnectionString</td>
+            <td>The connection string that includes the source database name, and other parameters needed to establish the initial connection.</td>
+        </tr>
+    </table>
+</div>
 
-<st>Examples</st>
-<ew />
-<br />
-<br />
+    <st>Examples</st>
+    <ew />
+    <br />
+    <br />
 
     Following section defines a provider.
-<code-tab>
-    <pre lang="c#">
+    <code-tab>
+        <pre lang="c#">
         // for MsSql
         var prv_ms = new Odb.Connection.Provider(ProviderType.MsSql, "System.Data.SqlClient", "Your-ConnectionString");
 
         // for PorstgreSql - multiple factory names
         var prv_pg = new Odb.Connection.Provider(ProviderType.PostgreSql, new[] {"Npgsql", "Npgsql.NpgsqlFactory, Npgsql"}, "Your-ConnectionString");
     </pre>
-    <pre lang="vb">
+        <pre lang="vb">
         ' for MsSql
         Dim prv_ms = new Odb.Connection.Provider(ProviderType.MsSql, "System.Data.SqlClient", "Your-ConnectionString")
 
         ' for PorstgreSql - multiple factory names
         Dim prv_pg = new Odb.Connection.Provider(ProviderType.PostgreSql, {"Npgsql", "Npgsql.NpgsqlFactory, Npgsql"}, "Your-ConnectionString")
     </pre>
-</code-tab>
-<br />
-<co type="warning">
-    You can create many <a href="##CON-Connection">Connection</a> from the Provider. Please refer to <a href="##CON-Connection">Connection</a> for further information.
-</co>
+    </code-tab>
+    <br />
+    <co type="warning">
+        You can create many <a href="##CON-Connection">Connection</a> from the Provider. Please refer to <a href="##CON-Connection">Connection</a> for further information.
+    </co>
 

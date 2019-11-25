@@ -2,40 +2,42 @@
 
 <st>Definition</st>
 <co type="light">
-	<small><b>Namespace : </b>Odb.Connection.DDL</small>
+    <small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
     <pre lang="c#">
 		public List&lt;SchemaTableInfo&gt; GetTables(string TableName = null)
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		Public Function GetTables(TableName As String = Nothing) As List(Of SchemaTableInfo)
 	</pre>
 </code-tab>
 
 
 <st>Return</st>
-<table class="table-responsive">
-    <thead>
-        <tr>
-            <th>SchemaTableInfo</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tr><td>Catalog</td><td>Database or Catalog name which has the table</td></tr>
-    <tr><td>Schema </td><td>Name of schema that contains the table.     </td></tr>
-    <tr><td>Table  </td><td>Table name.                                 </td></tr>
-</table>
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th>SchemaTableInfo</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tr><td>Catalog</td><td>Database or Catalog name which has the table</td></tr>
+        <tr><td>Schema </td><td>Name of schema that contains the table.     </td></tr>
+        <tr><td>Table  </td><td>Table name.                                 </td></tr>
+    </table>
+</div>
 
 <st>Examples</st>
-<ew/>
-<br/>
-<br/>
+<ew />
+<br />
+<br />
 
-Following section demonstrates retrieving the tables from database.
+    Following section demonstrates retrieving the tables from database.
 
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		var tables = cn.DDL.GetTables();
 
 		var table_count = tables.Count;
@@ -44,7 +46,7 @@ Following section demonstrates retrieving the tables from database.
 			System.Diagnostics.Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}");
 		}
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		Dim tables = cn.DDL.GetTables()
 
 		Dim table_count = tables.Count
