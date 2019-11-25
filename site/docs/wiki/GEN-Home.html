@@ -15,7 +15,8 @@ OrmDB has no dependencies. You can <a href="/">DOWNLOAD</a> from releases, into 
 <st>What is it?</st>
 OrmDB is a simple, fast and lightweight embedded .NET ORM tool which was inspired by the equivalent other tools.
 OrmDB works across .NET ADO providers as shown below.
-
+<br/>
+<br/>
 <table>
     <thead>
         <tr>
@@ -24,10 +25,10 @@ OrmDB works across .NET ADO providers as shown below.
         </tr>
     </thead>
     <tbody>
-        <tr><td>Ms SQL         </td><td>System.Data.SqlClient             </td></tr>
-        <tr><td>Postgre SQL    </td><td>Npgsql                            </td></tr>
-        <tr><td>MySQL / MariaDB</td><td>MySql.Data                        </td></tr>
-        <tr><td>Oracle         </td><td>ODP.Net (Oracle ManagedDataAccess)</td></tr>
+        <tr><td>System.Data.SqlClient</td><td>System.Data.SqlClient.SqlClientFactory, System.Data</td></tr>
+        <tr><td>MySql.Data.MySqlClient</td><td>MySql.Data.MySqlClient.MySqlClientFactory, MySql.Data</td></tr>
+        <tr><td>Oracle.ManagedDataAccess.Client</td><td>Oracle.ManagedDataAccess.Client.OracleClientFactory, Oracle.ManagedDataAccess</td></tr>
+        <tr><td>Npgsql</td><td>Npgsql.NpgsqlFactory, Npgsql</td></tr>
     </tbody>
 </table>
 
