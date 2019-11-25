@@ -6,14 +6,14 @@
 </co>
 <code-tab>
     <pre lang="c#">
-        Odb.Connection.Provider ( ProviderType Type, string InvariantOrAssemblyQualifiedName, string ConnectionString )
+        Odb.Connection.Provider ( ProviderType Type, string Name, string ConnectionString )
 
-        Odb.Connection.Provider ( ProviderType Type, IEnumerable&lt;string&gt; InvariantOrAssemblyQualifiedName, string ConnectionString )
+        Odb.Connection.Provider ( ProviderType Type, IEnumerable&lt;string&gt; Name, string ConnectionString )
     </pre>
     <pre lang="vb">
-        Odb.Connection.Provider ( Type As ProviderType, InvariantOrAssemblyQualifiedName As String, ConnectionString As String )
+        Odb.Connection.Provider ( Type As ProviderType, Name As String, ConnectionString As String )
 
-        Odb.Connection.Provider ( Type As ProviderType, InvariantOrAssemblyQualifiedNames As IEnumerable(Of String), ConnectionString As String )
+        Odb.Connection.Provider ( Type As ProviderType, Name As IEnumerable(Of String), ConnectionString As String )
     </pre>
 </code-tab>
 
@@ -30,7 +30,7 @@
         <td>is <k>type</k> of the DbProvider.</td>
     </tr>
     <tr>
-        <td>InvariantOrAssemblyQualifiedName [1..n]</td>
+        <td>Name [1..n]</td>
         <td>
             is <k>name</k> of the <b>DbFactory</b> to be created. Can be specify as <k>[InvariantName]</k> or <k>[AssemblyQualifiedName]</k> or <k>both</k>.
             <br /><br />
