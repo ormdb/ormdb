@@ -75,19 +75,18 @@ Following example iterates through a DataReader object and returns two columns f
 </code-tab>
 
 <br/>
-
-<table>
-	<thead>
+<table class="table-responsive">
+    <thead>
         <tr>
             <th>Reading By</th>
             <th>Performance</th>
             <th>Memory Consumption</th>
         </tr>
-	</thead>
-	<tr><td>column-name		</td><td>0.0000057 ms		</td><td>new instance for per column</td></tr>
-	<tr><td>column-info		</td><td>0.0000035 ms		</td><td>new instance for per column (REGULAR)</td></tr>
-	<tr><td>index info		</td><td>0.0000028 ms		</td><td>new instance for per column</td></tr>
-	<tr><td>binded			</td><td>0.0000025 ms		</td><td>one instance for all columns</td></tr>
+    </thead>
+    <tr><td>column-name		</td><td>0.0000057 ms		</td><td>new instance for per column</td></tr>
+    <tr><td>column-info		</td><td>0.0000035 ms		</td><td>new instance for per column (REGULAR)</td></tr>
+    <tr><td>index info		</td><td>0.0000028 ms		</td><td>new instance for per column</td></tr>
+    <tr><td>binded			</td><td>0.0000025 ms		</td><td>one instance for all columns</td></tr>
 </table>
 
 <co type="light">
