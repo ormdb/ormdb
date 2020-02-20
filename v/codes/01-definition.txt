@@ -27,8 +27,3 @@ public class TableLines : Base
         base.AddPrimaryKey(new[] { Year, Id, LineId });
     }
 }
-
-// define db-provider for once
-var _provider = new Connection.Provider(ProviderType.MsSql, 
-                                        "System.Data.SqlClient", 
-                                        "Your-ConnectionString");

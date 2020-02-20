@@ -1,0 +1,32 @@
+﻿Retrieves the datetime info from database server.
+
+
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Providers.IProvider</small>
+</co>
+<code-tab>
+	<pre lang="c#">
+		public DateTime GetServerDateTime()
+	</pre>
+	<pre lang="vb">
+		Public Function GetServerDateTime() As DateTime
+	</pre>
+</code-tab>
+
+<st>Examples</st>
+<ew />
+<br />
+<br />
+
+Following section demonstrates ping and calculate average time.
+<code-tab>
+	<pre lang="c#">
+		var dt = cn.Provider.GetServerDateTime();
+		Debug.WriteLine($"Server DateTime = { dt.ToString() }");
+	</pre>
+	<pre lang="vb">
+		Dim dt = cn.Provider.GetServerDateTime()
+		Debug.WriteLine($"Server DateTime = { dt.ToString() }")
+	</pre>
+</code-tab>

@@ -1,0 +1,88 @@
+﻿Executes a Transact-SQL statement against the connection and returns the number of rows affected..
+
+
+<st>Definition</st>
+<co type="light">
+    <small>
+        <b>Namespace : </b>Odb
+        <co type="warning">
+            These methods are come as an extension methods. So you have to <b>include</b> or <b>import</b> to use them.
+        </co>
+    </small>
+</co>
+<code-tab>
+	<pre lang="c#">
+		public Task ExecuteNonQueryAsync(this Odb.SQL.IExecutable o, Odb.Connection Connection, Odb.ExecuteIn ExecuteIn = ActualConnection)
+
+		public void ExecuteNonQuery(this Odb.SQL.IExecutable o, Odb.Connection Connection, Odb.ExecuteIn ExecuteIn = ActualConnection)
+	</pre>
+	<pre lang="vb">
+		Public Function ExecuteNonQueryAsync(o As Odb.SQL.IExecutable, Connection As Odb.Connection, ExecuteIn As Odb.ExecuteIn = ActualConnection) As Task
+
+		Public Sub ExecuteNonQuery(o As Odb.SQL.IExecutable, Connection As Odb.Connection, ExecuteIn As Odb.ExecuteIn = ActualConnection)
+	</pre>
+</code-tab>
+<co type="light">
+    <small><b>Namespace : </b>Odb.Connection</small>
+</co>
+<code-tab>
+    <pre lang="c#">
+		public Task ExecuteNonQueryAsync(string TSQL, Odb.ExecuteIn ExecuteIn = ActualConnection)
+
+		public void ExecuteNonQuery(string TSQL, Odb.ExecuteIn ExecuteIn = ActualConnection)
+
+		public Task ExecuteNonQueryAsync(Data.Common.DbCommand Cmd, Odb.ExecuteIn ExecuteIn = ActualConnection)
+
+		public void ExecuteNonQuery(Data.Common.DbCommand Cmd, Odb.ExecuteIn ExecuteIn = ActualConnection)
+	</pre>
+	<pre lang="vb">
+		Public Function ExecuteNonQueryAsync(TSQL As String, ExecuteIn As Odb.ExecuteIn = ActualConnection) As Task
+
+		Public Sub ExecuteNonQuery(TSQL As String, ExecuteIn As Odb.ExecuteIn = ActualConnection)
+
+		Public Function ExecuteNonQueryAsync(Cmd As Data.Common.DbCommand, ExecuteIn As Odb.ExecuteIn = ActualConnection) As Task
+
+		Public Sub ExecuteNonQuery(Cmd As Data.Common.DbCommand, ExecuteIn As Odb.ExecuteIn = ActualConnection)
+	</pre>
+</code-tab>
+
+<st>Examples</st>
+<ew />
+<br />
+<br />
+<code-tab>
+    <pre lang="c#">
+		using Odb; /* for extensions */
+	
+		// 1. to execute IExecutable.
+		var sql1 = SQL.X.Delete(h, h.Id == 9999);
+		sql1.ExecuteNonQuery(cn);
+
+		// 2. to execute TSQL string.
+		var sql2 = "DELETE FROM table WHERE field1<>0 AND field2='X'";
+		cn.ExecuteNonQuery(sql2);
+
+		// 3. to execute DbCommand.
+		var cmd = cn.CreateCommand(
+						"DELETE FROM table WHERE field1<>@param1 AND field2=@param2",
+						new { param1 = 0, param2 = "X"});
+		cn.ExecuteNonQuery(cmd);
+	</pre>
+    <pre lang="vb">
+		Imports Odb '// for extensions
+
+		'// 1. to execute IExecutable.
+		Dim sql1 = SQL.X.Delete(h, h.Id = 9999)
+		sql1.ExecuteNonQuery(cn)
+
+		'// 2. to execute TSQL string.
+		Dim sql2 = "DELETE FROM table WHERE field1<>0 AND field2='X'"
+		cn.ExecuteNonQuery(sql2)
+
+		'// 3. to execute DbCommand.
+		Dim cmd = cn.CreateCommand(
+						"DELETE FROM table WHERE field1<>@param1 AND field2=@param2",
+						new { param1 = 0, param2 = "X"})
+		cn.ExecuteNonQuery(cmd)
+	</pre>
+</code-tab>

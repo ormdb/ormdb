@@ -180,16 +180,15 @@ header {
 /*-----------------------------------------*/
 /*-- SCROLL-BAR --*/
 /*-----------------------------------------*/
-::-webkit-scrollbar-button {
-    display: none;
-    height: 13px;
-    border-radius: 0px;
-    background-color: #808080;
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
 }
 
-    ::-webkit-scrollbar-button:hover {
-        background-color: #808080;
+    ::-webkit-scrollbar:hover {
+        background: #c6c7ca;
     }
+
 
 ::-webkit-scrollbar-thumb {
     background-color: #808080;
@@ -201,6 +200,17 @@ header {
         border-radius: 5px;
     }
 
+::-webkit-scrollbar-button {
+    display: none;
+    height: 13px;
+    border-radius: 0px;
+    background-color: #808080;
+}
+
+    ::-webkit-scrollbar-button:hover {
+        background-color: #808080;
+    }
+
 ::-webkit-scrollbar-track {
     background-color: #efefef;
     border-radius: 10px;
@@ -210,11 +220,7 @@ header {
         background-color: #efefef;
         border-radius: 10px;
     }
-
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}/*-----------------------------------------*/
+/*-----------------------------------------*/
 /*-- CODE --*/
 /*-----------------------------------------*/
 pre {

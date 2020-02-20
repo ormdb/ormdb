@@ -1,0 +1,62 @@
+﻿{
+  "home": "GEN-Home",
+  "items": {
+    "GEN": {
+      "title": "Home",
+      "items": {
+        "GEN-Home": "Home"
+      }
+    },
+    "TBL": {
+      "title": "Table",
+      "items": {
+        "TBL-Columns": "Columns",
+        "TBL-Definition": "Definition",
+        "TBL-Serialize": "Serialize & Deserialize"
+      }
+    },
+    "CON": {
+      "title": "Connection",
+      "items": {
+        "CON-Provider": "Provider",
+        "CON-Connection": "Connection",
+        "CON-Transaction": "Transaction",
+        "CON-Import": "Import Data"
+      }
+    },
+    "SQL": {
+      "title": "SQL",
+      "items": {
+        "SQL-Operators": "Operators & Functions",
+        "SQL-Select": "Select",
+        "SQL-Insert": "Insert",
+        "SQL-InsertInto": "InsertInto",
+        "SQL-Update": "Update",
+        "SQL-Delete": "Delete",
+        "SQL-Query": "Query"
+      }
+    },
+    "DDL": {
+      "title": "DDL",
+      "items": {
+        "DDL-GetTables": "GetTables",
+        "DDL-GetTableInstance": "GetTableInstance",
+        "DDL-GetTableIndexes": "GetTableIndexes",
+        "DDL-TableExist": "TableExist",
+        "DDL-GetTableColumns": "GetTableColumns",
+        "DDL-CreateTable": "CreateTable",
+        "DDL-DropTable": "DropTable",
+        "DDL-CreateIndex": "CreateIndex",
+        "DDL-DropIndex": "DropIndex",
+        "DDL-Truncate": "Truncate"
+      }
+    },
+    "OTH": {
+      "title": "Other",
+      "items": {
+        "OTH-Execute": "Execute",
+        "OTH-DataReader": "DataReader"
+      }
+    }
+  }
+}

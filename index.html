@@ -9,18 +9,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/site/resources/css/prism.css">
-    <link rel="stylesheet" href="/site/resources/css/site.css" />
+    <link rel="stylesheet" href="/resources/css/prism.css">
+    <link rel="stylesheet" href="/resources/css/site.css" />
 </head>
 
 
 <body>
-    <nav class="navbar navbar-dark bg-dark d-flex">
+    <nav class="navbar navbar-dark bg-dark d-flex py-0">
         <a class="navbar-brand" href="/">
             <div style="background-image: url('https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80');width: 100px;height: 40px;background-position: center center;background-repeat: no-repeat;"></div>
         </a>
         <div class="flex-grow-1 navbar-nav d-flex flex-row" id="navbarNav">
-            <a class="nav-link px-3 fa-lg" href="/wiki.html" style="">Wiki&nbsp;&nbsp;<i class="fa fa-book"></i></a>
+            <a class="nav-link px-3 fa-lg" href="#" onclick="goto_wiki()">Wiki&nbsp;&nbsp;<i class="fa fa-book"></i></a>
         </div>
     </nav>
 
@@ -34,7 +34,7 @@
         <div class="p-5">
             <a href="https://www.nuget.org/packages/OrmDb/" target="_blank" style="margin:10px; text-decoration:none;padding:1px;display: inline-flex;align-items: center;background-color: #0e83cd;color: white;">
                 <div class="p-3 text-light bg-dark">
-                    <img src="site/resources/images/nuget.png" style="height:25px">&nbsp;&nbsp;Install from Nuget
+                    <img src="/resources/images/nuget.png" style="height:25px">&nbsp;&nbsp;Install from Nuget
                 </div>
                 <span style="padding: 10px;">
                     <i class="fa fa-arrow-right" style="width:30px;"></i>
@@ -64,7 +64,7 @@
             <div class="text-secondary">
                 OrmDb does NOT executes the queries as a string statement. OrmDb executes the queries as a part of the code like LINQ.
                 <div class="mt-3 small">
-                    Please refer to <a href="/wiki.html">Wiki</a> for further information.
+                    Please refer to <a href="#" onclick="goto_wiki()">Wiki</a> for further information.
                 </div>
             </div>
         </div>
@@ -81,7 +81,7 @@
             <div class="text-secondary">
                 You dont need the multiple queries for different databases with OrmDb. ONE Query can be executed on different connection(s).
                 <div class="mt-3 small">
-                    Please refer to <a href="/wiki.html">Wiki</a> for further information.
+                    Please refer to <a href="#" onclick="goto_wiki()">Wiki</a> for further information.
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@
             <div class="text-secondary">
                 You can look out our samples which are shown below, to understand better how to use.
                 <div class="mt-3 small">
-                    Please refer to <a href="/wiki.html">Wiki</a> for further information.
+                    Please refer to <a href="#" onclick="goto_wiki()">Wiki</a> for further information.
                 </div>
             </div>
         </div>
@@ -111,8 +111,8 @@
     <small class="copyright"></small>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="site/resources/js/prism.js"></script>
-    <script src="site/resources/js/site.js"></script>
+    <script src="/resources/js/prism.js"></script>
+    <script src="/resources/js/site.js"></script>
     <script>
         var _examples_data = [];
         function _example_activate(index) {
@@ -120,24 +120,27 @@
             $("#examples_menu>li:eq(" + index + ")").addClass("active");
             $("#examples_data").html(_examples_data[index]);
         }
-
+        function goto_wiki() {
+            location.href = "/wiki.html";
+            //location.href = "/wiki.html?v=version-number";
+        }
         $(function () {
-            $.get(site.code_path + "00-no_string_2.html", function (data) {
+            $.get(site.code_path + "00-no_string_2.txt", function (data) {
                 $("#sample_no_string_2").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));
             });
 
             //-- one-statemment-sample is being loaded...
-            $.get(site.code_path + "00-one_statement.html", function (data) {
+            $.get(site.code_path + "00-one_statement.txt", function (data) {
                 $("#sample_one_statement").html(Prism.highlight(data, Prism.languages.csharp, 'csharp'));
             });
 
             //-- Samples are being loaded...
             var items = [
-                { title: "Definition", file: "01-definition.html" },
-                { title: "Select", file: "02-select.html" },
-                { title: "Insert", file: "03-insert.html" },
-                { title: "Update", file: "04-update.html" },
-                { title: "Delete", file: "05-delete.html" }
+                { title: "Definition", file: "01-definition.txt" },
+                { title: "Select", file: "02-select.txt" },
+                { title: "Insert", file: "03-insert.txt" },
+                { title: "Update", file: "04-update.txt" },
+                { title: "Delete", file: "05-delete.txt" }
             ];
 
             var ul = $("#examples_menu");

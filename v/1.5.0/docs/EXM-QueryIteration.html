@@ -1,0 +1,44 @@
+﻿<ew />
+<br />
+<br />
+
+
+Following example iterates the records for two columns.
+<br />
+<br />
+<code-tab>
+	<pre lang="c#">
+		var sql = SQL.X.Select(h.Note, h.DocDate).From(h);
+
+		foreach (var r in sql.ExecuteReader(cn)) {
+			// read by column-name.
+			Debug.WriteLine("{0}, {1}", r("Note").ToString(), 
+										  r("DocDate").ToString());
+
+			// read by column.
+			Debug.WriteLine("{0}, {1}", r(h.Note).ToString(), 
+										  r(h.DocDate).ToString());
+
+			// read by column-index.
+			Debug.WriteLine("{0}, {1}", r(0).ToString(),
+										  r(1).ToString());
+		}
+	</pre>
+	<pre lang="vb">
+		Dim sql = SQL.X.Select(h.Note, h.DocDate).From(h)
+
+		For Each r In sql.ExecuteReader(cn)
+			' read by column-name.
+			Debug.WriteLine("{0}, {1}", r("Note").ToString(), 
+										  r("DocDate").ToString())
+
+			' read by column.
+			Debug.WriteLine("{0}, {1}", r(h.Note).ToString(), 
+										  r(h.DocDate).ToString())
+
+			' read by column-index.
+			Debug.WriteLine("{0}, {1}", r(0).ToString(), 
+										  r(1).ToString())
+		Next
+	</pre>
+</code-tab>

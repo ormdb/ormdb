@@ -1,0 +1,4 @@
+﻿	var h = new Header();
+	var l = new Lines();
+	
+	var sql = SQL.X.Select().From(h, h.Year > 2018).InnerJoin(l, l.id == h.id);

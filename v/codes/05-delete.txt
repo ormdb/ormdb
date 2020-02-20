@@ -1,7 +1,7 @@
 ﻿using Odb;
 
 // create connection
-var cn = Connection.Manager.Create(); 
+var cn = Odb.Connection.Create<Providers.MsSql>("Your-ConnectionString");
 
 // initialize table alias => (... FROM TableHeader AS h)
 var h = new TableHeader();

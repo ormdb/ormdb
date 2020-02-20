@@ -1,0 +1,191 @@
+﻿The Connection Object is a part of <k>OrmDb</k> Data Provider and it is a unique session with the Data Source.
+The Connection Object is Handling the part of physical communication between the application and the Data Source.
+<br />
+<br />
+The Connection Object connect to the specified Data Source and open a connection between the application and the Data Source, depends on the parameter specified in the <k>Connection String</k>.
+When the connection is established, SQL Commands will execute with the help of the Connection Object and retrieve or manipulate data in the Data Source.
+<br />
+<br />
+<co type="warning">
+    Once the Database activity is over; Connection should be closed and release the Data Source resources.
+</co>
+
+<st>Definition</st>
+<co type="light">
+    <small><b>Namespace : </b>Odb</small>
+</co>
+<code-tab>
+    <pre lang="c#">
+        public static Connection Create(string ProviderName, string ConnectionString, IEnumerable(Of string) FactoryNames = null, ConnectionSettings Settings = null)
+
+        public static Connection Create&lt;T&gt;(string ConnectionString, IEnumerable(Of string) FactoryNames = null, ConnectionSettings Settings = null)  where T : Providers.IProvider
+
+        public static Connection Create(System.Type Provider, string ConnectionString, IEnumerable(Of string) FactoryNames = null, ConnectionSettings Settings = null)
+
+        public static Connection Create(Providers.IProvider Provider, string ConnectionString, IEnumerable(Of string) FactoryNames = null, ConnectionSettings Settings = null)
+</pre>
+    <pre lang="vb">
+        Public Shared Function Create(ProviderName As String, ConnectionString As String, FactoryNames As IEnumerable(Of String) = Nothing, Settings As ConnectionSettings = Nothing) As Connection
+
+        Public Shared Function Create(Of T As Providers.IProvider)(ConnectionString As String, FactoryNames As IEnumerable(Of String) = Nothing, Settings As ConnectionSettings = Nothing) As Connection
+
+        Public Shared Function Create(Provider As System.Type, ConnectionString As String, FactoryNames As IEnumerable(Of String) = Nothing, Settings As ConnectionSettings = Nothing) As Connection
+
+        Public Shared Function Create(Provider As Providers.IProvider, ConnectionString As String, FactoryNames As IEnumerable(Of String) = Nothing, Settings As ConnectionSettings = Nothing) As Connection
+    </pre>
+</code-tab>
+
+<st>Parameters</st>
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th>Parameters</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tr>
+            <td><b>Provider</b></td>
+            <td>
+                Providers can be specify as <k>System.String (ProviderName)</k> or <k>System.Type (IProvider)</k>. The providers are used to prepare the commands for the database to be connected.
+                <br />
+                <br />
+                Each providers are also include default FactoryName as shown below.
+                <br />
+                <br />
+                <table class="table table-light table-bordered">
+                    <thead class="thead-dark">
+                        <tr><th>Provider</th><th>Default InvariantName</th><th>Default AssemblyQualifiedName</th>			    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MsSql</td>
+                            <td>System.Data.SqlClient</td>
+                            <td>System.Data.SqlClient.SqlClientFactory, System.Data</td>
+                        </tr>
+                        <tr>
+                            <td>MySql</td>
+                            <td>MySql.Data.MySqlClient</td>
+                            <td>MySql.Data.MySqlClient.MySqlClientFactory, MySql.Data</td>
+                        </tr>
+                        <tr>
+                            <td>Oracle</td>
+                            <td>Oracle.ManagedDataAccess.Client</td>
+                            <td>Oracle.ManagedDataAccess.Client.OracleClientFactory, Oracle.ManagedDataAccess</td>
+                        </tr>
+                        <tr>
+                            <td>PostgreSql</td>
+                            <td>Npgsql</td>
+                            <td>Npgsql.NpgsqlFactory, Npgsql</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <co type="warning">
+                    If different DbProviderFactory needs to be use,  you can specify it by the argument named <b>FactoryNames</b>.
+                </co>
+            </td>
+        </tr>
+        <tr>
+            <td><b>ConnectionString</b></td>
+            <td>To connect to a database, you must specify a connection string, the parameters of which might differ for each provider and data source.</td>
+        </tr>
+        <tr>
+            <td><b>FactoryNames</b></td>
+            <td>
+                is optional.
+                <br />
+                <br />
+                If different DbProviderFactory needs to be use, you can specify it by this argument. Factories are native libraries written by its manufacturer. FactoryNames can be specify as <k>InvariantName</k> or <k>AssemblyQualifiedName</k>.
+                <br />
+                <br />
+                <k>InvariantName</k> is the name of the factory in GAC; and the factory initialized from GAC by this name.
+                <br />
+                <k>AssemblyQualifiedName</k> initialize the factory from references in memory of current process.
+            </td>
+        </tr>
+        <tr>
+            <td><b>Settings</b></td>
+            <td>
+                is optional.
+                <br />
+                <br />
+                <table class="table table-light table-bordered">
+                    <thead class="thead-dark">
+                        <tr><th>Name</th>			<th>Description</th>			    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AutoStartTrans</td>
+                            <td>
+                                Queries and Commands are executed in a transaction as automatically. Transactions are initialized again automatically after COMMIT or ROLLBACK commands.
+                                <br />
+                                <i>(Default : false)</i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>IsolationLevel</td>
+                            <td>
+                                IsolationLevels are used to define the degree to which one transaction must be isolated from resource or data modifications made by other concurrent transactions.
+                                <br />
+                                <i>(Default : System.Data.IsolationLevel.ReadUncommitted)</i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>SchemaPrefix</td>
+                            <td>
+                                is used for making group the tables in database. If it is specified then the prefix appends for every tables before sql execution.
+                                <br />
+                                <i>(Default : Odb.Connection.DefaultSchemaPrefix)</i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<co type="warning">
+    Please refer to <a href="##EXM-ConnectionManager">Example - ConnectionManager</a> for further information about creation of a connection.
+</co>
+
+<st>Examples</st>
+<br />
+Following section demonstrates how to create a connection with <k>DefaultSettings</k>.
+<code-tab>
+    <pre lang="c#">
+        var cn = Odb.Connection.Create&lt;Providers.MsSql&gt;("Your-ConnectionString");
+
+        // Connection, will opened at first execution automatically.
+
+        // You can open the connection manually as shown below.
+        // cn.Open();
+   </pre>
+    <pre lang="vb">
+        Dim cn = Odb.Connection.Create(Of Providers.MsSql)("Your-ConnectionString")
+
+        ' Connection, will opened at first execution automatically.
+
+        ' You can open the connection manually as shown below.
+        ' cn.Open()
+    </pre>
+</code-tab>
+
+
+<br />
+Following section demonstrates how to create a connection with <k>AutoTrans</k>. Please refer to <a href="##CON-Transaction">Transaction</a> for further information.
+<code-tab>
+    <pre lang="c#">
+        var cn = var cn = Odb.Connection.Create&lt;Providers.MsSql&gt;("Your-ConnectionString", new ConnectionSettings() { AutoStartTrans = true });
+    </pre>
+    <pre lang="vb">
+        Dim cn = Odb.Connection.Create(Of Providers.MsSql)("Your-ConnectionString", New ConnectionSettings() With {.AutoStartTrans = True})
+    </pre>
+</code-tab>
+This means that each time a transaction is committed or rolled-back, a new transaction is started and all queries are automatically executed in this transaction.
+<br />
+<br />
+<br />
+<co type="warning">
+    Please refer to <a href="##EXM-ConnectionManager">Example - ConnectionManager</a> for further information about creation of a connection.
+</co>

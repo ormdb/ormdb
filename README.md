@@ -47,5 +47,5 @@ Change details for each release are documented in the [release notes](https://gi
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2017 - OrmDb
+Copyright (c) 2020 - OrmDb
 

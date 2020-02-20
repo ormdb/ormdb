@@ -9,10 +9,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/site/resources/css/prism.css">
-    <link rel="stylesheet" href="/site/resources/css/site.css" />
+    <link rel="stylesheet" href="/resources/css/prism.css">
+    <link rel="stylesheet" href="/resources/css/site.css" />
 
     <style>
+        /*html {
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+        }*/
+
+        body {
+            overflow: hidden;
+            font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol !important;
+        }
         /* code output/result */
         O {
             display: block;
@@ -44,7 +52,7 @@
 
 
             #wiki > #wiki-menu {
-                padding: 0 0 10px 0;
+                padding: 25px 0 10px 25px !important;
                 background: #f6f8fa;
                 border-right: 2px solid #f5f2f0;
                 -webkit-box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
@@ -87,7 +95,7 @@
         }
 
         #wiki > #wiki-body {
-            padding: 25px 15px 50px 25px !important;
+            padding: 25px 25px 10px 25px !important;
             font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
             font-size: 16px;
             line-height: 1.5;
@@ -95,6 +103,13 @@
             overflow: auto;
         }
 
+        .wiki-logo {
+            background-image: url('https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80');
+            display: inline-block;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position-y: center;
+        }
         /*-----------------------------------------*/
         /* -code-tab- */
         /*-----------------------------------------*/
@@ -131,50 +146,93 @@
 
             .code-tab pre {
                 margin: 0 !important;
+                white-space: pre-wrap;
             }
     </style>
 </head>
 <body>
-    <div class="d-flex flex-column w-100 h-100" style="position: absolute;top: 0; right: 0; bottom: 0; left: 0;">
+    <div class="d-flex flex-column w-100 h-100" style="position: absolute;top: 0; right: 0; bottom: 0; left: 0; line-height:1;">
         <nav class="navbar navbar-dark bg-dark d-sm-flex d-md-none">
             <button class="navbar-toggler" type="button" onclick="toggleNav()">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <a class="navbar-brand" href="/" style="height:30px;">
-                <img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80" style="margin-top:-25px;">
+            <a class="navbar-brand navbar-text text-center" href="/">
+                <div class ="wiki-logo" style="width:45px;height:20px;"></div>
+                wiki
             </a>
-            <div class="navbar-text" style="padding:0;font-size: 6vw;">Wiki</div>
+            <button type="button" class="ModalLangShowBtn btn btn-secondary mt-1 px-1 py-0" style="font-size:.8em; border-color:rgba(255,255,255,.5);">Lang : c#</button>
         </nav>
-        <nav class="navbar navbar-dark bg-dark d-none d-md-flex ">
-            <button class="navbar-toggler" type="button" onclick="toggleNav()">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="/" style="height:30px;">
-                <img src="https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b?s=80" style="margin-top:-25px;">
+        <nav class="navbar navbar-dark bg-dark d-none d-md-flex py-0">
+            <div>
+                <!--<button class="navbar-toggler" type="button" onclick="toggleNav()">
+                    <span class="navbar-toggler-icon"></span>
+                </button>-->
+                <div class="btn-group">
+                    <button class="VersionBtn btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ver.
+                    </button>
+                    <div class="VersionMnu dropdown-menu"></div>
+                </div>
+            </div>
+
+            <a class="navbar-brand navbar-text" href="/">
+                <div class="wiki-logo" style="width:80px;height:40px;"></div>
+                Wiki
             </a>
-            <div class="navbar-text" style="padding:0;font-size:calc(32px + 6 * ((1000px - 320px) / 680));">Wiki</div>
+
+            <button type="button" class="ModalLangShowBtn btn btn-secondary mt-1 px-1 py-0" style="font-size:.9em; border-color:rgba(255,255,255,.5);">Lang : c#</button>
         </nav>
 
-        <div id="wiki" class="flex-grow-1 d-flex overflow-hidden">
-            <div id="wiki-menu" class="p-3 wiki-menu-visible"></div>
-            <div id="wiki-body" class="p-3 w-100 overflow-auto"></div>
+        <div id="wiki" class="h-100 d-flex overflow-hidden">
+            <div id="wiki-menu" class="wiki-menu-visible"></div>
+            <div id="wiki-body" class="scrollable-y w-100 overflow-auto"></div>
         </div>
         <div id="is_small" class="d-none d-md-block"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="site/resources/js/prism.js"></script>
-    <script src="site/resources/js/site.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="/resources/js/prism.js"></script>
+    <script src="/resources/js/site.js"></script>
     <script>
         String.prototype.replaceAll = function (search, replacement) {
             var target = this;
             return target.replace(new RegExp(search, 'g'), replacement);
         };
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
 
         //-- location is being determining...
         var _wiki_menu = $("#wiki-menu");
         var _wiki_body = $("#wiki-body");
+
+        //-------------------------------------------------------------------------------------
+        //-- VERSION
+        var _wiki_vers = ["1.5.0", "1.4.0"];
+        var wiki_ver = {};
+        wiki_ver.number = getParameterByName("v") || _wiki_vers[0];
+        wiki_ver.root_path = "/v/" + wiki_ver.number + "/";
+        wiki_ver.docs_path = wiki_ver.root_path + "docs/";
+
+        //-- versions are being loaded
+        var _wiki_ver_menu = $(".VersionMnu");
+        ["1.5.0", "1.4.0"].forEach(function (v) {
+            _wiki_ver_menu.append('<button class="dropdown-item ' + (v === wiki_ver.number ? 'active' : '') + '" type="button" onclick="VersionChnage(\'' + v + '\')">' + v + '</button>');
+        });
+        $(".VersionBtn").text("ver. " + wiki_ver.number);
+
+        function VersionChnage(v) {
+            location.href = "?v=" + v;
+        }
         //-------------------------------------------------------------------------------------
         //-- SIDE-NAV
         function openNav() {
@@ -192,83 +250,9 @@
         }
         //-------------------------------------------------------------------------------------
         //-- MENU
-        var _menu_groups = {
-            "GEN": {
-                title: "Home",
-                items: {
-                    "GEN-Home": "Home"
-                }
-            },
-            "TBL": {
-                title: "Table",
-                items: {
-                    "TBL-Columns": "Columns",
-                    "TBL-Definition": "Definition",
-                    "TBL-Serialize": "Serialize & Deserialize"
-                }
-            },
-            "CON": {
-                title: "Connection",
-                items: {
-                    "CON-Provider": "Provider",
-                    "CON-Connection": "Connection",
-                    "CON-Transaction": "Transaction",
-                    "CON-Import": "Import Data"
-                }
-            },
-            "SQL": {
-                title: "SQL",
-                items: {
-                    "SQL-Operators": "Operators & Functions",
-                    "SQL-Select": "Select",
-                    "SQL-Insert": "Insert",
-                    "SQL-InsertInto": "InsertInto",
-                    "SQL-Update": "Update",
-                    "SQL-Delete": "Delete",
-                    "SQL-Query": "Query"
-                }
-            },
-            "DDL": {
-                title: "DDL",
-                items: {
-                    "DDL-GetTables": "GetTables",
-                    "DDL-GetTableInstance": "GetTableInstance",
-                    "DDL-GetTableIndexes": "GetTableIndexes",
-                    "DDL-TableExist": "TableExist",
-                    "DDL-GetTableColumns": "GetTableColumns",
-                    "DDL-CreateTable": "CreateTable",
-                    "DDL-DropTable": "DropTable",
-                    "DDL-CreateIndex": "CreateIndex",
-                    "DDL-DropIndex": "DropIndex",
-                    "DDL-Truncate": "Truncate"
-                }
-            },
-            "OTH": {
-                title: "Other",
-                items: {
-                    "OTH-Execute": "Execute",
-                    "OTH-DataReader": "DataReader"
-                }
-            }
-        }
-
+        var _menu_groups;
+        var _menu_home;
         var _menu = [];
-        for (var g in _menu_groups) {
-            var _menu_group = _menu_groups[g];
-
-            _menu.push('<p class="mt-4 mb-1"><strong>' + _menu_group.title + '</strong></p>');
-            // _menu.push('<ul>');
-
-            for (var i in _menu_group.items) {
-                //_menu.push('<li onclick=menu_click(this) data-hash="' + i + '">' + _menu_group.items[i] + '</li>');
-                _menu.push('<a href="##' + i + '">' + _menu_group.items[i] + '</a>');
-
-            }
-            // _menu.push('</ul>');
-
-        }
-        // menu is being rendered...
-        _wiki_menu.html(_menu.join(''));
         //function menu_click(obj) {
         //    window.location.hash = '##' + $(obj).data()["hash"];
         //}
@@ -279,11 +263,36 @@
         function is_small() {
             return $("#is_small").css("display") === "none";
         }
-        function load_page() {
-            var _home_page = "GEN-Home";
+        function load_menu() {
+            $.get(wiki_ver.root_path + "menu.json", function (data) {
+                _menu_home = data.home
+                _menu_groups = data.items;
+                for (var g in _menu_groups) {
+                    var _menu_group = _menu_groups[g];
 
+                    _menu.push('<p class="mt-4 mb-1"><strong>' + _menu_group.title + '</strong></p>');
+                    // _menu.push('<ul>');
+
+                    for (var i in _menu_group.items) {
+                        //_menu.push('<li onclick=menu_click(this) data-hash="' + i + '">' + _menu_group.items[i] + '</li>');
+                        _menu.push('<a href="##' + i + '">' + _menu_group.items[i] + '</a>');
+
+                    }
+                    // _menu.push('</ul>');
+
+                }
+                // menu is being rendered...
+                _wiki_menu.html(_menu.join(''));
+
+                load_page();
+            }).fail(function () {
+                console.log("Menu file isnot found. (" + wiki_ver.root_path + "menu.json)");
+            });
+
+        }
+        function load_page() {
             var _file = window.location.hash.replace("##", "");
-            if (_file === "") _file = _home_page;
+            if (_file === "") _file = _menu_home;
 
             //-- set active-class for selected-menu-item
             $("#wiki > #wiki-menu li").removeClass("wiki-menu-active");
@@ -291,7 +300,7 @@
 
             //-- title
             var _title = "";
-            if (_file !== _home_page) {
+            if (_file !== _menu_home) {
                 var _menu_group_key = _file.split("-")[0];
                 var _menu_group = _menu_groups[_menu_group_key];
                 var _menu_group_item = _menu_group.items[_file];
@@ -301,17 +310,16 @@
             }
 
             //-- content
-
             var _copyright = '<small class="copyright">' + site.copyright + '</small>';
             var _not_found = '<div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div>';
 
-            var _regex_cod = /<\s*code(?:\s[^>]*|)>(.*?)<\s*\/\s*code>/gmis
-            var _regex_cod_bgn = /<\s*code(?:\s[^>]*|)>/gmis
-            var _regex_cod_end = /<\s*\/\s*code>/gmis
+            var _regex_cod = "/<\s*code(?:\s[^>]*|)>(.*?)<\s*\/\s*code>/gmis";
+            var _regex_cod_bgn = "/<\s*code(?:\s[^>]*|)>/gmis";
+            var _regex_cod_end = "/<\s*\/\s*code>/gmis";
 
             _wiki_body.scrollTop(0);
             if (is_small()) closeNav();
-            $.get(site.wiki_path + _file + ".html", function (data) {
+            $.get(wiki_ver.docs_path + _file + ".html", function (data) {
 
                 //-- The CODE block(s), are determined with its attributes.
                 var _code_blocks = data.match(_regex_cod_bgn);
@@ -356,7 +364,7 @@
         }
         //-------------------------------------------------------------------------------------
         //-- Code Tab
-        var _sel_lang_inx = 0;
+        var current_lang = 'c#';
         function load_page_code_render_tab() {
             var _tabs = $("#wiki-body code-tab");
             for (n = 0; n < _tabs.length; n++) {
@@ -369,7 +377,7 @@
                     var _tab_code = _tab_codes[m];
                     //var _title = (_tab_code.attributes.title.value || "").toLowerCase();
                     var _title = (_tab_code.attributes.lang.value || "").toLowerCase();
-                    _retval += '<li class="text-white btn ' + (m === 0 ? 'bg-secondary' : '') + '" onclick="load_page_code_tab_select(' + m + ');">' + _title + '</li>';
+                    _retval += '<li lang="' + _title + '" class="text-white btn ' + (m === 0 ? 'bg-secondary' : '') + '" onclick="load_page_code_tab_select(this.lang);">' + _title + '</li>';
                     _codes += _tab_code.outerHTML;
                 }
                 _retval += '<li style="flex-grow: 1;"></li><li class="text-white btn copy" onclick="load_page_code_copy(' + n + ');"><i class="fa fa-copy"></i>&nbsp;Copy</li>';
@@ -377,23 +385,25 @@
 
                 _tab.replaceWith(_retval);
             }
-            load_page_code_tab_select(0);
+            load_page_code_tab_select(current_lang);
         }
-        function load_page_code_tab_select(inx) {
-            $('#wiki-body .code-tab>ul>li').removeClass("bg-secondary");
-            $('#wiki-body .code-tab>ul>li:nth-child(' + (inx + 1) + ')').addClass("bg-secondary");
-
+        function load_page_code_tab_select(lang) {
+            //painting tab-strip
+            $("#wiki-body .code-tab>ul>li").removeClass("bg-secondary");
+            $("#wiki-body .code-tab>ul>li[lang|='" + lang + "']").addClass("bg-secondary");
             //
             $("#wiki-body .code-tab pre").hide();
-            $('#wiki-body .code-tab').each(function (index) {
-                $(this).find('pre:eq(' + inx + ')').show();
-            });
-            //
-            _sel_lang_inx = inx;
+            $("#wiki-body .code-tab pre[lang|='" + lang + "']").show();
+
+            //-- modal-language value is being set and hide.
+            $(".ModalLangShowBtn").text("Lang : " + lang);
+            $("#ModalLang").modal('hide');
+
+            current_lang = lang;
         }
         function load_page_code_copy(grp) {
             var _grp = $("#wiki-body .code-tab")[grp]
-            var _itm = $(_grp).children("pre")[_sel_lang_inx];
+            var _itm = $(_grp).children("pre[lang|='" + current_lang + "']")[0];
             var _txt = (_itm ? _itm.textContent : "").replace(brRegex, "\r\n")
 
             var $temp = $("<textarea>");
@@ -451,7 +461,7 @@
 
                 var _item = $(_items[0]);
 
-                _item.replaceWith('<div class="bs-callout bs-callout-warning table-warning">All Examples needs the <a href="##OTH-Example-Header">Example Header</a>. Please refer to <a href="##OTH-Example-Header">Example Header</a> for further information.</div>');
+                _item.replaceWith('<div class="bs-callout bs-callout-warning table-warning">All Examples needs the <a href="##EXM-Startup">Startup</a>. Please refer to <a href="##OTH-Startup">Startup</a> for further information.</div>');
             }
         }
         //-------------------------------------------------------------------------------------
@@ -472,7 +482,7 @@
             while (true) {
                 var _items = $("#wiki-body co");
                 if (_items.length == 0) return;
-                
+
                 var _item = $(_items[0]);
                 var _type = _item.attr("type");
                 var _text = "";
@@ -484,9 +494,22 @@
             }
         }
         //-------------------------------------------------------------------------------------
+        //-- Change Code Language
+        $(".ModalLangShowBtn").click(function () {
+            switch (current_lang) {
+                case "c#":
+                    load_page_code_tab_select("vb");
+                    break;
+                case "vb":
+                    load_page_code_tab_select("c#");
+                    break;
+            }
+        });
+        //-------------------------------------------------------------------------------------
+
         $(function () {
-            load_page();
             if (is_small()) closeNav();
+            load_menu();
 
             //-- Masked IFrame workaround - FavIcon
             var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
@@ -499,6 +522,7 @@
             // Disable caching of AJAX responses
             cache: false
         });
+        //-------------------------------------------------------------------------------------
     </script>
 
 

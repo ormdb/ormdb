@@ -4,8 +4,7 @@
     location_path = location_path.join("/");
 
     return {
-        code_path: location_path + "/site/docs/codes/",
-        wiki_path: location_path + "/site/docs/wiki/",
+        code_path: location_path + "/v/codes/",
         copyright: 'Copyright(c) ' + (new Date()).getFullYear() + ' - OrmDb'
     };
 })();

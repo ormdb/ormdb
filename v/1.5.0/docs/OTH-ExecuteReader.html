@@ -1,0 +1,141 @@
+﻿To retrieve data, create an instance of a SQL.IQueryable object, and then records can be read by calling <k>ExecuteReader</k>.
+The <k>ExecuteReader</k> provides an <b>unbuffered</b> stream of data that allows procedural logic to efficiently process results from a data source sequentially.
+
+<co type="success">
+    The ExecuteReader is a good choice when you're retrieving large amounts of data because the data is not cached in memory.
+</co>
+
+
+<st>Definition</st>
+<co type="light">
+    <small>
+        <b>Namespace : </b>Odb
+        <co type="warning">
+            These methods are come as an extension methods. So you have to <b>include</b> or <b>import</b> to use them.
+        </co>
+    </small>
+</co>
+<code-tab>
+    <pre lang="c#">
+		public IEnumerable&lt;Odb.DataRow&gt; ExecuteReader(this Odb.SQL.IQueryable o, Odb.Connection Connection)
+
+		public IEnumerable&lt;Odb.DataRow&gt; ExecuteReader(this Data.Common.DbCommand o, Odb.Connection Connection)
+	</pre>
+    <pre lang="vb">
+		Public Function ExecuteReader(o As Odb.SQL.IQueryable, Connection As Odb.Connection) As IEnumerable(Of Odb.DataRow)
+
+		Public Function ExecuteReader(Cmd As Data.Common.DbCommand, Connection As Odb.Connection) As IEnumerable(Of Odb.DataRow)
+	</pre>
+</code-tab>
+<co type="light">
+    <small><b>Namespace : </b>Odb.Connection</small>
+</co>
+<code-tab>
+    <pre lang="c#">
+		public IEnumerable&lt;Odb.DataRow&gt; ExecuteNonQuery(TSQL As String)
+
+		public IEnumerable&lt;Odb.DataRow&gt; ExecuteNonQuery(Cmd As Data.Common.DbCommand)
+	</pre>
+    <pre lang="vb">
+		Public Function ExecuteNonQuery(TSQL As String) As IEnumerable(Of Odb.DataRow)
+
+		Public Function ExecuteNonQuery(Cmd As Data.Common.DbCommand) As IEnumerable(Of Odb.DataRow)
+	</pre>
+</code-tab>
+
+
+<st>Examples</st>
+<ew />
+<br />
+Following example iterates the records for two columns.
+<br />
+<br />
+<code-tab>
+    <pre lang="c#">
+		// 1. to execute IQueryable.
+		var sql = SQL.X.Select(h.Note, h.DocDate).From(h).Where(h.Year == 2017);
+		var dr = sql.ExecuteReader(cn);
+
+		// 2. to execute TSQL string.
+		var sql2 = "SELECT h.Note, h.DocDate FROM TableHeader AS h WHERE h.Year == 2017";
+		var dr = sql2.ExecuteReader(cn);
+
+		// 3. to execute DbCommand.
+		var cmd = cn.CreateCommand(
+						"SELECT h.Note, h.DocDate FROM TableHeader AS h WHERE h.Year=@param1",
+						new { param1 = 2017});
+		var dr = cn.ExecuteReader(cmd);
+
+
+		// looping records.
+		foreach (var r in dr) {
+			// read by column-name.
+			Debug.WriteLine("{0}, {1}", r("Note").ToString(), 
+										r("DocDate").ToString());
+
+			// read by column.
+			Debug.WriteLine("{0}, {1}", r(h.Note).ToString(), 
+										r(h.DocDate).ToString());
+
+			// read by column-index.
+			Debug.WriteLine("{0}, {1}", r(0).ToString(),
+										r(1).ToString());
+		}
+	</pre>
+    <pre lang="vb">
+		'// 1. to execute IQueryable.
+		Dim sql = SQL.X.Select(h.Note, h.DocDate).From(h).Where(h.Year = 2017)
+		Dim dr = sql.ExecuteReader(cn)
+
+		'// 2. to execute TSQL string.
+		Dim sql2 = "SELECT h.Note, h.DocDate FROM TableHeader AS h WHERE h.Year == 2017"
+		Dim dr = sql2.ExecuteReader(cn)
+
+		'// 3. to execute DbCommand.
+		Dim cmd = cn.CreateCommand(
+						"SELECT h.Note, h.DocDate FROM TableHeader AS h WHERE h.Year=@param1",
+						new { param1 = 2017})
+		Dim dr = cn.ExecuteReader(cmd)
+
+
+		'// looping records.
+		For Each r In dr
+			'// read by column-name.
+			Debug.WriteLine("{0}, {1}", r("Note").ToString(), 
+										r("DocDate").ToString())
+
+			'// read by column.
+			Debug.WriteLine("{0}, {1}", r(h.Note).ToString(), 
+										r(h.DocDate).ToString())
+
+			'// read by column-index.
+			Debug.WriteLine("{0}, {1}", r(0).ToString(), 
+										r(1).ToString())
+		Next
+	</pre>
+</code-tab>
+
+<br />
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th>Reading By</th>
+                <th>Performance</th>
+                <th>Memory Consumption</th>
+            </tr>
+        </thead>
+        <tr><td>column-name		</td><td>0.0000035 ms		</td><td>new instance for per column</td></tr>
+        <tr><td>column-info		</td><td>0.0000035 ms		</td><td>new instance for per column (REGULAR)</td></tr>
+        <tr><td>index info		</td><td>0.0000028 ms		</td><td>new instance for per column</td></tr>
+    </table>
+</div>
+
+<co type="light" style="font-size:.8em">
+        Record Count= 1200<br/>
+		<div style="padding:20px;">
+			Client  : Core I7-9750H @2.60GHz<br />
+			Server	: 2.3Ghz 4 VCPU, 8GB Memory, MsSQL Server Linux (RHEL/Centos) 2016<br />
+			Network : CAT6 gigabit
+		</div>
+</co>

@@ -1,0 +1,54 @@
+﻿Tables (inherited from <k>Odb.Table.Base</k>) are used to be in sql queries. The tables defined can be used by its instances.
+
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Table</small>
+</co>
+
+
+<st>Examples</st>
+<ew />
+<br />
+<br />
+
+Instances of the tables are being initialized.
+<code-tab>
+	<pre lang="c#">
+			var h = new TableHeader();
+			var l = new TableLines();
+
+			var sql = SQL.X.Select().From(h);
+	</pre>
+	<pre lang="vb">
+			Dim h As New TableHeader()
+			Dim l As New TableLines()
+
+			Dim sql = SQL.X.Select().From(h)
+	</pre>
+</code-tab>
+
+<br />
+
+If you would like to join a table with itself, same table can be initialized twice as shown below.
+<code-tab>
+	<pre lang="c#">
+			var h  = new TableHeader();
+			var l  = new TableLines();
+			var h2 = new TableHeader();
+
+			var sql = SQL.X.Select(h.All, l.All, h2.Note.AS("note2"));
+				sql.From(h);
+				sql.LeftJoin(l, l.Id == h.Id );
+				sql.LeftJoin(l, h2.Id = h.Id );
+	</pre>
+	<pre lang="vb">
+			Dim h  As New TableHeader()
+			Dim l  As New TableLines()
+			Dim h2 As New TableHeader()
+
+			Dim sql = SQL.X.Select(h.All, l.All, h2.Note.AS("note2"))
+				sql.From(h)
+				sql.LeftJoin(l, l.Id = h.Id )
+				sql.LeftJoin(l, h2.Id = h.Id )
+	</pre>
+</code-tab>

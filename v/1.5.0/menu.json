@@ -1,0 +1,75 @@
+﻿{
+  "home": "GEN-Home",
+  "items": {
+    "GEN": {
+      "title": "Home",
+      "items": {
+        "GEN-Home": "Home"
+      }
+    },
+    "TBL": {
+      "title": "Table",
+      "items": {
+        "TBL-Columns": "Columns",
+        "TBL-Definition": "Definition",
+        "TBL-Serialize": "Serialize & Deserialize"
+      }
+    },
+    "CON": {
+      "title": "Connection",
+      "items": {
+        "CON-Connection": "Connection",
+        "CON-Transaction": "Transaction",
+        "CON-Import": "Import Data"
+      }
+    },
+    "SQL": {
+      "title": "SQL",
+      "items": {
+        "SQL-Operators": "Operators & Functions",
+        "SQL-Select": "Select",
+        "SQL-Insert": "Insert",
+        "SQL-InsertInto": "InsertInto",
+        "SQL-Update": "Update",
+        "SQL-Delete": "Delete",
+        "SQL-Query": "Query"
+      }
+    },
+    "DDL": {
+      "title": "DDL",
+      "items": {
+        "DDL-AnalyzeTable": "AnalyzeTable",
+        "DDL-CreateIndex": "CreateIndex",
+        "DDL-CreateTable": "CreateTable",
+        "DDL-DropIndex": "DropIndex",
+        "DDL-TableDrop": "DropTable",
+        "DDL-GetServerDateTime": "GetServerDateTime",
+        "DDL-GetServerInfo": "GetServerInfo",
+        "DDL-GetTableColumns": "GetTableColumns",
+        "DDL-GetTableIndexes": "GetTableIndexes",
+        "DDL-GetTableInstance": "GetTableInstance",
+        "DDL-GetTables": "GetTables",
+        "DDL-PingServer": "PingServer",
+        "DDL-TableExist": "TableExist",
+        "DDL-TruncateTable": "TruncateTable"
+      }
+    },
+    "OTH": {
+      "title": "Other",
+      "items": {
+        "OTH-ExecuteReader": "ExecuteReader",
+        "OTH-ExecuteNonQuery": "ExecuteNonQuery"
+      }
+    },
+    "EXM": {
+      "title": "Examples",
+      "items": {
+        "EXM-Startup": "Startup",
+        "EXM-ConnectionManager": "Connection Manager",
+        "EXM-QueryIteration": "Reading - Iteration",
+        "EXM-QueryLinq": "Reading - Linq",
+        "EXM-Command": "Command Using"
+      }
+    }
+  }
+}

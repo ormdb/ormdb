@@ -1,0 +1,71 @@
+﻿<k>QUERY</k> statement is used to execution for multiple commands.
+
+All Select, Insert, Delete, and Update commands (also free text sql commands) can be execute in same query. 
+
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.SQL.X</small>
+</co>
+<code-tab>
+	<pre lang="c#">
+		public static SQL.Query Query()
+	</pre>
+	<pre lang="vb">
+		Public Shared Function Query() As SQL.Query
+	</pre>
+</code-tab>
+
+
+<st>Examples</st>
+<ew/>
+<br/>
+<br/>
+
+<code-tab>
+	<pre lang="c#">
+		var sql = SQL.X.Query();
+
+			sql.Delete(h);
+			sql.Delete(l);
+
+		var header_inserter = sql.Insert<TableHeader>(true);
+
+		for (n = 1; (n <= 100); n++) {
+			var row = header_inserter.AddRow;
+				row.Year = 2017;
+				row.Id = 9999;
+				row.Note = String.Concat("Note -", n.toString());
+				row.DocDate = DateTime.Now();
+				row.IsActive = true;
+		}
+
+		var row1 = sql.Update<TableHeader>.Where( h.Id == 5 ).Values;
+			row1.Note = String.Empty;
+
+			sql.ExecuteAsync(cn);
+	</pre>
+	<pre lang="vb">
+		With  SQL.X.Query()
+
+			.Delete(h)
+			.Delete(l)
+
+			With .Insert(Of TableHeader)(true)
+				For n=1 to 100
+					Dim row = .AddRow()
+						row.Year = 2017
+						row.Id = n
+						row.Note = String.Concat("Note -", n.toString())
+						row.DocDate = DateTime.Now()
+						row.IsActive = True
+				End If
+			End With
+
+			With sql.Update(Of TableHeader).Where( h.Id = 5).Values
+				.Note = String.Empty
+			End With
+
+			.Execute(cn)
+		End With
+	</pre>
+</code-tab>
