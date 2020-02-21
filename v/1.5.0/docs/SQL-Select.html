@@ -154,6 +154,10 @@ Following section demonstrates using <hl>JOIN</hl> clause.
 <br />
 
 Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
+
+<co type="warning">
+    <hl>SKIP</hl> and <hl>TOP</hl> depends on the version of the database connected. For example, code below works only MsSql 2012 and above.
+</co>
 <code-tab>
     <pre lang="c#">
 		var sql = SQL.X.Select().From(h).Skip(5).Top(10).OrderBy(h.Year);
