@@ -176,7 +176,10 @@ is used for .NET <k>System.Date</k> data type. This type of column stores <b>DAT
 
 
 <st>ColumnRef</st>
-is used for columns used repeatedly. <b>Name</b>, <b>Description</b> and <b>Nullable</b> properties can be redefiend.
+is used for columns used repeatedly. <b>Name</b>, <b>Description</b>, <b>DefaultValue</b> and <b>Nullable</b> properties can be redefiend. You can reference a column from many column(s).
+<co type="warning">
+    Reference columns does not inherit <b>DefaultValue</b> from reference column(s). You must specify <b>DefaultValue</b> for the column.
+</co>
 <br />
 <br />
 <code-tab>

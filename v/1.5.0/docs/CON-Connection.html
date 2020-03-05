@@ -1,5 +1,4 @@
-﻿The Connection Object is a part of <k>OrmDb</k> Data Provider and it is a unique session with the Data Source.
-The Connection Object is Handling the part of physical communication between the application and the Data Source.
+﻿The Connection Object is handling the part of physical communication between the application and the Data Source.
 <br />
 <br />
 The Connection Object connect to the specified Data Source and open a connection between the application and the Data Source, depends on the parameter specified in the <k>Connection String</k>.
@@ -47,36 +46,36 @@ When the connection is established, SQL Commands will execute with the help of t
         <tr>
             <td><b>Provider</b></td>
             <td>
-                Providers can be specify as <k>System.String (ProviderName)</k> or <k>System.Type (IProvider)</k>. The providers are used to prepare the commands for the database to be connected.
+                Providers can be specify as <k>System.String (ProviderName)</k> or <k>System.Type (IProvider)</k>.
+                The providers are used to prepare the commands for the database to be connected.
                 <br />
                 <br />
-                Each providers are also include default FactoryName as shown below.
+                <b>Odb</b> includes built in 4 providers as shown below;
                 <br />
                 <br />
                 <table class="table table-light table-bordered">
                     <thead class="thead-dark">
-                        <tr><th>Provider</th><th>Default InvariantName</th><th>Default AssemblyQualifiedName</th>			    </tr>
+                        <tr>
+                            <th>Odb.Providers</th>
+                            <th>Default Connector(Factory)</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>MsSql</td>
                             <td>System.Data.SqlClient</td>
-                            <td>System.Data.SqlClient.SqlClientFactory, System.Data</td>
                         </tr>
                         <tr>
                             <td>MySql</td>
                             <td>MySql.Data.MySqlClient</td>
-                            <td>MySql.Data.MySqlClient.MySqlClientFactory, MySql.Data</td>
                         </tr>
                         <tr>
                             <td>Oracle</td>
                             <td>Oracle.ManagedDataAccess.Client</td>
-                            <td>Oracle.ManagedDataAccess.Client.OracleClientFactory, Oracle.ManagedDataAccess</td>
                         </tr>
                         <tr>
                             <td>PostgreSql</td>
                             <td>Npgsql</td>
-                            <td>Npgsql.NpgsqlFactory, Npgsql</td>
                         </tr>
                     </tbody>
                 </table>
@@ -90,56 +89,53 @@ When the connection is established, SQL Commands will execute with the help of t
             <td>To connect to a database, you must specify a connection string, the parameters of which might differ for each provider and data source.</td>
         </tr>
         <tr>
-            <td><b>FactoryNames</b></td>
+            <td><i class="text-secondary"><b>FactoryNames</b><br />(Optional)</i></td>
             <td>
-                is optional.
+                A DbProviderFactory is the native libraries written by its manufacturer or 3rd companies.
                 <br />
                 <br />
-                If different DbProviderFactory needs to be use, you can specify it by this argument. Factories are native libraries written by its manufacturer. FactoryNames can be specify as <k>InvariantName</k> or <k>AssemblyQualifiedName</k>.
+                If different DbProviderFactory needs to be use, you can specify it by this argument. FactoryNames can be specify as <k>InvariantName</k> or <k>AssemblyQualifiedName</k>.
                 <br />
                 <br />
                 <k>InvariantName</k> is the name of the factory in GAC; and the factory initialized from GAC by this name.
                 <br />
                 <k>AssemblyQualifiedName</k> initialize the factory from references in memory of current process.
+                <br />
+                <br />
+                <img src="/resources/images/v.1.5.0/providers.png" class="img-fluid rounded mx-auto d-block " />
             </td>
         </tr>
         <tr>
-            <td><b>Settings</b></td>
+            <td><i class="text-secondary"><b>Settings</b><br />(Optional)</i></td>
             <td>
-                is optional.
-                <br />
-                <br />
-                <table class="table table-light table-bordered">
-                    <thead class="thead-dark">
-                        <tr><th>Name</th>			<th>Description</th>			    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>AutoStartTrans</td>
-                            <td>
-                                Queries and Commands are executed in a transaction as automatically. Transactions are initialized again automatically after COMMIT or ROLLBACK commands.
-                                <br />
-                                <i>(Default : false)</i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>IsolationLevel</td>
-                            <td>
-                                IsolationLevels are used to define the degree to which one transaction must be isolated from resource or data modifications made by other concurrent transactions.
-                                <br />
-                                <i>(Default : System.Data.IsolationLevel.ReadUncommitted)</i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>SchemaPrefix</td>
-                            <td>
-                                is used for making group the tables in database. If it is specified then the prefix appends for every tables before sql execution.
-                                <br />
-                                <i>(Default : Odb.Connection.DefaultSchemaPrefix)</i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h5>{</h5>
+                <div class="list-group pl-5">
+
+                    <div class="my-2 d-flex w-100 justify-content-between">
+                        <b>AutoStartTrans : </b>
+                        <small class="text-secondary">(Default : false)</small>
+                    </div>
+                    <p>
+                        Queries and Commands are executed in a transaction as automatically. Transactions are initialized again automatically after COMMIT or ROLLBACK commands.
+                    </p>
+
+                    <div class="my-2 d-flex w-100 justify-content-between">
+                        <b>IsolationLevel : </b>
+                        <small class="text-secondary">(Default : ReadUncommitted)</small>
+                    </div>
+                    <p>
+                        IsolationLevels are used to define the degree to which one transaction must be isolated from resource or data modifications made by other concurrent transactions.
+                    </p>
+
+                    <div class="my-2 d-flex w-100 justify-content-between">
+                        <b>SchemaPrefix : </b>
+                        <small class="text-secondary">(Default : DefaultSchemaPrefix)</small>
+                    </div>
+                    <p>
+                        is used for making group the tables in database. If it is specified then the prefix appends for every tables before sql execution.
+                    </p>
+                </div>
+                <h5>}</h5>
             </td>
         </tr>
     </table>
