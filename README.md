@@ -14,18 +14,7 @@ OrmDB has no no dependencies. You can [**DOWNLOAD**](http://ormdb.net) from rele
 <br/>
 
 ## How to use
-A example for selection records with join:
-```C#
-var sql = SQL.X.Select().From(h);
-    sql.LeftJoin(l, l.Year == h.Year & l.Id  == h.Id )
-    sql.Where( h.Year = 2018 );
-    sql.Skip(5).Top(10).OrderBy(h.Year);
-
-foreach (var row in sql.ExecuteReader(_cn))
-    Console.WriteLine( "Id={0}", row(h.Id).ToString() );
-}
-```
-**You can read documentation for more detail. [Wiki](http://ormdb.net/wiki.html).**
+**Plesae refer to wiki for further information. [Wiki](http://ormdb.net/wiki.html).**
 
 <br/>
 
