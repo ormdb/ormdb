@@ -1,0 +1,66 @@
+﻿Following example iterates the records for two columns.
+<br />
+<br />
+<code-tab>
+	<pre lang="c#">
+		var sql = SQL.X.Select(h.Note, h.DocDate).From(h);
+
+		foreach (var r in sql.ExecuteReader(cn)) {
+			// Read by ColumnName.
+			Debug.WriteLine("{0}, {1}",
+						r("Note").toString(), 
+						r("DocDate").toString());
+
+			// Read by ColumnInfo.
+			Debug.WriteLine("{0}, {1}",
+						r(h.Note).toString(),
+						r(h.DocDate).toString());
+
+			// Read by ColumnIndex.
+			Debug.WriteLine("{0}, {1}",
+						r(0).toString(),
+						r(1).toString());
+		}
+	</pre>
+	<pre lang="vb">
+		Dim sql = SQL.X.Select(h.Note, h.DocDate).From(h)
+
+		For Each r In sql.ExecuteReader(cn)
+			' Read by ColumnName.
+			Debug.WriteLine("{0}, {1}",
+						r("Note").toString(),
+						r("DocDate").toString())
+
+			' Read by ColumnInfo.
+			Debug.WriteLine("{0}, {1}",
+						r(h.Note).toString(),
+						r(h.DocDate).toString())
+
+			' Read by ColumnIndex.
+			Debug.WriteLine("{0}, {1}",
+						r(0).toString(),
+						r(1).toString())
+		Next
+	</pre>
+</code-tab>
+
+<br />
+<co type="light" style="font-size:.8em">
+    Record Count= 1200<br />
+    <div class="pl-4">
+        Client  : Core I7-9750H @2.60GHz<br />
+        Server	: 2.3Ghz 4 VCPU, 8GB Memory, MsSQL Server Linux (RHEL/Centos) 2016<br />
+        Network : CAT6 gigabit
+    </div>
+    <br />
+    Results<br />
+    <div class="pl-4">
+        {
+        <div class="pl-3">
+            By ColumnName : 0.0000035 ms<br />
+            By ColumnInfo : 0.0000035 ms<br />
+            By ColumnIndex : 0.0000028 ms<br />
+        </div>
+        }
+    </div>
+</co>

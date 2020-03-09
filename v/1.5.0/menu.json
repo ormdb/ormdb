@@ -47,7 +47,7 @@
         "DDL-CreateIndex": "CreateIndex",
         "DDL-CreateTable": "CreateTable",
         "DDL-DropIndex": "DropIndex",
-        "DDL-TableDrop": "DropTable",
+        "DDL-DropTable": "DropTable",
         "DDL-GetServerDateTime": "GetServerDateTime",
         "DDL-GetServerInfo": "GetServerInfo",
         "DDL-GetTableColumns": "GetTableColumns",
@@ -56,7 +56,7 @@
         "DDL-GetTables": "GetTables",
         "DDL-PingServer": "PingServer",
         "DDL-TableExist": "TableExist",
-        "DDL-TruncateTable": "TruncateTable"
+        "DDL-TruncateTable": "Truncate able"
       }
     },
     "OTH": {
@@ -73,10 +73,11 @@
       "items": {
         "Startup": "Startup",
         "ConnectionManager": "Connection Manager",
-        "QueryIteration": "Reading - Iteration",
-        "QueryLinq": "Reading - Linq",
-        "Command": "Command Using",
         "BatchExecution": "Batch Execution",
+        "ExecuteReaderByString": "Reading By SQL String",
+        "ExecuteReaderByCommand": "Reading By DbCommand",
+        "ExecuteReaderByIteration": "Reading By Iteration",
+        "ExecuteReaderByLinq": "Reading By Linq",
 
         "-SEL": "SELECT",
         "SelectSimple": "SELECT Simple",

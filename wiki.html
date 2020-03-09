@@ -59,7 +59,7 @@
 
 
             #wiki > #wiki-menu {
-                padding: 25px 0 25px 25px !important;
+                padding: 25px 25px 25px 25px !important;
                 background: #f6f8fa;
                 border-right: 2px solid #f5f2f0;
                 -webkit-box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
@@ -83,7 +83,7 @@
                     color: #0056b3;
                     cursor: pointer;
                     padding: 5px 10px 5px 20px;
-                    white-space: nowrap;
+                    /*white-space: nowrap;*/
                 }
 
                     #wiki > #wiki-menu a:hover {
@@ -318,8 +318,18 @@
             if (_file === "") _file = _menu_home;
 
             //-- set active-class for selected-menu-item
-            $("#wiki > #wiki-menu li").removeClass("wiki-menu-active");
-            $('#wiki > #wiki-menu li[data-hash="' + _file + '"]').addClass("wiki-menu-active");
+            $("#wiki > #wiki-menu a").removeClass("wiki-menu-active");
+            var _link = $('#wiki > #wiki-menu a[href="##' + _file + '"]');
+            _link.addClass("wiki-menu-active");
+
+            //-- scroll-into-view
+            var _offset = _link.offset();
+            var _top = _wiki_menu.scrollTop();
+            var _hei = _wiki_menu.innerHeight();
+            if (((_top + _hei) < _offset.top)) {
+                _link[0].scrollIntoView();
+                _wiki_menu[0].scrollTop -= 10;
+            }
 
             //-- title
             var _title = "";

@@ -1,0 +1,64 @@
+﻿<k>TRUNCATE</k> method is used to delete existing records in a table like <k>DELETE</k>. This process also executes the <k>UPDATE STATISTICS</k> for tables, after <b>DELETE</b> operation.
+
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Providers.IProvider</small>
+</co>
+<code-tab>
+	<pre lang="c#">
+		public List&lt;string&gt; TruncateTable(IEnumerable&lt;Table.Base&gt; Tables, bool OnlyGenerateScript = false)
+		public List&lt;string&gt; TruncateTable(IEnumerable&lt;string&gt; TableNames, bool OnlyGenerateScript = false)
+
+		public string TruncateTable(Table.Base Table, bool OnlyGenerateScript = false)
+		public string TruncateTable(string TableName, bool OnlyGenerateScript = false)
+	</pre>
+	<pre lang="vb">
+		Public Function TruncateTable(Tables As IEnumerable(Of Table.Base), OnlyGenerateScript As Boolean = False) As List(Of String)
+		Public Function TruncateTable(TableNames As IEnumerable(Of String), OnlyGenerateScript As Boolean = False) As List(Of String)
+
+		Public Function TruncateTable(Table As Table.Base, OnlyGenerateScript As Boolean = False) As String
+		Public Function TruncateTable(TableName As String, OnlyGenerateScript As Boolean = False) As String
+	</pre>
+</code-tab>
+
+
+<st>Examples</st>
+<ew />
+<br />
+<br />
+
+Following section demonstrates <k>TRUNCATE</k> the table(s).
+<code-tab>
+	<pre lang="c#">
+		// single table by instance
+		cn.Provider.TruncateTable(h);
+
+		// multi table by instance
+		cn.Provider.TruncateTable(new [] {h, l});
+
+		// single table by name
+		cn.Provider.TruncateTable("table1");
+	</pre>
+	<pre lang="vb">
+		' single table by instance
+		cn.Provider.TruncateTable(h)
+
+		' multi table by instance
+		cn.Provider.TruncateTable({h, l})
+
+		' single table by name
+		cn.Provider.TruncateTable("table1")
+	</pre>
+</code-tab>
+
+<br />
+
+Following section demonstrates how to generate <k>TRUNCATE</k> script.
+<code-tab>
+	<pre lang="c#">
+		var script = cn.Provider.Truncate(h, true);
+	</pre>
+	<pre lang="vb">
+		Dim script = cn.Provider.Truncate(h, True)
+	</pre>
+</code-tab>

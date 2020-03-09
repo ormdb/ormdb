@@ -1,0 +1,21 @@
+﻿Following example iterates the records for two columns.
+<br />
+<br />
+<code-tab>
+    <pre lang="c#">
+        var sql = "SELECT field1, field2 FROM table1 AS h WHERE field3 = 2017";
+
+        var result = cmd.ExecuteReader(cn).ToDictionary(
+                                       x => x["field1"], 
+                                       x => x["field2"]
+                                   );
+	</pre>
+    <pre lang="vb">
+        Dim sql = "SELECT field1, field2 FROM table1 AS h WHERE field3 = 2017"
+
+        Dim result = cmd.ExecuteReader(cn).ToDictionary(
+                                      Function(x) x("field1"), 
+                                      Function(x) x("field2")
+                                  )
+	</pre>
+</code-tab>
