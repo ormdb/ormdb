@@ -312,12 +312,13 @@
 
                     _menu.push('<p class="mt-4 mb-1"><strong>' + _menu_group.title + '</strong></p>');
                     for (var i in _menu_group.items) {
-                        var _menu_group_item = _menu_group.items[i];
+                        _menu_group.items[i] = { url: load_page_url_parse(_menu_group.path + i + ".html"), text: _menu_group.items[i], data: null };
 
+                        item = _menu_group.items[i];
                         if (i.startsWith('-')) {
-                            _menu.push('<x>' + _menu_group_item + '</x>');
+                            _menu.push('<x>' + item.text + '</x>');
                         } else {
-                            _menu.push('<a href="##' + g + "--" + i + '">' + _menu_group_item + '</a>');
+                            _menu.push('<a href="##' + g + "--" + i + '">' + item.text + '</a>');
                         }
                     }
                 }
@@ -355,17 +356,11 @@
             var _menu_group = _menu_groups[_p[0]];
             var _menu_item = _menu_group.items[_p[1]];
             if (_menu_item !== undefined) {
-                _title = '<div style="font-weight:bold;line-height:1.125;word-wrap: break-word;font-size: 1.5em;"><span style="color:#8f9092;">' + _menu_group.title + '</span> / <span style="color:#5b6065;">' + _menu_item + '</span></div><hr/>';
+                _title = '<div style="font-weight:bold;line-height:1.125;word-wrap: break-word;font-size: 1.5em;"><span style="color:#8f9092;">' + _menu_group.title + '</span> / <span style="color:#5b6065;">' + _menu_item.text + '</span></div><hr/>';
             }
             if (!_menu_group.path) _menu_group.path = "";
 
-            var _page = load_page_url_parse(_menu_group.path + _p[1] + ".html");
             //-- content
-            var _copyright = '<small class="copyright">' + site.copyright + '</small>';
-
-            _wiki_body.scrollTop(0);
-            if (is_small()) closeNav();
-
             var _content = ""
             if (!_menu_group.before_data) {
                 _menu_group.before_data = "";
@@ -380,11 +375,14 @@
                 }
             }
 
-            _content = getSync(_page);
-            if (!_content) {
-                _content += '<co type="danger"><div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div><div class="text-muted text-center">' + _page + '</div></co>';
-            } else {
-                _content = _menu_group.before_data + _content + _menu_group.after_data
+            if (!_menu_item.data) {
+                _menu_item.data = getSync(_menu_item.url);
+
+                if (!_menu_item.data) {
+                    _menu_item.data = '<co type="danger"><div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div><div class="text-muted text-center">' + _menu_item.url + '</div></co>';
+                } else {
+                    _menu_item.data = _menu_group.before_data + _menu_item.data + _menu_group.after_data
+                }
             }
 
             //  var _regex_cod = "/<\s*code(?:\s[^>]*|)>(.*?)<\s*\/\s*code>/gmis";
@@ -409,7 +407,10 @@
             //          data += _code_blocks[_code_block_inx] + block.replace(_regex_cod_bgn, "").replace(_regex_cod_end, "").replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "</code>"
             //      }
             //  });
-            _wiki_body.html(_title + _content + _copyright);
+            _wiki_body.html(_title + _menu_item.data + '<small class="copyright">' + site.copyright + '</small>');
+            _wiki_body.scrollTop(0);
+            if (is_small()) closeNav();
+
             load_page_include(function () {
                 load_page_render();
             });
