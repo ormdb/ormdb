@@ -20,6 +20,6 @@ var sql = SQL.X.Select().From(h, h.Year > 2018)
     foreach (var r in sql.ExecuteReader(cn)) {
 
             Debug.WriteLine("Note={0}, Date={1}",
-                              r(h.Note).ToString(),
+                              r(h.Note).toString(),
                               r(h.DocDate).ToDateTime());
      }

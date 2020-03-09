@@ -142,7 +142,7 @@ When the connection is established, SQL Commands will execute with the help of t
 </div>
 
 <co type="warning">
-    Please refer to <a href="##EXM-ConnectionManager">Example - ConnectionManager</a> for further information about creation of a connection.
+    Please refer to <a href="##EXM--ConnectionManager">Example - ConnectionManager</a> for further information about creation of a connection.
 </co>
 
 <st>Examples</st>
@@ -169,7 +169,7 @@ Following section demonstrates how to create a connection with <k>DefaultSetting
 
 
 <br />
-Following section demonstrates how to create a connection with <k>AutoTrans</k>. Please refer to <a href="##CON-Transaction">Transaction</a> for further information.
+Following section demonstrates how to create a connection with <k>AutoTrans</k>. Please refer to <a href="##CON--CON-Transaction">Transaction</a> for further information.
 <code-tab>
     <pre lang="c#">
         var cn = var cn = Odb.Connection.Create&lt;Providers.MsSql&gt;("Your-ConnectionString", new ConnectionSettings() { AutoStartTrans = true });
@@ -183,5 +183,5 @@ This means that each time a transaction is committed or rolled-back, a new trans
 <br />
 <br />
 <co type="warning">
-    Please refer to <a href="##EXM-ConnectionManager">Example - ConnectionManager</a> for further information about creation of a connection.
+    Please refer to <a href="##EXM--ConnectionManager">Example - ConnectionManager</a> for further information about creation of a connection.
 </co>

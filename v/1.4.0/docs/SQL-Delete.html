@@ -113,7 +113,7 @@
         using (var _dr = SQL.X.Select(h.Id).From(h, h.Year &lt; 2018))
         {
             foreach (var _r in _dr)
-                _ids.Add(_r(0).ToString());
+                _ids.Add(_r(0).toString());
         }
 
         // records are being deleted in chunks, by supplying record Id information.
@@ -137,7 +137,7 @@
         ' collection the Ids of the records to be deleted...
         Using _dr = SQL.X.Select(h.Id).From(h, h.Year &lt; 2018)
             For Each _r In _dr
-                _ids.Add(_r(0).ToString())
+                _ids.Add(_r(0).toString())
             Next
         End Using
 

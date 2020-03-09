@@ -1,0 +1,128 @@
+﻿<code-tab>
+<pre lang="c#">
+
+using Odb; /* for extensions */
+using Odb.Table;
+using Odb.Connection;
+
+    
+public enum MyColumns
+{
+    [ColumnNumeric(4, 0, Description = "Year", MinValue = 1900, MaxValue = 2100)] year,
+    [ColumnNumeric(4, 0)] id
+}
+
+    
+//--------------------------------------------------------------------
+// Definition of the header-table
+public class TableHeader : Base
+{
+    [ColumnRef(MyColumns.year)] public Column Year;
+    [ColumnRef(MyColumns.id)]   public Column Id;
+    [ColumnString(100)]         public Column Note;
+    [ColumnDate()]              public Column DocDate;
+    [ColumnBoolean()]           public Column IsActive;
+
+    protected override void InitKeyInfo() {
+        base.PrimaryKey(new[] {Year, Id});
+    }
+}
+
+    
+//--------------------------------------------------------------------
+// Definition of the lines-table:
+public class TableLines : Base
+{
+    [ColumnRef(MyColumns.year)] public Column Year;
+    [ColumnRef(MyColumns.id)]   public Column Id;
+    [ColumnNumeric(2, 0)]       public Column LineId;
+    [ColumnString(100)]         public Column Note;
+    
+    protected override void InitKeyInfo() {
+        base.AddPrimaryKey(new[] {Year, Id, LineId});
+    }
+}
+    
+    
+    
+//--------------------------------------------------------------------
+// MAIN
+public void main()
+{
+    TableHeader h = new TableHeader();
+    TableHeader l = new TableLines();
+    
+    // provider is being defined...
+    var prv_ms = new Odb.Connection.Provider(ProviderType.MsSql,
+                                            "System.Data.SqlClient",
+                                            "connection-string");
+    
+    // connection is being created...
+    var cn = prv_ms.Create();
+}
+
+</pre>
+<pre lang="vb">
+
+Imports Odb ' for extensions
+Imports Odb.Table
+Imports Odb.Connection
+
+    
+Public Enum MyColumns
+    &lt;ColumnNumeric(4, 0&gt;, Description:="Year" , MinValue:=1900, MaxValue:=2100)&gt; year
+    &lt;ColumnNumeric(4, 0)&gt; id
+End Enum
+
+    
+'--------------------------------------------------------------------
+' Definition of the header-table
+Public Class TableHeader
+    Inherits Base
+    
+    &lt;ColumnRef(MyColumns.year)&gt; Public Year     As Column
+    &lt;ColumnRef(MyColumns.id)&gt;   Public Id       As Column
+    &lt;ColumnString(100)&gt;         Public Note     As Column
+    &lt;ColumnDate()&gt;              Public DocDate  As Column
+    &lt;ColumnBoolean()&gt;           Public IsActive As Column
+    
+    Protected Overrides Sub InitKeyInfo()
+        MyBase.PrimaryKey({Year, Id})
+    End Sub
+End Class
+
+    
+'--------------------------------------------------------------------
+' Definition of the lines-table:
+Public Class TableLines
+    Inherits Base
+    
+    &lt;ColumnRef(MyColumns.year)&gt; Public Year    As Column
+    &lt;ColumnRef(MyColumns.id)&gt;   Public Id      As Column
+    &lt;ColumnNumeric(2, 0)&gt;       Public LineId  As Column
+    &lt;ColumnString(100)&gt;         Public Note    As Column
+    
+    Protected Overrides Sub InitKeyInfo()
+        MyBase.AddPrimaryKey({Year, Id, LineId})
+    End Sub
+End Class
+
+    
+    
+    
+'--------------------------------------------------------------------
+' MAIN
+Public Sub main()
+    Dim h As TableHeader = New TableHeader()
+    Dim l As TableHeader = New TableLines()
+    
+    ' provider is being defined...
+    Dim prv_ms = New Odb.Connection.Provider(ProviderType.MsSql,
+                                            "System.Data.SqlClient",
+                                            "connection-string")
+    
+    ' connection is being created...
+    Dim cn = prv_ms.Create()
+End Sub
+</pre>
+</code-tab>

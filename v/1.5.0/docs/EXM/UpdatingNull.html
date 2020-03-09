@@ -1,0 +1,14 @@
+﻿Following section demonstrates to use <b>Null</b> for setting value, and filtering record(s).
+<code-tab>
+	<pre lang="c#">
+		var _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel());
+			_row.str = System.DbNull;
+	</pre>
+	<pre lang="vb">
+		Dim _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel())
+			_row.str = System.DbNull
+	</pre>
+</code-tab>
+<o>
+	UPDATE h SET <u><hl>h.str = NULL</hl></u> FROM TableHeader AS h WHERE <u><hl>h.str IS NOT NULL</hl></u>
+</o>

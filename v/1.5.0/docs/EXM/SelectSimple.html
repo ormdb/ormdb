@@ -1,0 +1,24 @@
+﻿Following section demonstrates <hl>how select the fields</hl> to be read.
+<code-tab>
+	<pre lang="c#">
+		var sql = SQL.X.Select().From(h);
+		var sql = SQL.X.Select(h.All).From(h);
+		var sql = SQL.X.Select(h.Year, h.Id).From(h);
+		var sql = SQL.X.Select(h.All).Exclude(h.Note).From(h);
+	</pre>
+	<pre lang="vb">
+		Dim sql = SQL.X.Select().From(h)
+		Dim sql = SQL.X.Select(h.All).From(h)
+		Dim sql = SQL.X.Select(h.Year, h.Id).From(h)
+		Dim sql = SQL.X.Select().Exclude(h.Note).From(h)
+	</pre>
+</code-tab>
+<o>
+	SELECT <hl>*</hl> FROM TableHeader AS h
+	<br />
+	SELECT <hl>h.*</hl> FROM TableHeader AS h
+	<br />
+	SELECT <hl>h.Year, h.Id</hl> FROM TableHeader AS h
+	<br />
+	SELECT <hl>h.Year, h.Id, h.DocDate, h.IsActive</hl> FROM TableHeader AS h
+</o>

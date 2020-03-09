@@ -30,46 +30,46 @@ Following example iterates through a DataReader object and returns two columns f
 		foreach (var r in dr) {
 
 			// read by column-name.
-			Console.WriteLine("{0}, {1}", r("Note").ToString(), 
-										  r("DocDate").ToString());
+			Console.WriteLine("{0}, {1}", r("Note").toString(), 
+										  r("DocDate").toString());
 
 			// read by column. (REGULAR)
-			Console.WriteLine("{0}, {1}", r(h.Note).ToString(), 
-										  r(h.DocDate).ToString());
+			Console.WriteLine("{0}, {1}", r(h.Note).toString(), 
+										  r(h.DocDate).toString());
 
 			// read by column-index. (more faster)
-			Console.WriteLine("{0}, {1}", r(0).ToString(), 
-										  r(1).ToString());
+			Console.WriteLine("{0}, {1}", r(0).toString(), 
+										  r(1).toString());
 		}
 
 		// read by binded-column. (more faster)
 		var f1 = dr(h.Note);
 		var f2 = dr(h.DocDate);
 		foreach (var r in dr) {
-			Console.WriteLine("{0}, {1}", f1.ToString(), f2.ToString());
+			Console.WriteLine("{0}, {1}", f1.toString(), f2.toString());
 		}
 	</pre>
     <pre lang="vb">
 		For Each r In dr
 
 			' read by column-name.
-			Console.WriteLine("{0}, {1}", r("Note").ToString(), 
-										  r("DocDate").ToString())
+			Console.WriteLine("{0}, {1}", r("Note").toString(), 
+										  r("DocDate").toString())
 
 			' read by column. (REGULAR)
-			Console.WriteLine("{0}, {1}", r(h.Note).ToString(), 
-										  r(h.DocDate).ToString())
+			Console.WriteLine("{0}, {1}", r(h.Note).toString(), 
+										  r(h.DocDate).toString())
 
 			' read by column-index. (more faster)
-			Console.WriteLine("{0}, {1}", r(0).ToString(), 
-										  r(1).ToString())
+			Console.WriteLine("{0}, {1}", r(0).toString(), 
+										  r(1).toString())
 		Next
 
 		' read by binded-column. (more faster)
 		Dim f1 = dr(h.Note)
 		Dim f2 = dr(h.DocDate)
 		For Each r In dr
-			Console.WriteLine("{0}, {1}", f1.ToString(),  f2.ToString())
+			Console.WriteLine("{0}, {1}", f1.toString(),  f2.toString())
 		Next
 	</pre>
 </code-tab>

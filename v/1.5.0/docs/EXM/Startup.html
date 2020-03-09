@@ -1,0 +1,117 @@
+﻿<st>Table Definitions</st>
+
+Following section demonstrates how to define the tables.
+<br />
+<br />
+<co type="warning">
+    Please refer to <a href="##TBL--TBL-Columns">Columns</a> for further information.
+</co>
+
+<code-tab>
+    <pre lang="c#">
+using Odb.Table;
+    
+public enum MyColumns
+{
+    [ColumnNumeric(4, 0, Description = "Year", MinValue = 1900, MaxValue = 2100)] year,
+    [ColumnNumeric(4, 0)] id
+}
+
+    
+public class TableHeader : Base
+{
+    [ColumnRef(MyColumns.year)] public Column Year;
+    [ColumnRef(MyColumns.id)]   public Column Id;
+    [ColumnString(100)]         public Column Note;
+    [ColumnDate()]              public Column DocDate;
+    [ColumnBoolean()]           public Column IsActive;
+
+    protected override void InitKeyInfo() {
+        base.PrimaryKey(new[] {Year, Id});
+    }
+}
+
+    
+public class TableLines : Base
+{
+    [ColumnRef(MyColumns.year)] public Column Year;
+    [ColumnRef(MyColumns.id)]   public Column Id;
+    [ColumnNumeric(2, 0)]       public Column LineId;
+    [ColumnString(100)]         public Column Note;
+    
+    protected override void InitKeyInfo() {
+        base.AddPrimaryKey(new[] {Year, Id, LineId});
+    }
+}
+</pre>
+    <pre lang="vb">
+Imports Odb.Table
+    
+Public Enum MyColumns
+    &lt;ColumnNumeric(4, 0&gt;, Description:="Year" , MinValue:=1900, MaxValue:=2100)&gt; year
+    &lt;ColumnNumeric(4, 0)&gt; id
+End Enum
+
+    
+Public Class TableHeader
+    Inherits Base
+    
+    &lt;ColumnRef(MyColumns.year)&gt; Public Year     As Column
+    &lt;ColumnRef(MyColumns.id)&gt;   Public Id       As Column
+    &lt;ColumnString(100)&gt;         Public Note     As Column
+    &lt;ColumnDate()&gt;              Public DocDate  As Column
+    &lt;ColumnBoolean()&gt;           Public IsActive As Column
+    
+    Protected Overrides Sub InitKeyInfo()
+        MyBase.PrimaryKey({Year, Id})
+    End Sub
+End Class
+
+    
+Public Class TableLines
+    Inherits Base
+    
+    &lt;ColumnRef(MyColumns.year)&gt; Public Year    As Column
+    &lt;ColumnRef(MyColumns.id)&gt;   Public Id      As Column
+    &lt;ColumnNumeric(2, 0)&gt;       Public LineId  As Column
+    &lt;ColumnString(100)&gt;         Public Note    As Column
+    
+    Protected Overrides Sub InitKeyInfo()
+        MyBase.AddPrimaryKey({Year, Id, LineId})
+    End Sub
+End Class
+</pre>
+</code-tab>
+
+<st>Startup</st>
+Following section demonstrates initializing the table instance and creation a connection.
+<br />
+<br />
+<code-tab>
+    <pre lang="c#">
+        using Odb; /* for extensions */
+
+        private TableHeader h = new TableHeader();
+        private TableLines l = new TableLines();
+
+        public void main()
+        {
+            // connection is being created...
+            var cn = Odb.Connection.Create&lt;Providers.MsSql&gt;("Your-ConnectionString");
+        }
+    </pre>
+    <pre lang="vb">
+        Imports Odb ' for extensions
+
+        Private h As New TableHeader()
+        Private l As New TableLines()
+    
+        Public Sub main()
+            ' connection is being created...
+            Dim cn = Odb.Connection.Create(Of Providers.MsSql)("Your-ConnectionString")
+        End Sub
+    </pre>
+</code-tab>
+<co type="warning">
+    Please refer to <a href="##EXM--ConnectionManager">ConnectionManager</a> for more connection.
+</co>

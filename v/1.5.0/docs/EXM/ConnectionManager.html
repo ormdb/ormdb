@@ -1,0 +1,132 @@
+﻿<co type="warning">
+    Please refer to <a href="##CON--CON-Connection">Connection</a> for further information.
+</co>
+<br />
+<br />
+
+Following example demonstrates how to create a connection dynamically.
+<br />
+<br />
+<code-tab>
+    <pre lang="c#">
+    public Odb.Connection InitConnection&lt;T&gt;(
+        string Host, 
+        string Catalog, 
+        string User = null, 
+        string Password = null, 
+        int? Port = default(int?), 
+        bool DBA_Privilege = true,
+        bool AutoStartTrans = false) where T : Odb.Providers.IProvider
+    {
+
+        string str = null;
+        switch (typeof(T).FullName.Split().Last())
+        {
+            case "MsSql":
+                Port = Port == null || Port == 0 ? 1433 : Port;
+                if (string.IsNullOrEmpty(User))
+                    str = $"MultipleActiveResultSets=true;Pooling=false;data source={Host},{Port};Database={Catalog};Trusted_Connection=True";
+                else
+                    str = $"MultipleActiveResultSets=true;Pooling=false;data source={Host},{Port};Database={Catalog};user id={User};pwd={Password}";
+                break;
+
+            case "MySql":
+                Port = Port == null || Port == 0 ? 3306 : Port;
+                str = $"Pooling=false;ConvertZeroDateTime=True;server={Host};port={Port};database={Catalog};user id={User};password={Password}";
+                break;
+
+            case "PostgreSql":
+                Port = Port == null || Port == 0 ? 5432 : Port;
+                if (string.IsNullOrEmpty(User))
+                    str = $"ApplicationName=OrmDb - MyApplication; Server={Host};Port={Port};Database={Catalog};Integrated Security=true";
+                else
+                    str = $"ApplicationName=OrmDb - MyApplication; Server={Host};Port={Port};Database={Catalog};User Id={User};Password={Password}";
+                break;
+
+            case "Oracle":
+                Port = Port == null || Port == 0 ? 1521 : Port;
+                string _source;
+                if (DBA_Privilege)
+                    _source = $"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={Host})(PORT={Port}))(CONNECT_DATA=(SERVICE_NAME={Catalog})));DBA Privilege=SYSDBA;";
+                else
+                    _source = $"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={Host})(PORT={Port}))(CONNECT_DATA=(SERVICE_NAME={Catalog })));";
+                if (string.IsNullOrEmpty(User))
+                    str = $"{_source}User Id=/;";
+                else
+                    str = $"{_source}User Id={User};Password={Password};";
+                break;
+        }
+
+        return Odb.Connection.Create&lt;T&gt;(str, Settings: new ConnectionSettings() { AutoStartTrans = AutoStartTrans });
+    }
+
+    public void Main()
+    {
+        Odb.Connection.DefaultSettings.IsolationLevel = IsolationLevel.ReadCommitted;
+
+        var cn_1 = InitConnection&lt;Odb.Providers.Oracle&gt;("localhost", "SERVICE_NAME", "user", "pass");
+        var cn_2 = InitConnection&lt;Odb.Providers.MsSql&gt;("localhost", "DB_NAME", "user", "pass");
+        var cn_3 = InitConnection&lt;Odb.Providers.MySql&gt;("localhost", "DB_NAME", "user", "pass");
+        var cn_4 = InitConnection&lt;Odb.Providers.PostgreSql&gt;("localhost", "DB_NAME", "user", "pass");
+    }
+   </pre>
+    <pre lang="vb">
+    Function InitConnection(Of T As Odb.Providers.IProvider)(
+                Host As String, 
+                Catalog As String,
+                Optional User As String = Nothing,
+                Optional Password As String = Nothing,
+                Optional Port As Integer? = Nothing,
+                Optional DBA_Privilege As Boolean = True
+                Optional AutoStartTrans As Boolean = False) As Odb.Connection
+
+        Dim str As String = Nothing
+        Select Case GetType(T).FullName.Split().Last()
+            Case "MsSql"
+                Port = If(Port Is Nothing OrElse Port = 0, 1433, Port)
+                If String.IsNullOrEmpty(User) Then
+                    str = $"MultipleActiveResultSets=true;Pooling=false;data source={Host},{Port};Database={Catalog};Trusted_Connection=True"
+                Else
+                    str = $"MultipleActiveResultSets=true;Pooling=false;data source={Host},{Port};Database={Catalog};user id={User};pwd={Password}"
+                End If
+
+            Case "MySql"
+                Port = If(Port Is Nothing OrElse Port = 0, 3306, Port)
+                str = $"Pooling=false;ConvertZeroDateTime=True;server={Host};port={Port};database={Catalog};user id={User};password={Password}"
+
+            Case "PostgreSql"
+                Port = If(Port Is Nothing OrElse Port = 0, 5432, Port)
+                If String.IsNullOrEmpty(User) Then
+                    str = $"ApplicationName=OrmDb - MyApplication; Server={Host};Port={Port};Database={Catalog};Integrated Security=true"
+                Else
+                    str = $"ApplicationName=OrmDb - MyApplication; Server={Host};Port={Port};Database={Catalog};User Id={User};Password={Password}"
+                End If
+
+            Case "Oracle"
+                Port = If(Port Is Nothing OrElse Port = 0, 1521, Port)
+                Dim _source As String
+                If DBA_Privilege Then
+                    _source = $"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={Host})(PORT={Port}))(CONNECT_DATA=(SERVICE_NAME={Catalog})));DBA Privilege=SYSDBA;"
+                Else
+                    _source = $"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={Host})(PORT={Port}))(CONNECT_DATA=(SERVICE_NAME={Catalog })));"
+                End If
+                If String.IsNullOrEmpty(User) Then
+                    str = $"{_source}User Id=/;"
+                Else
+                    str = $"{_source}User Id={User};Password={Password};"
+                End If
+        End Select
+
+        Return Odb.Connection.Create(Of T)(str, Settings:=New ConnectionSettings() With {.AutoStartTrans = AutoStartTrans})
+    End Function
+
+     Sub Main()
+        Odb.Connection.DefaultSettings.IsolationLevel = IsolationLevel.ReadCommitted
+        
+        Dim cn_1 = InitConnection(Of Odb.Providers.Oracle)( "localhost", "SERVICE_NAME", "user", "pass" )
+        Dim cn_2 = InitConnection(Of Odb.Providers.MsSql)( "localhost", "DB_NAME", "user", "pass" )
+        Dim cn_3 = InitConnection(Of Odb.Providers.MySql)( "localhost", "DB_NAME", "user", "pass" )
+        Dim cn_4 = InitConnection(Of Odb.Providers.PostgreSql)( "localhost", "DB_NAME", "user", "pass" )
+    End Sub
+    </pre>
+</code-tab>

@@ -1,0 +1,20 @@
+﻿Following section demonstrates <b>deletion with join</b>.
+<code-tab>
+    <pre lang="c#">
+		var sql = SQL.X.Delete(h);
+			sql.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
+			sql.Where(l.LineId > 3);
+
+			sql.Execute(cn);
+	</pre>
+    <pre lang="vb">
+		Dim sql = SQL.X.Delete(h)
+			sql.InnerJoin(l, l.Year = h.Year And l.Id = h.Id )
+			sql.Where(l.LineId > 3)
+
+			sql.Execute(cn)
+	</pre>
+</code-tab>
+<o>
+    This sample deletes from [header-table] records which contain record(s) that is greather than 3 in [line-table].
+</o>

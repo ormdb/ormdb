@@ -1,0 +1,33 @@
+﻿<ew />
+<br />
+<br />
+
+
+Following section demonstrates how to retreive the records by linq as <k>list</k>.
+<br />
+<br />
+<code-tab>
+    <pre lang="c#">
+        var cmd = SQL.X.Select().From(h);
+
+        var result = cmd.ExecuteReader(cn).Select(x => new {
+                Year = x[h.Year].ToInt32(),
+                Id = x[h.Id].toString(),
+                Note = x[h.Note].toString(),
+                DocDate = x[h.DocDate].ToToDateTime(),
+                IsActive = x[h.IsActive].ToBoolean()
+            }).ToList();
+ 
+   </pre>
+    <pre lang="vb">
+        Dim cmd = SQL.X.Select().From(h);
+
+        Dim result = cmd.ExecuteReader(cn).Select(Function(x) New With {
+                .Year = x(h.Year).ToInt32(),
+                .Id = x(h.Id).toString(),
+                .Note = x(h.Note).toString(),
+                .DocDate = x(h.DocDate).ToToDateTime(),
+                .IsActive = x(h.IsActive).ToBoolean()
+            }).ToList()
+    </pre>
+</code-tab>

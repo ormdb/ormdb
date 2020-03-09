@@ -45,11 +45,12 @@
             border-radius: 3px;
             padding: 2px;
         }
+
         hlb {
             background-color: #ffefa3 !important;
             border-radius: 3px;
             padding: 2px;
-            color:black!important;
+            color: black !important;
         }
 
         #wiki {
@@ -58,7 +59,7 @@
 
 
             #wiki > #wiki-menu {
-                padding: 25px 0 10px 25px !important;
+                padding: 25px 0 25px 25px !important;
                 background: #f6f8fa;
                 border-right: 2px solid #f5f2f0;
                 -webkit-box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
@@ -66,6 +67,15 @@
                 box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
                 overflow: auto;
             }
+
+                #wiki > #wiki-menu x {
+                    border-bottom: 1px solid rgba(0,0,0,0.1);
+                    padding: 0 0 2px 5px;
+                    margin: 15px -25px 5px 10px;
+                    color: rgba(0,0,0,0.7);
+                    font-weight: 500;
+                    display: block;
+                }
 
                 #wiki > #wiki-menu a {
                     display: block;
@@ -164,7 +174,7 @@
             </button>
 
             <a class="navbar-brand navbar-text text-center" href="/">
-                <div class ="wiki-logo" style="width:45px;height:20px;"></div>
+                <div class="wiki-logo" style="width:45px;height:20px;"></div>
                 wiki
             </a>
             <button type="button" class="ModalLangShowBtn btn btn-secondary mt-1 px-1 py-0" style="font-size:.8em; border-color:rgba(255,255,255,.5);">Lang : c#</button>
@@ -216,6 +226,14 @@
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
+        function getItemByIndex(o, i) {
+            if (i < 0) return null;
+            for (var prop in o) {
+                if (i === 0) return o[prop];
+                i -= 1;
+            }
+            return null;
+        }
 
         //-- location is being determining...
         var _wiki_menu = $("#wiki-menu");
@@ -264,7 +282,7 @@
         //}
         //-------------------------------------------------------------------------------------
         $(window).on('popstate', function (e) {
-            load_page();
+            load_page();    // on url-hash-change...
         });
         function is_small() {
             return $("#is_small").css("display") === "none";
@@ -273,26 +291,25 @@
             $.get(wiki_ver.root_path + "menu.json", function (data) {
                 _menu_home = data.home
                 _menu_groups = data.items;
+
                 for (var g in _menu_groups) {
                     var _menu_group = _menu_groups[g];
 
                     _menu.push('<p class="mt-4 mb-1"><strong>' + _menu_group.title + '</strong></p>');
-                    // _menu.push('<ul>');
-
                     for (var i in _menu_group.items) {
-                        //_menu.push('<li onclick=menu_click(this) data-hash="' + i + '">' + _menu_group.items[i] + '</li>');
-                        _menu.push('<a href="##' + i + '">' + _menu_group.items[i] + '</a>');
-
+                        if (i.startsWith('-')) {
+                            _menu.push('<x>' + _menu_group.items[i] + '</x>');
+                        } else {
+                            _menu.push('<a href="##' + g + "--" + i + '">' + _menu_group.items[i] + '</a>');
+                        }
                     }
-                    // _menu.push('</ul>');
-
                 }
                 // menu is being rendered...
                 _wiki_menu.html(_menu.join(''));
 
                 load_page();
             }).fail(function () {
-                console.log("Menu file isnot found. (" + wiki_ver.root_path + "menu.json)");
+                console.log("Menu file is not found. (" + wiki_ver.root_path + "menu.json)");
             });
 
         }
@@ -306,50 +323,91 @@
 
             //-- title
             var _title = "";
-            if (_file !== _menu_home) {
-                var _menu_group_key = _file.split("-")[0];
-                var _menu_group = _menu_groups[_menu_group_key];
-                var _menu_group_item = _menu_group.items[_file];
-                if (_menu_group_item !== undefined) {
-                    _title = '<div style="font-weight:bold;line-height:1.125;word-wrap: break-word;font-size: 1.5em;"><span style="color:#8f9092;">' + _menu_group.title + '</span> / <span style="color:#5b6065;">' + _menu_group_item + '</span></div><hr/>';
-                }
+            var _p = _file.split("--");
+            var _menu_group = _menu_groups[_p[0]];
+            var _menu_item = _menu_group.items[_p[1]];
+            if (_menu_item !== undefined) {
+                _title = '<div style="font-weight:bold;line-height:1.125;word-wrap: break-word;font-size: 1.5em;"><span style="color:#8f9092;">' + _menu_group.title + '</span> / <span style="color:#5b6065;">' + _menu_item + '</span></div><hr/>';
             }
+            if (!_menu_group.path) _menu_group.path = "";
 
+            var _page = load_page_url_parse(wiki_ver.docs_path + _menu_group.path + "/" + _p[1] + ".html");
             //-- content
             var _copyright = '<small class="copyright">' + site.copyright + '</small>';
-            var _not_found = '<div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div>';
-
-            var _regex_cod = "/<\s*code(?:\s[^>]*|)>(.*?)<\s*\/\s*code>/gmis";
-            var _regex_cod_bgn = "/<\s*code(?:\s[^>]*|)>/gmis";
-            var _regex_cod_end = "/<\s*\/\s*code>/gmis";
 
             _wiki_body.scrollTop(0);
             if (is_small()) closeNav();
-            $.get(wiki_ver.docs_path + _file + ".html", function (data) {
 
-                //-- The CODE block(s), are determined with its attributes.
-                var _code_blocks = data.match(_regex_cod_bgn);
-                var _code_block_inx = -1;
-                var _blocks = data.split(_regex_cod);
-                data = "";
-                _blocks.forEach(function (block, index) {
-                    if ((index % 2) == 0) {
-                        data += block;
-                    } else {
-                        //-- The CODE block, is taken with its attributes such as  (lang="", data-xyz="" etc.)
-                        _code_block_inx += 1;
-                        data += _code_blocks[_code_block_inx] + block.replace(_regex_cod_bgn, "").replace(_regex_cod_end, "").replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "</code>"
-                    }
-                });
+            //load_page_get(wiki_ver.docs_path + _file + ".html");
+            $.get(_page, function (data) {
+                //  var _regex_cod = "/<\s*code(?:\s[^>]*|)>(.*?)<\s*\/\s*code>/gmis";
+                //  var _regex_cod_bgn = "/<\s*code(?:\s[^>]*|)>/gmis";
+                //  var _regex_cod_end = "/<\s*\/\s*code>/gmis";
+                //  var _regex_include = /<\s*include\s*src=".*?"\s\/>/gmis;
+                //
+                //  //--
+                //  //-- Replacing "<" and ">" characters with "&lt;" and "&gt;" .
+                //  //--
+                //
+                //  var _code_blocks = data.match(_regex_cod_bgn);
+                //  var _code_block_inx = -1;
+                //  var _blocks = data.split(_regex_cod);
+                //  data = "";
+                //  _blocks.forEach(function (block, index) {
+                //      if ((index % 2) == 0) {
+                //          data += block;
+                //      } else {
+                //          //-- The CODE block, is taken with its attributes such as  (lang="", data-xyz="" etc.)
+                //          _code_block_inx += 1;
+                //          data += _code_blocks[_code_block_inx] + block.replace(_regex_cod_bgn, "").replace(_regex_cod_end, "").replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "</code>"
+                //      }
+                //  });
 
                 _wiki_body.html(_title + data + _copyright);
-                load_page_render();
+                load_page_include(function () {
+                    load_page_render();
+                });
+
             }).fail(function () {
-                _wiki_body.html(_title + _not_found + _copyright);
+                _wiki_body.html(_title + '<div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div><div class="text-muted text-center">' + _page + '</div>' + _copyright);
             });
 
         }
         //-- Rendering
+
+        function load_page_url_parse(url) {
+            // $ = current file path
+            //
+            // $/docs/test.html
+
+            return url.replace("$", wiki_ver.docs_path).replace("\\", "/").replace("//", "/")
+        }
+        function load_page_url2path(url) {
+            var p = load_page_url_parse(url).split("/");
+            p.pop();    // remove last part
+            return p.join("/");
+        }
+        function load_page_include(done) {
+            var _included = 0;
+            _wiki_body.find("include").each(function (inx, itm) {
+                var _obj = $(itm);
+                var _src = _obj.attr("src");
+                $.ajax({
+                    url: load_page_url_parse(_src),
+                    type: "GET",
+                    async: false,
+                    success: function (data) {
+                        _obj.replaceWith(data);
+                        _included += 1;
+                    }
+                });
+            });
+            if (_included > 0) load_page_include();
+
+            if (done) { done(); }
+            return true;
+        }
+
         function load_page_render() {
             $("table").addClass("table table-striped table-bordered");
             $("table>thead").addClass("thead-dark");
@@ -467,7 +525,7 @@
 
                 var _item = $(_items[0]);
 
-                _item.replaceWith('<div class="bs-callout bs-callout-warning table-warning">All Examples needs the <a href="##EXM-Startup">Startup</a>. Please refer to <a href="##OTH-Startup">Startup</a> for further information.</div>');
+                _item.replaceWith('<div class="bs-callout bs-callout-warning table-warning">All Examples needs the <a href="##EXM--Startup">Startup</a>. Please refer to <a href="##EXM--Startup">Startup</a> for further information.</div>');
             }
         }
         //-------------------------------------------------------------------------------------
@@ -514,6 +572,11 @@
         //-------------------------------------------------------------------------------------
 
         $(function () {
+            $.ajaxSetup({
+                // Disable caching of AJAX responses
+                cache: false
+            });
+
             if (is_small()) closeNav();
             load_menu();
 
@@ -523,10 +586,6 @@
             link.rel = 'shortcut icon';
             link.href = 'https://secure.gravatar.com/avatar/94fac54dbff997be51b5dc0096e0d40b';
             document.getElementsByTagName('head')[0].appendChild(link);
-        });
-        $.ajaxSetup({
-            // Disable caching of AJAX responses
-            cache: false
         });
         //-------------------------------------------------------------------------------------
     </script>

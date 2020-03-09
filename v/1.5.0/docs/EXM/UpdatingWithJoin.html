@@ -1,0 +1,26 @@
+﻿Following section demonstrates <b>update with join</b>.
+<code-tab>
+	<pre lang="c#">
+		var sql = SQL.X.Update(h);
+			sql.InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
+			sql.Where(l.LineId > 3);
+
+			var row = sql.Set(h.NewModel());
+				row.Note = "new note";
+
+		sql.Execute(cn);
+	</pre>
+	<pre lang="vb">
+		Dim sql = SQL.X.Update(h)
+			sql.InnerJoin(l, l.Year = h.Year And l.Id = h.Id )
+			sql.Where(l.LineId > 3)
+
+			Dim row = sql.Set(h.NewModel())
+				row.Note = "new note"
+
+		sql.Execute(cn)
+	</pre>
+</code-tab>
+<o>
+	This sample updates the [header-table] records which contain record(s) that is greather than 3 in [line-table].
+</o>

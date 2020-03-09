@@ -1,5 +1,5 @@
 ﻿{
-  "home": "GEN-Home",
+  "home": "GEN--GEN-Home",
   "items": {
     "GEN": {
       "title": "Home",
@@ -56,6 +56,13 @@
       "items": {
         "OTH-Execute": "Execute",
         "OTH-DataReader": "DataReader"
+      }
+    },
+    "EXM": {
+      "title": "Examples",
+      "path": "/EXM",
+      "items": {
+        "Startup": "Startup"
       }
     }
   }

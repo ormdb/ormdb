@@ -70,16 +70,16 @@ Following example iterates the records for two columns.
 		// looping records.
 		foreach (var r in dr) {
 			// read by column-name.
-			Debug.WriteLine("{0}, {1}", r("Note").ToString(), 
-										r("DocDate").ToString());
+			Debug.WriteLine("{0}, {1}", r("Note").toString(), 
+										r("DocDate").toString());
 
 			// read by column.
-			Debug.WriteLine("{0}, {1}", r(h.Note).ToString(), 
-										r(h.DocDate).ToString());
+			Debug.WriteLine("{0}, {1}", r(h.Note).toString(), 
+										r(h.DocDate).toString());
 
 			// read by column-index.
-			Debug.WriteLine("{0}, {1}", r(0).ToString(),
-										r(1).ToString());
+			Debug.WriteLine("{0}, {1}", r(0).toString(),
+										r(1).toString());
 		}
 	</pre>
     <pre lang="vb">
@@ -101,16 +101,16 @@ Following example iterates the records for two columns.
 		'// looping records.
 		For Each r In dr
 			'// read by column-name.
-			Debug.WriteLine("{0}, {1}", r("Note").ToString(), 
-										r("DocDate").ToString())
+			Debug.WriteLine("{0}, {1}", r("Note").toString(), 
+										r("DocDate").toString())
 
 			'// read by column.
-			Debug.WriteLine("{0}, {1}", r(h.Note).ToString(), 
-										r(h.DocDate).ToString())
+			Debug.WriteLine("{0}, {1}", r(h.Note).toString(), 
+										r(h.DocDate).toString())
 
 			'// read by column-index.
-			Debug.WriteLine("{0}, {1}", r(0).ToString(), 
-										r(1).ToString())
+			Debug.WriteLine("{0}, {1}", r(0).toString(), 
+										r(1).toString())
 		Next
 	</pre>
 </code-tab>

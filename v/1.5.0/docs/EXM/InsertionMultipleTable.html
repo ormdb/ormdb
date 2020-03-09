@@ -1,0 +1,55 @@
+﻿Following section demonstrates <b>multiple table insertion</b>.
+<code-tab>
+	<pre lang="c#">
+		var sql = SQL.X.Query();
+
+		var _insert = sql.Insert();
+
+		for (n = 1; n <= 100; n++) {
+		   var note= String.Concat("Note -", n.toString());
+
+			var r1 = _insert.AddRow(h.NewModel());
+				r1.Year = 2017;
+				r1.Id = n;
+				r1.Note = note;
+				r1.DocDate = DateTime.Now();
+
+			for (m = 1; m <= 2; m++) {
+				var r2 = _insert.AddRow(l.NewModel());
+					r2.Year = r1.Year;
+					r2.Id = r1.Id;
+					r2.LineId = m;
+					r2.Note = note;
+			}
+		}
+
+		// All commands in query, are being executed as batch.
+		sql.Execute(cn)
+	</pre>
+	<pre lang="vb">
+		With SQL.X.Query()
+			Dim _insert = sql.Insert()
+
+			For n = 1 To 100
+			   var note= String.Concat("Note -", n.toString())
+
+				Dim r1 = _insert.AddRow(h.NewModel())
+					r1.Year = 2017
+					r1.Id = n
+					r1.Note = note
+					r1.DocDate = DateTime.Now()
+
+				For m = 1 To 2
+					Dim r2 = _insert.AddRow(l.NewModel())
+						r2.Year = r1.Year
+						r2.Id = r1.Id
+						r2.LineId = m
+						r2.Note = note
+				Next
+			Next
+
+			' All commands in query, are being executed as batch.
+			.Execute(cn)
+		End With
+	</pre>
+</code-tab>

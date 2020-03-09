@@ -1,0 +1,45 @@
+﻿Following section demonstrates using <hl>ExecuteCount</hl> clause.
+<code-tab>
+    <pre lang="c#">
+        var sql = SQL.X.Select()
+                    .From(h)
+                    .Where( h.Year.In(new[] {2018, 2019}) & 
+                            h.Id.IsNotNull() );
+
+        var count = sql.ExecuteCount(cn);
+	</pre>
+    <pre lang="vb">
+        Dim sql = SQL.X.Select() _
+                    .From(h) _
+                    .Where( h.Year.In({2018, 2019}) And 
+                            h.Id.IsNotNull() )
+
+        Dim count = sql.ExecuteCount(cn)
+	</pre>
+</code-tab>
+
+<br />
+<br />
+
+Also you can use <hl>COUNT</hl> clause, if you want.
+<code-tab>
+    <pre lang="c#">
+        var sql = SQL.X.Select(h.COUNT())
+                    .From(h)
+                    .Where( h.Year.In(new[] {2018, 2019}) & 
+                            h.Id.IsNotNull() );
+
+        var count = sql.Execute(cn);
+	</pre>
+    <pre lang="vb">
+        Dim sql = SQL.X.Select(h.COUNT()) _
+                    .From(h) _
+                    .Where( h.Year.In({2018, 2019}) And 
+                            h.Id.IsNotNull() )
+
+        Dim count = sql.Execute(cn)
+	</pre>
+</code-tab>
+<o>
+    SELECT <hl>COUNT(h)</hl> FROM TableHeader AS h WHERE h.Year IN (2018, 2019) AND h.Id ISNOT NULL
+</o>

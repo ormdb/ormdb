@@ -1,0 +1,25 @@
+﻿Following section demonstrates <b>multiple update</b>.
+<code-tab>
+	<pre lang="c#">
+		var sql = SQL.X.Query;
+
+			var r1 = sql.Update(h, h.Id == 9999).Set(h.NewModel());
+				r1.Note = "new note";
+
+			var r2 = sql.Update(l, l.Id == 9999).Set(l.NewModel());
+				r2.Note = "new note";
+
+		sql.Execute(cn);
+	</pre>
+	<pre lang="vb">
+		Dim sql = SQL.X.Query
+
+			Dim r1 = sql.Update(h, h.Id = 9999).Set(h.NewModel())
+				r1.Note = "new note"
+
+			Dim r2 = sql.Update(l, l.Id = 9999).Set(l.NewModel())
+				r2.Note = "new note"
+
+		sql.Execute(cn)
+	</pre>
+</code-tab>

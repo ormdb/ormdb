@@ -1,0 +1,15 @@
+﻿Following section demonstrates using <hl>GROUP BY</hl> clause.
+<code-tab>
+	<pre lang="c#">
+		var _yr_min = h.Year.MIN().AS("_date_min");
+		var _yr_max = h.Year.MAX().AS("_date_max");
+
+		var sql = SQL.X.Select(h.Id, _yr_min, _yr_max).From(h).GroupBy(h.Id);
+	</pre>
+	<pre lang="vb">
+		Dim _yr_min = h.Year.MIN().AS("_date_min")
+		Dim _yr_max = h.Year.MAX().AS("_date_max")
+
+		Dim sql = SQL.X.Select(h.Id, _yr_min, _yr_max).From(h).GroupBy(h.Id)
+	</pre>
+</code-tab>

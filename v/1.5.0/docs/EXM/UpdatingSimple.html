@@ -1,0 +1,20 @@
+﻿Following section demonstrates <b>regular update</b>.
+<code-tab>
+	<pre lang="c#">
+		var sql = SQL.X.Update(h, h.Id == 9999);
+
+			var row = sql.Set(h.NewModel());
+				row.Note = "new note";
+
+		sql.Execute(cn);
+	</pre>
+	<pre lang="vb">
+		Dim sql = SQL.X.Update(h, h.Id = 9999)
+
+			With sql.Set(h.NewModel())
+				.Note = "new note"
+			End With
+
+		sql.Execute(cn)
+	</pre>
+</code-tab>

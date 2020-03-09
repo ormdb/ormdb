@@ -1,0 +1,20 @@
+﻿Following section demonstrates using <hl>UNION</hl> clause.
+<code-tab>
+	<pre lang="c#">
+		var sql= SQL.X.Union();
+			sql.RemoveDuplicates = true;
+
+			sql.Select().From(h, h.Id == 1000).Top(1).OrderBy(h.Id);
+			sql.Select().From(h, h.Id == 2000).Top(1).OrderBy(h.Id);
+			sql.OrderBy(h.DocDate);
+	</pre>
+	<pre lang="vb">
+		With SQL.X.Union()
+			.RemoveDuplicates = True
+
+			.Select().From(h, h.Id = 1000).Top(1).OrderBy(h.Id)
+			.Select().From(h, h.Id = 2000).Top(1).OrderBy(h.Id)
+			.OrderBy(h.DocDate)
+		End With
+	</pre>
+</code-tab>

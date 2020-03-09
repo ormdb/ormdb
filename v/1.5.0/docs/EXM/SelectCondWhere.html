@@ -1,0 +1,24 @@
+﻿Following section demonstrates the dynamic creation of the <hl>Where</hl> clause.
+<code-tab>
+	<pre lang="c#">
+		var _where = (h.Year == 2017);
+
+		var _condition = true;
+		if( _condition ) _where = _where & (h.IsActive == true);
+
+		var sql = SQL.X.Select().From(h, _where);
+	</pre>
+	<pre lang="vb">
+		Dim _where = (h.Year = 2017)
+
+		Dim _condition = True
+		If _condition Then _where = _where And (h.IsActive = True)
+
+		Dim sql = SQL.X.Select().From(h, _where)
+	</pre>
+</code-tab>
+<o>
+	SELECT * FROM TableHeader AS h WHERE <hl>h.Year = 2017</hl>
+	<br />
+	SELECT * FROM TableHeader AS h WHERE <hl>h.Year = 2017 AND h.IsActive = true</hl>
+</o>

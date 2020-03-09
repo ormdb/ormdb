@@ -1,0 +1,50 @@
+﻿Following section demonstrates how to execute multiple sql commands in one batch-query.
+<br />
+<br />
+<code-tab>
+    <pre lang="c#">
+		var sql = SQL.X.Query();
+
+			sql.Delete(h);
+			sql.Delete(l);
+
+		var _insert = sql.Insert(true);
+
+		for (n = 1; n <= 100; n++) {
+			var row = _insert.AddRow(h.NewModel());
+				row.Year = 2017;
+				row.Id = 9999;
+				row.Note = String.Concat("Note -", n.toString());
+				row.DocDate = DateTime.Now();
+				row.IsActive = true;
+		}
+
+		var row1 = sql.Update.Where( h.Id == 5 ).Set(h.NewModel());
+			row1.Note = "New Value";
+
+			sql.ExecuteAsync(cn);
+	</pre>
+    <pre lang="vb">
+		With  SQL.X.Query()
+			.Delete(h)
+			.Delete(l)
+
+			With .Insert(true)
+				For n=1 to 100
+					Dim row = _insert.AddRow(h.NewModel())
+						row.Year = 2017
+						row.Id = n
+						row.Note = String.Concat("Note -", n.toString())
+						row.DocDate = DateTime.Now()
+						row.IsActive = True
+				End If
+			End With
+
+			With sql.Update.Where( h.Id = 5).Set(h.NewModel())
+				.Note = "New Value"
+			End With
+
+			.Execute(cn)
+		End With
+	</pre>
+</code-tab>
