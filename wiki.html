@@ -234,6 +234,18 @@
             }
             return null;
         }
+        function getSync(url) {
+            var retval = null;
+            $.ajax({
+                url: url,
+                type: "GET",
+                async: false,
+                success: function (data) {
+                    retval = data;
+                }
+            });
+            return retval;
+        }
 
         //-- location is being determining...
         var _wiki_menu = $("#wiki-menu");
@@ -294,13 +306,18 @@
 
                 for (var g in _menu_groups) {
                     var _menu_group = _menu_groups[g];
+                    _menu_group.path = load_page_url_parse(wiki_ver.docs_path + _menu_group.path + "/")
+                    if (_menu_group.before) _menu_group.before = load_page_url_parse(_menu_group.path + _menu_group.before + ".html");
+                    if (_menu_group.after) _menu_group.after = load_page_url_parse(_menu_group.path + _menu_group.after + ".html");
 
                     _menu.push('<p class="mt-4 mb-1"><strong>' + _menu_group.title + '</strong></p>');
                     for (var i in _menu_group.items) {
+                        var _menu_group_item = _menu_group.items[i];
+
                         if (i.startsWith('-')) {
-                            _menu.push('<x>' + _menu_group.items[i] + '</x>');
+                            _menu.push('<x>' + _menu_group_item + '</x>');
                         } else {
-                            _menu.push('<a href="##' + g + "--" + i + '">' + _menu_group.items[i] + '</a>');
+                            _menu.push('<a href="##' + g + "--" + i + '">' + _menu_group_item + '</a>');
                         }
                     }
                 }
@@ -320,15 +337,16 @@
             //-- set active-class for selected-menu-item
             $("#wiki > #wiki-menu a").removeClass("wiki-menu-active");
             var _link = $('#wiki > #wiki-menu a[href="##' + _file + '"]');
-            _link.addClass("wiki-menu-active");
-
-            //-- scroll-into-view
-            var _offset = _link.offset();
-            var _top = _wiki_menu.scrollTop();
-            var _hei = _wiki_menu.innerHeight();
-            if (((_top + _hei) < _offset.top)) {
-                _link[0].scrollIntoView();
-                _wiki_menu[0].scrollTop -= 10;
+            if (_link.length > 0) {
+                _link.addClass("wiki-menu-active");
+                //-- scroll-into-view
+                var _offset = _link.offset();
+                var _top = _wiki_menu.scrollTop();
+                var _hei = _wiki_menu.innerHeight();
+                if (((_top + _hei) < _offset.top)) {
+                    _link[0].scrollIntoView();
+                    _wiki_menu[0].scrollTop -= 10;
+                }
             }
 
             //-- title
@@ -341,47 +359,60 @@
             }
             if (!_menu_group.path) _menu_group.path = "";
 
-            var _page = load_page_url_parse(wiki_ver.docs_path + _menu_group.path + "/" + _p[1] + ".html");
+            var _page = load_page_url_parse(_menu_group.path + _p[1] + ".html");
             //-- content
             var _copyright = '<small class="copyright">' + site.copyright + '</small>';
 
             _wiki_body.scrollTop(0);
             if (is_small()) closeNav();
 
-            //load_page_get(wiki_ver.docs_path + _file + ".html");
-            $.get(_page, function (data) {
-                //  var _regex_cod = "/<\s*code(?:\s[^>]*|)>(.*?)<\s*\/\s*code>/gmis";
-                //  var _regex_cod_bgn = "/<\s*code(?:\s[^>]*|)>/gmis";
-                //  var _regex_cod_end = "/<\s*\/\s*code>/gmis";
-                //  var _regex_include = /<\s*include\s*src=".*?"\s\/>/gmis;
-                //
-                //  //--
-                //  //-- Replacing "<" and ">" characters with "&lt;" and "&gt;" .
-                //  //--
-                //
-                //  var _code_blocks = data.match(_regex_cod_bgn);
-                //  var _code_block_inx = -1;
-                //  var _blocks = data.split(_regex_cod);
-                //  data = "";
-                //  _blocks.forEach(function (block, index) {
-                //      if ((index % 2) == 0) {
-                //          data += block;
-                //      } else {
-                //          //-- The CODE block, is taken with its attributes such as  (lang="", data-xyz="" etc.)
-                //          _code_block_inx += 1;
-                //          data += _code_blocks[_code_block_inx] + block.replace(_regex_cod_bgn, "").replace(_regex_cod_end, "").replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "</code>"
-                //      }
-                //  });
+            var _content = ""
+            if (!_menu_group.before_data) {
+                _menu_group.before_data = "";
+                if (_menu_group.before) {
+                    _menu_group.before_data = getSync(_menu_group.before)
+                }
+            }
+            if (!_menu_group.after_data) {
+                _menu_group.after_data = "";
+                if (_menu_group.after) {
+                    _menu_group.after_data = getSync(_menu_group.after)
+                }
+            }
 
-                _wiki_body.html(_title + data + _copyright);
-                load_page_include(function () {
-                    load_page_render();
-                });
+            _content = getSync(_page);
+            if (!_content) {
+                _content += '<co type="danger"><div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div><div class="text-muted text-center">' + _page + '</div></co>';
+            } else {
+                _content = _menu_group.before_data + _content + _menu_group.after_data
+            }
 
-            }).fail(function () {
-                _wiki_body.html(_title + '<div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div><div class="text-muted text-center">' + _page + '</div>' + _copyright);
+            //  var _regex_cod = "/<\s*code(?:\s[^>]*|)>(.*?)<\s*\/\s*code>/gmis";
+            //  var _regex_cod_bgn = "/<\s*code(?:\s[^>]*|)>/gmis";
+            //  var _regex_cod_end = "/<\s*\/\s*code>/gmis";
+            //  var _regex_include = /<\s*include\s*src=".*?"\s\/>/gmis;
+            //
+            //  //--
+            //  //-- Replacing "<" and ">" characters with "&lt;" and "&gt;" .
+            //  //--
+            //
+            //  var _code_blocks = data.match(_regex_cod_bgn);
+            //  var _code_block_inx = -1;
+            //  var _blocks = data.split(_regex_cod);
+            //  data = "";
+            //  _blocks.forEach(function (block, index) {
+            //      if ((index % 2) == 0) {
+            //          data += block;
+            //      } else {
+            //          //-- The CODE block, is taken with its attributes such as  (lang="", data-xyz="" etc.)
+            //          _code_block_inx += 1;
+            //          data += _code_blocks[_code_block_inx] + block.replace(_regex_cod_bgn, "").replace(_regex_cod_end, "").replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "</code>"
+            //      }
+            //  });
+            _wiki_body.html(_title + _content + _copyright);
+            load_page_include(function () {
+                load_page_render();
             });
-
         }
         //-- Rendering
 

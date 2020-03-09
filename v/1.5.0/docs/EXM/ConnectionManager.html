@@ -1,10 +1,4 @@
-﻿<co type="warning">
-    Please refer to <a href="##CON--CON-Connection">Connection</a> for further information.
-</co>
-<br />
-<br />
-
-Following example demonstrates how to create a connection dynamically.
+﻿Following example demonstrates how to create a connection dynamically.
 <br />
 <br />
 <code-tab>
@@ -57,7 +51,10 @@ Following example demonstrates how to create a connection dynamically.
                 break;
         }
 
-        return Odb.Connection.Create&lt;T&gt;(str, Settings: new ConnectionSettings() { AutoStartTrans = AutoStartTrans });
+        return Odb.Connection.Create&lt;T&gt;(str, 
+                        Settings: new ConnectionSettings() { 
+                            AutoStartTrans = AutoStartTrans 
+                        });
     }
 
     public void Main()
@@ -117,7 +114,10 @@ Following example demonstrates how to create a connection dynamically.
                 End If
         End Select
 
-        Return Odb.Connection.Create(Of T)(str, Settings:=New ConnectionSettings() With {.AutoStartTrans = AutoStartTrans})
+        Return Odb.Connection.Create(Of T)(str, 
+                        Settings:=New ConnectionSettings() With {
+                            .AutoStartTrans = AutoStartTrans
+                        })
     End Function
 
      Sub Main()
@@ -130,3 +130,9 @@ Following example demonstrates how to create a connection dynamically.
     End Sub
     </pre>
 </code-tab>
+<br />
+<br />
+
+<co type="warning">
+    Please refer to <a href="##CON--CON-Connection">Connection</a> for further information.
+</co>
