@@ -234,17 +234,23 @@
             }
             return null;
         }
-        function getSync(url) {
-            var retval = null;
-            $.ajax({
-                url: url,
-                type: "GET",
-                async: false,
-                success: function (data) {
-                    retval = data;
-                }
-            });
-            return retval;
+        var requested_data = {};
+        function getSyncWithCached(url) {
+            if (!url) return null;
+
+            url = load_page_url_parse(url);
+            if (!requested_data[url]) {
+                requested_data[url] = null;
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    async: false,
+                    success: function (data) {
+                        requested_data[url] = data;
+                    }
+                });
+            }
+            return requested_data[url];
         }
 
         //-- location is being determining...
@@ -312,7 +318,7 @@
 
                     _menu.push('<p class="mt-4 mb-1"><strong>' + _menu_group.title + '</strong></p>');
                     for (var i in _menu_group.items) {
-                        _menu_group.items[i] = { url: load_page_url_parse(_menu_group.path + i + ".html"), text: _menu_group.items[i], data: null };
+                        _menu_group.items[i] = { url: load_page_url_parse(_menu_group.path + i + ".html"), text: _menu_group.items[i] };
 
                         item = _menu_group.items[i];
                         if (i.startsWith('-')) {
@@ -361,28 +367,11 @@
             if (!_menu_group.path) _menu_group.path = "";
 
             //-- content
-            var _content = ""
-            if (!_menu_group.before_data) {
-                _menu_group.before_data = "";
-                if (_menu_group.before) {
-                    _menu_group.before_data = getSync(_menu_group.before)
-                }
-            }
-            if (!_menu_group.after_data) {
-                _menu_group.after_data = "";
-                if (_menu_group.after) {
-                    _menu_group.after_data = getSync(_menu_group.after)
-                }
-            }
-
-            if (!_menu_item.data) {
-                _menu_item.data = getSync(_menu_item.url);
-
-                if (!_menu_item.data) {
-                    _menu_item.data = '<co type="danger"><div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div><div class="text-muted text-center">' + _menu_item.url + '</div></co>';
-                } else {
-                    _menu_item.data = _menu_group.before_data + _menu_item.data + _menu_group.after_data
-                }
+            var _content = getSyncWithCached(_menu_item.url);
+            if (!_content) {
+                _content = '<co type="danger"><div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div><div class="text-muted text-center">' + _menu_item.url + '</div></co>';
+            } else {
+                _content = getSyncWithCached(_menu_group.before) + _content + getSyncWithCached(_menu_group.after)
             }
 
             //  var _regex_cod = "/<\s*code(?:\s[^>]*|)>(.*?)<\s*\/\s*code>/gmis";
@@ -407,7 +396,7 @@
             //          data += _code_blocks[_code_block_inx] + block.replace(_regex_cod_bgn, "").replace(_regex_cod_end, "").replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "</code>"
             //      }
             //  });
-            _wiki_body.html(_title + _menu_item.data + '<small class="copyright">' + site.copyright + '</small>');
+            _wiki_body.html(_title + _content + '<small class="copyright">' + site.copyright + '</small>');
             _wiki_body.scrollTop(0);
             if (is_small()) closeNav();
 
@@ -421,7 +410,7 @@
             // $ = current file path
             //
             // $/docs/test.html
-
+            if (!url) return "";
             return url.replace("$", wiki_ver.docs_path).replace("\\", "/").replace("//", "/")
         }
         function load_page_url2path(url) {
@@ -433,16 +422,9 @@
             var _included = 0;
             _wiki_body.find("include").each(function (inx, itm) {
                 var _obj = $(itm);
-                var _src = _obj.attr("src");
-                $.ajax({
-                    url: load_page_url_parse(_src),
-                    type: "GET",
-                    async: false,
-                    success: function (data) {
-                        _obj.replaceWith(data);
-                        _included += 1;
-                    }
-                });
+                var data = getSyncWithCached(_obj.attr("src"));
+                _obj.replaceWith(data);
+                _included += 1;
             });
             if (_included > 0) load_page_include();
 
