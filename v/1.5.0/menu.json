@@ -90,7 +90,7 @@
 
         "-DEL": "DELETE",
         "DeletionSimple": "DELETE Simple",
-        "DeletionFromMultipleTable": "DELETE Multiple Table",
+        "DeletionMultipleTable": "DELETE Multiple Table",
         "DeletionWithJoin": "DELETE With Join",
         "DeletionWithChunks": "DELETE With Chunks",
 
