@@ -1,9 +1,13 @@
 ﻿Following section demonstrates <b>simple deletion</b>.
 <code-tab>
 	<pre lang="c#">
-		SQL.X.Delete(h, h.Id == 9999).Execute(cn);
+		var sql = SQL.X.Delete(h, h.Id == 9999);
+
+			sql.ExecuteNonQuery(cn);
 	</pre>
 	<pre lang="vb">
-		SQL.X.Delete(h, h.Id = 9999).Execute(cn)
+		Dim sql = SQL.X.Delete(h, h.Id = 9999)
+
+			sql.ExecuteNonQuery(cn)
 	</pre>
 </code-tab>

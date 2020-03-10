@@ -1,0 +1,37 @@
+﻿Following section demonstrates how to execute multiple sql commands in one batch-query.
+<code-tab>
+	<pre lang="c#">
+		using Odb; /* for extensions */
+	
+		// IExecutable
+		var sql = SQL.X.Delete(h, h.Id == 9999);
+		cn.ExecuteNonQuery(sql);	// or sql.ExecuteNonQuery(cn)
+
+		// TSQL string
+		var str = "DELETE FROM table WHERE field1<>0 AND field2='X'";
+		cn.ExecuteNonQuery(str);
+
+		// DbCommand.
+		var cmd = cn.CreateCommand(
+						"DELETE FROM table WHERE field1<>@p1 AND field2=@p2",
+						new { p1 = 0, p2 = "X"});
+		cn.ExecuteNonQuery(cmd);	// or cmd.ExecuteNonQuery(cn)
+	</pre>
+	<pre lang="vb">
+		Imports Odb ' for extensions
+
+		' IExecutable
+		Dim sql = SQL.X.Delete(h, h.Id = 9999)
+		cn.ExecuteNonQuery(sql)		' or sql.ExecuteNonQuery(cn)
+
+		' TSQL string
+		Dim str = "DELETE FROM table WHERE field1<>0 AND field2='X'"
+		cn.ExecuteNonQuery(str)
+
+		' DbCommand
+		Dim cmd = cn.CreateCommand(
+						"DELETE FROM table WHERE field1<>@p1 AND field2=@p2",
+						new { p1 = 0, p2 = "X"})
+		cn.ExecuteNonQuery(cmd)		' or cmd.ExecuteNonQuery(cn)
+	</pre>
+</code-tab>

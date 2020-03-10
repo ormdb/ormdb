@@ -1,27 +1,29 @@
-﻿Following section demonstrates how to retreive the records by linq as <k>list</k>.
-<br />
-<br />
+﻿Following section demonstrates how to read record(s) with <b>ExecuteReader</b>, using <k>Linq</k>.
 <code-tab>
     <pre lang="c#">
+        // Query is being generated...
         var cmd = SQL.X.Select().From(h);
 
+        // Records are being read and converted to dictionary by linq...
         var result = cmd.ExecuteReader(cn).Select(x => new {
-                Year = x[h.Year].ToInt32(),
-                Id = x[h.Id].toString(),
-                Note = x[h.Note].toString(),
-                DocDate = x[h.DocDate].ToToDateTime(),
-                IsActive = x[h.IsActive].ToBoolean()
+                Year = x(h.Year).ToInt32(),
+                Id = x(h.Id).ToString(),
+                Note = x(h.Note).ToString(),
+                DocDate = x(h.DocDate).ToDateTime(),
+                IsActive = x(h.IsActive).ToBoolean()
             }).ToList();
  
    </pre>
     <pre lang="vb">
+        ' Query is being generated...
         Dim cmd = SQL.X.Select().From(h);
 
+        ' Records are being read and converted to dictionary by linq...
         Dim result = cmd.ExecuteReader(cn).Select(Function(x) New With {
                 .Year = x(h.Year).ToInt32(),
-                .Id = x(h.Id).toString(),
-                .Note = x(h.Note).toString(),
-                .DocDate = x(h.DocDate).ToToDateTime(),
+                .Id = x(h.Id).ToString(),
+                .Note = x(h.Note).ToString(),
+                .DocDate = x(h.DocDate).ToDateTime(),
                 .IsActive = x(h.IsActive).ToBoolean()
             }).ToList()
     </pre>

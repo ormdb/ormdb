@@ -3,16 +3,18 @@
 	<pre lang="c#">
 		var _where = (h.Year == 2017);
 
-		var _condition = true;
-		if( _condition ) _where = _where & (h.IsActive == true);
+		if ( true ) {
+			_where = _where & (h.IsActive == true);
+		}
 
 		var sql = SQL.X.Select().From(h, _where);
 	</pre>
 	<pre lang="vb">
 		Dim _where = (h.Year = 2017)
 
-		Dim _condition = True
-		If _condition Then _where = _where And (h.IsActive = True)
+		If True Then
+			_where = _where And (h.IsActive = True)
+		End If
 
 		Dim sql = SQL.X.Select().From(h, _where)
 	</pre>

@@ -1,10 +1,14 @@
 ﻿Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
 <code-tab>
 	<pre lang="c#">
-		var sql = SQL.X.Select().From(h).Skip(5).Top(10).OrderBy(h.Year);
+		var sql = SQL.X.Select().From(h)
+					.Skip(5).Top(10)
+					.OrderBy(h.Year);
 	</pre>
 	<pre lang="vb">
-		Dim sql = SQL.X.Select().From(h).Skip(5).Top(10).OrderBy(h.Year)
+		Dim sql = SQL.X.Select().From(h) _
+					.Skip(5).Top(10) _ 
+					.OrderBy(h.Year)
 	</pre>
 </code-tab>
 <co type="warning">

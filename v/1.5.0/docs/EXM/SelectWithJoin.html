@@ -3,14 +3,18 @@
 	<pre lang="c#">
         var sql = SQL.X.Select();
             sql.From(h);
-            sql.LeftJoin(l, l.Year==h.Year & l.Id == h.Id );
-            sql.Where( h.Year.In(new[] {2018, 2019}) & h.Id.IsNotNull() );
+            sql.LeftJoin(l, l.Year == h.Year &
+                            l.Id == h.Id );
+            sql.Where(  h.Year.In( new[] {2018, 2019} ) & 
+                        h.Id.IsNotNull() );
 	</pre>
 	<pre lang="vb">
         Dim sql = SQL.X.Select()
             sql.From(h)
-            sql.LeftJoin(l, l.Year=h.Year And l.Id = h.Id )
-            sql.Where( h.Year.In( {2018, 2019} ) And h.Id.IsNotNull() )
+            sql.LeftJoin(l, l.Year = h.Year And 
+                            l.Id = h.Id )
+            sql.Where(  h.Year.In( {2018, 2019} ) And
+                        h.Id.IsNotNull() )
 	</pre>
 </code-tab>
 <o>

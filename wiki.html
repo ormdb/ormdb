@@ -257,6 +257,12 @@
             if (!url) return "";
 
             url = load_page_url_parse(url);
+
+            //-- disabling caching on localhost
+            if (location.hostname.toLowerCase() === "localhost") {
+                requested_data[url]=null
+            }
+
             if (!requested_data[url]) {
                 requested_data[url] = "";
                 $.ajax({
@@ -436,7 +442,7 @@
         //-- Rendering
 
         function load_page_url_parse(url) {
-            // $ = current file path
+            // $ = current docs path
             //
             // $/docs/test.html
             if (!url) return "";

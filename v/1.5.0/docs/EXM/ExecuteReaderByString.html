@@ -1,19 +1,21 @@
-﻿Following example iterates the records for two columns.
-<br />
-<br />
+﻿Following section demonstrates how to read record(s) with <b>ExecuteReader</b>, using <k>SQL String</k>.
 <code-tab>
     <pre lang="c#">
+        // SQL statement is being generated...
         var sql = "SELECT field1, field2 FROM table1 AS h WHERE field3 = 2017";
 
-        var result = cmd.ExecuteReader(cn).ToDictionary(
-                                       x => x["field1"], 
-                                       x => x["field2"]
+        // Records are being read and converted to dictionary by linq...
+        var dic = cn.ExecuteReader(sql).ToDictionary(
+                                       x => x("field1"), 
+                                       x => x("field2")
                                    );
 	</pre>
     <pre lang="vb">
+        ' SQL statement is being generated...
         Dim sql = "SELECT field1, field2 FROM table1 AS h WHERE field3 = 2017"
 
-        Dim result = cmd.ExecuteReader(cn).ToDictionary(
+        ' Records are being read and converted to dictionary by linq...
+        Dim dic = cn.ExecuteReader(sql).ToDictionary(
                                       Function(x) x("field1"), 
                                       Function(x) x("field2")
                                   )

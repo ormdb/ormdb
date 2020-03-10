@@ -1,15 +1,29 @@
 ﻿Following section demonstrates <hl>how select the fields</hl> to be read.
 <code-tab>
 	<pre lang="c#">
+		// selects all fields
 		var sql = SQL.X.Select().From(h);
+
+		// selects all fields for only table [h]
 		var sql = SQL.X.Select(h.All).From(h);
+
+		// selects only [h.Year] and [h.Id] fields
 		var sql = SQL.X.Select(h.Year, h.Id).From(h);
-		var sql = SQL.X.Select(h.All).Exclude(h.Note).From(h);
+
+		// selects all fields excluding field [h.Note]
+		var sql = SQL.X.Select().Exclude(h.Note).From(h);
 	</pre>
 	<pre lang="vb">
+		' selects all fields
 		Dim sql = SQL.X.Select().From(h)
+
+		' selects all fields for only table [h]
 		Dim sql = SQL.X.Select(h.All).From(h)
+
+		' selects only [h.Year] and [h.Id] fields
 		Dim sql = SQL.X.Select(h.Year, h.Id).From(h)
+
+		' selects all fields excluding field [h.Note]
 		Dim sql = SQL.X.Select().Exclude(h.Note).From(h)
 	</pre>
 </code-tab>

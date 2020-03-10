@@ -2,27 +2,28 @@
 <co type="warning">
     <k>Delete</k> operation is always a problem for the large records. But you can break the large delete operation into chunks.
 </co>
-
+<br />
 Following section demonstrates <b>deletion with chunks</b>.
 <code-tab>
     <pre lang="c#">
         // Ids are being obtained for the records to be deleted...
         var _ids = SQL.X.Select(h.Id)
                     .From(h, h.Year &lt; 2018)
-                    .ExecuteReader(cn).Select(x => x(0).ToString());
+                    .ExecuteReader(cn)
+                    .Select(x => x(0).ToString()).ToList();
 
         // records are being deleted in chunks, by supplying record Id information.
-        int _index = 0;
-        int _chunk_size = 3000;
-
-        var sql = Core.Ado.SQL.X.Query;
+        var _index = 0;
+        var _chunk_size = 3000;
+        var sql = Odb.Sql.X.Query();
         do {
             var _items = _ids.Skip(_index).Take(_chunk_size);
             if (_items.Count == 0) break;
 
             sql.Delete(h, h.Id.In(_items));  // headers are being deleted
             sql.Delete(l, l.Id.In(_items));  // lines are being deleted
-            sql.Execute(cn, ClearQue: true);
+            sql.Execute(cn);
+            sql.Clear();
 
             _index += _chunk_size;
         }
@@ -31,20 +32,21 @@ Following section demonstrates <b>deletion with chunks</b>.
         ' Ids are being obtained for the records to be deleted...
         Dim _ids = SQL.X.Select(h.Id) _
                     .From(h, h.Year &lt; 2018) _
-                    .ExecuteReader(cn).Select(Function(x) x(0).ToString())
+                    .ExecuteReader(cn) _ 
+                    .Select(Function(x) x(0).ToString()).ToList()
 
         ' records are being deleted in chunks, by supplying record Id information.
-        Dim _index As Integer = 0
-        Dim _chunk_size As Integer = 3000
-
-        Dim sql = Core.Ado.SQL.X.Query
+        Dim _index = 0
+        Dim _chunk_size = 3000
+        Dim sql = Odb.Sql.X.Query();
         Do
             Dim _items = _ids.Skip(_index).Take(_chunk_size)
             If (_items.Count = 0) Exit Do
 
             sql.Delete(h, h.Id.In(_items))  ' headers are being deleted
             sql.Delete(l, l.Id.In(_items))  ' lines are being deleted
-            sql.Execute(cn, ClearQue:= True)
+            sql.Execute(cn)
+            sql.Clear()
 
             _index += _chunk_size
         Loop

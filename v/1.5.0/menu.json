@@ -56,7 +56,7 @@
         "DDL-GetTables": "GetTables",
         "DDL-PingServer": "PingServer",
         "DDL-TableExist": "TableExist",
-        "DDL-TruncateTable": "Truncate able"
+        "DDL-TruncateTable": "Truncate Table"
       }
     },
     "OTH": {
@@ -76,11 +76,12 @@
       "items": {
         "Startup": "Startup",
         "ConnectionManager": "Connection Manager",
-        "BatchExecution": "Batch Execution",
-        "ExecuteReaderByString": "Reading By SQL String",
-        "ExecuteReaderByCommand": "Reading By DbCommand",
-        "ExecuteReaderByIteration": "Reading By Iteration",
-        "ExecuteReaderByLinq": "Reading By Linq",
+        "ExecuteReaderByString": "Read By SQL String",
+        "ExecuteReaderByCommand": "Read By DbCommand",
+        "ExecuteReaderByIteration": "Read By Iteration",
+        "ExecuteReaderByLinq": "Read By Linq",
+        "ExecuteNonQuery": "Execute",
+        "ExecuteNonQueryBatch": "Execute - Batch",
 
         "-SEL": "SELECT",
         "SelectSimple": "SELECT Simple",
