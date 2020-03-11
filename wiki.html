@@ -54,55 +54,59 @@
         }
 
         #wiki {
-            overflow: hidden;
         }
 
-
             #wiki > #wiki-menu {
-                padding: 25px 25px 25px 25px !important;
+                padding: 25px !important;
                 background: #f6f8fa;
                 border-right: 2px solid #f5f2f0;
                 -webkit-box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
                 -moz-box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
                 box-shadow: 10px 1px 10px -9px rgb(214, 213, 212);
-                overflow: auto;
             }
 
-                #wiki > #wiki-menu x {
-                    border-bottom: 1px solid rgba(0,0,0,0.1);
-                    padding: 0 0 2px 5px;
-                    margin: 15px -25px 5px 10px;
-                    color: rgba(0,0,0,0.7);
-                    font-weight: 500;
-                    display: block;
-                }
-
-                #wiki > #wiki-menu a {
-                    display: block;
-                    text-decoration: none;
-                    color: #0056b3;
-                    cursor: pointer;
-                    padding: 5px 10px 5px 20px;
-                    /*white-space: nowrap;*/
-                }
-
-                    #wiki > #wiki-menu a:hover {
-                        text-decoration: underline;
-                        color: #0056b3;
-                    }
-
-
         .wiki-menu-visible {
-            min-width: 270px !important;
-            max-width: 270px !important;
+            min-width: 270px;
+            max-width: 270px;
+            width: 270px;
             overflow-x: hidden;
             overflow-y: scroll;
-            display: block !important;
+            display: flex !important;
         }
 
         .wiki-menu-hidden {
             display: none !important;
         }
+
+        #wiki > #wiki-menu > #wiki-menu-content {
+            margin-right: -25px !important;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding-right: 20px;
+        }
+
+            #wiki > #wiki-menu > #wiki-menu-content x {
+                border-bottom: 1px solid rgba(0,0,0,0.1);
+                padding: 0 0 2px 5px;
+                margin: 15px -25px 5px 10px;
+                color: rgba(0,0,0,0.7);
+                font-weight: 500;
+                display: block;
+            }
+
+            #wiki > #wiki-menu > #wiki-menu-content a {
+                display: block;
+                text-decoration: none;
+                color: #0056b3;
+                cursor: pointer;
+                padding: 5px 10px 5px 20px;
+                /*white-space: nowrap;*/
+            }
+
+                #wiki > #wiki-menu > #wiki-menu-content a:hover {
+                    text-decoration: underline;
+                    color: #0056b3;
+                }
 
 
         #wiki > #wiki-menu .wiki-menu-active {
@@ -167,7 +171,7 @@
     </style>
 </head>
 <body>
-    <div class="d-flex flex-column w-100 h-100" style="position: absolute;top: 0; right: 0; bottom: 0; left: 0; line-height:1;">
+    <div class="d-flex flex-column overflow-hidden" style="position: absolute; top:0; right:0; left:0; bottom:0; line-height1;">
         <nav class="navbar navbar-dark bg-dark d-sm-flex d-md-none">
             <button class="navbar-toggler" type="button" onclick="toggleNav()">
                 <span class="navbar-toggler-icon"></span>
@@ -201,7 +205,19 @@
         </nav>
 
         <div id="wiki" class="h-100 d-flex overflow-hidden">
-            <div id="wiki-menu" class="wiki-menu-visible"></div>
+            <div id="wiki-menu" class="d-flex flex-column overflow-hidden wiki-menu-visible">
+
+                <div class="input-group">
+                    <input id="wiki-menu-search" type="text" class="form-control" placeholder="Search" oninput="menu_render()">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="menu_filter_remove()">X</button>
+                    </div>
+                </div>
+
+
+                <div id="wiki-menu-content" class="h-100"></div>
+            </div>
+
             <div id="wiki-body" class="scrollable-y w-100 overflow-auto"></div>
 
             <div id="wiki-mask" class="h-100 w-100 d-flex justify-content-center align-items-center" style="position: absolute;background-color: rgba(0,0,0,0.5);visibility:hidden">
@@ -231,19 +247,74 @@
     <script src="/resources/js/prism.js"></script>
     <script src="/resources/js/site.js"></script>
     <script>
-        String.prototype.replaceAll = function (search, replacement) {
-            var target = this;
-            return target.replace(new RegExp(search, 'g'), replacement);
+        String.prototype.replaceAll = function (search, replacement, caseInsensitive) {
+            return this.replace(new RegExp(search, "g" + (caseInsensitive ? "i" : "")), replacement);
         };
-        function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
+        String.prototype.contains = function (search, caseInsensitive) {
+            //if (search === "") return true
+            return this.match(new RegExp(search, "g" + (caseInsensitive ? "i" : ""))) != null;
+        };
+        util = {
+            url_parse: function (url) {
+                // $ = current docs path
+                //
+                // $/docs/test.html
+                if (!url) return "";
+                return url.replace("$", wiki_ver.docs_path).replace("\\", "/").replace("//", "/")
+            },
+            url_path: function (url) {
+                var p = util.url_parse(url).split("/");
+                p.pop();    // remove last part
+                return p.join("/");
+            },
+            url_queryString: function (name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, '\\$&');
+                var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            },
+            ajax_get_sync_data: {},
+            ajax_get_sync: function (url, fromCache) {
+                if (!url) return "";
+
+                url = util.url_parse(url);
+
+                //-- disabling caching on localhost
+                if (!fromCache || location.hostname.toLowerCase() === "localhost") {
+                    util.ajax_get_sync_data[url] = null
+                }
+
+                if (!util.ajax_get_sync_data[url]) {
+                    util.ajax_get_sync_data[url] = "";
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        async: false,
+                        success: function (data) {
+                            util.ajax_get_sync_data[url] = data;
+                        }
+                    });
+                }
+                return util.ajax_get_sync_data[url];
+            },
+            highlight: function (str, search, caseInsensitive, replaceAll) {
+                var _ra = (replaceAll ? "g" : "");
+                var _ci = (caseInsensitive ? "i" : "");
+                var parts = {};
+                str.match(new RegExp(search, _ra + _ci)).forEach(function (itm) {
+                    if (parts[itm] === undefined) {
+                        parts[itm] = 1;
+                        str = str.replace(new RegExp(itm, _ra), "<hl>" + itm + "</hl>");
+                    }
+                });
+                return str;
+            }
+        };
+
+
         function getItemByIndex(o, i) {
             if (i < 0) return null;
             for (var prop in o) {
@@ -252,33 +323,11 @@
             }
             return null;
         }
-        var requested_data = {};
-        function getSyncWithCached(url) {
-            if (!url) return "";
-
-            url = load_page_url_parse(url);
-
-            //-- disabling caching on localhost
-            if (location.hostname.toLowerCase() === "localhost") {
-                requested_data[url]=null
-            }
-
-            if (!requested_data[url]) {
-                requested_data[url] = "";
-                $.ajax({
-                    url: url,
-                    type: "GET",
-                    async: false,
-                    success: function (data) {
-                        requested_data[url] = data;
-                    }
-                });
-            }
-            return requested_data[url];
-        }
 
         //-- location is being determining...
-        var _wiki_menu = $("#wiki-menu");
+        var _wiki_menu_panel = $("#wiki-menu");
+        var _wiki_menu_search = $("#wiki-menu-search");
+        var _wiki_menu_content = $("#wiki-menu-content");
         var _wiki_body = $("#wiki-body");
         var _wiki_mask = $("#wiki-mask");
 
@@ -286,7 +335,7 @@
         //-- VERSION
         var _wiki_vers = ["1.5.0", "1.4.0"];
         var wiki_ver = {};
-        wiki_ver.number = getParameterByName("v") || _wiki_vers[0];
+        wiki_ver.number = util.url_queryString("v") || _wiki_vers[0];
         wiki_ver.root_path = "/v/" + wiki_ver.number + "/";
         wiki_ver.docs_path = wiki_ver.root_path + "docs/";
 
@@ -307,13 +356,13 @@
         //-------------------------------------------------------------------------------------
         //-- SIDE-NAV
         function openNav() {
-            _wiki_menu.removeClass("wiki-menu-hidden")
+            _wiki_menu_panel.removeClass("wiki-menu-hidden")
         }
         function closeNav() {
-            _wiki_menu.addClass("wiki-menu-hidden")
+            _wiki_menu_panel.addClass("wiki-menu-hidden")
         }
         function toggleNav() {
-            if (_wiki_menu.css("display") === "none") {
+            if (_wiki_menu_panel.css("display") === "none") {
                 openNav();
             } else {
                 closeNav();
@@ -323,70 +372,110 @@
         //-- MENU
         var _menu_groups;
         var _menu_home;
-        var _menu = [];
         //function menu_click(obj) {
         //    window.location.hash = '##' + $(obj).data()["hash"];
         //}
         //-------------------------------------------------------------------------------------
-        $(window).on('popstate', function (e) {
-            load_page();    // on url-hash-change...
-        });
         function is_small() {
             return $("#is_small").css("display") === "none";
         }
-        function load_menu() {
+        function menu_load() {
             $.get(wiki_ver.root_path + "menu.json", function (data) {
                 _menu_home = data.home
                 _menu_groups = data.items;
 
                 for (var g in _menu_groups) {
                     var _menu_group = _menu_groups[g];
-                    _menu_group.path = load_page_url_parse(wiki_ver.docs_path + _menu_group.path + "/")
-                    if (_menu_group.before) _menu_group.before = load_page_url_parse(_menu_group.path + _menu_group.before + ".html");
-                    if (_menu_group.after) _menu_group.after = load_page_url_parse(_menu_group.path + _menu_group.after + ".html");
+                    _menu_group.path = util.url_parse(wiki_ver.docs_path + _menu_group.path + "/")
+                    if (_menu_group.before) _menu_group.before = util.url_parse(_menu_group.path + _menu_group.before + ".html");
+                    if (_menu_group.after) _menu_group.after = util.url_parse(_menu_group.path + _menu_group.after + ".html");
 
-                    _menu.push('<p class="mt-4 mb-1"><strong>' + _menu_group.title + '</strong></p>');
                     for (var i in _menu_group.items) {
-                        _menu_group.items[i] = { url: load_page_url_parse(_menu_group.path + i + ".html"), text: _menu_group.items[i] };
-
-                        item = _menu_group.items[i];
-                        if (i.startsWith('-')) {
-                            _menu.push('<x>' + item.text + '</x>');
-                        } else {
-                            _menu.push('<a href="##' + g + "--" + i + '">' + item.text + '</a>');
-                        }
+                        _menu_group.items[i] = {
+                            url: util.url_parse(_menu_group.path + i + ".html"),
+                            text: _menu_group.items[i]
+                        };
                     }
                 }
-                // menu is being rendered...
-                _wiki_menu.html(_menu.join(''));
+                menu_render();
 
-                load_page();
             }).fail(function () {
                 console.log("Menu file is not found. (" + wiki_ver.root_path + "menu.json)");
             });
 
         }
+        function menu_render() {
+            var _filter = _wiki_menu_search.val()
 
+            var _menu = [];
+            for (var g in _menu_groups) {
+                var _menu_group = _menu_groups[g];
+
+                var _grp_items = [];
+                for (var i in _menu_group.items) {
+                    var t = _menu_group.items[i].text;
+
+                    if (_filter) {
+                        if (t.contains(_filter, true)) {
+                            t = util.highlight(t, _filter, true);
+                        } else {
+                            continue;
+                        }
+                    }
+
+                    if (i.startsWith('-')) {
+                        _grp_items.push('<x>' + t + '</x>');
+                    } else {
+                        _grp_items.push('<a href="##' + g + "--" + i + '">' + t + '</a>');
+                    }
+                }
+                if (_grp_items.length > 0) {
+                    _menu.push('<p class="mt-4 mb-1"><strong>' + _menu_group.title + '</strong></p>');
+                    _menu = _menu.concat(_grp_items);
+                }
+            }
+            // menu is being rendered...
+            _wiki_menu_content.html(_menu.join(''));
+        }
+        function menu_filter_remove() {
+            _wiki_menu_search.val("");
+            menu_render();
+            menu_selectItem();
+        }
+        function menu_selectItem(hash_url) {
+            if (!hash_url) hash_url = window.location.hash.replace("##", "");
+            if (hash_url === "") hash_url = _menu_home;
+
+            _wiki_menu_content.find("a").removeClass("wiki-menu-active");
+            var _link = _wiki_menu_content.find('a[href="##' + hash_url + '"]');
+            if (_link.length > 0) {
+                _link.addClass("wiki-menu-active");
+
+                _link[0].scrollIntoViewIfNeeded(true)
+/*
+                //-- scroll-into-view
+                var _lnk_top = _link.offset().top;
+                var _lnk_hei = _link.outerHeight();
+
+
+                (_lnk_top + _lnk_hei)
+
+                var _top = _wiki_menu_content.scrollTop();
+                var _hei = _wiki_menu_content.innerHeight();
+                if (((_top + _hei) < _offset.top)) {
+                    _wiki_menu_content[0].scrollTop = _offset.top - (_hei / 2);
+                    // _link[0].scrollIntoView();
+                    // _wiki_menu_content[0].scrollTop -= 10;
+                }
+                */
+            }
+            return hash_url;
+        }
+        //-------------------------------------------------------------------------------------
         function load_page() {
             maskShow();
             setTimeout(function () {
-                var _file = window.location.hash.replace("##", "");
-                if (_file === "") _file = _menu_home;
-
-                //-- set active-class for selected-menu-item
-                $("#wiki > #wiki-menu a").removeClass("wiki-menu-active");
-                var _link = $('#wiki > #wiki-menu a[href="##' + _file + '"]');
-                if (_link.length > 0) {
-                    _link.addClass("wiki-menu-active");
-                    //-- scroll-into-view
-                    var _offset = _link.offset();
-                    var _top = _wiki_menu.scrollTop();
-                    var _hei = _wiki_menu.innerHeight();
-                    if (((_top + _hei) < _offset.top)) {
-                        _link[0].scrollIntoView();
-                        _wiki_menu[0].scrollTop -= 10;
-                    }
-                }
+                var _file = menu_selectItem();
 
                 //-- title
                 var _title = "";
@@ -399,11 +488,11 @@
                 if (!_menu_group.path) _menu_group.path = "";
 
                 //-- content
-                var _content = getSyncWithCached(_menu_item.url);
+                var _content = util.ajax_get_sync(_menu_item.url, true);
                 if (!_content) {
                     _content = '<co type="danger"><div style="text-align: center;font-size:2em;color: #f55151;">!!! Content Not Found !!!</div><div class="text-muted text-center">' + _menu_item.url + '</div></co>';
                 } else {
-                    _content = getSyncWithCached(_menu_group.before) + _content + getSyncWithCached(_menu_group.after)
+                    _content = util.ajax_get_sync(_menu_group.before, true) + _content + util.ajax_get_sync(_menu_group.after, true)
                 }
 
                 //  var _regex_cod = "/<\s*code(?:\s[^>]*|)>(.*?)<\s*\/\s*code>/gmis";
@@ -425,7 +514,7 @@
                 //      } else {
                 //          //-- The CODE block, is taken with its attributes such as  (lang="", data-xyz="" etc.)
                 //          _code_block_inx += 1;
-                //          data += _code_blocks[_code_block_inx] + block.replace(_regex_cod_bgn, "").replace(_regex_cod_end, "").replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "</code>"
+                //          data += _code_blocks[_code_block_inx] + block.replaceAll(_regex_cod_bgn, "").replaceAll(_regex_cod_end, "").replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "</code>"
                 //      }
                 //  });
                 _wiki_body.html(_title + _content + '<small class="copyright">' + site.copyright + '</small>');
@@ -441,23 +530,12 @@
         }
         //-- Rendering
 
-        function load_page_url_parse(url) {
-            // $ = current docs path
-            //
-            // $/docs/test.html
-            if (!url) return "";
-            return url.replace("$", wiki_ver.docs_path).replace("\\", "/").replace("//", "/")
-        }
-        function load_page_url2path(url) {
-            var p = load_page_url_parse(url).split("/");
-            p.pop();    // remove last part
-            return p.join("/");
-        }
+
         function load_page_include_sync(done) {
             var _included = 0;
             _wiki_body.find("include").each(function (inx, itm) {
                 var _obj = $(itm);
-                var data = getSyncWithCached(_obj.attr("src"));
+                var data = util.ajax_get_sync(_obj.attr("src"), true);
                 _obj.replaceWith(data);
                 _included = 1;
             });
@@ -466,10 +544,6 @@
         }
 
         function load_page_render() {
-            $("table").addClass("table table-striped table-bordered");
-            $("table>thead").addClass("thead-dark");
-            $("table th").addClass("thead-dark");
-
             load_page_code_render();
             load_page_code_render_tab();
             load_page_render_EW();
@@ -576,7 +650,7 @@
         //-- Example-Warning
         function load_page_render_EW() {
             while (true) {
-                var _items = $("#wiki-body ew");
+                var _items = _wiki_body.find("ew");
                 if (_items.length == 0) return;
 
                 var _item = $(_items[0]);
@@ -588,7 +662,7 @@
         //-- SubTitle
         function load_page_render_ST() {
             while (true) {
-                var _items = $("#wiki-body st");
+                var _items = _wiki_body.find("st");
                 if (_items.length == 0) return;
 
                 var _item = $(_items[0]);
@@ -600,7 +674,7 @@
         //-- Callout
         function load_page_render_CO() {
             while (true) {
-                var _items = $("#wiki-body co");
+                var _items = _wiki_body.find("co");
                 if (_items.length == 0) return;
 
                 var _item = $(_items[0]);
@@ -628,13 +702,18 @@
         //-------------------------------------------------------------------------------------
 
         $(function () {
+            $(window).on('popstate', function (e) {
+                load_page();    // on url-hash-change...
+            });
+
             $.ajaxSetup({
                 // Disable caching of AJAX responses
                 cache: false
             });
 
             if (is_small()) closeNav();
-            load_menu();
+            menu_load();
+            load_page();
 
             //-- Masked IFrame workaround - FavIcon
             var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
