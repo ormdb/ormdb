@@ -10,36 +10,20 @@ var l = new TableLines();
 
 
 // ------------------------------------------------------
-/* REGULAR update 
-
-	UPDATE	h 
-	SET		h.Note = 'new note',
-			h.IsActive = NOT h.IsActive,
-			h.DocDate = 20180914
-	FROM	TableHeader AS h
-	WHERE	h.Id = 9999
-*/
+// -- REGULAR update
 var sql = SQL.X.Update().Where(h.Id == 9999);
 
     var row = sql.Set(h.NewModel());
         row.Note = "new note";
         row.DocDate = DateTime.Now();
 
-sql.Execute(cn);
+sql.ExecuteNonQuery(cn);
 
 
 
 // ------------------------------------------------------
-/* JOIN Update : Updates the header records which contain 
-				 DocumentLine that is greather than 3 in lines-table.
-
-	UPDATE		h 
-	SET			h.Note = 'new note',
-				h.IsActive = NOT h.IsActive
-	FROM		TableHeader AS h
-	LEFT JOIN	TableLines  AS l ON l.Year = h.Year AND l.Id = h.Id
-	WHERE		l.LineId > 3
-*/
+// -- JOIN Update : Updates the header records which contain 
+// --               DocumentLine that is greather than 3 in lines-table.
 var sql = SQL.X.Update().Where(l.LineId > 3)
 			   .InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
 
@@ -47,23 +31,12 @@ var sql = SQL.X.Update().Where(l.LineId > 3)
         row.Note = "new note";
         row.DocDate = DateTime.Now();
 
-sql.Execute(cn);
+sql.ExecuteNonQuery(cn);
 
 
 
 // ------------------------------------------------------
-/* BATCH Update
-
-	UPDATE	h 
-	SET		h.Note = 'new note',
-	FROM	TableHeader AS h
-	WHERE	h.Id = 9999;
-
-	UPDATE	l 
-	SET		l.Note = 'new note',
-	FROM	TableLines AS l
-	WHERE	l.Id = 9999;
-*/
+// -- BATCH Update
 var sql = SQL.X.Query;
 
     var r1 = sql.Update.Where(h.Id == 9999).Set(h.NewModel());
@@ -72,4 +45,4 @@ var sql = SQL.X.Query;
     var r2 = sql.Update.Where(l.Id == 9999).Set(l.NewModel());
         r2.Note = "new note";
 
-sql.Execute(cn);
+sql.ExecuteNonQuery(cn);

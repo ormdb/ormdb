@@ -10,25 +10,14 @@ var l = new TableLines();
 
 
 // ------------------------------------------------------
-/* REGULAR delete 
-
-	DELETE	h 
-	FROM	TableHeader AS h
-	WHERE	h.Id = 9999
-*/
+// -- REGULAR delete
 SQL.X.Delete(h).Where(h.Id == 9999).Execute(cn);
 
 
 
 // ------------------------------------------------------
-/* JOIN Delete : Deletes the header records which contain 
-				 DocumentLine that is greather than 3 in lines-table.
-
-	DELETE		h 
-	FROM		TableHeader AS h
-	LEFT JOIN	TableLines  AS l ON l.Year = h.Year AND l.Id = h.Id
-	WHERE		l.LineId > 3
-*/
+// -- JOIN Delete : Deletes the header records which contain 
+// -- 			    DocumentLine that is greather than 3 in lines-table.
 SQL.X.Delete(h).Where(l.LineId > 3)
 	 .InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) )
 	 .Execute(cn);
@@ -36,16 +25,7 @@ SQL.X.Delete(h).Where(l.LineId > 3)
 
 
 // ------------------------------------------------------
-/* BATCH Delete
-
-	DELETE	h 
-	FROM	TableHeader AS h
-	WHERE	h.Id = 9999;
-
-	DELETE	l 
-	FROM	TableLines AS l
-	WHERE	l.Id = 9999 AND l.Year < 2018;
-*/
+// -- BATCH Delete
 var sql = SQL.X.Query;
 
     sql.Delete(h, h.Id == 9999);

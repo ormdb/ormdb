@@ -16,10 +16,8 @@ var sql = SQL.X.Select().From(h, h.Year > 2018)
                           .Top(10)
                           .OrderBy( h.Year, h.Id.DESC() ) ;
 
-    // reading data
-    foreach (var r in sql.ExecuteReader(cn)) {
-
-            Debug.WriteLine("Note={0}, Date={1}",
-                              r(h.Note).toString(),
-                              r(h.DocDate).ToDateTime());
-     }
+// reading data
+var result = cmd.ExecuteReader(cn).Select(x => new {
+        Note = x(h.Note).ToString(),
+        DocDate = x(h.DocDate).ToDateTime()
+    }).ToList();

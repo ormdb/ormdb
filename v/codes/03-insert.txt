@@ -10,12 +10,7 @@ var l = new TableLines();
 
 
 // ------------------------------------------------------
-/* MULTI ROW insert
-
-	INSERT INTO TableHeader AS h (fields...) VALUES (...);
-	INSERT INTO TableHeader AS h (fields...) VALUES (...);
-	... -> 100
-*/
+// --MULTI ROW insert
 var sql = SQL.X.Insert(SetInitials:true);
 
 for (n = 1; (n <= 100); n++) {
@@ -26,20 +21,12 @@ for (n = 1; (n <= 100); n++) {
     sql.AddRow(_model);
 }
 
-sql.Execute(cn);
+sql.ExecuteNonQuery(cn);
 
 
 
 // ------------------------------------------------------
-/* BATCH TABLE insert
-
-	INSERT INTO TableHeader AS h (fields...) VALUES (...);
-	INSERT INTO TableHeader AS h (fields...) VALUES (...);
-	... -> 100
-
-	INSERT INTO TableLines  AS l (fields...) VALUES (...);
-	... -> 200 (= 100 x 2)
-*/
+// -- BATCH TABLE insert
 var sql = SQL.X.Insert(SetInitials:true);
 
 for (n = 1; (n <= 100); n++) {
@@ -56,4 +43,4 @@ for (n = 1; (n <= 100); n++) {
 	}
 }
 
-sql.Execute(cn);
+sql.ExecuteNonQuery(cn);
