@@ -25,28 +25,26 @@ Please refer to <a href="##CON--CON-Provider">Provider</a> for further informati
 </code-tab>
 
 <st>Parameters</st>
-<div class="table-responsive">
-    <table>
-        <thead>
-            <tr>
-                <th>Parameters</th>
-                <th>Description</th>
-            </tr>
-        </thead>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
         <tr>
-            <td><b>AutoStartTrans</b></td>
-            <td>Optional. Every sql are executed in transaction as automatically. Transactions are initialized again automatically after COMMIT or ROLLBACK commands.</td>
+            <th>Parameters</th>
+            <th>Description</th>
         </tr>
-        <tr>
-            <td><b>AutoConnect</b></td>
-            <td>Optional. Connection is opened automatically on first sql execution.</td>
-        </tr>
-        <tr>
-            <td><b>SchemaPrefix</b></td>
-            <td>Optional. is used for making group the tables in database. If it is specified then the prefix appends for every tables before sql execution</td>
-        </tr>
-    </table>
-</div>
+    </thead>
+    <tr>
+        <td><b>AutoStartTrans</b></td>
+        <td>Optional. Every sql are executed in transaction as automatically. Transactions are initialized again automatically after COMMIT or ROLLBACK commands.</td>
+    </tr>
+    <tr>
+        <td><b>AutoConnect</b></td>
+        <td>Optional. Connection is opened automatically on first sql execution.</td>
+    </tr>
+    <tr>
+        <td><b>SchemaPrefix</b></td>
+        <td>Optional. is used for making group the tables in database. If it is specified then the prefix appends for every tables before sql execution</td>
+    </tr>
+</table>
 
 
 <st>Examples</st>
