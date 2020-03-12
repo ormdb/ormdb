@@ -251,7 +251,6 @@
             return this.replace(new RegExp(search, "g" + (caseInsensitive ? "i" : "")), replacement);
         };
         String.prototype.contains = function (search, caseInsensitive) {
-            //if (search === "") return true
             return this.match(new RegExp(search, "g" + (caseInsensitive ? "i" : ""))) != null;
         };
         util = {
