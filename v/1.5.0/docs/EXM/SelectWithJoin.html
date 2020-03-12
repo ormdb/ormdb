@@ -1,20 +1,32 @@
 ﻿Following section demonstrates using <hl>JOIN</hl> clause.
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
+        // SQL is being initialized...
         var sql = SQL.X.Select();
             sql.From(h);
             sql.LeftJoin(l, l.Year == h.Year &
                             l.Id == h.Id );
             sql.Where(  h.Year.In( new[] {2018, 2019} ) & 
                         h.Id.IsNotNull() );
+        
+        // Records are being fetched row by row...
+        foreach (var row in sql.ExecuteReader(cn)) {
+        	// row(0).ToString();
+        }
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
+        ' SQL is being initialized...
         Dim sql = SQL.X.Select()
             sql.From(h)
             sql.LeftJoin(l, l.Year = h.Year And 
                             l.Id = h.Id )
             sql.Where(  h.Year.In( {2018, 2019} ) And
                         h.Id.IsNotNull() )
+        
+        ' Records are being fetched row by row...
+        For Each row In cn.ExecuteReader(sql)
+        	' row(0).ToString();
+        Next
 	</pre>
 </code-tab>
 <o>

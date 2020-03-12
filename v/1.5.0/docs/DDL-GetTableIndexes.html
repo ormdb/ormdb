@@ -2,31 +2,31 @@
 
 <st>Definition</st>
 <co type="light">
-    <small><b>Namespace : </b>Odb.Providers.IProvider</small>
+	<small><b>Namespace : </b>Odb.Providers.IProvider</small>
 </co>
 <code-tab>
-    <pre lang="c#">
+	<pre lang="c#">
 		public List&lt;SchemaIndexInfo&gt; GeTableIndexes(string TableName)
 	</pre>
-    <pre lang="vb">
+	<pre lang="vb">
 		Public Function GeTableIndexes(TableName As String) As List(Of SchemaIndexInfo)
 	</pre>
 </code-tab>
 
 <st>Return</st>
 <table class="table table-bordered table-striped">
-    <thead class="thead-dark">
-        <tr>
-            <th>SchemaIndexInfo</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tr><td>Name              </td><td>Name of the index.         </td></tr>
-    <tr><td>IsPrimary         </td><td>Is primary key index.      </td></tr>
-    <tr><td>IsUnique          </td><td>Is index unique.           </td></tr>
-    <tr><td>IsClustered       </td><td>Is index clustered.        </td></tr>
-    <tr><td>IsUniqueConstraint</td><td>Is index unique-constraint.</td></tr>
-    <tr><td>Columns           </td><td>Columns of the index.      </td></tr>
+	<thead class="thead-dark">
+		<tr>
+			<th>SchemaIndexInfo</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tr><td>Name              </td><td>Name of the index.         </td></tr>
+	<tr><td>IsPrimary         </td><td>Is primary key index.      </td></tr>
+	<tr><td>IsUnique          </td><td>Is index unique.           </td></tr>
+	<tr><td>IsClustered       </td><td>Is index clustered.        </td></tr>
+	<tr><td>IsUniqueConstraint</td><td>Is index unique-constraint.</td></tr>
+	<tr><td>Columns           </td><td>Columns of the index.      </td></tr>
 </table>
 
 <st>Examples</st>
@@ -34,9 +34,9 @@
 <br />
 <br />
 
-Following section demonstrates reading the indexes of table <b>by its instance</b>.
+Following section demonstrates reading the indexes of table <b>by its name</b>.
 <code-tab>
-    <pre lang="c#">
+	<pre lang="c#">
 		foreach (var index in cn.Provider.GeTableIndexes("table_name")){
 
 			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
@@ -49,7 +49,7 @@ Following section demonstrates reading the indexes of table <b>by its instance</
 			}
 		}
 	</pre>
-    <pre lang="vb">
+	<pre lang="vb">
 		For Each index In cn.Provider.GeTableIndexes("table_name")
 
 			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
@@ -65,15 +65,14 @@ Following section demonstrates reading the indexes of table <b>by its instance</
 </code-tab>
 
 <br />
-
-    Following section demonstrates reading the indexes of table <b>by its name</b>.
+Following section demonstrates reading the indexes of table <b>by its instance</b>.
 <code-tab>
-    <pre lang="c#">
+	<pre lang="c#">
 		foreach (var index in h.GetIndexes()) {
 			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
 		}
 	</pre>
-    <pre lang="vb">
+	<pre lang="vb">
 		For Each index In h.GetIndexes()
 			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
 		Next

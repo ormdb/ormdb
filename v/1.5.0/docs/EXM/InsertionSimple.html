@@ -1,6 +1,7 @@
-﻿Following section demonstrates <b>single table insertion</b>. DocDate is accepted as <k>Date.MinValue</k>.
+﻿Following section demonstrates <b>single table insertion</b>.
 <code-tab>
 	<pre lang="c#">
+		// QUERY is being initialized...
 		var _insert = SQL.X.Insert(true);
 
 		for (n = 1; (n <= 100); n++) {
@@ -10,20 +11,25 @@
 				row.Note = String.Concat("Note -", n.toString());
 				// row.DocDate = DateTime.Now();
 		}
-		sql.Execute(cn);
+
+		// QUERY is being executed...
+		sql.ExecuteNonQuery(cn)
 	</pre>
 	<pre lang="vb">
-		With SQL.X.Insert(True)
-			For n = 1 To 100
-				With sql.AddRow(h.NewModel())
-					.Year = 2017
-					.Id = n
-					.Note = String.Concat("Note -", n.toString())
-					' .DocDate = DateTime.Now()
-				End With
-			Next
-			.Execute(cn)
-		End With
+		' QUERY is being initialized...
+		Dim sql = SQL.X.Insert(True)
+
+		For n = 1 To 100
+			With sql.AddRow(h.NewModel())
+				.Year = 2017
+				.Id = n
+				.Note = String.Concat("Note -", n.toString())
+				' .DocDate = DateTime.Now()
+			End With
+		Next
+
+		' QUERY is being executed...
+		sql.ExecuteNonQuery(cn)
 	</pre>
 </code-tab>
 <o>

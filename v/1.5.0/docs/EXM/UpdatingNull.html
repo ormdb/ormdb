@@ -1,12 +1,20 @@
 ﻿Following section demonstrates to use <b>Null</b> for setting value, and filtering record(s).
 <code-tab>
 	<pre lang="c#">
+		// QUERY is being initialized...
 		var _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel());
 			_row.str = System.DbNull;
+
+		// SQL is being executed...
+		sql.ExecuteNonQuery(cn);
 	</pre>
 	<pre lang="vb">
+		' QUERY is being initialized...
 		Dim _row = SQL.X.Update(h, h.str.IsNotNull()).Set(h.NewModel())
 			_row.str = System.DbNull
+
+		' QUERY is being executed...
+		sql.ExecuteNonQuery(cn)
 	</pre>
 </code-tab>
 <o>

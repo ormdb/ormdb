@@ -1,0 +1,94 @@
+﻿<co type="warning">
+    Some columns need to be inserted/updated with their default/initial values. Specify <k>SetInitials</k> parameter as <k>true</k> for setting columns with their initial-value. This parameter is <k>false</k> by default.
+</co>
+
+<br />
+Rules are shown below for determining the value for updating or inserting processes.
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th width="150">Value</th>
+            <th>Rule</th>
+            <th width="150">Result</th>
+        </tr>
+    </thead>
+    <tr>
+        <td><b>Null/Nothing</b></td>
+        <td>
+            <h5>{</h5>
+            <div class="list-group pl-4">
+                <div class="my-2">
+                    <b>1 - Column Default Value (CDV) : </b>
+                </div>
+                <div class="pl-3">
+                    If the value is <k>"Null or Nothing"</k> and especially <b>CDV</b> was specified on column definition; then <b>CDV</b> is accepted.
+                </div>
+
+                <div class="my-2">
+                    <b>2 - Column Initial Value (CIV) : </b>
+                </div>
+                <div class="pl-3">
+                    If the value and <b>CDV</b> are <k>"Null or Nothing"</k> and <b>SetInitial</b> was specified as <k>true</k> on insert or update processes; then <b>CIV</b> is accepted.
+                    <br /><br />
+                    <b>Column Initial Values</b><br />
+                    <h5>{</h5>
+                    <div class="list-group pl-4">
+                        <div class="mt-0">
+                            <b>ColumnString : </b>String.Empty
+                        </div>
+
+                        <div class="mt-2">
+                            <b>ColumnNumeric : </b>0 (Zero)
+                        </div>
+
+                        <div class="mt-2">
+                            <b>ColumnBoolean : </b>false
+                        </div>
+
+                        <div class="mt-2">
+                            <b>ColumnBinary : </b>Array.Empty
+                        </div>
+
+                        <div class="mt-2">
+                            <b>ColumnTime : </b>TimeSpan.Zero
+                        </div>
+
+                        <div class="mt-2">
+                            <b>ColumnDate : </b>Date.MinValue.Date
+                        </div>
+
+                        <div class="mt-2">
+                            <b>ColumnDateTime : </b>Date.MinValue
+                        </div>
+                    </div>
+                    <h5>}</h5>
+
+                </div>
+
+                <div class="my-2">
+                    <b>3 - DbNull : </b>
+                </div>
+                <div class="pl-3">
+                    If the value and <b>CDV</b> and <b>CIV</b> are <k>"Null or Nothing"</k>; then <b>DbNull</b> is accepted.
+                </div>
+            </div>
+            <h5>}</h5>
+        </td>
+        <td><b>CDV</b>, <b>CIV</b> or <b>DbNull</b></td>
+    </tr>
+    <tr>
+        <td><b>DbNull</b></td>
+        <td>
+            If <k>NULL</k> value will be used especially on insert or update processes; then <b>DbNull</b> value has to be specified.
+        </td>
+        <td><b>DbNull</b></td>
+    </tr>
+
+    <tr>
+        <td><b>Other</b></td>
+        <td>
+            All values except <k>"Null/Nothing"</k> and <k>"DbNull"</k>. Value is accepted as is.
+        </td>
+        <td><b>As Is</b></td>
+    </tr>
+</table>

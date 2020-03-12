@@ -20,10 +20,10 @@ Following section demonstrates <b>deletion with chunks</b>.
             var _items = _ids.Skip(_index).Take(_chunk_size);
             if (_items.Count == 0) break;
 
-            sql.Delete(h, h.Id.In(_items));  // headers are being deleted
-            sql.Delete(l, l.Id.In(_items));  // lines are being deleted
-            sql.Execute(cn);
-            sql.Clear();
+            sql.Delete(h, h.Id.In(_items)); // command are being queued
+            sql.Delete(l, l.Id.In(_items)); // command are being queued
+            sql.Execute(cn);                // QUERY is being executed
+            sql.Clear();                    // buffer is being clear
 
             _index += _chunk_size;
         }
@@ -43,10 +43,10 @@ Following section demonstrates <b>deletion with chunks</b>.
             Dim _items = _ids.Skip(_index).Take(_chunk_size)
             If (_items.Count = 0) Exit Do
 
-            sql.Delete(h, h.Id.In(_items))  ' headers are being deleted
-            sql.Delete(l, l.Id.In(_items))  ' lines are being deleted
-            sql.Execute(cn)
-            sql.Clear()
+            sql.Delete(h, h.Id.In(_items))  ' command are being queued
+            sql.Delete(l, l.Id.In(_items))  ' command are being queued
+            sql.Execute(cn)                 ' QUERY is being executed
+            sql.Clear()                     ' buffer is being clear
 
             _index += _chunk_size
         Loop

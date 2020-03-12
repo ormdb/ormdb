@@ -1,6 +1,7 @@
 ﻿Following section demonstrates using <hl>UNION</hl> clause.
 <code-tab>
 	<pre lang="c#">
+		// SQL is being initialized...
 		var sql = SQL.X.Union();
 			sql.RemoveDuplicates = true;
 
@@ -8,11 +9,13 @@
 			sql.Select().From(h, h.Id == 2000).Top(1).OrderBy(h.DocDate);
 			sql.OrderBy(h.Id);
 
+		// Ids are being fetched by using Linq...
 		var ids = sql.ExecuteReader(cn)
-					 .Select( Function(x) x(h.Id).ToString() )
+					 .Select( x => x(h.Id).ToString() )
 					 .ToList();
 	</pre>
 	<pre lang="vb">
+		' SQL is being initialized...
 		Dim sql = SQL.X.Union();
 			sql.RemoveDuplicates = True
 
@@ -20,6 +23,7 @@
 			sql.Select().From(h, h.Id = 2000).Top(1).OrderBy(h.DocDate)
 			sql.OrderBy(h.Id)
 
+		' Ids are being fetched by using Linq...
 		Dim ids = sql.ExecuteReader(cn) _ 
 					 .Select( Function(x) x(h.Id).ToString() ) _
 					 .ToList()

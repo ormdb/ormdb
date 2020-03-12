@@ -1,14 +1,26 @@
 ﻿Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
 <code-tab>
 	<pre lang="c#">
+		// SQL is being initialized...
 		var sql = SQL.X.Select().From(h)
 					.Skip(5).Top(10)
 					.OrderBy(h.Year);
+
+		// Records are being fetched row by row...
+		foreach (var row in sql.ExecuteReader(cn)) {
+			// row(0).ToString();
+		}
 	</pre>
 	<pre lang="vb">
+		' SQL is being initialized...
 		Dim sql = SQL.X.Select().From(h) _
 					.Skip(5).Top(10) _ 
 					.OrderBy(h.Year)
+
+		' Records are being fetched row by row...
+		For Each row In cn.ExecuteReader(sql)
+			' row(0).ToString();
+		Next
 	</pre>
 </code-tab>
 <co type="warning">

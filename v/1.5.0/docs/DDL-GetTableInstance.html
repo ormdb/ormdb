@@ -26,11 +26,19 @@
 Following section demonstrates generating the instance of the table.
 <code-tab>
 	<pre lang="c#">
+		// new instance of a table from definition
+		var t1 = new TableHeader();
+
+		// new instance of a table via provider
 		var tb1 = cn.Provider.GetTableInstance&lt;TableHeader&gt;();
 		var tb2 = cn.Provider.GetTableInstance(typeof(TableHeader)());
 		var tb3 = cn.Provider.GetTableInstance("TableHeader");
 	</pre>
 	<pre lang="vb">
+		' new instance of a table from definition
+		Dim t1 = new TableHeader()
+		
+		' new instance of a table via provider
 		Dim tb1 = cn.Provider.GetTableInstance(Of TableHeader()
 		Dim tb2 = cn.Provider.GetTableInstance(GetType(TableHeader))
 		Dim tb3 = cn.Provider.GetTableInstance("TableHeader")
@@ -61,11 +69,6 @@ Following section demonstrates reading the informations from table-instance.
 		}
 	</pre>
 	<pre lang="vb">
-		' Reading table columns...
-		For Each col In tb.GetColumns()
-			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}")
-		Next
-
 		' Reading table indexes...
 		For Each index In tb.GetIndexes()
 

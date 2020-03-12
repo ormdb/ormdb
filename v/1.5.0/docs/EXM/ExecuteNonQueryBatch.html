@@ -1,6 +1,7 @@
 ﻿Following section demonstrates how to execute multiple sql commands in one batch-query.
 <code-tab>
 	<pre lang="c#">
+		// Batch-SQL is being initialized...
 		var sql = SQL.X.Query();
 
 			// DELETE commands are being queued...
@@ -28,6 +29,7 @@
 		sql.ExecuteNonQuery(cn);
 	</pre>
 	<pre lang="vb">
+		' Batch-SQL is being initialized...
 		With  SQL.X.Query()
 
 			' DELETE commands are being queued...

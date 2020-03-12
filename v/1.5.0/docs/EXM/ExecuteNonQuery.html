@@ -1,8 +1,6 @@
-﻿Following section demonstrates how to execute multiple sql commands in one batch-query.
+﻿Following section demonstrates how to execute a sql command.
 <code-tab>
 	<pre lang="c#">
-		using Odb; /* for extensions */
-	
 		// IExecutable
 		var sql = SQL.X.Delete(h, h.Id == 9999);
 		cn.ExecuteNonQuery(sql);	// or sql.ExecuteNonQuery(cn)
@@ -18,8 +16,6 @@
 		cn.ExecuteNonQuery(cmd);	// or cmd.ExecuteNonQuery(cn)
 	</pre>
 	<pre lang="vb">
-		Imports Odb ' for extensions
-
 		' IExecutable
 		Dim sql = SQL.X.Delete(h, h.Id = 9999)
 		cn.ExecuteNonQuery(sql)		' or sql.ExecuteNonQuery(cn)
