@@ -1,20 +1,23 @@
 ﻿Following section demonstrates <b>multiple table insertion</b>.
 <code-tab>
 	<pre lang="c#">
-		// QUERY is being initialized...
+		// new instance of a table from definition
+		var h = new TableHeader();
+		var l = new TableLines();
+		
+		// query is being prepared
 		var sql = SQL.X.Query();
 
 		var _insert = sql.Insert(true);
-
 		for (n = 1; n <= 100; n++) {
 		   var note= String.Concat("Note -", n.ToString());
-
+		
 			var r1 = _insert.AddRow(h.NewModel());
 				r1.Year = 2017;
 				r1.Id = n;
 				r1.Note = note;
 				r1.DocDate = DateTime.Now();
-
+		
 			for (m = 1; m <= 2; m++) {
 				var r2 = _insert.AddRow(l.NewModel());
 					r2.Year = r1.Year;
@@ -23,14 +26,17 @@
 					r2.Note = note;
 			}
 		}
-
-		// QUERY is being executed...
+		
+		// query is being executed
 		sql.ExecuteNonQuery(cn)
 	</pre>
 	<pre lang="vb">
-		' QUERY is being initialized...
-		Dim sql = SQL.X.Query()
+		' new instance of a table from definition
+		Dim h = New TableHeader()
+		Dim l = New TableLines()
 		
+		' query is being prepared
+		Dim sql = SQL.X.Query()
 		With sql.Insert(True)
 			For n = 1 To 100
 			   var note= String.Concat("Note -", n.ToString())
@@ -50,8 +56,8 @@
 				Next
 			Next
 		End With
-
-		' QUERY is being executed...
+		
+		' query is being executed
 		sql.ExecuteNonQuery(cn)
 	</pre>
 </code-tab>

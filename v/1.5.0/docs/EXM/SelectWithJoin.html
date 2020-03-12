@@ -1,7 +1,11 @@
 ﻿Following section demonstrates using <hl>JOIN</hl> clause.
 <code-tab>
     <pre lang="c#">
-        // SQL is being initialized...
+        // new instance of a table from definition
+        var h = new TableHeader();
+        var l = new TableLines();
+        
+        // query is being prepared
         var sql = SQL.X.Select();
             sql.From(h);
             sql.LeftJoin(l, l.Year == h.Year &
@@ -9,13 +13,15 @@
             sql.Where(  h.Year.In( new[] {2018, 2019} ) & 
                         h.Id.IsNotNull() );
         
-        // Records are being fetched row by row...
-        foreach (var row in sql.ExecuteReader(cn)) {
-        	// row(0).ToString();
-        }
+        // Record(s) are being fetched
+        var rows = sql.ExecuteReader(cn);
 	</pre>
     <pre lang="vb">
-        ' SQL is being initialized...
+        ' new instance of a table from definition
+        Dim h = New TableHeader()
+        Dim l = New TableLines()
+        
+        ' query is being prepared
         Dim sql = SQL.X.Select()
             sql.From(h)
             sql.LeftJoin(l, l.Year = h.Year And 
@@ -23,10 +29,8 @@
             sql.Where(  h.Year.In( {2018, 2019} ) And
                         h.Id.IsNotNull() )
         
-        ' Records are being fetched row by row...
-        For Each row In cn.ExecuteReader(sql)
-        	' row(0).ToString();
-        Next
+        ' Record(s) are being fetched
+        Dim rows = sql.ExecuteReader(cn)
 	</pre>
 </code-tab>
 <o>

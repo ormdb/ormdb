@@ -1,7 +1,7 @@
 ﻿Following section demonstrates how to read record(s) with <b>ExecuteReader</b>, using <k>System.Data.Common.DbCommand</k>.
 <code-tab>
     <pre lang="c#">
-        // SQL command is being generated...
+        // DbCommand is being prepared
         var cmd = cn.CreateCommand(" SELECT field1, field2 " + 
                                    " FROM table1 WHERE field1<>@param1;",
                                    new { param1 = 0});
@@ -13,7 +13,7 @@
                                    );
    </pre>
     <pre lang="vb">
-        ' SQL command is being generated...
+        ' DbCommand is being prepared
         Dim cmd = cn.CreateCommand(" SELECT field1, field2 " & 
                                    " FROM table1 WHERE field1<>@param1;",
                                    new { .param1 = 0});

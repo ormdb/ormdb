@@ -1,6 +1,9 @@
 ﻿Following section demonstrates using <hl>GROUP BY</hl> clause.
 <code-tab>
     <pre lang="c#">
+        // new instance of a table from definition
+        var h = new TableHeader();
+        
         // SQL is being initialized...
         var _yr_min = h.Year.MIN().AS("yr_min");
         var _yr_max = h.Year.MAX().AS("yr_max");
@@ -17,6 +20,9 @@
             }).ToList();
 	</pre>
     <pre lang="vb">
+        ' new instance of a table from definition
+        Dim h = New TableHeader()
+        
         ' SQL is being initialized...
         Dim _yr_min = h.Year.MIN().AS("yr_min")
         Dim _yr_max = h.Year.MAX().AS("yr_max")

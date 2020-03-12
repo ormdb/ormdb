@@ -1,33 +1,67 @@
-﻿Following section demonstrates how to execute a sql command.
+﻿Following section demonstrates how to execute the <b>IExecutable</b> command.
 <code-tab>
 	<pre lang="c#">
-		// IExecutable
+		// new instance of a table from definition
+		var h = new TableHeader();
+		
+		// query is being prepared
 		var sql = SQL.X.Delete(h, h.Id == 9999);
-		cn.ExecuteNonQuery(sql);	// or sql.ExecuteNonQuery(cn)
 
-		// TSQL string
-		var str = "DELETE FROM table WHERE field1<>0 AND field2='X'";
-		cn.ExecuteNonQuery(str);
-
-		// DbCommand.
-		var cmd = cn.CreateCommand(
-						"DELETE FROM table WHERE field1<>@p1 AND field2=@p2",
-						new { p1 = 0, p2 = "X"});
-		cn.ExecuteNonQuery(cmd);	// or cmd.ExecuteNonQuery(cn)
+		// query is being executed
+		sql.ExecuteNonQuery(cn);	// or cn.ExecuteNonQuery(sql);
 	</pre>
 	<pre lang="vb">
-		' IExecutable
+		' new instance of a table from definition
+		Dim h = New TableHeader()
+		
+		' query is being prepared
 		Dim sql = SQL.X.Delete(h, h.Id = 9999)
-		cn.ExecuteNonQuery(sql)		' or sql.ExecuteNonQuery(cn)
+		
+		' query is being executed
+		sql.ExecuteNonQuery(cn)		' or cn.ExecuteNonQuery(sql)
+	</pre>
+</code-tab>
+<br />
+<br />
 
-		' TSQL string
+Following section demonstrates how to execute the <b>TSQL</b> command.
+<code-tab>
+	<pre lang="c#">
+		// SQL statement is being prepared
+		var str = "DELETE FROM table WHERE field1<>0 AND field2='X'";
+
+		// query is being executed
+		cn.ExecuteNonQuery(str);
+	</pre>
+	<pre lang="vb">
+		' SQL statement is being prepared
 		Dim str = "DELETE FROM table WHERE field1<>0 AND field2='X'"
-		cn.ExecuteNonQuery(str)
 
-		' DbCommand
+		' query is being executed
+		cn.ExecuteNonQuery(str)
+	</pre>
+</code-tab>
+<br />
+<br />
+
+Following section demonstrates how to execute the <b>DbCommand</b>.
+<code-tab>
+	<pre lang="c#">
+		// DbCommand is being prepared
+		var cmd = cn.CreateCommand(
+					"DELETE FROM table WHERE field1<>@p1 AND field2=@p2",
+					new { p1 = 0, p2 = "X"});
+		
+		// query is being executed
+		sql.ExecuteNonQuery(cmd);	// or cmd.ExecuteNonQuery(sql);
+	</pre>
+	<pre lang="vb">
+		' DbCommand is being prepared
 		Dim cmd = cn.CreateCommand(
-						"DELETE FROM table WHERE field1<>@p1 AND field2=@p2",
-						new { p1 = 0, p2 = "X"})
-		cn.ExecuteNonQuery(cmd)		' or cmd.ExecuteNonQuery(cn)
+					"DELETE FROM table WHERE field1<>@p1 AND field2=@p2",
+					new { p1 = 0, p2 = "X"})
+		
+		' query is being executed
+		sql.ExecuteNonQuery(cmd)	' or cmd.ExecuteNonQuery(sql)
 	</pre>
 </code-tab>

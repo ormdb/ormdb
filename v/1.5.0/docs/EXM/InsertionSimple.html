@@ -1,7 +1,10 @@
 ﻿Following section demonstrates <b>single table insertion</b>.
 <code-tab>
 	<pre lang="c#">
-		// QUERY is being initialized...
+		// new instance of a table from definition
+		var h = new TableHeader();
+		
+		// query is being prepared
 		var _insert = SQL.X.Insert(true);
 
 		for (n = 1; (n <= 100); n++) {
@@ -12,11 +15,14 @@
 				// row.DocDate = DateTime.Now();
 		}
 
-		// QUERY is being executed...
+		// query is being executed
 		sql.ExecuteNonQuery(cn)
 	</pre>
 	<pre lang="vb">
-		' QUERY is being initialized...
+		' new instance of a table from definition
+		Dim h = New TableHeader()
+		
+		' query is being prepared
 		Dim sql = SQL.X.Insert(True)
 
 		For n = 1 To 100
@@ -28,7 +34,7 @@
 			End With
 		Next
 
-		' QUERY is being executed...
+		' query is being executed
 		sql.ExecuteNonQuery(cn)
 	</pre>
 </code-tab>

@@ -6,12 +6,16 @@
 Following section demonstrates <b>deletion with chunks</b>.
 <code-tab>
     <pre lang="c#">
+        // new instance of a table from definition
+        var h = new TableHeader();
+        var l = new TableLines();
+        
         // Ids are being obtained for the records to be deleted...
         var _ids = SQL.X.Select(h.Id)
                     .From(h, h.Year &lt; 2018)
                     .ExecuteReader(cn)
                     .Select(x => x(0).ToString()).ToList();
-
+        
         // records are being deleted in chunks, by supplying record Id information.
         var _index = 0;
         var _chunk_size = 3000;
@@ -19,22 +23,26 @@ Following section demonstrates <b>deletion with chunks</b>.
         do {
             var _items = _ids.Skip(_index).Take(_chunk_size);
             if (_items.Count == 0) break;
-
+        
             sql.Delete(h, h.Id.In(_items)); // command are being queued
             sql.Delete(l, l.Id.In(_items)); // command are being queued
-            sql.Execute(cn);                // QUERY is being executed
+            sql.Execute(cn);                // queries are being executed
             sql.Clear();                    // buffer is being clear
-
+        
             _index += _chunk_size;
         }
 	</pre>
     <pre lang="vb">
+        ' new instance of a table from definition
+        Dim h = New TableHeader()
+        Dim l = New TableLines()
+        
         ' Ids are being obtained for the records to be deleted...
         Dim _ids = SQL.X.Select(h.Id) _
                     .From(h, h.Year &lt; 2018) _
                     .ExecuteReader(cn) _ 
                     .Select(Function(x) x(0).ToString()).ToList()
-
+        
         ' records are being deleted in chunks, by supplying record Id information.
         Dim _index = 0
         Dim _chunk_size = 3000
@@ -42,12 +50,12 @@ Following section demonstrates <b>deletion with chunks</b>.
         Do
             Dim _items = _ids.Skip(_index).Take(_chunk_size)
             If (_items.Count = 0) Exit Do
-
+        
             sql.Delete(h, h.Id.In(_items))  ' command are being queued
             sql.Delete(l, l.Id.In(_items))  ' command are being queued
-            sql.Execute(cn)                 ' QUERY is being executed
+            sql.Execute(cn)                 ' queries are being executed
             sql.Clear()                     ' buffer is being clear
-
+        
             _index += _chunk_size
         Loop
 	</pre>

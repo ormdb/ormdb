@@ -8,9 +8,6 @@ Following section demonstrates initializing the table instance and creation a co
     <pre lang="c#">
         using Odb; /* for extensions */
 
-        private TableHeader h = new TableHeader();
-        private TableLines l = new TableLines();
-
         public void main()
         {
             // connection is being created...
@@ -20,9 +17,6 @@ Following section demonstrates initializing the table instance and creation a co
     <pre lang="vb">
         Imports Odb ' for extensions
 
-        Private h As New TableHeader()
-        Private l As New TableLines()
-    
         Public Sub main()
             ' connection is being created...
             Dim cn = Odb.Connection.Create(Of Providers.MsSql)("Your-ConnectionString")

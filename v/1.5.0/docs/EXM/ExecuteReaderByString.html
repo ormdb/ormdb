@@ -1,7 +1,7 @@
 ﻿Following section demonstrates how to read record(s) with <b>ExecuteReader</b>, using <k>SQL String</k>.
 <code-tab>
     <pre lang="c#">
-        // SQL statement is being generated...
+        // SQL statement is being prepared
         var sql = "SELECT field1, field2 FROM table1 AS h WHERE field3 = 2017";
 
         // Records are being read and converted to dictionary by linq...
@@ -11,7 +11,7 @@
                                    );
 	</pre>
     <pre lang="vb">
-        ' SQL statement is being generated...
+        ' SQL statement is being prepared
         Dim sql = "SELECT field1, field2 FROM table1 AS h WHERE field3 = 2017"
 
         ' Records are being read and converted to dictionary by linq...

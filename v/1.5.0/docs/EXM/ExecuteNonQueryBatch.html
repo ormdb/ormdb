@@ -1,13 +1,17 @@
 ﻿Following section demonstrates how to execute multiple sql commands in one batch-query.
 <code-tab>
 	<pre lang="c#">
-		// Batch-SQL is being initialized...
+		// new instance of a table from definition
+		var h = new TableHeader();
+		var l = new TableLines();
+		
+		// query is being prepared
 		var sql = SQL.X.Query();
-
+		
 			// DELETE commands are being queued...
 			sql.Delete(h);
 			sql.Delete(l);
-
+		
 			// INSERT commands are being queued...
 			var _insert = sql.Insert(true);
 			for (n = 1; n <= 100; n++) {
@@ -18,24 +22,28 @@
 					row.DocDate = DateTime.Now();
 					row.IsActive = true;
 			}
-
+		
 			// UPDATE commands are being queued...
 			var row = h.NewModel();
 				row.Note = "new note";
 				row.DocDate = DateTime.Now();
 			sql.Update(h, h.Id == 5).Set(row);
-
+		
 		// Commands are being executed...
 		sql.ExecuteNonQuery(cn);
 	</pre>
 	<pre lang="vb">
-		' Batch-SQL is being initialized...
+		' new instance of a table from definition
+		Dim h = new TableHeader()
+		Dim l = new TableLines()
+		
+		' query is being prepared
 		With  SQL.X.Query()
-
+		
 			' DELETE commands are being queued...
 			.Delete(h)
 			.Delete(l)
-
+		
 			' INSERT commands are being queued...
 			Dim _insert = .Insert(true);
 			For n=1 to 100
@@ -46,13 +54,13 @@
 					row.DocDate = DateTime.Now()
 					row.IsActive = True
 			End If
-
+		
 			' UPDATE commands are being queued...
 			Dim row = h.NewModel()
 				row.Note = "new note"
 				row.DocDate = DateTime.Now()
 			.Update(h, h.Id = 5).Set(row)
-
+		
 			' Commands are being executed...
 			.ExecuteNonQuery(cn)
 		End With

@@ -1,31 +1,39 @@
 ﻿Following section demonstrates <b>multiple update</b>.
 <code-tab>
 	<pre lang="c#">
-		// QUERY is being initialized...
+		// new instance of a table from definition
+		var h = new TableHeader();
+		var l = new TableLines();
+		
+		// query is being prepared
 		var sql = SQL.X.Query;
-
+		
 		var r1 = sql.Update(h, h.Id == 9999).Set(h.NewModel());
 			r1.Note = "new note";
 			r1.DocDate = DateTime.Now();
-
+		
 		var r2 = sql.Update(l, l.Id == 9999).Set(l.NewModel());
 			r2.Note = "new note";
-
-		// QUERY is being executed...
+		
+		// query is being executed
 		sql.ExecuteNonQuery(cn);
 	</pre>
 	<pre lang="vb">
-		' QUERY is being initialized...
+		' new instance of a table from definition
+		Dim h = New TableHeader()
+		Dim l = New TableLines()
+		
+		' query is being prepared
 		Dim sql = SQL.X.Query
-
+		
 		Dim r1 = sql.Update(h, h.Id = 9999).Set(h.NewModel())
 			r1.Note = "new note"
 			r1.DocDate = DateTime.Now()
-
+		
 		Dim r2 = sql.Update(l, l.Id = 9999).Set(l.NewModel())
 			r2.Note = "new note"
-
-		' QUERY is being executed...
+		
+		' query is being executed
 		sql.ExecuteNonQuery(cn)
 	</pre>
 </code-tab>
