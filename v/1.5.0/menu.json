@@ -5,7 +5,8 @@
       "title": "Home",
       "path": "/",
       "items": {
-        "GEN-Home": "Home"
+        "GEN-Home": "Home",
+        "GEN-ChangeLog": "Change Log"
       }
     },
     "TBL": {

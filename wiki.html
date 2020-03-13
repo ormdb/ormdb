@@ -237,7 +237,7 @@
             </div>
 
             <div id="wiki-body" style="z-index:0" class="w-100 overflow-auto">
-                <div id="wiki-body-header" class="w-100 d-flex bg-light border-bottom p-3 shadow-sm" style="font-weight:bold;line-height:1.125;word-wrap: break-word;font-size: 1.5em;">
+                <div id="wiki-body-header" class="w-100 d-flex bg-light border-bottom p-3 shadow-sm" style="z-index:2;font-weight:bold;line-height:1.125;word-wrap: break-word;font-size: 1.5em;">
                     <div id="wiki-body-header-title" class="flex-grow-1">&nbsp;</div>
                     <div class="flex-shrink-1 d-flex flex-column flex-md-row flex-wrap justify-content-end">
                         <button type="button" class="border-0 btn btn-sm btn-outline-secondary" style="box-shadow:none!important;border:none!important" onclick="util.social.facebook();">
@@ -251,7 +251,7 @@
                         </button>
                     </div>
                 </div>
-                <div id="wiki-body-content"></div>
+                <div id="wiki-body-content" style="z-index:0;"></div>
             </div>
 
             <div id="wiki-mask" class="h-100 w-100 d-flex justify-content-center align-items-center" style="z-index:999;position: absolute;background-color: rgba(0,0,0,0.5);visibility:hidden">
