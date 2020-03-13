@@ -75,19 +75,21 @@ Following example iterates through a DataReader object and returns two columns f
 </code-tab>
 
 <br />
-<table class="table table-bordered table-striped">
-	<thead class="thead-dark">
-		<tr>
-			<th>Reading By</th>
-			<th>Performance</th>
-			<th>Memory Consumption</th>
-		</tr>
-	</thead>
-	<tr><td>column-name		</td><td>0.0000057 ms		</td><td>new instance for per column</td></tr>
-	<tr><td>column-info		</td><td>0.0000035 ms		</td><td>new instance for per column (REGULAR)</td></tr>
-	<tr><td>index info		</td><td>0.0000028 ms		</td><td>new instance for per column</td></tr>
-	<tr><td>binded			</td><td>0.0000025 ms		</td><td>one instance for all columns</td></tr>
-</table>
+<div class="table-responsive">
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Reading By</th>
+				<th>Performance</th>
+				<th>Memory Consumption</th>
+			</tr>
+		</thead>
+		<tr><td>column-name		</td><td>0.0000057 ms		</td><td>new instance for per column</td></tr>
+		<tr><td>column-info		</td><td>0.0000035 ms		</td><td>new instance for per column (REGULAR)</td></tr>
+		<tr><td>index info		</td><td>0.0000028 ms		</td><td>new instance for per column</td></tr>
+		<tr><td>binded			</td><td>0.0000025 ms		</td><td>one instance for all columns</td></tr>
+	</table>
+</div>
 
 <co type="light">
     Record Count= 1200, Network= CAT6 gigabit, Server= MsSQL 2016

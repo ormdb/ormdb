@@ -53,32 +53,34 @@ When the connection is established, SQL Commands will execute with the help of t
                 <b>Odb</b> includes built in 4 providers as shown below;
                 <br />
                 <br />
-                <table class="table table-light table-striped table-bordered">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Odb.Providers</th>
-                            <th>Default Connector(Factory)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>MsSql</td>
-                            <td>System.Data.SqlClient</td>
-                        </tr>
-                        <tr>
-                            <td>MySql</td>
-                            <td>MySql.Data.MySqlClient</td>
-                        </tr>
-                        <tr>
-                            <td>Oracle</td>
-                            <td>Oracle.ManagedDataAccess.Client</td>
-                        </tr>
-                        <tr>
-                            <td>PostgreSql</td>
-                            <td>Npgsql</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-light table-striped table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Odb.Providers</th>
+                                <th>Default Connector(Factory)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>MsSql</td>
+                                <td>System.Data.SqlClient</td>
+                            </tr>
+                            <tr>
+                                <td>MySql</td>
+                                <td>MySql.Data.MySqlClient</td>
+                            </tr>
+                            <tr>
+                                <td>Oracle</td>
+                                <td>Oracle.ManagedDataAccess.Client</td>
+                            </tr>
+                            <tr>
+                                <td>PostgreSql</td>
+                                <td>Npgsql</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <co type="warning">
                     If different DbProviderFactory needs to be use,  you can specify it by the argument named <b>FactoryNames</b>.
                 </co>

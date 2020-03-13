@@ -39,47 +39,54 @@ The column-types as shown below, can be used in the table definitions.
 </co>
 <br />
 
-All column types has the properties as shown below.
-<table class="table table-bordered table-striped">
-    <thead class="thead-dark">
-        <tr>
-            <th>Property Name</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="text-nowrap"><b>c</b> - ColumnName</td>
-            <td>Optional. It is the name of the column.</td>
-        </tr>
-        <tr>
-            <td class="text-nowrap"><b>d</b> - Description</td>
-            <td>Optional. It is the description of the column.</td>
-        </tr>
-        <tr>
-            <td class="text-nowrap"><b>n</b> - Nullable</td>
-            <td>Optional. This constraint enforces a column to accept or NOT accept NULL values.</td>
-        </tr>
-        <tr>
-            <td class="text-nowrap"><b>m</b> - MinValue</td>
-            <td>Optional. It is the min value of the column for checking constraint.</td>
-        </tr>
-        <tr>
-            <td class="text-nowrap"><b>x</b> - MaxValue</td>
-            <td>Optional. It is the max value of the column for checking constraint.</td>
-        </tr>
-        <tr>
-            <td class="text-nowrap"><b>v</b> - DefaultValue</td>
-            <td>Optional. It is the default value of the column.</td>
-        </tr>
-    </tbody>
-</table>
+All column types has the <k>properties</k> as shown below.
+<div class="table-responsive">
+    <h5>{</h5>
+    <div class="list-group pl-3">
 
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>ColumnName : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>It is the name of the column.</p>
 
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>Description : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>It is the description of the column.</p>
+
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>Nullable : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>This constraint enforces a column to accept or NOT accept NULL values.</p>
+
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>MinValue : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>It is the min value of the column for checking constraint.</p>
+
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>MaxValue : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>It is the max value of the column for checking constraint.</p>
+
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>DefaultValue : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>It is the default value of the column.</p>
+
+    </div>
+    <h5>}</h5>
+</div>
 
 <st>ColumnString (Length)</st>
-is used for .NET <k>System.String</k> data type.
-Variable-size string data. <b>Length</b> is the size in bytes, NOT in char. Max value of <b>Length</b> can be different according to databases.
+    is used for .NET <k>System.String</k> data type.
+    Variable-size string data. <b>Length</b> is the size in bytes, NOT in char. Max value of <b>Length</b> can be different according to databases.
 
 <br />
 <br />
@@ -94,9 +101,9 @@ Variable-size string data. <b>Length</b> is the size in bytes, NOT in char. Max 
 
 
 <st>ColumnNumeric (Precision, Scale)</st>
-is used for any .NET numeric types such as <k>int[16/32/64]</k>, <k>sigle</k>, <k>double</k>, <k>decimal</k> etc.
-Precision is an integer that represents the total number of digits allowed in this column.
-The scale, also an integer value, represents the number of decimal places to right of the decimal point.
+    is used for any .NET numeric types such as <k>int[16/32/64]</k>, <k>sigle</k>, <k>double</k>, <k>decimal</k> etc.
+    Precision is an integer that represents the total number of digits allowed in this column.
+    The scale, also an integer value, represents the number of decimal places to right of the decimal point.
 <br />
 <br />
 <code-tab>
@@ -109,7 +116,7 @@ The scale, also an integer value, represents the number of decimal places to rig
 </code-tab>
 
 <st>ColumnBoolean</st>
-is used for .NET <k>System.Boolean</k> data type.
+    is used for .NET <k>System.Boolean</k> data type.
 <br />
 <br />
 <code-tab>
@@ -123,7 +130,7 @@ is used for .NET <k>System.Boolean</k> data type.
 
 
 <st>ColumnBinary</st>
-is used for .NET <k>System.Byte[]</k> data type.
+    is used for .NET <k>System.Byte[]</k> data type.
 <br />
 <br />
 <code-tab>
@@ -136,7 +143,7 @@ is used for .NET <k>System.Byte[]</k> data type.
 </code-tab>
 
 <st>ColumnTime</st>
-is used for .NET <k>System.TimeSpan</k> data type. This type of column stores only <b>TIME</b> value of <k>System.TimeSpan</k> as "24hh:mm:dd".
+    is used for .NET <k>System.TimeSpan</k> data type. This type of column stores only <b>TIME</b> value of <k>System.TimeSpan</k> as "24hh:mm:dd".
 <br />
 <br />
 <code-tab>
@@ -150,7 +157,7 @@ is used for .NET <k>System.TimeSpan</k> data type. This type of column stores on
 
 
 <st>ColumnDate</st>
-is used for .NET <k>System.Date</k> data type. This type of column stores only <b>DATE</b> value of <k>System.Date</k> as "yyyy-MM-dd".
+    is used for .NET <k>System.DateTime</k> data type. This type of column stores only value of <k>System.DateTime.Date</k> as "yyyy-MM-dd".
 <br />
 <br />
 <code-tab>
@@ -164,7 +171,7 @@ is used for .NET <k>System.Date</k> data type. This type of column stores only <
 
 
 <st>ColumnDateTime</st>
-is used for .NET <k>System.Date</k> data type. This type of column stores <b>DATE</b> and <b>TIME</b> value of <k>System.Date</k> as "yyyy-MM-dd 24hh-mm-ss".
+    is used for .NET <k>System.DateTime</k> data type. This type of column stores <b>DATE</b> and <b>TIME</b> value of <k>System.Date</k> as "yyyy-MM-dd 24hh-mm-ss".
 <br />
 <br />
 <code-tab>
@@ -178,7 +185,7 @@ is used for .NET <k>System.Date</k> data type. This type of column stores <b>DAT
 
 
 <st>ColumnRef</st>
-is used for columns used repeatedly. <b>Name</b>, <b>Description</b>, <b>DefaultValue</b> and <b>Nullable</b> properties can be redefiend. You can reference a column from many column(s).
+    is used for columns used repeatedly. <b>Name</b>, <b>Description</b>, <b>DefaultValue</b> and <b>Nullable</b> properties can be redefiend. You can reference a column from many column(s).
 <co type="warning">
     Reference columns does not inherit <b>DefaultValue</b> from reference column(s). You must specify <b>DefaultValue</b> for the column.
 </co>
@@ -199,17 +206,19 @@ is used for columns used repeatedly. <b>Name</b>, <b>Description</b>, <b>Default
     There is no INTEGER data type for all databases because an INTEGER is a number with no decimal precision in ANSI standards.
 </co>
 <br />
-<table class="table table-bordered table-striped" style="max-width:450px;">
-    <thead class="thead-dark">
-        <tr><th>SubType</th>			<th>Accept As</th>				<th>Byte Size</th>	</tr>
-    </thead>
-    <tbody>
-        <tr><td>Int8 / tinyint</td>		<td>ColumnNumeric(3, 0)</td>	<td>3</td>			</tr>
-        <tr><td>Int16 / smallint</td>	<td>ColumnNumeric(5, 0)</td>	<td>5</td>			</tr>
-        <tr><td>Int32 / int</td>		<td>ColumnNumeric(10, 0)</td>	<td>9</td>			</tr>
-        <tr><td>Int64 / bigint</td>		<td>ColumnNumeric(19, 0)</td>	<td>9</td>			</tr>
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped" style="max-width:450px;">
+        <thead class="thead-dark">
+            <tr><th>SubType</th>			<th>Accept As</th>				<th>Byte Size</th>	</tr>
+        </thead>
+        <tbody>
+            <tr><td>Int8 / tinyint</td>		<td>ColumnNumeric(3, 0)</td>	<td>3</td>			</tr>
+            <tr><td>Int16 / smallint</td>	<td>ColumnNumeric(5, 0)</td>	<td>5</td>			</tr>
+            <tr><td>Int32 / int</td>		<td>ColumnNumeric(10, 0)</td>	<td>9</td>			</tr>
+            <tr><td>Int64 / bigint</td>		<td>ColumnNumeric(19, 0)</td>	<td>9</td>			</tr>
+        </tbody>
+    </table>
+</div>
 <co type="warning">
     These types are not supported for definition only. But you can allways use these types in database.
 </co>
