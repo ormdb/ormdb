@@ -1,57 +1,67 @@
-﻿Following section demonstrates how to execute multiple sql commands in one batch-query.
-<br />
-<br />
+﻿Following section demonstrates how to execute multiple commands in one batch-query with <a href="##OTH--OTH-ExecuteNonQuery">ExecuteNonQuery</a>.
 <code-tab>
 	<pre lang="c#">
+		// new instance of a table from definition
+		var h = new TableHeader();
+		var l = new TableLines();
+		
+		// query is being prepared
 		var sql = SQL.X.Query();
-
-			//-- delete
+		
+			// DELETE commands are being queued...
 			sql.Delete(h);
 			sql.Delete(l);
-
-			//-- insert
+		
+			// INSERT commands are being queued...
 			var _insert = sql.Insert(true);
 			for (n = 1; n <= 100; n++) {
 				var row = _insert.AddRow(h.NewModel());
 					row.Year = 2017;
 					row.Id = 9999;
-					row.Note = String.Concat("Note -", n.toString());
+					row.Note = String.Concat("Note -", n.ToString());
 					row.DocDate = DateTime.Now();
 					row.IsActive = true;
 			}
-
-			//-- update
+		
+			// UPDATE commands are being queued...
 			var row = h.NewModel();
 				row.Note = "new note";
 				row.DocDate = DateTime.Now();
 			sql.Update(h, h.Id == 5).Set(row);
-
+		
+		// Commands are being executed...
 		sql.ExecuteNonQuery(cn);
 	</pre>
 	<pre lang="vb">
+		' new instance of a table from definition
+		Dim h = new TableHeader()
+		Dim l = new TableLines()
+		
+		' query is being prepared
 		With  SQL.X.Query()
-
-			'//-- delete
+		
+			' DELETE commands are being queued...
 			.Delete(h)
 			.Delete(l)
-
-			'//-- insert
+		
+			' INSERT commands are being queued...
 			Dim _insert = .Insert(true);
 			For n=1 to 100
 				Dim row = _insert.AddRow(h.NewModel())
 					row.Year = 2017
 					row.Id = n
-					row.Note = String.Concat("Note -", n.toString())
+					row.Note = String.Concat("Note -", n.ToString())
 					row.DocDate = DateTime.Now()
 					row.IsActive = True
 			End If
-
-			'//-- update
+		
+			' UPDATE commands are being queued...
 			Dim row = h.NewModel()
 				row.Note = "new note"
 				row.DocDate = DateTime.Now()
 			.Update(h, h.Id = 5).Set(row)
-
+		
+			' Commands are being executed...
 			.ExecuteNonQuery(cn)
 		End With
 	</pre>

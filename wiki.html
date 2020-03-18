@@ -384,7 +384,7 @@
 
         //-------------------------------------------------------------------------------------
         //-- VERSION
-        var _wiki_vers = ["1.5.0", "1.4.0"];
+        var _wiki_vers = ["1.5.0.1", "1.4.0"];
         var wiki_ver = {};
         wiki_ver.number = util.url_queryString("v") || _wiki_vers[0];
         wiki_ver.root_path = "/v/" + wiki_ver.number + "/";
@@ -392,7 +392,7 @@
 
         //-- versions are being loaded
         var _wiki_ver_menu = $(".VersionMnu");
-        ["1.5.0", "1.4.0"].forEach(function (v) {
+        _wiki_vers.forEach(function (v) {
             _wiki_ver_menu.append('<button class="dropdown-item ' + (v === wiki_ver.number ? 'active' : '') + '" type="button" onclick="VersionChnage(\'' + v + '\')">' + v + '</button>');
         });
         $(".VersionBtn").text("ver. " + wiki_ver.number);
