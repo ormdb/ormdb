@@ -40,29 +40,29 @@ actually SQL statements as shown below, are executed.
     <div class="text-muted" style="font-size:.8em">
         <div class="font-weight-bold">MsSql :</div>
         <o>
-            SELECT t1.<hlb>[</hlb>id<hlb>]</hlb>
-            FROM <hlb>[</hlb>header<hlb>]</hlb><hlb class="mx-2 d-inline-block text-center" style="min-width:35px;opacity: 1;">AS</hlb>t1
+            SELECT h.<hlb>[</hlb>id<hlb>]</hlb>
+            FROM <hlb>[</hlb>header<hlb>]</hlb><hlb class="mx-2 d-inline-block text-center" style="min-width:35px;opacity: 1;">AS</hlb>h
             <hlb>ORDER BY (SELECT NULL) OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY</hlb>
         </o>
 
         <div class="mt-4 font-weight-bold">PostgreSql :</div>
         <o>
-            SELECT t1.<hlb>"</hlb>id<hlb>"</hlb>
-            FROM <hlb>"</hlb>header<hlb>"</hlb><hlb class="mx-2 d-inline-block text-center" style="min-width:35px;opacity: 1;">AS</hlb>t1
+            SELECT h.<hlb>"</hlb>id<hlb>"</hlb>
+            FROM <hlb>"</hlb>header<hlb>"</hlb><hlb class="mx-2 d-inline-block text-center" style="min-width:35px;opacity: 1;">AS</hlb>h
             <hlb>OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY</hlb>
         </o>
 
         <div class="mt-4 font-weight-bold">Oracle :</div>
         <o>
-            SELECT t1.<hlb>"</hlb>id<hlb>"</hlb>
-            FROM <hlb>"</hlb>header<hlb>"</hlb><hlb class="mx-2 d-inline-block text-center" style="min-width:35px;opacity: .3;">&nbsp;</hlb>t1
+            SELECT h.<hlb>"</hlb>id<hlb>"</hlb>
+            FROM <hlb>"</hlb>header<hlb>"</hlb><hlb class="mx-2 d-inline-block text-center" style="min-width:35px;opacity: .3;">&nbsp;</hlb>h
             <hlb>OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY</hlb>
         </o>
 
         <div class="mt-4 font-weight-bold">MySql :</div>
         <o>
-            SELECT t1.<hlb>`</hlb>id<hlb>`</hlb>
-            FROM <hlb>`</hlb>header<hlb>`</hlb><hlb class="mx-2 d-inline-block text-center" style="min-width:35px;opacity: .3;">&nbsp;</hlb>t1
+            SELECT h.<hlb>`</hlb>id<hlb>`</hlb>
+            FROM <hlb>`</hlb>header<hlb>`</hlb><hlb class="mx-2 d-inline-block text-center" style="min-width:35px;opacity: .3;">&nbsp;</hlb>h
             <hlb>LIMIT 5, 10</hlb>
         </o>
     </div>
