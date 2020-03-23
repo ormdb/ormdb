@@ -1,0 +1,40 @@
+﻿Following section demonstrates using <hl>JOIN</hl> clause.
+<code-tab>
+    <pre lang="c#">
+        // new instance of a table from definition
+        var h = new TableHeader();
+        var l = new TableLines();
+        
+        // query is being prepared
+        var sql = SQL.X.Select();
+            sql.From(h);
+            sql.LeftJoin(l, l.Year == h.Year &
+                            l.Id == h.Id );
+            sql.Where(  h.Year.In( new[] {2018, 2019} ) & 
+                        h.Id.IsNotNull() );
+        
+        // Record(s) are being fetched
+        var rows = sql.ExecuteReader(cn);
+	</pre>
+    <pre lang="vb">
+        ' new instance of a table from definition
+        Dim h = New TableHeader()
+        Dim l = New TableLines()
+        
+        ' query is being prepared
+        Dim sql = SQL.X.Select()
+            sql.From(h)
+            sql.LeftJoin(l, l.Year = h.Year And 
+                            l.Id = h.Id )
+            sql.Where(  h.Year.In( {2018, 2019} ) And
+                        h.Id.IsNotNull() )
+        
+        ' Record(s) are being fetched
+        Dim rows = sql.ExecuteReader(cn)
+	</pre>
+</code-tab>
+<o>
+	SELECT * FROM TableHeader AS h <br />
+	<hl>LEFT JOIN TableLines AS l ON l.Id = h.Id</hl> <br />
+	WHERE h.Year IN (2018, 2019) AND h.Id ISNOT NULL <br />
+</o>

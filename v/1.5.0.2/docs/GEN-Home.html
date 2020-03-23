@@ -1,0 +1,81 @@
+﻿<img src="/resources/images/logo.png" />
+<br />
+<br />
+Welcome to OrmDb documentation Wiki pages. Here you will find all information you need to know better OrmDb and how you can work.
+
+<co type="warning">
+    OrmDB has no dependencies. You can <a href="/">DOWNLOAD</a> from releases, into your Bin folder and add it as Reference.
+</co>
+
+
+
+<st>What is it?</st>
+    OrmDB is a simple, fast and lightweight embedded .NET ORM tool which was inspired by the equivalent other tools.
+    OrmDB works across .NET ADO providers such as MsSql, MySql, Oracle and PostgreSql.
+<br />
+<br />
+You dont need the re-write the queries for different databases with OrmDb. You can execute ONE statement on different databases and its native connectors.
+OrmDB prepares your statements for your connection.
+<br />
+<br />
+<div class="text-center">
+    <img src="/resources/images/1.5.0.2/providers.png" class="img-fluid" />
+</div>
+
+<br />
+<st>How doest it look?</st>
+If the query as shown below will be executed...
+<code-tab>
+    <pre lang="c#">
+        var sql = Odb.SQL.X.Select(h.id).From(h).Skip(5).Top(10);
+   </pre>
+    <pre lang="vb">
+        Dim sql = Odb.SQL.X.Select(h.id).From(h).Skip(5).Top(10)
+    </pre>
+</code-tab>
+<br />
+actually SQL statements as shown below, are executed.
+<br />
+<co type="light">
+    <div class="text-muted" style="font-size:.8em">
+        <div class="font-weight-bold">MsSql :</div>
+        <o>
+            SELECT h.<hlb>[</hlb>id<hlb>]</hlb>
+            FROM <hlb>[</hlb>header<hlb>]</hlb><hlb class="mx-2 d-inline-block text-center" style="min-width:35px;opacity: 1;">AS</hlb>h
+            <hlb>ORDER BY (SELECT NULL) OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY</hlb>
+        </o>
+
+        <div class="mt-4 font-weight-bold">PostgreSql :</div>
+        <o>
+            SELECT h.<hlb>"</hlb>id<hlb>"</hlb>
+            FROM <hlb>"</hlb>header<hlb>"</hlb><hlb class="mx-2 d-inline-block text-center" style="min-width:35px;opacity: 1;">AS</hlb>h
+            <hlb>OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY</hlb>
+        </o>
+
+        <div class="mt-4 font-weight-bold">Oracle :</div>
+        <o>
+            SELECT h.<hlb>"</hlb>id<hlb>"</hlb>
+            FROM <hlb>"</hlb>header<hlb>"</hlb><hlb class="mx-2 d-inline-block text-center" style="min-width:35px;opacity: .3;">&nbsp;</hlb>h
+            <hlb>OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY</hlb>
+        </o>
+
+        <div class="mt-4 font-weight-bold">MySql :</div>
+        <o>
+            SELECT h.<hlb>`</hlb>id<hlb>`</hlb>
+            FROM <hlb>`</hlb>header<hlb>`</hlb><hlb class="mx-2 d-inline-block text-center" style="min-width:35px;opacity: .3;">&nbsp;</hlb>h
+            <hlb>LIMIT 5, 10</hlb>
+        </o>
+    </div>
+</co>
+
+<st>Where to use?</st>
+<ul>
+    <li>All desktop/web applications need to communicate with a database</li>
+    <li>Multi database operation</li>
+    <li>Multi client application</li>
+    <li>.Net / Asp.Net / .Net Core / Asp.Net Core</li>
+</ul>
+
+
+<st>License</st>
+<a href="http://opensource.org/licenses/MIT" target="_blank">MIT</a>

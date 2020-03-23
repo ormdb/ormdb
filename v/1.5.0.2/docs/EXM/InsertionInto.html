@@ -1,0 +1,30 @@
+﻿Following section demonstrates <b>insert-into with select</b>.
+<code-tab>
+	<pre lang="c#">
+		// new instance of a table from definition
+		var h = new TableHeader();
+		
+		// copies records in 2017 into same table as 2018
+		var sql = SQL.X.Select(h.Const(2018).AS(h.Year), 
+							   h.Id,
+							   h.Note,
+							   h.DocDate).From(h, h.Year == 2017);
+		
+		
+		// query is being executed
+		SQL.X.InsertInto(h, sql).ExecuteNonQuery(cn);
+	</pre>
+	<pre lang="vb">
+		' new instance of a table from definition
+		Dim h = New TableHeader()
+		
+		' copies records in 2017 into same table as 2018
+		Dim sql = SQL.X.Select(h.Const(2018).AS(h.Year), 
+							   h.Id,
+							   h.Note,
+							   h.DocDate).From(h, h.Year = 2017)
+		
+		' query is being executed
+		SQL.X.InsertInto(h, sql).ExecuteNonQuery(cn)
+	</pre>
+</code-tab>

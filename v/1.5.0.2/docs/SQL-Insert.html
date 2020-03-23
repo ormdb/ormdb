@@ -1,0 +1,37 @@
+﻿<k>Insert</k> method is used to insert new records to a table.
+
+<st>Definition</st>
+<co type="light">
+    <small><b>Namespace : </b>Odb.SQL.X</small>
+</co>
+<code-tab>
+    <pre lang="c#">
+		public static SQL.Insert Insert(bool SetInitials = false) 
+	</pre>
+    <pre lang="vb">
+		Public Shared Function Insert(SetInitials As Boolean = False) As SQL.Insert
+	</pre>
+</code-tab>
+
+<st>Syntax</st>
+<co type="light" class="p-0">
+    <pre lang="sql">
+        INSERT ( [ initial_option ] )
+            ADDROW ( model )
+    </pre>
+</co>
+
+
+<st>Remarks</st>
+<include src="$/SQL-InsertUpdate_DetermineValue.html" />
+
+<st>Examples</st>
+<ew />
+
+<br />
+<br />
+<include src="$/EXM/InsertionSimple.html" />
+
+<br />
+<br />
+<include src="$/EXM/InsertionMultipleTable.html" />

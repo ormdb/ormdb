@@ -1,0 +1,63 @@
+﻿Tables (inherited from <k>Odb.Table.Base</k>) are used to be in sql queries. The tables defined can be used by its instances.
+
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Table</small>
+</co>
+
+<st>Examples</st>
+<ew />
+<br />
+<include src="$/EXM/TableDefinition.html" />
+<br />
+<br />
+
+Instances of the tables are being initialized.
+<code-tab>
+	<pre lang="c#">
+		// new instance of a table from definition
+		var h = new TableHeader();
+		var l = new TableLines();
+		
+		// execute a query
+		var sql = SQL.X.Select().From(h);
+	</pre>
+	<pre lang="vb">
+		' new instance of a table from definition
+		Dim h As New TableHeader()
+		Dim l As New TableLines()
+		
+		' execute a query
+		Dim sql = SQL.X.Select().From(h)
+	</pre>
+</code-tab>
+<br />
+<br />
+
+If you would like to join a table with itself, same table can be initialized twice as shown below.
+<code-tab>
+	<pre lang="c#">
+		// new instance of a table from definition
+		var h  = new TableHeader();
+		var l  = new TableLines();
+		var h2 = new TableHeader();
+		
+		// execute a query
+		var sql = SQL.X.Select(h.All, l.All, h2.Note.AS("note2"))
+					   .From(h)
+					   .LeftJoin(l, l.Id == h.Id )
+					   .LeftJoin(l, h2.Id = h.Id );
+	</pre>
+	<pre lang="vb">
+		' new instance of a table from definition
+		Dim h  As New TableHeader()
+		Dim l  As New TableLines()
+		Dim h2 As New TableHeader()
+		
+		' execute a query
+		Dim sql = SQL.X.Select(h.All, l.All, h2.Note.AS("note2")) _
+					   .From(h) _
+					   .LeftJoin(l, l.Id = h.Id ) _
+					   .LeftJoin(l, h2.Id = h.Id )
+	</pre>
+</code-tab>

@@ -1,0 +1,85 @@
+﻿<k>GetTableInstance</k> is used to initialize the instance of <b>[Table.Base.Generic]</b>, according to table-information in database.
+
+
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Providers.IProvider</small>
+</co>
+<code-tab>
+	<pre lang="c#">
+		public T GetTableInstance&lt;T&gt;() where T : Table.Base
+		public Table.Base GetTableInstance(Type Type)
+		public Table.Base.Generic GetTableInstance(string TableName)
+	</pre>
+	<pre lang="vb">
+		Public Function GetTableInstance(Of T As Table.Base)() As T
+		Public Function GetTableInstance(Type As System.Type) As Table.Base
+		Public Function GetTableInstance(TableName As String) As Table.Base.Generic
+	</pre>
+</code-tab>
+
+<st>Examples</st>
+<ew/>
+<br/>
+<br/>
+
+Following section demonstrates generating the instance of the table.
+<code-tab>
+	<pre lang="c#">
+		// new instance of a table from definition
+		var t1 = new TableHeader();
+
+		// new instance of a table via provider
+		var tb1 = cn.Provider.GetTableInstance&lt;TableHeader&gt;();
+		var tb2 = cn.Provider.GetTableInstance(typeof(TableHeader)());
+		var tb3 = cn.Provider.GetTableInstance("TableHeader");
+	</pre>
+	<pre lang="vb">
+		' new instance of a table from definition
+		Dim t1 = new TableHeader()
+		
+		' new instance of a table via provider
+		Dim tb1 = cn.Provider.GetTableInstance(Of TableHeader()
+		Dim tb2 = cn.Provider.GetTableInstance(GetType(TableHeader))
+		Dim tb3 = cn.Provider.GetTableInstance("TableHeader")
+	</pre>
+</code-tab>
+
+<br/>
+
+Following section demonstrates reading the informations from table-instance.
+<code-tab>
+	<pre lang="c#">
+		// Reading table columns...
+		foreach ( var col in tb.GetColumns() ){
+			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
+		}
+
+		// Reading table indexes...
+		foreach ( var index in tb.GetIndexes() ){
+
+			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
+
+			Debug.WriteLine($"Columns");
+			Debug.WriteLine($"----------------------------");
+
+			foreach (var col in index.Columns){
+				Debug.WriteLine($"{col.Name} {(index.IsDescending? "DESC" : "ASC")}");
+			}
+		}
+	</pre>
+	<pre lang="vb">
+		' Reading table indexes...
+		For Each index In tb.GetIndexes()
+
+			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}")
+
+			Debug.WriteLine($"Columns")
+			Debug.WriteLine($"----------------------------")
+
+			For Each col In index.Columns
+				Debug.WriteLine($"{col.Name} {(index.IsDescending? "DESC" : "ASC")}")
+			Next
+		Next
+	</pre>
+</code-tab>

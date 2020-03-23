@@ -1,0 +1,52 @@
+﻿Following section demonstrates <hl>how select the fields</hl> to be read.
+<code-tab>
+	<pre lang="c#">
+		// new instance of a table from definition
+		var h = new TableHeader();
+		var l = new TableLines();
+
+		// selects all fields
+		var sql = SQL.X.Select().From(h);
+
+		// selects all fields for only table [h]
+		var sql = SQL.X.Select(h.All).From(h).LeftJoin(l, l.Id == h.Id );
+
+		// selects only [h.Year] and [h.Id] fields
+		var sql = SQL.X.Select(h.Year, h.Id).From(h);
+
+		// selects all fields excluding field [h.Note]
+		var sql = SQL.X.Select().Exclude(h.Note).From(h);
+		
+		// Record(s) are being fetched
+		var rows = sql.ExecuteReader(cn);
+	</pre>
+	<pre lang="vb">
+		' new instance of a table from definition
+		Dim h = New TableHeader()
+		Dim l = New TableLines()
+
+		' selects all fields
+		Dim sql = SQL.X.Select().From(h)
+
+		' selects all fields for only table [l]
+		Dim sql = SQL.X.Select(l.All).From(h).LeftJoin(l, l.Id = h.Id )
+
+		' selects only [h.Year] and [h.Id] fields
+		Dim sql = SQL.X.Select(h.Year, h.Id).From(h)
+
+		' selects all fields excluding field [h.Note]
+		Dim sql = SQL.X.Select().Exclude(h.Note).From(h)
+		
+		' Record(s) are being fetched
+		Dim rows = sql.ExecuteReader(cn)
+	</pre>
+</code-tab>
+<o>
+	SELECT <hl>*</hl> FROM TableHeader AS h
+	<br />
+	SELECT <hl>l.*</hl> FROM TableHeader AS h LEFT JOIN TableLines AS l ON l.Id = h.Id
+	<br />
+	SELECT <hl>h.Year, h.Id</hl> FROM TableHeader AS h
+	<br />
+	SELECT <hl>h.Year, h.Id, h.DocDate, h.IsActive</hl> FROM TableHeader AS h
+</o>

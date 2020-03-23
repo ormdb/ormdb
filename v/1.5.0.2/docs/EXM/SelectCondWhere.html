@@ -1,0 +1,44 @@
+﻿Following section demonstrates the dynamic creation of the <hl>Where</hl> clause.
+<code-tab>
+	<pre lang="c#">
+		// new instance of a table from definition
+		var h = new TableHeader();
+		
+		// NULL value criteria are not included in the query.
+		var _where = (h.Year == 2017 &amp; h.Note == null);
+		
+		if ( true ) {
+			_where = _where & (h.IsActive == true);
+		}
+		
+		// query is being prepared
+		var sql = SQL.X.Select().From(h, _where);
+		
+		// Record(s) are being fetched
+		var rows = sql.ExecuteReader(cn);
+	</pre>
+	<pre lang="vb">
+		' new instance of a table from definition
+		Dim h = New TableHeader()
+		
+		' NOTHING value criteria are not included in the query.
+		Dim _where = (h.Year = 2017 And h.Note = Nothing)
+		
+		If True Then
+			_where = _where And (h.IsActive = True)
+		End If
+		
+		' query is being prepared
+		Dim sql = SQL.X.Select().From(h, _where)
+		
+		' Record(s) are being fetched
+		Dim rows = sql.ExecuteReader(cn)
+	</pre>
+</code-tab>
+<o>
+	SELECT * FROM TableHeader AS h WHERE <hl>h.Year = 2017</hl>
+	<br />
+	or
+	<br />
+	SELECT * FROM TableHeader AS h WHERE <hl>h.Year = 2017 AND h.IsActive = true</hl>
+</o>
