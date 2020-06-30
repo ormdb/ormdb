@@ -1,4 +1,4 @@
-﻿<ew/>
+﻿<ew></ew>
 
 <st>Where Operator</st>
 <k>WHERE</k> clause is used to filter and extract only records that fulfill a specified condition.
@@ -17,7 +17,7 @@
 <o>
 	SELECT * FROM TableHeader AS h <hl>WHERE</hl> (h.Year = 2018) <hl>AND</hl> (h.DocDate >= 'DateValue') <hl>AND</hl> (h.DocDate <= 'DateValue')
 </o>
-<br/>
+<br />
 
 Also you can use <k>WHERE</k> clause as shortness within specified as a parameter in <b>FROM</b>.
 
@@ -30,7 +30,7 @@ Also you can use <k>WHERE</k> clause as shortness within specified as a paramete
 	</pre>
 </code-tab>
 <o>
-SELECT * FROM TableHeader AS h <hl>WHERE</hl> (h.Year = 2018 <hl>AND</hl> h.IsActive = 1)
+	SELECT * FROM TableHeader AS h <hl>WHERE</hl> (h.Year = 2018 <hl>AND</hl> h.IsActive = 1)
 </o>
 
 <st>As Operator</st>
@@ -44,7 +44,7 @@ Renames a column with an alias.
 	</pre>
 </code-tab>
 <o>
-SELECT 'X' <hl>AS</hl> flag, h.Year <hl>AS</hl> y1 FROM TableHeader AS h
+	SELECT 'X' <hl>AS</hl> flag, h.Year <hl>AS</hl> y1 FROM TableHeader AS h
 </o>
 
 
@@ -63,8 +63,8 @@ SELECT 'X' <hl>AS</hl> flag, h.Year <hl>AS</hl> y1 FROM TableHeader AS h
 	</pre>
 </code-tab>
 <o>
-SELECT * FROM TableHeader AS h WHERE h.Year <hl>IN</hl> (2017, 2018) <br/>
-SELECT * FROM TableHeader AS h WHERE h.Year <hl>NOT IN</hl> ('A', 'B', 'C')
+	SELECT * FROM TableHeader AS h WHERE h.Year <hl>IN</hl> (2017, 2018) <br />
+	SELECT * FROM TableHeader AS h WHERE h.Year <hl>NOT IN</hl> ('A', 'B', 'C')
 </o>
 
 
@@ -82,14 +82,14 @@ SELECT * FROM TableHeader AS h WHERE h.Year <hl>NOT IN</hl> ('A', 'B', 'C')
 	</pre>
 </code-tab>
 <o>
-SELECT * FROM TableHeader AS h WHERE h.Note <hl>IS NULL</hl> <br/>
-SELECT * FROM TableHeader AS h WHERE h.Note <hl>IS NOT NULL</hl> <br/>
+	SELECT * FROM TableHeader AS h WHERE h.Note <hl>IS NULL</hl> <br />
+	SELECT * FROM TableHeader AS h WHERE h.Note <hl>IS NOT NULL</hl> <br />
 </o>
 
 
 <st>Like Operator</st>
 <k>LIKE</k> command is used in a WHERE clause to search for a specified pattern in a column.
-<br/>
+<br />
 <code-tab>
 	<pre lang="c#">
 		SQL.X.Select().From(h).Where( h.Note.CONTAINS("ASD") );
@@ -107,9 +107,9 @@ SELECT * FROM TableHeader AS h WHERE h.Note <hl>IS NOT NULL</hl> <br/>
 	</pre>
 </code-tab>
 <o>
-SELECT * FROM TableHeader AS h WHERE h.Note <hl>LIKE</hl> '<hl>%</hl>ASD<hl>%</hl>' <br/>
-SELECT * FROM TableHeader AS h WHERE h.Note <hl>LIKE</hl> 'ASD<hl>%</hl>' <br/>
-SELECT * FROM TableHeader AS h WHERE h.Note <hl>LIKE</hl> '<hl>%</hl>ASD' <br/>
+	SELECT * FROM TableHeader AS h WHERE h.Note <hl>LIKE</hl> '<hl>%</hl>ASD<hl>%</hl>' <br />
+	SELECT * FROM TableHeader AS h WHERE h.Note <hl>LIKE</hl> 'ASD<hl>%</hl>' <br />
+	SELECT * FROM TableHeader AS h WHERE h.Note <hl>LIKE</hl> '<hl>%</hl>ASD' <br />
 </o>
 
 
@@ -124,7 +124,7 @@ SELECT * FROM TableHeader AS h WHERE h.Note <hl>LIKE</hl> '<hl>%</hl>ASD' <br/>
 	</pre>
 </code-tab>
 <o>
-SELECT * FROM TableHeader AS h  <hl>ORDER BY</hl> h.Year, h.DocDate <hl>DESC</hl>
+	SELECT * FROM TableHeader AS h  <hl>ORDER BY</hl> h.Year, h.DocDate <hl>DESC</hl>
 </o>
 
 
@@ -139,7 +139,7 @@ The <k>COUNT</k> function returns the number of rows that matches a specified cr
 	</pre>
 </code-tab>
 <o>
-SELECT <hl>COUNT(*)</hl> FROM TableHeader AS h
+	SELECT <hl>COUNT(*)</hl> FROM TableHeader AS h
 </o>
 
 
@@ -155,7 +155,7 @@ The <k>DISTINCT</k> statement is used to return only distinct (different) values
 	</pre>
 </code-tab>
 <o>
-SELECT <hl>DISTINCT(h.Id)</hl> FROM TableHeader AS h
+	SELECT <hl>DISTINCT(h.Id)</hl> FROM TableHeader AS h
 </o>
 
 
@@ -170,8 +170,8 @@ Return the specified value, if the field value is NULL, otherwise return the fie
 	</pre>
 </code-tab>
 <o>
-SELECT <hl>COALESCE(h.Id, 9999)</hl> FROM TableHeader AS h<br/>
-SELECT <hl>IFNULL(h.Id, 9999)</hl> FROM TableHeader AS h<br/>
+	SELECT <hl>COALESCE(h.Id, 9999)</hl> FROM TableHeader AS h<br />
+	SELECT <hl>IFNULL(h.Id, 9999)</hl> FROM TableHeader AS h<br />
 </o>
 
 
@@ -197,10 +197,10 @@ SELECT <hl>IFNULL(h.Id, 9999)</hl> FROM TableHeader AS h<br/>
 	</pre>
 </code-tab>
 <o>
-SELECT h.Year, <hl>AVG(h.Id)</hl> FROM TableHeader AS h <hl>GROUP BY</hl> h.Year <br/>
-SELECT h.Year, <hl>MIN(h.Id)</hl> FROM TableHeader AS h <hl>GROUP BY</hl> h.Year <br/>
-SELECT h.Year, <hl>MAX(h.Id)</hl> FROM TableHeader AS h <hl>GROUP BY</hl> h.Year <br/>
-SELECT h.Year, <hl>SUM(h.Id)</hl> FROM TableHeader AS h <hl>GROUP BY</hl> h.Year <br/>
+	SELECT h.Year, <hl>AVG(h.Id)</hl> FROM TableHeader AS h <hl>GROUP BY</hl> h.Year <br />
+	SELECT h.Year, <hl>MIN(h.Id)</hl> FROM TableHeader AS h <hl>GROUP BY</hl> h.Year <br />
+	SELECT h.Year, <hl>MAX(h.Id)</hl> FROM TableHeader AS h <hl>GROUP BY</hl> h.Year <br />
+	SELECT h.Year, <hl>SUM(h.Id)</hl> FROM TableHeader AS h <hl>GROUP BY</hl> h.Year <br />
 </o>
 
 

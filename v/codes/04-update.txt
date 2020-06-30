@@ -11,11 +11,10 @@ var l = new TableLines();
 
 // ------------------------------------------------------
 // -- REGULAR update
-var sql = SQL.X.Update().Where(h.Id == 9999);
+var sql = SQL.X.Update(h).Where(h.Id == 9999);
 
-    var row = sql.Set(h.NewModel());
-        row.Note = "new note";
-        row.DocDate = DateTime.Now();
+    sql.Row.Note = "new note";
+    sql.Row.DocDate = DateTime.Now();
 
 sql.ExecuteNonQuery(cn);
 
@@ -24,12 +23,12 @@ sql.ExecuteNonQuery(cn);
 // ------------------------------------------------------
 // -- JOIN Update : Updates the header records which contain 
 // --               DocumentLine that is greather than 3 in lines-table.
-var sql = SQL.X.Update().Where(l.LineId > 3)
-			   .InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) );
+var sql = SQL.X.Update(h)
+			   .InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) )
+               .Where(l.LineId > 3);
 
-    var row = sql.Set(h.NewModel());
-        row.Note = "new note";
-        row.DocDate = DateTime.Now();
+    sql.Row.Note = "new note";
+    sql.Row.DocDate = DateTime.Now();
 
 sql.ExecuteNonQuery(cn);
 
@@ -39,10 +38,10 @@ sql.ExecuteNonQuery(cn);
 // -- BATCH Update
 var sql = SQL.X.Query;
 
-    var r1 = sql.Update.Where(h.Id == 9999).Set(h.NewModel());
+    var r1 = sql.Update(h).Where(h.Id == 9999).Row;
         r1.Note = "new note";
 
-    var r2 = sql.Update.Where(l.Id == 9999).Set(l.NewModel());
+    var r2 = sql.Update(l).Where(l.Id == 9999).Row;
         r2.Note = "new note";
 
 sql.ExecuteNonQuery(cn);

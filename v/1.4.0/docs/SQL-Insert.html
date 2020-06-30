@@ -2,20 +2,20 @@
 
 <st>Definition</st>
 <co type="light">
-    <small><b>Namespace : </b>Odb.SQL.X</small>
+	<small><b>Namespace : </b>Odb.SQL.X</small>
 </co>
 <code-tab>
-    <pre lang="c#">
+	<pre lang="c#">
 		public static SQL.Insert Insert(bool SetInitials = false) 
 	</pre>
-    <pre lang="vb">
+	<pre lang="vb">
 		Public Shared Function Insert(SetInitials As Boolean = False) As SQL.Insert
 	</pre>
 </code-tab>
 
 <st>Syntax</st>
 <co type="light" class="p-0">
-    <pre lang="sql">
+	<pre lang="sql">
         INSERT ( [ initial_option ] )
             ADDROW ( model )
     </pre>
@@ -49,13 +49,13 @@ Columns which are specified <k>SetInitials = true</k>, accepts values shown belo
 </div>
 
 <st>Examples</st>
-<ew />
+<ew></ew>
 <br />
 <br />
 
     Following section demonstrates <b>single table insertion</b>. DocDate is accepted as <k>Date.MinValue</k>.
 <code-tab>
-    <pre lang="c#">
+	<pre lang="c#">
 		var _insert = SQL.X.Insert(true);
 
 		for (n = 1; (n <= 100); n++) {
@@ -67,7 +67,7 @@ Columns which are specified <k>SetInitials = true</k>, accepts values shown belo
 		}
 		sql.Execute(cn);
 	</pre>
-    <pre lang="vb">
+	<pre lang="vb">
 		With SQL.X.Insert(True)
 			For n = 1 To 100
 				With sql.AddRow(h.NewModel())
@@ -82,14 +82,14 @@ Columns which are specified <k>SetInitials = true</k>, accepts values shown belo
 	</pre>
 </code-tab>
 <o>
-    In this sample, the column <k>h.DocDate</k> was not specified. Sql engine of <k>OrmDb</k> sets the column with its inital value according to its type.
+	In this sample, the column <k>h.DocDate</k> was not specified. Sql engine of <k>OrmDb</k> sets the column with its inital value according to its type.
 </o>
 
 <br />
 
     Following section demonstrates <b>multiple table insertion</b>.
 <code-tab>
-    <pre lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Query();
 
 		var _insert = sql.Insert();
@@ -115,7 +115,7 @@ Columns which are specified <k>SetInitials = true</k>, accepts values shown belo
 		// All commands in query, are being executed as batch.
 		sql.Execute(cn)
 	</pre>
-    <pre lang="vb">
+	<pre lang="vb">
 		With SQL.X.Query()
 			Dim _insert = sql.Insert()
 

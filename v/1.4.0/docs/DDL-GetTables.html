@@ -2,13 +2,13 @@
 
 <st>Definition</st>
 <co type="light">
-    <small><b>Namespace : </b>Odb.Connection.DDL</small>
+	<small><b>Namespace : </b>Odb.Connection.DDL</small>
 </co>
 <code-tab>
-    <pre lang="c#">
+	<pre lang="c#">
 		public List&lt;SchemaTableInfo&gt; GetTables(string TableName = null)
 	</pre>
-    <pre lang="vb">
+	<pre lang="vb">
 		Public Function GetTables(TableName As String = Nothing) As List(Of SchemaTableInfo)
 	</pre>
 </code-tab>
@@ -30,14 +30,14 @@
 </div>
 
 <st>Examples</st>
-<ew />
+<ew></ew>
 <br />
 <br />
 
     Following section demonstrates retrieving the tables from database.
 
 <code-tab>
-    <pre lang="c#">
+	<pre lang="c#">
 		var tables = cn.DDL.GetTables();
 
 		var table_count = tables.Count;
@@ -46,7 +46,7 @@
 			System.Diagnostics.Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}");
 		}
 	</pre>
-    <pre lang="vb">
+	<pre lang="vb">
 		Dim tables = cn.DDL.GetTables()
 
 		Dim table_count = tables.Count

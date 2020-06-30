@@ -2,22 +2,22 @@
 The <k>DataReader</k> provides an <b>unbuffered</b> stream of data that allows procedural logic to efficiently process results from a data source sequentially.
 
 <co type="success">
-    The DataReader is a good choice when you're retrieving large amounts of data because the data is not cached in memory.
+	The DataReader is a good choice when you're retrieving large amounts of data because the data is not cached in memory.
 </co>
 
 
 <st>Examples</st>
-<ew />
+<ew></ew>
 <br />
 <br />
 Following example iterates through a DataReader object and returns two columns from each row.
 
 <code-tab>
-    <pre lang="c#">
+	<pre lang="c#">
 		var sql = SQL.X.Select(h.Note, h.DocDate).From(h);
 		var dr = sql.Execute(cn);
 	</pre>
-    <pre lang="vb">
+	<pre lang="vb">
 		Dim sql = SQL.X.Select(h.Note, h.DocDate).From(h)
 		Dim dr = sql.Execute(cn)
 	</pre>
@@ -26,7 +26,7 @@ Following example iterates through a DataReader object and returns two columns f
 <br />
 
 <code-tab>
-    <pre lang="c#">
+	<pre lang="c#">
 		foreach (var r in dr) {
 
 			// read by column-name.
@@ -49,7 +49,7 @@ Following example iterates through a DataReader object and returns two columns f
 			Console.WriteLine("{0}, {1}", f1.toString(), f2.toString());
 		}
 	</pre>
-    <pre lang="vb">
+	<pre lang="vb">
 		For Each r In dr
 
 			' read by column-name.
@@ -92,5 +92,5 @@ Following example iterates through a DataReader object and returns two columns f
 </div>
 
 <co type="light">
-    Record Count= 1200, Network= CAT6 gigabit, Server= MsSQL 2016
+	Record Count= 1200, Network= CAT6 gigabit, Server= MsSQL 2016
 </co>

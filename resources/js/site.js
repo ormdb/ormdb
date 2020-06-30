@@ -5,6 +5,7 @@
 
     return {
         code_path: location_path + "/v/codes/",
-        copyright: 'Copyright(c) ' + (new Date()).getFullYear() + ' - OrmDb'
+        copyright: 'Copyright(c) ' + (new Date()).getFullYear() + ' - OrmDb',
+        report_issue_url: "https://github.com/ormdb/ormdb/issues"
     };
 })();

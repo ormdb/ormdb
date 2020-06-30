@@ -18,8 +18,9 @@ SQL.X.Delete(h).Where(h.Id == 9999).Execute(cn);
 // ------------------------------------------------------
 // -- JOIN Delete : Deletes the header records which contain 
 // -- 			    DocumentLine that is greather than 3 in lines-table.
-SQL.X.Delete(h).Where(l.LineId > 3)
+SQL.X.Delete(h)
 	 .InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) )
+	 .Where(l.LineId > 3)
 	 .Execute(cn);
 
 
