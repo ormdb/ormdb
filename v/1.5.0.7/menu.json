@@ -1,0 +1,116 @@
+﻿{
+  "home": "GEN--GEN-Home",
+  "items": {
+    "GEN": {
+      "title": "Home",
+      "path": "/",
+      "items": {
+        "GEN-Home": "Home",
+        "GEN-ChangeLog": "Change Log"
+      }
+    },
+    "TBL": {
+      "title": "Table",
+      "path": "/",
+      "items": {
+        "TBL-Columns": "Columns",
+        "TBL-Definition": "Definition",
+        "TBL-Serialize": "Serialize & Deserialize"
+      }
+    },
+    "CON": {
+      "title": "Connection",
+      "path": "/",
+      "items": {
+        "CON-Connection": "Connection",
+        "CON-Transaction": "Transaction",
+        "CON-Import": "Import Data"
+      }
+    },
+    "SQL": {
+      "title": "SQL",
+      "path": "/",
+      "items": {
+        "SQL-Operators": "Operators & Functions",
+        "SQL-Select": "Select",
+        "SQL-Insert": "Insert",
+        "SQL-InsertInto": "InsertInto",
+        "SQL-Update": "Update",
+        "SQL-Delete": "Delete",
+        "SQL-Query": "Query"
+      }
+    },
+    "DDL": {
+      "title": "DDL",
+      "path": "/",
+      "items": {
+        "DDL-AnalyzeTable": "AnalyzeTable",
+        "DDL-CreateIndex": "CreateIndex",
+        "DDL-CreateTable": "CreateTable",
+        "DDL-DropIndex": "DropIndex",
+        "DDL-DropTable": "DropTable",
+        "DDL-GetServerDateTime": "GetServerDateTime",
+        "DDL-GetServerInfo": "GetServerInfo",
+        "DDL-GetTableColumns": "GetTableColumns",
+        "DDL-GetTableIndexes": "GetTableIndexes",
+        "DDL-GetTableInstance": "GetTableInstance",
+        "DDL-GetTables": "GetTables",
+        "DDL-PingServer": "PingServer",
+        "DDL-TableExist": "TableExist",
+        "DDL-TruncateTable": "Truncate Table"
+      }
+    },
+    "OTH": {
+      "title": "Other",
+      "path": "/",
+      "items": {
+        "OTH-ExecuteReader": "ExecuteReader",
+        "OTH-ExecuteNonQuery": "ExecuteNonQuery"
+      }
+    },
+    "EXM": {
+      "title": "Examples",
+      "path": "/EXM",
+      "before": "0_before",
+      "after": "0_after",
+
+      "items": {
+        "Startup": "Startup",
+        "ConnectionManager": "Connection Manager",
+        "ExecuteReaderByString": "Read By SQL String",
+        "ExecuteReaderByCommand": "Read By DbCommand",
+        "ExecuteReaderByIteration": "Read By Iteration",
+        "ExecuteReaderByLinq": "Read By Linq",
+        "ExecuteNonQuery": "Execute",
+        "ExecuteNonQueryBatch": "Execute - Batch",
+
+        "-SEL": "SELECT",
+        "SelectFields": "Fields - Exclude",
+        "SelectCondWhere": "Conditional Where",
+        "SelectCount": "Count",
+        "SelectWithJoin": "Join",
+        "SelectSkipTop": "Skip/Top",
+        "SelectGroupBy": "Grouping",
+        "SelectUnion": "Union",
+        "SelectSubSelect": "SubSelect",
+
+        "-DEL": "DELETE",
+        "DeletionSimple": "Simple",
+        "DeletionMultipleTable": "Multiple Table",
+        "DeletionWithJoin": "With Join",
+        "DeletionWithChunks": "With Chunks",
+
+        "-UPD": "UPDATE",
+        "UpdatingSimple": "Simple",
+        "UpdatingMultipleTable": "Multiple Table",
+        "UpdatingWithJoin": "With Join",
+        "UpdatingNull": "With NULL",
+
+        "-INS": "INSERT",
+        "InsertionSimple": "Simple",
+        "InsertionMultipleTable": "Multiple Table",
+        "InsertionInto": "Into"
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+﻿Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
+<code-tab>
+	<pre lang="c#">
+		// instance(s) created from definition(s)
+		var h = new TableHeader();
+		
+		// SQL is being initialized...
+		var sql = SQL.X.Select().From(h)
+					.Skip(5).Top(10)
+					.OrderBy(h.Year);
+		
+		var reader = sql.ExecuteReader(cn);
+	</pre>
+	<pre lang="vb">
+		' instance(s) created from definition(s)
+		Dim h = New TableHeader()
+		
+		' SQL is being initialized...
+		Dim sql = SQL.X.Select().From(h) _
+					.Skip(5).Top(10) _ 
+					.OrderBy(h.Year)
+		
+		Dim reader = sql.ExecuteReader(cn)
+	</pre>
+</code-tab>
+<co type="warning">
+	<hl>SKIP</hl> and <hl>TOP</hl> depends on the version of the database connected. For example, code shown above works only MsSql 2012 and above.
+</co>

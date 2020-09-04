@@ -1,0 +1,29 @@
+﻿Following section demonstrates <b>regular update</b>.
+<code-tab>
+	<pre lang="c#">
+		// instance(s) created from definition(s)
+		var h = new TableHeader();
+
+		var sql = SQL.X.Update(h).Where(h.Id == 9999);
+		
+			// new values is being set...
+			sql.Row.Note = "new note";
+			sql.Row.DocDate = DateTime.Now();
+		
+		// query is being executed
+		sql.ExecuteNonQuery(cn);
+	</pre>
+	<pre lang="vb">
+		' instance(s) created from definition(s)
+		Dim h = new TableHeader()
+
+		Dim sql = SQL.X.Update(h).Where(h.Id = 9999)
+		
+			' values are being set...
+			sql.Row.Note = "new note"
+			sql.Row.DocDate = DateTime.Now()
+		
+		' query is being executed
+		sql.ExecuteNonQuery(cn)
+	</pre>
+</code-tab>

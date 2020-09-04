@@ -1,0 +1,35 @@
+﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a>, using <k>Linq</k>.
+<code-tab>
+    <pre lang="c#">
+        // instance(s) created from definition(s)
+        var h = new TableHeader();
+        
+        // query is being prepared
+        var cmd = SQL.X.Select().From(h);
+        
+        // Records are being read and converted to dictionary by linq...
+        var result = cmd.ExecuteReader(cn).Select(x => new {
+                Year = x(h.Year).ToInt32(),
+                Id = x(h.Id).ToString(),
+                Note = x(h.Note).ToString(),
+                DocDate = x(h.DocDate).ToDateTime(),
+                IsActive = x(h.IsActive).ToBoolean()
+            }).ToList();
+   </pre>
+    <pre lang="vb">
+        ' instance(s) created from definition(s)
+        Dim h = New TableHeader()
+        
+        ' query is being prepared
+        Dim cmd = SQL.X.Select().From(h);
+        
+        ' Records are being read and converted to dictionary by linq...
+        Dim result = cmd.ExecuteReader(cn).Select(Function(x) New With {
+                .Year = x(h.Year).ToInt32(),
+                .Id = x(h.Id).ToString(),
+                .Note = x(h.Note).ToString(),
+                .DocDate = x(h.DocDate).ToDateTime(),
+                .IsActive = x(h.IsActive).ToBoolean()
+            }).ToList()
+    </pre>
+</code-tab>

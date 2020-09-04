@@ -1,0 +1,41 @@
+﻿Following section demonstrates using <hl>GROUP BY</hl> clause.
+<code-tab>
+    <pre lang="c#">
+        // instance(s) created from definition(s)
+        var h = new TableHeader();
+        
+        // SQL is being initialized...
+        var _yr_min = h.Year.MIN().AS("yr_min");
+        var _yr_max = h.Year.MAX().AS("yr_max");
+        
+        var sql = SQL.X.Select(h.Id, _yr_min, _yr_max).From(h).GroupBy(h.Id);
+        
+        // Record(s) are being fetched by using Linq...
+        var result = sql.ExecuteReader(cn).Select(x => new {
+        
+                Id = x(h.Id).ToString(),
+                YearMin = x(_yr_min).ToInt16(),
+                YearMax = x(_yr_max).ToInt16()
+        
+            }).ToList();
+	</pre>
+    <pre lang="vb">
+        ' instance(s) created from definition(s)
+        Dim h = New TableHeader()
+        
+        ' SQL is being initialized...
+        Dim _yr_min = h.Year.MIN().AS("yr_min")
+        Dim _yr_max = h.Year.MAX().AS("yr_max")
+        
+        Dim sql = SQL.X.Select(h.Id, _yr_min, _yr_max).From(h).GroupBy(h.Id)
+        
+        ' Record(s) are being fetched by using Linq...
+        Dim result = sql.ExecuteReader(cn).Select(Function(x) New With {
+        
+                .Id = x(h.Id).ToString(),
+                .YearMin = x(_yr_min).ToInt16(),
+                .YearMax = x(_yr_max).ToInt16()
+        
+            }).ToList()
+	</pre>
+</code-tab>

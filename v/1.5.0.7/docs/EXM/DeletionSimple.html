@@ -1,0 +1,17 @@
+﻿Following section demonstrates <b>simple deletion</b>.
+<code-tab>
+	<pre lang="c#">
+		// instance(s) created from definition(s)
+		var h = new TableHeader();
+		
+		// query is being executed
+		SQL.X.Delete(h, h.Id == 9999).ExecuteNonQuery(cn);
+	</pre>
+	<pre lang="vb">
+		' instance(s) created from definition(s)
+		Dim h = New TableHeader()
+		
+		' query is being executed
+		SQL.X.Delete(h, h.Id = 9999).ExecuteNonQuery(cn)
+	</pre>
+</code-tab>
