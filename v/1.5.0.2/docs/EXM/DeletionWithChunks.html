@@ -14,7 +14,7 @@ Following section demonstrates <b>deletion with chunks</b>.
         var _ids = SQL.X.Select(h.Id)
                     .From(h, h.Year &lt; 2018)
                     .ExecuteReader(cn)
-                    .Select(x => x(0).ToString()).ToList();
+                    .Select(x => x[0].ToString()).ToList();
         
         // records are being deleted in chunks, by supplying record Id information.
         var _index = 0;

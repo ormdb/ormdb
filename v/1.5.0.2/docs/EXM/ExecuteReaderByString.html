@@ -6,8 +6,8 @@
 
         // Records are being read and converted to dictionary by linq...
         var dic = cn.ExecuteReader(sql).ToDictionary(
-                                       x => x("field1"), 
-                                       x => x("field2")
+                                       x => x["field1"], 
+                                       x => x["field2"]
                                    );
 	</pre>
     <pre lang="vb">

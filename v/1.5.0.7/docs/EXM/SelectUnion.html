@@ -14,7 +14,7 @@
 		
 		// Ids are being fetched by using Linq...
 		var ids = sql.ExecuteReader(cn)
-					 .Select( x => x(h.Id).ToString() )
+					 .Select( x => x[h.Id].ToString() )
 					 .ToList();
 	</pre>
 	<pre lang="vb">
@@ -22,7 +22,7 @@
 		Dim h = New TableHeader()
 		
 		' SQL is being initialized...
-		Dim sql = SQL.X.Union();
+		Dim sql = SQL.X.Union()
 			sql.RemoveDuplicates = True
 		
 			sql.Select().From(h, h.Id = 1000).Top(1).OrderBy(h.DocDate)

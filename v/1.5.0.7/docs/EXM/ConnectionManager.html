@@ -12,7 +12,7 @@
     {
 
         string str = null;
-        switch (typeof(T).FullName.Split().Last())
+        switch (typeof(T).FullName.Split('.').Last())
         {
             case "MsSql":
                 Port = Port == null || Port == 0 ? 1433 : Port;
@@ -76,7 +76,7 @@
                 Optional AutoStartTrans As Boolean = False) As Odb.Connection
 
         Dim str As String = Nothing
-        Select Case GetType(T).FullName.Split().Last()
+        Select Case GetType(T).FullName.Split(".").Last()
             Case "MsSql"
                 Port = If(Port Is Nothing OrElse Port = 0, 1433, Port)
                 If String.IsNullOrEmpty(User) Then
