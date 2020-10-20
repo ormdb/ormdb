@@ -26,12 +26,6 @@ OrmDB has no no dependencies. You can [**DOWNLOAD**](http://ormdb.net) from rele
 
 <br/>
 
-## Changelog
-
-Change details for each release are documented in the [release notes](https://github.com/ormdb/ormdb/releases).
-
-<br/>
-
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
