@@ -9,7 +9,7 @@ OrmDB is a simple, fast and lightweight embedded .NET ORM tool which was inspire
 
 ## Download
 
-OrmDB has no no dependencies. You can [**DOWNLOAD**](http://ormdb.net) from releases, into your Bin folder and add it as Reference.
+OrmDB has no no dependencies. You can [**DOWNLOAD**](https://www.nuget.org/packages/OrmDb/) from releases, into your Bin folder and add it as Reference.
 
 <br/>
 
