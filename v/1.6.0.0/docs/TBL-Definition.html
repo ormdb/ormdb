@@ -1,0 +1,53 @@
+﻿Tables (inherited from <k>Odb.Table.Base</k>) are used to be in sql queries. The tables defined can be used by its instances.
+
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb.Table</small>
+</co>
+
+<st>Examples</st>
+<include src="$/EXM/TableDefinition.html"></include>
+<br />
+<br />
+
+<code-tab>
+	<pre lang="c#">
+		var th = new TableHeader();
+
+		var sql = Odb.SQL.X.Select(x => x.From(th));
+	</pre>
+	<pre lang="vb">
+		Dim th As New TableHeader()
+
+		Dim sql = Odb.SQL.X.Select(Function(X) X.From(th))
+	</pre>
+</code-tab>
+<o>
+	SELECT *<br />
+	FROM <hl>header</hl> AS th
+</o>
+<br />
+<br />
+
+If you would like to join a table with itself, same table can be initialized twice as shown below.
+<code-tab>
+	<pre lang="c#">
+		var t1 = new TableHeader();
+		var t2 = new TableHeader();
+
+		var sql = SQL.Select(x => x.From(t1)
+								   .LeftJoin(t2, t2.Id == t1.Id));
+	</pre>
+	<pre lang="vb">
+		Dim t1 = new TableHeader()
+		Dim t2 = new TableHeader()
+		
+		Dim sql = SQL.Select(Function(X) X.From(t1) _
+								          .LeftJoin(t2, t2.Id = t1.Id))
+	</pre>
+</code-tab>
+<o>
+	SELECT *<br />
+	FROM <hl>header</hl> AS t1<br />
+	LEFT JOIN <hl>header</hl> AS t2 ON t2.id = t1.id
+</o>

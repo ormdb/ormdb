@@ -1,0 +1,33 @@
+﻿Following section demonstrates to use <b>Set</b> method for setting value(s).
+<code-tab>
+	<pre lang="c#">
+		var th = new TableHeader();
+		
+		var sql = Odb.SQL.Update(x =>
+						x.From(th)
+						 .Where(th.Year == 2018)
+						 .Set(th.DocDate, System.DateTime.Now)
+						 .SetRaw(th.Id, th.Id + 1)
+						 .SetRaw(th.IsActive, !th.IsActive)
+						 .SetNull(th.Note)
+					);
+	</pre>
+	<pre lang="vb">
+		Dim th = new TableHeader()
+		
+		Dim sql = Odb.SQL.Update(Function(x) _
+						x.From(th) _
+						 .Where(th.Year = 2018) _
+						 .Set(th.DocDate, System.DateTime.Now) _
+						 .SetRaw(th.Id, th.Id + 1) _
+						 .SetRaw(th.IsActive, Not th.IsActive) _
+						 .SetNull(th.Note)
+					)
+	</pre>
+</code-tab>
+<o>
+	UPDATE th<br />
+	<hlb>SET th.date='2020-06-20 10:00:00', th.id=(th.id + 1), th.active=NOT th.active, </hlb><hl>th.note=NULL</hl><br />
+	FROM [header] AS th<br />
+	WHERE (th.year = 2018)
+</o>

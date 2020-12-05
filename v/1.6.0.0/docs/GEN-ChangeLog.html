@@ -1,10 +1,10 @@
 ﻿<co type="">
     <div class="my-1 pl-3">
-        Release Date : <b class="text-secondary">2020-06-04</b>
+        Release Date : <b class="text-secondary">2020-11-17</b>
     </div>
 
     <div class="my-1 pl-3">
-        Version : <b class="text-secondary">1.5.0.5</b>
+        Version : <b class="text-secondary">1.6.0.0</b>
     </div>
 </co>
 
@@ -21,19 +21,19 @@
             <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                 <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
                 <span class="pl-3">
-                    <k>Variable length</k> <b>StringColumn</b> implemented.  Please refer to <a href="##TBL--TBL-Columns">Columns</a> for further information.
+                    The entire SQL engine has been rewritten in accordance with <kbd class="bg-success text-white">LINQ</kbd> expression.
+                </span>
+            </li>
+            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                <span class="pl-3">
+                    <kbd class="bg-success text-white">Strongly Type</kbd> reading implemented. Please refer to the <a href="##EXM--ExecuteReaderByStronglyTyped">example</a> for further information.
                 </span>
             </li>
             <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                 <h5 class="d-inline"><span class="badge badge-dark">3</span></h5>
                 <span class="pl-3">
-                    Added new examples.
-                </span>
-            </li>
-            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">4</span></h5>
-                <span class="pl-3">
-                    Wiki pages updated.
+                    Wiki pages updated and also added new examples.
                 </span>
             </li>
         </ul>
@@ -45,23 +45,30 @@
             <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                 <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
                 <span class="pl-3">
-                    Table.Base<b>.NewModel()</b> extension method removed. Use direct <b>Update.Set()</b> or <b>Insert.AddRow()</b> methods instead of.
+                    The type "Table.<k>Column</k>" has been removed. Table column(s) are defined by primitive value types. Please refer to <a href="##TBL--TBL-Columns">Columns</a> for further information.
                 </span>
             </li>
             <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
                 <span class="pl-3">
-                    <b>"Set"</b> method removed from <b>"Odb.SQL.X.Update"</b>. You can set values, via property named ROW. Please refer to <a href="##SQL--SQL-Update">Update</a> for further information.
+                    The "Connection.<k>ImportData</k>" method has been removed. You can browse the example "<a href="##EXM--InsertionFromAnotherDb">Insertion From Another Db</a>" instead.
                 </span>
             </li>
             <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">3</span></h5>
+                <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
                 <span class="pl-3">
-                    <b>"AddRow"</b> method of <b>"Odb.SQL.X.Insert"</b> changed. The table instance which the new record to be added, is passed. Please refer to <a href="##SQL--SQL-Insert">Insert</a> for further information.
+                    The "Connection.<k>ExecuteNonQueryAsync</k>" method has been removed. You can browse the example "<a href="##EXM--ExecuteNonQueryAsync">Execute NonQuery Async</a>" instead.
+                </span>
+            </li>
+            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                <span class="pl-3">
+                    Methods "Table.Base.<k>Serialize</k>" and "Table.Base.<k>Deserialize</k>" have been removed.
                 </span>
             </li>
         </ul>
     </co>
+
 
     <st>Defects</st>
     <co type="">
@@ -69,17 +76,10 @@
             <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                 <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
                 <span class="pl-3">
-                    "<i><k>Public member 'Value' on type 'Double' not found.</k></i>" exception when <b>"INSERT/UPDATE"</b> operations for the <b>"Numeric Columns"</b> which are specified min/max value.
-                </span>
-            </li>
-            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
-                <span class="pl-3">
-                    "<i><k>Public member 'Value' on type 'DateTime' not found.</k></i>" exception when <b>"INSERT/UPDATE"</b> operations for the <b>"[Date/Time] Columns"</b> which are specified min/max value.
+                    <a href="##DDL--DDL-GetTableColumns">GetTableColumns</a> method returns incorrect <k>DataTypeName</k> value.
                 </span>
             </li>
         </ul>
-
     </co>
 </div>
 
@@ -91,19 +91,107 @@
 <br />
 <br />
 
-<co type="light">
-    <div class="my-1 pl-3">
-        Release Date : <b class="text-secondary">2020-03-19</b>
-    </div>
-
-    <div class="my-1 pl-3">
-        Version : <b class="text-secondary">1.5.0.2</b>
-    </div>
-</co>
-
 <div style="opacity: .7">
-    <div class="pl-lg-5 pl-md-4 pl-sm-0">
+    <co type="">
+        <div class="my-1 pl-3">
+            Release Date : <b class="text-secondary">2020-06-04</b>
+        </div>
 
+        <div class="my-1 pl-3">
+            Version : <b class="text-secondary">1.5.0.5</b>
+        </div>
+    </co>
+
+    <div class="pl-lg-5 pl-md-4 pl-sm-0">
+        <st>Features</st>
+        <co type="">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        Code stability improvements, bug fixes and further improvements to performance.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                    <span class="pl-3">
+                        <k>Variable length</k> <b>StringColumn</b> implemented.  Please refer to <a href="##TBL--TBL-Columns">Columns</a> for further information.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">3</span></h5>
+                    <span class="pl-3">
+                        Added new examples.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">4</span></h5>
+                    <span class="pl-3">
+                        Wiki pages updated.
+                    </span>
+                </li>
+            </ul>
+        </co>
+
+        <st>Breaking Changes</st>
+        <co type="">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        Table.Base<b>.NewModel()</b> extension method removed. Use direct <b>Update.Set()</b> or <b>Insert.AddRow()</b> methods instead of.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                    <span class="pl-3">
+                        <b>"Set"</b> method removed from <b>"Odb.SQL.X.Update"</b>. You can set values, via property named ROW. Please refer to <a href="##SQL--SQL-Update">Update</a> for further information.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">3</span></h5>
+                    <span class="pl-3">
+                        <b>"AddRow"</b> method of <b>"Odb.SQL.X.Insert"</b> changed. The table instance which the new record to be added, is passed. Please refer to <a href="##SQL--SQL-Insert">Insert</a> for further information.
+                    </span>
+                </li>
+            </ul>
+        </co>
+
+        <st>Defects</st>
+        <co type="">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        "<i><k>Public member 'Value' on type 'Double' not found.</k></i>" exception when <b>"INSERT/UPDATE"</b> operations for the <b>"Numeric Columns"</b> which are specified min/max value.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                    <span class="pl-3">
+                        "<i><k>Public member 'Value' on type 'DateTime' not found.</k></i>" exception when <b>"INSERT/UPDATE"</b> operations for the <b>"[Date/Time] Columns"</b> which are specified min/max value.
+                    </span>
+                </li>
+            </ul>
+
+        </co>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <co type="light">
+        <div class="my-1 pl-3">
+            Release Date : <b class="text-secondary">2020-03-19</b>
+        </div>
+
+        <div class="my-1 pl-3">
+            Version : <b class="text-secondary">1.5.0.2</b>
+        </div>
+    </co>
+
+    <div class="pl-lg-5 pl-md-4 pl-sm-0">
         <st>Features</st>
         <co type="light">
             <ul class="list-group list-group-flush">

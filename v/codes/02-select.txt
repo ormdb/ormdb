@@ -1,23 +1,11 @@
-﻿using Odb;
-
-// create connection
-var cn = Odb.Connection.Create<Providers.MsSql>("Your-ConnectionString");
-
-// initialize table alias => (... FROM TableHeader AS h)
-var h = new TableHeader();
-var l = new TableLines();
-
-
-
-// ------------------------------------------------------
-var sql = SQL.X.Select().From(h, h.Year > 2018)
-                          .LeftJoin( l, l.Year == h.Year & l.Id == h.Id )
-                          .Skip(5)
-                          .Top(10)
-                          .OrderBy( h.Year, h.Id.DESC() ) ;
+﻿var sql = Odb.SQL.Select(x => 
+				x.From(th)
+				.LeftJoin(tl, tl.Year == th.Year & 
+								tl.Id == th.Id ) 
+				.Where( th.Year > 2018 )
+			);	
 
 // reading data
-var result = cmd.ExecuteReader(cn).Select(x => new {
-        Note = x(h.Note).ToString(),
-        DocDate = x(h.DocDate).ToDateTime()
-    }).ToList();
+var result = sql.ExecuteReader<TableHeader>(cn);
+
+

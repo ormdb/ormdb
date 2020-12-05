@@ -1,12 +1,14 @@
-﻿	var h = new Header();
-	var l = new Lines();
+﻿var th = new TableHeader();
+var tl = new TableLines();
 	
-	var sql = SQL.X.Select()
-				   .From(h, h.Year > 2018)
-				   .InnerJoin(l, l.id == h.id);
-	
+var sql = Odb.SQL.Select(x => 
+				x.From(th)
+				.LeftJoin(tl, tl.Year == th.Year & 
+								tl.Id == th.Id ) 
+				.Where( th.Year > 2018 )
+			);	
 
-	... sql.ExecuteReader(connection_for_mssql);
-	... sql.ExecuteReader(connection_for_oracle);
-	... sql.ExecuteReader(connection_for_mysql);
-	... sql.ExecuteReader(connection_postgres);
+... sql.ExecuteReader(connection_for_mssql);
+... sql.ExecuteReader(connection_for_oracle);
+... sql.ExecuteReader(connection_for_mysql);
+... sql.ExecuteReader(connection_postgres);

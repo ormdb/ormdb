@@ -1,0 +1,23 @@
+﻿Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
+<code-tab>
+    <pre lang="c#">
+        var th = new TableHeader();
+
+        var sql = Odb.SQL.Select(x => 
+                        x.From(th)
+                         .Skip(15).Top(5)
+                    );
+	</pre>
+    <pre lang="vb">
+        Dim th = new TableHeader()
+
+        Dim sql = Odb.SQL.Select(Function(x) _
+                        x.From(th) _
+                         .Skip(15).Top(5)
+                    )
+	</pre>
+</code-tab>
+<co type="warning">
+	<hl>SKIP</hl> and <hl>TOP</hl> depends on the version of the database connected. 
+    For example, code shown above works only MsSql 2012 and above.
+</co>

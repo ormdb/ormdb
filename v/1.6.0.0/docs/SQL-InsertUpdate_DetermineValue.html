@@ -1,0 +1,62 @@
+﻿Rules are shown below for determining the value for updating or inserting processes.
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th width="150">Value</th>
+                <th>Rule</th>
+            </tr>
+        </thead>
+        <tr>
+            <td><b>Null/Nothing</b></td>
+            <td>
+                If the value is <k>"Null or Nothing"</k> then <b>Column Default Value</b> is accepted.<br />
+                If the <b>Column Default Value</b> is not specified then it is accepted initial value of data type.
+                <h5>{</h5>
+                <div class="list-group pl-4">
+                    <div class="mt-0">
+                        <b>ColumnString : </b>String.Empty
+                    </div>
+
+                    <div class="mt-2">
+                        <b>ColumnNumeric : </b>0 (Zero)
+                    </div>
+
+                    <div class="mt-2">
+                        <b>ColumnBoolean : </b>false
+                    </div>
+
+                    <div class="mt-2">
+                        <b>ColumnBinary : </b>Array.Empty
+                    </div>
+
+                    <div class="mt-2">
+                        <b>ColumnTime : </b>TimeSpan.Zero
+                    </div>
+
+                    <div class="mt-2">
+                        <b>ColumnDate : </b>Date.MinValue.Date
+                    </div>
+
+                    <div class="mt-2">
+                        <b>ColumnDateTime : </b>Date.MinValue
+                    </div>
+                </div>
+                <h5>}</h5>
+            </td>
+        </tr>
+        <tr>
+            <td><b>DbNull</b></td>
+            <td>
+                If <k>NULL</k> value will be used especially on insert or update processes; then <b>DbNull</b> value has to be specified.
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>Other</b></td>
+            <td>
+                All values except <k>"Null/Nothing"</k> and <k>"DbNull"</k>. Value is accepted as is.
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,46 +1,12 @@
-﻿using Odb;
+﻿var sql = Odb.SQL.Insert(true);
+for (short n = 0; n < 100; n++)
+{
+    var model = new TableHeader();
+    model.Year = DateTime.Now.Year;
+    model.Id = n;
+    model.DocDate = DateTime.Now.AddDays(1);
 
-// create connection
-var cn = Odb.Connection.Create<Providers.MsSql>("Your-ConnectionString");
-
-// initialize table alias => (... FROM TableHeader AS h)
-var h = new TableHeader();
-var l = new TableLines();
-
-
-
-// ------------------------------------------------------
-// --MULTI ROW insert
-var sql = SQL.X.Insert(SetInitials:true);
-
-for (n = 1; (n <= 100); n++) {
-    var _model = h.NewModel();
-        _model.Year = 2017;
-        _model.Id = n;
-        _model.DocDate = DateTime.Now();
-    sql.AddRow(_model);
-}
-
-sql.ExecuteNonQuery(cn);
-
-
-
-// ------------------------------------------------------
-// -- BATCH TABLE insert
-var sql = SQL.X.Insert(SetInitials:true);
-
-for (n = 1; (n <= 100); n++) {
-    var r1 = sql.AddRow(h.NewModel());
-        r1.Year = 2017;
-        r1.Id = n;
-        r1.DocDate = DateTime.Now();
-
-	for (m = 1; (m <= 2); m++) {
-		var r2 = sql.AddRow(l.NewModel());
-			r2.Year = header_row(h.Year);
-			r2.Id = header_row(h.Id);
-			r2.LineId = m;
-	}
+    sql.Add(model);
 }
 
 sql.ExecuteNonQuery(cn);

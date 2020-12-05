@@ -1,0 +1,29 @@
+﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a>, using <k>Linq</k>.
+<code-tab>
+    <pre lang="c#">
+        var th = new TableHeader();
+        
+        var sql = Odb.SQL.Select(x => x.From(th));
+        
+        var result = cmd.ExecuteReader(cn).Select(r => new {
+                Year = (int)r.Get(() => th.Year),
+                Id = (int)r.Get(() => th.Id),
+                Note = r.Get(() => th.Note).ToString(),
+                DocDate = (DateTime)r.Get(() => th.DocDate),
+                IsActive = (bool)r.Get(() => th.IsActive)
+            }).ToList();
+   </pre>
+    <pre lang="vb">
+        Dim th = new TableHeader()
+        
+        Dim sql = Odb.SQL.Select( Function(x) x.From(th) )
+        
+        Dim result = cmd.ExecuteReader(cn).Select(Function(r) New With {
+                .Year = CInt(r.Get(Function() th.Year)),
+                .Id = CInt(r.Get(Function() th.Id)),
+                .Note = r.Get(Function() th.Note).ToString(),
+                .DocDate = CDate(r.Get(Function() th.DocDate)),
+                .IsActive = CBool(r.Get(Function() th.IsActive))
+            }).ToList()
+    </pre>
+</code-tab>

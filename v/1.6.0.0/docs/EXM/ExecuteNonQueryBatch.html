@@ -1,0 +1,57 @@
+﻿Following section demonstrates how to execute multiple commands in one batch-query with <a href="##OTH--OTH-ExecuteNonQuery">ExecuteNonQuery</a>.
+<code-tab>
+	<pre lang="c#">
+		var th = new TableHeader();
+		var tl = new TableLines();
+		
+		var sql = SQL.X.Query();
+		
+		// DELETE commands are being queued...
+		sql.Delete(th);
+		sql.Delete(tl);
+		
+		// INSERT commands are being queued...
+		var model = th.NewModel();
+			model.Year = DateTime.Now.Year;
+			model.Id = 1;
+			model.DocDate = DateTime.Now.AddDays(1);
+		sql.Insert(true).Add(model);
+
+		// UPDATE commands are being queued...
+		sql.Update(x =>
+				x.From(th)
+				.Where(th.Year == 2018)
+				.Set(th.IsActive, !th.IsActive)
+			);
+		
+		// Commands are being executed...
+		sql.ExecuteNonQuery(cn);
+	</pre>
+	<pre lang="vb">
+		Dim th = new TableHeader()
+		Dim tl = new TableLines()
+		
+		Dim sql = SQL.X.Query()
+		
+		' DELETE commands are being queued...
+		sql.Delete(th)
+		sql.Delete(tl)
+		
+		' INSERT commands are being queued...
+		Dim model = th.NewModel()
+			model.Year = DateTime.Now.Year
+			model.Id = 1
+			model.DocDate = DateTime.Now.AddDays(1)
+		sql.Insert(True).Add(model)
+
+		' UPDATE commands are being queued...
+		sql.Update(Function(x) _
+				x.From(th) _
+				.Where(th.Year = 2018) _
+				.Set(th.IsActive, Not th.IsActive)
+			)
+		
+		' Commands are being executed...
+		sql.ExecuteNonQuery(cn)
+	</pre>
+</code-tab>

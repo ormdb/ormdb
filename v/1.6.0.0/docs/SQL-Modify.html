@@ -1,0 +1,36 @@
+﻿<k>Modify</k> method is used to insert a record if not exists or update the record if exists, in a table.
+
+
+<st>Definition</st>
+<co type="light">
+    <small><b>Namespace : </b>Odb</small>
+</co>
+<br />
+<code-tab>
+	<pre lang="c#">
+		public static SQL.Expressions.Modify SQL.Modify&lt;ITable&gt;(Expression)
+	</pre>
+	<pre lang="vb">
+		Public Shared Function SQL.Modify(of ITable)(Expression) As SQL.Expressions.Modify
+	</pre>
+</code-tab>
+
+<st>Syntax</st>
+<co type="light" class="p-0">
+	<pre lang="sql">
+		Modify( x ) =>
+			x.From( Table | SubSelect )
+			 .Where( Condition )
+		)
+		.OnInsert( set_initials , new_row)
+		.onUpdate( new_row , old_row)
+		.onAlways( new_row , old_row)
+    </pre>
+</co>
+
+<st>Examples</st>
+<ew></ew>
+
+<br />
+<br />
+<include src="$/EXM/ModifySimple.html"></include>

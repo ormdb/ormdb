@@ -1,0 +1,26 @@
+﻿Following section demonstrates <b>simple deletion</b>.
+<code-tab>
+	<pre lang="c#">
+		var th = new TableHeader();
+		
+		var sql = Odb.SQL.Delete(x =>
+						x.From(th)
+						 .Where(th.Year == 2018 &
+								th.Id == 12345M)
+					);
+	</pre>
+	<pre lang="vb">
+		Dim th = new TableHeader()
+		
+		Dim sql = Odb.SQL.Delete(Function(x) _
+						x.From(th) _
+						 .Where(th.Year = 2018 And
+								th.Id = 12345D)
+					)
+	</pre>
+</code-tab>
+<o>
+	DELETE th<br />
+	FROM [header] AS th<br />
+	WHERE ((th.year = 2018) AND (th.id = 12345))<br />
+</o>

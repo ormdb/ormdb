@@ -1,6 +1,9 @@
-﻿	var h = new Header();
-	var l = new Lines();
+﻿var th = new TableHeader();
+var tl = new TableLines();
 	
-	var sql = SQL.X.Select()
-				   .From(h, h.Year > 2018)
-				   .InnerJoin(l, l.id == h.id);
+var sql = Odb.SQL.Select(x => 
+				x.From(th)
+				.LeftJoin(tl, tl.Year == th.Year & 
+								tl.Id == th.Id ) 
+				.Where( th.Year > 2018 )
+			);

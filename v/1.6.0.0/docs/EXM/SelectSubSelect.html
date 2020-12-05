@@ -1,0 +1,90 @@
+﻿Following section demonstrates using <hl>SUB SELECT</hl> clause.
+<code-tab>
+	<pre lang="c#">
+		var th = new TableHeader();
+		var tl = new TableLines();
+		
+		var sql1 = Odb.SQL.Select(x =>
+						x.From(tl)
+						 .GroupBy( tl.Year)
+						 .Fields( tl.Year, x[tl.Id].MAX().AS("C1") )
+					);
+		
+		var sql = Odb.SQL.Select(x =>
+						x.From(th)
+						 .LeftJoin( sql1, sql1[tl.Year].ToInteger() == th.Year )
+						 .Fields( th, sql1["C1"] )
+					);
+	</pre>
+	<pre lang="vb">
+		Dim th = new TableHeader()
+		Dim tl = new TableLines()
+		
+		Dim sql1 = Odb.SQL.Select(Function(x) _
+						x.From(tl) _
+						 .GroupBy( tl.Year) _
+						 .Fields( tl.Year, x(tl.Id).MAX().AS("C1") )
+					)
+		
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.From(th) _
+						 .LeftJoin( sql1, sql1(tl.Year).ToInteger() = th.Year ) _
+						 .Fields( th, sql1("C1") )
+					)
+	</pre>
+</code-tab>
+<o>
+    SELECT th.*, t2.C1<br />
+    FROM [header] AS th<br />
+    LEFT JOIN (<br />
+    <div style="padding-left:50px;">
+        <hl>
+            SELECT tl.year, MAX(tl.id) AS C1<br />
+            FROM [lines] AS tl<br />
+            GROUP BY tl.year
+        </hl>
+    </div>
+    ) AS t2 ON (t2.year = th.year)
+</o>
+<br />
+<br />
+
+Following section demonstrates using <hl>SUB SELECT</hl> in a <hl>WHERE</hl> block.
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+		var tl = new TableLines();
+		
+		var sql1 = Odb.SQL.Select(x =>
+						x.From(tl)
+						 .Where( tl.Year == 2018 )
+						 .Fields( x[tl.Id].DISTINCT() )
+					);
+		
+		var sql = Odb.SQL.Select(x => x.From(th).Where( x[th.Id].IN(sql1)) );
+	</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+		Dim tl = new TableLines()
+		
+		Dim sql1 = Odb.SQL.Select(Function(x) _
+						x.From(tl) _
+						 .Where( tl.Year = 2018 ) _
+						 .Fields( tl.Id.DISTINCT() )
+					)
+		
+		Dim sql = Odb.SQL.Select(Function(x) x.From(th).Where( x(th.Id).IN(sql1)) )
+	</pre>
+</code-tab>
+<o>
+    SELECT * FROM header AS th<br />
+    WHERE th.id IN (
+    <div style="padding-left:50px;">
+        <hl>
+            SELECT DISTINCT(tl.id)<br />
+            FROM header AS tl<br />
+            WHERE tl.year = 2018
+        </hl>
+    </div>
+    )
+</o>

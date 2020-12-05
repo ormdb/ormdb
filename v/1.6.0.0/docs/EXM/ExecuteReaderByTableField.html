@@ -1,0 +1,59 @@
+﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> by <b>TableField</b>.
+<code-tab>
+	<pre lang="c#">
+		var th = new TableHeader();
+
+		var sql = Odb.SQL.Select(x => x.From(th));
+
+		foreach (var r in sql.ExecuteReader(cn))
+		{
+			// var c1 = r[(0];      // Read by ColumnIndex.
+			// var c1 = r["year"];  // Read by ColumnName.
+
+			// Read by TableField.
+			var c1 = r.Get(() => th.Year);
+			var c2 = r.Get(() => th.Id);
+			var c3 = r.Get(() => th.DocDate);
+			var c4 = r.Get(() => th.IsActive);
+			var c5 = r.Get(() => th.Note);
+		}
+	</pre>
+	<pre lang="vb">
+		Dim th = new TableHeader()
+
+		Dim sql = Odb.SQL.Select( Function(x) x.From(th) )
+				
+		For Each r In sql.ExecuteReader(cn)
+			' Dim c1 = r(0)      ' Read by ColumnIndex.
+			' Dim c1 = r("year") ' Read by ColumnName.
+
+			' Read by TableField.
+			Dim c1 = r.Get(Function() th.Year)
+			Dim c2 = r.Get(Function() th.Id)
+			Dim c3 = r.Get(Function() th.DocDate)
+			Dim c4 = r.Get(Function() th.IsActive)
+			Dim c5 = r.Get(Function() th.Note)
+		Next
+	</pre>
+</code-tab>
+
+<br />
+<co type="light" style="font-size:.8em">
+	<b>Record Count= 1.093.000</b><br />
+	<div class="pl-4">
+		Client  : Core I7-9750H @2.60GHz, 16GB RAM<br />
+		Server	: (Localhost), MsSQL Server 2019<br />
+	</div>
+	<br />
+	Results<br />
+	<div class="pl-4">
+		{
+		<div class="pl-3">
+			<b>Strongly Typed : 1,6356077 seconds</b><br />
+			By ColumnIndex : 1,8987543 seconds<br />
+			By ColumnName  : 2,3467037 seconds<br />
+			By TableField : 2,5380411 seconds<br />
+		</div>
+		}
+	</div>
+</co>

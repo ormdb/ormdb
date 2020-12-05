@@ -1,0 +1,58 @@
+﻿<k>Update</k> method is used to update existing records in a table.
+
+<br />
+<br />
+<co type="warning">
+	<b>Note:</b> Be careful when updating records in a table! Notice the WHERE clause in the UPDATE statement. The WHERE clause specifies which record(s) should be updated. If you omit the WHERE clause, all records in the table will be updated!
+</co>
+
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb</small>
+</co>
+<code-tab>
+	<pre lang="c#">
+		public static SQL.Expressions.Update SQL.Update(Expression)
+	</pre>
+	<pre lang="vb">
+		Public Shared Function SQL.Update(Expression) As SQL.Expressions.Update
+	</pre>
+</code-tab>
+
+<st>Syntax</st>
+<co type="light" class="p-0">
+	<pre lang="sql">
+		Update( x ) =>
+			x.From( Table | SubSelect )
+			 .LeftJoin( (Table | SubSelect), Condition )
+			 .RightJoin( (Table | SubSelect), Condition )
+			 .InnerJoin( (Table | SubSelect), Condition )
+			 .Where( Condition )
+
+			 .SetModel( model )
+			 .Set( Field , value )
+			 .SetRaw( Field , Expression )
+			 .SetNull( Field ) )
+		)
+    </pre>
+</co>
+
+
+<st>Examples</st>
+<ew></ew>
+
+<br />
+<br />
+<include src="$/EXM/UpdatingSimple.html"></include>
+
+<br />
+<br />
+<include src="$/EXM/UpdatingMultipleTable.html"></include>
+
+<br />
+<br />
+<include src="$/EXM/UpdatingWithJoin.html"></include>
+
+<br />
+<br />
+<include src="$/EXM/UpdatingWithSet.html"></include>

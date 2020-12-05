@@ -1,0 +1,24 @@
+﻿Following section demonstrates how to sort the data returned in ascending/descending order.
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+
+		var sql = Odb.SQL.Select(x => 
+						x.From(th)
+						 .OrderDESC(th.Year).OrderASC(th.Id)
+					);
+	</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.From(th) _
+						 .OrderDESC(th.Year).OrderASC(th.Id)
+					)
+	</pre>
+</code-tab>
+<o>
+    SELECT <hl>*</hl> <br />
+    FROM <hl>header</hl> AS th <br />
+    ORDER BY th.year <hl>DESC</hl>, th.id <hl>ASC</hl>
+</o>

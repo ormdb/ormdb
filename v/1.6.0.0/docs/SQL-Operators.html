@@ -1,0 +1,345 @@
+﻿
+<co type="success">
+    "<b>Sql Commands</b>" (such as AS, AVG, DISTINCT etc.) can be used via helper parameter that comes with expression function.
+    <br />
+    <br />
+    <code-tab>
+        <pre lang="c#">
+		Odb.SQL.Select(x => ... x[table-field].SqlCommand ... );</pre>
+        <pre lang="vb">
+		Odb.SQL.Select(Function(x) ... x(table-field).SqlCommand ... )</pre>
+    </code-tab>
+</co>
+<br />
+<ew></ew>
+
+<st>CONSTANT</st>
+Selects a contant value.
+<code-tab>
+    <pre lang="c#">
+		var sql = Odb.SQL.Select(x => 
+						x.Fields(
+							5.60, x[5.63].AS("C1"),
+							"str1", x["str2"].AS("C2"), 
+						)
+					);
+	</pre>
+	<pre lang="vb">
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.Fields(
+							5.60, x(5.63).AS("C1"),
+							"str1", x("str2").AS("C2"), 
+						)
+					)
+	</pre>
+</code-tab>
+<o>
+    SELECT <hl>5.60</hl>, <hl>5.63 AS C1</hl>, <hl>'str1'</hl>, <hl>'str2' AS C2</hl>
+</o>
+
+
+<st>AS</st>
+Renames a column with an alias.
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+
+		var sql = Odb.SQL.Select(x => 
+						x.Fields(
+							x["X"].AS("C1"), 
+							x[th.Year].AS("Y1")
+						).From(th)
+					);
+	</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.Fields(
+							x("X").AS("C1"), 
+							x(th.Year).AS("Y1")
+						).From(th)
+					)
+	</pre>
+</code-tab>
+<o>
+    SELECT 'X' <hl>AS</hl> C1, th.Year <hl>AS</hl> Y1<br />
+    FROM header AS th
+</o>
+
+
+<st>IN / NOT_IN</st>
+<k>IN</k> command allows you to specify multiple values in a <b>WHERE</b> clause.
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+
+		var vals1 = new[] {2017, 2018};
+		var vals2 = new[] {"A", "B", "C"};
+
+		var sql = Odb.SQL.Select(x => 
+						x.From(th)
+						 .Where( x[th.Year].IN(vals1) &amp; 
+								 x[th.Note].NOT_IN(vals2) 
+						)
+					);
+	</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+
+		Dim vals1 = {2017, 2018}
+		Dim vals2 = {"A", "B", "C"}
+
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.From(th) _
+						 .Where( x(th.Year).IN(vals1) And
+								 x(th.Note).NOT_IN(vals2) 
+						)
+					)
+	</pre>
+</code-tab>
+<o>
+    SELECT *<br />
+    FROM header AS th <br />
+    WHERE ( th.year <hl>IN</hl> (2017, 2018) ) AND
+    ( th.note <hl>NOT IN</hl> ('A', 'B', 'C') )
+</o>
+
+
+<st>IS NULL / IS NOT NULL</st>
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+
+		var sql = Odb.SQL.Select(x => 
+						x.From(th)
+						 .Where( th.Year is null &amp; 
+								 th.Note is object 
+						)
+					);
+	</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.From(th) _
+						 .Where( th.Year Is Nothing And 
+								 th.Note IsNot Nothing
+						 )
+					)
+	</pre>
+</code-tab>
+<o>
+    SELECT *<br />
+    FROM header AS th <br />
+    WHERE ( th.year <hl>IS NULL</hl> ) AND
+    ( th.note <hl>IS NOT NULL</hl> )
+</o>
+
+
+<st>LIKE</st>
+is used in a WHERE clause to search for a specified pattern in a column.
+<br />
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+
+		var sql = Odb.SQL.Select(x => 
+						x.From(th)
+						 .Where( x[th.Note].STARTS_WITH("A") | 
+								 x[th.Note].ENDS_WITH("Z") | 
+								 x[th.Note].CONTAINS("M")
+						 )
+					);
+	</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.From(th) _
+						 .Where( x(th.Note).STARTS_WITH("A") Or 
+								 x(th.Note).ENDS_WITH("Z") Or 
+								 x(th.Note).CONTAINS("M")
+						 )
+					)
+	</pre>
+</code-tab>
+<o>
+    SELECT *<br />
+    FROM header AS th <br />
+    WHERE ( th.note <hl>LIKE</hl> 'A<hl>%</hl>' ) OR
+    ( th.note <hl>LIKE</hl> '<hl>%</hl>Z' ) OR
+    ( th.note <hl>LIKE</hl> '<hl>%</hl>M<hl>%</hl>' )
+</o>
+
+<st>COUNT</st>
+The <k>COUNT</k> function returns the number of rows that matches a specified criteria.
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+
+		var sql = Odb.SQL.Select(x => 
+						x.Fields(
+							x[th.Year].COUNT()
+						).From(th)
+					);
+	</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.Fields(
+							x(th.Year).COUNT()
+						).From(th)
+					)
+	</pre>
+</code-tab>
+<o>
+	SELECT <hl>COUNT(th.year)</hl><br />
+	FROM header AS th <br />
+</o>
+<co type="warning">
+	Please refer to <a href="##EXM--SelectCount">SelectCount</a> for different usages.
+</co>
+
+<st>DISTINCT</st>
+Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
+The <k>DISTINCT</k> statement is used to return only distinct (different) values.
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+
+		var sql = Odb.SQL.Select(x => 
+						x.Fields( x[th.Year].DISTINCT().AS("C") )
+						 .From(th)
+					);</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.Fields( x(th.Year).DISTINCT().AS("C") ) _
+						 .From(th)
+					)</pre>
+</code-tab>
+<o>
+	SELECT <hl>DISTINCT(th.year)</hl> AS 'C'<br />
+	FROM header AS th <br />
+</o>
+
+
+<st>COALESCE</st>
+Return the first non-null value in a list.
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+
+		var sql = Odb.SQL.Select(x => 
+						x.Fields( x[th.Year].COALESCE(th.Id, 5, null).AS("C") )
+						 .From(th)
+					);
+	</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.Fields( x(th.Year).COALESCE(th.Id, 5, Nothing).AS("C") ) _
+						 .From(th)
+					)
+	</pre>
+</code-tab>
+<o>
+	SELECT <hl>COALESCE(th.year, 5, NULL)</hl> AS 'C'<br />
+	FROM header AS th <br />
+</o>
+
+
+<st>Aggregate Functions</st>
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+
+		var sql = Odb.SQL.Select(x => 
+						x.From(th)
+						 .GroupBy(th.Year)
+						 .Fields( th.Year, 
+								  x[th.Id].AVG().AS("C1"), 
+								  x[th.Id].MIN().AS("C2"), 
+								  x[th.Id].MAX().AS("C3"), 
+								  x[th.Id].SUM().AS("C4")
+						  )
+					);
+	</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.From(th) _
+						 .GroupBy(th.Year) _
+						 .Fields( th.Year, 
+								  x(th.Id).AVG().AS("C1"), 
+								  x(th.Id).MIN().AS("C2"), 
+								  x(th.Id).MAX().AS("C3"), 
+								  x(th.Id).SUM().AS("C4")
+						  )
+					)
+	</pre>
+</code-tab>
+<o>
+	SELECT th.Year,
+	<div style="padding-left:50px;">
+		<hl>AVG(th.id)</hl> AS 'C1',<br />
+		<hl>MIN(th.id)</hl> AS 'C2',<br />
+		<hl>MAX(th.id)</hl> AS 'C3',<br />
+		<hl>SUM(th.id)</hl> AS 'C4'
+	</div>
+	FROM header AS th <br />
+</o>
+
+
+<st>String Functions</st>
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+
+		var sql = Odb.SQL.Select(x => 
+						x.Fields( x[th.Note].SUBSTRING(2, 4).AS("2_to_4"), 
+								  x[th.Note].SUBSTRING(0, 1).AS("left_1"), 
+								  x[th.Note].SUBSTRING(-1, 2).AS("right_2"), 
+								  x[th.Note].UPPER().AS("C1"), 
+								  x[th.Note].LOWER().AS("C2"), 
+								  x[th.Note].TRIM().AS("C3"), 
+								  x[th.Note].RTRIM().LTRIM().AS("C4"), 
+								  x[th.Note].CONCAT(", ID=", th.Id).AS("C5")
+						  ).From(th)
+					);
+	</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.Fields( x(th.Note).SUBSTRING(2, 4).AS("2_to_4"), 
+								  x(th.Note).SUBSTRING(0, 1).AS("left_1"), 
+								  x(th.Note).SUBSTRING(-1, 2).AS("right_2"), 
+								  x(th.Note).UPPER().AS("C1"), 
+								  x(th.Note).LOWER().AS("C2"), 
+								  x(th.Note).TRIM().AS("C3"), 
+								  x(th.Note).RTRIM().LTRIM().AS("C4"), 
+								  x(th.Note).CONCAT(", ID=", th.Id).AS("C5")
+						  ).From(th)
+					)
+	</pre>
+</code-tab>
+<o>
+	SELECT
+	<div style="padding-left:50px;">
+		<hl>SUBSTRING(th.note)</hl> AS '2_to_4',<br />
+		<hl>LEFT(th.note, 1)</hl> AS 'left_1',<br />
+		<hl>RIGHT(th.note, 2)</hl> AS 'right_2',<br />
+		<hl>UPPER(th.note)</hl> AS 'C1',<br />
+		<hl>LOWER(th.note)</hl> AS 'C2',<br />
+		<hl>TRIM(th.note)</hl> AS 'C3',<br />
+		<hl>LTRIM(RTRIM(th.note))</hl> AS 'C4',<br />
+		<hl>CONCAT(th.note, ', ID=', th.id)</hl> AS 'C5'
+	</div>
+	FROM header AS th <br />
+</o>

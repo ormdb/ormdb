@@ -1,35 +1,11 @@
-﻿using Odb;
+﻿var sql = Odb.SQL.Delete(x =>
+                x.From(th)
+                    .Where(th.Year == 2018 &
+                        th.Id == 12345M)
+            );
 
-// create connection
-var cn = Odb.Connection.Create<Providers.MsSql>("Your-ConnectionString");
-
-// initialize table alias => (... FROM TableHeader AS h)
-var h = new TableHeader();
-var l = new TableLines();
-
-
-
-// ------------------------------------------------------
-// -- REGULAR delete
-SQL.X.Delete(h).Where(h.Id == 9999).Execute(cn);
+sql.ExecuteNonQuery(cn);
 
 
 
-// ------------------------------------------------------
-// -- JOIN Delete : Deletes the header records which contain 
-// -- 			    DocumentLine that is greather than 3 in lines-table.
-SQL.X.Delete(h)
-	 .InnerJoin(l, (l.Year == h.Year) & (l.Id == h.Id) )
-	 .Where(l.LineId > 3)
-	 .Execute(cn);
 
-
-
-// ------------------------------------------------------
-// -- BATCH Delete
-var sql = SQL.X.Query;
-
-    sql.Delete(h, h.Id == 9999);
-    sql.Delete(l, l.Id == 9999 & l.Year < 2018);
-
-sql.Execute(cn);

@@ -1,0 +1,224 @@
+﻿Columns are defined by supplying necessary type information in the attribute.
+
+<co type="warning">
+    If a column definition is often used in many of tables, so a column attributes can be defined as a reference.
+</co>
+
+<st>Definition</st>
+<co type="light">
+    <small><b>Namespace : </b>Odb.Table</small>
+</co>
+
+<st>Supported .Net Value Types</st>
+<code-tab>
+    <pre lang="c#">
+        // String
+        public string my_col;
+
+        // Fixed length String
+        [Column(Length = 10)] public string my_col;
+
+        // Numerics
+        [Column(Length = 5)] public short my_col;
+        [Column(Length = 10)] public int my_col;
+        [Column(Length = 15)] public long my_col;
+        [Column(Length = 7, Scale = 2)] public float my_col;
+        [Column(Length = 15, Scale = 2)] public double my_col;
+        [Column(Length = 20, Scale = 2)] public decimal my_col;
+
+        // Boolean
+        public bool; my_col;
+
+        // Binary
+        public byte[] my_col;
+
+        // Only Time
+        public System.TimeSpan my_col;
+        [Column(DateFormat = ColumnDateFormat.OnlyTime)] public System.TimeSpan my_col;
+
+        // Only Date
+        [Column(DateFormat = ColumnDateFormat.OnlyDate)] public System.DateTime my_col;
+
+        // Date + Time
+        System.DateTime my_col;
+        [Column(DateFormat = ColumnDateFormat.DateTime)] public System.DateTime my_col;
+	</pre>
+    <pre lang="vb">
+        ' String
+        Public my_col AS String
+
+        ' Fixed length String
+        &lt;Column(Length:=10)&gt; Public my_col AS String
+                
+        ' Numerics
+        &lt;Column(Length:=5)&gt; public my_col AS Short
+        &lt;Column(Length:=10)&gt; public my_col AS Integer
+        &lt;Column(Length:=15)&gt; public my_col AS Long
+        &lt;Column(Length:=7, Scale:=2)&gt; public my_col AS Single
+        &lt;Column(Length:=15, Scale:=2)&gt; public my_col AS Double
+        &lt;Column(Length:=20, Scale:=2)&gt; public my_col AS Decimal
+
+        ' Boolean
+        Public my_col AS Boolean
+
+        ' Binary
+        Public my_col AS Byte()
+
+        ' Only Time
+        Public my_col AS System.TimeSpan
+        &lt;Column(DateFormat:=ColumnDateFormat.OnlyTime)&gt; Public my_col AS System.TimeSpan
+
+        ' Only Date
+        &lt;Column(DateFormat:=ColumnDateFormat.OnlyDate)&gt; Public my_col AS System.DateTime
+
+        ' Date + Time
+        Public my_col AS System.DateTime
+        &lt;Column(DateFormat:=ColumnDateFormat.DateTime)&gt;Public my_col AS System.DateTime
+	</pre>
+</code-tab>
+
+<st>Reference Column</st>
+<p>is used for columns used repeatedly. <b>Name</b>, <b>Description</b>, <b>DefaultValue</b> and <b>Nullable</b> properties can be redefiend. You can reference a column from many column(s).</p>
+<code-tab>
+    <pre lang="c#">
+        // Attributes are defined at once to use as a reference...
+        public enum Ref
+        {
+            [Column("year", Length = 4, DefaultValue = 2000, MinValue = 1900, MaxValue = 2100)] year,
+            [Column("note", Length = 100)] note,
+            [Column("id", Length = 2)] id,
+            [Column(DateFormat:=ColumnDateFormat.OnlyDate)] only_date,
+            ...
+        }
+
+        // usage
+        [Column( Ref.year )] public int my_col;
+
+        // extends the column to max length
+        [Column( Ref.year, Ref.id )] public int my_col;
+	</pre>
+    <pre lang="vb">
+        ' Attributes are defined at once to use as a reference...
+        Public Enum Ref
+            &lt;Column("year", Length:=4, DefaultValue:=2000, MinValue:=1900, MaxValue:=2100)&gt; year
+            &lt;Column("note", Length:=100)&gt; note
+            &lt;Column("id", Length:=2)&gt; id
+            &lt;Column(DateFormat:=ColumnDateFormat.OnlyDate)&gt; only_date
+            ...
+        End Enum
+
+        ' usage
+        &lt;Column( Ref.year )&gt; Public my_col AS Integer
+
+        ' extends the column to max length
+        &lt;Column( Ref.year, Ref.id )&gt; Public my_col AS Integer
+	</pre>
+</code-tab>
+<br />
+
+
+<br />
+<co type="warning">
+    You can use <b>connection.Provider.ToDbTypeName</b> to get the Database Equivalent statement of the column. Example shown below, returns different results for each provider type.
+</co>
+<code-tab>
+    <pre lang="c#">
+        var result = cn.Provider.ToDbTypeName(th.Year);
+        
+        //-- MsSql      = numeric(4, 0)
+        //-- MySql      = DECIMAL(4, 0)
+        //-- Oracle     = NUMBER(4, 0)
+        //-- PostgreSql = NUMERIC(4, 0)
+	</pre>
+    <pre lang="vb">
+        Dim result = cn.Provider.ToDbTypeName(th.Year)
+        
+        '//-- MsSql      = numeric(4, 0)
+        '//-- MySql      = DECIMAL(4, 0)
+        '//-- Oracle     = NUMBER(4, 0)
+        '//-- PostgreSql = NUMERIC(4, 0)
+	</pre>
+</code-tab>
+<br />
+
+<st>Column Attributes</st>
+<div class="list-group pl-3">
+    <a class="list-group-item list-group-item-action">
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>Name : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>It is the name of the column.</p>
+    </a>
+    <a class="list-group-item list-group-item-action">
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>Length : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>is used for string columns and also is the Precision that represents the total number of digits allowed for numeric columns.</p>
+
+        <co type="danger">
+            There is no INTEGER data type for all databases because an INTEGER is a number with no decimal precision in ANSI standards.
+        </co>
+        <br />
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" style="max-width:450px;">
+                <thead class="thead-dark">
+                    <tr><th>DbType</th>	    <th>Byte Size</th>	<th>Accept As</th>	        </tr>
+                </thead>
+                <tbody>
+                    <tr><td>tinyint</td>    <td>3</td>			<td>Length=3, Scale=0</td>  </tr>
+                    <tr><td>smallint</td>	<td>5</td>			<td>Length=5, Scale=0</td>  </tr>
+                    <tr><td>int</td>		<td>9</td>			<td>Length=10, Scale=0</td>	</tr>
+                    <tr><td>bigint</td>		<td>9</td>			<td>Length=19, Scale=0</td>	</tr>
+                </tbody>
+            </table>
+        </div>
+        <co type="warning">
+            These types are not supported for definition only. But you can allways use these types in database.
+        </co>
+
+    </a>
+    <a class="list-group-item list-group-item-action">
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>Scale : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>represents the number of decimal places to right of the decimal point.</p>
+    </a>
+    <a class="list-group-item list-group-item-action">
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>Description : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>It is the description of the column.</p>
+    </a>
+    <a class="list-group-item list-group-item-action">
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>Nullable : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>This constraint enforces a column to accept or NOT accept NULL values.</p>
+    </a>
+    <a class="list-group-item list-group-item-action">
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>MinValue : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>It is the min value of the column for checking constraint.</p>
+    </a>
+    <a class="list-group-item list-group-item-action">
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>MaxValue : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>It is the max value of the column for checking constraint.</p>
+    </a>
+    <a class="list-group-item list-group-item-action">
+        <div class="my-1 d-flex w-100 justify-content-between">
+            <b>DefaultValue : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>It is the default value of the column.</p>
+    </a>
+</div>

@@ -1,0 +1,42 @@
+﻿Following section demonstrates insertion by <b>Table Model</b>.
+<code-tab>
+    <pre lang="c#">
+        var sql = Odb.SQL.Insert(true);
+
+        for (short n = 0; n < short.MaxValue; n++)
+        {
+            var model = th.NewModel();
+            model.Year = DateTime.Now.Year;
+            model.Id = n;
+            model.DocDate = DateTime.Now.AddDays(1);
+            // model.IsActive = true;
+            // model.Note = DBNull.Value;
+
+            sql.Add(model);
+        }
+	</pre>
+    <pre lang="vb">
+        Dim sql = Odb.SQL.Insert(True)
+
+        For n = 1 To Short.MaxValue
+            Dim model = th.NewModel()
+            model.Year = DateTime.Now.Year
+            model.Id = n
+            model.DocDate = DateTime.Now.AddDays(1)
+            ' model.IsActive = True
+            ' model.Note = DBNull.Value
+
+            sql.Add(model)
+        Next
+	</pre>
+</code-tab>
+<o>
+    In this sample; columns "<k>IsActive</k>" and "<k>Note</k>" were not specified.
+    <br />
+    These columns will be accepted as its initial value, since the parameter "<k>SetInitials</k>" of <b>Insert</b> is <k>TRUE</k>.
+    <br />
+    <br />
+
+    INSERT INTO [header]<br />
+    VALUES (2020, 1, '2020-01-20 10:00:00', <hlb>FALSE</hlb>, <hlb>''</hlb>)
+</o>

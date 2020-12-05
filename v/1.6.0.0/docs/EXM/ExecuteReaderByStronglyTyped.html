@@ -1,0 +1,66 @@
+﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> as <b>StronglyTyped</b>.
+<code-tab>
+<pre lang="c#">
+	var th = new TableHeader();
+
+	// reading by table type
+	var rows = Odb.SQL.Select(x => x.From(th))
+				.ExecuteReader&lt;TableHeader&gt;(cn).ToList();
+
+
+	// reading by custom type
+	private partial class custom_type
+	{
+		public int year;
+		public int id;
+		public object note;
+	}
+
+	var rows = Odb.SQL.Select(x => 
+								x.From(th)
+								 .Fields(th.Year, th.Id, th.Note))
+				.ExecuteReader&lt;custom_type&gt;(cn).ToList();
+</pre>
+<pre lang="vb">
+	Dim th = new TableHeader()
+
+	' reading by table type
+	Dim rows = Odb.SQL.Select( Function(x) x.From(th) ) _
+				.ExecuteReader(Of TableHeader)(cn).ToList()
+
+
+	' reading by custom type
+	Private Class custom_type
+		Public year As Integer
+		Public id As Integer
+		Public note As Object
+	End Class
+
+	Dim rows = Odb.SQL.Select( Function(x) _
+								x.From(th)  _
+								 .Fields(th.Year, th.Id, th.Note) _
+							) _
+				.ExecuteReader(Of custom_type)(cn).ToList()
+</pre>
+</code-tab>
+
+<br />
+<co type="light" style="font-size:.8em">
+	<b>Record Count= 1.093.000</b><br />
+	<div class="pl-4">
+		Client  : Core I7-9750H @2.60GHz, 16GB RAM<br />
+		Server	: (Localhost), MsSQL Server 2019<br />
+	</div>
+	<br />
+	Results<br />
+	<div class="pl-4">
+		{
+		<div class="pl-3">
+			<b>Strongly Typed : 1,6356077 seconds</b><br />
+			By ColumnIndex : 1,8987543 seconds<br />
+			By ColumnName  : 2,3467037 seconds<br />
+			By TableField : 2,5380411 seconds<br />
+		</div>
+		}
+	</div>
+</co>

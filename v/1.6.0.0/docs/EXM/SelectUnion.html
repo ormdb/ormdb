@@ -1,0 +1,72 @@
+﻿Following section demonstrates using <hl>UNION</hl> clause.
+<code-tab>
+	<pre lang="c#">
+		var th = new TableHeader();
+		var tl = new TableLines();
+		
+		var sql1 = Odb.SQL.Select(x =>
+						x.From(th)
+						 .GroupBy(th.Year)
+						 .OrderDESC(th.DocDate)
+						 .Fields(th.Year, x[th.Id].MAX().AS("C1"))
+					);
+		var sql2 = Odb.SQL.Select(x =>
+						x.From(tl)
+						.GroupBy(tl.Year)
+						.Fields(tl.Year, x[th.Id].MAX().AS("C1"))
+					);
+
+		var sql = Odb.SQL.Union(x =>
+						x.RemoveDuplicates()
+						 .Add(sql1)
+						 .Add(sql2)
+						 .OrderASC(sql1[th.Year]).OrderDESC(sql1["C1"])
+					);
+	</pre>
+	<pre lang="vb">
+		Dim th = new TableHeader()
+		Dim tl = new TableLines()
+		
+		Dim sql1 = Odb.SQL.Select(Function(x) _
+						x.From(th) _
+						 .GroupBy(th.Year) _
+						 .OrderDESC(th.DocDate) _
+						 .Fields(th.Year, x(th.Id).MAX().AS("C1"))
+					)
+		Dim sql2 = Odb.SQL.Select(Function(x) _
+						x.From(tl) _
+						.GroupBy(tl.Year) _
+						.Fields(tl.Year, x(tl.Id).MAX().AS("C1"))
+					)
+
+		Dim sql = Odb.SQL.Union(Function(x) _
+						x.RemoveDuplicates() _
+						 .Add(sql1) _
+						 .Add(sql2) _
+						 .OrderASC(sql1(th.Year)).OrderDESC(sql1("C1"))
+					)
+	</pre>
+</code-tab>
+<o>
+    <hl>SELECT * FROM (</hl><br />
+    <div style="padding-left:50px;">
+        (
+        <div style="padding-left:50px;">
+            SELECT t3.year, MAX(t3.id) AS C1<br />
+            FROM [header] AS t3<br />
+            GROUP BY t3.year<br />
+            ORDER BY t3.date DESC
+        </div>
+        ) AS t0<br />
+        <hlb>UNION</hlb><br />
+        (
+        <div style="padding-left:50px;">
+            SELECT t1.year, MAX(t1.id) AS C1 <br />
+            FROM [lines] AS t1 <br />
+            GROUP BY t1.year
+        </div>
+        ) AS t2
+    </div>
+    <hl>) AS t</hl><br />
+    <hl>ORDER BY year ASC, C1 DESC</hl>
+</o>

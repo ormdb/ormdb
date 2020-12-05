@@ -1,0 +1,31 @@
+﻿Following section demonstrates insertion with <b>Value Array</b>.
+<code-tab>
+    <pre lang="c#">
+        var sql = Odb.SQL.Insert(true);
+
+        sql.Add&lt;TableHeader&gt;(DateTime.Now.Year, 
+                            1, 
+                            DateTime.Now, 
+                            null, 
+                            DBNull.Value);
+	</pre>
+    <pre lang="vb">
+        Dim sql = Odb.SQL.Insert(True)
+
+        sql.Add(Of TableHeader)(DateTime.Now.Year,
+                                1,
+                                DateTime.Now,
+                                Nothing,
+                                DBNull.Value)
+	</pre>
+</code-tab>
+<o>
+    In this sample; column "<k>IsActive</k>" was not specified (3rd value), and also column "<k>Note</k>" was specified as DbNull (4th value).
+    <br />
+    These columns will be accepted as its initial value, since the parameter "<k>SetInitials</k>" of <b>Insert</b> is <k>TRUE</k>.
+    <br />
+    <br />
+
+    INSERT INTO [header]<br />
+    VALUES (2020, 1, '2020-01-20 10:00:00', <hlb>FALSE</hlb>, <hlb>''</hlb>)
+</o>

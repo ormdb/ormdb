@@ -1,0 +1,73 @@
+﻿<k>Select</k> method is used to select data from a database.
+
+You can access each column of the returned row by passing the name or ordinal number of the column to the
+<a href="##OTH--OTH-ExecuteReader">ExecuteReader</a>.
+
+<st>Definition</st>
+<co type="light">
+	<small><b>Namespace : </b>Odb</small>
+</co>
+<br />
+<code-tab>
+	<pre lang="c#">
+		public static SQL.Expressions.Select SQL.Select(Expression)
+	</pre>
+	<pre lang="vb">
+		Public Shared Function SQL.Select(Expression) As SQL.Expressions.Select
+	</pre>
+</code-tab>
+
+<st>Syntax</st>
+<co type="light" class="p-0">
+	<pre lang="sql">
+		Select( x ) =>
+			x.Fields( { Table | Field | SubSelect( Field | FieldName) } )
+			 .ExcludeFields( { Table | Field } )
+			 .From( Table | SubSelect )
+			 .LeftJoin( (Table | SubSelect), Condition )
+			 .RightJoin( (Table | SubSelect), Condition )
+			 .InnerJoin( (Table | SubSelect), Condition )
+			 .Where( Condition )
+			 .GroupBy( Field Expression Array )
+			 .Having( Condition )
+
+			 .Skip( value )
+			 .Top( value )
+			 .Paging( page , size )
+
+			 .OrderASC( Field | SubSelect( Field | FieldName) )
+			 .OrderDESC( Field | SubSelect( Field | FieldName) )
+		)
+    </pre>
+</co>
+
+<st>Examples</st>
+<ew></ew>
+
+<br />
+<br />
+<include src="$/EXM/SelectFields.html"></include>
+
+<br />
+<br />
+<include src="$/EXM/SelectCondWhere.html"></include>
+
+<br />
+<br />
+<include src="$/EXM/SelectWithJoin.html"></include>
+
+<br />
+<br />
+<include src="$/EXM/SelectSkipTop.html"></include>
+
+<br />
+<br />
+<include src="$/EXM/SelectGroupBy.html"></include>
+
+<br />
+<br />
+<include src="$/EXM/SelectUnion.html"></include>
+
+<br />
+<br />
+<include src="$/EXM/SelectSubSelect.html"></include>

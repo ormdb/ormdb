@@ -1,0 +1,44 @@
+﻿Following section demonstrates using <hl>ExecuteCount</hl>, to get count of row(s).
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+		
+		var sql = Odb.SQL.Select(Function(x) x.From(th));
+
+		var cnt = sql.ExecuteCount(cn);
+	</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+		
+		Dim sql = Odb.SQL.Select(Function(x) x.From(th))
+
+		Dim cnt = sql.ExecuteCount(cn)
+	</pre>
+</code-tab>
+<o>
+    SELECT <hl>COUNT(1)</hl> FROM header AS th
+</o>
+
+<br />
+<br />
+
+To counting the row(s) by excluding NULL values, you have to use <k>COUNT</k> with a column.
+<code-tab>
+	<pre lang="c#">
+		var th = new TableHeader();
+		
+		var sql = Odb.SQL.Select(x => x.From(th).Fields(x[th.Id].COUNT()));
+
+		var cnt = sql2.ExecuteReader(cn).FirstOrDefault().GetInt64[0];
+	</pre>
+	<pre lang="vb">
+		Dim th = new TableHeader()
+		
+		Dim sql = Odb.SQL.Select(Function(x) x.From(th).Fields(x(th.Id).COUNT()))
+
+		Dim cnt = sql2.ExecuteReader(cn).FirstOrDefault().GetInt64(0)
+	</pre>
+</code-tab>
+<o>
+    SELECT <hl>COUNT(th.id)</hl> FROM header AS th
+</o>

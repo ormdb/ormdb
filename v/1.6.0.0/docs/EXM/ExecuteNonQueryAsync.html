@@ -1,0 +1,19 @@
+﻿Following section demonstrates how to execute a "NonQuery" command  as asynchronously by creating a task.
+<code-tab>
+	<pre lang="c#">
+		var th = new TableHeader();
+		
+		var sql = Odb.SQL.Delete(x => x.From(th).Where(th.Id == 12345M) );
+
+		var task = Task&lt;int&gt;.Factory.StartNew(() => sql.ExecuteNonQuery(cn) );
+		var affectedRows = task.Result;
+	</pre>
+	<pre lang="vb">
+		Dim th = new TableHeader()
+		
+		Dim sql = Odb.SQL.Delete(Function(x) x.From(th).Where(th.Id = 12345D) )
+		
+		Dim task = Task(Of Integer).Factory.StartNew(Function() sql.ExecuteNonQuery(cn))
+		Dim affectedRows = task.Result
+	</pre>
+</code-tab>

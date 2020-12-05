@@ -1,29 +1,32 @@
 ﻿// Table Definition
-using Odb;
+using System;
+using System.Linq.Expressions;
 using Odb.Table;
 
+[Table("header")]
 public class TableHeader : Base
 {
-    [ColumnNumeric(4, 0)] public Column Year;
-    [ColumnNumeric(4, 0)] public Column Id;
-    [ColumnString(15)   ] public Column Note;
-    [ColumnDate()]		  public Column DocDate;
-    [ColumnBoolean()    ] public Column IsActive;
-
-    protected override void InitKeyInfo()
-    {
-        base.PrimaryKey(new[] { Year, Id });
-    }
+    [Column(4, 0)] public int Year;
+    [Column(4, 0)] public int Id;
+    [Column()]     public string Note;
+    [Column()]     public System.Datetime DocDate;
+    [Column()]     public bool IsActive;
+    
+    // Method expression which returns of type "TableConfig", is returned.
+    protected override Expression<TableConfig> Config() =>
+        (x) => x.SetPrimaryKey(Year, Id)
+                        .AddIndex(DocDate);
 }
+
+[Table("lines")]
 public class TableLines : Base
 {
-    [ColumnNumeric(4, 0)] public Column Year;
-    [ColumnNumeric(4, 0)] public Column Id;
-    [ColumnNumeric(2, 0)] public Column LineId;
-    [ColumnString(15)   ] public Column Note;
-
-    protected override void InitKeyInfo()
-    {
-        base.AddPrimaryKey(new[] { Year, Id, LineId });
-    }
+    [Column(4, 0)] public int Year;
+    [Column()]     public int Id;
+    [Column()]     public short LineId;
+    [Column()]     public string Note;
+    
+    // Method expression which returns of type "TableConfig", is returned.
+    protected override Expression<TableConfig> Config() =>
+        (x) => x.SetPrimaryKey(Year, Id, LineId);
 }

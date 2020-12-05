@@ -1,0 +1,59 @@
+﻿Following section demonstrates how to update [TableHeader] and [TableLine] records,
+which contain the records that YEAR is 2018 in [TableHeader].
+<code-tab>
+	<pre lang="c#">
+		var th = new TableHeader();
+		var tl = new TableLines();
+
+		var sql = Odb.SQL.Select(x =>
+						x.Fields(th.Id.DISTINCT())
+						 .From(th)
+						 .Where(th.Year == 2018)
+					);
+
+		var qry = Odb.SQL.Query();
+			qry.Update(x => x.From(th).Where(th.Id.IN(sql)).Set(th.Note, "") );
+			qry.Update(x => x.From(tl).Where(tl.Id.IN(sql)).Set(th.Note, "") );
+
+			qry.ExecuteNonQuery(cn);
+	</pre>
+	<pre lang="vb">
+		Dim th = new TableHeader()
+		Dim tl = new TableLines()
+
+		Dim sql = Odb.SQL.Select(Function(x) _
+						x.Fields(th.Id.DISTINCT()) _
+						 .From(th) _
+						 .Where(th.Year = 2018)
+					)
+
+		Dim qry = Odb.SQL.Query()
+			qry.Update(Function(x) x.From(th).Where(th.Id.IN(sql)).Set(th.Note, "") )
+			qry.Update(Function(x) x.From(tl).Where(tl.Id.IN(sql)).Set(th.Note, "") )
+
+			qry.ExecuteNonQuery(cn)
+	</pre>
+</code-tab>
+<o>
+	UPDATE th<br />
+	<hlb>SET th.note=''</hlb><br />
+	FROM [header] AS th<br />
+	WHERE th.id IN (
+	<div style="padding-left:50px;">
+		<hl>
+			SELECT DISTINCT(th.id) FROM [header] AS th WHERE th.year = 2018
+		</hl>
+	</div>
+	)<br />
+	<br />
+	UPDATE tl<br />
+	<hlb>SET tl.note=''</hlb><br />
+	FROM [lines] AS tl<br />
+	WHERE tl.id IN (
+	<div style="padding-left:50px;">
+		<hl>
+			SELECT DISTINCT(th.id) FROM [header] AS th WHERE th.year = 2018
+		</hl>
+	</div>
+	)<br />
+</o>

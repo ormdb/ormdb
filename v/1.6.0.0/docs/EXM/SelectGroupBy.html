@@ -1,0 +1,26 @@
+﻿Following section demonstrates using <hl>GROUP BY</hl> clause.
+<code-tab>
+    <pre lang="c#">
+        var th = new TableHeader();
+
+        var sql = Odb.SQL.Select(x => 
+                        x.From(th)
+                         .GroupBy(th.Year)
+                         .Fields(th.Year, x[th.Id].MAX().AS("C1"))
+                    );
+	</pre>
+    <pre lang="vb">
+        Dim th = new TableHeader()
+
+        Dim sql = Odb.SQL.Select(Function(x) _
+                        x.From(th) _
+                         .GroupBy(th.Year) _
+                         .Fields(th.Year, x(th.Id).MAX().AS("C1"))
+                    )
+	</pre>
+</code-tab>
+<o>
+    SELECT th.year, <hl>MAX(th.id) AS 'C1'</hl>,<br />
+    FROM header AS th<br />
+    <hlb>GROUP BY th.year</hlb>
+</o>

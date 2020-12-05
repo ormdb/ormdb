@@ -1,0 +1,37 @@
+﻿Following section demonstrates <b>insert-into with select</b>.
+<code-tab>
+    <pre lang="c#">
+        var th = new TableHeader();
+
+        Odb.SQL.InsertInto( th, 
+                            x => x.From(th)
+                                .Where(th.Year == 2018)
+                                .Fields((th.Year + 1),
+                                        th.Id,
+                                        th.DocDate,
+                                        th.IsActive,
+                                        th.Note)
+        ).ExecuteNonQuery(cn);
+	</pre>
+    <pre lang="vb">
+        Dim th = new TableHeader()
+
+        Odb.SQL.InsertInto( th, 
+                            Function(x) x.From(th)
+                                .Where(th.Year = 2018)
+                                .Fields((th.Year + 1),
+                                        th.Id,
+                                        th.DocDate,
+                                        th.IsActive,
+                                        th.Note)
+        ).ExecuteNonQuery(cn)
+	</pre>
+</code-tab>
+<o>
+	INSERT INTO [header]<br />
+	<div style="padding-left:50px;">
+		SELECT (th.year + 1), th.id, th.date, th.active, th.note<br />
+		FROM [header] AS th<br />
+		WHERE (th.year = 2018)
+	</div>
+</o>

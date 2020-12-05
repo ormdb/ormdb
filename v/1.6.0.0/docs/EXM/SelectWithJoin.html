@@ -1,0 +1,32 @@
+﻿Following section demonstrates using <hl>JOIN</hl> clause.
+<code-tab>
+    <pre lang="c#">
+        var th = new TableHeader();
+        var tl = new TableLines();
+
+        var sql = Odb.SQL.Select(x => 
+                        x.From(th)
+                        .LeftJoin(tl, tl.Year == th.Year & 
+                                      tl.Id == th.Id ) 
+                        .Where( x[th.Year].IN( new[] {2018, 2019} ) &
+                                th.Id is object )
+                    );
+    </pre>
+    <pre lang="vb">
+        Dim th = new TableHeader()
+        Dim tl = new TableLines()
+
+        Dim sql = Odb.SQL.Select(Function(x) _
+                        x.From(th) _
+                        .LeftJoin(tl, tl.Year = th.Year And
+                                      tl.Id = th.Id ) _
+                        .Where( x(th.Year).IN( {2018, 2019} ) And
+                                th.Id IsNot Nothng )
+                    )
+	</pre>
+</code-tab>
+<o>
+    SELECT * FROM header AS th <br />
+    <hlb>LEFT JOIN lines AS tl ON tl.year = th.year AND tl.id = th.id</hlb> <br />
+    WHERE th.year IN (2018, 2019) AND th.id IS NOT NULL <br />
+</o>

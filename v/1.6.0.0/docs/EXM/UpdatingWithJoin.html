@@ -1,0 +1,44 @@
+﻿Following section demonstrates how to update from [TableHeader] records,
+which contain records that is between 1-10 in [TableLines].
+<code-tab>
+    <pre lang="c#">
+		var th = new TableHeader();
+		var tl = new TableLines();
+		
+		var sql = Odb.SQL.Update(x =>
+						x.From(th) 
+						 .InnerJoin(tl,
+									tl.Year == th.Year &
+									tl.Id == th.Id) 
+						 .Where(tl.LineId > 1M &
+								tl.LineId < 10M)
+						 .Set(th.IsActive, true)
+					);
+	</pre>
+    <pre lang="vb">
+		Dim th = new TableHeader()
+		Dim tl = new TableLines()
+		
+		Dim sql = Odb.SQL.Update(Function(x) _
+						x.From(th) _
+						 .InnerJoin(tl,
+									tl.Year = th.Year And
+									tl.Id = th.Id) _
+						 .Where(tl.LineId > 1D And
+								tl.LineId < 10D) _
+						 .Set(th.IsActive, True)
+					)
+	</pre>
+</code-tab>
+<o>
+    <i class="text-success">
+        This query generates different results for each database connected.<br />
+        The code shown below is generated via MsSql database connection.
+    </i><br /><br />
+
+    UPDATE th<br />
+    <hl>SET th.active=1</hl><br />
+    FROM [header] AS th<br />
+    <hlb>INNER JOIN [lines] AS tl ON (tl.year = th.year AND tl.id = th.id)</hlb><br />
+    WHERE (tl.lineid > 1 AND tl.lineid < 10)<br />
+</o>

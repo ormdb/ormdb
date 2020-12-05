@@ -1,0 +1,56 @@
+﻿Following section demonstrates the dynamic creation of the <hl>Where</hl> clause.
+<code-tab>
+	<pre lang="c#">
+		var th = new TableHeader();
+		
+		// [Where] clause is being extended depending on IF()
+		var sql1 = Odb.SQL.Select(x => 
+							x.From(th)
+							 .Where( th.Year == 2017 ));
+		if ( true )
+			sql1.Add(x => x.Where(th.IsActive == true));
+		else
+			sql1.Add(x => x.Where(th.IsActive == false));
+
+
+		// [Where] clause is being executed depending on value test.
+		var val1 = "X";
+		var sql2 = Odb.SQL.Select(x => 
+							x.From(th)
+							 .Where( (val1 == "X" & th.IsActive == true) |
+									 (val1 == "Y" & th.IsActive == false)
+									)
+					);
+	</pre>
+	<pre lang="vb">
+		Dim th = new TableHeader()
+		
+		' [Where] clause is being extended depending on IF()
+		Dim sql1 = Odb.SQL.Select(Function(X) _
+							x.From(th) _
+							 .Where( th.Year = 2017 )
+		If True Then
+			sql1.Add((Function(X) x.Where(th.IsActive = True))
+		Else
+			sql1.Add((Function(X) x.Where(th.IsActive = False))
+		End If
+
+		' [Where] clause is being executed depending on value test.
+		Dim val1 = "X"
+		Dim sql2 = Odb.SQL.Select(Function(X) _
+							x.From(th) _
+							 .Where( (val1 = "X" And th.IsActive = True) Or
+									 (val1 = "Y" And th.IsActive = False)
+									)
+					)
+	</pre>
+</code-tab>
+<o>
+	SELECT * FROM header AS th<br />
+	WHERE th.year = 2017 AND <hlb>th.active = 1</hlb>
+
+	<br /><br /><br />
+
+	SELECT * FROM header AS th<br />
+	WHERE (<hlb>1=1</hlb> AND th.active = 1) OR (<hlb>1=0</hlb>)
+</o>

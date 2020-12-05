@@ -1,0 +1,58 @@
+﻿Following section demonstrates <hl>how select/exclude the fields</hl> to be read.
+<code-tab>
+	<pre lang="c#">
+		var th = new TableHeader();
+		var tl = new TableLines();
+
+		// selects all fields
+		var sql = Odb.SQL.Select(x => x.From(th) );
+
+		// selects only [Year] and [Id] fields from [TableLines]
+		var sql = Odb.SQL.Select(x => 
+						x.Fields(th.Year, th.Id)
+						  .From(th) );
+
+		// selects all fields for only [TableLines]
+		var sql = Odb.SQL.Select(x => 
+						x.Fields(tl)
+						  .From(th)
+						  .LeftJoin(tl, tl.Id == th.Id) );
+
+		// selects all fields excluding field [Note]
+		var sql = Odb.SQL.Select(x => 
+						x.ExcludeFields(th.Note)
+						  .From(th) );
+	</pre>
+	<pre lang="vb">
+		Dim th = new TableHeader()
+		Dim tl = new TableLines()
+
+		' selects all fields
+		Dim sql = Odb.SQL.Select(Function(X) x.From(th) )
+
+		' selects only [Year] and [Id] fields from [TableLines]
+		Dim sql = Odb.SQL.Select(Function(X) _
+						x.Fields(th.Year, th.Id) _
+						  .From(th) )
+
+		' selects all fields for only [TableLines]
+		Dim sql = Odb.SQL.Select(Function(X) _
+						x.Fields(tl) _
+						  .From(th) _
+						  .LeftJoin(tl, tl.Id = th.Id) )
+
+		' selects all fields excluding field [Note]
+		Dim sql = Odb.SQL.Select(Function(X) _
+						x.ExcludeFields(th.Note) _
+						  .From(th) )
+	</pre>
+</code-tab>
+<o>
+	SELECT <hl>*</hl> FROM header AS th
+	<br />
+	SELECT <hl>th.year, th.id</hl> FROM header AS th
+	<br />
+	SELECT <hl>tl.*</hl> FROM header AS th LEFT JOIN TableLines AS tl ON tl.id = th.id
+	<br />
+	SELECT <hl>th.year, th.id, th.date, th.active</hl> FROM header AS th
+</o>
