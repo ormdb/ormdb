@@ -4,21 +4,21 @@
 		var th = new TableHeader();
 		var tl = new TableLines();
 
-		// selects all fields
+		// All columns
 		var sql = Odb.SQL.Select(x => x.From(th) );
 
-		// selects only [Year] and [Id] fields from [TableLines]
+		// Only [Year] and [Id] columns from [TableHeader]
 		var sql = Odb.SQL.Select(x => 
 						x.Fields(th.Year, th.Id)
 						  .From(th) );
 
-		// selects all fields for only [TableLines]
+		// All columns for only [TableLines]
 		var sql = Odb.SQL.Select(x => 
 						x.Fields(tl)
 						  .From(th)
 						  .LeftJoin(tl, tl.Id == th.Id) );
 
-		// selects all fields excluding field [Note]
+		// All columns by excluding column [Note] from [TableHeader]
 		var sql = Odb.SQL.Select(x => 
 						x.ExcludeFields(th.Note)
 						  .From(th) );
@@ -27,21 +27,21 @@
 		Dim th = new TableHeader()
 		Dim tl = new TableLines()
 
-		' selects all fields
+		' All columns
 		Dim sql = Odb.SQL.Select(Function(X) x.From(th) )
 
-		' selects only [Year] and [Id] fields from [TableLines]
+		' Only [Year] and [Id] columns from [TableHeader]
 		Dim sql = Odb.SQL.Select(Function(X) _
 						x.Fields(th.Year, th.Id) _
 						  .From(th) )
 
-		' selects all fields for only [TableLines]
+		' All columns for only [TableLines]
 		Dim sql = Odb.SQL.Select(Function(X) _
 						x.Fields(tl) _
 						  .From(th) _
 						  .LeftJoin(tl, tl.Id = th.Id) )
 
-		' selects all fields excluding field [Note]
+		' All columns by excluding column [Note] from [TableHeader]
 		Dim sql = Odb.SQL.Select(Function(X) _
 						x.ExcludeFields(th.Note) _
 						  .From(th) )

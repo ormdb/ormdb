@@ -41,12 +41,12 @@
 								var key1 = h.year.ToString() + "_" + h.id.ToString();
 								var key2 = key1 + "_" + l.lineid.ToString();
 
-								Return new[] { key1, key2 };
+								return new[] { key1, key2 };
 							},
 
 						// Combine the items in this method
 						Combine = (h, l) => {
-								if (h.lines == null } h.lines = new List&lt;my_line&gt;();
+								if (h.lines == null) h.lines = new List&lt;my_line&gt;();
 								h.lines.Add(l);
 							}
 				).ToList();
