@@ -1,72 +1,81 @@
 ﻿Following section demonstrates using <hl>UNION</hl> clause.
+<br />
 <code-tab>
 	<pre lang="c#">
 		var th = new TableHeader();
 		var tl = new TableLines();
 		
+		// query 1
 		var sql1 = Odb.SQL.Select(x =>
 						x.From(th)
 						 .GroupBy(th.Year)
-						 .OrderDESC(th.DocDate)
-						 .Fields(th.Year, x[th.Id].MAX().AS("C1"))
+						 .Fields(x["T1"], th.Year, x[th.Id].MAX().AS("MaxValue"))
 					);
+
+		// query 2
 		var sql2 = Odb.SQL.Select(x =>
 						x.From(tl)
 						.GroupBy(tl.Year)
-						.Fields(tl.Year, x[th.Id].MAX().AS("C1"))
+						.Fields(x["T2"], tl.Year, x[th.Id].MAX().AS("MaxValue"))
 					);
 
+		// union
 		var sql = Odb.SQL.Union(x =>
 						x.RemoveDuplicates()
 						 .Add(sql1)
 						 .Add(sql2)
-						 .OrderASC(sql1[th.Year]).OrderDESC(sql1["C1"])
+						 .OrderASC(sql1[0]).OrderASC(sql1[1]).OrderDESC(sql1["MaxValue"])
 					);
 	</pre>
 	<pre lang="vb">
 		Dim th = new TableHeader()
 		Dim tl = new TableLines()
 		
+		' query 1
 		Dim sql1 = Odb.SQL.Select(Function(x) _
 						x.From(th) _
 						 .GroupBy(th.Year) _
-						 .OrderDESC(th.DocDate) _
-						 .Fields(th.Year, x(th.Id).MAX().AS("C1"))
+						 .Fields(x("T1"), th.Year, x(th.Id).MAX().AS("MaxValue"))
 					)
+
+		' query 2
 		Dim sql2 = Odb.SQL.Select(Function(x) _
 						x.From(tl) _
 						.GroupBy(tl.Year) _
-						.Fields(tl.Year, x(tl.Id).MAX().AS("C1"))
+						.Fields(x("T2"), tl.Year, x(tl.Id).MAX().AS("MaxValue"))
 					)
 
+		' union
 		Dim sql = Odb.SQL.Union(Function(x) _
 						x.RemoveDuplicates() _
 						 .Add(sql1) _
 						 .Add(sql2) _
-						 .OrderASC(sql1(th.Year)).OrderDESC(sql1("C1"))
+						 .OrderASC(sql1(0)).OrderASC(sql1(1)).OrderDESC(sql1("MaxValue"))
 					)
 	</pre>
 </code-tab>
+<co type="warning">
+	to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
+</co>
 <o>
-    <hl>SELECT * FROM (</hl><br />
-    <div style="padding-left:50px;">
-        (
-        <div style="padding-left:50px;">
-            SELECT t3.year, MAX(t3.id) AS C1<br />
-            FROM [header] AS t3<br />
-            GROUP BY t3.year<br />
-            ORDER BY t3.date DESC
-        </div>
-        ) AS t0<br />
-        <hlb>UNION</hlb><br />
-        (
-        <div style="padding-left:50px;">
-            SELECT t1.year, MAX(t1.id) AS C1 <br />
-            FROM [lines] AS t1 <br />
-            GROUP BY t1.year
-        </div>
-        ) AS t2
-    </div>
-    <hl>) AS t</hl><br />
-    <hl>ORDER BY year ASC, C1 DESC</hl>
+	<hl>SELECT * FROM (</hl>
+	<div style="padding-left:30px;">
+		(
+		<div style="padding-left:30px;">
+			SELECT 'T1' AS dyn_1, th.year, MAX(th.id) AS MaxValue<br />
+			FROM [header] AS th<br />
+			GROUP BY th.year<br />
+		</div>
+		)
+		<hlb>UNION</hlb><br />
+		(
+		<div style="padding-left:30px;">
+			SELECT 'T2' AS dyn_1, tl.year, MAX(tl.id) AS MaxValue <br />
+			FROM [lines] AS tl <br />
+			GROUP BY tl.year<br />
+		</div>
+		)
+	</div>
+	<hl>) AS t</hl><br />
+	<hl>ORDER BY dyn_1 ASC, year ASC, C1 DESC</hl>
 </o>

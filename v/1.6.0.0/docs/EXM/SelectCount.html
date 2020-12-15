@@ -3,14 +3,14 @@
     <pre lang="c#">
 		var th = new TableHeader();
 		
-		var sql = Odb.SQL.Select(Function(x) x.From(th));
+		var sql = Odb.SQL.Select(x => x.From(th));
 
 		var cnt = sql.ExecuteCount(cn);
 	</pre>
-    <pre lang="vb">
+	<pre lang="vb">
 		Dim th = new TableHeader()
 		
-		Dim sql = Odb.SQL.Select(Function(x) x.From(th))
+		Dim sql = Odb.SQL.Select(x => x.From(th))
 
 		Dim cnt = sql.ExecuteCount(cn)
 	</pre>

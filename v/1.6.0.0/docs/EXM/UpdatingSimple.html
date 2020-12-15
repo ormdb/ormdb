@@ -4,9 +4,8 @@
 		var th = new TableHeader();
 
 		// Updates the entire row with values which are NOT Null if the fields are nullable.
-		var model = th.NewModel();
-		model.DocDate = DateTime.Now.AddDays(1);
-		// model.Note = DBNull.Value // if the field is nullable
+		th.DocDate = DateTime.Now.AddDays(1);
+		// th.Note = DBNull.Value // if the field is nullable
 
 		var sql = Odb.SQL.Update(x =>
 						x.From(th)
@@ -15,12 +14,11 @@
 					);
 	</pre>
 	<pre lang="vb">
-		Dim th = new TableHeader()
+		Dim th = New TableHeader()
 
 		' Updates the entire row with values which are NOT Null.
-		Dim model = th.NewModel()
-		model.DocDate = DateTime.Now.AddDays(1)
-		' model.Note = DBNull.Value ' if the field is nullable if the fields are nullable.
+		th.DocDate = DateTime.Now.AddDays(1)
+		' th.Note = DBNull.Value ' if the field is nullable if the fields are nullable.
 
 		Dim sql = Odb.SQL.Update(Function(x) _
 						x.From(th) _

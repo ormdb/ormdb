@@ -1,14 +1,11 @@
 ﻿Following section demonstrates <b>multiple table insertion</b>.
 <code-tab>
 	<pre lang="c#">
-		var th = new TableHeader();
-		var tl = new TableLines();
-
 		var sql = Odb.SQL.Insert(true);
 
 		for (short n = 0; n < 100; n++)
 		{
-			var row1 = th.NewModel();
+			var row1 = new TableHeader();
 				row1.Year    = DateTime.Now.Year;
 				row1.Id      = n;
 				row1.DocDate = DateTime.Now.AddDays(1);
@@ -17,7 +14,7 @@
 
 			for (short i = 0; i < 2; n++)
 			{
-				var row2 = tl.NewModel();
+				var row2 = new TableLines();
 					row2.Year   = row1.Year;
 					row2.Id     = row1.Id;
 					row2.LineId = i;
@@ -27,24 +24,21 @@
 		}
 	</pre>
 	<pre lang="vb">
-		Dim th = new TableHeader()
-		Dim tl = new TableLines()
-
 		Dim sql = Odb.SQL.Insert(True)
 
-		For n As Short = 1 To 100		
-			Dim row1 = th.NewModel()
+		For n As Short = 1 To 100
+			Dim row1 = New TableHeader()
 				row1.Year    = DateTime.Now.Year
 				row1.Id      = n
 				row1.DocDate = DateTime.Now.AddDays(1)
 				row1.Note    = "header note value"
 			sql.Add(row1)
 
-			For m As Short = 1 To 2
-				Dim row2 = tl.NewModel()
+			For i As Short = 1 To 2
+				Dim row2 = New TableLines()
 					row2.Year   = row1.Year
 					row2.Id     = row1.Id
-					row2.LineId = m
+					row2.LineId = i
 					row2.Note   = "line note value"
 				sql.Add(row2)
 			Next

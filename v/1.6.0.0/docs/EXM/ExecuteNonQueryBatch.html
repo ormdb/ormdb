@@ -11,11 +11,11 @@
 		sql.Delete(tl);
 		
 		// INSERT commands are being queued...
-		var model = th.NewModel();
-			model.Year = DateTime.Now.Year;
-			model.Id = 1;
-			model.DocDate = DateTime.Now.AddDays(1);
-		sql.Insert(true).Add(model);
+		sql.Insert(True).Add(new TableHeader() {
+                                Year = DateTime.Now.Year,
+								Id = 1,
+								DocDate = DateTime.Now.AddDays(1)
+                            })
 
 		// UPDATE commands are being queued...
 		sql.Update(x =>
@@ -28,8 +28,8 @@
 		sql.ExecuteNonQuery(cn);
 	</pre>
 	<pre lang="vb">
-		Dim th = new TableHeader()
-		Dim tl = new TableLines()
+		Dim th = New TableHeader()
+		Dim tl = New TableLines()
 		
 		Dim sql = SQL.X.Query()
 		
@@ -38,11 +38,11 @@
 		sql.Delete(tl)
 		
 		' INSERT commands are being queued...
-		Dim model = th.NewModel()
-			model.Year = DateTime.Now.Year
-			model.Id = 1
-			model.DocDate = DateTime.Now.AddDays(1)
-		sql.Insert(True).Add(model)
+		sql.Insert(True).Add(New TableHeader() With {
+                                .Year = DateTime.Now.Year,
+								.Id = 1,
+								.DocDate = DateTime.Now.AddDays(1)
+                            })
 
 		' UPDATE commands are being queued...
 		sql.Update(Function(x) _

@@ -5,7 +5,7 @@
 
         for (short n = 0; n < short.MaxValue; n++)
         {
-            var model = th.NewModel();
+            var model = new TableHeader();
             model.Year = DateTime.Now.Year;
             model.Id = n;
             model.DocDate = DateTime.Now.AddDays(1);
@@ -19,7 +19,7 @@
         Dim sql = Odb.SQL.Insert(True)
 
         For n = 1 To Short.MaxValue
-            Dim model = th.NewModel()
+            Dim model = New TableHeader()
             model.Year = DateTime.Now.Year
             model.Id = n
             model.DocDate = DateTime.Now.AddDays(1)

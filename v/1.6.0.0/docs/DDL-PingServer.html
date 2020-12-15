@@ -24,9 +24,9 @@ Following section demonstrates ping and calculate average time.
 	<pre lang="c#">
 		var ts = new TimeSpan();
 		for (int n = 1; n <= 3; n++)
-		    ts = ts + common.cn.Provider.PingServer();
+		    ts = ts + cn.Provider.PingServer();
 
-		Debug.WriteLine("Server Ping (Avg.) = {ts.TotalMilliseconds.toString()} ms.");
+		Debug.WriteLine("Server Ping (Avg.) = {ts.TotalMilliseconds.ToString()} ms.");
 	</pre>
 	<pre lang="vb">
 		Dim ts As New TimeSpan
@@ -34,6 +34,6 @@ Following section demonstrates ping and calculate average time.
 		    ts = ts + cn.Provider.PingServer()
 		Next
 
-		Debug.WriteLine("Server Ping (Avg.) = {ts.TotalMilliseconds.toString()} ms.")
+		Debug.WriteLine("Server Ping (Avg.) = {ts.TotalMilliseconds.ToString()} ms.")
 	</pre>
 </code-tab>

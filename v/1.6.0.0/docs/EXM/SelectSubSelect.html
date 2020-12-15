@@ -1,6 +1,6 @@
 ﻿Following section demonstrates using <hl>SUB SELECT</hl> clause.
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 		var th = new TableHeader();
 		var tl = new TableLines();
 		
@@ -12,11 +12,11 @@
 		
 		var sql = Odb.SQL.Select(x =>
 						x.From(th)
-						 .LeftJoin( sql1, sql1[tl.Year].ToInteger() == th.Year )
-						 .Fields( th, sql1["C1"] )
+						 .LeftJoin( sql1, sql1[0].ToInteger() == th.Year )
+						 .Fields( th, sql1[1] )
 					);
 	</pre>
-	<pre lang="vb">
+    <pre lang="vb">
 		Dim th = new TableHeader()
 		Dim tl = new TableLines()
 		
@@ -28,11 +28,14 @@
 		
 		Dim sql = Odb.SQL.Select(Function(x) _
 						x.From(th) _
-						 .LeftJoin( sql1, sql1(tl.Year).ToInteger() = th.Year ) _
-						 .Fields( th, sql1("C1") )
+						 .LeftJoin( sql1, sql1(0).ToInteger() = th.Year ) _
+						 .Fields( th, sql1(1) )
 					)
 	</pre>
 </code-tab>
+<co type="warning">
+    to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
+</co>
 <o>
     SELECT th.*, t2.C1<br />
     FROM [header] AS th<br />

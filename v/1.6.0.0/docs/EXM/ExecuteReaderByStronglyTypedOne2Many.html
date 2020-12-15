@@ -1,6 +1,6 @@
 ﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> as <b>StronglyTyped</b>.
 <code-tab>
-	<pre lang="c#">
+    <pre lang="c#">
 	var th = new TableHeader();
 	var tl = new TableLines();
 
@@ -10,25 +10,6 @@
 						 .LeftJoin(tl, tl.Year == th.Year &
 									     th.Id == tl.Id)
 					);
-
-	// strongly types
-	internal class my_header
-	{
-		public int year;
-		public int id;
-		public DateTime date;
-		public bool active;
-		public object note;
-
-		public List&lt;my_line&gt; lines;
-	}
-
-	internal class my_line
-	{
-		public short lineid;
-		public string note;
-	}
-
 	// reading
 	var rows = sql.ExecuteReaderOneToMany&lt;my_header, my_line&gt;(
 						cn,
@@ -50,8 +31,27 @@
 								h.lines.Add(l);
 							}
 				).ToList();
+
+	// strongly types
+	internal class my_header
+	{
+		public int year;
+		public int id;
+		public DateTime date;
+		public bool active;
+		public object note;
+
+		public List&lt;my_line&gt; lines;
+	}
+
+	internal class my_line
+	{
+		public short lineid;
+		public string note;
+	}
+
 </pre>
-	<pre lang="vb">
+    <pre lang="vb">
 	Dim th = new TableHeader()
 	Dim tl = new TableLines()
 
@@ -61,21 +61,6 @@
 						 .LeftJoin(tl, tl.Year = th.Year And
 									     th.Id = tl.Id)
 					)
-
-	' strongly types
-	Private Class my_header
-		Public year As Integer
-		Public id As Integer
-		Public [date] As Date
-		Public active As Boolean
-		Public note As Object
-
-		Public lines As List(Of my_line)
-	End Class
-	Private Class my_line
-		Public lineid As Short
-		Public note As String
-	End Class
 
 	' reading
 	Dim rows = sql.ExecuteReaderOneToMany(Of my_header, my_line)(
@@ -98,6 +83,21 @@
 								h.lines.Add(l)
 							End Sub
 				).ToList()
+
+	' strongly types
+	Private Class my_header
+		Public year As Integer
+		Public id As Integer
+		Public [date] As Date
+		Public active As Boolean
+		Public note As Object
+
+		Public lines As List(Of my_line)
+	End Class
+	Private Class my_line
+		Public lineid As Short
+		Public note As String
+	End Class
 </pre>
 </code-tab>
 
