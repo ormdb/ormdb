@@ -1,8 +1,5 @@
-﻿
+﻿"<b>Sql Commands</b>" (such as AS, AVG, DISTINCT etc.) can be used via helper parameter that comes with expression function.
 <co type="success">
-    "<b>Sql Commands</b>" (such as AS, AVG, DISTINCT etc.) can be used via helper parameter that comes with expression function.
-    <br />
-    <br />
     <code-tab>
         <pre lang="c#">
 		Odb.SQL.Select(x => ... x[table-field].SqlCommand ... );</pre>
@@ -15,8 +12,10 @@
 
 <st>CONSTANT</st>
 Selects a contant value.
-<code-tab>
-    <pre lang="c#">
+<div class="row">
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
 		var sql = Odb.SQL.Select(x => 
 						x.Fields(
 							5.60, x[5.63].AS("C1"),
@@ -24,7 +23,7 @@ Selects a contant value.
 						)
 					);
 	</pre>
-	<pre lang="vb">
+            <pre lang="vb">
 		Dim sql = Odb.SQL.Select(Function(x) _
 						x.Fields(
 							5.60, x(5.63).AS("C1"),
@@ -32,16 +31,22 @@ Selects a contant value.
 						)
 					)
 	</pre>
-</code-tab>
-<o>
-    SELECT <hl>5.60</hl>, <hl>5.63 AS C1</hl>, <hl>'str1'</hl>, <hl>'str2' AS C2</hl>
-</o>
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            SELECT <hl>5.60</hl>, <hl>5.63 AS C1</hl>, <hl>'str1'</hl>, <hl>'str2' AS C2</hl>
+        </o>
+    </div>
+</div>
 
 
 <st>AS</st>
 Renames a column with an alias.
-<code-tab>
-    <pre lang="c#">
+<div class="row">
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
 		var th = new TableHeader();
 
 		var sql = Odb.SQL.Select(x => 
@@ -51,7 +56,7 @@ Renames a column with an alias.
 						).From(th)
 					);
 	</pre>
-    <pre lang="vb">
+            <pre lang="vb">
 		Dim th = new TableHeader()
 
 		Dim sql = Odb.SQL.Select(Function(x) _
@@ -61,17 +66,23 @@ Renames a column with an alias.
 						).From(th)
 					)
 	</pre>
-</code-tab>
-<o>
-    SELECT 'X' <hl>AS</hl> C1, th.Year <hl>AS</hl> Y1<br />
-    FROM header AS th
-</o>
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            SELECT 'X' <hl>AS</hl> C1, th.Year <hl>AS</hl> Y1<br />
+            FROM header AS th
+        </o>
+    </div>
+</div>
 
 
 <st>IN / NOT_IN</st>
 <k>IN</k> command allows you to specify multiple values in a <b>WHERE</b> clause.
-<code-tab>
-    <pre lang="c#">
+<div class="row">
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
 		var th = new TableHeader();
 
 		var vals1 = new[] {2017, 2018};
@@ -84,7 +95,7 @@ Renames a column with an alias.
 						)
 					);
 	</pre>
-    <pre lang="vb">
+            <pre lang="vb">
 		Dim th = new TableHeader()
 
 		Dim vals1 = {2017, 2018}
@@ -97,18 +108,24 @@ Renames a column with an alias.
 						)
 					)
 	</pre>
-</code-tab>
-<o>
-    SELECT *<br />
-    FROM header AS th <br />
-    WHERE ( th.year <hl>IN</hl> (2017, 2018) ) AND
-    ( th.note <hl>NOT IN</hl> ('A', 'B', 'C') )
-</o>
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            SELECT *<br />
+            FROM header AS th <br />
+            WHERE ( th.year <hl>IN</hl> (2017, 2018) ) AND
+            ( th.note <hl>NOT IN</hl> ('A', 'B', 'C') )
+        </o>
+    </div>
+</div>
 
 
 <st>IS NULL / IS NOT NULL</st>
-<code-tab>
-    <pre lang="c#">
+<div class="row">
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
 		var th = new TableHeader();
 
 		var sql = Odb.SQL.Select(x => 
@@ -118,7 +135,7 @@ Renames a column with an alias.
 						)
 					);
 	</pre>
-    <pre lang="vb">
+            <pre lang="vb">
 		Dim th = new TableHeader()
 
 		Dim sql = Odb.SQL.Select(Function(x) _
@@ -128,20 +145,25 @@ Renames a column with an alias.
 						 )
 					)
 	</pre>
-</code-tab>
-<o>
-    SELECT *<br />
-    FROM header AS th <br />
-    WHERE ( th.year <hl>IS NULL</hl> ) AND
-    ( th.note <hl>IS NOT NULL</hl> )
-</o>
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            SELECT *<br />
+            FROM header AS th <br />
+            WHERE ( th.year <hl>IS NULL</hl> ) AND
+            ( th.note <hl>IS NOT NULL</hl> )
+        </o>
+    </div>
+</div>
 
 
 <st>LIKE</st>
 is used in a WHERE clause to search for a specified pattern in a column.
-<br />
-<code-tab>
-    <pre lang="c#">
+<div class="row">
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
 		var th = new TableHeader();
 
 		var sql = Odb.SQL.Select(x => 
@@ -152,7 +174,7 @@ is used in a WHERE clause to search for a specified pattern in a column.
 						 )
 					);
 	</pre>
-    <pre lang="vb">
+            <pre lang="vb">
 		Dim th = new TableHeader()
 
 		Dim sql = Odb.SQL.Select(Function(x) _
@@ -163,19 +185,25 @@ is used in a WHERE clause to search for a specified pattern in a column.
 						 )
 					)
 	</pre>
-</code-tab>
-<o>
-    SELECT *<br />
-    FROM header AS th <br />
-    WHERE ( th.note <hl>LIKE</hl> 'A<hl>%</hl>' ) OR
-    ( th.note <hl>LIKE</hl> '<hl>%</hl>Z' ) OR
-    ( th.note <hl>LIKE</hl> '<hl>%</hl>M<hl>%</hl>' )
-</o>
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            SELECT *<br />
+            FROM header AS th <br />
+            WHERE ( th.note <hl>LIKE</hl> 'A<hl>%</hl>' ) OR
+            ( th.note <hl>LIKE</hl> '<hl>%</hl>Z' ) OR
+            ( th.note <hl>LIKE</hl> '<hl>%</hl>M<hl>%</hl>' )
+        </o>
+    </div>
+</div>
 
 <st>COUNT</st>
-The <k>COUNT</k> function returns the number of rows that matches a specified criteria.
-<code-tab>
-    <pre lang="c#">
+The <k>COUNT</k> function returns the number of rows that matches a specified criteria. <co type="warning" inline>Please refer to <a href="##EXM--SelectCount">SelectCount</a> for different usages.</co>
+	<div class="row">
+		<div class="col-md-12 col-lg">
+			<code-tab>
+				<pre lang="c#">
 		var th = new TableHeader();
 
 		var sql = Odb.SQL.Select(x => 
@@ -184,7 +212,7 @@ The <k>COUNT</k> function returns the number of rows that matches a specified cr
 						).From(th)
 					);
 	</pre>
-    <pre lang="vb">
+				<pre lang="vb">
 		Dim th = new TableHeader()
 
 		Dim sql = Odb.SQL.Select(Function(x) _
@@ -193,44 +221,53 @@ The <k>COUNT</k> function returns the number of rows that matches a specified cr
 						).From(th)
 					)
 	</pre>
-</code-tab>
-<o>
-	SELECT <hl>COUNT(th.year)</hl><br />
-	FROM header AS th <br />
-</o>
-<co type="warning">
-	Please refer to <a href="##EXM--SelectCount">SelectCount</a> for different usages.
-</co>
+			</code-tab>
+		</div>
+		<div class="col-md-12 col-lg-4">
+			<o class="h-100">
+				SELECT <hl>COUNT(th.year)</hl><br />
+				FROM header AS th <br />
+			</o>
+		</div>
+	</div>
 
-<st>DISTINCT</st>
-Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
-The <k>DISTINCT</k> statement is used to return only distinct (different) values.
-<code-tab>
-    <pre lang="c#">
+	<st>DISTINCT</st>
+	Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
+	The <k>DISTINCT</k> statement is used to return only distinct (different) values.
+	<div class="row">
+		<div class="col-md-12 col-lg">
+			<code-tab>
+				<pre lang="c#">
 		var th = new TableHeader();
 
 		var sql = Odb.SQL.Select(x => 
 						x.Fields( x[th.Year].DISTINCT().AS("C") )
 						 .From(th)
 					);</pre>
-    <pre lang="vb">
+				<pre lang="vb">
 		Dim th = new TableHeader()
 
 		Dim sql = Odb.SQL.Select(Function(x) _
 						x.Fields( x(th.Year).DISTINCT().AS("C") ) _
 						 .From(th)
 					)</pre>
-</code-tab>
-<o>
-	SELECT <hl>DISTINCT(th.year)</hl> AS 'C'<br />
-	FROM header AS th <br />
-</o>
+			</code-tab>
+		</div>
+		<div class="col-md-12 col-lg-4">
+			<o class="h-100">
+				SELECT <hl>DISTINCT(th.year)</hl> AS 'C'<br />
+				FROM header AS th <br />
+			</o>
+		</div>
+	</div>
 
 
-<st>COALESCE</st>
-Return the first non-null value in a list.
-<code-tab>
-    <pre lang="c#">
+	<st>COALESCE</st>
+	Return the first non-null value in a list.
+	<div class="row">
+		<div class="col-md-12 col-lg">
+			<code-tab>
+				<pre lang="c#">
 		var th = new TableHeader();
 
 		var sql = Odb.SQL.Select(x => 
@@ -238,7 +275,7 @@ Return the first non-null value in a list.
 						 .From(th)
 					);
 	</pre>
-    <pre lang="vb">
+				<pre lang="vb">
 		Dim th = new TableHeader()
 
 		Dim sql = Odb.SQL.Select(Function(x) _
@@ -246,16 +283,22 @@ Return the first non-null value in a list.
 						 .From(th)
 					)
 	</pre>
-</code-tab>
-<o>
-	SELECT <hl>COALESCE(th.year, 5, NULL)</hl> AS 'C'<br />
-	FROM header AS th <br />
-</o>
+			</code-tab>
+		</div>
+		<div class="col-md-12 col-lg-4">
+			<o class="h-100">
+				SELECT <hl>COALESCE(th.year, 5, NULL)</hl> AS 'C'<br />
+				FROM header AS th <br />
+			</o>
+		</div>
+	</div>
 
 
-<st>Aggregate Functions</st>
-<code-tab>
-    <pre lang="c#">
+	<st>Aggregate Functions</st>
+	<div class="row">
+		<div class="col-md-12 col-lg">
+			<code-tab>
+				<pre lang="c#">
 		var th = new TableHeader();
 
 		var sql = Odb.SQL.Select(x => 
@@ -269,7 +312,7 @@ Return the first non-null value in a list.
 						  )
 					);
 	</pre>
-    <pre lang="vb">
+				<pre lang="vb">
 		Dim th = new TableHeader()
 
 		Dim sql = Odb.SQL.Select(Function(x) _
@@ -283,22 +326,28 @@ Return the first non-null value in a list.
 						  )
 					)
 	</pre>
-</code-tab>
-<o>
-	SELECT th.Year,
-	<div style="padding-left:50px;">
-		<hl>AVG(th.id)</hl> AS 'C1',<br />
-		<hl>MIN(th.id)</hl> AS 'C2',<br />
-		<hl>MAX(th.id)</hl> AS 'C3',<br />
-		<hl>SUM(th.id)</hl> AS 'C4'
+			</code-tab>
+		</div>
+		<div class="col-md-12 col-lg-4">
+			<o class="h-100">
+				SELECT th.Year,
+				<div style="padding-left:50px;">
+					<hl>AVG(th.id)</hl> AS 'C1',<br />
+					<hl>MIN(th.id)</hl> AS 'C2',<br />
+					<hl>MAX(th.id)</hl> AS 'C3',<br />
+					<hl>SUM(th.id)</hl> AS 'C4'
+				</div>
+				FROM header AS th <br />
+			</o>
+		</div>
 	</div>
-	FROM header AS th <br />
-</o>
 
 
-<st>String Functions</st>
-<code-tab>
-    <pre lang="c#">
+	<st>String Functions</st>
+	<div class="row">
+		<div class="col-md-12 col-lg">
+			<code-tab>
+				<pre lang="c#">
 		var th = new TableHeader();
 
 		var sql = Odb.SQL.Select(x => 
@@ -313,7 +362,7 @@ Return the first non-null value in a list.
 						  ).From(th)
 					);
 	</pre>
-    <pre lang="vb">
+				<pre lang="vb">
 		Dim th = new TableHeader()
 
 		Dim sql = Odb.SQL.Select(Function(x) _
@@ -328,18 +377,22 @@ Return the first non-null value in a list.
 						  ).From(th)
 					)
 	</pre>
-</code-tab>
-<o>
-	SELECT
-	<div style="padding-left:50px;">
-		<hl>SUBSTRING(th.note)</hl> AS '2_to_4',<br />
-		<hl>LEFT(th.note, 1)</hl> AS 'left_1',<br />
-		<hl>RIGHT(th.note, 2)</hl> AS 'right_2',<br />
-		<hl>UPPER(th.note)</hl> AS 'C1',<br />
-		<hl>LOWER(th.note)</hl> AS 'C2',<br />
-		<hl>TRIM(th.note)</hl> AS 'C3',<br />
-		<hl>LTRIM(RTRIM(th.note))</hl> AS 'C4',<br />
-		<hl>CONCAT(th.note, ', ID=', th.id)</hl> AS 'C5'
+			</code-tab>
+		</div>
+		<div class="col-md-12 col-lg-4">
+			<o class="h-100">
+				SELECT
+				<div style="padding-left:50px;">
+					<hl>SUBSTRING(th.note)</hl> AS '2_to_4',<br />
+					<hl>LEFT(th.note, 1)</hl> AS 'left_1',<br />
+					<hl>RIGHT(th.note, 2)</hl> AS 'right_2',<br />
+					<hl>UPPER(th.note)</hl> AS 'C1',<br />
+					<hl>LOWER(th.note)</hl> AS 'C2',<br />
+					<hl>TRIM(th.note)</hl> AS 'C3',<br />
+					<hl>LTRIM(RTRIM(th.note))</hl> AS 'C4',<br />
+					<hl>CONCAT(th.note, ', ID=', th.id)</hl> AS 'C5'
+				</div>
+				FROM header AS th <br />
+			</o>
+		</div>
 	</div>
-	FROM header AS th <br />
-</o>

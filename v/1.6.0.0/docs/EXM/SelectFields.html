@@ -1,6 +1,8 @@
 ﻿Following section demonstrates <hl>how select/exclude the fields</hl> to be read.
-<code-tab>
-	<pre lang="c#">
+<div class="row">
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
 		var th = new TableHeader();
 		var tl = new TableLines();
 
@@ -23,7 +25,7 @@
 						x.ExcludeFields(th.Note)
 						  .From(th) );
 	</pre>
-	<pre lang="vb">
+			<pre lang="vb">
 		Dim th = new TableHeader()
 		Dim tl = new TableLines()
 
@@ -46,13 +48,21 @@
 						x.ExcludeFields(th.Note) _
 						  .From(th) )
 	</pre>
-</code-tab>
-<o>
-	SELECT <hl>*</hl> FROM header AS th
-	<br />
-	SELECT <hl>th.year, th.id</hl> FROM header AS th
-	<br />
-	SELECT <hl>tl.*</hl> FROM header AS th LEFT JOIN TableLines AS tl ON tl.id = th.id
-	<br />
-	SELECT <hl>th.year, th.id, th.date, th.active</hl> FROM header AS th
-</o>
+		</code-tab>
+	</div>
+	<div class="col-md-12 col-lg-4">
+		<o class="h-100">
+			SELECT <hl>*</hl> FROM header AS th
+			<br />
+			<br />
+			SELECT <hl>th.year, th.id</hl> FROM header AS th
+			<br />
+			<br />
+			SELECT <hl>tl.*</hl> FROM header AS th LEFT JOIN TableLines AS tl ON tl.id = th.id
+			<br />
+			<br />
+			SELECT <hl>th.year, th.id, th.date, th.active</hl> FROM header AS th
+		</o>
+	</div>
+</div>
+<a href="https://dotnetfiddle.net/1j0zsQ" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

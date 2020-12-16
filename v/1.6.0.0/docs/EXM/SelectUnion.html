@@ -1,7 +1,12 @@
 ﻿Following section demonstrates using <hl>UNION</hl> clause.
-<br />
-<code-tab>
-	<pre lang="c#">
+<co type="warning" inline>
+	to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
+</co>
+
+<div class="row">
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
 		var th = new TableHeader();
 		var tl = new TableLines();
 		
@@ -27,7 +32,7 @@
 						 .OrderASC(sql1[0]).OrderASC(sql1[1]).OrderDESC(sql1["MaxValue"])
 					);
 	</pre>
-	<pre lang="vb">
+			<pre lang="vb">
 		Dim th = new TableHeader()
 		Dim tl = new TableLines()
 		
@@ -53,29 +58,31 @@
 						 .OrderASC(sql1(0)).OrderASC(sql1(1)).OrderDESC(sql1("MaxValue"))
 					)
 	</pre>
-</code-tab>
-<co type="warning">
-	to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
-</co>
-<o>
-	<hl>SELECT * FROM (</hl>
-	<div style="padding-left:30px;">
-		(
-		<div style="padding-left:30px;">
-			SELECT 'T1' AS dyn_1, th.year, MAX(th.id) AS MaxValue<br />
-			FROM [header] AS th<br />
-			GROUP BY th.year<br />
-		</div>
-		)
-		<hlb>UNION</hlb><br />
-		(
-		<div style="padding-left:30px;">
-			SELECT 'T2' AS dyn_1, tl.year, MAX(tl.id) AS MaxValue <br />
-			FROM [lines] AS tl <br />
-			GROUP BY tl.year<br />
-		</div>
-		)
+		</code-tab>
 	</div>
-	<hl>) AS t</hl><br />
-	<hl>ORDER BY dyn_1 ASC, year ASC, C1 DESC</hl>
-</o>
+	<div class="col-md-12 col-lg-4">
+		<o class="h-100">
+			<hl>SELECT * FROM (</hl>
+			<div style="padding-left:30px;">
+				(
+				<div style="padding-left:30px;">
+					SELECT 'T1' AS dyn_1, th.year, MAX(th.id) AS MaxValue<br />
+					FROM [header] AS th<br />
+					GROUP BY th.year<br />
+				</div>
+				)
+				<hlb>UNION</hlb><br />
+				(
+				<div style="padding-left:30px;">
+					SELECT 'T2' AS dyn_1, tl.year, MAX(tl.id) AS MaxValue <br />
+					FROM [lines] AS tl <br />
+					GROUP BY tl.year<br />
+				</div>
+				)
+			</div>
+			<hl>) AS t</hl><br />
+			<hl>ORDER BY dyn_1 ASC, year ASC, C1 DESC</hl>
+		</o>
+	</div>
+</div>
+<a href="https://dotnetfiddle.net/2G0HiR" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

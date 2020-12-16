@@ -1,6 +1,8 @@
 ﻿Following section demonstrates how to sort the data returned in ascending/descending order.
-<code-tab>
-    <pre lang="c#">
+<div class="row">
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
 		var th = new TableHeader();
 
 		var sql = Odb.SQL.Select(x => 
@@ -8,7 +10,7 @@
 						 .OrderDESC(th.Year).OrderASC(th.Id)
 					);
 	</pre>
-    <pre lang="vb">
+			<pre lang="vb">
 		Dim th = new TableHeader()
 
 		Dim sql = Odb.SQL.Select(Function(x) _
@@ -16,9 +18,14 @@
 						 .OrderDESC(th.Year).OrderASC(th.Id)
 					)
 	</pre>
-</code-tab>
-<o>
-    SELECT <hl>*</hl> <br />
-    FROM <hl>header</hl> AS th <br />
-    ORDER BY th.year <hl>DESC</hl>, th.id <hl>ASC</hl>
-</o>
+		</code-tab>
+	</div>
+	<div class="col-md-12 col-lg-4">
+		<o class="h-100">
+			SELECT <hl>*</hl> <br />
+			FROM <hl>header</hl> AS th <br />
+			ORDER BY th.year <hl>DESC</hl>, th.id <hl>ASC</hl>
+		</o>
+	</div>
+</div>
+<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

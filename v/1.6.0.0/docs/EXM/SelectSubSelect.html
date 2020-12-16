@@ -1,6 +1,12 @@
 ﻿Following section demonstrates using <hl>SUB SELECT</hl> clause.
-<code-tab>
-    <pre lang="c#">
+<co type="warning" inline>
+	to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
+</co>
+
+<div class="row">
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
 		var th = new TableHeader();
 		var tl = new TableLines();
 		
@@ -16,7 +22,7 @@
 						 .Fields( th, sql1[1] )
 					);
 	</pre>
-    <pre lang="vb">
+			<pre lang="vb">
 		Dim th = new TableHeader()
 		Dim tl = new TableLines()
 		
@@ -32,29 +38,33 @@
 						 .Fields( th, sql1(1) )
 					)
 	</pre>
-</code-tab>
-<co type="warning">
-    to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
-</co>
-<o>
-    SELECT th.*, t2.C1<br />
-    FROM [header] AS th<br />
-    LEFT JOIN (<br />
-    <div style="padding-left:50px;">
-        <hl>
-            SELECT tl.year, MAX(tl.id) AS C1<br />
-            FROM [lines] AS tl<br />
-            GROUP BY tl.year
-        </hl>
-    </div>
-    ) AS t2 ON (t2.year = th.year)
-</o>
+		</code-tab>
+	</div>
+	<div class="col-md-12 col-lg-4">
+		<o class="h-100">
+			SELECT th.*, t2.C1<br />
+			FROM [header] AS th<br />
+			LEFT JOIN (<br />
+			<div style="padding-left:50px;">
+				<hl>
+					SELECT tl.year, MAX(tl.id) AS C1<br />
+					FROM [lines] AS tl<br />
+					GROUP BY tl.year
+				</hl>
+			</div>
+			) AS t2 ON (t2.year = th.year)
+		</o>
+	</div>
+</div>
+<a href="https://dotnetfiddle.net/C5xQwQ" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
 <br />
 <br />
 
 Following section demonstrates using <hl>SUB SELECT</hl> in a <hl>WHERE</hl> block.
-<code-tab>
-    <pre lang="c#">
+<div class="row">
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
 		var th = new TableHeader();
 		var tl = new TableLines();
 		
@@ -66,7 +76,7 @@ Following section demonstrates using <hl>SUB SELECT</hl> in a <hl>WHERE</hl> blo
 		
 		var sql = Odb.SQL.Select(x => x.From(th).Where( x[th.Id].IN(sql1)) );
 	</pre>
-    <pre lang="vb">
+			<pre lang="vb">
 		Dim th = new TableHeader()
 		Dim tl = new TableLines()
 		
@@ -78,16 +88,21 @@ Following section demonstrates using <hl>SUB SELECT</hl> in a <hl>WHERE</hl> blo
 		
 		Dim sql = Odb.SQL.Select(Function(x) x.From(th).Where( x(th.Id).IN(sql1)) )
 	</pre>
-</code-tab>
-<o>
-    SELECT * FROM header AS th<br />
-    WHERE th.id IN (
-    <div style="padding-left:50px;">
-        <hl>
-            SELECT DISTINCT(tl.id)<br />
-            FROM header AS tl<br />
-            WHERE tl.year = 2018
-        </hl>
-    </div>
-    )
-</o>
+		</code-tab>
+	</div>
+	<div class="col-md-12 col-lg-4">
+		<o class="h-100">
+			SELECT * FROM header AS th<br />
+			WHERE th.id IN (
+			<div style="padding-left:50px;">
+				<hl>
+					SELECT DISTINCT(tl.id)<br />
+					FROM header AS tl<br />
+					WHERE tl.year = 2018
+				</hl>
+			</div>
+			)
+		</o>
+	</div>
+</div>
+<a href="https://dotnetfiddle.net/C5xQwQ" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

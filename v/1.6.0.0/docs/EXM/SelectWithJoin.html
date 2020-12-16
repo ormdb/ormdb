@@ -1,6 +1,8 @@
 ﻿Following section demonstrates using <hl>JOIN</hl> clause.
-<code-tab>
-    <pre lang="c#">
+<div class="row">
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
         var th = new TableHeader();
         var tl = new TableLines();
 
@@ -12,7 +14,7 @@
                                 th.Id is object )
                     );
     </pre>
-    <pre lang="vb">
+            <pre lang="vb">
         Dim th = new TableHeader()
         Dim tl = new TableLines()
 
@@ -24,9 +26,14 @@
                                 th.Id IsNot Nothng )
                     )
 	</pre>
-</code-tab>
-<o>
-    SELECT * FROM header AS th <br />
-    <hlb>LEFT JOIN lines AS tl ON tl.year = th.year AND tl.id = th.id</hlb> <br />
-    WHERE th.year IN (2018, 2019) AND th.id IS NOT NULL <br />
-</o>
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            SELECT * FROM header AS th <br />
+            <hlb>LEFT JOIN lines AS tl ON tl.year = th.year AND tl.id = th.id</hlb> <br />
+            WHERE th.year IN (2018, 2019) AND th.id IS NOT NULL <br />
+        </o>
+    </div>
+</div>
+<a href="https://dotnetfiddle.net/S9MQUT" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

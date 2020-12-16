@@ -1,6 +1,8 @@
 ﻿Following section demonstrates using <hl>GROUP BY</hl> clause.
-<code-tab>
-    <pre lang="c#">
+<div class="row">
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
         var th = new TableHeader();
 
         var sql = Odb.SQL.Select(x => 
@@ -9,7 +11,7 @@
                          .Fields(th.Year, x[th.Id].MAX().AS("C1"))
                     );
 	</pre>
-    <pre lang="vb">
+            <pre lang="vb">
         Dim th = new TableHeader()
 
         Dim sql = Odb.SQL.Select(Function(x) _
@@ -18,9 +20,14 @@
                          .Fields(th.Year, x(th.Id).MAX().AS("C1"))
                     )
 	</pre>
-</code-tab>
-<o>
-    SELECT th.year, <hl>MAX(th.id) AS 'C1'</hl>,<br />
-    FROM header AS th<br />
-    <hlb>GROUP BY th.year</hlb>
-</o>
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            SELECT th.year, <hl>MAX(th.id) AS 'C1'</hl>,<br />
+            FROM header AS th<br />
+            <hlb>GROUP BY th.year</hlb>
+        </o>
+    </div>
+</div>
+<a href="https://dotnetfiddle.net/zeHZ1R" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

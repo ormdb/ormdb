@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
     <link rel="stylesheet" href="/resources/css/prism.css">
     <link rel="stylesheet" href="/resources/css/site.css" />
 
@@ -277,8 +278,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="/resources/js/prism.js"></script>
     <script src="/resources/js/site.js"></script>
     <script>
@@ -739,7 +739,7 @@
                     if (_items.length == 0) return;
 
                     var _item = $(_items[0]);
-                    _item.replaceWith('<div class="bs-callout bs-callout-warning table-warning">All Examples needs the <a href="##EXM--Startup">Startup</a>. Please refer to <a href="##EXM--Startup">Startup</a> for further information.</div>');
+                    _item.replaceWith('<div class="bs-callout bs-callout-warning bs-fill">All Examples needs the <a href="##EXM--Startup">Startup</a>. Please refer to <a href="##EXM--Startup">Startup</a> for further information.</div>');
                 }
             }
             //-------------------------------------------------------------------------------------
@@ -760,15 +760,15 @@
                 while (true) {
                     var _items = _wiki_body_content.find("co");
                     if (_items.length == 0) return;
-
                     var _item = $(_items[0]);
                     var _type = _item.attr("type");
+                    var _inline = (_item.attr("inline")!=undefined);
                     var _text = "";
                     switch (_type) {
                         case "light":
                             _text = "text-muted"
                     }
-                    _item.replaceWith('<div class="bs-callout bs-callout-' + _type + ' table-' + _type + ' ' + _text + ' ' + _item[0].classList.value + '" style="' + _item[0].style.cssText + '">' + _item.html() + '</div>');
+                    _item.replaceWith('<div class="bs-callout' + (_inline ? '-sm' : '') + ' bs-callout-' + _type + ' bs-fill' + ' ' + _text + ' ' + _item[0].classList.value + '" style="' + (_inline ? 'display:inline!important' : '') + _item[0].style.cssText + '">' + _item.html() + '</div>');
                 }
             }
         }

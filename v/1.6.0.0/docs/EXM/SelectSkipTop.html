@@ -1,6 +1,8 @@
 ﻿Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
-<code-tab>
-    <pre lang="c#">
+<div class="row">
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
         var th = new TableHeader();
 
         var sql = Odb.SQL.Select(x => 
@@ -8,7 +10,7 @@
                          .Skip(15).Top(5)
                     );
 	</pre>
-    <pre lang="vb">
+            <pre lang="vb">
         Dim th = new TableHeader()
 
         Dim sql = Odb.SQL.Select(Function(x) _
@@ -16,8 +18,13 @@
                          .Skip(15).Top(5)
                     )
 	</pre>
-</code-tab>
-<co type="warning">
-	<hl>SKIP</hl> and <hl>TOP</hl> depends on the version of the database connected. 
-    For example, code shown above works only MsSql 2012 and above.
-</co>
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <co type="warning" class="h-100">
+            <hl>SKIP</hl> and <hl>TOP</hl> depends on the version of the database connected.
+            For example, code shown above works only MsSql 2012 and above.
+        </co>
+    </div>
+</div>
+<a href="https://dotnetfiddle.net/61623M" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
