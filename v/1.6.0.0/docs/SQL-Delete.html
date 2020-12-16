@@ -3,19 +3,19 @@
 <br />
 <br />
 <co type="warning">
-    <b>Note:</b> Be careful when deleting records in a table! Notice the WHERE clause in the DELETE statement. The WHERE clause specifies which record(s) should be deleted. If you omit the WHERE clause, all records in the table will be deleted!
+	<b>Note:</b> Be careful when deleting records in a table! Notice the WHERE clause in the DELETE statement. The WHERE clause specifies which record(s) should be deleted. If you omit the WHERE clause, all records in the table will be deleted!
 </co>
 
 <st>Definition</st>
 <co type="light">
-    <small><b>Namespace : </b>Odb</small>
+	<small><b>Namespace : </b>Odb</small>
 </co>
 <br />
 <code-tab>
-    <pre lang="c#">
+	<pre lang="c#">
 		public static SQL.Expressions.Delete SQL.Delete(Expression)
 	</pre>
-    <pre lang="vb">
+	<pre lang="vb">
 		Public Shared Function SQL.Delete(Expression) As SQL.Expressions.Delete
 	</pre>
 </code-tab>
@@ -38,18 +38,22 @@
 
 <br />
 <br />
+<st>Regular</st>
 <include src="$/EXM/DeletionSimple.html"></include>
 
 <br />
 <br />
+<st>Multpile</st>
 <include src="$/EXM/DeletionMultipleTable.html"></include>
 
 
 <br />
 <br />
+<st>With Join</st>
 <include src="$/EXM/DeletionWithJoin.html"></include>
 
 
 <br />
 <br />
+<st>With Chunks</st>
 <include src="$/EXM/DeletionWithChunks.html"></include>

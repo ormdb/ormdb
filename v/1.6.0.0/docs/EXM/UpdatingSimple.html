@@ -1,6 +1,8 @@
 ﻿Following section demonstrates <b>regular update</b> with model of table.
-<code-tab>
-	<pre lang="c#">
+<div class="row">
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
 		var th = new TableHeader();
 
 		// Updates the entire row with values which are NOT Null if the fields are nullable.
@@ -12,8 +14,10 @@
 						 .Where( th.Id == 12345M )
 						 .Set(model)
 					);
+
+		var affectedRows = sql.ExecuteNonQuery(cn);
 	</pre>
-	<pre lang="vb">
+			<pre lang="vb">
 		Dim th = New TableHeader()
 
 		' Updates the entire row with values which are NOT Null.
@@ -25,11 +29,18 @@
 						 .Where( th.Id = 12345D ) _
 						 .Set(model)
 					)
+
+		Dim affectedRows = sql.ExecuteNonQuery(cn)
 	</pre>
-</code-tab>
-<o>
-    UPDATE th<br />
-    <hlb>SET th.date='2020-06-20 10:00:00' </hlb><br />
-    FROM [header] AS th<br />
-    WHERE (th.id = 12345)
-</o>
+		</code-tab>
+	</div>
+	<div class="col-md-12 col-lg-4">
+		<o class="h-100">
+			UPDATE th<br />
+			<hlb>SET th.date='2020-06-20 10:00:00' </hlb><br />
+			FROM [header] AS th<br />
+			WHERE (th.id = 12345)
+		</o>
+	</div>
+</div>
+<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

@@ -1,9 +1,11 @@
 ﻿Following section demonstrates <b>insert-into with select</b>.
-<code-tab>
-    <pre lang="c#">
+<div class="row">
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
         var th = new TableHeader();
 
-        Odb.SQL.InsertInto( th, 
+        var sql = Odb.SQL.InsertInto( th, 
                             x => x.From(th)
                                 .Where(th.Year == 2018)
                                 .Fields((th.Year + 1),
@@ -11,12 +13,14 @@
                                         th.DocDate,
                                         th.IsActive,
                                         th.Note)
-        ).ExecuteNonQuery(cn);
+        );
+
+        var affectedRows = sql.ExecuteNonQuery(cn);
 	</pre>
-    <pre lang="vb">
+            <pre lang="vb">
         Dim th = new TableHeader()
 
-        Odb.SQL.InsertInto( th, 
+        Dim sql = Odb.SQL.InsertInto( th, 
                             Function(x) x.From(th)
                                 .Where(th.Year = 2018)
                                 .Fields((th.Year + 1),
@@ -24,14 +28,21 @@
                                         th.DocDate,
                                         th.IsActive,
                                         th.Note)
-        ).ExecuteNonQuery(cn)
+        )
+
+        Dim affectedRows = sql.ExecuteNonQuery(cn)
 	</pre>
-</code-tab>
-<o>
-	INSERT INTO [header]<br />
-	<div style="padding-left:50px;">
-		SELECT (th.year + 1), th.id, th.date, th.active, th.note<br />
-		FROM [header] AS th<br />
-		WHERE (th.year = 2018)
-	</div>
-</o>
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            INSERT INTO [header]<br />
+            <div style="padding-left:50px;">
+                SELECT (th.year + 1), th.id, th.date, th.active, th.note<br />
+                FROM [header] AS th<br />
+                WHERE (th.year = 2018)
+            </div>
+        </o>
+    </div>
+</div>
+<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

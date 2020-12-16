@@ -1,6 +1,8 @@
 ﻿Following section demonstrates to use <b>Set</b> method for setting value(s).
-<code-tab>
-	<pre lang="c#">
+<div class="row">
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
 		var th = new TableHeader();
 		
 		var sql = Odb.SQL.Update(x =>
@@ -11,8 +13,10 @@
 						 .SetRaw(th.IsActive, !th.IsActive)
 						 .SetNull(th.Note)
 					);
+
+		var affectedRows = sql.ExecuteNonQuery(cn);
 	</pre>
-	<pre lang="vb">
+			<pre lang="vb">
 		Dim th = new TableHeader()
 		
 		Dim sql = Odb.SQL.Update(Function(x) _
@@ -23,11 +27,18 @@
 						 .SetRaw(th.IsActive, Not th.IsActive) _
 						 .SetNull(th.Note)
 					)
+
+		Dim affectedRows = sql.ExecuteNonQuery(cn)
 	</pre>
-</code-tab>
-<o>
-	UPDATE th<br />
-	<hlb>SET th.date='2020-06-20 10:00:00', th.id=(th.id + 1), th.active=NOT th.active, </hlb><hl>th.note=NULL</hl><br />
-	FROM [header] AS th<br />
-	WHERE (th.year = 2018)
-</o>
+		</code-tab>
+	</div>
+	<div class="col-md-12 col-lg-4">
+		<o class="h-100">
+			UPDATE th<br />
+			<hlb>SET th.date='2020-06-20 10:00:00', th.id=(th.id + 1), th.active=NOT th.active, </hlb><hl>th.note=NULL</hl><br />
+			FROM [header] AS th<br />
+			WHERE (th.year = 2018)
+		</o>
+	</div>
+</div>
+<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

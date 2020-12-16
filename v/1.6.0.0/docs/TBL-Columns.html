@@ -15,8 +15,10 @@
         // String
         public string my_col;
 
-        // Fixed length String
+        // Fixed length String + Nullable
         [Column(Length = 10)] public string my_col;
+        // Fixed length String + Not Nullable
+        [Column(Length = 10, DefaultValue = "")] public string my_col;
 
         // Numerics
         [Column(Length = 5)] public short my_col;
@@ -49,6 +51,8 @@
 
         ' Fixed length String
         &lt;Column(Length:=10)&gt; Public my_col AS String
+        ' Fixed length String + Not Nullable
+        &lt;Column(Length:=10, DefaultValue:="")&gt; Public my_col AS String
                 
         ' Numerics
         &lt;Column(Length:=5)&gt; public my_col AS Short
@@ -78,7 +82,7 @@
 </code-tab>
 
 <st>Reference Column</st>
-<p>is used for columns used repeatedly. <b>Name</b>, <b>Description</b>, <b>DefaultValue</b> and <b>Nullable</b> properties can be redefiend. You can reference a column from many column(s).</p>
+<p>is used for columns used repeatedly. <b>Name</b>, <b>Description</b>, <b>DefaultValue</b> and <b>AutoIncrement</b> properties can be redefiend. You can reference a column from many column(s).</p>
 <code-tab>
     <pre lang="c#">
         // Attributes are defined at once to use as a reference...
@@ -188,6 +192,13 @@
     </a>
     <a class="list-group-item list-group-item-action">
         <div class="my-1 d-flex w-100 justify-content-between">
+            <b>AutoIncrement : </b>
+            <small class="text-secondary">(Optional)</small>
+        </div>
+        <p>allows a unique number to be generated automatically when a new record is inserted into a table.</p>
+    </a>
+    <a class="list-group-item list-group-item-action">
+        <div class="my-1 d-flex w-100 justify-content-between">
             <b>Description : </b>
             <small class="text-secondary">(Optional)</small>
         </div>
@@ -198,7 +209,7 @@
             <b>Nullable : </b>
             <small class="text-secondary">(Optional)</small>
         </div>
-        <p>This constraint enforces a column to accept or NOT accept NULL values.</p>
+        <p>It is determined  automatically. If the type is nullable (such as int?, string etc.) and also <b>DefaultValue</b> is not specified then <b>TRUE</b> is accepted. otherwise <b>FALSE</b> is accepted.</p>
     </a>
     <a class="list-group-item list-group-item-action">
         <div class="my-1 d-flex w-100 justify-content-between">

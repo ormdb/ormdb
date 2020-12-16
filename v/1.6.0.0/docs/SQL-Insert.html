@@ -6,17 +6,17 @@
 </co>
 <code-tab>
     <pre lang="c#">
-		public static SQL.Expressions.Insert SQL.Insert(bool SetInitials = false)
+		public static SQL.Expressions.Insert SQL.Insert()
 	</pre>
     <pre lang="vb">
-		Public Shared Function SQL.Insert(SetInitials As Boolean = False) As SQL.Expressions.Insert
+		Public Shared Function SQL.Insert() As SQL.Expressions.Insert
 	</pre>
 </code-tab>
 
 <st>Syntax</st>
 <co type="light" class="p-0">
     <pre lang="sql">
-        INSERT ( [ SetInitials ] )
+        INSERT ( )
             ADD ( model | value array )
     </pre>
 </co>
@@ -30,16 +30,20 @@
 
 <br />
 <br />
-<include src="$/EXM/InsertionSimple.html" ></include>
+<st>With Model</st>
+<include src="$/EXM/InsertionSimple.html"></include>
 
 <br />
 <br />
-<include src="$/EXM/InsertionWithValues.html" ></include>
+<st>With Values</st>
+<include src="$/EXM/InsertionWithValues.html"></include>
 
 <br />
 <br />
+<st>Multiple</st>
 <include src="$/EXM/InsertionMultipleTable.html"></include>
 
 <br />
 <br />
+<st>From Another Db</st>
 <include src="$/EXM/InsertionFromAnotherDb.html"></include>

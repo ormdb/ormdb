@@ -1,31 +1,46 @@
 ﻿Following section demonstrates insertion with <b>Value Array</b>.
-<code-tab>
-    <pre lang="c#">
-        var sql = Odb.SQL.Insert(true);
+<div class="row">
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
+        var sql = Odb.SQL.Insert();
 
-        sql.Add&lt;TableHeader&gt;(DateTime.Now.Year, 
-                            1, 
-                            DateTime.Now, 
-                            null, 
-                            DBNull.Value);
+        var dt = DateTime.Now;
+        sql.Add&lt;TableHeader&gt;(dt.Year, 1, dt, null, DBNull.Value);
+
+        sql.Add&lt;TableLines&gt;(dt.Year, 1, 1, "note 1");
+        sql.Add&lt;TableLines&gt;(dt.Year, 1, 2, "note 2");
+
+        var affectedRows = sql.ExecuteNonQuery(cn);
 	</pre>
-    <pre lang="vb">
-        Dim sql = Odb.SQL.Insert(True)
+            <pre lang="vb">
+        Dim sql = Odb.SQL.Insert()
 
-        sql.Add(Of TableHeader)(DateTime.Now.Year,
-                                1,
-                                DateTime.Now,
-                                Nothing,
-                                DBNull.Value)
+        Dim dt = DateTime.Now
+        sql.Add(Of TableHeader)(dt.Year, 1, dt, Nothing, DBNull.Value)
+
+        sql.Add(Of TableLines)(dt.Year, 1, 1, "note 1")
+        sql.Add(Of TableLines)(dt.Year, 1, 2, "note 2")
+
+        Dim affectedRows = sql.ExecuteNonQuery(cn)
 	</pre>
-</code-tab>
-<o>
-    In this sample; column "<k>IsActive</k>" was not specified (3rd value), and also column "<k>Note</k>" was specified as DbNull (4th value).
-    <br />
-    These columns will be accepted as its initial value, since the parameter "<k>SetInitials</k>" of <b>Insert</b> is <k>TRUE</k>.
-    <br />
-    <br />
-
-    INSERT INTO [header]<br />
-    VALUES (2020, 1, '2020-01-20 10:00:00', <hlb>FALSE</hlb>, <hlb>''</hlb>)
-</o>
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            In this sample; column "<k>IsActive</k>" was not specified (3rd value), and also column "<k>Note</k>" was specified as DbNull (4th value).
+            <br />
+            These columns will be accepted as its initial value, since the parameter "<k>SetInitials</k>" of <b>Insert</b> is <k>TRUE</k>.
+            <br />
+            <br />
+            INSERT INTO [header]<br />
+            VALUES (2020, 1, '2020-01-20 10:00:00', <hlb>FALSE</hlb>, <hlb>''</hlb>);
+            <br />
+            <br />
+            INSERT INTO [lines] VALUES (2020, 1, 1, 'note 1');
+            <br />
+            INSERT INTO [lines] VALUES (2020, 1, 2, 'note 2');
+        </o>
+    </div>
+</div>
+<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

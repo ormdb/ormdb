@@ -1,6 +1,8 @@
 ﻿Following section demonstrates <b>simple deletion</b>.
-<code-tab>
-	<pre lang="c#">
+<div class="row">
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
 		var th = new TableHeader();
 		
 		var sql = Odb.SQL.Delete(x =>
@@ -9,7 +11,7 @@
 								th.Id == 12345M)
 					);
 	</pre>
-	<pre lang="vb">
+			<pre lang="vb">
 		Dim th = new TableHeader()
 		
 		Dim sql = Odb.SQL.Delete(Function(x) _
@@ -18,9 +20,14 @@
 								th.Id = 12345D)
 					)
 	</pre>
-</code-tab>
-<o>
-	DELETE th<br />
-	FROM [header] AS th<br />
-	WHERE ((th.year = 2018) AND (th.id = 12345))<br />
-</o>
+		</code-tab>
+	</div>
+	<div class="col-md-12 col-lg-4">
+		<o class="h-100">
+			DELETE th<br />
+			FROM [header] AS th<br />
+			WHERE ((th.year = 2018) AND (th.id = 12345))<br />
+		</o>
+	</div>
+</div>
+<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

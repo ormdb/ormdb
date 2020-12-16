@@ -1,10 +1,12 @@
 ﻿Following section demonstrates insertion from <b>Another Database</b>.
-<code-tab>
-    <pre lang="c#">
+<div class="row">
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
         Odb.Connection src_cn = default;
         int batch_size = 5000;
 
-        var sql = Odb.SQL.Insert(true);
+        var sql = Odb.SQL.Insert();
 
         foreach (var _row in src_cn.ExecuteReader("SELECT * FROM header"))
         {
@@ -13,11 +15,11 @@
                 sql.ExecuteNonQuery(cn);
         }
     </pre>
-    <pre lang="vb">
+            <pre lang="vb">
         Dim src_cn As Odb.Connection
         Dim batch_size As Integer = 5000
 
-        Dim sql = Odb.SQL.Insert(True)
+        Dim sql = Odb.SQL.Insert()
 
         For Each _row In src_cn.ExecuteReader("SELECT * FROM header")
             sql.Add(Of TableHeader)(_row.ToArray())
@@ -26,4 +28,11 @@
             End If
         Next
 	</pre>
-</code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            Insertions are being executed each 5000 rows.
+        </o>
+    </div>
+</div>
+<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

@@ -194,7 +194,7 @@
 </head>
 <body>
     <div class="d-flex flex-column overflow-hidden" style="position: absolute; top:0; right:0; left:0; bottom:0; line-height1;">
-        <nav class="navbar navbar-dark bg-dark d-sm-flex d-md-none">
+        <nav class="navbar navbar-dark bg-dark d-sm-flex d-md-none px-2 py-0">
             <button class="navbar-toggler" type="button" onclick="toggleNav()">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -205,18 +205,13 @@
             </a>
             <button type="button" class="ModalLangShowBtn btn btn-secondary mt-1 px-1 py-0" style="font-size:.8em; border-color:rgba(255,255,255,.5);">Lang : c#</button>
         </nav>
-        <nav class="navbar navbar-dark bg-dark d-none d-md-flex py-0">
-            <div>
-                <!--<button class="navbar-toggler" type="button" onclick="toggleNav()">
-                    <span class="navbar-toggler-icon"></span>
-                </button>-->
+        <nav class="navbar navbar-dark bg-dark d-none d-md-flex px-2 py-0">
                 <div class="btn-group">
-                    <button class="VersionBtn btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="VersionBtn btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         ver.
                     </button>
                     <div class="VersionMnu dropdown-menu"></div>
                 </div>
-            </div>
 
             <a class="navbar-brand navbar-text" href="/">
                 <div class="wiki-logo" style="width:80px;height:40px;"></div>
@@ -352,8 +347,8 @@
                         method: "GET", async: true, cache: false,
                         headers: {
                             'X-Forwarded-For': ip/*,
-                            'origin': location.protocol + '://' + ip,
-                            'referer': location.protocol + '://' + ip + '/index.html'*/
+                                'origin': location.protocol + '://' + ip,
+                                'referer': location.protocol + '://' + ip + '/index.html'*/
                         }
                     })
                 } catch { }
@@ -762,7 +757,7 @@
                     if (_items.length == 0) return;
                     var _item = $(_items[0]);
                     var _type = _item.attr("type");
-                    var _inline = (_item.attr("inline")!=undefined);
+                    var _inline = (_item.attr("inline") != undefined);
                     var _text = "";
                     switch (_type) {
                         case "light":

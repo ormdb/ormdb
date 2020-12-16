@@ -198,68 +198,35 @@ is used in a WHERE clause to search for a specified pattern in a column.
     </div>
 </div>
 
-<st>COUNT</st>
-The <k>COUNT</k> function returns the number of rows that matches a specified criteria. <co type="warning" inline>Please refer to <a href="##EXM--SelectCount">SelectCount</a> for different usages.</co>
-	<div class="row">
-		<div class="col-md-12 col-lg">
-			<code-tab>
-				<pre lang="c#">
-		var th = new TableHeader();
+<st>DISTINCT</st>
+Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
+The <k>DISTINCT</k> statement is used to return only distinct (different) values.
+<div class="row">
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
+	var th = new TableHeader();
 
-		var sql = Odb.SQL.Select(x => 
-						x.Fields(
-							x[th.Year].COUNT()
-						).From(th)
-					);
-	</pre>
-				<pre lang="vb">
-		Dim th = new TableHeader()
+	var sql = Odb.SQL.Select(x => 
+					x.Fields( x[th.Year].DISTINCT().AS("C") )
+						.From(th)
+				);</pre>
+			<pre lang="vb">
+	Dim th = new TableHeader()
 
-		Dim sql = Odb.SQL.Select(Function(x) _
-						x.Fields(
-							x(th.Year).COUNT()
-						).From(th)
-					)
-	</pre>
-			</code-tab>
-		</div>
-		<div class="col-md-12 col-lg-4">
-			<o class="h-100">
-				SELECT <hl>COUNT(th.year)</hl><br />
-				FROM header AS th <br />
-			</o>
-		</div>
+	Dim sql = Odb.SQL.Select(Function(x) _
+					x.Fields( x(th.Year).DISTINCT().AS("C") ) _
+						.From(th)
+				)</pre>
+		</code-tab>
 	</div>
-
-	<st>DISTINCT</st>
-	Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
-	The <k>DISTINCT</k> statement is used to return only distinct (different) values.
-	<div class="row">
-		<div class="col-md-12 col-lg">
-			<code-tab>
-				<pre lang="c#">
-		var th = new TableHeader();
-
-		var sql = Odb.SQL.Select(x => 
-						x.Fields( x[th.Year].DISTINCT().AS("C") )
-						 .From(th)
-					);</pre>
-				<pre lang="vb">
-		Dim th = new TableHeader()
-
-		Dim sql = Odb.SQL.Select(Function(x) _
-						x.Fields( x(th.Year).DISTINCT().AS("C") ) _
-						 .From(th)
-					)</pre>
-			</code-tab>
-		</div>
-		<div class="col-md-12 col-lg-4">
-			<o class="h-100">
-				SELECT <hl>DISTINCT(th.year)</hl> AS 'C'<br />
-				FROM header AS th <br />
-			</o>
-		</div>
+	<div class="col-md-12 col-lg-4">
+		<o class="h-100">
+			SELECT <hl>DISTINCT(th.year)</hl> AS 'C'<br />
+			FROM header AS th <br />
+		</o>
 	</div>
+</div>
 
 
 	<st>COALESCE</st>

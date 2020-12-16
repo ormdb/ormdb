@@ -111,7 +111,7 @@
         "UpdatingWithSet": "Update With Set",
 
         "-INS": "INSERT",
-        "InsertionSimple": "Insert Model",
+        "InsertionSimple": "Insert",
         "InsertionWithValues": "Insert Value Array",
         "InsertionMultipleTable": "Insert Multiple",
         "InsertionInto": "Insert Into",

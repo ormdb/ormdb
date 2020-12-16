@@ -1,40 +1,41 @@
 ﻿Following section demonstrates how to delete from [TableHeader] records,
 which contain records that is between 1-10 in [TableLines].
-<code-tab>
-	<pre lang="c#">
+<div class="row">
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
 		var th = new TableHeader();
 		var tl = new TableLines();
 		
 		var sql = Odb.SQL.Delete(x =>
 						x.From(th) 
-						 .InnerJoin(tl,
-									tl.Year == th.Year &
-									tl.Id == th.Id) 
-						 .Where(tl.LineId > 1M &
-								tl.LineId < 10M)
+						 .InnerJoin(tl, tl.Year == th.Year & tl.Id == th.Id) 
+						 .Where(tl.LineId > 1M & tl.LineId < 10M)
 					);
 	</pre>
-	<pre lang="vb">
+			<pre lang="vb">
 		Dim th = new TableHeader()
 		Dim tl = new TableLines()
 		
 		Dim sql = Odb.SQL.Delete(Function(x) _
 						x.From(th) _
-						 .InnerJoin(tl,
-									tl.Year = th.Year And
-									tl.Id = th.Id) _
-						 .Where(tl.LineId > 1D And
-								tl.LineId < 10D)
+						 .InnerJoin(tl, tl.Year = th.Year And tl.Id = th.Id) _
+						 .Where(tl.LineId > 1D And tl.LineId < 10D)
 					)
 	</pre>
-</code-tab>
-<o>
-	<i class="text-success">
-		This query generates different results for each database connected.<br />
-		The code shown below is generated via MsSql database connection.
-	</i><br /><br />
-	DELETE th<br />
-	FROM [header] AS th<br />
-	INNER JOIN [lines] AS tl ON ((tl.year = th.year) AND (tl.id = th.id))<br />
-	WHERE ((tl.lineid > 5800) AND (tl.lineid < 6100))<br />
-</o>
+		</code-tab>
+	</div>
+	<div class="col-md-12 col-lg-4">
+		<o class="h-100">
+			<i class="text-success">
+				This query generates different results for each database connected.<br />
+				The code shown below is generated via MsSql database connection.
+			</i><br /><br />
+			DELETE th<br />
+			FROM [header] AS th<br />
+			INNER JOIN [lines] AS tl ON ((tl.year = th.year) AND (tl.id = th.id))<br />
+			WHERE ((tl.lineid > 5800) AND (tl.lineid < 6100))<br />
+		</o>
+	</div>
+</div>
+<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

@@ -1,7 +1,9 @@
 ﻿Following section demonstrates <b>multiple table insertion</b>.
-<code-tab>
-	<pre lang="c#">
-		var sql = Odb.SQL.Insert(true);
+<div class="row">
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
+		var sql = Odb.SQL.Insert();
 
 		for (short n = 0; n < 100; n++)
 		{
@@ -22,9 +24,11 @@
 				sql.Add(row2);
 			}
 		}
+
+		var affectedRows = sql.ExecuteNonQuery(cn);
 	</pre>
-	<pre lang="vb">
-		Dim sql = Odb.SQL.Insert(True)
+			<pre lang="vb">
+		Dim sql = Odb.SQL.Insert()
 
 		For n As Short = 1 To 100
 			Dim row1 = New TableHeader()
@@ -43,5 +47,18 @@
 				sql.Add(row2)
 			Next
 		Next
+
+		Dim affectedRows = sql.ExecuteNonQuery(cn)
 	</pre>
-</code-tab>
+		</code-tab>
+	</div>
+	<div class="col-md-12 col-lg-4">
+		<o class="h-100">
+			Different model(s) can be appended by using the same inserter.
+			<br />
+			<br />
+			All model(s) will be grouped according its type, before execution by Insert engine.
+		</o>
+	</div>
+</div>
+<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

@@ -1,6 +1,8 @@
 ﻿Following section demonstrates <b>deletion from multiple table</b>.
-<code-tab>
-	<pre lang="c#">
+<div class="row">
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
 		var th = new TableHeader();
 		var tl = new TableLines();
 
@@ -16,7 +18,7 @@
 
 			qry.ExecuteNonQuery(cn);
 	</pre>
-	<pre lang="vb">
+			<pre lang="vb">
 		Dim th = new TableHeader()
 		Dim tl = new TableLines()
 
@@ -32,23 +34,28 @@
 
 			qry.ExecuteNonQuery(cn)
 	</pre>
-</code-tab>
-<o>
-	DELETE th FROM [header] AS th<br />
-	WHERE th.id IN (
-	<div style="padding-left:50px;">
-		<hl>
-			SELECT DISTINCT(th.id) FROM [header] AS th WHERE th.year = 2018
-		</hl>
+		</code-tab>
 	</div>
-	)<br />
-	<br />
-	DELETE tl FROM [lines] AS tl<br />
-	WHERE tl.id IN (
-	<div style="padding-left:50px;">
-		<hl>
-			SELECT DISTINCT(th.id) FROM [header] AS th WHERE th.year = 2018
-		</hl>
+	<div class="col-md-12 col-lg-4">
+		<o class="h-100">
+			DELETE th FROM [header] AS th<br />
+			WHERE th.id IN (
+			<div style="padding-left:50px;">
+				<hl>
+					SELECT DISTINCT(th.id) FROM [header] AS th WHERE th.year = 2018
+				</hl>
+			</div>
+			)<br />
+			<br />
+			DELETE tl FROM [lines] AS tl<br />
+			WHERE tl.id IN (
+			<div style="padding-left:50px;">
+				<hl>
+					SELECT DISTINCT(th.id) FROM [header] AS th WHERE th.year = 2018
+				</hl>
+			</div>
+			)<br />
+		</o>
 	</div>
-	)<br />
-</o>
+</div>
+<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

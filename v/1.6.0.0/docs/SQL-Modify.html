@@ -22,7 +22,7 @@
 			x.From( Table | SubSelect )
 			 .Where( Condition )
 		)
-		.OnInsert( set_initials , new_row)
+		.OnInsert( new_row)
 		.onUpdate( new_row , old_row)
 		.onAlways( new_row , old_row)
     </pre>

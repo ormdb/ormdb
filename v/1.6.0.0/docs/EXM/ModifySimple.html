@@ -7,15 +7,15 @@
                                 x.From(th)
                                  .Where(th.Year == 2021 & 
                                         th.Id == 1000)
-        ).onInsert(true, Row => {
-                            Row.DocDate = DateTime.Now
-                        }
+        ).onInsert(Row => {
+                        Row.DocDate = DateTime.Now
+                    }
         ).onUpdate((Row, OldRow) => {
-                            Row.Note = "new note value"
-                        }
+                        Row.Note = "new note value"
+                    }
         ).onAlways((Row, OldRow) => {
-                            var IsUpdate = (OldRow is object);
-                        }
+                        var IsUpdate = (OldRow is object);
+                    }
         ).ExecuteNonQuery(cn);
     </pre>
     <pre lang="vb">
@@ -25,9 +25,9 @@
                                 x.From(th) _
                                  .Where(th.Year = 2021 And
                                         th.Id = 1000)
-        ).onInsert(True, Sub(Row)
-                            Row.DocDate = DateTime.Now
-                        End Sub) _
+        ).onInsert(Sub(Row)
+                        Row.DocDate = DateTime.Now
+                    End Sub) _
          .onUpdate(Sub(Row, OldRow)
                         Row.Note = "new note value"
                     End Sub) _
