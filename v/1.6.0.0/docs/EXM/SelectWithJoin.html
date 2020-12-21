@@ -3,37 +3,29 @@
     <div class="col-md-12 col-lg">
         <code-tab>
             <pre lang="c#">
-        var th = new TableHeader();
-        var tl = new TableLines();
-
-        var sql = Odb.SQL.Select(x => 
-                        x.From(th)
-                        .LeftJoin(tl, tl.Year == th.Year & 
-                                      tl.Id == th.Id ) 
-                        .Where( x[th.Year].IN( new[] {2018, 2019} ) &
-                                th.Id is object )
-                    );
-    </pre>
-            <pre lang="vb">
-        Dim th = new TableHeader()
-        Dim tl = new TableLines()
-
-        Dim sql = Odb.SQL.Select(Function(x) _
-                        x.From(th) _
-                        .LeftJoin(tl, tl.Year = th.Year And
-                                      tl.Id = th.Id ) _
-                        .Where( x(th.Year).IN( {2018, 2019} ) And
-                                th.Id IsNot Nothng )
-                    )
+		var t0 = new Orders();
+		var t1 = new OrderDetails();
+		
+		Odb.SQL.Select(x => 
+			    x.From(t0)
+			     .Fields(t0.OrderID, t1.OrderDetailID)
+			     .LeftJoin(t1, t1.OrderID == t0.OrderID) 
+			     .Where( t0.OrderID > 1500 &
+					     t1.OrderID != null )
+		);
 	</pre>
         </code-tab>
     </div>
     <div class="col-md-12 col-lg-4">
         <o class="h-100">
-            SELECT * FROM header AS th <br />
-            <hlb>LEFT JOIN lines AS tl ON tl.year = th.year AND tl.id = th.id</hlb> <br />
-            WHERE th.year IN (2018, 2019) AND th.id IS NOT NULL <br />
+            SELECT t0.OrderID, t1.OrderDetailID <br />
+            FROM [Orders] AS t0 <br />
+            <hlb>
+                LEFT JOIN [OrderDetails] AS t1 <br />
+                ON (t1.OrderID = t0.OrderID)
+            </hlb> <br />
+            WHERE ((t0.OrderID > 1500) AND (t1.OrderID IS NOT NULL))
         </o>
     </div>
 </div>
-<a href="https://dotnetfiddle.net/S9MQUT" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>S9MQUT</fiddle>

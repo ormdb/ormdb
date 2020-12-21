@@ -1,76 +1,46 @@
 ﻿Following section demonstrates <hl>how select/exclude the fields</hl> to be read.
 <div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-		var th = new TableHeader();
-		var tl = new TableLines();
+	<div class="col-md-12 col-lg">
+		<code-tab>
+			<pre lang="c#">
+		var t0 = new Orders();
+		var t1 = new OrderDetails();
 
-		// All columns
-		var sql = Odb.SQL.Select(x => x.From(th) );
+		// Select all columns
+		Odb.SQL.Select(x => x.From(t0) );
 
-		// Only [Year] and [Id] columns from [TableHeader]
-		var sql = Odb.SQL.Select(x => 
-						x.Fields(th.Year, th.Id)
-						  .From(th) );
+		// Select Only [OrderID] and [CustomerID] columns from [Orders]
+		Odb.SQL.Select(x => x.From(t0).Fields(t0.OrderID, t0.CustomerID) );
 
-		// All columns for only [TableLines]
-		var sql = Odb.SQL.Select(x => 
-						x.Fields(tl)
-						  .From(th)
-						  .LeftJoin(tl, tl.Id == th.Id) );
+		// Select all columns for only [OrderDetails]
+		Odb.SQL.Select(x => x.From(t0).LeftJoin(t1, t0.OrderID == t1.OrderID).Fields(t1) );
 
-		// All columns by excluding column [Note] from [TableHeader]
-		var sql = Odb.SQL.Select(x => 
-						x.ExcludeFields(th.Note)
-						  .From(th) );
+		// Select all columns by excluding column [ShipperID] from [Orders]
+		Odb.SQL.Select(x => x.From(t0).ExcludeFields(t0.ShipperID) );
 	</pre>
-            <pre lang="vb">
-		Dim th = new TableHeader()
-		Dim tl = new TableLines()
-
-		' All columns
-		Dim sql = Odb.SQL.Select(Function(X) x.From(th) )
-
-		' Only [Year] and [Id] columns from [TableHeader]
-		Dim sql = Odb.SQL.Select(Function(X) _
-						x.Fields(th.Year, th.Id) _
-						  .From(th) )
-
-		' All columns for only [TableLines]
-		Dim sql = Odb.SQL.Select(Function(X) _
-						x.Fields(tl) _
-						  .From(th) _
-						  .LeftJoin(tl, tl.Id = th.Id) )
-
-		' All columns by excluding column [Note] from [TableHeader]
-		Dim sql = Odb.SQL.Select(Function(X) _
-						x.ExcludeFields(th.Note) _
-						  .From(th) )
-	</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
+		</code-tab>
+	</div>
+	<div class="col-md-12 col-lg-4">
 		<o class="h-100">
-			<i class="text-success">All columns</i>
+			<i class="text-success">Select all columns</i>
 			<br />
-			SELECT <hl>*</hl> FROM header AS th
-			<br />
-			<br />
-			<i class="text-success">Only [Year] and [Id] columns from [TableHeader]</i>
-			<br />
-			SELECT <hl>th.year, th.id</hl> FROM header AS th
+			SELECT <hlb>*</hlb> FROM [Orders] AS t0
 			<br />
 			<br />
-			<i class="text-success">All columns for only [TableLines]</i>
+			<i class="text-success">Select Only [OrderID] and [CustomerID] columns from [Orders]</i>
 			<br />
-			SELECT <hl>tl.*</hl> FROM header AS th LEFT JOIN TableLines AS tl ON tl.id = th.id
+			SELECT <hlb>t0.OrderID, t0.CustomerID</hlb> FROM [Orders] AS t0
 			<br />
 			<br />
-			<i class="text-success">All columns by excluding column [Note] from [TableHeader]</i>
+			<i class="text-success">Select all columns for only [OrderDetails]</i>
 			<br />
-			SELECT <hl>th.year, th.id, th.date, th.active</hl> FROM header AS th
+			SELECT <hlb>tl.*</hlb> FROM [Orders] AS t0 LEFT JOIN [OrderDetails] AS t1 ON t0.OrderID = t1.OrderID
+			<br />
+			<br />
+			<i class="text-success">Select all columns by excluding column [ShipperID] from [Orders]</i>
+			<br />
+			SELECT <hlb>t0.OrderID, t0.CustomerID, t0.EmployeeID, t0.OrderDate</hlb> FROM [Orders] AS t0
 		</o>
-    </div>
+	</div>
 </div>
-<a href="https://dotnetfiddle.net/1j0zsQ" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>1j0zsQ</fiddle>

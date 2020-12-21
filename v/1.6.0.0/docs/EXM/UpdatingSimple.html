@@ -7,7 +7,6 @@
 
 		// Updates the entire row with values which are NOT Null if the fields are nullable.
 		th.DocDate = DateTime.Now.AddDays(1);
-		// th.Note = DBNull.Value // if the field is nullable
 
 		var sql = Odb.SQL.Update(x =>
 						x.From(th)
@@ -22,7 +21,6 @@
 
 		' Updates the entire row with values which are NOT Null.
 		th.DocDate = DateTime.Now.AddDays(1)
-		' th.Note = DBNull.Value ' if the field is nullable if the fields are nullable.
 
 		Dim sql = Odb.SQL.Update(Function(x) _
 						x.From(th) _

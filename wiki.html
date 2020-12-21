@@ -26,8 +26,7 @@
         /* code output/result */
         O {
             display: block;
-            margin-top: 5px;
-            padding: 5px;
+            padding: 16px;
             font-size: 10pt;
             font-family: consolas;
             background-color: #f8f9fa !important;
@@ -203,7 +202,7 @@
                 <div class="wiki-logo" style="width:45px;height:20px;"></div>
                 wiki
             </a>
-            <button type="button" class="ModalLangShowBtn btn btn-secondary mt-1 px-1 py-0" style="font-size:.8em; border-color:rgba(255,255,255,.5);">Lang : c#</button>
+            <button type="button" class="wiki-lang-button btn btn-secondary mt-1 px-1 py-0" style="font-size:.8em; border-color:rgba(255,255,255,.5);">Lang : c#</button>
         </nav>
         <nav class="navbar navbar-dark bg-dark d-none d-md-flex px-2 py-0">
             <div class="btn-group">
@@ -218,7 +217,7 @@
                 Wiki
             </a>
 
-            <button type="button" class="ModalLangShowBtn btn btn-secondary mt-1 px-1 py-0" style="font-size:.9em; border-color:rgba(255,255,255,.5);">Lang : c#</button>
+            <button type="button" class="wiki-lang-button btn btn-secondary mt-1 px-1 py-0" style="font-size:.9em; border-color:rgba(255,255,255,.5);">Lang : c#</button>
         </nav>
 
         <div id="wiki" class="h-100 d-flex overflow-hidden">
@@ -283,23 +282,27 @@
     <script src="/resources/js/prism.js"></script>
     <script src="/resources/js/site.js"></script>
     <script>
-        // https://globalcdn.nuget.org/packages/ormdb.1.5.0.4.nupkg
-
-        $.get("https://dotnetfiddle.net/Widget/61623M").done(function (data) {
-            debugger;
-            console.log(data);
-        });
-        $.ajax({
-            url: "https://dotnetfiddle.net/Widget/61623M",
-            type: "GET", dataType: 'text/html',
-            async: false,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("sec-fetch-mode", "navigate");
-            },
-            success: data => {
-                debugger;
-            }
-        });
+        //$.ajax({
+        //    url: "https://dotnetfiddle.net/Widget/61623M",
+        //    type: "GET", dataType: 'text/html',
+        //    async: false,
+        //    beforeSend: function (xhr) {
+        //        xhr.setRequestHeader("Access-Control-Allow-Headers", "x-requested-with, x-requested-by");
+        //    },
+        //    success: data => {
+        //        debugger;
+        //    }
+        //});
+        // var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
+        //$.ajax({
+        //     url: "https://dotnetfiddle.net/Widget/61623M",
+        //     method: "GET", async: true, cache: false,
+        //     headers: {
+        //         'X-Forwarded-For': ip/*,
+        //                                                             'origin': location.protocol + '://' + ip,
+        //                                                             'referer': location.protocol + '://' + ip + '/index.html'*/
+        //     }
+        // })
 
         String.prototype.replaceAll = function (search, replacement, caseInsensitive) {
             return this.replace(new RegExp(search, "g" + (caseInsensitive ? "i" : "")), replacement);
@@ -364,12 +367,12 @@
                     var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
 
                     $.ajax({
-                        url: "https://globalcdn.nuget.org/packages/ormdb.1.5.0.4.nupkg",
+                        url: "https://globalcdn.nuget.org/packages/ormdb.1.6.1.7.nupkg",
                         method: "GET", async: true, cache: false,
                         headers: {
                             'X-Forwarded-For': ip/*,
-                                                            'origin': location.protocol + '://' + ip,
-                                                            'referer': location.protocol + '://' + ip + '/index.html'*/
+                                                                            'origin': location.protocol + '://' + ip,
+                                                                            'referer': location.protocol + '://' + ip + '/index.html'*/
                         }
                     })
                 } catch { }
@@ -422,7 +425,7 @@
         var _wiki_body_header_title = $("#wiki-body-header-title");
         var _wiki_body_content = $("#wiki-body-content");
         var _wiki_mask = $("#wiki-mask");
-
+        var _wiki_lang_button = $(".wiki-lang-button");
         //-------------------------------------------------------------------------------------
         //-- VERSION
         var _wiki_vers = ["1.6.0.0", "1.5.0.7", "1.5.0.2", "1.4.0"];
@@ -649,6 +652,7 @@
             load_page_render_EW();
             load_page_render_ST();
             load_page_render_CO();
+            load_page_goto_fiddle();
             load_page_code_show_modal();
 
             //-- to remove left white-spaces from code block
@@ -660,15 +664,50 @@
 
 
         }
+        function load_page_goto_fiddle() {
+            var _fiddles = $("#wiki-body fiddle");
+            for (n = 0; n < _fiddles.length; n++) {
+                var _fiddle = $(_fiddles[n]);
+
+                _fiddle.replaceWith('<a href="https://dotnetfiddle.net/' + _fiddle.text() + '" class="btn btn-secondary btn-sm" target="_blank">Try it Yourself</a>');
+            }
+        }
+        function load_page_code_show_modal() {
+            var show_code_modal = null;
+            var show_code_frame = null;
+            if (show_code_modal == null) {
+                show_code_modal = new bootstrap.Modal(document.getElementById('show_code_from_fiddle_modal'));
+                show_code_frame = document.getElementById('show_code_from_fiddle_frame');
+            }
+            $(".btn-show-code").click(function () {
+                var href = $(this).data("href");
+                var site = "https://dotnetfiddle.net/Widget/" + href;
+                //show_code_frame.src = site;
+                show_code_modal.show();
+            });
+
+        }
         {
             //-------------------------------------------------------------------------------------
             //-- Code Tab
+            //
+            //  <code-tab>
+            //      <pre lang="c#">
+            //          ... c# code ...
+            //      </pre>
+            //      <pre lang="c#">
+            //          ... vb code ...
+            //      </pre>
+            //  </code-tab>
+            //
+            //
             var current_lang = 'c#';
+            var show_copy_button = false;
             function load_page_code_render_tab() {
                 var _tabs = $("#wiki-body code-tab");
                 for (n = 0; n < _tabs.length; n++) {
+                    var _tb = '';
                     var _codes = '';
-                    var _retval = '<div class="code-tab border rounded d-flex flex-column mh-100"><ul class="bg-dark">';
                     var _tab = $(_tabs[n]);
                     var _tab_codes = _tab.children();
 
@@ -676,13 +715,22 @@
                         var _tab_code = _tab_codes[m];
                         //var _title = (_tab_code.attributes.title.value || "").toLowerCase();
                         var _title = (_tab_code.attributes.lang.value || "").toLowerCase();
-                        _retval += '<li lang="' + _title + '" class="text-white btn ' + (m === 0 ? 'bg-secondary' : '') + '" onclick="load_page_code_tab_select(this.lang);">' + _title + '</li>';
+                        _tb += '<li lang="' + _title + '" class="text-white btn ' + (m === 0 ? 'bg-secondary' : '') + '" onclick="load_page_code_tab_select(this.lang);">' + _title + '</li>';
                         _codes += _tab_code.outerHTML;
                     }
-                    _retval += '<li style="flex-grow: 1;"></li><li class="text-white btn copy" onclick="load_page_code_copy(' + n + ');"><i class="fa fa-copy"></i>&nbsp;Copy</li>';
-                    _retval += '</ul>' + _codes + '</div>';
 
-                    _tab.replaceWith(_retval);
+
+                    //if (show_copy_button || _tab_codes.length > 1) {
+                    //    _tb = '' +
+                    //        '<ul class="bg-dark">' + _tb +
+                    //        '<li style="flex-grow: 1;"></li><li class="text-white btn copy" onclick="load_page_code_copy(' + n + ');"><i class="fa fa-copy"></i>&nbsp;Copy</li>' +
+                    //        '</ul>';
+                    //} else {
+                    //    _tb = '';
+                    //}
+                    _tb = '';
+
+                    _tab.replaceWith('<div class="code-tab border rounded d-flex flex-column mh-100">' + _tb + _codes + '</div>');
                 }
                 load_page_code_tab_select(current_lang);
             }
@@ -695,7 +743,7 @@
                 $("#wiki-body .code-tab pre[lang|='" + lang + "']").show();
 
                 //-- modal-language value is being set and hide.
-                $(".ModalLangShowBtn").text("Lang : " + lang);
+                _wiki_lang_button.text("Lang : " + lang);
 
                 current_lang = lang;
             }
@@ -750,22 +798,6 @@
                     _item.replaceWith('<pre ' + _atrb_val + '><code>\n' + Prism.highlight(_item.text(), _lang_obj, _lang_nam) + '</code></pre>');
                 }
             }
-
-            function load_page_code_show_modal() {
-                var show_code_modal = null;
-                var show_code_frame = null;
-                if (show_code_modal == null) {
-                    show_code_modal = new bootstrap.Modal(document.getElementById('show_code_from_fiddle_modal'));
-                    show_code_frame = document.getElementById('show_code_from_fiddle_frame');
-                }
-                $(".btn-show-code").click(function () {
-                    var href = $(this).data("href");
-                    var site = "https://dotnetfiddle.net/Widget/" + href;
-                    show_code_frame.src = site;
-                    show_code_modal.show();
-                });
-
-            }
             //-------------------------------------------------------------------------------------
             //-- Example-Warning
             function load_page_render_EW() {
@@ -808,8 +840,9 @@
             }
         }
         //-------------------------------------------------------------------------------------
-        //-- Change Code Language
-        $(".ModalLangShowBtn").click(function () {
+        //-- Language Button
+        _wiki_lang_button.hide();
+        _wiki_lang_button.click(function () {
             switch (current_lang) {
                 case "c#":
                     load_page_code_tab_select("vb");

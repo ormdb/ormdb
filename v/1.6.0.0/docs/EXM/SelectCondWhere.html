@@ -1,84 +1,63 @@
 ﻿Following section demonstrates the dynamic creation of the <hl>Where</hl> clause by <b>depending on conditional (if)</b>.
 <div class="row">
-	<div class="col-md-12 col-lg">
-		<code-tab>
-			<pre lang="c#">
-				var th = new TableHeader();
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
+				var t0 = new Orders();
 		
-				var sql1 = Odb.SQL.Select(x => 
-									x.From(th)
-									 .Where( th.Year == 2017 ));
+				var sql = Odb.SQL.Select(x => 
+									x.From(t0)
+									 .Where( t0.OrderID == 123456 ) );
 
-				// [Where] clause is being extended depending on condition.
-				if ( true )
-					sql1.Add(x => x.Where(th.IsActive == true));
-				else
-					sql1.Add(x => x.Where(th.IsActive == false));
+				// [Where] clause is being extended depending on IF()
+				int _shipper_id = 998877;
+				if ( _shipper_id > 0 )
+					sql.Add(x => x.Where(t0.ShipperID == _shipper_id));
 			</pre>
-			<pre lang="vb">
-				Dim th = new TableHeader()
-		
-				Dim sql1 = Odb.SQL.Select(Function(X) _
-									x.From(th) _
-									 .Where( th.Year = 2017 )
-
-				' [Where] clause is being extended depending on condition.
-				If True Then
-					sql1.Add((Function(X) x.Where(th.IsActive = True))
-				Else
-					sql1.Add((Function(X) x.Where(th.IsActive = False))
-				End If
-			</pre>
-		</code-tab>
-	</div>
-	<div class="col-md-12 col-lg-4">
-		<o class="h-100">
-			SELECT * FROM header AS th<br />
-			WHERE th.year = 2017 AND <hlb>th.active = 1</hlb>
-		</o>
-	</div>
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            SELECT * <br />
+            FROM [Orders] AS t0 <br />
+            WHERE t0.OrderID = 123456<br />
+            <hlb> AND t0.ShipperID = 998877</hlb>
+        </o>
+    </div>
 </div>
-<a href="https://dotnetfiddle.net/hpQSPY" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>hpQSPY</fiddle>
 
 <br />
 <br />
 
 Following section demonstrates the dynamic creation of the <hl>Where</hl> clause by <b>external variable(s)</b>.
 <div class="row">
-	<div class="col-md-12 col-lg">
-		<code-tab>
-			<pre lang="c#">
-				var th = new TableHeader();
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
+				var typ = "C";
+				var c_id = 5555;
+				var e_id = 6666;
 
 				// [Where] clause is being executed depending on value test.
-				var val1 = "X";
-				var sql2 = Odb.SQL.Select(x => 
-									x.From(th)
-									 .Where( (val1 == "X" & th.IsActive == true) |
-											 (val1 == "Y" & th.IsActive == false)
+				var sql = Odb.SQL.Select(x => 
+									x.From(t0)
+									 .Where( (typ == "C" & t0.CustomerID == c_id) |
+											 (typ == "E" & t0.EmployeeID == e_id)
 											)
 							);
 			</pre>
-			<pre lang="vb">
-				Dim th = new TableHeader()
-
-				' [Where] clause is being executed depending on value test.
-				Dim val1 = "X"
-				Dim sql2 = Odb.SQL.Select(Function(X) _
-									x.From(th) _
-									 .Where( (val1 = "X" And th.IsActive = True) Or
-											 (val1 = "Y" And th.IsActive = False)
-											)
-							)
-			</pre>
-		</code-tab>
-	</div>
-	<div class="col-md-12 col-lg-4">
-		<o class="h-100">
-			SELECT * FROM header AS th<br />
-			WHERE (<hlb>1=1</hlb> AND th.actisve = 1) OR (<hlb>1=0</hlb>)
-		</o>
-	</div>
-
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            SELECT *<br />
+            FROM [Orders] AS t0 <br />
+            <hlb>
+                WHERE ('C' = 'C' AND t0.CustomerID = 5555)<br />
+                OR ('C' = 'E' AND t0.EmployeeID = 6666)
+            </hlb>
+        </o>
+    </div>
 </div>
-<a href="https://dotnetfiddle.net/hpQSPY" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>hpQSPY</fiddle>

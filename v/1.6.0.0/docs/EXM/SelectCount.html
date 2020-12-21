@@ -3,55 +3,37 @@
 	<div class="col-md-12 col-lg">
 		<code-tab>
 			<pre lang="c#">
-		var th = new TableHeader();
+				var t0 = new Orders();
 		
-		var sql = Odb.SQL.Select(x => x.From(th));
-
-		var cnt = sql.ExecuteCount(cn);
-	</pre>
-			<pre lang="vb">
-		Dim th = new TableHeader()
-		
-		Dim sql = Odb.SQL.Select(x => x.From(th))
-
-		Dim cnt = sql.ExecuteCount(cn)
-	</pre>
+				var cnt = Odb.SQL.Select(x => x.From(t0)).ExecuteCount(cn);
+			</pre>
 		</code-tab>
 	</div>
 	<div class="col-md-12 col-lg-4">
 		<o class="h-100">
-			SELECT <hl>COUNT(1)</hl> FROM header AS th
+			SELECT <hl>COUNT(1)</hl> FROM [Orders] AS t0
 		</o>
 	</div>
 </div>
-<a href="https://dotnetfiddle.net/61623M" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>61623M</fiddle>
 <br />
 <br />
 
-		To counting the row(s) by excluding NULL values, you have to use <k>COUNT</k> with a column.
+To counting the row(s) by excluding NULL values, you have to use <k>COUNT</k> with a column.
 <div class="row">
 	<div class="col-md-12 col-lg">
 		<code-tab>
 			<pre lang="c#">
-		var th = new TableHeader();
-		
-		var sql = Odb.SQL.Select(x => x.From(th).Fields(x[th.Id].COUNT()));
+				var sql = Odb.SQL.Select(x => x.From(t0).Fields( x[t0.OrderID].COUNT() ));
 
-		var cnt = sql2.ExecuteReader(cn).FirstOrDefault().GetInt64[0];
-	</pre>
-			<pre lang="vb">
-		Dim th = new TableHeader()
-		
-		Dim sql = Odb.SQL.Select(Function(x) x.From(th).Fields(x(th.Id).COUNT()))
-
-		Dim cnt = sql2.ExecuteReader(cn).FirstOrDefault().GetInt64(0)
-	</pre>
+				var cnt = (int?)(sql.ExecuteReader(cn).FirstOrDefault()[0]) ?? 0;
+			</pre>
 		</code-tab>
 	</div>
 	<div class="col-md-12 col-lg-4">
 		<o class="h-100">
-			SELECT <hl>COUNT(th.id)</hl> FROM header AS th
+			SELECT <hl>COUNT(t0.OrderID)</hl> FROM [Orders] AS t0
 		</o>
 	</div>
 </div>
-<a href="https://dotnetfiddle.net/61623M" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>61623M</fiddle>

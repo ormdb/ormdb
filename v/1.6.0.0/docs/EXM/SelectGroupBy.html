@@ -6,28 +6,20 @@
         var th = new TableHeader();
 
         var sql = Odb.SQL.Select(x => 
-                        x.From(th)
-                         .GroupBy(th.Year)
-                         .Fields(th.Year, x[th.Id].MAX().AS("C1"))
+                        x.From(t0)
+                         .GroupBy(t0.EmployeeID)
+                         .Fields(t0.EmployeeID, 
+                                 x[t0.OrderID].MAX().AS("LastOrderId"))
                     );
-	</pre>
-            <pre lang="vb">
-        Dim th = new TableHeader()
-
-        Dim sql = Odb.SQL.Select(Function(x) _
-                        x.From(th) _
-                         .GroupBy(th.Year) _
-                         .Fields(th.Year, x(th.Id).MAX().AS("C1"))
-                    )
 	</pre>
         </code-tab>
     </div>
     <div class="col-md-12 col-lg-4">
         <o class="h-100">
-            SELECT th.year, <hl>MAX(th.id) AS 'C1'</hl>,<br />
-            FROM header AS th<br />
-            <hlb>GROUP BY th.year</hlb>
+            SELECT t0.EmployeeID, <hlb>MAX(t0.OrderID) AS LastOrderId</hlb><br />
+            FROM [Orders] AS t0 <br />
+            <hlb>GROUP BY t0.EmployeeID</hlb>
         </o>
     </div>
 </div>
-<a href="https://dotnetfiddle.net/zeHZ1R" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>zeHZ1R</fiddle>

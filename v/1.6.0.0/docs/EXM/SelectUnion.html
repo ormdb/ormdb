@@ -1,88 +1,65 @@
 ﻿Following section demonstrates using <hl>UNION</hl> clause.
 <co type="warning" inline>
-	to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
+    to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
 </co>
 
 <div class="row">
-	<div class="col-md-12 col-lg">
-		<code-tab>
-			<pre lang="c#">
-		var th = new TableHeader();
-		var tl = new TableLines();
+    <div class="col-md-12 col-lg">
+        <code-tab>
+            <pre lang="c#">
+				var t0 = new Orders();
+				var t1 = new OrderDetails();
 		
-		// query 1
-		var sql1 = Odb.SQL.Select(x =>
-						x.From(th)
-						 .GroupBy(th.Year)
-						 .Fields(x["T1"], th.Year, x[th.Id].MAX().AS("MaxValue"))
-					);
+				var sql1 = Odb.SQL.Select(x =>
+								x.From(t0)
+								 .GroupBy(t0.EmployeeID)
+								 .Fields(x["T1"].AS("Type"), 
+										 x[t0.EmployeeID].AS("Id"), 
+										 x[t0.OrderID].MAX().AS("OrderID"))
+							);
+				var sql2 = Odb.SQL.Select(x =>
+								x.From(t1)
+								.GroupBy(t1.ProductID)
+								.Fields(x["T2"].AS("Type"), 
+										x[t1.ProductID].AS("Id"), 
+										x[t1.OrderID].MAX().AS("OrderID"))
+							);
 
-		// query 2
-		var sql2 = Odb.SQL.Select(x =>
-						x.From(tl)
-						.GroupBy(tl.Year)
-						.Fields(x["T2"], tl.Year, x[th.Id].MAX().AS("MaxValue"))
-					);
-
-		// union
-		var sql = Odb.SQL.Union(x =>
-						x.RemoveDuplicates()
-						 .Add(sql1)
-						 .Add(sql2)
-						 .OrderASC(sql1[0]).OrderASC(sql1[1]).OrderDESC(sql1["MaxValue"])
-					);
+				// union
+				var sql = Odb.SQL.Union(x =>
+								x.RemoveDuplicates()
+								 .Add(sql1)
+								 .Add(sql2)
+								 .Top(5)
+								 .OrderASC(sql1[0]).OrderASC(sql1[1]).OrderDESC(sql1["OrderID"])
+							);
 	</pre>
-			<pre lang="vb">
-		Dim th = new TableHeader()
-		Dim tl = new TableLines()
-		
-		' query 1
-		Dim sql1 = Odb.SQL.Select(Function(x) _
-						x.From(th) _
-						 .GroupBy(th.Year) _
-						 .Fields(x("T1"), th.Year, x(th.Id).MAX().AS("MaxValue"))
-					)
-
-		' query 2
-		Dim sql2 = Odb.SQL.Select(Function(x) _
-						x.From(tl) _
-						.GroupBy(tl.Year) _
-						.Fields(x("T2"), tl.Year, x(tl.Id).MAX().AS("MaxValue"))
-					)
-
-		' union
-		Dim sql = Odb.SQL.Union(Function(x) _
-						x.RemoveDuplicates() _
-						 .Add(sql1) _
-						 .Add(sql2) _
-						 .OrderASC(sql1(0)).OrderASC(sql1(1)).OrderDESC(sql1("MaxValue"))
-					)
-	</pre>
-		</code-tab>
-	</div>
-	<div class="col-md-12 col-lg-4">
-		<o class="h-100">
-			<hl>SELECT * FROM (</hl>
-			<div style="padding-left:30px;">
-				(
-				<div style="padding-left:30px;">
-					SELECT 'T1' AS dyn_1, th.year, MAX(th.id) AS MaxValue<br />
-					FROM [header] AS th<br />
-					GROUP BY th.year<br />
-				</div>
-				)
-				<hlb>UNION</hlb><br />
-				(
-				<div style="padding-left:30px;">
-					SELECT 'T2' AS dyn_1, tl.year, MAX(tl.id) AS MaxValue <br />
-					FROM [lines] AS tl <br />
-					GROUP BY tl.year<br />
-				</div>
-				)
-			</div>
-			<hl>) AS t</hl><br />
-			<hl>ORDER BY dyn_1 ASC, year ASC, C1 DESC</hl>
-		</o>
-	</div>
+        </code-tab>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <o class="h-100">
+            <hl>SELECT * FROM (</hl><br />
+            <div style="padding-left:30px;">
+                SELECT 'T0' AS Type, <br />
+                t0.EmployeeID AS Id, <br />
+                MAX(t0.OrderID) AS OrderID <br />
+                FROM [Orders] AS t0 <br />
+                GROUP BY t0.EmployeeID
+            </div>
+            <hlb>UNION</hlb><br />
+            <div style="padding-left:30px;">
+                SELECT 'T1' AS Type,<br />
+                t1.ProductID AS Id,<br />
+                MAX(t1.OrderID) AS OrderID <br />
+                FROM [OrderDetails] AS t1<br />
+                GROUP BY t1.ProductID
+            </div>
+            <hl>) AS t</hl><br />
+            <hl>
+                ORDER BY Type ASC, Id ASC, OrderID DESC<br />
+                OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY
+            </hl>
+        </o>
+    </div>
 </div>
-<a href="https://dotnetfiddle.net/2G0HiR" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>2G0HiR</fiddle>

@@ -7,56 +7,42 @@
 	<div class="col-md-12 col-lg">
 		<code-tab>
 			<pre lang="c#">
-		var th = new TableHeader();
-		var tl = new TableLines();
+		var t0 = new Orders();
+		var t1 = new OrderDetails();
 		
-		var sql1 = Odb.SQL.Select(x =>
-						x.From(tl)
-						 .GroupBy( tl.Year)
-						 .Fields( tl.Year, x[tl.Id].MAX().AS("C1") )
+		// query for the max [OrderDetailId] grouped by [OrderId]
+		var sub_sql = Odb.SQL.Select(x =>
+						x.From(t1)
+						 .GroupBy(t1.OrderID)
+						 .Fields( x[t1.OrderID].AS("Id"), x[t1.OrderDetailID].MAX().AS("LastDetailId") )
 					);
-		
-		var sql = Odb.SQL.Select(x =>
-						x.From(th)
-						 .LeftJoin( sql1, sql1[0].ToInteger() == th.Year )
-						 .Fields( th, sql1[1] )
-					);
-	</pre>
-			<pre lang="vb">
-		Dim th = new TableHeader()
-		Dim tl = new TableLines()
-		
-		Dim sql1 = Odb.SQL.Select(Function(x) _
-						x.From(tl) _
-						 .GroupBy( tl.Year) _
-						 .Fields( tl.Year, x(tl.Id).MAX().AS("C1") )
-					)
-		
-		Dim sql = Odb.SQL.Select(Function(x) _
-						x.From(th) _
-						 .LeftJoin( sql1, sql1(0).ToInteger() = th.Year ) _
-						 .Fields( th, sql1(1) )
-					)
+
+		// join [Orders] with [sub query]
+		Odb.SQL.Select(x =>
+				x.From(t0).Top(5)
+				 .LeftJoin( sub_sql, sub_sql["Id"].ToInteger() == t0.OrderID )
+				 .Fields( t0.OrderID, sub_sql["LastDetailId"] )
+		);
 	</pre>
 		</code-tab>
 	</div>
 	<div class="col-md-12 col-lg-4">
 		<o class="h-100">
-			SELECT th.*, t2.C1<br />
-			FROM [header] AS th<br />
+			SELECT t2.OrderID, t1.LastDetailId <br />
+			FROM [Orders] AS t2 <br />
 			LEFT JOIN (<br />
-			<div style="padding-left:50px;">
-				<hl>
-					SELECT tl.year, MAX(tl.id) AS C1<br />
-					FROM [lines] AS tl<br />
-					GROUP BY tl.year
-				</hl>
-			</div>
-			) AS t2 ON (t2.year = th.year)
+			<div style="padding-left:50px;"><hl>
+				SELECT t0.OrderID AS Id, <br />
+					   MAX(t0.OrderDetailID) AS LastDetailId <br />
+				FROM [OrderDetails] AS t0 <br />
+				GROUP BY t0.OrderID
+			</hl></div>
+			) AS t1 ON t1.Id = t2.OrderID
+			ORDER BY (SELECT NULL) <br />
 		</o>
 	</div>
 </div>
-<a href="https://dotnetfiddle.net/C5xQwQ" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>C5xQwQ</fiddle>
 <br />
 <br />
 
@@ -65,44 +51,27 @@ Following section demonstrates using <hl>SUB SELECT</hl> in a <hl>WHERE</hl> blo
 	<div class="col-md-12 col-lg">
 		<code-tab>
 			<pre lang="c#">
-		var th = new TableHeader();
-		var tl = new TableLines();
-		
-		var sql1 = Odb.SQL.Select(x =>
-						x.From(tl)
-						 .Where( tl.Year == 2018 )
-						 .Fields( x[tl.Id].DISTINCT() )
+		var sub_sql = Odb.SQL.Select(x =>
+						x.From(t1).Fields( x[t1.OrderID].DISTINCT() )
 					);
-		
-		var sql = Odb.SQL.Select(x => x.From(th).Where( x[th.Id].IN(sql1)) );
-	</pre>
-			<pre lang="vb">
-		Dim th = new TableHeader()
-		Dim tl = new TableLines()
-		
-		Dim sql1 = Odb.SQL.Select(Function(x) _
-						x.From(tl) _
-						 .Where( tl.Year = 2018 ) _
-						 .Fields( tl.Id.DISTINCT() )
-					)
-		
-		Dim sql = Odb.SQL.Select(Function(x) x.From(th).Where( x(th.Id).IN(sql1)) )
+
+		Odb.SQL.Select(x => x.From(t0).Where( x[t0.OrderID].IN(sub_sql)) );
 	</pre>
 		</code-tab>
 	</div>
 	<div class="col-md-12 col-lg-4">
 		<o class="h-100">
-			SELECT * FROM header AS th<br />
-			WHERE th.id IN (
+			SELECT * <br />
+			FROM [Orders] AS t0<br />
+			WHERE t0.OrderID IN (
 			<div style="padding-left:50px;">
 				<hl>
-					SELECT DISTINCT(tl.id)<br />
-					FROM header AS tl<br />
-					WHERE tl.year = 2018
+					SELECT DISTINCT(t1.OrderID)<br />
+					FROM [OrderDetails] AS t1
 				</hl>
 			</div>
 			)
 		</o>
 	</div>
 </div>
-<a href="https://dotnetfiddle.net/C5xQwQ" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>C5xQwQ</fiddle>
