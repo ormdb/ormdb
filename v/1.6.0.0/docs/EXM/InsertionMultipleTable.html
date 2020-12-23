@@ -3,62 +3,43 @@
 	<div class="col-md-12 col-lg">
 		<code-tab>
 			<pre lang="c#">
-		var sql = Odb.SQL.Insert();
+				// SQL
+				var sql = Odb.SQL.Insert();
+		
+				// [Orders] with model 
+				var model = new Orders();
+					model.OrderID = 15;
+					model.CustomerID = 90;
+					model.EmployeeID = 8;
+					model.OrderDate = DateTime.Now;
+					model.ShipperID = 3;
+				sql.Add(model);
+		
+				// [OrderDetails] as ValueArray 
+				sql.Add&lt;OrderDetails&gt;(1, model.OrderID, 999, 2.5);
+				sql.Add&lt;OrderDetails&gt;(2, model.OrderID, 888, 1000);
+				sql.Add&lt;OrderDetails&gt;(3, model.OrderID, 777, 3.5);
+				sql.Add&lt;OrderDetails&gt;(4, model.OrderID, 666, 25.83);
 
-		for (short n = 0; n < 100; n++)
-		{
-			var row1 = new TableHeader();
-				row1.Year    = DateTime.Now.Year;
-				row1.Id      = n;
-				row1.DocDate = DateTime.Now.AddDays(1);
-				row1.Note    = "header note value";
-			sql.Add(row1);
-
-			for (short i = 0; i < 2; n++)
-			{
-				var row2 = new TableLines();
-					row2.Year   = row1.Year;
-					row2.Id     = row1.Id;
-					row2.LineId = i;
-					row2.Note   = "line note value";
-				sql.Add(row2);
-			}
-		}
-
-		var affectedRows = sql.ExecuteNonQuery(cn);
-	</pre>
-			<pre lang="vb">
-		Dim sql = Odb.SQL.Insert()
-
-		For n As Short = 1 To 100
-			Dim row1 = New TableHeader()
-				row1.Year    = DateTime.Now.Year
-				row1.Id      = n
-				row1.DocDate = DateTime.Now.AddDays(1)
-				row1.Note    = "header note value"
-			sql.Add(row1)
-
-			For i As Short = 1 To 2
-				Dim row2 = New TableLines()
-					row2.Year   = row1.Year
-					row2.Id     = row1.Id
-					row2.LineId = i
-					row2.Note   = "line note value"
-				sql.Add(row2)
-			Next
-		Next
-
-		Dim affectedRows = sql.ExecuteNonQuery(cn)
-	</pre>
+				var affectedRows = sql.ExecuteNonQuery(cn);
+			</pre>
 		</code-tab>
 	</div>
 	<div class="col-md-12 col-lg-4">
 		<o class="h-100">
-			Different model(s) can be appended by using the same inserter.
+			INSERT INTO [Orders] <br />
+			([OrderID], [CustomerID],[EmployeeID],[OrderDate],[ShipperID]) <br />
+			VALUES <br />
+			(15, 90, 8, '2020-12-23 07:57:20', 1);<br />
 			<br />
-			<br />
-			All model(s) will be grouped according its type, before execution by Insert engine.
+			INSERT INTO [OrderDetails] <br />
+			([OrderDetailID],[OrderID],[ProductID],[Quantity]) <br />
+			VALUES <br />
+			(1,15,999,2.5),<br />
+			(2,15,888,1000),<br />
+			(3,15,777,3.5),<br />
+			(4,15,666,25.83);
 		</o>
 	</div>
 </div>
-<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>Iq25SB</fiddle>

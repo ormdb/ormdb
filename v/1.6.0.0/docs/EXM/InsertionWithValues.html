@@ -17,18 +17,15 @@
     </div>
     <div class="col-md-12 col-lg-4">
         <o class="h-100">
-            In this sample; column "<k>IsActive</k>" was not specified (3rd value), and also column "<k>Note</k>" was specified as DbNull (4th value).
-            <br />
-            These columns will be accepted as its initial value, since the parameter "<k>SetInitials</k>" of <b>Insert</b> is <k>TRUE</k>.
+            In this sample; column "<k>OrderID</k>" is AutoIncrement field.
             <br />
             <br />
-            INSERT INTO [header]<br />
-            VALUES (2020, 1, '2020-01-20 10:00:00', <hlb>FALSE</hlb>, <hlb>''</hlb>);
-            <br />
-            <br />
-            INSERT INTO [lines] VALUES (2020, 1, 1, 'note 1');
-            <br />
-            INSERT INTO [lines] VALUES (2020, 1, 2, 'note 2');
+
+            INSERT INTO [Orders] <br />
+            ([CustomerID],[EmployeeID],[OrderDate],[ShipperID]) <br />
+            VALUES <br />
+            (90,8,'2020-12-23 07:57:20',1),<br />
+            (91,8,'2020-12-23 07:57:20',2);
         </o>
     </div>
 </div>

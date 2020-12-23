@@ -3,46 +3,34 @@
     <div class="col-md-12 col-lg">
         <code-tab>
             <pre lang="c#">
-        var th = new TableHeader();
+                var t0 = new Shippers();
+		
+                var sql = Odb.SQL.InsertInto(t0, 
+                                x => x.From(t0)
+                                      .Where(t0.ShipperID == 5)
+                                      .Fields((t0.ShipperID * 10),
+                                               t0.ShipperName,
+                                               t0.Phone)
+			                );
 
-        var sql = Odb.SQL.InsertInto( th, 
-                            x => x.From(th)
-                                .Where(th.Year == 2018)
-                                .Fields((th.Year + 1),
-                                        th.Id,
-                                        th.DocDate,
-                                        th.IsActive,
-                                        th.Note)
-        );
-
-        var affectedRows = sql.ExecuteNonQuery(cn);
-	</pre>
-            <pre lang="vb">
-        Dim th = new TableHeader()
-
-        Dim sql = Odb.SQL.InsertInto( th, 
-                            Function(x) x.From(th)
-                                .Where(th.Year = 2018)
-                                .Fields((th.Year + 1),
-                                        th.Id,
-                                        th.DocDate,
-                                        th.IsActive,
-                                        th.Note)
-        )
-
-        Dim affectedRows = sql.ExecuteNonQuery(cn)
-	</pre>
+                var affectedRows = sql.ExecuteNonQuery(cn);
+	        </pre>
         </code-tab>
     </div>
     <div class="col-md-12 col-lg-4">
         <o class="h-100">
-            INSERT INTO [header]<br />
+            INSERT INTO [Shippers]<br />
             <div style="padding-left:50px;">
-                SELECT (th.year + 1), th.id, th.date, th.active, th.note<br />
-                FROM [header] AS th<br />
-                WHERE (th.year = 2018)
+                SELECT<br />
+                <div style="padding-left:50px;">
+                t0.ShipperID * 10<br />
+                t0.ShipperName<br />
+                t0.Phone<br />
+                </div>
+                FROM [Shippers] AS t0;<br />
+                WHERE (t0.ShipperID = 5);
             </div>
         </o>
     </div>
 </div>
-<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>61393H</fiddle>
