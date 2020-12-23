@@ -3,27 +3,16 @@
     <div class="col-md-12 col-lg">
         <code-tab>
             <pre lang="c#">
-        var sql = Odb.SQL.Insert();
+                var sql = Odb.SQL.Insert();
 
-        var dt = DateTime.Now;
-        sql.Add&lt;TableHeader&gt;(dt.Year, 1, dt, null, DBNull.Value);
+                var dt = DateTime.Now;
+                sql.Add&lt;TableHeader&gt;(dt.Year, 1, dt, null, DBNull.Value);
 
-        sql.Add&lt;TableLines&gt;(dt.Year, 1, 1, "note 1");
-        sql.Add&lt;TableLines&gt;(dt.Year, 1, 2, "note 2");
+                sql.Add&lt;TableLines&gt;(dt.Year, 1, 1, "note 1");
+                sql.Add&lt;TableLines&gt;(dt.Year, 1, 2, "note 2");
 
-        var affectedRows = sql.ExecuteNonQuery(cn);
-	</pre>
-            <pre lang="vb">
-        Dim sql = Odb.SQL.Insert()
-
-        Dim dt = DateTime.Now
-        sql.Add(Of TableHeader)(dt.Year, 1, dt, Nothing, DBNull.Value)
-
-        sql.Add(Of TableLines)(dt.Year, 1, 1, "note 1")
-        sql.Add(Of TableLines)(dt.Year, 1, 2, "note 2")
-
-        Dim affectedRows = sql.ExecuteNonQuery(cn)
-	</pre>
+                var affectedRows = sql.ExecuteNonQuery(cn);
+	        </pre>
         </code-tab>
     </div>
     <div class="col-md-12 col-lg-4">
@@ -43,4 +32,4 @@
         </o>
     </div>
 </div>
-<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>jApWhp</fiddle>

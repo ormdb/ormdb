@@ -3,51 +3,31 @@
     <div class="col-md-12 col-lg">
         <code-tab>
             <pre lang="c#">
-        var sql = Odb.SQL.Insert();
+                var sql = Odb.SQL.Insert();
+		
+                var model = new Orders();
+                // model.OrderID = AutoIncrement;
+                model.CustomerID = 90;
+                model.EmployeeID = 8;
+                model.OrderDate = DateTime.Now;
+                // model.ShipperID <= accepted its DefaultValue;
+		
+                sql.Add(model);
 
-        for (short n = 0; n < short.MaxValue; n++)
-        {
-            var model = new TableHeader();
-            model.Year = DateTime.Now.Year;
-            model.Id = n;
-            model.DocDate = DateTime.Now.AddDays(1);
-            // model.IsActive;
-            // model.Note;
-
-            sql.Add(model);
-        }
-
-        var affectedRows = sql.ExecuteNonQuery(cn);
-	</pre>
-            <pre lang="vb">
-        Dim sql = Odb.SQL.Insert()
-
-        For n = 1 To Short.MaxValue
-            Dim model = New TableHeader()
-            model.Year = DateTime.Now.Year
-            model.Id = n
-            model.DocDate = DateTime.Now.AddDays(1)
-            ' model.IsActive
-            ' model.Note
-
-            sql.Add(model)
-        Next
-
-        Dim affectedRows = sql.ExecuteNonQuery(cn)
-	</pre>
+                var affectedRows = sql.ExecuteNonQuery(cn);
+	        </pre>
         </code-tab>
     </div>
     <div class="col-md-12 col-lg-4">
         <o class="h-100">
-            In this sample; columns "<k>IsActive</k>" and "<k>Note</k>" were not specified.
-            <br />
-            These columns will be accepted as its default values.
+            In this sample; columns "<k>OrderID</k>" is AutoIncrement field, and "<k>ShipperID</k>" will be accepted as its default values.
             <br />
             <br />
 
-            INSERT INTO [header]<br />
-            VALUES (2020, 1, '2020-01-20 10:00:00', <hlb>FALSE</hlb>, <hlb>''</hlb>)
+            INSERT INTO [Orders] <br />
+            ([CustomerID],[EmployeeID],[OrderDate],[ShipperID]) <br />
+            VALUES (90,8,'2020-12-22 06:30:08',<hlb>1</hlb>);
         </o>
     </div>
 </div>
-<a href="https://dotnetfiddle.net/RkXXJo" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>RkXXJo</fiddle>
