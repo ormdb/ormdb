@@ -3,19 +3,25 @@
     <div class="col-md-12 col-lg">
         <code-tab>
             <pre lang="c#">
+                // source database which includes to be copied records.
                 Odb.Connection src_cn = default;
                 int batch_size = 5000;
 
                 var sql = Odb.SQL.Insert();
 
+                // reading from source table
                 foreach (var _row in src_cn.ExecuteReader("SELECT * FROM table"))
                 {
                     sql.Add&lt;target_table&gt;(_row.ToArray());
-                    if (sql.Count >= batch_size)
+
+                    if (sql.Count >= batch_size) {
                         sql.ExecuteNonQuery(cn);
+                        sql.Clear();
+                    }
                 }
 
-                var affectedRows = sql.ExecuteNonQuery(cn);
+                if (sql.Count >= batch_size)
+                    sql.ExecuteNonQuery(cn);
             </pre>
         </code-tab>
     </div>
