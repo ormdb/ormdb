@@ -3,15 +3,12 @@
     <div class="col-md-12 col-lg">
         <code-tab>
             <pre lang="c#">
-                var th = new TableHeader();
-                var tl = new TableLines();
+                var t0 = new Orders();
+                var t1 = new OrderDetails();
 
                 // Ids are being obtained for the records to be deleted...
-                var _ids = Odb.SQL.Select(x =>
-                                x.Fields(x[th.Id].DISTINCT()) 
-                                    .From(th) 
-                                    .Where(th.Year == 2018)
-                            ).ExecuteReader&lt;string&gt;(cn).ToList();
+                var _ids = Odb.SQL.Select(x => x.Fields(x[t0.Id].DISTINCT()) .From(t0) )
+                                .ExecuteReader&lt;string&gt;(cn).ToList();
 
                 // records are being deleted in chunks, by supplying record Id information.
                 var _index = 0;
@@ -22,8 +19,8 @@
                     If (_items.Count = 0) break;
 
                     // command are being queued
-                    qry.Delete(x => x.From(th).Where(th.Id.IN(_items)) );
-                    qry.Delete(x => x.From(tl).Where(tl.Id.IN(_items)) );
+                    qry.Delete(x => x.From(t1).Where(t1.Id.IN(_items)) );
+                    qry.Delete(x => x.From(t0).Where(t0.Id.IN(_items)) );
 
                     qry.Execute(cn);                // queries are being executed
                     qry.Clear();                    // buffer is being clear
@@ -33,43 +30,11 @@
 
                 var affectedRows = sql.ExecuteNonQuery(cn);
             </pre>
-            <pre lang="vb">
-                Dim th = new TableHeader()
-                Dim tl = new TableLines()
-
-                ' Ids are being obtained for the records to be deleted...
-                Dim _ids = Odb.SQL.Select(Function(x) _
-                                x.Fields(x(th.Id).DISTINCT()) _
-                                    .From(th) _
-                                    .Where(th.Year = 2018)
-                            ).ExecuteReader(Of String)(cn).ToList()
-        
-                ' records are being deleted in chunks, by supplying record Id information.
-                Dim _index = 0
-                Dim _chunk_size = 3000
-                Dim qry = Odb.SQL.Query()
-                Do
-                    Dim _items = _ids.Skip(_index).Take(_chunk_size)
-                    If (_items.Count = 0) Exit Do
-
-                    ' command are being queued
-                    qry.Delete(Function(x) x.From(th).Where(th.Id.IN(_items)) )
-                    qry.Delete(Function(x) x.From(tl).Where(tl.Id.IN(_items)) )
-
-                    qry.Execute(cn)                 ' queries are being executed
-                    qry.Clear()                     ' buffer is being clear
-        
-                    _index += _chunk_size
-                Loop
-
-                Dim affectedRows = sql.ExecuteNonQuery(cn)
-	        </pre>
         </code-tab>
     </div>
     <div class="col-md-12 col-lg-4">
         <co type="warning" class="h-100">
-          000  <k>Delete</k> operation is always a problem for the large records. But you can break the large delete operation into chunks.
+          <k>Delete</k> operation is always a problem for the large records. But you can break the large delete operation into chunks.
         </co>
     </div>
 </div>
-<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>

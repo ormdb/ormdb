@@ -101,7 +101,6 @@
         "-DEL": "DELETE",
         "DeletionSimple": "Delete",
         "DeletionWithJoin": "Delete With Join",
-        "DeletionMultipleTable": "Delete Multiple",
         "DeletionWithChunks": "Delete With Chunks",
 
         "-UPD": "UPDATE",
