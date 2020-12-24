@@ -1,27 +1,6 @@
 ﻿<k>Transaction</k> methods are used with the <a href="##CON--CON-Connection">Connection</a> object to save or cancel changes made to the data source.
 Please refer to <a href="##CON--CON-Connection">Connection</a> for further information.
 
-<st>Definition</st>
-<co type="light">
-	<small><b>Namespace : </b>Odb.Connection</small>
-</co>
-<code-tab>
-	<pre lang="c#">
-		public void BeginTrans()
-
-		public void CommitTrans(bool AutoStartTrans = false)
-
-		public void RollbackTrans(bool AutoStartTrans = false)
-	</pre>
-	<pre lang="vb">
-		Public Shared Sub BeginTrans()
-
-		Public Shared Sub CommitTrans(Optional AutoStartTrans As Boolean = False)
-
-		Public Shared Sub RollbackTrans(Optional AutoStartTrans As Boolean = False)
-	</pre>
-</code-tab>
-
 
 <st>BeginTrans</st>
 BeginTrans method starts a new transaction. A Transaction cannot be created , if there is an another transaction already in progress.

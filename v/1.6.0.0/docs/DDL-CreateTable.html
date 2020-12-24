@@ -2,65 +2,30 @@
 
 <br />
 
-<st>Definition</st>
-<co type="light">
-	<small><b>Namespace : </b>Odb.Providers.IProvider</small>
-</co>
-<code-tab>
-	<pre lang="c#">
-		public List&lt;string&gt; CreateTables(IEnumerable&lt;Table.Base&gt; Tables, string SchemaPrefix = null, bool CreateIndexes = true, bool OnlyGenerateScript = false)
-
-		public List&lt;string&gt; CreateTable(Type Type, string SchemaPrefix = null, bool CreateIndexes = true, bool OnlyGenerateScript = false)
-
-		public List&lt;string&gt; CreateTable&lt;T&gt;(string SchemaPrefix = null, bool CreateIndexes = true, bool OnlyGenerateScript = false) where T : Table.Base
-
-		public List&lt;string&gt; CreateTable(Table.Base Table, string SchemaPrefix = null, bool CreateIndexes = true, bool OnlyGenerateScript = false)
-
-		public string CreateTable(string TableName, IEnumerable&lt;Table.Column&gt; Columns, Table.IndexInfo PrimaryKeyInfo = null, bool OnlyGenerateScript = false)
-	</pre>
-	<pre lang="vb">
-		Public Function CreateTables(Tables As IEnumerable(Of Table.Base), SchemaPrefix As String = Nothing, CreateIndexes As Boolean = True, OnlyGenerateScript As Boolean = False) As List(Of String)
-
-		Public Function CreateTable(Type As System.Type, SchemaPrefix As String = Nothing, CreateIndexes As Boolean = True, OnlyGenerateScript As Boolean = False) As List(Of String)
-
-		Public Function CreateTable(Of T As Table.Base)(SchemaPrefix As String = Nothing, CreateIndexes As Boolean = True, OnlyGenerateScript As Boolean = False) As List(Of String)
-
-		Public Function CreateTable(Table As Table.Base, SchemaPrefix As String = Nothing, CreateIndexes As Boolean = True, OnlyGenerateScript As Boolean = False) As List(Of String)
-
-		Public Function CreateTable(TableName As String, Columns As IEnumerable(Of Table.Column), PrimaryKeyInfo As Table.IndexInfo = Nothing, OnlyGenerateScript As Boolean = False) As String
-	</pre>
-</code-tab>
 <o>
-	<k>SchemaPrefix</k> is a prefix for table-name. (Exm. Name="table-name" , NameWithPrefix="[pfx]table-name").
+    <k>SchemaPrefix</k> is a prefix for table-name. (Exm. Name="table-name" , NameWithPrefix="[pfx]table-name").
 </o>
 
 <st>Examples</st>
-<ew></ew>
-<br />
-<br />
 
 Following section demonstrates creating a table.
-
-<code-tab>
-	<pre lang="c#">
-		// create the table.
-		cn.Provider.CreateTable(h);
-	</pre>
-	<pre lang="vb">
-		' create the table.
-		cn.Provider.CreateTable(h)
-	</pre>
-</code-tab>
-
+<sample>
+    <code lang="c#">
+        // create the table.
+        cn.Provider.CreateTable(h);
+    </code>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>
 <br />
 
 Following section demonstrates how to generate <k>CREATE TABLE</k> script.
-
-<code-tab>
-	<pre lang="c#">
-		var script1 = cn.Provider.CreateTable(h, OnlyGenerateScript:true);
-	</pre>
-	<pre lang="vb">
-		Dim script1 = cn.Provider.CreateTable(h, OnlyGenerateScript:=True)
-	</pre>
-</code-tab>
+<sample>
+    <code lang="c#">
+        var script1 = cn.Provider.CreateTable(h, OnlyGenerateScript:true);
+    </code>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>

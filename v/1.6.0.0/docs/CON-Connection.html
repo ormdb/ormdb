@@ -9,30 +9,6 @@ When the connection is established, SQL Commands will execute with the help of t
     Once the Database activity is over; Connection should be closed and release the Data Source resources.
 </co>
 
-<st>Definition</st>
-<co type="light">
-    <small><b>Namespace : </b>Odb</small>
-</co>
-<code-tab>
-    <pre lang="c#">
-        public static Connection Create(string ProviderName, string ConnectionString, IEnumerable(Of string) FactoryNames = null, ConnectionSettings Settings = null)
-
-        public static Connection Create&lt;T&gt;(string ConnectionString, IEnumerable(Of string) FactoryNames = null, ConnectionSettings Settings = null)  where T : Providers.IProvider
-
-        public static Connection Create(System.Type Provider, string ConnectionString, IEnumerable(Of string) FactoryNames = null, ConnectionSettings Settings = null)
-
-        public static Connection Create(Providers.IProvider Provider, string ConnectionString, IEnumerable(Of string) FactoryNames = null, ConnectionSettings Settings = null)
-</pre>
-    <pre lang="vb">
-        Public Shared Function Create(ProviderName As String, ConnectionString As String, FactoryNames As IEnumerable(Of String) = Nothing, Settings As ConnectionSettings = Nothing) As Connection
-
-        Public Shared Function Create(Of T As Providers.IProvider)(ConnectionString As String, FactoryNames As IEnumerable(Of String) = Nothing, Settings As ConnectionSettings = Nothing) As Connection
-
-        Public Shared Function Create(Provider As System.Type, ConnectionString As String, FactoryNames As IEnumerable(Of String) = Nothing, Settings As ConnectionSettings = Nothing) As Connection
-
-        Public Shared Function Create(Provider As Providers.IProvider, ConnectionString As String, FactoryNames As IEnumerable(Of String) = Nothing, Settings As ConnectionSettings = Nothing) As Connection
-    </pre>
-</code-tab>
 
 <st>Parameters</st>
 <div class="table-responsive">

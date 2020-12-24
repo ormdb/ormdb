@@ -1,18 +1,5 @@
 ﻿Obtains database [Table-Information] according to provider via [Database] currently connected.
 
-<st>Definition</st>
-<co type="light">
-	<small><b>Namespace : </b>Odb.Providers.IProvider</small>
-</co>
-<code-tab>
-	<pre lang="c#">
-		public List&lt;SchemaTableInfo&gt; GetTables(string TableName = null)
-	</pre>
-	<pre lang="vb">
-		Public Function GetTables(TableName As String = Nothing) As List(Of SchemaTableInfo)
-	</pre>
-</code-tab>
-
 
 <st>Return</st>
 <div class="table-responsive">
@@ -30,14 +17,10 @@
 </div>
 
 <st>Examples</st>
-<ew></ew>
-<br />
-<br />
 
 Following section demonstrates retrieving the tables from database.
-
-<code-tab>
-	<pre lang="c#">
+<sample>
+	<code lang="c#">
 		var tables = cn.Provider.GetTables();
 
 		var table_count = tables.Count;
@@ -45,14 +28,8 @@ Following section demonstrates retrieving the tables from database.
 		foreach (var table in tables) {
 			Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}");
 		}
-	</pre>
-	<pre lang="vb">
-		Dim tables = cn.Provider.GetTables()
-
-		Dim table_count = tables.Count
-
-		For Each table In tables
-			Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}")
-		Next
-	</pre>
-</code-tab>
+	</code>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>

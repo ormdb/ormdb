@@ -1,36 +1,17 @@
 ﻿<k>TableExist</k> is used to test for the existence of a table.
 
 
-<st>Definition</st>
-<co type="light">
-	<small><b>Namespace : </b>Odb.Providers.IProvider</small>
-</co>
-<code-tab>
-	<pre lang="c#">
-		public bool TableExist(Table.Base Table)
-		public bool TableExist(string TableName)
-	</pre>
-	<pre lang="vb">
-		Public Function TableExist(Table As Table.Base) As Boolean
-		Public Function TableExist(TableName As String) As Boolean
-	</pre>
-</code-tab>
-
 <st>Examples</st>
-<ew></ew>
-<br />
-<br />
 
 Following section demonstrates determining whether the specified [Table] exists.
-<code-tab>
-	<pre lang="c#">
-		Debug.WriteLine("[table1] = " + (cn.Provider.TableExist("table1") ? "Exists" : "N/A") );
+<sample>
+	<code lang="c#">
+		cn.Provider.TableExist("table1");
 
-		Debug.WriteLine($"[{h.Name}] = " + (cn.Provider.TableExist(h) ? "Exists " : "N/A") );
-	</pre>
-	<pre lang="vb">
-		Debug.WriteLine("[table1] = " + If(cn.Provider.TableExist("table1"), "Exists", "N/A") )
-
-		Debug.WriteLine($"[{h.Name}] = " + If(cn.Provider.TableExist(h), "Exists", "N/A") )
-	</pre>
-</code-tab>
+		var t0 = new Order();
+		cn.Provider.TableExist(t0)
+	</code>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>

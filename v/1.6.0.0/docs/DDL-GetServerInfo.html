@@ -4,20 +4,6 @@
     This method may needs some privilege according to the database product and its version.
 </co>
 
-<st>Definition</st>
-<co type="light">
-    <small><b>Namespace : </b>Odb.Providers.IProvider</small>
-</co>
-<code-tab>
-    <pre lang="c#">
-		public ServerInfo GetServerInfo()
-	</pre>
-    <pre lang="vb">
-		Public Function GetServerInfo() As ServerInfo
-	</pre>
-</code-tab>
-
-
 <st>Return</st>
 <div class="table-responsive">
     <table class="table table-bordered">
@@ -33,18 +19,14 @@
 </div>
 
 <st>Examples</st>
-<ew></ew>
-<br />
-<br />
 
 Following section retrieves the product info from database server.
-<code-tab>
-    <pre lang="c#">
-		var si = cn.Provider.GetServerInfo();
-		Debug.WriteLine($"Name={si.Name} , Version={si.Version}");
-	</pre>
-    <pre lang="vb">
-		Dim si = cn.Provider.GetServerInfo()
-		Debug.WriteLine($"Name={si.Name} , Version={si.Version}")
-	</pre>
-</code-tab>
+<sample>
+    <code lang="c#">
+        var si = cn.Provider.GetServerInfo();
+        Debug.WriteLine($"Name={si.Name} , Version={si.Version}");
+    </code>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>

@@ -1,52 +1,29 @@
 ﻿Executes the <k>AnalyzeTable</k> on the database server. This method generates table statistics.
 
-<st>Definition</st>
-<co type="light">
-	<small><b>Namespace : </b>Odb.Providers.IProvider</small>
-</co>
-<code-tab>
-	<pre lang="c#">
-		public string AnalyzeTable(Table.Base Table, bool OnlyGenerateScript = false)
-		public string AnalyzeTable(string TableName, bool OnlyGenerateScript = false)
-	</pre>
-	<pre lang="vb">
-		Public Function AnalyzeTable(Table As Table.Base, OnlyGenerateScript As Boolean = False) As String
-		Public Function AnalyzeTable(TableName As String, OnlyGenerateScript As Boolean = False) As String
-	</pre>
-</code-tab>
-
 
 <st>Examples</st>
-<ew></ew>
-<br />
-<br />
 
 Following section demonstrates <k>ANALYZE</k> the table(s).
-<code-tab>
-	<pre lang="c#">
-		// by instance
-		cn.Provider.AnalyzeTable(h);
+<sample>
+    <code lang="c#">
+        // by instance
+        cn.Provider.AnalyzeTable(h);
 
-		// by name
-		cn.Provider.AnalyzeTable("table1");
-	</pre>
-	<pre lang="vb">
-		' by instance
-		cn.Provider.AnalyzeTable(h)
-
-		' by name
-		cn.Provider.AnalyzeTable("table1")
-	</pre>
-</code-tab>
-
+        // by name
+        cn.Provider.AnalyzeTable("table1");
+    </code>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>
 <br />
 
 Following section demonstrates how to generate <k>ANALYZE</k> script.
-<code-tab>
-	<pre lang="c#">
-		var script = cn.Provider.AnalyzeTable("table1", true);
-	</pre>
-	<pre lang="vb">
-		Dim script = cn.Provider.AnalyzeTable("table1", True)
-	</pre>
-</code-tab>
+<sample>
+    <code lang="c#">
+        var script = cn.Provider.AnalyzeTable("table1", true);
+    </code>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>

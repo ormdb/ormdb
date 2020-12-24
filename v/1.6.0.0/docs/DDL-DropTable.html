@@ -1,38 +1,11 @@
 ﻿<k>DropTable</k> is used to drop an existing table in a database.
 
-<st>Definition</st>
-<co type="light">
-	<small><b>Namespace : </b>Odb.Providers.IProvider</small>
-</co>
-<code-tab>
-	<pre lang="c#">
-		public List&lt;string&gt; DropTable(IEnumerable&lt;Table.Base&gt; Tables, bool OnlyGenerateScript = false)
-
-		public List&lt;string&gt; DropTable(IEnumerable&lt;string&gt; TableNames, bool OnlyGenerateScript = false)
-
-		public string DropTable(Table.Base Table, bool OnlyGenerateScript = false)
-
-		public string DropTable(string TableName, bool OnlyGenerateScript = false)
-	</pre>
-	<pre lang="vb">
-		Public Function DropTable(Tables As IEnumerable(Of Table.Base), OnlyGenerateScript As Boolean = False) As List(Of String)
-
-		Public Function DropTable(TableNames As IEnumerable(Of String), OnlyGenerateScript As Boolean = False) As List(Of String)
-
-		Public Function DropTable(Table As Table.Base, OnlyGenerateScript As Boolean = False) As String
-
-		Public Function DropTable(TableName As String, OnlyGenerateScript As Boolean = False) As String
-	</pre>
-</code-tab>
 
 <st>Examples</st>
-<ew></ew>
-<br />
-<br />
 
 Following section demonstrates how to drop table.
-<code-tab>
-	<pre lang="c#">
+<sample>
+	<code lang="c#">
 		// single table by instance
 		cn.Provider.DropTable(h);
 
@@ -41,27 +14,19 @@ Following section demonstrates how to drop table.
 
 		// single table by name
 		cn.Provider.DropTable("table1");
-	</pre>
-	<pre lang="vb">
-		' single table by instance
-		cn.Provider.DropTable(h)
-
-		' multi table by instance
-		cn.Provider.DropTable({h, l})
-
-		' single table by name
-		cn.Provider.DropTable("table1")
-	</pre>
-</code-tab>
-
+	</code>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>
 <br />
 
 Following section demonstrates how to generate <k>DROP TABLE</k> script.
-<code-tab>
-	<pre lang="c#">
+<sample>
+	<code lang="c#">
 		var script = cn.Provider.DropTable(h, true);
-	</pre>
-	<pre lang="vb">
-		Dim script = cn.Provider.DropTable(h, true)
-	</pre>
-</code-tab>
+	</code>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>
