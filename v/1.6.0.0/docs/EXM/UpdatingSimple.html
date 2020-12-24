@@ -3,42 +3,28 @@
 	<div class="col-md-12 col-lg">
 		<code-tab>
 			<pre lang="c#">
-		var th = new TableHeader();
+				// Updates the entire row with values which are NOT Null if the fields are nullable.
+				var model = new Orders();
+					model.OrderDate = DateTime.Now.AddDays(1);
+		
+				var t0 = new Orders();
+				var sql = Odb.SQL.Update(x =>
+								x.From(t0)
+									.Where( t0.OrderID == 10248 )
+									.SetModel(model)
+							);
 
-		// Updates the entire row with values which are NOT Null if the fields are nullable.
-		th.DocDate = DateTime.Now.AddDays(1);
-
-		var sql = Odb.SQL.Update(x =>
-						x.From(th)
-						 .Where( th.Id == 12345M )
-						 .Set(model)
-					);
-
-		var affectedRows = sql.ExecuteNonQuery(cn);
-	</pre>
-			<pre lang="vb">
-		Dim th = New TableHeader()
-
-		' Updates the entire row with values which are NOT Null.
-		th.DocDate = DateTime.Now.AddDays(1)
-
-		Dim sql = Odb.SQL.Update(Function(x) _
-						x.From(th) _
-						 .Where( th.Id = 12345D ) _
-						 .Set(model)
-					)
-
-		Dim affectedRows = sql.ExecuteNonQuery(cn)
-	</pre>
+				var affectedRows = sql.ExecuteNonQuery(cn);
+			</pre>
 		</code-tab>
 	</div>
 	<div class="col-md-12 col-lg-4">
 		<o class="h-100">
-			UPDATE th<br />
-			<hlb>SET th.date='2020-06-20 10:00:00' </hlb><br />
-			FROM [header] AS th<br />
-			WHERE (th.id = 12345)
+			UPDATE t0<br />
+			<hlb>SET t0.OrderDate='2020-06-20 10:00:00' </hlb><br />
+			FROM [Orders] AS t0<br />
+			WHERE t0.OrderID == 10248
 		</o>
 	</div>
 </div>
-<a href="https://dotnetfiddle.net/GWRT5w" class="btn btn-outline-secondary btn-sm" target="_blank">Try it Yourself</a>
+<fiddle>uyWUAp</fiddle>

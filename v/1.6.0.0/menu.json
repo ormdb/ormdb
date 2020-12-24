@@ -106,9 +106,8 @@
 
         "-UPD": "UPDATE",
         "UpdatingSimple": "Update",
-        "UpdatingWithJoin": "Update With Join",
-        "UpdatingMultipleTable": "Update Multiple",
         "UpdatingWithSet": "Update With Set",
+        "UpdatingWithJoin": "Update With Join",
 
         "-INS": "INSERT",
         "InsertionSimple": "Insert",
