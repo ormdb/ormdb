@@ -1,33 +1,27 @@
-﻿Following section demonstrates insertion by <b>Table Model</b>.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-                var sql = Odb.SQL.Insert();
+﻿Following section demonstrates insertion by <b>Model</b>.
+<sample>
+    <code lang="c#">
+        var sql = Odb.SQL.Insert();
 		
-                var model = new Orders();
-                // model.OrderID = AutoIncrement;
-                model.CustomerID = 90;
-                model.EmployeeID = 8;
-                model.OrderDate = DateTime.Now;
-                // model.ShipperID <= accepted its DefaultValue;
+        var model = new Orders();
+            // model.OrderID = AutoIncrement;
+            model.CustomerID = 90;
+            model.EmployeeID = 8;
+            model.OrderDate = DateTime.Now;
+            // model.ShipperID <= accepted its DefaultValue;
 		
-                sql.Add(model);
+        sql.Add(model);
 
-                var affectedRows = sql.ExecuteNonQuery(cn);
-	        </pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            In this sample; columns "<k>OrderID</k>" is AutoIncrement field, and "<k>ShipperID</k>" will be accepted as its default values.
-            <br />
-            <br />
+        var affectedRows = sql.ExecuteNonQuery(cn);
+    </code>
+    <output>
+        In this sample; columns "<k>OrderID</k>" is AutoIncrement field, and "<k>ShipperID</k>" will be accepted as its default values.
+        <br />
+        <br />
 
-            INSERT INTO [Orders] <br />
-            ([CustomerID],[EmployeeID],[OrderDate],[ShipperID]) <br />
-            VALUES (90,8,'2020-12-22 06:30:08',<hlb>1</hlb>);
-        </o>
-    </div>
-</div>
-<fiddle>RkXXJo</fiddle>
+        INSERT INTO [Orders] <br />
+        ([CustomerID],[EmployeeID],[OrderDate],[ShipperID]) <br />
+        VALUES (90,8,'2020-12-22 06:30:08',<hlb>1</hlb>);
+    </output>
+    <fiddle>RkXXJo</fiddle>
+</sample>

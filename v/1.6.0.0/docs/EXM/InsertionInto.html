@@ -1,36 +1,30 @@
 ﻿Following section demonstrates <b>insert-into with select</b>.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-                var t0 = new Shippers();
+<sample>
+    <code lang="c#">
+        var t0 = new Shippers();
 		
-                var sql = Odb.SQL.InsertInto(t0, 
-                                x => x.From(t0)
-                                      .Where(t0.ShipperID == 5)
-                                      .Fields((t0.ShipperID * 10),
-                                               t0.ShipperName,
-                                               t0.Phone)
-			                );
+        var sql = Odb.SQL.InsertInto(t0, 
+                        x => x.From(t0)
+                                .Where(t0.ShipperID == 5)
+                                .Fields((t0.ShipperID * 10),
+                                        t0.ShipperName,
+                                        t0.Phone)
+			        );
 
-                var affectedRows = sql.ExecuteNonQuery(cn);
-	        </pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            INSERT INTO [Shippers]<br />
+        var affectedRows = sql.ExecuteNonQuery(cn);
+    </code>
+    <output>
+        INSERT INTO [Shippers]<br />
+        <div style="padding-left:50px;">
+            SELECT<br />
             <div style="padding-left:50px;">
-                SELECT<br />
-                <div style="padding-left:50px;">
                 t0.ShipperID * 10<br />
                 t0.ShipperName<br />
                 t0.Phone<br />
-                </div>
-                FROM [Shippers] AS t0;<br />
-                WHERE (t0.ShipperID = 5);
             </div>
-        </o>
-    </div>
-</div>
-<fiddle>61393H</fiddle>
+            FROM [Shippers] AS t0;<br />
+            WHERE (t0.ShipperID = 5);
+        </div>
+    </output>
+    <fiddle>61393H</fiddle>
+</sample>

@@ -59,14 +59,6 @@
         "DDL-TruncateTable": "Truncate Table"
       }
     },
-    "OTH": {
-      "title": "Other",
-      "path": "/",
-      "items": {
-        "OTH-ExecuteReader": "ExecuteReader",
-        "OTH-ExecuteNonQuery": "ExecuteNonQuery"
-      }
-    },
     "EXM": {
       "title": "Examples",
       "path": "/EXM",
@@ -76,12 +68,14 @@
       "items": {
         "Startup": "Startup",
         "ConnectionManager": "Connection Manager",
-        "ExecuteReaderByStronglyTyped": "Read By StronglyTyped",
-        "ExecuteReaderByStronglyTypedOne2Many": "Read By StronglyTyped One2Many",
-        "ExecuteReaderByTableField": "Read By TableField",
-        "ExecuteReaderByString": "Read By SQL String",
-        "ExecuteReaderByCommand": "Read By DbCommand",
-        "ExecuteReaderByLinq": "Read By Linq",
+        "Read_Linq_StronglyTyped": "Read(LinQ) StronglyTyped",
+        "Read_Linq_StronglyTypedMany": "Read(LinQ) StronglyTypedMany",
+
+        "Read_TSql_Anonymmous": "Read(TSql) Anonymous",
+        "Read_TSql_ArrayList": "Read(TSql) ArrayList",
+        "Read_TSql_Datatable": "Read(TSql) Datatable",
+        "Read_TSql_StronglyTyped": "Read(TSql) StronglyTyped",
+        "Read_Command": "Read By DbCommand",
 
         "ExecuteNonQuery": "Execute",
         "ExecuteNonQueryBatch": "Execute - Batch",

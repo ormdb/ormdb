@@ -1,35 +1,29 @@
-﻿Following section demonstrates to use <b>Set</b> method for setting value(s).
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-				var t0 = new Products();
-				var sql = Odb.SQL.Update(x =>
-								x.From(t0)
-								 .Where(t0.ProductID == 1)
-								 .Set(t0.ProductName, "New ProductName")
-								 .SetRaw(t0.Price, t0.Price * 10)
-								 .SetNull(t0.ProductName)
-							);
-				var affectedRows = sql.ExecuteNonQuery(cn);
-			</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            In this sample; 2 different values are set into column "<k>ProductName</k>". Last value will be accepted for the column.
-            <br />
-            <br />
+﻿Following section demonstrates to use <b>Set</b> method(s) for setting value(s).
+<sample>
+    <code lang="c#">
+		var t0 = new Products();
+		var sql = Odb.SQL.Update(x =>
+						x.From(t0)
+							.Where(t0.ProductID == 1)
+							.Set(t0.ProductName, "New ProductName")
+							.SetRaw(t0.Price, t0.Price * 10)
+							.SetNull(t0.ProductName)
+					);
+		var affectedRows = sql.ExecuteNonQuery(cn);
+    </code>
+	<output>
+		In this sample; 2 different values are set into column "<k>ProductName</k>". Last value will be accepted for the column.
+		<br />
+		<br />
 
-            UPDATE t0<br />
-            SET <br />
-            <div style="padding-left:25px;">
-                t0.ProductName=NULL, <br />
-                t0.Price=(t0.Price * 10)
-            </div>
-            FROM [Products] AS t0<br />
-            WHERE (t0.ProductID = 1)
-        </o>
-    </div>
-</div>
-<fiddle>GcVEfE</fiddle>
+		UPDATE t0<br />
+		SET <br />
+		<div style="padding-left:25px;">
+			t0.ProductName=NULL, <br />
+			t0.Price=(t0.Price * 10)
+		</div>
+		FROM [Products] AS t0<br />
+		WHERE (t0.ProductID = 1)
+	</output>
+	<fiddle>GcVEfE</fiddle>
+</sample>

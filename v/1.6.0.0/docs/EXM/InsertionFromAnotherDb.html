@@ -1,33 +1,28 @@
 ﻿Following section demonstrates insertion from <b>Another Database</b>.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-                // source database which includes to be copied records.
-                Odb.Connection src_cn = default;
-                int batch_size = 5000;
+<sample>
+    <code lang="c#">
+        // source database which includes to be copied records.
+        Odb.Connection src_cn = default;
+        int batch_size = 5000;
 
-                var sql = Odb.SQL.Insert();
+        var sql = Odb.SQL.Insert();
 
-                // reading from source table
-                foreach (var _row in src_cn.ExecuteReader("SELECT * FROM table"))
-                {
-                    sql.Add&lt;target_table&gt;(_row.ToArray());
+        // reading from source table
+        foreach (var _row in src_cn.ExecuteReader("SELECT * FROM table"))
+        {
+            sql.Add&lt;target_table&gt;(_row.ToArray());
 
-                    if (sql.Count >= batch_size) {
-                        sql.ExecuteNonQuery(cn);
-                        sql.Clear();
-                    }
-                }
+            if (sql.Count >= batch_size) {
+                sql.ExecuteNonQuery(cn);
+                sql.Clear();
+            }
+        }
 
-                if (sql.Count >= batch_size)
-                    sql.ExecuteNonQuery(cn);
-            </pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            Insertions are being executed each 5000 rows.
-        </o>
-    </div>
-</div>
+        if (sql.Count >= batch_size)
+            sql.ExecuteNonQuery(cn);
+    </code>
+    <output>
+        Insertions are being executed each 5000 rows.
+    </output>
+    <fiddle></fiddle>
+</sample>

@@ -1,23 +1,17 @@
 ﻿Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-                var t0 = new Orders();
+<sample>
+    <code lang="c#">
+        var t0 = new Orders();
 
-                Odb.SQL.Select(x => x.From(t0).Skip(15).Top(5) );
-	        </pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            SELECT * <br />
-            FROM [Orders] AS t0 <br />
-            <hlb>
-                ORDER BY (SELECT NULL)<br />
-                OFFSET 15 ROWS FETCH NEXT 5 ROWS ONLY
-            </hlb>
-        </o>
-    </div>
-</div>
-<fiddle>DtN2pm</fiddle>
+        Odb.SQL.Select(x => x.From(t0).Skip(15).Top(5) );
+    </code>
+    <output>
+        SELECT * <br />
+        FROM [Orders] AS t0 <br />
+        <hlb>
+            ORDER BY (SELECT NULL)<br />
+            OFFSET 15 ROWS FETCH NEXT 5 ROWS ONLY
+        </hlb>
+    </output>
+    <fiddle>DtN2pm</fiddle>
+</sample>

@@ -1,0 +1,28 @@
+﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> as <b>StronglyTyped</b>.
+<sample>
+    <code lang="c#">
+        var sql = Odb.SQL.Select(x => x.From(t1)
+                            .Where( t1.OrderID > 10260 )
+                            .Skip(5).Top(10)
+                            .ExcludeFields(t1.ShipperID)
+                    );
+
+        var rows = sql.ExecuteReader&lt;Orders&gt;(cn).ToList();
+    </code>
+    <output type="secondary" >
+        <b>Record Count= 1.093.000</b><br />
+        <div style="padding-left:25px;">
+            Client  : Core I7-9750H @2.60GHz, 16GB RAM<br />
+            Server	: (Localhost), MsSQL Server 2019<br />
+        </div>
+        <br />
+        Results<br />
+        <div style="padding-left:25px;">
+            <b>Strongly Typed : 1,6356077 seconds</b><br />
+            By ColumnIndex : 1,8987543 seconds<br />
+            By ColumnName  : 2,3467037 seconds<br />
+            By TableField : 2,5380411 seconds<br />
+        </div>
+    </output>
+    <fiddle>bf0YQ5</fiddle>
+</sample>

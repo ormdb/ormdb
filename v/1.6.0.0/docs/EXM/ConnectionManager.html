@@ -1,6 +1,6 @@
 ﻿Following example demonstrates how to create a connection dynamically.
-<code-tab>
-    <pre lang="c#">
+<sample>
+    <code lang="c#">
     public Odb.Connection InitConnection&lt;T&gt;(
         string Host, 
         string Database, 
@@ -64,70 +64,11 @@
         var cn_3 = InitConnection&lt;Odb.Providers.MySql&gt;("localhost", "DB_NAME", "user", "pass");
         var cn_4 = InitConnection&lt;Odb.Providers.PostgreSql&gt;("localhost", "DB_NAME", "user", "pass");
     }
-   </pre>
-    <pre lang="vb">
-    Function InitConnection(Of T As Odb.Providers.IProvider)(
-                Host As String, 
-                Database As String,
-                Optional User As String = Nothing,
-                Optional Password As String = Nothing,
-                Optional Port As Integer? = Nothing,
-                Optional DBA_Privilege As Boolean = True
-                Optional AutoStartTrans As Boolean = False) As Odb.Connection
-
-        Dim str As String = Nothing
-        Select Case GetType(T).FullName.Split(".").Last()
-            Case "MsSql"
-                Port = If(Port Is Nothing OrElse Port = 0, 1433, Port)
-                If String.IsNullOrEmpty(User) Then
-                    str = $"MultipleActiveResultSets=true;Pooling=false;data source={Host},{Port};Database={Database};Trusted_Connection=True"
-                Else
-                    str = $"MultipleActiveResultSets=true;Pooling=false;data source={Host},{Port};Database={Database};user id={User};pwd={Password}"
-                End If
-
-            Case "MySql"
-                Port = If(Port Is Nothing OrElse Port = 0, 3306, Port)
-                str = $"Pooling=false;ConvertZeroDateTime=True;server={Host};port={Port};database={Database};user id={User};password={Password}"
-
-            Case "PostgreSql"
-                Port = If(Port Is Nothing OrElse Port = 0, 5432, Port)
-                If String.IsNullOrEmpty(User) Then
-                    str = $"ApplicationName=OrmDb - MyApplication; Server={Host};Port={Port};Database={Database};Integrated Security=true"
-                Else
-                    str = $"ApplicationName=OrmDb - MyApplication; Server={Host};Port={Port};Database={Database};User Id={User};Password={Password}"
-                End If
-
-            Case "Oracle"
-                Port = If(Port Is Nothing OrElse Port = 0, 1521, Port)
-                Dim _source As String
-                If DBA_Privilege Then
-                    _source = $"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={Host})(PORT={Port}))(CONNECT_DATA=(SERVICE_NAME={Database})));DBA Privilege=SYSDBA;"
-                Else
-                    _source = $"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={Host})(PORT={Port}))(CONNECT_DATA=(SERVICE_NAME={Database })));"
-                End If
-                If String.IsNullOrEmpty(User) Then
-                    str = $"{_source}User Id=/;"
-                Else
-                    str = $"{_source}User Id={User};Password={Password};"
-                End If
-        End Select
-
-        Return Odb.Connection.Create(Of T)(str, 
-                        Settings:=New ConnectionSettings() With {
-                            .AutoStartTrans = AutoStartTrans
-                        })
-    End Function
-
-     Sub Main()
-        Odb.Connection.DefaultSettings.IsolationLevel = IsolationLevel.ReadCommitted
-        
-        Dim cn_1 = InitConnection(Of Odb.Providers.Oracle)( "localhost", "SERVICE_NAME", "user", "pass" )
-        Dim cn_2 = InitConnection(Of Odb.Providers.MsSql)( "localhost", "DB_NAME", "user", "pass" )
-        Dim cn_3 = InitConnection(Of Odb.Providers.MySql)( "localhost", "DB_NAME", "user", "pass" )
-        Dim cn_4 = InitConnection(Of Odb.Providers.PostgreSql)( "localhost", "DB_NAME", "user", "pass" )
-    End Sub
-    </pre>
-</code-tab>
+    </code>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>
 <br />
 <br />
 

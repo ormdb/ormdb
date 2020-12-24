@@ -1,34 +1,28 @@
 ﻿Following section demonstrates how to update from [Order] records,
 which contains line that has value of quantity is lower 5 in [OrderDetails].
-<div class="row">
-	<div class="col-md-12 col-lg">
-		<code-tab>
-			<pre lang="c#">
-				var t0 = new Orders();
-				var t1 = new OrderDetails();
-				var sql = Odb.SQL.Update(x =>
-								x.From(t0) 
-								 .InnerJoin(t1, t1.OrderID == t0.OrderID) 
-								 .Where(t1.Quantity < 5)
-								 .Set(t0.EmployeeID, 3)
-							);
+<sample>
+	<code lang="c#">
+		var t0 = new Orders();
+		var t1 = new OrderDetails();
+		var sql = Odb.SQL.Update(x =>
+						x.From(t0) 
+							.InnerJoin(t1, t1.OrderID == t0.OrderID) 
+							.Where(t1.Quantity < 5)
+							.Set(t0.EmployeeID, 3)
+					);
 
-				var affectedRows = sql.ExecuteNonQuery(cn);
-			</pre>
-		</code-tab>
-	</div>
-	<div class="col-md-12 col-lg-4">
-		<o class="h-100">
-			<i class="text-success">
-				This sample generates different results for each database connected. The code shown below is generated via MsSql database connection.
-			</i><br /><br />
+		var affectedRows = sql.ExecuteNonQuery(cn);
+	</code>
+	<output>
+		<i class="text-success">
+			This sample generates different results for each database connected. The code shown below is generated via MsSql database connection.
+		</i><br /><br />
 
-			UPDATE t0<br />
-			SET t0.EmployeeID=3<br />
-			FROM [Orders] AS t0<br />
-			INNER JOIN [OrderDetails] AS t1 ON t1.OrderID = t0.OrderID<br />
-			WHERE t1.Quantity < 5<br />
-		</o>
-	</div>
-</div>
-<fiddle>510Wss</fiddle>
+		UPDATE t0<br />
+		SET t0.EmployeeID=3<br />
+		FROM [Orders] AS t0<br />
+		INNER JOIN [OrderDetails] AS t1 ON t1.OrderID = t0.OrderID<br />
+		WHERE t1.Quantity < 5<br />
+	</output>
+	<fiddle>510Wss</fiddle>
+</sample>

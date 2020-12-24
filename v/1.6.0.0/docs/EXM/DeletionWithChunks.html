@@ -1,13 +1,11 @@
 ﻿Following section demonstrates <b>deletion with chunks</b>.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
+<sample>
+    <code lang="c#">
                 var t0 = new Orders();
                 var t1 = new OrderDetails();
 
                 // Ids are being obtained for the records to be deleted...
-                var _ids = Odb.SQL.Select(x => x.Fields(x[t0.Id].DISTINCT()) .From(t0) )
+                var _ids = Odb.SQL.Select(x => x.Fields(x[t0.OrderID].DISTINCT()) .From(t0) )
                                 .ExecuteReader&lt;string&gt;(cn).ToList();
 
                 // records are being deleted in chunks, by supplying record Id information.
@@ -19,8 +17,8 @@
                     If (_items.Count = 0) break;
 
                     // command are being queued
-                    qry.Delete(x => x.From(t1).Where(t1.Id.IN(_items)) );
-                    qry.Delete(x => x.From(t0).Where(t0.Id.IN(_items)) );
+                    qry.Delete(x => x.From(t1).Where(t1.OrderID.IN(_items)) );
+                    qry.Delete(x => x.From(t0).Where(t0.OrderID.IN(_items)) );
 
                     qry.Execute(cn);                // queries are being executed
                     qry.Clear();                    // buffer is being clear
@@ -29,12 +27,9 @@
                 }
 
                 var affectedRows = sql.ExecuteNonQuery(cn);
-            </pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <co type="warning" class="h-100">
-          <k>Delete</k> operation is always a problem for the large records. But you can break the large delete operation into chunks.
-        </co>
-    </div>
-</div>
+    </code>
+    <output>
+        <k>Delete</k> operation is always a problem for the large records. But you can break the large delete operation into chunks.
+    </output>
+    <fiddle></fiddle>
+</sample>

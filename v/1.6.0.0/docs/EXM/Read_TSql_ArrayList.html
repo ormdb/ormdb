@@ -1,0 +1,20 @@
+﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> as <b>ArrayList</b>, using <k>SQL String</k>.
+<sample>
+    <code lang="c#">
+        var sql = "SELECT * FROM Customers";
+
+        foreach (var row in cn.ExecuteReader(sql).ToArray())
+        {
+            Console.WriteLine(String.Join(", ", from x in row select x.ToString().TrimEnd()));
+        }
+    </code>
+    <output type="secondary">
+        1, Alfreds Futterkiste, Maria Anders, Obere Str. 57, ...<br />
+        2, Ana Trujillo Emparedados y helados, Ana Trujillo, Avda. de 2222, ...<br />
+        3, Antonio Moreno Taquería, Antonio, Mataderos 2312, México ...<br />
+        4, Around the Horn, Thomas Hardy, 120 Hanover Sq., London, ...<br />
+        ...<br />
+        ...
+    </output>
+    <fiddle>l6aZOi</fiddle>
+</sample>

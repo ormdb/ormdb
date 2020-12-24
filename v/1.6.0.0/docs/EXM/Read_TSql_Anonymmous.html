@@ -1,0 +1,49 @@
+﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a>, using <k>SQL String</k>.
+<sample>
+    <code lang="c#">
+        var sql = "SELECT * FROM Customers";
+
+        // Reading by COLUMN-INDEX...
+        foreach (var row in cn.ExecuteReader(sql))
+            // row[0] ... row[6]
+
+
+        // Reading by COLUMN-NAME...
+        foreach (var row in cn.ExecuteReader(sql))
+            // row["CustomerID"];
+            // row["CustomerName"];
+            // row["ContactName"];
+            // row["Address"];
+            // row["City"];
+            // row["PostalCode"];
+            // row["Country"];
+
+
+        // Reading by EXPRESSION...
+        Customer c = null; // for expression
+        foreach (var row in cn.ExecuteReader(sql))
+            // row.Get(()=> c.CustomerID);
+            // row.Get(()=> c.CustomerName);
+            // row.Get(()=> c.ContactName);
+            // row.Get(()=> c.Address);
+            // row.Get(()=> c.City);
+            // row.Get(()=> c.PostalCode);
+            // row.Get(()=> c.Country);
+    </code>
+    <output type="secondary">
+        <b>Record Count= 1.093.000</b><br />
+        <div style="padding-left:25px;">
+            Client  : Core I7-9750H @2.60GHz, 16GB RAM<br />
+            Server	: (Localhost), MsSQL Server 2019<br />
+        </div>
+        <br />
+        Results<br />
+        <div style="padding-left:25px;">
+            <b>Strongly Typed : 1,6356077 seconds</b><br />
+            By ColumnIndex : 1,8987543 seconds<br />
+            By ColumnName  : 2,3467037 seconds<br />
+            By TableField : 2,5380411 seconds<br />
+        </div>
+    </output>
+    <fiddle>l6aZOi</fiddle>
+</sample>

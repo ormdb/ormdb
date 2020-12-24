@@ -1,8 +1,6 @@
 ﻿Following section demonstrates using <hl>GROUP BY</hl> clause.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
+<sample>
+    <code lang="c#">
         var th = new TableHeader();
 
         var sql = Odb.SQL.Select(x => 
@@ -11,15 +9,11 @@
                          .Fields(t0.EmployeeID, 
                                  x[t0.OrderID].MAX().AS("LastOrderId"))
                     );
-	</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            SELECT t0.EmployeeID, <hlb>MAX(t0.OrderID) AS LastOrderId</hlb><br />
-            FROM [Orders] AS t0 <br />
-            <hlb>GROUP BY t0.EmployeeID</hlb>
-        </o>
-    </div>
-</div>
-<fiddle>zeHZ1R</fiddle>
+    </code>
+    <output>
+        SELECT t0.EmployeeID, <hlb>MAX(t0.OrderID) AS LastOrderId</hlb><br />
+        FROM [Orders] AS t0 <br />
+        <hlb>GROUP BY t0.EmployeeID</hlb>
+    </output>
+    <fiddle>zeHZ1R</fiddle>
+</sample>

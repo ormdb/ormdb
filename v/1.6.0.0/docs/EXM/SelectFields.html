@@ -1,46 +1,40 @@
 ﻿Following section demonstrates <hl>how select/exclude the fields</hl> to be read.
-<div class="row">
-	<div class="col-md-12 col-lg">
-		<code-tab>
-			<pre lang="c#">
-		var t0 = new Orders();
-		var t1 = new OrderDetails();
+<sample>
+    <code lang="c#">
+        var t0 = new Orders();
+        var t1 = new OrderDetails();
 
-		// Select all columns
-		Odb.SQL.Select(x => x.From(t0) );
+        // Select all columns
+        Odb.SQL.Select(x => x.From(t0) );
 
-		// Select Only [OrderID] and [CustomerID] columns from [Orders]
-		Odb.SQL.Select(x => x.From(t0).Fields(t0.OrderID, t0.CustomerID) );
+        // Select Only [OrderID] and [CustomerID] columns from [Orders]
+        Odb.SQL.Select(x => x.From(t0).Fields(t0.OrderID, t0.CustomerID) );
 
-		// Select all columns for only [OrderDetails]
-		Odb.SQL.Select(x => x.From(t0).LeftJoin(t1, t0.OrderID == t1.OrderID).Fields(t1) );
+        // Select all columns for only [OrderDetails]
+        Odb.SQL.Select(x => x.From(t0).LeftJoin(t1, t0.OrderID == t1.OrderID).Fields(t1) );
 
-		// Select all columns by excluding column [ShipperID] from [Orders]
-		Odb.SQL.Select(x => x.From(t0).ExcludeFields(t0.ShipperID) );
-	</pre>
-		</code-tab>
-	</div>
-	<div class="col-md-12 col-lg-4">
-		<o class="h-100">
-			<i class="text-success">Select all columns</i>
-			<br />
-			SELECT <hlb>*</hlb> FROM [Orders] AS t0
-			<br />
-			<br />
-			<i class="text-success">Select Only [OrderID] and [CustomerID] columns from [Orders]</i>
-			<br />
-			SELECT <hlb>t0.OrderID, t0.CustomerID</hlb> FROM [Orders] AS t0
-			<br />
-			<br />
-			<i class="text-success">Select all columns for only [OrderDetails]</i>
-			<br />
-			SELECT <hlb>tl.*</hlb> FROM [Orders] AS t0 LEFT JOIN [OrderDetails] AS t1 ON t0.OrderID = t1.OrderID
-			<br />
-			<br />
-			<i class="text-success">Select all columns by excluding column [ShipperID] from [Orders]</i>
-			<br />
-			SELECT <hlb>t0.OrderID, t0.CustomerID, t0.EmployeeID, t0.OrderDate</hlb> FROM [Orders] AS t0
-		</o>
-	</div>
-</div>
-<fiddle>1j0zsQ</fiddle>
+        // Select all columns by excluding column [ShipperID] from [Orders]
+        Odb.SQL.Select(x => x.From(t0).ExcludeFields(t0.ShipperID) );
+    </code>
+    <output>
+        <i class="text-success">Select all columns</i>
+        <br />
+        SELECT <hlb>*</hlb> FROM [Orders] AS t0
+        <br />
+        <br />
+        <i class="text-success">Select Only [OrderID] and [CustomerID] columns from [Orders]</i>
+        <br />
+        SELECT <hlb>t0.OrderID, t0.CustomerID</hlb> FROM [Orders] AS t0
+        <br />
+        <br />
+        <i class="text-success">Select all columns for only [OrderDetails]</i>
+        <br />
+        SELECT <hlb>tl.*</hlb> FROM [Orders] AS t0 LEFT JOIN [OrderDetails] AS t1 ON t0.OrderID = t1.OrderID
+        <br />
+        <br />
+        <i class="text-success">Select all columns by excluding column [ShipperID] from [Orders]</i>
+        <br />
+        SELECT <hlb>t0.OrderID, t0.CustomerID, t0.EmployeeID, t0.OrderDate</hlb> FROM [Orders] AS t0
+    </output>
+    <fiddle>1j0zsQ</fiddle>
+</sample>

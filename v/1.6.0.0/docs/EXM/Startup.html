@@ -4,8 +4,8 @@
 
 <st>Startup</st>
 Following section demonstrates initializing the table instance and creation a connection.
-<code-tab>
-    <pre lang="c#">
+<sample>
+    <code lang="c#">
         using Odb; /* for extensions */
 
         public void main()
@@ -13,16 +13,11 @@ Following section demonstrates initializing the table instance and creation a co
             // connection is being created...
             var cn = Odb.Connection.Create&lt;Providers.MsSql&gt;("Your-ConnectionString");
         }
-    </pre>
-    <pre lang="vb">
-        Imports Odb ' for extensions
-
-        Public Sub main()
-            ' connection is being created...
-            Dim cn = Odb.Connection.Create(Of Providers.MsSql)("Your-ConnectionString")
-        End Sub
-    </pre>
-</code-tab>
+    </code>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>
 <co type="warning">
     Please refer to <a href="##EXM--ConnectionManager">ConnectionManager</a> for more connection.
 </co>

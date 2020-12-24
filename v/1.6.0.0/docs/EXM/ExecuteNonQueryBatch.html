@@ -1,6 +1,6 @@
-﻿Following section demonstrates how to execute multiple commands in one batch-query with <a href="##OTH--OTH-ExecuteNonQuery">ExecuteNonQuery</a>.
-<code-tab>
-	<pre lang="c#">
+﻿Following section demonstrates how to execute multiple commands in one batch-query with <b>ExecuteNonQuery</b>.
+<sample>
+    <code lang="c#">
 		var th = new TableHeader();
 		var tl = new TableLines();
 		
@@ -26,32 +26,8 @@
 		
 		// Commands are being executed...
 		sql.ExecuteNonQuery(cn);
-	</pre>
-	<pre lang="vb">
-		Dim th = New TableHeader()
-		Dim tl = New TableLines()
-		
-		Dim sql = SQL.X.Query()
-		
-		' DELETE commands are being queued...
-		sql.Delete(th)
-		sql.Delete(tl)
-		
-		' INSERT commands are being queued...
-		sql.Insert(True).Add(New TableHeader() With {
-                                .Year = DateTime.Now.Year,
-								.Id = 1,
-								.DocDate = DateTime.Now.AddDays(1)
-                            })
-
-		' UPDATE commands are being queued...
-		sql.Update(Function(x) _
-				x.From(th) _
-				.Where(th.Year = 2018) _
-				.Set(th.IsActive, Not th.IsActive)
-			)
-		
-		' Commands are being executed...
-		sql.ExecuteNonQuery(cn)
-	</pre>
-</code-tab>
+    </code>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>

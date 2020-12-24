@@ -2,64 +2,57 @@
 <co type="warning" inline>
     to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
 </co>
-
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-				var t0 = new Orders();
-				var t1 = new OrderDetails();
+<sample>
+    <code lang="c#">
+		var t0 = new Orders();
+		var t1 = new OrderDetails();
 		
-				var sql1 = Odb.SQL.Select(x =>
-								x.From(t0)
-								 .GroupBy(t0.EmployeeID)
-								 .Fields(x["T1"].AS("Type"), 
-										 x[t0.EmployeeID].AS("Id"), 
-										 x[t0.OrderID].MAX().AS("OrderID"))
-							);
-				var sql2 = Odb.SQL.Select(x =>
-								x.From(t1)
-								.GroupBy(t1.ProductID)
-								.Fields(x["T2"].AS("Type"), 
-										x[t1.ProductID].AS("Id"), 
-										x[t1.OrderID].MAX().AS("OrderID"))
-							);
+		var sql1 = Odb.SQL.Select(x =>
+						x.From(t0)
+							.GroupBy(t0.EmployeeID)
+							.Fields(x["T1"].AS("Type"), 
+									x[t0.EmployeeID].AS("Id"), 
+									x[t0.OrderID].MAX().AS("OrderID"))
+					);
+		var sql2 = Odb.SQL.Select(x =>
+						x.From(t1)
+						.GroupBy(t1.ProductID)
+						.Fields(x["T2"].AS("Type"), 
+								x[t1.ProductID].AS("Id"), 
+								x[t1.OrderID].MAX().AS("OrderID"))
+					);
 
-				// union
-				var sql = Odb.SQL.Union(x =>
-								x.RemoveDuplicates()
-								 .Add(sql1)
-								 .Add(sql2)
-								 .Top(5)
-								 .OrderASC(sql1[0]).OrderASC(sql1[1]).OrderDESC(sql1["OrderID"])
-							);
-	</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            <hl>SELECT * FROM (</hl><br />
-            <div style="padding-left:30px;">
-                SELECT 'T0' AS Type, <br />
-                t0.EmployeeID AS Id, <br />
-                MAX(t0.OrderID) AS OrderID <br />
-                FROM [Orders] AS t0 <br />
-                GROUP BY t0.EmployeeID
-            </div>
-            <hlb>UNION</hlb><br />
-            <div style="padding-left:30px;">
-                SELECT 'T1' AS Type,<br />
-                t1.ProductID AS Id,<br />
-                MAX(t1.OrderID) AS OrderID <br />
-                FROM [OrderDetails] AS t1<br />
-                GROUP BY t1.ProductID
-            </div>
-            <hl>) AS t</hl><br />
-            <hl>
-                ORDER BY Type ASC, Id ASC, OrderID DESC<br />
-                OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY
-            </hl>
-        </o>
-    </div>
-</div>
-<fiddle>2G0HiR</fiddle>
+		// union
+		var sql = Odb.SQL.Union(x =>
+						x.RemoveDuplicates()
+							.Add(sql1)
+							.Add(sql2)
+							.Top(5)
+							.OrderASC(sql1[0]).OrderASC(sql1[1]).OrderDESC(sql1["OrderID"])
+					);
+    </code>
+	<output>
+		<hl>SELECT * FROM (</hl><br />
+		<div style="padding-left:30px;">
+			SELECT 'T0' AS Type, <br />
+			t0.EmployeeID AS Id, <br />
+			MAX(t0.OrderID) AS OrderID <br />
+			FROM [Orders] AS t0 <br />
+			GROUP BY t0.EmployeeID
+		</div>
+		<hlb>UNION</hlb><br />
+		<div style="padding-left:30px;">
+			SELECT 'T1' AS Type,<br />
+			t1.ProductID AS Id,<br />
+			MAX(t1.OrderID) AS OrderID <br />
+			FROM [OrderDetails] AS t1<br />
+			GROUP BY t1.ProductID
+		</div>
+		<hl>) AS t</hl><br />
+		<hl>
+			ORDER BY Type ASC, Id ASC, OrderID DESC<br />
+			OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY
+		</hl>
+	</output>
+	<fiddle>2G0HiR</fiddle>
+</sample>

@@ -2,11 +2,8 @@
 <co type="warning" inline>
 	to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
 </co>
-
-<div class="row">
-	<div class="col-md-12 col-lg">
-		<code-tab>
-			<pre lang="c#">
+<sample>
+	<code lang="c#">
 		var t0 = new Orders();
 		var t1 = new OrderDetails();
 		
@@ -23,55 +20,47 @@
 				 .LeftJoin( sub_sql, sub_sql["Id"].ToInteger() == t0.OrderID )
 				 .Fields( t0.OrderID, sub_sql["LastDetailId"] )
 		);
-	</pre>
-		</code-tab>
-	</div>
-	<div class="col-md-12 col-lg-4">
-		<o class="h-100">
-			SELECT t2.OrderID, t1.LastDetailId <br />
-			FROM [Orders] AS t2 <br />
-			LEFT JOIN (<br />
-			<div style="padding-left:50px;"><hl>
+	</code>
+	<output>
+		SELECT t2.OrderID, t1.LastDetailId <br />
+		FROM [Orders] AS t2 <br />
+		LEFT JOIN (<br />
+		<div style="padding-left:50px;">
+			<hl>
 				SELECT t0.OrderID AS Id, <br />
-					   MAX(t0.OrderDetailID) AS LastDetailId <br />
+				MAX(t0.OrderDetailID) AS LastDetailId <br />
 				FROM [OrderDetails] AS t0 <br />
 				GROUP BY t0.OrderID
-			</hl></div>
-			) AS t1 ON t1.Id = t2.OrderID
-			ORDER BY (SELECT NULL) <br />
-		</o>
-	</div>
-</div>
-<fiddle>C5xQwQ</fiddle>
+			</hl>
+		</div>
+		) AS t1 ON t1.Id = t2.OrderID
+		ORDER BY (SELECT NULL) <br />
+	</output>
+	<fiddle>C5xQwQ</fiddle>
+</sample>
 <br />
 <br />
 
 Following section demonstrates using <hl>SUB SELECT</hl> in a <hl>WHERE</hl> block.
-<div class="row">
-	<div class="col-md-12 col-lg">
-		<code-tab>
-			<pre lang="c#">
+<sample>
+	<code lang="c#">
 		var sub_sql = Odb.SQL.Select(x =>
 						x.From(t1).Fields( x[t1.OrderID].DISTINCT() )
 					);
 
 		Odb.SQL.Select(x => x.From(t0).Where( x[t0.OrderID].IN(sub_sql)) );
-	</pre>
-		</code-tab>
-	</div>
-	<div class="col-md-12 col-lg-4">
-		<o class="h-100">
-			SELECT * <br />
-			FROM [Orders] AS t0<br />
-			WHERE t0.OrderID IN (
-			<div style="padding-left:50px;">
-				<hl>
-					SELECT DISTINCT(t1.OrderID)<br />
-					FROM [OrderDetails] AS t1
-				</hl>
-			</div>
-			)
-		</o>
-	</div>
-</div>
-<fiddle>C5xQwQ</fiddle>
+	</code>
+	<output>
+		SELECT * <br />
+		FROM [Orders] AS t0<br />
+		WHERE t0.OrderID IN (
+		<div style="padding-left:50px;">
+			<hl>
+				SELECT DISTINCT(t1.OrderID)<br />
+				FROM [OrderDetails] AS t1
+			</hl>
+		</div>
+		)
+	</output>
+	<fiddle>C5xQwQ</fiddle>
+</sample>

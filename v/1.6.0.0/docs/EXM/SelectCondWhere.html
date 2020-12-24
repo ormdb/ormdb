@@ -1,40 +1,32 @@
 ﻿Following section demonstrates the dynamic creation of the <hl>Where</hl> clause by <b>depending on conditional (if)</b>.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-				var t0 = new Orders();
+<sample>
+    <code lang="c#">
+		var t0 = new Orders();
 		
-				var sql = Odb.SQL.Select(x => 
-									x.From(t0)
-									 .Where( t0.OrderID == 123456 ) );
+		var sql = Odb.SQL.Select(x => 
+							x.From(t0)
+							  .Where( t0.OrderID == 123456 ) );
 
-				// [Where] clause is being extended depending on IF()
-				int _shipper_id = 998877;
-				if ( _shipper_id > 0 )
-					sql.Add(x => x.Where(t0.ShipperID == _shipper_id));
-			</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            SELECT * <br />
-            FROM [Orders] AS t0 <br />
-            WHERE t0.OrderID = 123456<br />
-            <hlb> AND t0.ShipperID = 998877</hlb>
-        </o>
-    </div>
-</div>
-<fiddle>hpQSPY</fiddle>
+		// [Where] clause is being extended depending on IF()
+		int _shipper_id = 998877;
+		if ( _shipper_id > 0 )
+			sql.Add(x => x.Where(t0.ShipperID == _shipper_id));
+    </code>
+    <output>
+        SELECT * <br />
+        FROM [Orders] AS t0 <br />
+        WHERE t0.OrderID = 123456<br />
+        <hlb> AND t0.ShipperID = 998877</hlb>
+    </output>
+    <fiddle>hpQSPY</fiddle>
+</sample>
 
 <br />
 <br />
 
 Following section demonstrates the dynamic creation of the <hl>Where</hl> clause by <b>external variable(s)</b>.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
+<sample>
+    <code lang="c#">
 				var typ = "C";
 				var c_id = 5555;
 				var e_id = 6666;
@@ -46,18 +38,14 @@ Following section demonstrates the dynamic creation of the <hl>Where</hl> clause
 											 (typ == "E" & t0.EmployeeID == e_id)
 											)
 							);
-			</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            SELECT *<br />
-            FROM [Orders] AS t0 <br />
-            <hlb>
-                WHERE (1 = 1 AND t0.CustomerID = 5555)<br />
-                OR ('C' = 'E' AND t0.EmployeeID = 6666)
-            </hlb>
-        </o>
-    </div>
-</div>
-<fiddle>hpQSPY</fiddle>
+    </code>
+	<output>
+		SELECT *<br />
+		FROM [Orders] AS t0 <br />
+		<hlb>
+			WHERE (1 = 1 AND t0.CustomerID = 5555)<br />
+			OR ('C' = 'E' AND t0.EmployeeID = 6666)
+		</hlb>
+	</output>
+	<fiddle>hpQSPY</fiddle>
+</sample>

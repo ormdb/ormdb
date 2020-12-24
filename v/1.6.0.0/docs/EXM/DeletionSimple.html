@@ -1,29 +1,24 @@
 ﻿Following section demonstrates <b>simple deletion</b>.
-<div class="row">
-	<div class="col-md-12 col-lg">
-		<code-tab>
-			<pre lang="c#">
-				var t0 = new OrderDetails();
-				var t1 = new Orders();
+Following section demonstrates <b>deletion with chunks</b>.
+<sample>
+	<code lang="c#">
+		var t0 = new OrderDetails();
+		var t1 = new Orders();
 		
-				var sql = Odb.SQL.Query();
-					sql.Delete(x => x.From(t0).Where( t0.OrderID == 10248 ));
-					sql.Delete(x => x.From(t1).Where( t1.OrderID == 10248 ));
+		var sql = Odb.SQL.Query();
+			sql.Delete(x => x.From(t0).Where( t0.OrderID == 10248 ));
+			sql.Delete(x => x.From(t1).Where( t1.OrderID == 10248 ));
 
-				var affectedRows = sql.ExecuteNonQuery(cn);
-			</pre>
-		</code-tab>
-	</div>
-	<div class="col-md-12 col-lg-4">
-		<o class="h-100">
-			DELETE t0<br />
-			FROM [OrderDetails] AS t0<br />
-			WHERE t0.OrderID = 10248<br />
-			<br />
-			DELETE t1<br />
-			FROM [Orders] AS t1<br />
-			WHERE t1.OrderID = 10248<br />
-		</o>
-	</div>
-</div>
-<fiddle>JiFrw4</fiddle>
+		var affectedRows = sql.ExecuteNonQuery(cn);
+	</code>
+	<output>
+		DELETE t0<br />
+		FROM [OrderDetails] AS t0<br />
+		WHERE t0.OrderID = 10248<br />
+		<br />
+		DELETE t1<br />
+		FROM [Orders] AS t1<br />
+		WHERE t1.OrderID = 10248<br />
+	</output>
+	<fiddle>JiFrw4</fiddle>
+</sample>

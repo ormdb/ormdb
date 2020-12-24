@@ -1,8 +1,6 @@
 ﻿Following section demonstrates using <hl>JOIN</hl> clause.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
+<sample>
+    <code lang="c#">
 		var t0 = new Orders();
 		var t1 = new OrderDetails();
 		
@@ -12,19 +10,15 @@
 			     .LeftJoin(t1, t1.OrderID == t0.OrderID) 
 			     .Where( t0.OrderID == 10248 )
 		);
-	</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            SELECT t0.*, t1.OrderDetailID, t1.ProductID, t1.Quantity <br />
-            FROM [Orders] AS t0 <br />
-            <hlb>
-                LEFT JOIN [OrderDetails] AS t1 <br />
-                ON (t1.OrderID = t0.OrderID)
-            </hlb> <br />
-            WHERE ((t0.OrderID > 1500) AND (t1.OrderID IS NOT NULL))
-        </o>
-    </div>
-</div>
-<fiddle>S9MQUT</fiddle>
+    </code>
+    <output>
+        SELECT t0.*, t1.OrderDetailID, t1.ProductID, t1.Quantity <br />
+        FROM [Orders] AS t0 <br />
+        <hlb>
+            LEFT JOIN [OrderDetails] AS t1 <br />
+            ON (t1.OrderID = t0.OrderID)
+        </hlb> <br />
+        WHERE ((t0.OrderID > 1500) AND (t1.OrderID IS NOT NULL))
+    </output>
+    <fiddle>S9MQUT</fiddle>
+</sample>

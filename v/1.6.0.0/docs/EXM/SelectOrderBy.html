@@ -1,24 +1,18 @@
 ﻿Following section demonstrates how to sort the data returned in ascending/descending order.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
+<sample>
+    <code lang="c#">
 		var t0 = new Orders();
 		
 		Odb.SQL.Select(x => 
 					 x.From(t0).Top(15)
 					 .OrderASC(t0.OrderID).OrderDESC(t0.OrderDate)
 					);
-	</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            SELECT * <br />
-            FROM [Orders] AS t0 <br />
-            <hlb>ORDER BY t0.OrderID ASC, t0.OrderDate DESC</hlb><br />
-            OFFSET 0 ROWS FETCH NEXT 15 ROWS ONLY
-        </o>
-    </div>
-</div>
-<fiddle>GWRT5w</fiddle>
+    </code>
+    <output>
+        SELECT * <br />
+        FROM [Orders] AS t0 <br />
+        <hlb>ORDER BY t0.OrderID ASC, t0.OrderDate DESC</hlb><br />
+        OFFSET 0 ROWS FETCH NEXT 15 ROWS ONLY
+    </output>
+    <fiddle>GWRT5w</fiddle>
+</sample>

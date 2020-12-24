@@ -1,32 +1,26 @@
 ﻿Following section demonstrates insertion with <b>Value Array</b>.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-                var sql = Odb.SQL.Insert();
+<sample>
+    <code lang="c#">
+        var sql = Odb.SQL.Insert();
 
-                var dt = DateTime.Now;
-                sql.Add&lt;TableHeader&gt;(dt.Year, 1, dt, null, DBNull.Value);
+        var dt = DateTime.Now;
+        sql.Add&lt;TableHeader&gt;(dt.Year, 1, dt, null, DBNull.Value);
 
-                sql.Add&lt;TableLines&gt;(dt.Year, 1, 1, "note 1");
-                sql.Add&lt;TableLines&gt;(dt.Year, 1, 2, "note 2");
+        sql.Add&lt;TableLines&gt;(dt.Year, 1, 1, "note 1");
+        sql.Add&lt;TableLines&gt;(dt.Year, 1, 2, "note 2");
 
-                var affectedRows = sql.ExecuteNonQuery(cn);
-	        </pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            In this sample; column "<k>OrderID</k>" is AutoIncrement field.
-            <br />
-            <br />
+        var affectedRows = sql.ExecuteNonQuery(cn);
+    </code>
+    <output>
+        In this sample; column "<k>OrderID</k>" is AutoIncrement field.
+        <br />
+        <br />
 
-            INSERT INTO [Orders] <br />
-            ([CustomerID],[EmployeeID],[OrderDate],[ShipperID]) <br />
-            VALUES <br />
-            (90,8,'2020-12-23 07:57:20',1),<br />
-            (91,8,'2020-12-23 07:57:20',2);
-        </o>
-    </div>
-</div>
-<fiddle>jApWhp</fiddle>
+        INSERT INTO [Orders] <br />
+        ([CustomerID],[EmployeeID],[OrderDate],[ShipperID]) <br />
+        VALUES <br />
+        (90,8,'2020-12-23 07:57:20',1),<br />
+        (91,8,'2020-12-23 07:57:20',2);
+    </output>
+    <fiddle>jApWhp</fiddle>
+</sample>

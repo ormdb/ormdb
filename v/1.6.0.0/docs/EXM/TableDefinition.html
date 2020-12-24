@@ -1,93 +1,53 @@
 ﻿Following section demonstrates how to define the tables.
-<code-tab>
-    <pre lang="c#">
-using System;
-using System.Linq.Expressions;
-using Odb.Table;
 
-// Attributes are defined at once to use with [Ref]...
-public enum Ref
-{
-    [Column("year", Length = 4, DefaultValue = 2000, MinValue = 1900, MaxValue = 2100)] year,
-    [Column("note", Length = 100, DefaultValue = "")] note,
-    [Column("id", Length = 2)] id,
-    [Column(DateFormat = ColumnDateFormat.OnlyDate)] only_date
-}
+<sample>
+    <code lang="c#">
+        using System;
+        using System.Linq.Expressions;
+        using Odb.Table;
 
-[Table("header")]
-public class TableHeader : Base
-{
-    [Column(Ref.year)]                public int? Year;
-    [Column(Ref.id)]                  public int? Id;
-    [Column("date", Ref.only_date)]   public DateTime? DocDate;
-    [Column("active")]                public bool IsActive;
-    [Column(Ref.note)]                public string Note;
+        // Attributes are defined at once to use with [Ref]...
+        public enum Ref
+        {
+            [Column("year", Length = 4, DefaultValue = 2000, MinValue = 1900, MaxValue = 2100)] year,
+            [Column("note", Length = 100, DefaultValue = "")] note,
+            [Column("id", Length = 2)] id,
+            [Column(DateFormat = ColumnDateFormat.OnlyDate)] only_date
+        }
 
-    // Method expression which returns of type "TableConfig", is returned.
-    protected override Expression&lt;TableConfig&gt; Config() =>
-        (x) => x.SetPrimaryKey(Year, Id)
-                        .AddIndex(DocDate);
-}
+        [Table("header")]
+        public class TableHeader : Base
+        {
+            [Column(Ref.year)]                public int? Year;
+            [Column(Ref.id)]                  public int? Id;
+            [Column("date", Ref.only_date)]   public DateTime? DocDate;
+            [Column("active")]                public bool IsActive;
+            [Column(Ref.note)]                public string Note;
 
-[Table("lines")]
-public class TableLines : Base
-{
-    [Column(Ref.year)]                public int? Year;
-    [Column(Ref.id)]                  public int? Id;
-    [Column("lineid", Length = 2)]    public int? LineId;
-    [Column(Ref.note)]                public string Note;
+            // Method expression which returns of type "TableConfig", is returned.
+            protected override Expression&lt;TableConfig&gt; Config() =>
+                (x) => x.SetPrimaryKey(Year, Id)
+                                .AddIndex(DocDate);
+        }
 
-    // Method expression which returns of type "TableConfig", is returned.
-    protected override Expression&lt;TableConfig&gt; Config() =>
-        (x) => x.SetPrimaryKey(Year, Id, LineId);
-}
-</pre>
-    <pre lang="vb">
-Imports System
-Imports Odb.Table
-Imports System.Linq.Expressions
+        [Table("lines")]
+        public class TableLines : Base
+        {
+            [Column(Ref.year)]                public int? Year;
+            [Column(Ref.id)]                  public int? Id;
+            [Column("lineid", Length = 2)]    public int? LineId;
+            [Column(Ref.note)]                public string Note;
 
-' column attributes are defined at once to use with [Ref]...
-Public Enum Ref
-    &lt;Column("year", Length:=4, DefaultValue:=2000, MinValue:=1900, MaxValue:=2100)&gt; year
-    &lt;Column("note", Length:=100)&gt; note
-    &lt;Column("id", Length:=2)&gt; id
-    &lt;Column(DateFormat:=ColumnDateFormat.OnlyDate)&gt; only_date
-End Enum
+            // Method expression which returns of type "TableConfig", is returned.
+            protected override Expression&lt;TableConfig&gt; Config() =>
+                (x) => x.SetPrimaryKey(Year, Id, LineId);
+        }
+    </code>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>
 
-&lt;Table("header")&gt;
-Public Class TableHeader
-    Inherits Base
-
-    &lt;Column(Ref.year)&gt;              Public Year As Integer?
-    &lt;Column(Ref.id)&gt;                Public Id As Integer?
-    &lt;Column("date", Ref.only_date)&gt; Public DocDate As Date?
-    &lt;Column("active")&gt;              Public IsActive As Boolean?
-    &lt;Column(Ref.note)&gt;              Public Note As String
-
-    ' Method expression which returns of type "TableConfig", is returned.
-    Protected Overrides Function Config() As Expression(Of TableConfig)
-        Return Function(x) x.SetPrimaryKey(Year, Id) _
-                            .AddIndex(DocDate)
-    End Function
-End Class
-
-&lt;Table("lines")&gt;
-Public Class TableLines
-    Inherits Base
-
-    &lt;Column(Ref.year)&gt;              Public Year As Integer?
-    &lt;Column(Ref.id)&gt;                Public Id As Integer?
-    &lt;Column("lineid", Length:=2)&gt;   Public LineId As Short?
-    &lt;Column(Ref.note)&gt;              Public Note As String
-
-    ' Method expression which returns of type "TableConfig", is returned.
-    Protected Overrides Function Config() As Expression(Of TableConfig)
-        Return Function(x) x.SetPrimaryKey(Year, Id, LineId)
-    End Function
-End Class
-</pre>
-</code-tab>
 <co type="warning">
     Please refer to <a href="##TBL--TBL-Columns">Columns</a> for further information.
 </co>

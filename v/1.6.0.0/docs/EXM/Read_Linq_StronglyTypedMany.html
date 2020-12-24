@@ -1,0 +1,33 @@
+﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> as <b>StronglyTyped (One2Many)</b>.
+<sample>
+    <code lang="c#">
+		var sql = Odb.SQL.Select(x => 
+						x.From(t1)
+						.LeftJoin(t2, t2.OrderID == t1.OrderID)
+						.Top(10)
+					);
+		
+		var rows = sql.ExecuteReaderOneToMany&lt;Orders, OrderDetails&gt;(
+						connection,
+						
+						// Grouping => must be returned the value as much as specified generic parameter.
+						(t1, t2) => {
+							var key1 = t1.OrderID.ToString();
+							var key2 = key1 + "_" + t2.OrderDetailID.ToString();
+
+							return new[] { key1, key2 };
+						},
+						
+						// Combine the items in this method
+						(t1, t2) => {
+							if (t1.Details == null) t1.Details = new List&lt;OrderDetails&gt;();
+							t1.Details.Add(t2);
+						},
+			
+						// SplitOn => Start points of the join block(s)
+						new[] { "OrderDetailID" }
+					).ToList();
+    </code>
+    <output type="secondary"></output>
+	<fiddle>qmOsfO</fiddle>
+</sample>

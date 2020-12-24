@@ -1,32 +1,26 @@
 ﻿Following section demonstrates how to delete records
 which belongs to customer specified at [Order], from [OrderDetails].
-<div class="row">
-	<div class="col-md-12 col-lg">
-		<code-tab>
-			<pre lang="c#">
-				var t0 = new Orders();
-				var t1 = new OrderDetails();
-				var sql = Odb.SQL.Delete(x =>
-								x.From(t1) 
-								 .InnerJoin(t0, t0.OrderID == t1.OrderID) 
-								 .Where(t0.CustomerID == 90)
-							);
+<sample>
+	<code lang="c#">
+		var t0 = new Orders();
+		var t1 = new OrderDetails();
+		var sql = Odb.SQL.Delete(x =>
+						x.From(t1) 
+							.InnerJoin(t0, t0.OrderID == t1.OrderID) 
+							.Where(t0.CustomerID == 90)
+					);
 
-				var affectedRows = sql.ExecuteNonQuery(cn);
-			</pre>
-		</code-tab>
-	</div>
-	<div class="col-md-12 col-lg-4">
-		<o class="h-100">
-			<i class="text-success">
-				This sample generates different results for each database connected. The code shown below is generated via MsSql database connection.
-			</i><br /><br />
+		var affectedRows = sql.ExecuteNonQuery(cn);
+	</code>
+	<output>
+		<i class="text-success">
+			This sample generates different results for each database connected. The code shown below is generated via MsSql database connection.
+		</i><br /><br />
 
-			DELETE t1<br />
-			FROM [OrderDetails] AS t1<br />
-			INNER JOIN [Orders] AS t0 ON t0.OrderID = t1.OrderID<br />
-			WHERE t0.CustomerID = 90
-		</o>
-	</div>
-</div>
-<fiddle>510Wss</fiddle>
+		DELETE t1<br />
+		FROM [OrderDetails] AS t1<br />
+		INNER JOIN [Orders] AS t0 ON t0.OrderID = t1.OrderID<br />
+		WHERE t0.CustomerID = 90
+	</output>
+	<fiddle>kWZDWd</fiddle>
+</sample>

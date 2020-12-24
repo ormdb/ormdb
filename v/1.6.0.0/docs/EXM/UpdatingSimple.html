@@ -1,30 +1,24 @@
 ﻿Following section demonstrates <b>regular update</b> with model of table.
-<div class="row">
-	<div class="col-md-12 col-lg">
-		<code-tab>
-			<pre lang="c#">
-				// Updates the entire row with values which are NOT Null if the fields are nullable.
-				var model = new Orders();
-					model.OrderDate = DateTime.Now.AddDays(1);
+<sample>
+    <code lang="c#">
+		// Updates the entire row with values which are NOT Null if the fields are nullable.
+		var model = new Orders();
+			model.OrderDate = DateTime.Now.AddDays(1);
 		
-				var t0 = new Orders();
-				var sql = Odb.SQL.Update(x =>
-								x.From(t0)
-									.Where( t0.OrderID == 10248 )
-									.SetModel(model)
-							);
+		var t0 = new Orders();
+		var sql = Odb.SQL.Update(x =>
+						x.From(t0)
+							.Where( t0.OrderID == 10248 )
+							.SetModel(model)
+					);
 
-				var affectedRows = sql.ExecuteNonQuery(cn);
-			</pre>
-		</code-tab>
-	</div>
-	<div class="col-md-12 col-lg-4">
-		<o class="h-100">
-			UPDATE t0<br />
-			<hlb>SET t0.OrderDate='2020-06-20 10:00:00' </hlb><br />
-			FROM [Orders] AS t0<br />
-			WHERE t0.OrderID == 10248
-		</o>
-	</div>
-</div>
-<fiddle>uyWUAp</fiddle>
+		var affectedRows = sql.ExecuteNonQuery(cn);
+    </code>
+    <output>
+        UPDATE t0<br />
+        <hlb>SET t0.OrderDate='2020-06-20 10:00:00' </hlb><br />
+        FROM [Orders] AS t0<br />
+        WHERE t0.OrderID == 10248
+    </output>
+    <fiddle>uyWUAp</fiddle>
+</sample>

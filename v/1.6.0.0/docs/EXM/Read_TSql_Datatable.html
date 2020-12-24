@@ -1,0 +1,10 @@
+﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> as <b>Datatable</b>, using <k>SQL String</k>.
+<sample>
+    <code lang="c#">
+        var sql = "SELECT * FROM Customers";
+
+        var dt = cn.ExecuteReader("SELECT * FROM Customers").ToDataTable()
+    </code>
+    <output type="secondary"></output>
+    <fiddle>k2lUkS</fiddle>
+</sample>
