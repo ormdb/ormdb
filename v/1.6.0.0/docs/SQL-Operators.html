@@ -1,365 +1,231 @@
 ﻿"<b>Sql Commands</b>" (such as AS, AVG, DISTINCT etc.) can be used via helper parameter that comes with expression function.
 <co type="success">
-    <code-tab>
-        <pre lang="c#">
-		Odb.SQL.Select(x => ... x[table-field].SqlCommand ... );</pre>
-        <pre lang="vb">
-		Odb.SQL.Select(Function(x) ... x(table-field).SqlCommand ... )</pre>
-    </code-tab>
+	<sample>
+		<code lang="c#">
+			Odb.SQL.Select(x => ... x[table-field].SqlCommand ... );
+		</code>
+		<output>
+		</output>
+		<fiddle></fiddle>
+	</sample>
 </co>
 <br />
 
 
 <st>CONSTANT</st>
 Selects a contant value.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-		var sql = Odb.SQL.Select(x => 
-						x.Fields(
-							5.60, x[5.63].AS("C1"),
-							"str1", x["str2"].AS("C2"), 
-						)
-					);
-	</pre>
-            <pre lang="vb">
-		Dim sql = Odb.SQL.Select(Function(x) _
-						x.Fields(
-							5.60, x(5.63).AS("C1"),
-							"str1", x("str2").AS("C2"), 
-						)
-					)
-	</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            SELECT <hl>5.60</hl>, <hl>5.63 AS C1</hl>, <hl>'str1'</hl>, <hl>'str2' AS C2</hl>
-        </o>
-    </div>
-</div>
+<sample>
+	<code lang="c#">
+		Odb.SQL.Select(x =>
+			x.Fields( 5.60, x[5.63].AS("C1"),
+					  "str1", x["str2"].AS("C2"),
+			)
+		);
+	</code>
+	<output>
+		SELECT <hl>5.60</hl>, <hl>5.63 AS C1</hl>, <hl>'str1'</hl>, <hl>'str2' AS C2</hl>
+	</output>
+	<fiddle></fiddle>
+</sample>
 
 
 <st>AS</st>
 Renames a column with an alias.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-		var th = new TableHeader();
+<sample>
+	<code lang="c#">
+		var t0 = new Orders();
 
-		var sql = Odb.SQL.Select(x => 
-						x.Fields(
-							x["X"].AS("C1"), 
-							x[th.Year].AS("Y1")
-						).From(th)
-					);
-	</pre>
-            <pre lang="vb">
-		Dim th = new TableHeader()
-
-		Dim sql = Odb.SQL.Select(Function(x) _
-						x.Fields(
-							x("X").AS("C1"), 
-							x(th.Year).AS("Y1")
-						).From(th)
-					)
-	</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            SELECT 'X' <hl>AS</hl> C1, th.Year <hl>AS</hl> Y1<br />
-            FROM header AS th
-        </o>
-    </div>
-</div>
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .Fields( x["X"].AS("C1"), 
+					  x[t0.OrderID].AS("OID")
+			 )
+		);
+	</code>
+	<output>
+		SELECT 'X' <hl>AS</hl> C1, t0.OrderID <hl>AS</hl> OID<br />
+		FROM [Orders] AS t0
+	</output>
+	<fiddle></fiddle>
+</sample>
 
 
 <st>IN / NOT_IN</st>
 <k>IN</k> command allows you to specify multiple values in a <b>WHERE</b> clause.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-		var th = new TableHeader();
+<sample>
+	<code lang="c#">
+		var t0 = new Orders();
 
-		var vals1 = new[] {2017, 2018};
+		var vals1 = new[] {1, 2};
 		var vals2 = new[] {"A", "B", "C"};
 
-		var sql = Odb.SQL.Select(x => 
-						x.From(th)
-						 .Where( x[th.Year].IN(vals1) &amp; 
-								 x[th.Note].NOT_IN(vals2) 
-						)
-					);
-	</pre>
-            <pre lang="vb">
-		Dim th = new TableHeader()
-
-		Dim vals1 = {2017, 2018}
-		Dim vals2 = {"A", "B", "C"}
-
-		Dim sql = Odb.SQL.Select(Function(x) _
-						x.From(th) _
-						 .Where( x(th.Year).IN(vals1) And
-								 x(th.Note).NOT_IN(vals2) 
-						)
-					)
-	</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            SELECT *<br />
-            FROM header AS th <br />
-            WHERE ( th.year <hl>IN</hl> (2017, 2018) ) AND
-            ( th.note <hl>NOT IN</hl> ('A', 'B', 'C') )
-        </o>
-    </div>
-</div>
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .Where( x[t0.OrderID].IN(vals1) &amp; 
+					 x[t0.EmployeeID].NOT_IN(vals2) 
+			)
+		);
+	</code>
+	<output>
+		SELECT *<br />
+		FROM [Orders] AS t0 <br />
+		WHERE <br />
+		t0.OrderID <hl>IN</hl> (1, 2) AND<br />
+		t0.EmployeeID <hl>NOT IN</hl> ('A', 'B', 'C')
+	</output>
+	<fiddle></fiddle>
+</sample>
 
 
 <st>IS NULL / IS NOT NULL</st>
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-		var th = new TableHeader();
+<sample>
+	<code lang="c#">
+		var t0 = new Orders();
 
-		var sql = Odb.SQL.Select(x => 
-						x.From(th)
-						 .Where( th.Year is null &amp; 
-								 th.Note is object 
-						)
-					);
-	</pre>
-            <pre lang="vb">
-		Dim th = new TableHeader()
-
-		Dim sql = Odb.SQL.Select(Function(x) _
-						x.From(th) _
-						 .Where( th.Year Is Nothing And 
-								 th.Note IsNot Nothing
-						 )
-					)
-	</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            SELECT *<br />
-            FROM header AS th <br />
-            WHERE ( th.year <hl>IS NULL</hl> ) AND
-            ( th.note <hl>IS NOT NULL</hl> )
-        </o>
-    </div>
-</div>
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .Where( t0.OrderID is null &amp; 
+					 t0.EmployeeID is object 
+			)
+		);
+	</code>
+	<output>
+		SELECT *<br />
+		FROM [Orders] AS t0 <br />
+		WHERE <br />
+		t0.OrderID <hl>IS NULL</hl> AND<br />
+		t0.EmployeeID <hl>IS NOT NULL</hl>
+	</output>
+	<fiddle></fiddle>
+</sample>
 
 
 <st>LIKE</st>
 is used in a WHERE clause to search for a specified pattern in a column.
-<div class="row">
-    <div class="col-md-12 col-lg">
-        <code-tab>
-            <pre lang="c#">
-		var th = new TableHeader();
+<sample>
+	<code lang="c#">
+		var t0 = new Customers();
 
-		var sql = Odb.SQL.Select(x => 
-						x.From(th)
-						 .Where( x[th.Note].STARTS_WITH("A") | 
-								 x[th.Note].ENDS_WITH("Z") | 
-								 x[th.Note].CONTAINS("M")
-						 )
-					);
-	</pre>
-            <pre lang="vb">
-		Dim th = new TableHeader()
-
-		Dim sql = Odb.SQL.Select(Function(x) _
-						x.From(th) _
-						 .Where( x(th.Note).STARTS_WITH("A") Or 
-								 x(th.Note).ENDS_WITH("Z") Or 
-								 x(th.Note).CONTAINS("M")
-						 )
-					)
-	</pre>
-        </code-tab>
-    </div>
-    <div class="col-md-12 col-lg-4">
-        <o class="h-100">
-            SELECT *<br />
-            FROM header AS th <br />
-            WHERE ( th.note <hl>LIKE</hl> 'A<hl>%</hl>' ) OR
-            ( th.note <hl>LIKE</hl> '<hl>%</hl>Z' ) OR
-            ( th.note <hl>LIKE</hl> '<hl>%</hl>M<hl>%</hl>' )
-        </o>
-    </div>
-</div>
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .Where( x[t0.Country].STARTS_WITH("A") | 
+					 x[t0.Country].ENDS_WITH("Z") | 
+					 x[t0.Country].CONTAINS("M")
+			 )
+		);
+	</code>
+	<output>
+		SELECT *<br />
+		FROM [Customers] AS t0 <br />
+		WHERE <br />
+		t0.Country <hl>LIKE</hl> 'A<hl>%</hl>' OR<br />
+		t0.Country <hl>LIKE</hl> '<hl>%</hl>Z' OR<br />
+		t0.Country<hl>LIKE</hl> '<hl>%</hl>M<hl>%</hl>'
+	</output>
+	<fiddle></fiddle>
+</sample>
 
 <st>DISTINCT</st>
 Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
 The <k>DISTINCT</k> statement is used to return only distinct (different) values.
-<div class="row">
-	<div class="col-md-12 col-lg">
-		<code-tab>
-			<pre lang="c#">
-	var th = new TableHeader();
+<sample>
+	<code lang="c#">
+		var t0 = new Customers();
 
-	var sql = Odb.SQL.Select(x => 
-					x.Fields( x[th.Year].DISTINCT().AS("C") )
-						.From(th)
-				);</pre>
-			<pre lang="vb">
-	Dim th = new TableHeader()
-
-	Dim sql = Odb.SQL.Select(Function(x) _
-					x.Fields( x(th.Year).DISTINCT().AS("C") ) _
-						.From(th)
-				)</pre>
-		</code-tab>
-	</div>
-	<div class="col-md-12 col-lg-4">
-		<o class="h-100">
-			SELECT <hl>DISTINCT(th.year)</hl> AS 'C'<br />
-			FROM header AS th <br />
-		</o>
-	</div>
-</div>
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .Fields( x[t0.Country].DISTINCT().AS("C") )
+		);
+	</code>
+	<output>
+		SELECT <hl>DISTINCT(th.year)</hl> AS 'C'<br />
+		FROM [Customers] AS t0 <br />
+	</output>
+	<fiddle></fiddle>
+</sample>
 
 
-	<st>COALESCE</st>
-	Return the first non-null value in a list.
-	<div class="row">
-		<div class="col-md-12 col-lg">
-			<code-tab>
-				<pre lang="c#">
-		var th = new TableHeader();
+<st>COALESCE</st>
+Return the first non-null value in a list.
+<sample>
+	<code lang="c#">
+		var t0 = new Customers();
 
-		var sql = Odb.SQL.Select(x => 
-						x.Fields( x[th.Year].COALESCE(th.Id, 5, null).AS("C") )
-						 .From(th)
-					);
-	</pre>
-				<pre lang="vb">
-		Dim th = new TableHeader()
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .Fields( x[t0.CustomerName].COALESCE('???').AS("C") )
+		);
+	</code>
+	<output>
+		SELECT <hl>COALESCE(t0.CustomerName, '???')</hl> AS 'C'<br />
+		FROM [Customers] AS t0 <br />
+	</output>
+	<fiddle></fiddle>
+</sample>
 
-		Dim sql = Odb.SQL.Select(Function(x) _
-						x.Fields( x(th.Year).COALESCE(th.Id, 5, Nothing).AS("C") ) _
-						 .From(th)
-					)
-	</pre>
-			</code-tab>
+
+<st>Aggregate Functions</st>
+<sample>
+	<code lang="c#">
+		var t0 = new Customers();
+
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .GroupBy(t0.Country)
+			 .Fields( th.Country, 
+					  x[t0.CustomerID].AVG().AS("C1"), 
+					  x[t0.CustomerID].MIN().AS("C2"), 
+					  x[t0.CustomerID].MAX().AS("C3"), 
+					  x[t0.CustomerID].SUM().AS("C4")
+			  )
+		);
+	</code>
+	<output>
+		SELECT t0.Country,
+		<div style="padding-left:25px;">
+			<hl>AVG(t0.CustomerID)</hl> AS 'C1',<br />
+			<hl>MIN(t0.CustomerID)</hl> AS 'C2',<br />
+			<hl>MAX(t0.CustomerID)</hl> AS 'C3',<br />
+			<hl>SUM(t0.CustomerID)</hl> AS 'C4'
 		</div>
-		<div class="col-md-12 col-lg-4">
-			<o class="h-100">
-				SELECT <hl>COALESCE(th.year, 5, NULL)</hl> AS 'C'<br />
-				FROM header AS th <br />
-			</o>
+		FROM [Customers] AS t0 <br />
+		<hl>GROUP BY t0.Country</hl>
+	</output>
+	<fiddle></fiddle>
+</sample>
+
+
+<st>String Functions</st>
+<sample>
+	<code lang="c#">
+		var t0 = new Customers();
+
+		Odb.SQL.Select(x =>
+			x.From(t0)
+			 .Fields( x[t0.City].SUBSTRING(2, 4).AS("2_to_4"), 
+					  x[t0.City].SUBSTRING(0, 1).AS("left_1"), 
+					  x[t0.City].SUBSTRING(-1, 2).AS("right_2"), 
+					  x[t0.City].UPPER().AS("C1"), 
+					  x[t0.City].LOWER().AS("C2"), 
+					  x[t0.City].TRIM().AS("C3"), 
+					  x[t0.City].RTRIM().LTRIM().AS("C4"), 
+					  x[t0.City].CONCAT(", ID=", t0.CustomerID).AS("C5")
+			  )
+		);
+	</code>
+	<output>
+		SELECT
+		<div style="padding-left:25px;">
+			<hl>SUBSTRING(t0.City)</hl> AS '2_to_4',<br />
+			<hl>LEFT(t0.City, 1)</hl> AS 'left_1',<br />
+			<hl>RIGHT(t0.City, 2)</hl> AS 'right_2',<br />
+			<hl>UPPER(t0.City)</hl> AS 'C1',<br />
+			<hl>LOWER(t0.City)</hl> AS 'C2',<br />
+			<hl>TRIM(t0.City)</hl> AS 'C3',<br />
+			<hl>LTRIM(RTRIM(t0.City))</hl> AS 'C4',<br />
+			<hl>CONCAT(t0.City, ', ID=', t0.CustomerID)</hl> AS 'C5'
 		</div>
-	</div>
-
-
-	<st>Aggregate Functions</st>
-	<div class="row">
-		<div class="col-md-12 col-lg">
-			<code-tab>
-				<pre lang="c#">
-		var th = new TableHeader();
-
-		var sql = Odb.SQL.Select(x => 
-						x.From(th)
-						 .GroupBy(th.Year)
-						 .Fields( th.Year, 
-								  x[th.Id].AVG().AS("C1"), 
-								  x[th.Id].MIN().AS("C2"), 
-								  x[th.Id].MAX().AS("C3"), 
-								  x[th.Id].SUM().AS("C4")
-						  )
-					);
-	</pre>
-				<pre lang="vb">
-		Dim th = new TableHeader()
-
-		Dim sql = Odb.SQL.Select(Function(x) _
-						x.From(th) _
-						 .GroupBy(th.Year) _
-						 .Fields( th.Year, 
-								  x(th.Id).AVG().AS("C1"), 
-								  x(th.Id).MIN().AS("C2"), 
-								  x(th.Id).MAX().AS("C3"), 
-								  x(th.Id).SUM().AS("C4")
-						  )
-					)
-	</pre>
-			</code-tab>
-		</div>
-		<div class="col-md-12 col-lg-4">
-			<o class="h-100">
-				SELECT th.Year,
-				<div style="padding-left:50px;">
-					<hl>AVG(th.id)</hl> AS 'C1',<br />
-					<hl>MIN(th.id)</hl> AS 'C2',<br />
-					<hl>MAX(th.id)</hl> AS 'C3',<br />
-					<hl>SUM(th.id)</hl> AS 'C4'
-				</div>
-				FROM header AS th <br />
-			</o>
-		</div>
-	</div>
-
-
-	<st>String Functions</st>
-	<div class="row">
-		<div class="col-md-12 col-lg">
-			<code-tab>
-				<pre lang="c#">
-		var th = new TableHeader();
-
-		var sql = Odb.SQL.Select(x => 
-						x.Fields( x[th.Note].SUBSTRING(2, 4).AS("2_to_4"), 
-								  x[th.Note].SUBSTRING(0, 1).AS("left_1"), 
-								  x[th.Note].SUBSTRING(-1, 2).AS("right_2"), 
-								  x[th.Note].UPPER().AS("C1"), 
-								  x[th.Note].LOWER().AS("C2"), 
-								  x[th.Note].TRIM().AS("C3"), 
-								  x[th.Note].RTRIM().LTRIM().AS("C4"), 
-								  x[th.Note].CONCAT(", ID=", th.Id).AS("C5")
-						  ).From(th)
-					);
-	</pre>
-				<pre lang="vb">
-		Dim th = new TableHeader()
-
-		Dim sql = Odb.SQL.Select(Function(x) _
-						x.Fields( x(th.Note).SUBSTRING(2, 4).AS("2_to_4"), 
-								  x(th.Note).SUBSTRING(0, 1).AS("left_1"), 
-								  x(th.Note).SUBSTRING(-1, 2).AS("right_2"), 
-								  x(th.Note).UPPER().AS("C1"), 
-								  x(th.Note).LOWER().AS("C2"), 
-								  x(th.Note).TRIM().AS("C3"), 
-								  x(th.Note).RTRIM().LTRIM().AS("C4"), 
-								  x(th.Note).CONCAT(", ID=", th.Id).AS("C5")
-						  ).From(th)
-					)
-	</pre>
-			</code-tab>
-		</div>
-		<div class="col-md-12 col-lg-4">
-			<o class="h-100">
-				SELECT
-				<div style="padding-left:50px;">
-					<hl>SUBSTRING(th.note)</hl> AS '2_to_4',<br />
-					<hl>LEFT(th.note, 1)</hl> AS 'left_1',<br />
-					<hl>RIGHT(th.note, 2)</hl> AS 'right_2',<br />
-					<hl>UPPER(th.note)</hl> AS 'C1',<br />
-					<hl>LOWER(th.note)</hl> AS 'C2',<br />
-					<hl>TRIM(th.note)</hl> AS 'C3',<br />
-					<hl>LTRIM(RTRIM(th.note))</hl> AS 'C4',<br />
-					<hl>CONCAT(th.note, ', ID=', th.id)</hl> AS 'C5'
-				</div>
-				FROM header AS th <br />
-			</o>
-		</div>
-	</div>
+		FROM [Customer] AS t0<br />
+	</output>
+	<fiddle></fiddle>
+</sample>

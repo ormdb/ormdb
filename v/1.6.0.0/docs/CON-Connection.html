@@ -126,40 +126,53 @@ When the connection is established, SQL Commands will execute with the help of t
 <st>Examples</st>
 <br />
 Following section demonstrates how to create a connection with <k>DefaultSettings</k>.
-<code-tab>
-    <pre lang="c#">
-        var cn = Odb.Connection.Create&lt;Providers.MsSql&gt;("Your-ConnectionString");
+<sample>
+    <code lang="c#">
+        var cn = Odb.Connection.Create&lt;Odb.Providers.MsSql&gt;("ConnectionString");
 
         // Connection, will opened at first execution automatically.
 
         // You can open the connection manually as shown below.
         // cn.Open();
-   </pre>
-    <pre lang="vb">
-        Dim cn = Odb.Connection.Create(Of Providers.MsSql)("Your-ConnectionString")
 
-        ' Connection, will opened at first execution automatically.
-
-        ' You can open the connection manually as shown below.
-        ' cn.Open()
-    </pre>
-</code-tab>
+        Console.WriteLine(" → Connection = " + cn.State);
+        Console.WriteLine(" → Provider Name = " + cn.ProviderName);
+    </code>
+    <output>
+        Connection = Open<br />
+        Provider Name = MsSql
+    </output>
+    <fiddle>ffO85n</fiddle>
+</sample>
 
 
 <br />
+<br />
+
 Following section demonstrates how to create a connection with <k>AutoTrans</k>. Please refer to <a href="##CON--CON-Transaction">Transaction</a> for further information.
-<code-tab>
-    <pre lang="c#">
-        var cn = var cn = Odb.Connection.Create&lt;Providers.MsSql&gt;("Your-ConnectionString", new ConnectionSettings() { AutoStartTrans = true });
-    </pre>
-    <pre lang="vb">
-        Dim cn = Odb.Connection.Create(Of Providers.MsSql)("Your-ConnectionString", New ConnectionSettings() With {.AutoStartTrans = True})
-    </pre>
-</code-tab>
-This means that each time a transaction is committed or rolled-back, a new transaction is started and all queries are automatically executed in this transaction.
+<sample>
+    <code lang="c#">
+        var cn_opt = new ConnectionSettings() { AutoStartTrans = true };
+
+        var cn = Odb.Connection.Create&lt;Odb.Providers.MsSql&gt;("ConnectionString", cn_opt);
+    </code>
+    <output>
+        Connection = Open<br />
+        Provider Name = MsSql
+    </output>
+    <fiddle>ffO85n</fiddle>
+</sample>
+
+<br />
+<br />
+
+This means that transactions are committed or rolled-back every execution and and all queries are automatically executed in the transaction.
 <br />
 <br />
 <br />
 <co type="warning">
     Please refer to <a href="##EXM--ConnectionManager">Example - ConnectionManager</a> for further information about creation of a connection.
 </co>
+
+<br />
+<br />

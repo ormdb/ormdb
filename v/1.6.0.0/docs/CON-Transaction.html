@@ -4,72 +4,73 @@ Please refer to <a href="##CON--CON-Connection">Connection</a> for further infor
 
 <st>BeginTrans</st>
 BeginTrans method starts a new transaction. A Transaction cannot be created , if there is an another transaction already in progress.
-<br/>
-<br/>
-<code-tab>
-	<pre lang="c#">
+<br />
+<br />
+<sample>
+	<code lang="c#">
 		cn.BeginTrans();
-	</pre>
-	<pre lang="vb">
-		cn.BeginTrans()
-	</pre>
-</code-tab>
+	</code>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>
 
-<br/>
+<br />
 
 <st>CommitTrans</st>
 CommitTrans method saves all the changes made since the last BeginTrans method call and ends current transaction.
 If a <a href="##CON--CON-Connection">Connection</a> is opened as <k>AutoTrans=true</k> then each time <k>CommitTrans</k> method is invoked, a new transaction is created automatically.
-<br/>
-<br/>
-<code-tab>
-	<pre lang="c#">
+<br />
+<br />
+<sample>
+	<code lang="c#">
 		cn.CommitTrans();
-	</pre>
-	<pre lang="vb">
-		cn.CommitTrans()
-	</pre>
-</code-tab>
+	</code>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>
 
-<br/>
+<br />
 
 If a <a href="##CON--CON-Connection">Connection</a> is opened as <k>AutoTrans=false</k>, you can always start a new transaction as shown below.
-<br/>
-<br/>
-<code-tab>
-	<pre lang="c#">
+<br />
+<br />
+<sample>
+	<code lang="c#">
 		cn.CommitTrans(AutoStartTrans:true);
-	</pre>
-	<pre lang="vb">
-		cn.CommitTrans(AutoStartTrans:=true)
-	</pre>
-</code-tab>
+	</code>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>
 
+<br />
 
 <st>RollbackTrans</st>
 RollbackTrans method cancels all changes made since the last BeginTrans method call and ends current transaction.
 If a <a href="##CON--CON-Connection">Connection</a> is opened as <k>AutoTrans = true</k> , then each time <k>RollbackTrans</k> method is invoked, a new transaction is created automatically.
-<br/>
-<br/>
-<code-tab>
-	<pre lang="c#">
+<br />
+<br />
+<sample>
+	<code lang="c#">
 		cn.RollbackTrans();
-	</pre>
-	<pre lang="vb">
-		cn.RollbackTrans()
-	</pre>
-</code-tab>
+	</code>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>
 
-<br/>
+<br />
 
 If a <a href="##CON--CON-Connection">Connection</a> is opened as <k>AutoTrans = false</k>, you can always start a new transaction as shown below.
-<br/>
-<br/>
-<code-tab>
-	<pre lang="c#">
+<br />
+<br />
+<sample>
+	<code lang="c#">
 		cn.RollbackTrans(AutoStartTrans:true);
-	</pre>
-	<pre lang="vb">
-		cn.RollbackTrans(AutoStartTrans:=true)
-	</pre>
-</code-tab>
+	</code>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>

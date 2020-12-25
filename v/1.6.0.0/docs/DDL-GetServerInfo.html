@@ -23,10 +23,14 @@
 Following section retrieves the product info from database server.
 <sample>
     <code lang="c#">
-        var si = cn.Provider.GetServerInfo();
-        Debug.WriteLine($"Name={si.Name} , Version={si.Version}");
+        var si = cn.Provider.ServerInfo();
+
+        Console.WriteLine(" → Name = " + si.Name);
+        Console.WriteLine(" → Version = " + si.Version);
     </code>
     <output>
+        Name = Express Edition (64-bit)<br />
+        Version = 13.0.5102.14
     </output>
-    <fiddle></fiddle>
+    <fiddle>ffO85n</fiddle>
 </sample>

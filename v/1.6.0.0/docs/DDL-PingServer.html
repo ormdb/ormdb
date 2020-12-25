@@ -8,11 +8,12 @@ Following section demonstrates ping and calculate average time.
 	<code lang="c#">
 		var ts = new TimeSpan();
 		for (int n = 1; n <= 3; n++)
-		    ts = ts + cn.Provider.PingServer();
+		ts = ts + cn.Provider.PingServer();
 
-		Debug.WriteLine("Server Ping (Avg.) = {ts.TotalMilliseconds.ToString()} ms.");
+		Console.WriteLine(" → Ping (Avg.) = " + ts.TotalMilliseconds.ToString() + "ms.");
 	</code>
 	<output>
+		Ping (Avg.) = 0ms.
 	</output>
-	<fiddle></fiddle>
+	<fiddle>ffO85n</fiddle>
 </sample>
