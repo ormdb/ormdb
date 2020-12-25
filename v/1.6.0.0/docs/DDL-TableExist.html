@@ -6,10 +6,14 @@
 Following section demonstrates determining whether the specified [Table] exists.
 <sample>
 	<pre lang="c#">
-		cn.Provider.TableExist("table1");
+		// by table instance
+		connection.Provider.TableExist(new Orders());
 
-		var t0 = new Orders();
-		cn.Provider.TableExist(t0)
+        // by type
+		connection.Provider.TableExist&lt;Orders&gt;();
+
+		// by table name
+		connection.Provider.TableExist("table1");
 	</pre>
 	<output>
 	</output>

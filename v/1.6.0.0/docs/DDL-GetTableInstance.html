@@ -8,9 +8,9 @@ Following section demonstrates generating the instance of the table.
 		var tb0 = new Orders();
 
 		// via provider
-		var tb1 = connection.Provider.GetTableInstance&lt;TableHeader&gt;();
-		var tb2 = connection.Provider.GetTableInstance(typeof(TableHeader)());
-		var tb3 = connection.Provider.GetTableInstance("TableHeader");
+		var tb1 = connection.Provider.GetTableInstance&lt;Orders&gt;();
+		var tb2 = connection.Provider.GetTableInstance(typeof(Orders)());
+		var tb3 = connection.Provider.GetTableInstance("Orders");
 	</pre>
 	<output>
 	</output>
