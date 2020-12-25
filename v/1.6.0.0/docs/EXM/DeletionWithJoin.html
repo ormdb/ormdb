@@ -10,7 +10,7 @@ which belongs to customer specified at [Order], from [OrderDetails].
 							.Where(t0.CustomerID == 90)
 					);
 
-		var affectedRows = sql.ExecuteNonQuery(cn);
+		var affectedRows = sql.ExecuteNonQuery(connection);
 	</pre>
 	<output>
 		<i class="text-success">

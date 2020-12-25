@@ -293,7 +293,7 @@
                             <pre lang="c#">
                         var sql = Select()...;
                         
-                        var rows = sql.ExecuteReader(cn);
+                        var rows = sql.ExecuteReader(connection);
                         
                         var first_row = rows.First();
                         
@@ -302,7 +302,7 @@
                             <pre lang="vb">
                         Dim sql = Select()...
 
-                        Dim rows = sql.ExecuteReader(cn)
+                        Dim rows = sql.ExecuteReader(connection)
 
                         Dim first_row = rows.First()
 

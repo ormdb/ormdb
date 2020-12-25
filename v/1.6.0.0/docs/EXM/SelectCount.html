@@ -4,7 +4,7 @@
 	<pre lang="c#">
 		var t0 = new Orders();
 
-		var cnt = Odb.SQL.Select(x => x.From(t0)).ExecuteCount(cn);
+		var cnt = Odb.SQL.Select(x => x.From(t0)).ExecuteCount(connection);
 	</pre>
 	<output>
 		SELECT <hl>COUNT(1)</hl> FROM [Orders] AS t0

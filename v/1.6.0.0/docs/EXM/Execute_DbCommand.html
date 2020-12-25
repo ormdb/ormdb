@@ -6,7 +6,7 @@
 					"DELETE FROM table WHERE field1<>@p1 AND field2=@p2",
 					new { p1 = 0, p2 = "X"});
 		
-		var affectedRows = sql.ExecuteNonQuery(cmd);
+		var affectedRows = connection.ExecuteNonQuery(cmd);
 	</pre>
 	<output>
 	</output>

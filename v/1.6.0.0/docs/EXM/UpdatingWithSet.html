@@ -1,6 +1,6 @@
 ﻿Following section demonstrates to use <b>Set</b> method(s) for setting value(s).
 <sample>
-    <pre lang="c#">
+	<pre lang="c#">
 		var t0 = new Products();
 		var sql = Odb.SQL.Update(x =>
 						x.From(t0)
@@ -9,7 +9,7 @@
 							.SetRaw(t0.Price, t0.Price * 10)
 							.SetNull(t0.ProductName)
 					);
-		var affectedRows = sql.ExecuteNonQuery(cn);
+		var affectedRows = sql.ExecuteNonQuery(connection);
     </pre>
 	<output>
 		In this sample; 2 different values are set into column "<k>ProductName</k>". Last value will be accepted for the column.

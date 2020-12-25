@@ -1,6 +1,6 @@
 ﻿Following section demonstrates <b>multiple table insertion</b>.
 <sample>
-    <pre lang="c#">
+	<pre lang="c#">
 		// SQL
 		var sql = Odb.SQL.Insert();
 		
@@ -19,7 +19,7 @@
 		sql.Add&lt;OrderDetails&gt;(3, model.OrderID, 777, 3.5);
 		sql.Add&lt;OrderDetails&gt;(4, model.OrderID, 666, 25.83);
 
-		var affectedRows = sql.ExecuteNonQuery(cn);
+		var affectedRows = sql.ExecuteNonQuery(connection);
     </pre>
     <output>
         INSERT INTO [Orders] <br />

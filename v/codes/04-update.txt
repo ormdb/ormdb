@@ -11,6 +11,6 @@ var sql = Odb.SQL.Update(x =>
 				 .SetNull(t0.ProductName)
 			);
 
-var affectedRows = sql.ExecuteNonQuery(cn);
+var affectedRows = sql.ExecuteNonQuery(connection);
 
 

@@ -6,7 +6,7 @@
 
         // Ids are being obtained for the records to be deleted...
         var _ids = Odb.SQL.Select(x => x.Fields(x[t0.OrderID].DISTINCT()) .From(t0) )
-                        .ExecuteReader&lt;string&gt;(cn).ToList();
+                        .ExecuteReader&lt;string&gt;(connection).ToList();
 
         // records are being deleted in chunks, by supplying record Id information.
         var _index = 0;
@@ -20,13 +20,13 @@
             qry.Delete(x => x.From(t1).Where(t1.OrderID.IN(_items)) );
             qry.Delete(x => x.From(t0).Where(t0.OrderID.IN(_items)) );
 
-            qry.Execute(cn);                // queries are being executed
+            qry.Execute(connection);        // queries are being executed
             qry.Clear();                    // buffer is being clear
 
             _index += _chunk_size;
         }
 
-        var affectedRows = sql.ExecuteNonQuery(cn);
+        var affectedRows = sql.ExecuteNonQuery(connection);
     </pre>
     <output>
         <k>Delete</k> operation is always a problem for the large records. But you can break the large delete operation into chunks.

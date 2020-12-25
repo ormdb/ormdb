@@ -11,4 +11,4 @@ var model = new Orders();
     model.ShipperID = 1;
 sql.Add(model);
 
-var affectedRows = sql.ExecuteNonQuery(cn);
+var affectedRows = sql.ExecuteNonQuery(connection);

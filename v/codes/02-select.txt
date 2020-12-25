@@ -11,6 +11,6 @@ var sql = Odb.SQL.Select(x =>
 			);	
 
 // reading data
-var result = sql.ExecuteReader<Orders>(cn);
+var result = sql.ExecuteReader<Orders>(connection);
 
 

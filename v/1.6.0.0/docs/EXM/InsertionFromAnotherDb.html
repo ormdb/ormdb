@@ -13,13 +13,13 @@
             sql.Add&lt;target_table&gt;(_row.ToArray());
 
             if (sql.Count >= batch_size) {
-                sql.ExecuteNonQuery(cn);
+                sql.ExecuteNonQuery(connection);
                 sql.Clear();
             }
         }
 
         if (sql.Count >= batch_size)
-            sql.ExecuteNonQuery(cn);
+            sql.ExecuteNonQuery(connection);
     </pre>
     <output>
         Insertions are being executed each 5000 rows.
