@@ -1,6 +1,6 @@
 ﻿Following section demonstrates using <hl>JOIN</hl> clause.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
 		var t0 = new Orders();
 		var t1 = new OrderDetails();
 		
@@ -10,7 +10,7 @@
 			     .LeftJoin(t1, t1.OrderID == t0.OrderID) 
 			     .Where( t0.OrderID == 10248 )
 		);
-    </code>
+    </pre>
     <output>
         SELECT t0.*, t1.OrderDetailID, t1.ProductID, t1.Quantity <br />
         FROM [Orders] AS t0 <br />

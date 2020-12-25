@@ -8,13 +8,13 @@
 
 Following section demonstrates how to create index for a table.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		// by table instance
 		cn.Provider.CreateIndex(h, h.Indexes.First(), "my_index");
 
 		// by table name
 		cn.Provider.CreateIndex("table1", true, new[] { "column1", "column2" }, "my_index");
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>
@@ -23,9 +23,9 @@ Following section demonstrates how to create index for a table.
 
 Following section demonstrates how to generate <k>CREATE INDEX</k> script.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var script = cn.Provider.CreateIndex(h, h.Indexes.First(), "my_index", true);
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>

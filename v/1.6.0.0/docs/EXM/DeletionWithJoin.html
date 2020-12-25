@@ -1,7 +1,7 @@
 ﻿Following section demonstrates how to delete records
 which belongs to customer specified at [Order], from [OrderDetails].
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var t0 = new Orders();
 		var t1 = new OrderDetails();
 		var sql = Odb.SQL.Delete(x =>
@@ -11,7 +11,7 @@ which belongs to customer specified at [Order], from [OrderDetails].
 					);
 
 		var affectedRows = sql.ExecuteNonQuery(cn);
-	</code>
+	</pre>
 	<output>
 		<i class="text-success">
 			This sample generates different results for each database connected. The code shown below is generated via MsSql database connection.

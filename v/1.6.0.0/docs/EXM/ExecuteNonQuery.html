@@ -1,12 +1,12 @@
 ﻿Following section demonstrates how to execute the <b>INonQueryable</b> expression.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var th = new TableHeader();
 
 		var sql = Odb.SQL.Delete(x => x.From(th).Where(th.Id == 12345M) );
 
 		var affectedRows = sql.ExecuteNonQuery(cn);
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>
@@ -16,12 +16,12 @@
 
 Following section demonstrates how to execute the <b>TSQL</b> command.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		// SQL statement is being prepared
 		var str = "DELETE FROM table WHERE field1<>0 AND field2='X'";
 
 		var affectedRows = cn.ExecuteNonQuery(str);
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>
@@ -31,14 +31,14 @@ Following section demonstrates how to execute the <b>TSQL</b> command.
 
 Following section demonstrates how to execute the <b>DbCommand</b>.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		// DbCommand is being prepared
 		var cmd = cn.CreateCommand(
 					"DELETE FROM table WHERE field1<>@p1 AND field2=@p2",
 					new { p1 = 0, p2 = "X"});
 		
 		var affectedRows = sql.ExecuteNonQuery(cmd);
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>

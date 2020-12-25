@@ -20,7 +20,7 @@
 
 Following section demonstrates retrieving the tables from database.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var tables = cn.Provider.GetTables();
 
 		var table_count = tables.Count;
@@ -28,7 +28,7 @@ Following section demonstrates retrieving the tables from database.
 		foreach (var table in tables) {
 			Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}");
 		}
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>

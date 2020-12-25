@@ -5,7 +5,7 @@
 
 Following section demonstrates how to drop table.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		// single table by instance
 		cn.Provider.DropTable(h);
 
@@ -14,7 +14,7 @@ Following section demonstrates how to drop table.
 
 		// single table by name
 		cn.Provider.DropTable("table1");
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>
@@ -23,9 +23,9 @@ Following section demonstrates how to drop table.
 
 Following section demonstrates how to generate <k>DROP TABLE</k> script.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var script = cn.Provider.DropTable(h, true);
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>

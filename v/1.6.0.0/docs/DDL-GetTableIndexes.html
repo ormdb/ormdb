@@ -23,7 +23,7 @@
 
 Following section demonstrates reading the indexes of table <b>by its name</b>.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		foreach (var index in cn.Provider.GeTableIndexes("table_name")){
 
 			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
@@ -35,7 +35,7 @@ Following section demonstrates reading the indexes of table <b>by its name</b>.
 				Debug.WriteLine(column.Name.ToString());
 			}
 		}
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>
@@ -44,11 +44,11 @@ Following section demonstrates reading the indexes of table <b>by its name</b>.
 <br />
 Following section demonstrates reading the indexes of table <b>by its instance</b>.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		foreach (var index in h.GetIndexes()) {
 			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
 		}
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>

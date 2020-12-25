@@ -5,13 +5,13 @@
 
 Following section demonstrates how to drop index of a table.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		// by table instance
 		cn.Provider.DropIndex(h, h.Indexes.First());
 
 		// by table name
 		cn.Provider.DropIndex("table1", "index_name");
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>
@@ -21,9 +21,9 @@ Following section demonstrates how to drop index of a table.
 
 Following section demonstrates how to generate <k>DROP INDEX</k> script.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var script = cn.Provider.DropIndex("table1", "index_name", true);
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>

@@ -3,7 +3,7 @@
     to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
 </co>
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
 		var t0 = new Orders();
 		var t1 = new OrderDetails();
 		
@@ -30,7 +30,7 @@
 							.Top(5)
 							.OrderASC(sql1[0]).OrderASC(sql1[1]).OrderDESC(sql1["OrderID"])
 					);
-    </code>
+    </pre>
 	<output>
 		<hl>SELECT * FROM (</hl><br />
 		<div style="padding-left:30px;">

@@ -1,6 +1,6 @@
 ﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a>, using <k>System.Data.Common.DbCommand</k>.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         // DbCommand is being prepared
         var cmd = cn.CreateCommand(" SELECT field1, field2 " + 
                                    " FROM table1 WHERE field1<>@param1;",
@@ -11,7 +11,7 @@
                                        x => x["field1"], 
                                        x => x["field2"]
                                    );
-    </code>
+    </pre>
     <output>
     </output>
     <fiddle></fiddle>

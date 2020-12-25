@@ -7,9 +7,9 @@ BeginTrans method starts a new transaction. A Transaction cannot be created , if
 <br />
 <br />
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		cn.BeginTrans();
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>
@@ -23,9 +23,9 @@ If a <a href="##CON--CON-Connection">Connection</a> is opened as <k>AutoTrans=tr
 <br />
 <br />
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		cn.CommitTrans();
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>
@@ -37,9 +37,9 @@ If a <a href="##CON--CON-Connection">Connection</a> is opened as <k>AutoTrans=fa
 <br />
 <br />
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		cn.CommitTrans(AutoStartTrans:true);
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>
@@ -53,9 +53,9 @@ If a <a href="##CON--CON-Connection">Connection</a> is opened as <k>AutoTrans = 
 <br />
 <br />
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		cn.RollbackTrans();
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>
@@ -67,9 +67,9 @@ If a <a href="##CON--CON-Connection">Connection</a> is opened as <k>AutoTrans = 
 <br />
 <br />
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		cn.RollbackTrans(AutoStartTrans:true);
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>

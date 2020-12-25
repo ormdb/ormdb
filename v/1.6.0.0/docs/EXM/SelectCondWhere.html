@@ -1,6 +1,6 @@
 ﻿Following section demonstrates the dynamic creation of the <hl>Where</hl> clause by <b>depending on conditional (if)</b>.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
 		var t0 = new Orders();
 		
 		var sql = Odb.SQL.Select(x => 
@@ -11,7 +11,7 @@
 		int _shipper_id = 998877;
 		if ( _shipper_id > 0 )
 			sql.Add(x => x.Where(t0.ShipperID == _shipper_id));
-    </code>
+    </pre>
     <output>
         SELECT * <br />
         FROM [Orders] AS t0 <br />
@@ -26,19 +26,19 @@
 
 Following section demonstrates the dynamic creation of the <hl>Where</hl> clause by <b>external variable(s)</b>.
 <sample>
-    <code lang="c#">
-				var typ = "C";
-				var c_id = 5555;
-				var e_id = 6666;
+    <pre lang="c#">
+		var typ = "C";
+		var c_id = 5555;
+		var e_id = 6666;
 
-				// [Where] clause is being executed depending on value test.
-				var sql = Odb.SQL.Select(x => 
-									x.From(t0)
-									 .Where( (typ == "C" & t0.CustomerID == c_id) |
-											 (typ == "E" & t0.EmployeeID == e_id)
-											)
-							);
-    </code>
+		// [Where] clause is being executed depending on value test.
+		var sql = Odb.SQL.Select(x => 
+							x.From(t0)
+								.Where( (typ == "C" & t0.CustomerID == c_id) |
+										(typ == "E" & t0.EmployeeID == e_id)
+									)
+					);
+    </pre>
 	<output>
 		SELECT *<br />
 		FROM [Orders] AS t0 <br />

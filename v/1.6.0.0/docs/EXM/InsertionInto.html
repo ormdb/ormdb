@@ -1,6 +1,6 @@
 ﻿Following section demonstrates <b>insert-into with select</b>.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         var t0 = new Shippers();
 		
         var sql = Odb.SQL.InsertInto(t0, 
@@ -12,7 +12,7 @@
 			        );
 
         var affectedRows = sql.ExecuteNonQuery(cn);
-    </code>
+    </pre>
     <output>
         INSERT INTO [Shippers]<br />
         <div style="padding-left:50px;">

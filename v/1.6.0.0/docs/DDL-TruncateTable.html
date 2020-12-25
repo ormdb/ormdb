@@ -5,7 +5,7 @@
 
 Following section demonstrates <k>TRUNCATE</k> the table(s).
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         // single table by instance
         cn.Provider.TruncateTable(h);
 
@@ -14,7 +14,7 @@ Following section demonstrates <k>TRUNCATE</k> the table(s).
 
         // single table by name
         cn.Provider.TruncateTable("table1");
-    </code>
+    </pre>
     <output>
     </output>
     <fiddle></fiddle>
@@ -24,9 +24,9 @@ Following section demonstrates <k>TRUNCATE</k> the table(s).
 
 Following section demonstrates how to generate <k>TRUNCATE</k> script.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         var script = cn.Provider.Truncate(h, true);
-    </code>
+    </pre>
     <output>
     </output>
     <fiddle></fiddle>

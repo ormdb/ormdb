@@ -5,13 +5,13 @@
 
 Following section demonstrates <k>ANALYZE</k> the table(s).
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         // by instance
         cn.Provider.AnalyzeTable(h);
 
         // by name
         cn.Provider.AnalyzeTable("table1");
-    </code>
+    </pre>
     <output>
     </output>
     <fiddle></fiddle>
@@ -20,9 +20,9 @@ Following section demonstrates <k>ANALYZE</k> the table(s).
 
 Following section demonstrates how to generate <k>ANALYZE</k> script.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         var script = cn.Provider.AnalyzeTable("table1", true);
-    </code>
+    </pre>
     <output>
     </output>
     <fiddle></fiddle>

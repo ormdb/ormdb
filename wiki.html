@@ -670,9 +670,9 @@
             load_page_goto_fiddle();
 
             //-- to remove left white-spaces from code block
-            $("pre code").each(function () {
-                this.innerHTML = remove_trailing_spaces(this.innerHTML);
-            });
+            //$("pre code").each(function () {
+            //    this.innerHTML = remove_trailing_spaces(this.innerHTML);
+            //});
 
 
         }
@@ -690,8 +690,7 @@
 
                 for (n = 0; n < _samples.length; n++) {
                     var _sample = $(_samples[n]);
-
-                    var _codes = _sample.find("code");
+                    var _codes = _sample.find("pre");
                     var _code_html = "";
                     for (i = 0; i < _codes.length; n++) {
                         var _code = $(_codes[i]);
@@ -715,9 +714,7 @@
                     var _code_panel = '' +
                         '<div class="' + (_output_html ? "col-md-12 col-lg-8" : "col-12") + ' mb-1">' +
                         '    <div class="code-tab border rounded d-flex flex-column h-100">' +
-                        '        <pre lang="c#" style="">' +
-                        '            <code>' + _code_html + '</code>' +
-                        '        </pre>' +
+                        '        <pre lang="c#" style="">' + _code_html + '</pre>' +
                         '    </div>' +
                         '</div>'
 
@@ -777,13 +774,15 @@
                             _lang_nam = "vb";
                             break
                     }
+
                     var _attrbs = _items[n].attributes;
                     var _atrb_val = '';
                     for (m = 0; m < _attrbs.length; m++) {
                         _atrb_val += ' ' + _attrbs[m].name + '="' + _attrbs[m].value + '"';
                     }
-                    //console.log(_item.html());
-                    _item.replaceWith('<pre ' + _atrb_val + '><code>\n' + Prism.highlight(_item.text(), _lang_obj, _lang_nam) + '</code></pre>');
+
+                    var text = remove_trailing_spaces(_item.text());
+                    _item.replaceWith('<pre ' + _atrb_val + '><code>' + Prism.highlight(text, _lang_obj, _lang_nam) + '</code></pre>');
                 }
             }
             var current_lang = 'c#';

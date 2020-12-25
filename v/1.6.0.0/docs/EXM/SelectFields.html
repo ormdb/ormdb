@@ -1,6 +1,6 @@
 ﻿Following section demonstrates <hl>how select/exclude the fields</hl> to be read.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         var t0 = new Orders();
         var t1 = new OrderDetails();
 
@@ -15,7 +15,7 @@
 
         // Select all columns by excluding column [ShipperID] from [Orders]
         Odb.SQL.Select(x => x.From(t0).ExcludeFields(t0.ShipperID) );
-    </code>
+    </pre>
     <output>
         <i class="text-success">Select all columns</i>
         <br />

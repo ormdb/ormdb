@@ -1,13 +1,13 @@
 ﻿Following section demonstrates how to execute a "NonQuery" command  as asynchronously by creating a task.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var th = new TableHeader();
 
 		var sql = Odb.SQL.Delete(x => x.From(th).Where(th.Id == 12345M) );
 
 		var task = Task&lt;int&gt;.Factory.StartNew(() => sql.ExecuteNonQuery(cn) );
 		var affectedRows = task.Result;
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>

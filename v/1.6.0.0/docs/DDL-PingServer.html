@@ -5,13 +5,13 @@
 
 Following section demonstrates ping and calculate average time.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var ts = new TimeSpan();
 		for (int n = 1; n <= 3; n++)
 		ts = ts + cn.Provider.PingServer();
 
 		Console.WriteLine(" → Ping (Avg.) = " + ts.TotalMilliseconds.ToString() + "ms.");
-	</code>
+	</pre>
 	<output>
 		Ping (Avg.) = 0ms.
 	</output>

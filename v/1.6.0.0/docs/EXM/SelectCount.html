@@ -1,11 +1,11 @@
 ﻿Following section demonstrates using <hl>ExecuteCount</hl>, to get count of row(s).
 
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var t0 = new Orders();
 
 		var cnt = Odb.SQL.Select(x => x.From(t0)).ExecuteCount(cn);
-	</code>
+	</pre>
 	<output>
 		SELECT <hl>COUNT(1)</hl> FROM [Orders] AS t0
 	</output>
@@ -17,11 +17,11 @@
 
 To counting the row(s) by excluding NULL values, you have to use <hl>COUNT</hl> with a column.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var sql = Odb.SQL.Select(x => x.From(t0).Fields( x[t0.OrderID].COUNT() ));
 
 		var cnt = (int?)(sql.ExecuteReader(cn).FirstOrDefault()[0]) ?? 0;
-	</code>
+	</pre>
 	<output>
 		SELECT <hl>COUNT(t0.OrderID)</hl> FROM [Orders] AS t0
 	</output>

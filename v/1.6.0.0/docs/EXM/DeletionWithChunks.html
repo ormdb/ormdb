@@ -1,33 +1,33 @@
 ﻿Following section demonstrates <b>deletion with chunks</b>.
 <sample>
-    <code lang="c#">
-                var t0 = new Orders();
-                var t1 = new OrderDetails();
+    <pre lang="c#">
+        var t0 = new Orders();
+        var t1 = new OrderDetails();
 
-                // Ids are being obtained for the records to be deleted...
-                var _ids = Odb.SQL.Select(x => x.Fields(x[t0.OrderID].DISTINCT()) .From(t0) )
-                                .ExecuteReader&lt;string&gt;(cn).ToList();
+        // Ids are being obtained for the records to be deleted...
+        var _ids = Odb.SQL.Select(x => x.Fields(x[t0.OrderID].DISTINCT()) .From(t0) )
+                        .ExecuteReader&lt;string&gt;(cn).ToList();
 
-                // records are being deleted in chunks, by supplying record Id information.
-                var _index = 0;
-                var _chunk_size = 3000;
-                var qry = Odb.SQL.Query();
-                do {
-                    var _items = _ids.Skip(_index).Take(_chunk_size);
-                    If (_items.Count = 0) break;
+        // records are being deleted in chunks, by supplying record Id information.
+        var _index = 0;
+        var _chunk_size = 3000;
+        var qry = Odb.SQL.Query();
+        do {
+            var _items = _ids.Skip(_index).Take(_chunk_size);
+            If (_items.Count = 0) break;
 
-                    // command are being queued
-                    qry.Delete(x => x.From(t1).Where(t1.OrderID.IN(_items)) );
-                    qry.Delete(x => x.From(t0).Where(t0.OrderID.IN(_items)) );
+            // command are being queued
+            qry.Delete(x => x.From(t1).Where(t1.OrderID.IN(_items)) );
+            qry.Delete(x => x.From(t0).Where(t0.OrderID.IN(_items)) );
 
-                    qry.Execute(cn);                // queries are being executed
-                    qry.Clear();                    // buffer is being clear
+            qry.Execute(cn);                // queries are being executed
+            qry.Clear();                    // buffer is being clear
 
-                    _index += _chunk_size;
-                }
+            _index += _chunk_size;
+        }
 
-                var affectedRows = sql.ExecuteNonQuery(cn);
-    </code>
+        var affectedRows = sql.ExecuteNonQuery(cn);
+    </pre>
     <output>
         <k>Delete</k> operation is always a problem for the large records. But you can break the large delete operation into chunks.
     </output>

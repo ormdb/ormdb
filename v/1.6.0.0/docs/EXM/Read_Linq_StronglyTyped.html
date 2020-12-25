@@ -1,6 +1,6 @@
 ﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> as <b>StronglyTyped</b>.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         var sql = Odb.SQL.Select(x => x.From(t1)
                             .Where( t1.OrderID > 10260 )
                             .Skip(5).Top(10)
@@ -8,7 +8,7 @@
                     );
 
         var rows = sql.ExecuteReader&lt;Orders&gt;(cn).ToList();
-    </code>
+    </pre>
     <output type="secondary" >
         <b>Record Count= 1.093.000</b><br />
         <div style="padding-left:25px;">

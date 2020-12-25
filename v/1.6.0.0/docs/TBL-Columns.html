@@ -7,7 +7,7 @@
 
 <st>Supported .Net Value Types</st>
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         // String
         public string my_col;
 
@@ -40,7 +40,7 @@
         // Date + Time
         System.DateTime my_col;
         [Column(DateFormat = ColumnDateFormat.DateTime)] public System.DateTime my_col;
-    </code>
+    </pre>
     <output>
     </output>
     <fiddle></fiddle>
@@ -49,7 +49,7 @@
 <st>Reference Column</st>
 <p>is used for columns used repeatedly. <b>Name</b>, <b>Description</b>, <b>DefaultValue</b> and <b>AutoIncrement</b> properties can be redefiend. You can reference a column from many column(s).</p>
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         // Attributes are defined at once to use as a reference...
         public enum Ref
         {
@@ -65,7 +65,7 @@
 
         // extends the column to max length
         [Column( Ref.year, Ref.id )] public int my_col;
-    </code>
+    </pre>
     <output>
     </output>
     <fiddle></fiddle>
@@ -78,14 +78,14 @@
     You can use <b>connection.Provider.ToDbTypeName</b> to get the Database Equivalent statement of the column. Example shown below, returns different results for each provider type.
 </co>
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         var result = cn.Provider.ToDbTypeName(th.Year);
 
         //-- MsSql      = numeric(4, 0)
         //-- MySql      = DECIMAL(4, 0)
         //-- Oracle     = NUMBER(4, 0)
         //-- PostgreSql = NUMERIC(4, 0)
-    </code>
+    </pre>
     <output>
     </output>
     <fiddle></fiddle>

@@ -1,7 +1,7 @@
 ﻿Following section demonstrates how to update from [Order] records,
 which contains line that has value of quantity is lower 5 in [OrderDetails].
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var t0 = new Orders();
 		var t1 = new OrderDetails();
 		var sql = Odb.SQL.Update(x =>
@@ -12,7 +12,7 @@ which contains line that has value of quantity is lower 5 in [OrderDetails].
 					);
 
 		var affectedRows = sql.ExecuteNonQuery(cn);
-	</code>
+	</pre>
 	<output>
 		<i class="text-success">
 			This sample generates different results for each database connected. The code shown below is generated via MsSql database connection.

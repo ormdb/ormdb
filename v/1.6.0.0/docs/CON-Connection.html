@@ -127,7 +127,7 @@ When the connection is established, SQL Commands will execute with the help of t
 <br />
 Following section demonstrates how to create a connection with <k>DefaultSettings</k>.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         var cn = Odb.Connection.Create&lt;Odb.Providers.MsSql&gt;("ConnectionString");
 
         // Connection, will opened at first execution automatically.
@@ -137,7 +137,7 @@ Following section demonstrates how to create a connection with <k>DefaultSetting
 
         Console.WriteLine(" → Connection = " + cn.State);
         Console.WriteLine(" → Provider Name = " + cn.ProviderName);
-    </code>
+    </pre>
     <output>
         Connection = Open<br />
         Provider Name = MsSql
@@ -151,11 +151,11 @@ Following section demonstrates how to create a connection with <k>DefaultSetting
 
 Following section demonstrates how to create a connection with <k>AutoTrans</k>. Please refer to <a href="##CON--CON-Transaction">Transaction</a> for further information.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         var cn_opt = new ConnectionSettings() { AutoStartTrans = true };
 
         var cn = Odb.Connection.Create&lt;Odb.Providers.MsSql&gt;("ConnectionString", cn_opt);
-    </code>
+    </pre>
     <output>
         Connection = Open<br />
         Provider Name = MsSql

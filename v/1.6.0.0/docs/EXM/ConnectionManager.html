@@ -1,6 +1,6 @@
 ﻿Following example demonstrates how to create a connection dynamically.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
     public Odb.Connection InitConnection&lt;T&gt;(
         string Host, 
         string Database, 
@@ -64,7 +64,7 @@
         var cn_3 = InitConnection&lt;Odb.Providers.MySql&gt;("localhost", "DB_NAME", "user", "pass");
         var cn_4 = InitConnection&lt;Odb.Providers.PostgreSql&gt;("localhost", "DB_NAME", "user", "pass");
     }
-    </code>
+    </pre>
     <output>
     </output>
     <fiddle></fiddle>

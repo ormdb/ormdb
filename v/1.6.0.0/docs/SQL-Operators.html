@@ -1,9 +1,9 @@
 ﻿"<b>Sql Commands</b>" (such as AS, AVG, DISTINCT etc.) can be used via helper parameter that comes with expression function.
 <co type="success">
 	<sample>
-		<code lang="c#">
+		<pre lang="c#">
 			Odb.SQL.Select(x => ... x[table-field].SqlCommand ... );
-		</code>
+		</pre>
 		<output>
 		</output>
 		<fiddle></fiddle>
@@ -15,13 +15,13 @@
 <st>CONSTANT</st>
 Selects a contant value.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		Odb.SQL.Select(x =>
 			x.Fields( 5.60, x[5.63].AS("C1"),
 					  "str1", x["str2"].AS("C2"),
 			)
 		);
-	</code>
+	</pre>
 	<output>
 		SELECT <hl>5.60</hl>, <hl>5.63 AS C1</hl>, <hl>'str1'</hl>, <hl>'str2' AS C2</hl>
 	</output>
@@ -32,7 +32,7 @@ Selects a contant value.
 <st>AS</st>
 Renames a column with an alias.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var t0 = new Orders();
 
 		Odb.SQL.Select(x => 
@@ -41,7 +41,7 @@ Renames a column with an alias.
 					  x[t0.OrderID].AS("OID")
 			 )
 		);
-	</code>
+	</pre>
 	<output>
 		SELECT 'X' <hl>AS</hl> C1, t0.OrderID <hl>AS</hl> OID<br />
 		FROM [Orders] AS t0
@@ -53,7 +53,7 @@ Renames a column with an alias.
 <st>IN / NOT_IN</st>
 <k>IN</k> command allows you to specify multiple values in a <b>WHERE</b> clause.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var t0 = new Orders();
 
 		var vals1 = new[] {1, 2};
@@ -65,7 +65,7 @@ Renames a column with an alias.
 					 x[t0.EmployeeID].NOT_IN(vals2) 
 			)
 		);
-	</code>
+	</pre>
 	<output>
 		SELECT *<br />
 		FROM [Orders] AS t0 <br />
@@ -79,7 +79,7 @@ Renames a column with an alias.
 
 <st>IS NULL / IS NOT NULL</st>
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var t0 = new Orders();
 
 		Odb.SQL.Select(x => 
@@ -88,7 +88,7 @@ Renames a column with an alias.
 					 t0.EmployeeID is object 
 			)
 		);
-	</code>
+	</pre>
 	<output>
 		SELECT *<br />
 		FROM [Orders] AS t0 <br />
@@ -103,7 +103,7 @@ Renames a column with an alias.
 <st>LIKE</st>
 is used in a WHERE clause to search for a specified pattern in a column.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var t0 = new Customers();
 
 		Odb.SQL.Select(x => 
@@ -113,7 +113,7 @@ is used in a WHERE clause to search for a specified pattern in a column.
 					 x[t0.Country].CONTAINS("M")
 			 )
 		);
-	</code>
+	</pre>
 	<output>
 		SELECT *<br />
 		FROM [Customers] AS t0 <br />
@@ -129,14 +129,14 @@ is used in a WHERE clause to search for a specified pattern in a column.
 Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
 The <k>DISTINCT</k> statement is used to return only distinct (different) values.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var t0 = new Customers();
 
 		Odb.SQL.Select(x => 
 			x.From(t0)
 			 .Fields( x[t0.Country].DISTINCT().AS("C") )
 		);
-	</code>
+	</pre>
 	<output>
 		SELECT <hl>DISTINCT(th.year)</hl> AS 'C'<br />
 		FROM [Customers] AS t0 <br />
@@ -148,14 +148,14 @@ The <k>DISTINCT</k> statement is used to return only distinct (different) values
 <st>COALESCE</st>
 Return the first non-null value in a list.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var t0 = new Customers();
 
 		Odb.SQL.Select(x => 
 			x.From(t0)
 			 .Fields( x[t0.CustomerName].COALESCE('???').AS("C") )
 		);
-	</code>
+	</pre>
 	<output>
 		SELECT <hl>COALESCE(t0.CustomerName, '???')</hl> AS 'C'<br />
 		FROM [Customers] AS t0 <br />
@@ -166,7 +166,7 @@ Return the first non-null value in a list.
 
 <st>Aggregate Functions</st>
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var t0 = new Customers();
 
 		Odb.SQL.Select(x => 
@@ -179,7 +179,7 @@ Return the first non-null value in a list.
 					  x[t0.CustomerID].SUM().AS("C4")
 			  )
 		);
-	</code>
+	</pre>
 	<output>
 		SELECT t0.Country,
 		<div style="padding-left:25px;">
@@ -197,7 +197,7 @@ Return the first non-null value in a list.
 
 <st>String Functions</st>
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var t0 = new Customers();
 
 		Odb.SQL.Select(x =>
@@ -212,7 +212,7 @@ Return the first non-null value in a list.
 					  x[t0.City].CONCAT(", ID=", t0.CustomerID).AS("C5")
 			  )
 		);
-	</code>
+	</pre>
 	<output>
 		SELECT
 		<div style="padding-left:25px;">

@@ -1,6 +1,6 @@
 ﻿Following section demonstrates insertion from <b>Another Database</b>.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         // source database which includes to be copied records.
         Odb.Connection src_cn = default;
         int batch_size = 5000;
@@ -20,7 +20,7 @@
 
         if (sql.Count >= batch_size)
             sql.ExecuteNonQuery(cn);
-    </code>
+    </pre>
     <output>
         Insertions are being executed each 5000 rows.
     </output>

@@ -1,10 +1,10 @@
 ﻿Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         var t0 = new Orders();
 
         Odb.SQL.Select(x => x.From(t0).Skip(15).Top(5) );
-    </code>
+    </pre>
     <output>
         SELECT * <br />
         FROM [Orders] AS t0 <br />

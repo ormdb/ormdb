@@ -1,7 +1,7 @@
 ﻿Following section demonstrates <b>simple deletion</b>.
 Following section demonstrates <b>deletion with chunks</b>.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		var t0 = new OrderDetails();
 		var t1 = new Orders();
 		
@@ -10,7 +10,7 @@ Following section demonstrates <b>deletion with chunks</b>.
 			sql.Delete(x => x.From(t1).Where( t1.OrderID == 10248 ));
 
 		var affectedRows = sql.ExecuteNonQuery(cn);
-	</code>
+	</pre>
 	<output>
 		DELETE t0<br />
 		FROM [OrderDetails] AS t0<br />

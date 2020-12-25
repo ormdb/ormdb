@@ -1,10 +1,10 @@
 ﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> as <b>StronglyTyped</b>, using <k>SQL String</k>.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         var sql = "SELECT * FROM Customers";
 
         var rows = cn.ExecuteReader<Customer>(sql).ToList();
-    </code>
+    </pre>
     <output>
     </output>
     <fiddle>DWNw8S</fiddle>

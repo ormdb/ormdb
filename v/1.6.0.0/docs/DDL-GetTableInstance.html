@@ -4,7 +4,7 @@
 
 Following section demonstrates generating the instance of the table.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		// instance(s) created from definition(s)
 		var t1 = new TableHeader();
 
@@ -12,7 +12,7 @@ Following section demonstrates generating the instance of the table.
 		var tb1 = cn.Provider.GetTableInstance&lt;TableHeader&gt;();
 		var tb2 = cn.Provider.GetTableInstance(typeof(TableHeader)());
 		var tb3 = cn.Provider.GetTableInstance("TableHeader");
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>
@@ -22,7 +22,7 @@ Following section demonstrates generating the instance of the table.
 
 Following section demonstrates reading the informations from table-instance.
 <sample>
-	<code lang="c#">
+	<pre lang="c#">
 		// Reading table columns...
 		foreach ( var col in tb.GetColumns() ){
 			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
@@ -40,7 +40,7 @@ Following section demonstrates reading the informations from table-instance.
 				Debug.WriteLine($"{col.Name} {(index.IsDescending? "DESC" : "ASC")}");
 			}
 		}
-	</code>
+	</pre>
 	<output>
 	</output>
 	<fiddle></fiddle>

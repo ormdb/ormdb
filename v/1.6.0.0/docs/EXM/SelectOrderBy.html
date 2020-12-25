@@ -1,13 +1,13 @@
 ﻿Following section demonstrates how to sort the data returned in ascending/descending order.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
 		var t0 = new Orders();
 		
 		Odb.SQL.Select(x => 
 					 x.From(t0).Top(15)
 					 .OrderASC(t0.OrderID).OrderDESC(t0.OrderDate)
 					);
-    </code>
+    </pre>
     <output>
         SELECT * <br />
         FROM [Orders] AS t0 <br />

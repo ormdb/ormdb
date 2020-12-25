@@ -30,11 +30,11 @@
 
 Following section demonstrates reading the columns of a table <b>by its instance</b>.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
 		foreach (var col in cn.Provider.GetTableColumns(h)) {
 			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
 		}
-    </code>
+    </pre>
     <output>
     </output>
     <fiddle></fiddle>
@@ -44,11 +44,11 @@ Following section demonstrates reading the columns of a table <b>by its instance
 
 Following section demonstrates reading the columns a of table <b>by its name</b>.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
 		foreach (var col in cn.Provider.GetTableColumns("table_name")) {
 			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
 		}
-    </code>
+    </pre>
     <output>
     </output>
     <fiddle></fiddle>

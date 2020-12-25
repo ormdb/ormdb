@@ -1,6 +1,6 @@
 ﻿Following section demonstrates insertion by <b>Model</b>.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         var sql = Odb.SQL.Insert();
 		
         var model = new Orders();
@@ -13,7 +13,7 @@
         sql.Add(model);
 
         var affectedRows = sql.ExecuteNonQuery(cn);
-    </code>
+    </pre>
     <output>
         In this sample; columns "<k>OrderID</k>" is AutoIncrement field, and "<k>ShipperID</k>" will be accepted as its default values.
         <br />

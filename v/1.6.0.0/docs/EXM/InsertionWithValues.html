@@ -1,6 +1,6 @@
 ﻿Following section demonstrates insertion with <b>Value Array</b>.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
         var sql = Odb.SQL.Insert();
 
         var dt = DateTime.Now;
@@ -10,7 +10,7 @@
         sql.Add&lt;TableLines&gt;(dt.Year, 1, 2, "note 2");
 
         var affectedRows = sql.ExecuteNonQuery(cn);
-    </code>
+    </pre>
     <output>
         In this sample; column "<k>OrderID</k>" is AutoIncrement field.
         <br />

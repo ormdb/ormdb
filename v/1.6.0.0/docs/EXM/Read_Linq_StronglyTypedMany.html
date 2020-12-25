@@ -1,6 +1,6 @@
 ﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> as <b>StronglyTyped (One2Many)</b>.
 <sample>
-    <code lang="c#">
+    <pre lang="c#">
 		var sql = Odb.SQL.Select(x => 
 						x.From(t1)
 						.LeftJoin(t2, t2.OrderID == t1.OrderID)
@@ -27,7 +27,7 @@
 						// SplitOn => Start points of the join block(s)
 						new[] { "OrderDetailID" }
 					).ToList();
-    </code>
+    </pre>
     <output type="secondary"></output>
 	<fiddle>qmOsfO</fiddle>
 </sample>
