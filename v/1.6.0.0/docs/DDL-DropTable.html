@@ -1,19 +1,24 @@
 ﻿<k>DropTable</k> is used to drop an existing table in a database.
 
-
 <st>Examples</st>
 
-Following section demonstrates how to drop table.
+Following section demonstrates <k>DROP</k> the table(s).
 <sample>
 	<pre lang="c#">
+		var t0 = new Orders();
+        var t1 = new OrderDetails();
+
 		// single table by instance
-		cn.Provider.DropTable(h);
+		connection.Provider.DropTable(t0);
 
 		// multi table by instance
-		cn.Provider.DropTable(new [] {h, l});
+		connection.Provider.DropTable(new [] {t0, t1});
+
+        // by type
+        connection.Provider.DropTable&lt;Orders&gt;();
 
 		// single table by name
-		cn.Provider.DropTable("table1");
+		connection.Provider.DropTable("table1");
 	</pre>
 	<output>
 	</output>
@@ -21,10 +26,13 @@ Following section demonstrates how to drop table.
 </sample>
 <br />
 
-Following section demonstrates how to generate <k>DROP TABLE</k> script.
+The parameter <b>OnlyGenerateScript</b> should be <k>true</k>, if the command's script is requested.
+<co type="warning" inline>
+	Default value of this parameter is <k>false</k>.
+</co>
 <sample>
 	<pre lang="c#">
-		var script = cn.Provider.DropTable(h, true);
+        var script = cn.Provider.DropTable(..., OnlyGenerateScript:true);
 	</pre>
 	<output>
 	</output>

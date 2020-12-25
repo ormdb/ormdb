@@ -1,19 +1,24 @@
 ﻿<k>TRUNCATE</k> method is used to delete existing records in a table like <k>DELETE</k>. This process also executes the <k>UPDATE STATISTICS</k> for tables, after <b>DELETE</b> operation.
 
-
 <st>Examples</st>
 
 Following section demonstrates <k>TRUNCATE</k> the table(s).
 <sample>
     <pre lang="c#">
+        var t0 = new Orders();
+        var t1 = new OrderDetails();
+
         // single table by instance
-        cn.Provider.TruncateTable(h);
+        connection.Provider.TruncateTable(t0);
 
         // multi table by instance
-        cn.Provider.TruncateTable(new [] {h, l});
+        connection.Provider.TruncateTable(new [] {t0, t1});
+
+        // by type
+        connection.Provider.TruncateTable&lt;Orders&gt;();
 
         // single table by name
-        cn.Provider.TruncateTable("table1");
+        connection.Provider.TruncateTable("table1");
     </pre>
     <output>
     </output>
@@ -22,10 +27,13 @@ Following section demonstrates <k>TRUNCATE</k> the table(s).
 
 <br />
 
-Following section demonstrates how to generate <k>TRUNCATE</k> script.
+The parameter <b>OnlyGenerateScript</b> should be <k>true</k>, if the command's script is requested.
+<co type="warning" inline>
+    Default value of this parameter is <k>false</k>.
+</co>
 <sample>
     <pre lang="c#">
-        var script = cn.Provider.Truncate(h, true);
+        var script = cn.Provider.TruncateTable(..., OnlyGenerateScript:true);
     </pre>
     <output>
     </output>

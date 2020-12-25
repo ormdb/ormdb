@@ -5,41 +5,12 @@
 Following section demonstrates generating the instance of the table.
 <sample>
 	<pre lang="c#">
-		// instance(s) created from definition(s)
-		var t1 = new TableHeader();
+		var tb0 = new Orders();
 
-		// new instance of a table via provider
-		var tb1 = cn.Provider.GetTableInstance&lt;TableHeader&gt;();
-		var tb2 = cn.Provider.GetTableInstance(typeof(TableHeader)());
-		var tb3 = cn.Provider.GetTableInstance("TableHeader");
-	</pre>
-	<output>
-	</output>
-	<fiddle></fiddle>
-</sample>
-
-<br />
-
-Following section demonstrates reading the informations from table-instance.
-<sample>
-	<pre lang="c#">
-		// Reading table columns...
-		foreach ( var col in tb.GetColumns() ){
-			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
-		}
-
-		// Reading table indexes...
-		foreach ( var index in tb.GetIndexes() ){
-
-			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
-
-			Debug.WriteLine($"Columns");
-			Debug.WriteLine($"----------------------------");
-
-			foreach (var col in index.Columns){
-				Debug.WriteLine($"{col.Name} {(index.IsDescending? "DESC" : "ASC")}");
-			}
-		}
+		// via provider
+		var tb1 = connection.Provider.GetTableInstance&lt;TableHeader&gt;();
+		var tb2 = connection.Provider.GetTableInstance(typeof(TableHeader)());
+		var tb3 = connection.Provider.GetTableInstance("TableHeader");
 	</pre>
 	<output>
 	</output>

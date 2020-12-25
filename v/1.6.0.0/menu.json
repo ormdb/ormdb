@@ -48,19 +48,20 @@
         "DDL-CreateTable": "CreateTable",
         "DDL-DropIndex": "DropIndex",
         "DDL-DropTable": "DropTable",
-        "DDL-GetServerDateTime": "GetServerDateTime",
+        "DDL-TruncateTable": "Truncate Table",
+        "-DDL_NFO": "Info",
         "DDL-GetServerInfo": "GetServerInfo",
+        "DDL-GetServerDateTime": "GetServerDateTime",
         "DDL-GetTableColumns": "GetTableColumns",
         "DDL-GetTableIndexes": "GetTableIndexes",
         "DDL-GetTableInstance": "GetTableInstance",
         "DDL-GetTables": "GetTables",
         "DDL-PingServer": "PingServer",
-        "DDL-TableExist": "TableExist",
-        "DDL-TruncateTable": "Truncate Table"
+        "DDL-TableExist": "TableExist"
       }
     },
     "EXM": {
-      "title": "Examples",
+      "title": "SAMPLES",
       "path": "/EXM",
       "before": "0_before",
       "after": "0_after",

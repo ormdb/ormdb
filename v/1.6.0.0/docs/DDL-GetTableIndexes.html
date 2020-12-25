@@ -24,32 +24,20 @@
 Following section demonstrates reading the indexes of table <b>by its name</b>.
 <sample>
 	<pre lang="c#">
-		foreach (var index in cn.Provider.GeTableIndexes("table_name")){
-
-			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
-
-			Debug.WriteLine($"Columns");
-			Debug.WriteLine($"----------------------------");
-
-			foreach (var column in index.Columns){
-				Debug.WriteLine(column.Name.ToString());
-			}
-		}
+		var indexes = cn.Provider.GeTableIndexes("table_name");
 	</pre>
 	<output>
 	</output>
-	<fiddle></fiddle>
+	<fiddle>8GeKtX</fiddle>
 </sample>
 
 <br />
 Following section demonstrates reading the indexes of table <b>by its instance</b>.
 <sample>
 	<pre lang="c#">
-		foreach (var index in h.GetIndexes()) {
-			Debug.WriteLine($"{index.Name}, is primary={index.IsPrimary}");
-		}
+		var indexes = (new Orders()).GetIndexes();
 	</pre>
 	<output>
 	</output>
-	<fiddle></fiddle>
+	<fiddle>8GeKtX</fiddle>
 </sample>

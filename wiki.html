@@ -100,11 +100,10 @@
 
                 #wiki > #wiki-menu > #wiki-menu-content x {
                     border-bottom: 1px solid rgba(0,0,0,0.1);
-                    padding: 0 0 2px 5px;
-                    margin: 15px -25px 5px 10px;
+                    padding: 10px 0 5px 20px;
                     color: rgba(0,0,0,0.7);
-                    font-weight: 500;
                     display: block;
+                    font-weight:500;
                 }
 
                 #wiki > #wiki-menu > #wiki-menu-content a {
@@ -112,6 +111,7 @@
                     text-decoration: none;
                     color: #0056b3;
                     cursor: pointer;
+                    padding: 5px 10px 5px 20px;
                     padding: 5px 10px 5px 20px;
                     /*white-space: nowrap;*/
                 }
@@ -479,6 +479,10 @@
                     for (var i in _menu_group.items) {
                         var t = _menu_group.items[i].text;
 
+                        if (i.startsWith('-')) {
+                            t =  capitalize(t) ;
+                        }
+
                         if (_filter) {
                             if (t.contains(_filter, true)) {
                                 t = util.highlight(t, _filter, true);
@@ -614,6 +618,9 @@
         }
         //-------------------------------------------------------------------------------------
         //-- Rendering
+        function capitalize(s) {
+            return s.toLowerCase().replace(/\b(\w)/g, x => x.toUpperCase())
+        }
         function remove_trailing_spaces(s) {
             // split lines and remove only empty rows from beginning...
             var lines_orginal = s.split('\n');

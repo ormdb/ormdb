@@ -28,28 +28,24 @@
 
 <st>Examples</st>
 
-Following section demonstrates reading the columns of a table <b>by its instance</b>.
+Following section demonstrates reading the columns a of table <b>by its name</b>.
 <sample>
     <pre lang="c#">
-		foreach (var col in cn.Provider.GetTableColumns(h)) {
-			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
-		}
+		var columns = cn.Provider.GetTableColumns("table_name");
     </pre>
     <output>
     </output>
-    <fiddle></fiddle>
+    <fiddle>8GeKtX</fiddle>
 </sample>
 
 <br />
 
-Following section demonstrates reading the columns a of table <b>by its name</b>.
+Following section demonstrates reading the columns of a table <b>by its instance</b>.
 <sample>
     <pre lang="c#">
-		foreach (var col in cn.Provider.GetTableColumns("table_name")) {
-			Debug.WriteLine($"{col.Catalog}.{col.Schema}.{col.Table}.{col.Name}");
-		}
+		var columns = (new Orders()).GetTableColumns();
     </pre>
     <output>
     </output>
-    <fiddle></fiddle>
+    <fiddle>8GeKtX</fiddle>
 </sample>

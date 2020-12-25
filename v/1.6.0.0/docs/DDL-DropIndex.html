@@ -3,14 +3,19 @@
 
 <st>Examples</st>
 
-Following section demonstrates how to drop index of a table.
+Following section demonstrates <k>DROP-INDEX</k> of the table(s).
 <sample>
 	<pre lang="c#">
+		var t0 = new Orders();
+
 		// by table instance
-		cn.Provider.DropIndex(h, h.Indexes.First());
+		connection.Provider.DropIndex(t0, t0.Indexes.First());
+
+        // by type
+		connection.Provider.DropIndex&lt;Orders&gt;("index_name");
 
 		// by table name
-		cn.Provider.DropIndex("table1", "index_name");
+		connection.Provider.DropIndex("table1", "index_name");
 	</pre>
 	<output>
 	</output>
@@ -19,10 +24,13 @@ Following section demonstrates how to drop index of a table.
 
 <br />
 
-Following section demonstrates how to generate <k>DROP INDEX</k> script.
+The parameter <b>OnlyGenerateScript</b> should be <k>true</k>, if the command's script is requested.
+<co type="warning" inline>
+	Default value of this parameter is <k>false</k>.
+</co>
 <sample>
 	<pre lang="c#">
-		var script = cn.Provider.DropIndex("table1", "index_name", true);
+        var script = cn.Provider.DropIndex(..., OnlyGenerateScript:true);
 	</pre>
 	<output>
 	</output>

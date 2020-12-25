@@ -9,24 +9,29 @@
 Following section demonstrates how to create index for a table.
 <sample>
 	<pre lang="c#">
+		var t0 = new Orders();
+
 		// by table instance
-		cn.Provider.CreateIndex(h, h.Indexes.First(), "my_index");
+		connection.Provider.CreateIndex(t0, t0.Indexes.First(), "my_index");
 
 		// by table name
-		cn.Provider.CreateIndex("table1", true, new[] { "column1", "column2" }, "my_index");
+		connection.Provider.CreateIndex("table1", true, new[] { "column1", "column2" }, "my_index");
 	</pre>
 	<output>
 	</output>
-	<fiddle></fiddle>
+	<fiddle>KpqPbU</fiddle>
 </sample>
 <br />
 
-Following section demonstrates how to generate <k>CREATE INDEX</k> script.
+The parameter <b>OnlyGenerateScript</b> should be <k>true</k>, if the command's script is requested.
+<co type="warning" inline>
+	Default value of this parameter is <k>false</k>.
+</co>
 <sample>
 	<pre lang="c#">
-		var script = cn.Provider.CreateIndex(h, h.Indexes.First(), "my_index", true);
+		var script = connection.Provider.CreateIndex(..., OnlyGenerateScript:true);
 	</pre>
 	<output>
 	</output>
-	<fiddle></fiddle>
+	<fiddle>KpqPbU</fiddle>
 </sample>

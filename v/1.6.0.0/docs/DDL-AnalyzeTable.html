@@ -6,11 +6,13 @@
 Following section demonstrates <k>ANALYZE</k> the table(s).
 <sample>
     <pre lang="c#">
+		var t0 = new Orders();
+
         // by instance
-        cn.Provider.AnalyzeTable(h);
+        connection.Provider.AnalyzeTable(t0);
 
         // by name
-        cn.Provider.AnalyzeTable("table1");
+        connection.Provider.AnalyzeTable("table1");
     </pre>
     <output>
     </output>
@@ -18,10 +20,13 @@ Following section demonstrates <k>ANALYZE</k> the table(s).
 </sample>
 <br />
 
-Following section demonstrates how to generate <k>ANALYZE</k> script.
+The parameter <b>OnlyGenerateScript</b> should be <k>true</k>, if the command's script is requested.
+<co type="warning" inline>
+    Default value of this parameter is <k>false</k>.
+</co>
 <sample>
     <pre lang="c#">
-        var script = cn.Provider.AnalyzeTable("table1", true);
+        var script = connection.Provider.AnalyzeTable(..., OnlyGenerateScript:true);
     </pre>
     <output>
     </output>

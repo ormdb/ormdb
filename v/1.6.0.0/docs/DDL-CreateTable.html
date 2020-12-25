@@ -11,21 +11,26 @@
 Following section demonstrates creating a table.
 <sample>
     <pre lang="c#">
-        // create the table.
-        cn.Provider.CreateTable(h);
+		var t0 = new Orders();
+
+		// by table instance
+        cn.Provider.CreateTable(t0);
     </pre>
     <output>
     </output>
-    <fiddle></fiddle>
+    <fiddle>KpqPbU</fiddle>
 </sample>
 <br />
 
-Following section demonstrates how to generate <k>CREATE TABLE</k> script.
+The parameter <b>OnlyGenerateScript</b> should be <k>true</k>, if the command's script is requested.
+<co type="warning" inline>
+    Default value of this parameter is <k>false</k>.
+</co>
 <sample>
     <pre lang="c#">
-        var script1 = cn.Provider.CreateTable(h, OnlyGenerateScript:true);
+        var script = connection.Provider.CreateTable(..., OnlyGenerateScript:true);
     </pre>
     <output>
     </output>
-    <fiddle></fiddle>
+    <fiddle>KpqPbU</fiddle>
 </sample>
