@@ -1,0 +1,18 @@
+﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a>, using <k>System.Data.Common.DbCommand</k>.
+<sample>
+    <pre lang="c#">
+        // DbCommand is being prepared
+        var cmd = cn.CreateCommand(" SELECT field1, field2 " + 
+                                   " FROM table1 WHERE field1<>@param1;",
+                                   new { param1 = 0});
+
+        // Records are being read and converted to dictionary by linq...
+        var dic = connection.ExecuteReader(cmd).ToDictionary(
+                                       x => x["field1"], 
+                                       x => x["field2"]
+                                   );
+    </pre>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>

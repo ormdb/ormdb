@@ -4,12 +4,12 @@
         var sql = "SELECT * FROM Customers";
 
         // Reading by COLUMN-INDEX...
-        foreach (var row in cn.ExecuteReader(sql))
+        foreach (var row in connection.ExecuteReader(sql))
             // row[0] ... row[6]
 
 
         // Reading by COLUMN-NAME...
-        foreach (var row in cn.ExecuteReader(sql))
+        foreach (var row in connection.ExecuteReader(sql))
             // row["CustomerID"];
             // row["CustomerName"];
             // row["ContactName"];
@@ -21,7 +21,7 @@
 
         // Reading by EXPRESSION...
         Customer c = null; // for expression
-        foreach (var row in cn.ExecuteReader(sql))
+        foreach (var row in connection.ExecuteReader(sql))
             // row.Get(()=> c.CustomerID);
             // row.Get(()=> c.CustomerName);
             // row.Get(()=> c.ContactName);

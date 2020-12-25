@@ -7,7 +7,7 @@
                             .ExcludeFields(t1.ShipperID)
                     );
 
-        var rows = sql.ExecuteReader&lt;Orders&gt;(cn).ToList();
+        var rows = sql.ExecuteReader&lt;Orders&gt;(connection).ToList();
     </pre>
     <output type="secondary" >
         <b>Record Count= 1.093.000</b><br />

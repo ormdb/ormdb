@@ -1,31 +1,28 @@
 ﻿Following section demonstrates how to execute multiple commands in one batch-query with <b>ExecuteNonQuery</b>.
 <sample>
-    <pre lang="c#">
-		var th = new TableHeader();
-		var tl = new TableLines();
-		
+	<pre lang="c#">
 		var sql = SQL.X.Query();
 		
-		// DELETE commands are being queued...
-		sql.Delete(th);
-		sql.Delete(tl);
+		var t0 = new Orders();
 		
-		// INSERT commands are being queued...
-		sql.Insert(True).Add(new TableHeader() {
-                                Year = DateTime.Now.Year,
-								Id = 1,
-								DocDate = DateTime.Now.AddDays(1)
-                            })
+		// DELETE...
+		sql.Delete(t0);
+		
+		// INSERT...
+		var ins = sql.Insert();
+			ins.Add&lt;Orders&gt;(null, 90, 8, DateTime.Now, 1);
+			ins.Add&lt;Orders&gt;(null, 91, 8, DateTime.Now, 2);
 
-		// UPDATE commands are being queued...
-		sql.Update(x =>
-				x.From(th)
-				.Where(th.Year == 2018)
-				.Set(th.IsActive, !th.IsActive)
-			);
+		// UPDATE...
+		var t1 = new Products();
+		var sql = Odb.SQL.Update(x =>
+						x.From(t1)
+							.Where(t1.ProductID == 1)
+							.SetRaw(t1.Price, t1.Price * 10)
+					);
 		
 		// Commands are being executed...
-		sql.ExecuteNonQuery(cn);
+		sql.ExecuteNonQuery(connection);
     </pre>
     <output>
     </output>

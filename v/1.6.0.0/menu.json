@@ -75,9 +75,11 @@
         "Read_TSql_ArrayList": "Read(TSql) ArrayList",
         "Read_TSql_Datatable": "Read(TSql) Datatable",
         "Read_TSql_StronglyTyped": "Read(TSql) StronglyTyped",
-        "Read_Command": "Read By DbCommand",
+        "Read_DbCommand": "Read By DbCommand",
 
         "ExecuteNonQuery": "Execute",
+        "Execute_Tsql": "Execute (TSql)",
+        "Execute_DbCommand": "Execute (DbCommand)",
         "ExecuteNonQueryBatch": "Execute - Batch",
         "ExecuteNonQueryAsync": "Execute - Async",
 

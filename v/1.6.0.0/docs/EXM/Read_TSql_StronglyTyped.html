@@ -3,7 +3,7 @@
     <pre lang="c#">
         var sql = "SELECT * FROM Customers";
 
-        var rows = cn.ExecuteReader<Customer>(sql).ToList();
+        var rows = connection.ExecuteReader<Customer>(sql).ToList();
     </pre>
     <output>
     </output>

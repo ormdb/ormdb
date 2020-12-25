@@ -1,0 +1,12 @@
+﻿Following section demonstrates how to execute the <b>TSQL</b> command.
+<sample>
+	<pre lang="c#">
+		// SQL statement is being prepared
+		var str = "DELETE FROM table WHERE field1<>0 AND field2='X'";
+
+		var affectedRows = connection.ExecuteNonQuery(str);
+	</pre>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>

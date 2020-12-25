@@ -3,7 +3,7 @@
     <pre lang="c#">
         var sql = "SELECT * FROM Customers";
 
-        foreach (var row in cn.ExecuteReader(sql).ToArray())
+        foreach (var row in connection.ExecuteReader(sql).ToArray())
         {
             Console.WriteLine(String.Join(", ", from x in row select x.ToString().TrimEnd()));
         }
