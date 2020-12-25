@@ -1,9 +1,8 @@
-﻿var th = new TableHeader();
-var tl = new TableLines();
+﻿var t0 = new Orders();
+var t1 = new OrderDetails();
 	
-var sql = Odb.SQL.Select(x => 
-				x.From(th)
-				.LeftJoin(tl, tl.Year == th.Year & 
-								tl.Id == th.Id ) 
-				.Where( th.Year > 2018 )
-			);
+Odb.SQL.Select(x => 
+		x.From(t0)
+		.LeftJoin(tl, tl.OrderID == t0.OrderID ) 
+		.Where( t0.OrderDate > Datetime.Now.AddDays(-5) )
+);

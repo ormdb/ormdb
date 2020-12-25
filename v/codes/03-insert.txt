@@ -1,12 +1,14 @@
-﻿var sql = Odb.SQL.Insert(true);
-for (short n = 0; n < 100; n++)
-{
-    var model = new TableHeader();
-    model.Year = DateTime.Now.Year;
-    model.Id = n;
-    model.DocDate = DateTime.Now.AddDays(1);
+﻿// create connection
+var cn = Odb.Connection.Create<Providers.MsSql>("ConnectionString");
 
-    sql.Add(model);
-}
+var sql = Odb.SQL.Insert();
 
-sql.ExecuteNonQuery(cn);
+var model = new Orders();
+    // model.OrderID = AutoIncrement;
+    model.CustomerID = 90;
+    model.EmployeeID = 8;
+    model.OrderDate = DateTime.Now;
+    model.ShipperID = 1;
+sql.Add(model);
+
+var affectedRows = sql.ExecuteNonQuery(cn);

@@ -1,11 +1,14 @@
-﻿var sql = Odb.SQL.Delete(x =>
-                x.From(th)
-                    .Where(th.Year == 2018 &
-                        th.Id == 12345M)
-            );
+﻿// create connection
+var cn = Odb.Connection.Create<Providers.MsSql>("ConnectionString");
 
-sql.ExecuteNonQuery(cn);
+var t0 = new OrderDetails();
+var t1 = new Orders();
+		
+var sql = Odb.SQL.Query();
+	sql.Delete(x => x.From(t0).Where( t0.OrderID == 10248 ));
+	sql.Delete(x => x.From(t1).Where( t1.OrderID == 10248 ));
 
+var affectedRows = sql.ExecuteNonQuery(cn);
 
 
 

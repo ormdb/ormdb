@@ -1,11 +1,16 @@
-﻿var sql = Odb.SQL.Update(x =>
-                x.From(th)
-                    .Where(th.Year == 2018)
-                    .SetRaw(th.IsActive, !th.IsActive)
-                    .SetNull(th.Note)
-                    .SetRaw(th.Id, th.Id + 1)
-            );
+﻿// create connection
+var cn = Odb.Connection.Create<Providers.MsSql>("ConnectionString");
 
-sql.ExecuteNonQuery(cn);
+var t0 = new Orders();
+
+var sql = Odb.SQL.Update(x =>
+				x.From(t0)
+				 .Where(t0.ProductID == 1)
+				 .Set(t0.ProductName, "New ProductName")
+				 .SetRaw(t0.Price, t0.Price * 10)
+				 .SetNull(t0.ProductName)
+			);
+
+var affectedRows = sql.ExecuteNonQuery(cn);
 
 
