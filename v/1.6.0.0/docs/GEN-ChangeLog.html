@@ -210,19 +210,19 @@
                 <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                     <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
                     <span class="pl-3">
-                        Added <b>LINQ</b> support. <a href="##EXM--ExecuteReaderByLinq">( Check Example )</a>
+                        Added <b>LINQ</b> support. <a href="##EXM--Read_Linq_StronglyTyped">( Check Example )</a>
                     </span>
                 </li>
                 <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                     <h5 class="d-inline"><span class="badge badge-dark">3</span></h5>
                     <span class="pl-3">
-                        Added <b>DbCommand</b> support. <a href="##EXM--ExecuteReaderByCommand">( Check Example )</a>
+                        Added <b>DbCommand</b> support. <a href="##EXM--Read_DbCommand">( Check Example )</a>
                     </span>
                 </li>
                 <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                     <h5 class="d-inline"><span class="badge badge-dark">4</span></h5>
                     <span class="pl-3">
-                        Added <b>TSQL</b> (as string) support. <a href="##EXM--ExecuteReaderByString">( Check Example )</a>
+                        Added <b>TSQL</b> (as string) support. <a href="##EXM--Read_TSql_StronglyTyped">( Check Example )</a>
                     </span>
                 </li>
                 <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
@@ -274,13 +274,13 @@
                 <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                     <h5 class="d-inline"><span class="badge badge-dark">3</span></h5>
                     <span class="pl-3">
-                        <b>"Execute"</b> method removed. Instead of this, <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> and <a href="##OTH--OTH-ExecuteNonQuery">ExecuteNonQuery</a> methods added.
+                        <b>"Execute"</b> method removed. Instead of this, <a href="##EXM--Read_Linq_StronglyTyped">ExecuteReader</a> and <a href="##EXM--ExecuteNonQuery">ExecuteNonQuery</a> methods added.
                     </span>
                 </li>
                 <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                     <h5 class="d-inline"><span class="badge badge-dark">4</span></h5>
                     <span class="pl-3">
-                        <b>"DataReader"</b> removed. Instead of this, <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> returns the records as <b>IEnumerable(Of Odb.DataRow)</b>.
+                        <b>"DataReader"</b> removed. Instead of this, <a href="##EXM--Read_Linq_StronglyTyped">ExecuteReader</a> returns the records as <b>IEnumerable(Of Odb.DataRow)</b>.
                     </span>
                 </li>
                 <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
@@ -297,23 +297,12 @@
                         <br />
                         <code-tab>
                             <pre lang="c#">
-                        var sql = Select()...;
+                                var sql = Select()...;
                         
-                        var rows = sql.ExecuteReader(connection);
+                                var rows = sql.ExecuteReader(cn);
                         
-                        var first_row = rows.First();
-                        
-                        var hasRow = (first_row != null);
-	                </pre>
-                            <pre lang="vb">
-                        Dim sql = Select()...
-
-                        Dim rows = sql.ExecuteReader(connection)
-
-                        Dim first_row = rows.First()
-
-                        Dim hasRow = (first_row IsNot Nothing)
-	                </pre>
+                                if(rows.First() != null){ }
+	                        </pre>
                         </code-tab>
 
                     </span>
