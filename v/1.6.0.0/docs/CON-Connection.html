@@ -5,7 +5,7 @@ The Connection Object connect to the specified Data Source and open a connection
 When the connection is established, SQL Commands will execute with the help of the Connection Object and retrieve or manipulate data in the Data Source.
 <br />
 <br />
-<co type="warning">
+<co type="warning" >
     Once the Database activity is over; Connection should be closed and release the Data Source resources.
 </co>
 
@@ -57,7 +57,7 @@ When the connection is established, SQL Commands will execute with the help of t
                         </tbody>
                     </table>
                 </div>
-                <co type="warning">
+                <co type="warning"  inline="true">
                     If different DbProviderFactory needs to be use,  you can specify it by the argument named <b>FactoryNames</b>.
                 </co>
             </td>
@@ -163,7 +163,6 @@ Following section demonstrates how to create a connection with <k>AutoTrans</k>.
     <fiddle>ffO85n</fiddle>
 </sample>
 
-<br />
 <br />
 
 This means that transactions are committed or rolled-back every execution and and all queries are automatically executed in the transaction.

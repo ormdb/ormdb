@@ -1,10 +1,5 @@
 ﻿Columns are defined by supplying necessary type information in the attribute.
 
-<co type="warning">
-    If a column definition is often used in many of tables, so a column attributes can be defined as a reference.
-</co>
-
-
 <st>Supported .Net Value Types</st>
 <sample>
     <pre lang="c#">
@@ -47,23 +42,39 @@
 </sample>
 
 <st>Reference Column</st>
-<p>is used for columns used repeatedly. <b>Name</b>, <b>Description</b>, <b>DefaultValue</b> and <b>AutoIncrement</b> properties can be redefiend. You can reference a column from many column(s).</p>
+If a column definition is often used in many of table-columns, so a column attributes can be defined as a reference.
+<co type="warning" inline="true">
+    <b>Name</b>, <b>Description</b>, <b>DefaultValue</b> and <b>AutoIncrement</b> properties can be redefiend.
+</co>
+<br />
 <sample>
     <pre lang="c#">
         // Attributes are defined at once to use as a reference...
-        public enum Ref
-        {
-        [Column("year", Length = 4, DefaultValue = 2000, MinValue = 1900, MaxValue = 2100)] year,
-        [Column("note", Length = 100)] note,
-        [Column("id", Length = 2)] id,
-        [Column(DateFormat:=ColumnDateFormat.OnlyDate)] only_date,
-        ...
+        public enum Ref {
+            [Column("year", Length = 4, DefaultValue = 2000, MinValue = 1900, MaxValue = 2100)] year,
+            [Column("note", Length = 100)] note,
+            [Column("id", Length = 5)] id,
+            [Column(DateFormat:=ColumnDateFormat.OnlyDate)] only_date,
+            ...
         }
 
         // usage
-        [Column( Ref.year )] public int my_col;
+        public class my_table : Odb.Table.Base {
+            [Column( Ref.year )] public int my_col;
+        }
+    </pre>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>
+<br />
 
-        // extends the column to max length
+<co type="warning">
+    A column can be expanded from many reference columns.
+</co>
+<sample>
+    <pre lang="c#">
+        // extends the column's length to 5
         [Column( Ref.year, Ref.id )] public int my_col;
     </pre>
     <output>
@@ -79,7 +90,7 @@
 </co>
 <sample>
     <pre lang="c#">
-        var result = cn.Provider.ToDbTypeName(table.field);
+        connection.Provider.ToDbTypeName(table.field);
 
         //-- MsSql      = numeric(4, 0)
         //-- MySql      = DECIMAL(4, 0)
@@ -106,12 +117,13 @@
             <b>Length : </b>
             <small class="text-secondary">(Optional)</small>
         </div>
-        <p>is used for string columns and also is the Precision that represents the total number of digits allowed for numeric columns.</p>
-
-        <co type="danger">
-            There is no INTEGER data type for all databases because an INTEGER is a number with no decimal precision in ANSI standards.
-        </co>
-        <br />
+        <p>
+            is used for string columns and also is the Precision that represents the total number of digits allowed for numeric columns.
+            <br />
+            <co type="danger" inline="true">
+                INTEGER data type is not supported by all databases such as ORACLE; because in ANSI standards, an INTEGER is considered a number with no decimal precision.
+            </co>
+        </p>
         <div class="table-responsive">
             <table class="table table-bordered table-striped" style="max-width:450px;">
                 <thead class="thead-dark">
@@ -125,7 +137,7 @@
                 </tbody>
             </table>
         </div>
-        <co type="warning">
+        <co type="warning" inline="true">
             These types are not supported for definition only. But you can allways use these types in database.
         </co>
 

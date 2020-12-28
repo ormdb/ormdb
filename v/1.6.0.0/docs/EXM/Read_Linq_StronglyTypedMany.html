@@ -1,6 +1,6 @@
-﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> as <b>StronglyTyped (One2Many)</b>.
+﻿Following section demonstrates how to read record(s) as <hl>StronglyTyped (One2Many)</hl> by using <hl>LinQ</hl>.
 <sample>
-    <pre lang="c#">
+	<pre lang="c#">
 		var sql = Odb.SQL.Select(x => 
 						x.From(t1)
 						.LeftJoin(t2, t2.OrderID == t1.OrderID)
@@ -28,6 +28,6 @@
 						new[] { "OrderDetailID" }
 					).ToList();
     </pre>
-    <output type="secondary"></output>
+	<output type="secondary"></output>
 	<fiddle>qmOsfO</fiddle>
 </sample>

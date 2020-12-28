@@ -1,4 +1,4 @@
-﻿Following section demonstrates how to read record(s) with <a href="##OTH--OTH-ExecuteReader">ExecuteReader</a> as <b>StronglyTyped</b>.
+﻿Following section demonstrates how to read record(s) as <hl>StronglyTyped</hl> by using <hl>LinQ</hl> .
 <sample>
     <pre lang="c#">
         var sql = Odb.SQL.Select(x => x.From(t1)
@@ -9,7 +9,7 @@
 
         var rows = sql.ExecuteReader&lt;Orders&gt;(connection).ToList();
     </pre>
-    <output type="secondary" >
+    <output type="secondary">
         <b>Record Count= 1.093.000</b><br />
         <div style="padding-left:25px;">
             Client  : Core I7-9750H @2.60GHz, 16GB RAM<br />
