@@ -15,6 +15,20 @@ Following section demonstrates <k>ANALYZE</k> the table(s).
         connection.Provider.AnalyzeTable("table1");
     </pre>
     <output>
+        <i class="text-success">MsSql</i><br />
+        UPDATE STATISTICS [Orders]
+        <br />
+        <br />
+        <i class="text-success">MySql</i><br />
+        ANALYZE TABLE [Orders]
+        <br />
+        <br />
+        <i class="text-success">PostgreSql</i><br />
+        ANALYZE [Orders]
+        <br />
+        <br />
+        <i class="text-success">Oracle</i><br />
+        ANALYZE TABLE [Orders] COMPUTE STATISTICS
     </output>
     <fiddle></fiddle>
 </sample>

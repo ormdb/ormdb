@@ -18,6 +18,20 @@ Following section demonstrates <k>DROP-INDEX</k> of the table(s).
 		connection.Provider.DropIndex("table1", "index_name");
 	</pre>
 	<output>
+		<i class="text-success">MsSql</i><br />
+		DROP INDEX IF EXISTS [Index] ON [Table]
+		<br />
+		<br />
+		<i class="text-success">MySql</i><br />
+		DROP INDEX [Index] ON [Table]
+		<br />
+		<br />
+		<i class="text-success">PostgreSql</i><br />
+		DROP INDEX IF EXISTS [Index]
+		<br />
+		<br />
+		<i class="text-success">Oracle</i><br />
+		DROP INDEX [Index]
 	</output>
 	<fiddle></fiddle>
 </sample>
