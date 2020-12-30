@@ -3,7 +3,7 @@
     <pre lang="c#">
         var t0 = new Orders();
 
-        Odb.SQL.Modify&lt;TableHeader&gt;(x => 
+        Odb.SQL.Modify&lt;Orders&gt;(x => 
                                 x.From(t0)
                                  .Where(t0.OrderID == 10248)
         ).onInsert(Row => {
