@@ -84,8 +84,8 @@ Renames a column with an alias.
 
 		Odb.SQL.Select(x => 
 			x.From(t0)
-			 .Where( t0.OrderID is null &amp; 
-					 t0.EmployeeID is object 
+			 .Where( (object)t0.OrderID == DBNull.Value &amp; 
+					 (object)t0.EmployeeID != DBNull.Value 
 			)
 		);
 	</pre>

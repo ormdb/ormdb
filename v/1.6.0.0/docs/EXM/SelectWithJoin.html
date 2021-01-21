@@ -8,7 +8,7 @@
 			    x.From(t0)
 			     .ExcludeFields(t1.OrderID)
 			     .LeftJoin(t1, t1.OrderID == t0.OrderID) 
-			     .Where( t0.OrderID == 10248 )
+			     .Where( t0.OrderID > 1500 &amp; ((object)t1.Note != DbNull.Value))
 		);
     </pre>
     <output>
@@ -18,7 +18,7 @@
             LEFT JOIN [OrderDetails] AS t1 <br />
             ON (t1.OrderID = t0.OrderID)
         </hlb> <br />
-        WHERE ((t0.OrderID > 1500) AND (t1.OrderID IS NOT NULL))
+        WHERE ((t0.OrderID > 1500) AND (t1.Note IS NOT NULL))
     </output>
     <fiddle>S9MQUT</fiddle>
 </sample>
