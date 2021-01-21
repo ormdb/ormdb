@@ -5,30 +5,24 @@
 
         // Reading by COLUMN-INDEX...
         foreach (var row in connection.ExecuteReader(sql))
-            // row[0] ... row[6]
+            // row[0];
+            // (int)row[0];             // casting
+            // row.GetInt32(0);         // casting
 
 
         // Reading by COLUMN-NAME...
         foreach (var row in connection.ExecuteReader(sql))
             // row["CustomerID"];
-            // row["CustomerName"];
-            // row["ContactName"];
-            // row["Address"];
-            // row["City"];
-            // row["PostalCode"];
-            // row["Country"];
+            // (int)row["CustomerID"];      //casting
+
 
 
         // Reading by EXPRESSION...
         Customer c = null; // for expression
         foreach (var row in connection.ExecuteReader(sql))
             // row.Get(()=> c.CustomerID);
-            // row.Get(()=> c.CustomerName);
-            // row.Get(()=> c.ContactName);
-            // row.Get(()=> c.Address);
-            // row.Get(()=> c.City);
-            // row.Get(()=> c.PostalCode);
-            // row.Get(()=> c.Country);
+            // row.Get&lt;int&gt;(()=> c.CustomerID);   //strongly-typed
+
     </pre>
     <output type="secondary">
         <b>Record Count= 1.093.000</b><br />
