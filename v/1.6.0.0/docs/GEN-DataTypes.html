@@ -85,11 +85,11 @@ If a column definition is often used in many of table-columns, so a column attri
 
 <br />
 <co type="warning">
-    You can use <b>connection.Provider.ToDbTypeName</b> to get the Database Equivalent statement of the column. Example shown below, returns different results for each provider type.
+    You can use <b>connection..Provider().ToDbTypeName</b> to get the Database Equivalent statement of the column. Example shown below, returns different results for each provider type.
 </co>
 <sample>
     <pre lang="c#">
-        connection.Provider.ToDbTypeName(table.field);
+        cn.Provider().ToDbTypeName(table.field);
 
         //-- MsSql      = numeric(4, 0)
         //-- MySql      = DECIMAL(4, 0)

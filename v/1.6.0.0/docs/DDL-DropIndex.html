@@ -9,16 +9,18 @@
 Following section demonstrates <k>DROP-INDEX</k> of the table(s).
 <sample>
 	<pre lang="c#">
-		var t0 = new Orders();
+        // get provider for the connection
+		var cp = cn.Provider();
 
 		// by table instance
-		connection.Provider.DropIndex(t0, t0.Indexes.First());
+		var t0 = new Orders().AsQueryable();
+		cp.DropIndex(t0, t0.Indexes.First());
 
         // by type
-		connection.Provider.DropIndex&lt;Orders&gt;("index_name");
+		cp.DropIndex&lt;Orders&gt;("index_name");
 
 		// by table name
-		connection.Provider.DropIndex("table1", "index_name");
+		cp.DropIndex("table1", "index_name");
 	</pre>
 	<output>
 		<i class="text-success">MsSql</i><br />
@@ -35,21 +37,6 @@ Following section demonstrates <k>DROP-INDEX</k> of the table(s).
 		<br />
 		<i class="text-success">Oracle</i><br />
 		DROP INDEX [Index]
-	</output>
-	<fiddle></fiddle>
-</sample>
-
-<br />
-
-The parameter <b>OnlyGenerateScript</b> should be <k>true</k>, if the command's script is requested.
-<co type="warning" inline>
-	Default value of this parameter is <k>false</k>.
-</co>
-<sample>
-	<pre lang="c#">
-        var script = cn.Provider.DropIndex(..., OnlyGenerateScript:true);
-	</pre>
-	<output>
 	</output>
 	<fiddle></fiddle>
 </sample>

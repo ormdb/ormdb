@@ -14,29 +14,17 @@
 Following section demonstrates how to create index for a table.
 <sample>
 	<pre lang="c#">
-		var t0 = new Orders();
+        // get provider for the connection
+		var cp = cn.Provider();
 
 		// by table instance
-		connection.Provider.CreateIndex(t0, t0.Indexes.First(), "my_index");
+		var t0 = new Orders().AsQueryable();
+		cp.CreateIndex(t0, t0.Indexes.First(), "my_index");
 
 		// by table name
-		connection.Provider.CreateIndex("table1", true, new[] { "column1", "column2" }, "my_index");
+		cp.CreateIndex("table1", true, new[] { "column1", "column2" }, "my_index");
 	</pre>
 	<output>
 	</output>
-	<fiddle>KpqPbU</fiddle>
-</sample>
-<br />
-
-The parameter <b>OnlyGenerateScript</b> should be <k>true</k>, if the command's script is requested.
-<co type="warning" inline>
-	Default value of this parameter is <k>false</k>.
-</co>
-<sample>
-	<pre lang="c#">
-		var script = connection.Provider.CreateIndex(..., OnlyGenerateScript:true);
-	</pre>
-	<output>
-	</output>
-	<fiddle>KpqPbU</fiddle>
+	<fiddle></fiddle>
 </sample>

@@ -15,26 +15,14 @@
 Following section demonstrates creating a table.
 <sample>
     <pre lang="c#">
-		var t0 = new Orders();
+        // get provider for the connection
+		var cp = cn.Provider();
 
 		// by table instance
-        cn.Provider.CreateTable(t0);
+		var t0 = new Orders().AsQueryable();
+        cp.CreateTable(t0);
     </pre>
     <output>
     </output>
-    <fiddle>KpqPbU</fiddle>
-</sample>
-<br />
-
-The parameter <b>OnlyGenerateScript</b> should be <k>true</k>, if the command's script is requested.
-<co type="warning" inline>
-    Default value of this parameter is <k>false</k>.
-</co>
-<sample>
-    <pre lang="c#">
-        var script = connection.Provider.CreateTable(..., OnlyGenerateScript:true);
-    </pre>
-    <output>
-    </output>
-    <fiddle>KpqPbU</fiddle>
+    <fiddle></fiddle>
 </sample>

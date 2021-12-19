@@ -23,7 +23,10 @@
 Following section retrieves the product info from database server.
 <sample>
     <pre lang="c#">
-        var si = cn.Provider.ServerInfo();
+        // get provider for the connection
+		var cp = cn.Provider();
+
+        var si = cp.ServerInfo();
 
         Console.WriteLine("Name = " + si.Name);
         Console.WriteLine("Version = " + si.Version);
@@ -32,5 +35,5 @@ Following section retrieves the product info from database server.
         Name = Express Edition (64-bit)<br />
         Version = 13.0.5102.14
     </output>
-    <fiddle>ffO85n</fiddle>
+    <fiddle>jJ0DZ7</fiddle>
 </sample>

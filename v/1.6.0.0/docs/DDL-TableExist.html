@@ -9,14 +9,17 @@
 Following section demonstrates determining whether the specified [Table] exists.
 <sample>
 	<pre lang="c#">
+        // get provider for the connection
+		var cp = cn.Provider();
+
 		// by table instance
-		connection.Provider.TableExist(new Orders());
+		cp.TableExist(new Orders());
 
         // by type
-		connection.Provider.TableExist&lt;Orders&gt;();
+		cp.TableExist&lt;Orders&gt;();
 
 		// by table name
-		connection.Provider.TableExist("table1");
+		cp.TableExist("table1");
 	</pre>
 	<output>
 	</output>

@@ -8,20 +8,20 @@
 Following section demonstrates <k>TRUNCATE</k> the table(s).
 <sample>
     <pre lang="c#">
-        var t0 = new Orders();
-        var t1 = new OrderDetails();
+        // get provider for the connection
+		var cp = cn.Provider();
 
-        // single table by instance
-        connection.Provider.TruncateTable(t0);
-
-        // multi table by instance
-        connection.Provider.TruncateTable(new [] {t0, t1});
+        // by instance
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+        cp.TruncateTable(t0);   // single
+        cp.TruncateTable(new [] {t0, t1});  // multi
 
         // by type
-        connection.Provider.TruncateTable&lt;Orders&gt;();
+        cp.TruncateTable&lt;Orders&gt;();
 
         // single table by name
-        connection.Provider.TruncateTable("table1");
+        cp.TruncateTable("table1");
     </pre>
     <output>
         <output>
@@ -30,21 +30,6 @@ Following section demonstrates <k>TRUNCATE</k> the table(s).
             <br />
             <br />
         </output>
-    </output>
-    <fiddle></fiddle>
-</sample>
-
-<br />
-
-The parameter <b>OnlyGenerateScript</b> should be <k>true</k>, if the command's script is requested.
-<co type="warning" inline>
-    Default value of this parameter is <k>false</k>.
-</co>
-<sample>
-    <pre lang="c#">
-        var script = cn.Provider.TruncateTable(..., OnlyGenerateScript:true);
-    </pre>
-    <output>
     </output>
     <fiddle></fiddle>
 </sample>

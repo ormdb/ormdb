@@ -24,7 +24,7 @@
 Following section demonstrates retrieving the tables from database.
 <sample>
 	<pre lang="c#">
-		var tables = cn.Provider.GetTables();
+		var tables = cn.Provider();.GetTables();
 
 		var table_count = tables.Count;
 
