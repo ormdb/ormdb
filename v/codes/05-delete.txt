@@ -1,6 +1,6 @@
 ﻿//var cn = your connection
 
-var t1 = new Orders();
+var t0 = new Orders().AsQueryable();
 		
 var sql = Odb.SQL.Delete(x => 
 				x.From(t0)
