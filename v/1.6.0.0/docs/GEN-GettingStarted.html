@@ -49,7 +49,7 @@ and also to build and run a simple console application using Visual Studio.
         Test your connection.
         <sample>
             <pre lang="c#">
-                Console.WriteLine("OrmDb v." + cn.OrmDbVersion());
+                Console.WriteLine("OrmDb v." + Odb.Version.ToString());
                 Console.WriteLine(String.Empty);
 
                 cn.OpenIf();
