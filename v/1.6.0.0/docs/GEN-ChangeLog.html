@@ -1,10 +1,10 @@
 ﻿<co type="">
     <div class="my-1 pl-3">
-        Release Date : <b class="text-secondary">2020-11-17</b>
+        Release Date : <b class="text-secondary">2020-12-15</b>
     </div>
 
     <div class="my-1 pl-3">
-        Version : <b class="text-secondary">1.6.0.0</b>
+        Version : <b class="text-secondary">1.6.3.0</b>
     </div>
 </co>
 
@@ -21,19 +21,19 @@
             <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                 <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
                 <span class="pl-3">
-                    The entire SQL engine has been rewritten in accordance with <kbd class="bg-success text-white">LINQ</kbd> expression.
+                    <kbd class="bg-success text-white">Sqlite</kbd> provider implemented.
                 </span>
             </li>
             <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                 <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
                 <span class="pl-3">
-                    <kbd class="bg-success text-white">Strongly Typed</kbd> reading implemented. Please refer to the <a href="##EXM--Read_Linq_StronglyTyped">example</a> for further information.
+                    <kbd class="bg-success text-white">Connection.Clone</kbd> feature has been implemented. You can use this method via Odb.Extensions.
                 </span>
             </li>
             <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                 <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
                 <span class="pl-3">
-                    <kbd class="bg-success text-white">AutoIncrement</kbd> attribute implemented for numeric fields. Please refer to the <a href="##TBL--TBL-Columns">Columns</a> for further information.
+                    <kbd class="bg-success text-white">Connection.OpenIf</kbd> feature has been implemented. You can use this method via Odb.Extensions.
                 </span>
             </li>
             <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
@@ -51,25 +51,13 @@
             <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                 <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
                 <span class="pl-3">
-                    The type "Table.<k>Column</k>" has been removed. Table column(s) are defined by primitive value types. Please refer to <a href="##TBL--TBL-Columns">Columns</a> for further information.
+                    The "Connection-Manager" class has been <kbd class="bg-danger text-white">removed</kbd>. You can create your connection by yourself instead. The methods in connection maneger are re-write as extention for IDbConnection.
                 </span>
             </li>
             <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                 <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
                 <span class="pl-3">
-                    The "Connection.<k>ImportData</k>" method has been removed. You can browse the example "<a href="##EXM--InsertionFromAnotherDb">Insertion From Another Db</a>" instead.
-                </span>
-            </li>
-            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
-                <span class="pl-3">
-                    The "Connection.<k>ExecuteNonQueryAsync</k>" method has been removed. You can browse the example "<a href="##EXM--ExecuteNonQueryAsync">Execute NonQuery Async</a>" instead.
-                </span>
-            </li>
-            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
-                <span class="pl-3">
-                    Methods "Table.Base.<k>Serialize</k>" and "Table.Base.<k>Deserialize</k>" have been removed.
+                    The "Transaction-Manager" class has been <kbd class="bg-danger text-white">removed</kbd>. You can manage your transactions by yourself instead.
                 </span>
             </li>
         </ul>
@@ -77,15 +65,8 @@
 
 
     <st>Defects</st>
-    <co type="">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
-                <span class="pl-3">
-                    <a href="##DDL--DDL-GetTableColumns">GetTableColumns</a> method returns incorrect <k>DataTypeName</k> value.
-                </span>
-            </li>
-        </ul>
+    <co type="light">
+        None
     </co>
 </div>
 
@@ -98,6 +79,101 @@
 <br />
 
 <div style="opacity: .7">
+    <co type="">
+        <div class="my-1 pl-3">
+            Release Date : <b class="text-secondary">2020-11-17</b>
+        </div>
+
+        <div class="my-1 pl-3">
+            Version : <b class="text-secondary">1.6.0.0</b>
+        </div>
+    </co>
+
+    <div class="pl-lg-5 pl-md-4 pl-sm-0">
+        <st>Features</st>
+        <co type="">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        Code stability improvements, bug fixes and further improvements to performance.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                    <span class="pl-3">
+                        The entire SQL engine has been rewritten in accordance with <kbd class="bg-success text-white">LINQ</kbd> expression.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                    <span class="pl-3">
+                        <kbd class="bg-success text-white">Strongly Typed</kbd> reading implemented. Please refer to the <a href="##EXM--Read_Linq_StronglyTyped">example</a> for further information.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                    <span class="pl-3">
+                        <kbd class="bg-success text-white">AutoIncrement</kbd> attribute implemented for numeric fields. Please refer to the <a href="##GEN--GEN-DataTypes">Data-Types</a> for further information.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">3</span></h5>
+                    <span class="pl-3">
+                        Wiki pages updated and also added new examples.
+                    </span>
+                </li>
+            </ul>
+        </co>
+
+        <st>Breaking Changes</st>
+        <co type="">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        The type "Table.<k>Column</k>" has been removed. Table column(s) are defined by primitive value types. Please refer to <a href="##GEN--GEN-DataTypes">Data-Types</a> for further information.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        The "Connection.<k>ImportData</k>" method has been removed. You can browse the example "<a href="##EXM--InsertionFromAnotherDb">Insertion From Another Db</a>" instead.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        The "Connection.<k>ExecuteNonQueryAsync</k>" method has been removed. You can browse the example "<a href="##EXM--ExecuteNonQueryAsync">Execute NonQuery Async</a>" instead.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        Methods "Table.Base.<k>Serialize</k>" and "Table.Base.<k>Deserialize</k>" have been removed.
+                    </span>
+                </li>
+            </ul>
+        </co>
+
+
+        <st>Defects</st>
+        <co type="">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        <a href="##DDL--DDL-GetTableColumns">GetTableColumns</a> method returns incorrect <k>DataTypeName</k> value.
+                    </span>
+                </li>
+            </ul>
+        </co>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
     <co type="">
         <div class="my-1 pl-3">
             Release Date : <b class="text-secondary">2020-06-04</b>
@@ -121,7 +197,7 @@
                 <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                     <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
                     <span class="pl-3">
-                        <k>Variable length</k> <b>StringColumn</b> implemented.  Please refer to <a href="##TBL--TBL-Columns">Columns</a> for further information.
+                        <k>Variable length</k> <b>StringColumn</b> implemented.  Please refer to <a href="##GEN--GEN-DataTypes">Data-Types</a> for further information.
                     </span>
                 </li>
                 <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
@@ -228,7 +304,7 @@
                 <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
                     <h5 class="d-inline"><span class="badge badge-dark">5</span></h5>
                     <span class="pl-3">
-                        <b>MinValue</b>, <b>MaxValue</b> and <b>DefaultValue</b> attributes included in columns properties now. Please refer to <a href="##TBL--TBL-Columns">Columns</a> for further information.
+                        <b>MinValue</b>, <b>MaxValue</b> and <b>DefaultValue</b> attributes included in columns properties now. Please refer to <a href="##GEN--GEN-DataTypes">Data-Types</a> for further information.
                     </span>
                 </li>
                 <li class="list-group-item px-0 d-flex justify-content-start align-items-start">

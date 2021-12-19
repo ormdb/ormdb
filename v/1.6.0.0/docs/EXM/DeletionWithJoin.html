@@ -2,8 +2,10 @@
 which belongs to customer specified at [Order], from [OrderDetails].
 <sample>
 	<pre lang="c#">
-		var t0 = new Orders();
-		var t1 = new OrderDetails();
+        // Define an alias for the models, to use in queries.
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+
 		var sql = Odb.SQL.Delete(x =>
 						x.From(t1) 
 							.InnerJoin(t0, t0.OrderID == t1.OrderID) 

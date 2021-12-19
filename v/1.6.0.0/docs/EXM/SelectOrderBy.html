@@ -1,7 +1,8 @@
 ﻿Following section demonstrates how to sort the data returned in ascending/descending order.
 <sample>
     <pre lang="c#">
-		var t0 = new Orders();
+        // Define an alias for the models, to use in queries.
+        var t0 = new Orders().AsQueryable();
 		
 		Odb.SQL.Select(x => 
 					 x.From(t0).Top(15)

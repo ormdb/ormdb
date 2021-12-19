@@ -1,5 +1,4 @@
-﻿// create connection
-var connection = Odb.Connection.Create<Providers.MsSql>("ConnectionString");
+﻿//var cn = your connection
 
 var t0 = new Orders();
 var t1 = new OrderDetails();
@@ -11,6 +10,6 @@ var sql = Odb.SQL.Select(x =>
 			);	
 
 // reading data
-var result = sql.ExecuteReader<Orders>(connection);
+var result = sql.ExecuteReader<Orders>(cn);
 
 

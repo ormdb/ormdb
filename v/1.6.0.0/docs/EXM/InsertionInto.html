@@ -1,7 +1,8 @@
 ﻿Following section demonstrates <b>insert-into with select</b>.
 <sample>
     <pre lang="c#">
-        var t0 = new Shippers();
+         // Define an alias for the models, to use in queries.
+        var t0 = new Shippers().AsQueryable();
 		
         var sql = Odb.SQL.InsertInto(t0, 
                         x => x.From(t0)

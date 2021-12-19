@@ -1,7 +1,9 @@
 ﻿Following section demonstrates how to execute a "NonQuery" command  as asynchronously by creating a task.
 <sample>
 	<pre lang="c#">
-		var t0 = new Orders();
+        // Define an alias for the models, to use in queries.
+        var t0 = new Orders().AsQueryable();
+
 		var sql = Odb.SQL.Delete(x => x.From(t0).Where(t0.OrderID == 10248) );
 
 		var task = Task&lt;int&gt;.Factory.StartNew(() => sql.ExecuteNonQuery(connection) );

@@ -1,11 +1,13 @@
 ﻿Following section demonstrates <b>regular update</b> with model of table.
 <sample>
 	<pre lang="c#">
+        // Define an alias for the models, to use in queries.
+        var t0 = new Orders().AsQueryable();
+
 		// Updates the entire row with values which are NOT Null if the fields are nullable.
 		var model = new Orders();
 			model.OrderDate = DateTime.Now.AddDays(1);
 		
-		var t0 = new Orders();
 		var sql = Odb.SQL.Update(x =>
 						x.From(t0)
 							.Where( t0.OrderID == 10248 )

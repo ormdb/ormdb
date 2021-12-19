@@ -3,9 +3,10 @@
     to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
 </co>
 <sample>
-    <pre lang="c#">
-		var t0 = new Orders();
-		var t1 = new OrderDetails();
+	<pre lang="c#">
+        // Define an alias for the models, to use in queries.
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
 		
 		var sql1 = Odb.SQL.Select(x =>
 						x.From(t0)
@@ -23,7 +24,7 @@
 					);
 
 		// union
-		var sql = Odb.SQL.Union(x =>
+		Odb.SQL.Union(x =>
 						x.RemoveDuplicates()
 							.Add(sql1)
 							.Add(sql2)

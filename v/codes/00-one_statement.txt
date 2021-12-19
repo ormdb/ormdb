@@ -1,13 +1,12 @@
-﻿var t0 = new Orders();
+﻿//var cn = your connection
+
+var t0 = new Orders();
 var t1 = new OrderDetails();
-	
+
 var sql = Odb.SQL.Select(x => 
 					x.From(t0)
 					 .LeftJoin(tl, tl.OrderID == t0.OrderID ) 
 					 .Where( t0.OrderDate > Datetime.Now.AddDays(-5) )
 			);	
 
-var rows = sql.ExecuteReader<Orders>(from_mssql);
-//		   sql.ExecuteReader<Orders>(from_oracle);
-//		   sql.ExecuteReader<Orders>(from_mysql);
-//		   sql.ExecuteReader<Orders>(from_postgres);
+var rows = sql.ExecuteReader<Orders>(cn);

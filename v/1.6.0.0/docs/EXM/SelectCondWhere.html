@@ -1,7 +1,8 @@
 ﻿Following section demonstrates the dynamic creation of the <hl>Where</hl> clause by <b>depending on conditional (if)</b>.
 <sample>
-    <pre lang="c#">
-		var t0 = new Orders();
+	<pre lang="c#">
+        // Define an alias for the models, to use in queries.
+        var t0 = new Orders().AsQueryable();
 		
 		var sql = Odb.SQL.Select(x => 
 							x.From(t0)
@@ -26,18 +27,21 @@
 
 Following section demonstrates the dynamic creation of the <hl>Where</hl> clause by <b>external variable(s)</b>.
 <sample>
-    <pre lang="c#">
+	<pre lang="c#">
+        // Define an alias for the models, to use in queries.
+        var t0 = new Orders().AsQueryable();
+
 		var typ = "C";
 		var c_id = 5555;
 		var e_id = 6666;
 
 		// [Where] clause is being executed depending on value test.
-		var sql = Odb.SQL.Select(x => 
-							x.From(t0)
-								.Where( (typ == "C" & t0.CustomerID == c_id) |
-										(typ == "E" & t0.EmployeeID == e_id)
-									)
-					);
+		Odb.SQL.Select(x => 
+						x.From(t0)
+							.Where( (typ == "C" & t0.CustomerID == c_id) |
+									(typ == "E" & t0.EmployeeID == e_id)
+								)
+				);
     </pre>
 	<output>
 		SELECT *<br />

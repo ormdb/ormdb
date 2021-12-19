@@ -1,7 +1,8 @@
 ﻿Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
 <sample>
     <pre lang="c#">
-        var t0 = new Orders();
+        // Define an alias for the models, to use in queries.
+        var t0 = new Orders().AsQueryable();
 
         Odb.SQL.Select(x => x.From(t0).Skip(15).Top(5) );
     </pre>

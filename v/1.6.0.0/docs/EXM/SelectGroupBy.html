@@ -1,9 +1,10 @@
 ﻿Following section demonstrates using <hl>GROUP BY</hl> clause.
 <sample>
     <pre lang="c#">
-        var th = new TableHeader();
+        // Define an alias for the models, to use in queries.
+        var t0 = new Orders().AsQueryable();
 
-        var sql = Odb.SQL.Select(x => 
+        Odb.SQL.Select(x => 
                         x.From(t0)
                          .GroupBy(t0.EmployeeID)
                          .Fields(t0.EmployeeID, 

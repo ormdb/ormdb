@@ -1,5 +1,4 @@
-﻿// create connection
-var connection = Odb.Connection.Create<Providers.MsSql>("ConnectionString");
+﻿//var cn = your connection
 
 var t0 = new Orders();
 
@@ -11,6 +10,6 @@ var sql = Odb.SQL.Update(x =>
 				 .SetNull(t0.ProductName)
 			);
 
-var affectedRows = sql.ExecuteNonQuery(connection);
+var affectedRows = sql.ExecuteNonQuery(cn);
 
 

@@ -1,8 +1,9 @@
 ﻿Following section demonstrates <b>deletion with chunks</b>.
 <sample>
     <pre lang="c#">
-        var t0 = new Orders();
-        var t1 = new OrderDetails();
+        // Define an alias for the models, to use in queries.
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
 
         // Ids are being obtained for the records to be deleted...
         var _ids = Odb.SQL.Select(x => x.Fields(x[t0.OrderID].DISTINCT()) .From(t0) )

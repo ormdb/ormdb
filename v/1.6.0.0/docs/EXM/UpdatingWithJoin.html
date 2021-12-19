@@ -2,8 +2,10 @@
 which contains line that has value of quantity is lower 5 in [OrderDetails].
 <sample>
 	<pre lang="c#">
-		var t0 = new Orders();
-		var t1 = new OrderDetails();
+        // Define an alias for the models, to use in queries.
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+
 		var sql = Odb.SQL.Update(x =>
 						x.From(t0) 
 							.InnerJoin(t1, t1.OrderID == t0.OrderID) 

@@ -1,0 +1,61 @@
+﻿The Models can be used also as table definition directly.
+
+<br />
+<br />
+Following section demonstrates how to define the models and tables.
+
+<sample>
+    <pre lang="c#">
+        using Odb;
+        using Odb.Table;
+        using System;
+        using System.Linq.Expressions;
+        using System.Collections.Generic;
+
+        // Column attributes can be defined at once to use with [Ref]...
+        public enum Ref
+        {
+            [Column("year", Length = 4, DefaultValue = 2000, MinValue = 1900, MaxValue = 2100)] year,
+            [Column("note", Length = 100, DefaultValue = "")] note,
+            [Column("id", Length = 5)] id,
+            [Column(DateFormat = ColumnDateFormat.OnlyDate)] dt
+        }
+
+        [Table("orders")]
+        public class Orders : Base
+        {
+		    [Column(Ref.id)]public int OrderID          {get;set;}
+		    [Column(Ref.id)]public int CustomerID       {get;set;}
+		    [Column(Ref.id)]public int EmployeeID       {get;set;}
+		    [Column(Ref.dt)]public DateTime OrderDate   {get;set;}
+		    [Column(Ref.id)]public int ShipperID        {get;set;}
+
+            public List&lt;OrderDetails&gt; Details { get; set; }
+
+
+            protected override Expression&lt;TableConfig&gt; Config() =>
+                (x) => x.SetPrimaryKey(OrderID)
+                                .AddIndex(OrderDate);
+        }
+
+        [Table("order_details")]
+        public class OrderDetails : Base
+        {
+		    [Column(Ref.id)]public int? OrderDetailID   {get;set;}
+		    [Column(Ref.id)]public int? OrderID         {get;set;}
+		    [Column(Ref.id)]public int? ProductID       {get;set;}
+		    [Column()]public decimal? Quantity          {get;set;}
+        
+
+            protected override Expression&lt;TableConfig&gt; Config() =>
+                (x) => x.SetPrimaryKey(OrderDetailID);
+        }
+    </pre>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>
+
+<co type="warning">
+    Please refer to <a href="##GEN--GEN-DataTypes">Data-Types</a> for further information.
+</co>

@@ -1,9 +1,10 @@
 ﻿Following section demonstrates how to execute multiple commands in one batch-query with <b>ExecuteNonQuery</b>.
 <sample>
 	<pre lang="c#">
-		var sql = SQL.X.Query();
+        // Define an alias for the models, to use in queries.
+        var t0 = new Orders().AsQueryable();
 		
-		var t0 = new Orders();
+		var sql = SQL.X.Query();
 		
 		// DELETE...
 		sql.Delete(t0);

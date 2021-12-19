@@ -1,6 +1,0 @@
-﻿// create connection
-var cn = Odb.Connection.Create<Providers.MsSql>("Your-ConnectionString");
-
-// tables which are to be used in queries.
-var th = new TableHeader();
-var tl = new TableLines();

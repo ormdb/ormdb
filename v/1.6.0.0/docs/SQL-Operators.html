@@ -1,4 +1,18 @@
-﻿"<b>Sql Commands</b>" (such as AS, AVG, DISTINCT etc.) can be used via helper parameter that comes with expression function.
+﻿Define an alias for the models, to use in queries.
+<co type="success">
+	<sample>
+		<pre lang="c#">
+            var t0 = new Orders().AsQueryable();
+		</pre>
+		<output>
+		</output>
+		<fiddle></fiddle>
+	</sample>
+</co>
+<br />
+
+
+"<b>Sql Commands</b>" (such as AS, AVG, DISTINCT etc.) can be used via helper parameter that comes with expression function.
 <co type="success">
 	<sample>
 		<pre lang="c#">
@@ -33,8 +47,6 @@ Selects a contant value.
 Renames a column with an alias.
 <sample>
 	<pre lang="c#">
-		var t0 = new Orders();
-
 		Odb.SQL.Select(x => 
 			x.From(t0)
 			 .Fields( x["X"].AS("C1"), 
@@ -54,8 +66,6 @@ Renames a column with an alias.
 <k>IN</k> command allows you to specify multiple values in a <b>WHERE</b> clause.
 <sample>
 	<pre lang="c#">
-		var t0 = new Orders();
-
 		var vals1 = new[] {1, 2};
 		var vals2 = new[] {"A", "B", "C"};
 
@@ -80,8 +90,6 @@ Renames a column with an alias.
 <st>IS NULL / IS NOT NULL</st>
 <sample>
 	<pre lang="c#">
-		var t0 = new Orders();
-
 		Odb.SQL.Select(x => 
 			x.From(t0)
 			 .Where( (object)t0.OrderID == DBNull.Value &amp; 
@@ -104,8 +112,6 @@ Renames a column with an alias.
 is used in a WHERE clause to search for a specified pattern in a column.
 <sample>
 	<pre lang="c#">
-		var t0 = new Customers();
-
 		Odb.SQL.Select(x => 
 			x.From(t0)
 			 .Where( x[t0.Country].STARTS_WITH("A") | 
@@ -130,8 +136,6 @@ Inside a table, a column often contains many duplicate values; and sometimes you
 The <k>DISTINCT</k> statement is used to return only distinct (different) values.
 <sample>
 	<pre lang="c#">
-		var t0 = new Customers();
-
 		Odb.SQL.Select(x => 
 			x.From(t0)
 			 .Fields( x[t0.Country].DISTINCT().AS("C") )
@@ -149,8 +153,6 @@ The <k>DISTINCT</k> statement is used to return only distinct (different) values
 Return the first non-null value in a list.
 <sample>
 	<pre lang="c#">
-		var t0 = new Customers();
-
 		Odb.SQL.Select(x => 
 			x.From(t0)
 			 .Fields( x[t0.CustomerName].COALESCE('???').AS("C") )
@@ -167,8 +169,6 @@ Return the first non-null value in a list.
 <st>Aggregate Functions</st>
 <sample>
 	<pre lang="c#">
-		var t0 = new Customers();
-
 		Odb.SQL.Select(x => 
 			x.From(t0)
 			 .GroupBy(t0.Country)
@@ -198,8 +198,6 @@ Return the first non-null value in a list.
 <st>String Functions</st>
 <sample>
 	<pre lang="c#">
-		var t0 = new Customers();
-
 		Odb.SQL.Select(x =>
 			x.From(t0)
 			 .Fields( x[t0.City].SUBSTRING(2, 4).AS("2_to_4"), 

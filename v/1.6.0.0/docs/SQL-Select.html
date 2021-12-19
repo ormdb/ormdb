@@ -6,7 +6,7 @@ You can access each column of the returned row by passing the name or ordinal nu
 <st>Syntax</st>
 <co type="light" class="p-0">
 	<pre lang="sql">
-		Select( x ) =>
+		Select( x =>
 			x.Fields( { Table | Field | SubSelect( Field | FieldName) } )
 			 .ExcludeFields( { Table | Field } )
 			 .From( Table | SubSelect )

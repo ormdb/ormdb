@@ -6,23 +6,10 @@
       "path": "/",
       "items": {
         "GEN-Home": "Home",
-        "GEN-ChangeLog": "Change Log"
-      }
-    },
-    "TBL": {
-      "title": "Table",
-      "path": "/",
-      "items": {
-        "TBL-Definition": "Definition",
-        "TBL-Columns": "Columns"
-      }
-    },
-    "CON": {
-      "title": "Connection",
-      "path": "/",
-      "items": {
-        "CON-Connection": "Connection",
-        "CON-Transaction": "Transaction"
+        "GEN-ChangeLog": "Change Log",
+        "GEN-GettingStarted": "Getting Started",
+        "GEN-ModelDefinition": "Model Definition",
+        "GEN-DataTypes": "Data Types"
       }
     },
     "SQL": {
@@ -67,8 +54,6 @@
       "after": "0_after",
 
       "items": {
-        "Startup": "Startup",
-        "ConnectionManager": "Connection Manager",
         "Read_Linq_StronglyTyped": "Read(LinQ) StronglyTyped",
         "Read_Linq_StronglyTypedMany": "Read(LinQ) StronglyTypedMany",
 

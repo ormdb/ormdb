@@ -1,14 +1,13 @@
-﻿// create connection
-var connection = Odb.Connection.Create<Providers.MsSql>("ConnectionString");
+﻿//var cn = your connection
 
 var sql = Odb.SQL.Insert();
 
 var model = new Orders();
-    // model.OrderID = AutoIncrement;
     model.CustomerID = 90;
     model.EmployeeID = 8;
     model.OrderDate = DateTime.Now;
     model.ShipperID = 1;
+
 sql.Add(model);
 
-var affectedRows = sql.ExecuteNonQuery(connection);
+var affectedRows = sql.ExecuteNonQuery(cn);

@@ -4,9 +4,7 @@
         var sql = "SELECT * FROM Customers";
 
         foreach (var row in connection.ExecuteReader(sql).ToArray())
-        {
             Console.WriteLine(String.Join(", ", from x in row select x.ToString().TrimEnd()));
-        }
     </pre>
     <output type="secondary">
         1, Alfreds Futterkiste, Maria Anders, Obere Str. 57, ...<br />
