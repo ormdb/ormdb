@@ -2,15 +2,16 @@
 <sample>
     <pre lang="c#">
          // Define an alias for the models, to use in queries.
-        var t0 = new Shippers().AsQueryable();
+        var t0 = new Products().AsQueryable();
 		
-        var sql = Odb.SQL.InsertInto(t0, 
-                        x => x.From(t0)
-                                .Where(t0.ShipperID == 5)
-                                .Fields((t0.ShipperID * 10),
-                                        t0.ShipperName,
-                                        t0.Phone)
-			        );
+		var query = Odb.SQL.InsertInto( t0, 
+						x => x.From(t0)
+							  .Where(t0.ProductID == 5)
+							  .Fields(x["new prod"],
+									t0.SupplierID,
+									t0.CategoryID,
+									t0.Unit,
+									t0.Price + 5)
 
         var affectedRows = sql.ExecuteNonQuery(connection);
     </pre>
@@ -27,5 +28,5 @@
             WHERE (t0.ShipperID = 5);
         </div>
     </output>
-    <fiddle>61393H</fiddle>
+    <fiddle>IpWzaZ</fiddle>
 </sample>

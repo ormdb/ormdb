@@ -6,9 +6,11 @@
 <br />
 <br />
 
-<o>
-    <k>SchemaPrefix</k> is a prefix for table-name. (Exm. Name="table-name" , NameWithPrefix="[pfx]table-name").
-</o>
+<co type="warning">
+    Tables are created according to the <k>SchemaPrefix</k> specified at connection's options.
+    <br />
+    (Exm. Name="table-name" , NameWithPrefix="[pfx]table-name").
+</co>
 
 <st>Examples</st>
 
@@ -21,8 +23,11 @@ Following section demonstrates creating a table.
 		// by table instance
 		var t0 = new Orders().AsQueryable();
         cp.CreateTable(t0);
+
+		// by type
+        cp.CreateTable&lt;Orders&gt;();
     </pre>
     <output>
     </output>
-    <fiddle></fiddle>
+    <fiddle>lYQxL5</fiddle>
 </sample>

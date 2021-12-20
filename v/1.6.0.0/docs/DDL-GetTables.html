@@ -24,15 +24,10 @@
 Following section demonstrates retrieving the tables from database.
 <sample>
 	<pre lang="c#">
-		var tables = cn.Provider();.GetTables();
-
-		var table_count = tables.Count;
-
-		foreach (var table in tables) {
-			Debug.WriteLine($"{table.Catalog}.{table.Schema}.{table.Name}");
-		}
+		foreach (var tb in cn.Provider();.GetTables())
+			Console.WriteLine("\t" + tb.Schema + "." + tb.Name);
 	</pre>
 	<output>
 	</output>
-	<fiddle>VqtBOI</fiddle>
+	<fiddle>9fxr4S</fiddle>
 </sample>

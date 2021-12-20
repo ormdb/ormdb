@@ -2,7 +2,7 @@
 <sample>
 	<pre lang="c#">
         // Define an alias for the models, to use in queries.
-        var t0 = new Orders().AsQueryable();
+        var t0 = new Products().AsQueryable();
 
 		var sql = Odb.SQL.Update(x =>
 						x.From(t0)
@@ -27,5 +27,5 @@
 		FROM [Products] AS t0<br />
 		WHERE (t0.ProductID = 1)
 	</output>
-	<fiddle>GcVEfE</fiddle>
+	<fiddle>fZmCJJ</fiddle>
 </sample>

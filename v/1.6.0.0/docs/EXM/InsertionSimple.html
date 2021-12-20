@@ -1,8 +1,7 @@
 ﻿Following section demonstrates insertion by <b>Model</b>.
 <sample>
     <pre lang="c#">
-        var sql = Odb.SQL.Insert();
-		
+		// the new model to be inserted
         var model = new Orders();
             // model.OrderID = AutoIncrement;
             model.CustomerID = 90;
@@ -10,9 +9,10 @@
             model.OrderDate = DateTime.Now;
             // model.ShipperID <= accepted its DefaultValue;
 		
-        sql.Add(model);
+        var query = Odb.SQL.Insert();
+            query.Add(model);
 
-        var affectedRows = sql.ExecuteNonQuery(connection);
+        var affectedRows = query.ExecuteNonQuery(connection);
     </pre>
     <output>
         In this sample; columns "<k>OrderID</k>" is AutoIncrement field, and "<k>ShipperID</k>" will be accepted as its default values.
@@ -23,5 +23,5 @@
         ([CustomerID],[EmployeeID],[OrderDate],[ShipperID]) <br />
         VALUES (90,8,'2020-12-22 06:30:08',<hlb>1</hlb>);
     </output>
-    <fiddle>RkXXJo</fiddle>
+    <fiddle>XDFx1Y</fiddle>
 </sample>
