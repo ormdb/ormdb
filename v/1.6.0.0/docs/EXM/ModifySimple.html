@@ -1,7 +1,7 @@
 ﻿Following section demonstrates <b>insert/update</b> the record.
 <code-tab>
     <pre lang="c#">
-         // Define an alias for the models, to use in queries.
+		// Table Aliases
         var t0 = new Orders().AsQueryable();
 
         Odb.SQL.Modify&lt;Orders&gt;(x => 

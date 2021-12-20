@@ -1,7 +1,7 @@
 ﻿Following section demonstrates how to execute the <b>INonQueryable</b> expression.
 <sample>
 	<pre lang="c#">
-        // Define an alias for the models, to use in queries.
+		// Table Aliases
         var t0 = new Orders().AsQueryable();
 
 		var sql = Odb.SQL.Delete(x => x.From(t0).Where(th.OrderID == 10248) );

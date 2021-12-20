@@ -1,7 +1,7 @@
 ﻿Following section demonstrates using <hl>SKIP</hl> and <hl>TOP</hl> clause.
 <sample>
     <pre lang="c#">
-        // Define an alias for the models, to use in queries.
+		// Table Aliases
         var t0 = new Orders().AsQueryable();
 
         Odb.SQL.Select(x => x.From(t0).Skip(15).Top(5) );
@@ -14,5 +14,5 @@
             OFFSET 15 ROWS FETCH NEXT 5 ROWS ONLY
         </hlb>
     </output>
-    <fiddle>DtN2pm</fiddle>
+    <fiddle>wnsx9p</fiddle>
 </sample>

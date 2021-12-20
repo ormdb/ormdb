@@ -2,16 +2,15 @@
 
 <sample>
 	<pre lang="c#">
-        // Define an alias for the models, to use in queries.
+		// Table Aliases
         var t0 = new Orders().AsQueryable();
-        var t1 = new OrderDetails().AsQueryable();
 
 		var cnt = Odb.SQL.Select(x => x.From(t0)).ExecuteCount(connection);
 	</pre>
 	<output>
 		SELECT <hl>COUNT(1)</hl> FROM [Orders] AS t0
 	</output>
-	<fiddle>61623M</fiddle>
+	<fiddle>dRfL97</fiddle>
 </sample>
 
 <br />
@@ -20,7 +19,7 @@
 To counting the row(s) by excluding NULL values, you have to use <hl>COUNT</hl> with a column.
 <sample>
 	<pre lang="c#">
-        // Define an alias for the models, to use in queries.
+		// Table Aliases
         var t0 = new Orders().AsQueryable();
 
 		var sql = Odb.SQL.Select(x => x.From(t0).Fields( x[t0.OrderID].COUNT() ));
@@ -30,5 +29,5 @@ To counting the row(s) by excluding NULL values, you have to use <hl>COUNT</hl> 
 	<output>
 		SELECT <hl>COUNT(t0.OrderID)</hl> FROM [Orders] AS t0
 	</output>
-	<fiddle>61623M</fiddle>
+	<fiddle>dRfL97</fiddle>
 </sample>

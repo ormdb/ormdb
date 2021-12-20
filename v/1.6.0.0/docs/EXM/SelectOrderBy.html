@@ -1,7 +1,7 @@
 ﻿Following section demonstrates how to sort the data returned in ascending/descending order.
 <sample>
     <pre lang="c#">
-        // Define an alias for the models, to use in queries.
+		// Table Aliases
         var t0 = new Orders().AsQueryable();
 		
 		Odb.SQL.Select(x => 
@@ -15,5 +15,5 @@
         <hlb>ORDER BY t0.OrderID ASC, t0.OrderDate DESC</hlb><br />
         OFFSET 0 ROWS FETCH NEXT 15 ROWS ONLY
     </output>
-    <fiddle>GWRT5w</fiddle>
+    <fiddle>ou6uzm</fiddle>
 </sample>

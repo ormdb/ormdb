@@ -4,7 +4,7 @@
 </co>
 <sample>
 	<pre lang="c#">
-        // Define an alias for the models, to use in queries.
+		// Table Aliases
         var t0 = new Orders().AsQueryable();
         var t1 = new OrderDetails().AsQueryable();
 		
@@ -34,26 +34,26 @@
     </pre>
 	<output>
 		<hl>SELECT * FROM (</hl><br />
-		<div style="padding-left:30px;">
+		<span class="d-block ps-5">
 			SELECT 'T0' AS Type, <br />
 			t0.EmployeeID AS Id, <br />
 			MAX(t0.OrderID) AS OrderID <br />
 			FROM [Orders] AS t0 <br />
 			GROUP BY t0.EmployeeID
-		</div>
+		</span>
 		<hlb>UNION</hlb><br />
-		<div style="padding-left:30px;">
+		<span class="d-block ps-5">
 			SELECT 'T1' AS Type,<br />
 			t1.ProductID AS Id,<br />
 			MAX(t1.OrderID) AS OrderID <br />
 			FROM [OrderDetails] AS t1<br />
 			GROUP BY t1.ProductID
-		</div>
+		</span>
 		<hl>) AS t</hl><br />
 		<hl>
 			ORDER BY Type ASC, Id ASC, OrderID DESC<br />
 			OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY
 		</hl>
 	</output>
-	<fiddle>2G0HiR</fiddle>
+	<fiddle>R4nvtn</fiddle>
 </sample>

@@ -4,7 +4,7 @@
 </co>
 <sample>
 	<pre lang="c#">
-        // Define an alias for the models, to use in queries.
+		// Table Aliases
         var t0 = new Orders().AsQueryable();
         var t1 = new OrderDetails().AsQueryable();
 		
@@ -26,18 +26,18 @@
 		SELECT t2.OrderID, t1.LastDetailId <br />
 		FROM [Orders] AS t2 <br />
 		LEFT JOIN (<br />
-		<div style="padding-left:50px;">
+		<span class="d-block ps-5">
 			<hl>
 				SELECT t0.OrderID AS Id, <br />
 				MAX(t0.OrderDetailID) AS LastDetailId <br />
 				FROM [OrderDetails] AS t0 <br />
 				GROUP BY t0.OrderID
 			</hl>
-		</div>
+		</span>
 		) AS t1 ON t1.Id = t2.OrderID
 		ORDER BY (SELECT NULL) <br />
 	</output>
-	<fiddle>C5xQwQ</fiddle>
+	<fiddle>QHUpM8</fiddle>
 </sample>
 <br />
 <br />
@@ -63,5 +63,5 @@ Following section demonstrates using <hl>SUB SELECT</hl> in a <hl>WHERE</hl> blo
 		</div>
 		)
 	</output>
-	<fiddle>C5xQwQ</fiddle>
+	<fiddle>QHUpM8</fiddle>
 </sample>

@@ -1,7 +1,7 @@
 ﻿Following section demonstrates the dynamic creation of the <hl>Where</hl> clause by <b>depending on conditional (if)</b>.
 <sample>
 	<pre lang="c#">
-        // Define an alias for the models, to use in queries.
+		// Table Aliases
         var t0 = new Orders().AsQueryable();
 		
 		var sql = Odb.SQL.Select(x => 
@@ -19,7 +19,7 @@
         WHERE t0.OrderID = 123456<br />
         <hlb> AND t0.ShipperID = 998877</hlb>
     </output>
-    <fiddle>hpQSPY</fiddle>
+	<fiddle>qUsExL</fiddle>
 </sample>
 
 <br />
@@ -28,7 +28,7 @@
 Following section demonstrates the dynamic creation of the <hl>Where</hl> clause by <b>external variable(s)</b>.
 <sample>
 	<pre lang="c#">
-        // Define an alias for the models, to use in queries.
+		// Table Aliases
         var t0 = new Orders().AsQueryable();
 
 		var typ = "C";
@@ -38,8 +38,8 @@ Following section demonstrates the dynamic creation of the <hl>Where</hl> clause
 		// [Where] clause is being executed depending on value test.
 		Odb.SQL.Select(x => 
 						x.From(t0)
-							.Where( (typ == "C" & t0.CustomerID == c_id) |
-									(typ == "E" & t0.EmployeeID == e_id)
+							.Where( ("C" == typ & t0.CustomerID == c_id) |
+									("E" == typ & t0.EmployeeID == e_id)
 								)
 				);
     </pre>
@@ -51,5 +51,5 @@ Following section demonstrates the dynamic creation of the <hl>Where</hl> clause
 			OR ('C' = 'E' AND t0.EmployeeID = 6666)
 		</hlb>
 	</output>
-	<fiddle>hpQSPY</fiddle>
+	<fiddle>qUsExL</fiddle>
 </sample>

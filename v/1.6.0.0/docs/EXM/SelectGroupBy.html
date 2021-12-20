@@ -1,7 +1,7 @@
 ﻿Following section demonstrates using <hl>GROUP BY</hl> clause.
 <sample>
     <pre lang="c#">
-        // Define an alias for the models, to use in queries.
+		// Table Aliases
         var t0 = new Orders().AsQueryable();
 
         Odb.SQL.Select(x => 
@@ -16,5 +16,5 @@
         FROM [Orders] AS t0 <br />
         <hlb>GROUP BY t0.EmployeeID</hlb>
     </output>
-    <fiddle>zeHZ1R</fiddle>
+    <fiddle>pWeo94</fiddle>
 </sample>
