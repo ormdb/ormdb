@@ -1,10 +1,15 @@
 ﻿Following section demonstrates how to read record(s) as <hl>Datatable</hl> by using <hl>TSQL</hl>.
 <sample>
     <pre lang="c#">
-        var sql = "SELECT * FROM Customers";
+		// Table Aliases
+		var t0 = new exm.Orders().AsQueryable();
+		var t1 = new exm.OrderDetails().AsQueryable();
 
-        var dt = connection.ExecuteReader("SELECT * FROM Customers").ToDataTable()
+		// Query
+		var query = Odb.SQL.Select(x => x.From(t0).Top(10) );
+
+		var dt = query.ExecuteReader(exm.cn).ToDataTable();	
     </pre>
     <output type="secondary"></output>
-    <fiddle>k2lUkS</fiddle>
+    <fiddle>HiKlfk</fiddle>
 </sample>

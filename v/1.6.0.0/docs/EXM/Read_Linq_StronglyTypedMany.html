@@ -1,33 +1,32 @@
 ﻿Following section demonstrates how to read record(s) as <hl>StronglyTyped (One2Many)</hl> by using <hl>LinQ</hl>.
 <sample>
 	<pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+
 		var sql = Odb.SQL.Select(x => 
-						x.From(t1)
-						.LeftJoin(t2, t2.OrderID == t1.OrderID)
+						x.From(t0)
+						.LeftJoin(t1, t1.OrderID == t0.OrderID)
 						.Top(10)
 					);
 		
 		var rows = sql.ExecuteReaderOneToMany&lt;Orders, OrderDetails&gt;(
 						connection,
 						
-						// Grouping => must be returned the value as much as specified generic parameter.
-						(t1, t2) => {
-							var key1 = t1.OrderID.ToString();
-							var key2 = key1 + "_" + t2.OrderDetailID.ToString();
-
-							return new[] { key1, key2 };
-						},
+						// GroupBy => New row is returned since these key values are changed.
+						(T1) => new[] { T1.OrderID.ToString() },
 						
-						// Combine the items in this method
-						(t1, t2) => {
-							if (t1.Details == null) t1.Details = new List&lt;OrderDetails&gt;();
-							t1.Details.Add(t2);
+						// Combine
+						(T1, T2) => {
+							if (T1.Details == null) T1.Details = new List&lt;OrderDetails&gt;();
+							T1.Details.Add(t2);
 						},
 			
-						// SplitOn => Start points of the join block(s)
+						// Split => Start points of generic parameters except first. (.. T2...T3...Tn)
 						new[] { "OrderDetailID" }
 					).ToList();
     </pre>
 	<output type="secondary"></output>
-	<fiddle>qmOsfO</fiddle>
+	<fiddle>zejRst</fiddle>
 </sample>

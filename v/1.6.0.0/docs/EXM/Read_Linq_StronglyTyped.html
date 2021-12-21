@@ -1,13 +1,16 @@
 ﻿Following section demonstrates how to read record(s) as <hl>StronglyTyped</hl> by using <hl>LinQ</hl> .
 <sample>
     <pre lang="c#">
-        var sql = Odb.SQL.Select(x => x.From(t1)
-                            .Where( t1.OrderID > 10260 )
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+
+        var query = Odb.SQL.Select(x => x.From(t0)
+                            .Where( t0.OrderID > 10260 )
                             .Skip(5).Top(10)
-                            .ExcludeFields(t1.ShipperID)
+                            .ExcludeFields(t0.ShipperID)
                     );
 
-        var rows = sql.ExecuteReader&lt;Orders&gt;(connection).ToList();
+        var rows = query.ExecuteReader&lt;Orders&gt;(connection).ToList();
     </pre>
     <output type="secondary">
         <b>Record Count= 1.093.000</b><br />

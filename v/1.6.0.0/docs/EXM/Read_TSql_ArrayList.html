@@ -1,18 +1,23 @@
 ﻿Following section demonstrates how to read record(s) as <hl>ArrayList</hl> by using <hl>TSQL</hl> .
 <sample>
     <pre lang="c#">
-        var sql = "SELECT * FROM Customers";
+		// Table Aliases
+		var t0 = new exm.Orders().AsQueryable();
+		var t1 = new exm.OrderDetails().AsQueryable();
 
-        foreach (var row in connection.ExecuteReader(sql).ToArray())
-            Console.WriteLine(String.Join(", ", from x in row select x.ToString().TrimEnd()));
+		// Query
+		var query = Odb.SQL.Select(x => x.From(t0).Top(10) );
+
+		foreach (var row in exm.ExecuteQuery(query).ToArray()) 
+			Console.WriteLine(String.Join(", ", from x in row select x.ToString().TrimEnd()));
     </pre>
     <output type="secondary">
-        1, Alfreds Futterkiste, Maria Anders, Obere Str. 57, ...<br />
-        2, Ana Trujillo Emparedados y helados, Ana Trujillo, Avda. de 2222, ...<br />
-        3, Antonio Moreno Taquería, Antonio, Mataderos 2312, México ...<br />
-        4, Around the Horn, Thomas Hardy, 120 Hanover Sq., London, ...<br />
+        10248, 90, 5, 07/04/1996 00:00:00, 3<br/>
+        10249, 81, 6, 07/05/1996 00:00:00, 1<br/>
+        10250, 34, 4, 07/08/1996 00:00:00, 2<br/>
+        10251, 84, 3, 07/08/1996 00:00:00, 1<br/>
         ...<br />
         ...
     </output>
-    <fiddle>l6aZOi</fiddle>
+    <fiddle>Jiderc</fiddle>
 </sample>

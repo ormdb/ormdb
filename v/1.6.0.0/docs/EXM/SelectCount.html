@@ -1,24 +1,37 @@
 ﻿Following section demonstrates using <hl>ExecuteCount</hl>, to get count of row(s).
 
 <sample>
-	<pre lang="c#">
+    <pre lang="c#">
 		// Table Aliases
         var t0 = new Orders().AsQueryable();
 
-		var cnt = Odb.SQL.Select(x => x.From(t0)).ExecuteCount(connection);
+		var query = Odb.SQL.Select(x => x.From(t0)).OrderBy(t0.OrderID);
+		var result = query.ExecuteCount(connection);
 	</pre>
-	<output>
-		SELECT <hl>COUNT(1)</hl> FROM [Orders] AS t0
-	</output>
-	<fiddle>dRfL97</fiddle>
+    <output>
+        SELECT <hl>COUNT(1)</hl> FROM [Orders] AS t0
+    </output>
+    <fiddle>dRfL97</fiddle>
 </sample>
 
+<co type="warning" class="mt-4">
+    <div class="text-danger">Limitations of <b>ExecuteCount</b></div>
+    <ol>
+        <li class="mt-3">
+            All selection fields are ignored and only value of the COUNT() is returned.
+        </li>
+
+        <li class="mt-3">
+            Order clause are removed from the query. Because it is not necessary.
+        </li>
+    </ol>
+</co>
 <br />
 <br />
 
 To counting the row(s) by excluding NULL values, you have to use <hl>COUNT</hl> with a column.
 <sample>
-	<pre lang="c#">
+    <pre lang="c#">
 		// Table Aliases
         var t0 = new Orders().AsQueryable();
 
@@ -26,8 +39,8 @@ To counting the row(s) by excluding NULL values, you have to use <hl>COUNT</hl> 
 
 		var cnt = (int?)(sql.ExecuteReader(cn).FirstOrDefault()[0]) ?? 0;
 	</pre>
-	<output>
-		SELECT <hl>COUNT(t0.OrderID)</hl> FROM [Orders] AS t0
-	</output>
-	<fiddle>dRfL97</fiddle>
+    <output>
+        SELECT <hl>COUNT(t0.OrderID)</hl> FROM [Orders] AS t0
+    </output>
+    <fiddle>dRfL97</fiddle>
 </sample>

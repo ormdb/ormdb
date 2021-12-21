@@ -1,9 +1,14 @@
 ﻿Following section demonstrates how to read record(s) as <hl>StronglyTyped</hl> by using <hl>TSQL</hl> .
 <sample>
     <pre lang="c#">
-        var sql = "SELECT * FROM Customers";
+		// Table Aliases
+		var t0 = new exm.Orders().AsQueryable();
+		var t1 = new exm.OrderDetails().AsQueryable();
 
-        var rows = connection.ExecuteReader&lt;Customer&gt;(sql).ToList();
+		// Query
+		var query = Odb.SQL.Select(x => x.From(t0).Top(10) );
+
+        var rows = query.ExecuteReader&lt;Customer&gt;(connection).ToList();
     </pre>
     <output>
     </output>

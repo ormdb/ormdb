@@ -1,43 +1,39 @@
 ﻿Following section demonstrates how to read record(s) as <hl>Anonymous</hl> by using <hl>TSQL</hl> .
 <sample>
     <pre lang="c#">
-        var sql = "SELECT * FROM Customers";
+		// Table Aliases
+		var t0 = new exm.Orders().AsQueryable();
+		var t1 = new exm.OrderDetails().AsQueryable();
 
-        // Reading by COLUMN-INDEX...
-        foreach (var row in connection.ExecuteReader(sql))
-            // row[0];
-            // (int)row[0];             // casting
-            // row.GetInt32(0);         // casting
+		// Query
+		var query = Odb.SQL.Select(x => x.From(t0).Top(10) );
 
+        foreach (var row in query.ExecuteReader(connection)){
+            // Reading by COLUMN-INDEX...                
+            var v1 = row[0];
+            var v2 = row.GetInt32(0);
 
-        // Reading by COLUMN-NAME...
-        foreach (var row in connection.ExecuteReader(sql))
-            // row["CustomerID"];
-            // (int)row["CustomerID"];      //casting
+            // Reading by COLUMN-NAME...
+            var v3 = (int)row["OrderID"];
 
-
-
-        // Reading by EXPRESSION...
-        Customer c = null; // for expression
-        foreach (var row in connection.ExecuteReader(sql))
-            // row.Get(()=> c.CustomerID);
-            // row.Get&lt;int&gt;(()=> c.CustomerID);   //strongly-typed
-
+            // Reading by EXPRESSION...
+            var v4 = row.Get(()=> t0.OrderID);
+        }
     </pre>
     <output type="secondary">
         <b>Record Count= 1.093.000</b><br />
-        <div style="padding-left:25px;">
+        <span class="d-block" style="padding-left:25px;">
             Client  : Core I7-9750H @2.60GHz, 16GB RAM<br />
             Server	: (Localhost), MsSQL Server 2019<br />
-        </div>
+        </span>
         <br />
         Results<br />
-        <div style="padding-left:25px;">
+        <span class="d-block" style="padding-left:25px;">
             <b>Strongly Typed : 1,6356077 seconds</b><br />
             By ColumnIndex : 1,8987543 seconds<br />
             By ColumnName  : 2,3467037 seconds<br />
             By TableField : 2,5380411 seconds<br />
-        </div>
+        </span>
     </output>
-    <fiddle>l6aZOi</fiddle>
+    <fiddle>5mvsiG</fiddle>
 </sample>

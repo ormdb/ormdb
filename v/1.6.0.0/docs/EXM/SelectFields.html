@@ -5,37 +5,36 @@
         var t0 = new Orders().AsQueryable();
         var t1 = new OrderDetails().AsQueryable();
 
-        // Select all columns
+        // 1. Select all columns
         Odb.SQL.Select(x => x.From(t0) );
 
-        // Select Only [OrderID] and [CustomerID] columns from [Orders]
+        // 2. Select Only [OrderID] and [CustomerID] columns from [Orders]
         Odb.SQL.Select(x => x.From(t0).Fields(t0.OrderID, t0.CustomerID) );
 
-        // Select all columns for only [OrderDetails]
+        // 3. Select all columns for only [OrderDetails]
         Odb.SQL.Select(x => x.From(t0).LeftJoin(t1, t0.OrderID == t1.OrderID).Fields(t1) );
 
-        // Select all columns by excluding column [ShipperID] from [Orders]
+        // 4. Select all columns by excluding column [ShipperID] from [Orders]
         Odb.SQL.Select(x => x.From(t0).ExcludeFields(t0.ShipperID) );
     </pre>
     <output>
-        <i class="text-success">Select all columns</i>
-        <br />
-        SELECT <hlb>*</hlb> FROM [Orders] AS t0
-        <br />
-        <br />
-        <i class="text-success">Select Only [OrderID] and [CustomerID] columns from [Orders]</i>
-        <br />
-        SELECT <hlb>t0.OrderID, t0.CustomerID</hlb> FROM [Orders] AS t0
-        <br />
-        <br />
-        <i class="text-success">Select all columns for only [OrderDetails]</i>
-        <br />
-        SELECT <hlb>tl.*</hlb> FROM [Orders] AS t0 LEFT JOIN [OrderDetails] AS t1 ON t0.OrderID = t1.OrderID
-        <br />
-        <br />
-        <i class="text-success">Select all columns by excluding column [ShipperID] from [Orders]</i>
-        <br />
-        SELECT <hlb>t0.OrderID, t0.CustomerID, t0.EmployeeID, t0.OrderDate</hlb> FROM [Orders] AS t0
+        <ol class="d-block ps-4">
+            <li class="mt-3">
+                SELECT <hlb>*</hlb> FROM [Orders] AS t0
+            </li>
+
+            <li class="mt-3">
+                SELECT <hlb>t0.OrderID, t0.CustomerID</hlb> FROM [Orders] AS t0
+            </li>
+
+            <li class="mt-3">
+                SELECT <hlb>tl.*</hlb> FROM [Orders] AS t0 LEFT JOIN [OrderDetails] AS t1 ON t0.OrderID = t1.OrderID
+            </li>
+
+            <li class="mt-3">
+                SELECT <hlb>t0.OrderID, t0.CustomerID, t0.EmployeeID, t0.OrderDate</hlb> FROM [Orders] AS t0
+            </li>
+        </ol>
     </output>
     <fiddle>1j0zsQ</fiddle>
 </sample>
