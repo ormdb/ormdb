@@ -761,6 +761,10 @@
                     var _lang_obj = null;
                     var _lang_nam = null;
                     switch (_lang) {
+                        case "markup":
+                            _lang_obj = Prism.languages.html;
+                            _lang_nam = "markup";
+                            break
                         case "sql":
                             _lang_obj = Prism.languages.sql;
                             _lang_nam = "sql";
