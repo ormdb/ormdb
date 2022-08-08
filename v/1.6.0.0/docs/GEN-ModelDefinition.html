@@ -21,7 +21,7 @@ Following section demonstrates how to define the models and tables.
             [Column(DateFormat = ColumnDateFormat.OnlyDate)] dt
         }
 
-        [Table("orders")]
+        [Table(Name = "orders")]
         public class Orders : Base
         {
 		    [Column(Ref.id)]public int OrderID          {get;set;}
@@ -38,7 +38,7 @@ Following section demonstrates how to define the models and tables.
                                 .AddIndex(OrderDate);
         }
 
-        [Table("order_details")]
+        [Table(Name = "order_details")]
         public class OrderDetails : Base
         {
 		    [Column(Ref.id)]public int? OrderDetailID   {get;set;}

@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="/resources/css/prism.css">
-    <link rel="stylesheet" href="/resources/css/site.css" />
+    <link rel="stylesheet" href="/ormdb/resources/css/prism.css">
+    <link rel="stylesheet" href="/ormdb/resources/css/site.css" />
 </head>
 
 <body>
     <nav class="navbar navbar-dark bg-dark d-flex py-0">
         <a class="navbar-brand" href="/">
-            <div style="background-image: url('/resources/images/logo.png');width: 100px;height: 40px;background-position: center center;background-repeat: no-repeat;"></div>
+            <div style="background-image: url('/ormdb/resources/images/logo.png'); width: 100px; height: 40px; background-position: center center; background-repeat: no-repeat;"></div>
         </a>
         <div class="flex-grow-1 navbar-nav d-flex flex-row justify-content-end" id="navbarNav">
             <a class="nav-link px-3" href="https://github.com/ormdb/ormdb/issues">Report Bug&nbsp;&nbsp;<i class="fa fa-bug"></i></a>
@@ -34,7 +34,7 @@
         <div class="p-5">
             <a href="https://www.nuget.org/packages/OrmDb/" target="_blank" style="margin:10px; text-decoration:none;padding:1px;display: inline-flex;align-items: center;background-color: #0e83cd;color: white;">
                 <div class="p-3 text-light bg-dark">
-                    <img src="/resources/images/nuget.png" style="height:25px">&nbsp;&nbsp;Install from Nuget
+                    <img src="/ormdb/resources/images/nuget.png" style="height:25px">&nbsp;&nbsp;Install from Nuget
                 </div>
                 <span style="padding: 10px;">
                     <i class="fa fa-arrow-right" style="width:30px;"></i>
@@ -44,7 +44,7 @@
     </div>
     <div class="container">
         <div class="text-center">
-            <span class="d-inline-block" style="background-image: url('/resources/images/logo.png');width: 100px;height:100px;background-position: center center;background-repeat: no-repeat;"></span>
+            <span class="d-inline-block" style="background-image: url('/ormdb/resources/images/logo.png'); width: 100px; height: 100px; background-position: center center; background-repeat: no-repeat;"></span>
         </div>
         <div>
             OrmDb is standalone a single DLL fully written in .NET managed code (compatible with .NET 4.x, NETCore 2.2 and above).
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="container text-center">
-            <img src="/resources/images/providers.jpg" class="img-fluid" width="400" />
+            <img src="/ormdb/resources/images/providers.jpg" class="img-fluid" width="400" />
             <div class="text-muted small">Images may be subject to copyright.</div>
         </div>
     </div>
@@ -127,7 +127,7 @@
             </div>
         </div>
         <div class="container text-center">
-            <img src="/resources/images/1.5.0.x/manage_code.png" class="mt-4 img-fluid" />
+            <img src="/ormdb/resources/images/1.5.0.x/manage_code.png" class="mt-4 img-fluid" />
         </div>
     </div>
 
@@ -144,7 +144,7 @@
             </div>
         </div>
         <div class="container text-center">
-            <img src="/resources/images/ddl_commands.png" class="mt-4 img-fluid" width="400" />
+            <img src="/ormdb/resources/images/ddl_commands.png" class="mt-4 img-fluid" width="400" />
         </div>
     </div>
 
@@ -169,8 +169,8 @@
     <small class="copyright"></small>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="/resources/js/prism.js"></script>
-    <script src="/resources/js/site.js"></script>
+    <script src="/ormdb/resources/js/prism.js"></script>
+    <script src="/ormdb/resources/js/site.js"></script>
     <script>
         var _examples_data = [];
         function _example_activate(index) {
@@ -179,7 +179,7 @@
             $("#examples_data").html(_examples_data[index]);
         }
         function goto_wiki() {
-            location.href = "/wiki.html";
+            location.href = "/ormdb/wiki.html";
             //location.href = "/wiki.html?v=version-number";
         }
         $(function () {
@@ -220,7 +220,7 @@
             var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
             link.type = 'image/x-icon';
             link.rel = 'shortcut icon';
-            link.href = '/resources/images/logo.png';
+            link.href = '/ormdb/resources/images/logo.png';
             document.getElementsByTagName('head')[0].appendChild(link);
 
 
