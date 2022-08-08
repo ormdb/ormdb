@@ -3,7 +3,7 @@
 
 OrmDB is a simple, fast and lightweight embedded .NET ORM tool which was inspired by the equivalent other tools.
 
-**You can read documentation for more detail. [Wiki](http://ormdb.net/wiki.html).**
+**You can read documentation for more detail. [Wiki](https://ormdb.github.io/ormdb/wiki.html).**
 
 <br/>
 
@@ -14,7 +14,7 @@ OrmDB has no no dependencies. You can [**DOWNLOAD**](https://www.nuget.org/packa
 <br/>
 
 ## How to use
-**Plesae refer to wiki for further information. [Wiki](http://ormdb.net/wiki.html).**
+**Plesae refer to wiki for further information. [Wiki](https://ormdb.github.io/ormdb/wiki.html).**
 
 <br/>
 
