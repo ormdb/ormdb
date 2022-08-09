@@ -6,13 +6,14 @@ which belongs to customer specified at [Order], from [OrderDetails].
         var t0 = new Orders().AsQueryable();
         var t1 = new OrderDetails().AsQueryable();
 
-		var sql = Odb.SQL.Delete(x =>
+		var query = Odb.SQL.Delete(x =>
 						x.From(t1) 
 							.InnerJoin(t0, t0.OrderID == t1.OrderID) 
 							.Where(t0.CustomerID == 90)
 					);
 
-		var affectedRows = sql.ExecuteNonQuery(connection);
+        using(var exc = cn.Executer()) 
+            var affected_rows = exc.Sql(query).NonQuery();
 	</pre>
 	<output>
 		<i class="text-success">

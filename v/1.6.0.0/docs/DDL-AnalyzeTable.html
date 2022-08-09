@@ -9,15 +9,15 @@
 Following section demonstrates <k>ANALYZE</k> the table(s).
 <sample>
     <pre lang="c#">
-        // get provider for the connection
-		var cp = cn.Provider();
+        using(var exc = cn.Executer()) 
+        {
+			// by table alias
+		    var t0 = new Orders().AsQueryable();
+            exc.AnalyzeTable(t0);
 
-        // by instance
-		var t0 = new Orders().AsQueryable();
-        cp.AnalyzeTable(t0);
-
-        // by name
-        cp.AnalyzeTable("table1");
+			// by table name
+            exc.AnalyzeTable("table1");
+        }
     </pre>
     <output>
         <i class="text-success">MsSql</i><br />

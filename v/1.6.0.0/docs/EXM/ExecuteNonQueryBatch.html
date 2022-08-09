@@ -3,27 +3,28 @@
 	<pre lang="c#">
 		// Table Aliases
         var t0 = new Orders().AsQueryable();
+		var t1 = new Products().AsQueryable();
 		
-		var sql = SQL.X.Query();
+		var query = SQL.X.Batch();
 		
 		// DELETE...
-		sql.Delete(t0);
+		query.Delete(t0);
 		
 		// INSERT...
-		var ins = sql.Insert();
+		var ins = query.Insert();
 			ins.Add&lt;Orders&gt;(null, 90, 8, DateTime.Now, 1);
 			ins.Add&lt;Orders&gt;(null, 91, 8, DateTime.Now, 2);
 
 		// UPDATE...
-		var t1 = new Products();
-		var sql = Odb.SQL.Update(x =>
-						x.From(t1)
-							.Where(t1.ProductID == 1)
-							.SetRaw(t1.Price, t1.Price * 10)
-					);
+		queryL.Update(x =>
+					x.From(t1)
+						.Where(t1.ProductID == 1)
+						.SetRaw(t1.Price, t1.Price * 10)
+				);
 		
-		// Commands are being executed...
-		sql.ExecuteNonQuery(connection);
+
+        using(var exc = cn.Executer()) 
+            var affected_rows = exc.Sql(query).NonQuery();
     </pre>
     <output>
     </output>

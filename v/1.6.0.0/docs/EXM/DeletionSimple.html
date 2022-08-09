@@ -6,11 +6,12 @@ Following section demonstrates <b>deletion with chunks</b>.
         var t0 = new Orders().AsQueryable();
         var t1 = new OrderDetails().AsQueryable();
 		
-		var sql = Odb.SQL.Query();
-			sql.Delete(x => x.From(t0).Where( t0.OrderID == 10248 ));
-			sql.Delete(x => x.From(t1).Where( t1.OrderID == 10248 ));
+		var query = Odb.SQL.Query();
+			query.Delete(x => x.From(t0).Where( t0.OrderID == 10248 ));
+			query.Delete(x => x.From(t1).Where( t1.OrderID == 10248 ));
 
-		var affectedRows = sql.ExecuteNonQuery(connection);
+        using(var exc = cn.Executer()) 
+            var affected_rows = exc.Sql(query).NonQuery();
 	</pre>
 	<output>
 		DELETE t0<br />

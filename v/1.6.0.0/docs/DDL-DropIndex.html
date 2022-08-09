@@ -9,18 +9,18 @@
 Following section demonstrates <k>DROP-INDEX</k> of the table(s).
 <sample>
 	<pre lang="c#">
-        // get provider for the connection
-		var cp = cn.Provider();
+        using(var exc = cn.Executer()) 
+        {
+			// by table alias
+			var t0 = new Orders().AsQueryable();
+			exc.DropIndex(t0, t0.Indexes.First());
 
-		// by table instance
-		var t0 = new Orders().AsQueryable();
-		cp.DropIndex(t0, t0.Indexes.First());
+			// by table type
+			exc.DropIndex&lt;Orders&gt;("index_name");
 
-        // by type
-		cp.DropIndex&lt;Orders&gt;("index_name");
-
-		// by table name
-		cp.DropIndex("table1", "index_name");
+			// by table name
+			exc.DropIndex("table1", "index_name");
+        }
 	</pre>
 	<output>
 		<i class="text-success">MsSql</i><br />
@@ -38,5 +38,5 @@ Following section demonstrates <k>DROP-INDEX</k> of the table(s).
 		<i class="text-success">Oracle</i><br />
 		DROP INDEX [Index]
 	</output>
-	<fiddle></fiddle>
+	<fiddle>vFa43T</fiddle>
 </sample>

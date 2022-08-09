@@ -24,8 +24,9 @@
 Following section demonstrates retrieving the tables from database.
 <sample>
 	<pre lang="c#">
-		foreach (var tb in cn.Provider();.GetTables())
-			Console.WriteLine("\t" + tb.Schema + "." + tb.Name);
+        using(var exc = cn.Executer()) 
+			foreach (var tb in exc.GetTables())
+				Console.WriteLine("\t" + tb.Schema + "." + tb.Name);
 	</pre>
 	<output>
 	</output>

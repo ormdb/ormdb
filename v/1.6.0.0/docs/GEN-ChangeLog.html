@@ -1,87 +1,154 @@
-﻿<co type="">
-    <div class="my-1 pl-3">
-        Release Date : <b class="text-secondary">2020-12-15</b>
-    </div>
-
-    <div class="my-1 pl-3">
-        Version : <b class="text-secondary">1.6.3.1</b>
-    </div>
-</co>
-
-<div class="pl-lg-5 pl-md-4 pl-sm-0">
-    <st>Features</st>
-    <co type="">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
-                <span class="pl-3">
-                    Code stability improvements, bug fixes and further improvements to performance.
-                </span>
-            </li>
-            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
-                <span class="pl-3">
-                    <kbd class="bg-success text-white">Sqlite</kbd> provider implemented.
-                </span>
-            </li>
-            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
-                <span class="pl-3">
-                    <kbd class="bg-success text-white">Connection.Clone</kbd> feature has been implemented. You can use this method via Odb.Extensions.
-                </span>
-            </li>
-            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
-                <span class="pl-3">
-                    <kbd class="bg-success text-white">Connection.OpenIf</kbd> feature has been implemented. You can use this method via Odb.Extensions.
-                </span>
-            </li>
-            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">3</span></h5>
-                <span class="pl-3">
-                    Wiki pages updated and also added new examples.
-                </span>
-            </li>
-        </ul>
-    </co>
-
-    <st>Breaking Changes</st>
-    <co type="">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
-                <span class="pl-3">
-                    The "Connection-Manager" class has been <kbd class="bg-danger text-white">removed</kbd>. You can create your connection by yourself instead. The methods in connection maneger are re-write as extention for IDbConnection.
-                </span>
-            </li>
-            <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
-                <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
-                <span class="pl-3">
-                    The "Transaction-Manager" class has been <kbd class="bg-danger text-white">removed</kbd>. You can manage your transactions by yourself instead.
-                </span>
-            </li>
-        </ul>
-    </co>
-
-
-    <st>Defects</st>
-    <co type="light">
-        None
-    </co>
-</div>
-
-<br />
-<br />
-<co type="warning">
+﻿<co type="warning">
     If you experience a Breaking Change, <a href="https://github.com/ormdb/ormdb/issues" target="_blank">please report the issue.</a>
 </co>
-<br />
-<br />
 
-<div style="opacity: .7">
+
+<div class="mt-4" >
     <co type="">
         <div class="my-1 pl-3">
-            Release Date : <b class="text-secondary">2020-11-17</b>
+            Release Date : <b class="text-secondary">2022-08-11</b>
+        </div>
+
+        <div class="my-1 pl-3">
+            Version : <b class="text-secondary">1.6.3.6</b>
+        </div>
+    </co>
+
+    <div class="pl-lg-5 pl-md-4 pl-sm-0">
+        <st>Features</st>
+        <co type="">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        Code stability improvements, bug fixes and further improvements to performance.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                    <span class="pl-3">
+                        <kbd class="bg-success text-white">System.Threading → Task/Parallel</kbd> safe execution implemented.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                    <span class="pl-3">
+                        <kbd class="bg-success text-white">Executer</kbd> feature has been implemented on IDbConnection. You can use this method via Odb.Extensions.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">3</span></h5>
+                    <span class="pl-3">
+                        Wiki pages updated and also added new examples.
+                    </span>
+                </li>
+            </ul>
+        </co>
+
+        <st>Breaking Changes</st>
+        <co type="">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        The "DDL" class has been <kbd class="bg-danger text-white">removed</kbd>. Use Executer extension for IDbConnection, instead of You can create your connection by yourself instead.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        The "Provider" class has been <kbd class="bg-danger text-white">removed</kbd>. Use Executer extension for IDbConnection, instead of You can create your connection by yourself instead.
+                    </span>
+                </li>
+            </ul>
+        </co>
+
+
+        <st>Defects</st>
+        <co type="light">
+            None
+        </co>
+    </div>
+</div>
+
+<div class="mt-4" style="opacity: .7">
+    <co type="">
+        <div class="my-1 pl-3">
+            Release Date : <b class="text-secondary">2021-01-08</b>
+        </div>
+
+        <div class="my-1 pl-3">
+            Version : <b class="text-secondary">1.6.3.1</b>
+        </div>
+    </co>
+
+    <div class="pl-lg-5 pl-md-4 pl-sm-0">
+        <st>Features</st>
+        <co type="">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        Code stability improvements, bug fixes and further improvements to performance.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                    <span class="pl-3">
+                        <kbd class="bg-success text-white">Sqlite</kbd> provider implemented.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                    <span class="pl-3">
+                        <kbd class="bg-success text-white">Connection.Clone</kbd> feature has been implemented. You can use this method via Odb.Extensions.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">2</span></h5>
+                    <span class="pl-3">
+                        <kbd class="bg-success text-white">Connection.OpenIf</kbd> feature has been implemented. You can use this method via Odb.Extensions.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">3</span></h5>
+                    <span class="pl-3">
+                        Wiki pages updated and also added new examples.
+                    </span>
+                </li>
+            </ul>
+        </co>
+
+        <st>Breaking Changes</st>
+        <co type="">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        The "Connection-Manager" class has been <kbd class="bg-danger text-white">removed</kbd>. You can create your connection by yourself instead. The methods in connection maneger are re-write as extention for IDbConnection.
+                    </span>
+                </li>
+                <li class="list-group-item px-0 d-flex justify-content-start align-items-start">
+                    <h5 class="d-inline"><span class="badge badge-dark">1</span></h5>
+                    <span class="pl-3">
+                        The "Transaction-Manager" class has been <kbd class="bg-danger text-white">removed</kbd>. You can manage your transactions by yourself instead.
+                    </span>
+                </li>
+            </ul>
+        </co>
+
+
+        <st>Defects</st>
+        <co type="light">
+            None
+        </co>
+    </div>
+</div>
+
+<div class="mt-4" style="opacity: .7">
+    <co type="">
+        <div class="my-1 pl-3">
+            Release Date : <b class="text-secondary">2020-12-05</b>
         </div>
 
         <div class="my-1 pl-3">
@@ -170,13 +237,13 @@
         </co>
     </div>
 
-    <br />
-    <br />
-    <br />
+</div>
+
+<div class="mt-4" style="opacity: .7">
 
     <co type="">
         <div class="my-1 pl-3">
-            Release Date : <b class="text-secondary">2020-06-04</b>
+            Release Date : <b class="text-secondary">2020-06-30</b>
         </div>
 
         <div class="my-1 pl-3">
@@ -259,9 +326,9 @@
         </co>
     </div>
 
-    <br />
-    <br />
-    <br />
+</div>
+
+<div class="mt-4" style="opacity: .7">
 
     <co type="light">
         <div class="my-1 pl-3">

@@ -9,9 +9,12 @@
 Following section demonstrates ping and calculate average time.
 <sample>
 	<pre lang="c#">
-		var ping = cn.Provider().PingServer();
+        using(var exc = cn.Executer()) 
+        {
+			var ping = exc.PingServer();
 
-		Console.WriteLine("Ping = " + ping.TotalMilliseconds.ToString() + "ms.");
+			Console.WriteLine("Ping = " + ping.TotalMilliseconds.ToString() + "ms.");
+        }
 	</pre>
 	<output>
 		Ping = 0ms.

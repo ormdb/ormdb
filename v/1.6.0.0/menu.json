@@ -23,7 +23,7 @@
         "SQL-Update": "Update",
         "SQL-Delete": "Delete",
         "SQL-Modify": "Modify",
-        "SQL-Query": "Query"
+        "SQL-Batch": "Batch"
       }
     },
     "DDL": {
@@ -70,35 +70,35 @@
         "ExecuteNonQueryAsync": "Execute - Async",
 
         "-SEL": "Select",
-        "SelectFields": "Fields - Exclude",
-        "SelectCondWhere": "Where",
-        "SelectOrderBy": "OrderBy",
-        "SelectCount": "Count",
-        "SelectWithJoin": "Join",
-        "SelectSkipTop": "Skip/Top",
-        "SelectGroupBy": "GroupBy",
-        "SelectUnion": "Union",
-        "SelectSubSelect": "Sub Select",
+        "SelectFields": "Select Fields - Exclude",
+        "SelectCondWhere": "Select Where",
+        "SelectOrderBy": "Select OrderBy",
+        "SelectCount": "Select Count",
+        "SelectWithJoin": "Select Join",
+        "SelectSkipTop": "Select Skip/Top",
+        "SelectGroupBy": "Select GroupBy",
+        "SelectUnion": "Select Union",
+        "SelectSubSelect": "Select Sub Select",
 
         "-DEL": "Delete",
-        "DeletionSimple": "Generic",
-        "DeletionWithJoin": "With Join",
-        "DeletionWithChunks": "With Chunks",
+        "DeletionSimple": "Delete Generic",
+        "DeletionWithJoin": "Delete With Join",
+        "DeletionWithChunks": "Delete With Chunks",
 
         "-UPD": "Update",
-        "UpdatingSimple": "Generic",
-        "UpdatingWithSet": "With Set",
-        "UpdatingWithJoin": "With Join",
+        "UpdatingSimple": "Update Generic",
+        "UpdatingWithSet": "Update With Set",
+        "UpdatingWithJoin": "Update With Join",
 
         "-INS": "Insert",
-        "InsertionSimple": "Generic",
-        "InsertionWithValues": "With Value Array",
-        "InsertionMultipleTable": "Multiple",
-        "InsertionInto": "Into",
-        "InsertionFromAnotherDb": "From Another Db",
+        "InsertionSimple": "Insert Generic",
+        "InsertionWithValues": "Insert With Value Array",
+        "InsertionMultipleTable": "Insert Multiple",
+        "InsertionInto": "Insert Into",
+        "InsertionFromAnotherDb": "Insert From Another Db",
 
         "-MDF": "Modify",
-        "ModifySimple": "Generic"
+        "ModifySimple": "Modify Generic"
       }
     }
   }

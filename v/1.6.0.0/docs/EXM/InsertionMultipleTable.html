@@ -1,25 +1,25 @@
 ﻿Following section demonstrates <b>multiple table insertion</b>.
 <sample>
-	<pre lang="c#">
-		// SQL
-		var sql = Odb.SQL.Insert();
-		
-		// [Orders] with model 
-		var model = new Orders();
-			model.OrderID = 15;
-			model.CustomerID = 90;
-			model.EmployeeID = 8;
-			model.OrderDate = DateTime.Now;
-			model.ShipperID = 3;
-		sql.Add(model);
-		
-		// [OrderDetails] as ValueArray 
-		sql.Add&lt;OrderDetails&gt;(1, model.OrderID, 999, 2.5);
-		sql.Add&lt;OrderDetails&gt;(2, model.OrderID, 888, 1000);
-		sql.Add&lt;OrderDetails&gt;(3, model.OrderID, 777, 3.5);
-		sql.Add&lt;OrderDetails&gt;(4, model.OrderID, 666, 25.83);
+    <pre lang="c#">
+        var query = Odb.SQL.Insert();
 
-		var affectedRows = sql.ExecuteNonQuery(connection);
+		// Header
+		var order = new Orders();
+			order.OrderID = 15;
+			order.CustomerID = 90;
+			order.EmployeeID = 8;
+			order.OrderDate = DateTime.Now;
+			order.ShipperID = 3;
+		query.Add(order);
+		
+		// Details with inline-values
+		query.Add&lt;OrderDetails&gt;(1, order.OrderID, 999, 2.5);
+		query.Add&lt;OrderDetails&gt;(2, order.OrderID, 888, 1000);
+		query.Add&lt;OrderDetails&gt;(3, order.OrderID, 777, 3.5);
+		query.Add&lt;OrderDetails&gt;(4, order.OrderID, 666, 25.83);
+
+        using(var exc = cn.Executer()) 
+            var affected_rows = exc.Sql(query).NonQuery();
     </pre>
     <output>
         INSERT INTO [Orders] <br />

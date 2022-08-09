@@ -1,25 +1,27 @@
 ﻿Following section demonstrates insertion from <b>Another Database</b>.
 <sample>
     <pre lang="c#">
-        // source database which includes to be copied records.
-        Odb.Connection src_cn = default;
         int batch_size = 5000;
+        
+        using(var SourceExc = SourceCn.Executer()){
+            var dataRows = SourceExc.Sql("SELECT * FROM table").Read();
 
-        var sql = Odb.SQL.Insert();
+            using(var TargetExc = TargetCn.Executer()){
 
-        // reading from source table
-        foreach (var _row in src_cn.ExecuteReader("SELECT * FROM table"))
-        {
-            sql.Add&lt;target_table&gt;(_row.ToArray());
+                var query = Odb.SQL.Insert();
+                foreach (var dataRow in dataRows)
+                {
+                    query.Add&lt;target_table&gt;(dataRow.ToArray());
 
-            if (sql.Count >= batch_size) {
-                sql.ExecuteNonQuery(connection);
-                sql.Clear();
+                    if (query.Count >= batch_size) {
+                        TargetExc.Sql(query).NonQuery();
+                        query.Clear();
+                    }
+                }
+                if (query.Count > 0)
+                    TargetExc.Sql(query).NonQuery();
             }
         }
-
-        if (sql.Count >= batch_size)
-            sql.ExecuteNonQuery(connection);
     </pre>
     <output>
         Insertions are being executed each 5000 rows.

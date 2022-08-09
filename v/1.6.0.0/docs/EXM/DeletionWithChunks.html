@@ -1,36 +1,38 @@
 ﻿Following section demonstrates <b>deletion with chunks</b>.
 <sample>
-    <pre lang="c#">
-		// Table Aliases
-        var t0 = new Orders().AsQueryable();
-        var t1 = new OrderDetails().AsQueryable();
+	<pre lang="c#">
+		using(var exc = cn.Executer()) 
+		{
+			// Ids are being obtained for the records to be deleted...
+			var sql = Odb.SQL.Select(x => x.Fields(x[t0.OrderID]).From(t0).Top(100));
+			var ids = exc.Sql(sql).Map<string>().ToList();
 
-        // Ids are being obtained for the records to be deleted...
-        var _ids = Odb.SQL.Select(x => x.Fields(x[t0.OrderID].DISTINCT()) .From(t0) )
-                        .ExecuteReader&lt;string&gt;(connection).ToList();
+			var tasks = new List<Task>();
+			var index = 0;
+			var chunk_size = 50;
+			int affected_rows = 0;
 
-        // records are being deleted in chunks, by supplying record Id information.
-        var _index = 0;
-        var _chunk_size = 3000;
-        var qry = Odb.SQL.Query();
-        do {
-            var _items = _ids.Skip(_index).Take(_chunk_size);
-            If (_items.Count = 0) break;
+			while (true)
+			{
+				var items = ids.Skip(index).Take(chunk_size);
+				if (items.Count() == 0) break;
 
-            // command are being queued
-            qry.Delete(x => x.From(t1).Where(t1.OrderID.IN(_items)) );
-            qry.Delete(x => x.From(t0).Where(t0.OrderID.IN(_items)) );
+				var task = Task.Run(() => {
+					var query = Odb.SQL.Batch();
+					query.Delete(x => x.From(t1).Where(x[t1.OrderID].IN(items)));
+					query.Delete(x => x.From(t0).Where(x[t0.OrderID].IN(items)));
 
-            qry.Execute(connection);        // queries are being executed
-            qry.Clear();                    // buffer is being clear
+					affected_rows += exc.Sql(query).NonQuery();
+				});
+				tasks.Add(task);
+			}
 
-            _index += _chunk_size;
-        }
-
-        var affectedRows = sql.ExecuteNonQuery(connection);
+			Task.WaitAll(tasks.ToArray());
+			Console.WriteLine("\n\n" + affected_rows + " row(s) affected.\n\n");
+		}
     </pre>
     <output>
         <k>Delete</k> operation is always a problem for the large records. But you can break the large delete operation into chunks.
     </output>
-    <fiddle></fiddle>
+	<fiddle>cTZXMe</fiddle>
 </sample>

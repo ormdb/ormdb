@@ -5,8 +5,13 @@
 		// Table Aliases
         var t0 = new Orders().AsQueryable();
 
-		var query = Odb.SQL.Select(x => x.From(t0)).OrderBy(t0.OrderID);
-		var result = query.ExecuteCount(connection);
+        using(var exc = cn.Executer()) {
+
+            var query = Odb.SQL.Select(x => x.From(t0)).OrderBy(t0.OrderID);
+
+            var result = exc.Sql(query).Read().FirstOrDefault()[0];
+
+        }
 	</pre>
     <output>
         SELECT <hl>COUNT(1)</hl> FROM [Orders] AS t0
@@ -35,9 +40,13 @@ To counting the row(s) by excluding NULL values, you have to use <hl>COUNT</hl> 
 		// Table Aliases
         var t0 = new Orders().AsQueryable();
 
-		var sql = Odb.SQL.Select(x => x.From(t0).Fields( x[t0.OrderID].COUNT() ));
+        using(var exc = cn.Executer()) {
 
-		var cnt = (int?)(sql.ExecuteReader(cn).FirstOrDefault()[0]) ?? 0;
+            var query = Odb.SQL.Select(x => x.From(t0).Fields( x[t0.OrderID].COUNT() ));
+
+            var result = (int?)(sql.ExecuteReader(cn).FirstOrDefault()[0]) ?? 0;
+
+        }
 	</pre>
     <output>
         SELECT <hl>COUNT(t0.OrderID)</hl> FROM [Orders] AS t0

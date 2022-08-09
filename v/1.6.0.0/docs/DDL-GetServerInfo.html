@@ -23,13 +23,13 @@
 Following section retrieves the product info from database server.
 <sample>
     <pre lang="c#">
-        // get provider for the connection
-		var cp = cn.Provider();
+        using(var exc = cn.Executer()) 
+        {
+            var si = exc.ServerInfo();
 
-        var si = cp.ServerInfo();
-
-        Console.WriteLine("Name = " + si.Name);
-        Console.WriteLine("Version = " + si.Version);
+            Console.WriteLine("Name = " + si.Name);
+            Console.WriteLine("Version = " + si.Version);
+        }
     </pre>
     <output>
         Name = Express Edition (64-bit)<br />

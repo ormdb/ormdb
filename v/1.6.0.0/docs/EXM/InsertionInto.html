@@ -13,7 +13,8 @@
 									t0.Unit,
 									t0.Price + 5)
 
-        var affectedRows = sql.ExecuteNonQuery(connection);
+        using(var exc = cn.Executer()) 
+            var affected_rows = exc.Sql(query).NonQuery();
     </pre>
     <output>
         INSERT INTO [Shippers]<br />

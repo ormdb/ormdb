@@ -8,20 +8,21 @@
 Following section demonstrates <k>TRUNCATE</k> the table(s).
 <sample>
     <pre lang="c#">
-        // get provider for the connection
-		var cp = cn.Provider();
+        using(var exc = cn.Executer()) 
+        {
+			// by table alias
+            var t0 = new Orders().AsQueryable();
+            var t1 = new OrderDetails().AsQueryable();
 
-        // by instance
-        var t0 = new Orders().AsQueryable();
-        var t1 = new OrderDetails().AsQueryable();
-        cp.TruncateTable(t0);   // single
-        cp.TruncateTable(new [] {t0, t1});  // multi
+            exc.TruncateTable(t0);   // single
+            exc.TruncateTable(new [] {t0, t1});  // multi
 
-        // by type
-        cp.TruncateTable&lt;Orders&gt;();
+			// by table type
+            exc.TruncateTable&lt;Orders&gt;();
 
-        // single table by name
-        cp.TruncateTable("table1");
+			// by table name
+            exc.TruncateTable("table1");
+        }
     </pre>
     <output>
         <output>

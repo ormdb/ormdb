@@ -2,17 +2,18 @@
 <sample>
     <pre lang="c#">
 		// the new model to be inserted
-        var model = new Orders();
-            // model.OrderID = AutoIncrement;
-            model.CustomerID = 90;
-            model.EmployeeID = 8;
-            model.OrderDate = DateTime.Now;
-            // model.ShipperID <= accepted its DefaultValue;
+        var order = new Orders();
+            // order.OrderID = AutoIncrement;
+            order.CustomerID = 90;
+            order.EmployeeID = 8;
+            order.OrderDate = DateTime.Now;
+            // order.ShipperID <= accepted its DefaultValue;
 		
-        var query = Odb.SQL.Insert();
-            query.Add(model);
+         var query = Odb.SQL.Insert();
+             query.Add(order);
 
-        var affectedRows = query.ExecuteNonQuery(connection);
+        using(var exc = cn.Executer())
+            var affected_rows = exc.Sql(query).NonQuery();
     </pre>
     <output>
         In this sample; columns "<k>OrderID</k>" is AutoIncrement field, and "<k>ShipperID</k>" will be accepted as its default values.

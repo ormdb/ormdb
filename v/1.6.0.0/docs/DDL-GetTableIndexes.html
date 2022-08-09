@@ -27,7 +27,8 @@
 Following section demonstrates reading the indexes of table <b>by its name</b>.
 <sample>
 	<pre lang="c#">
-		var indexes = cn.Provider().GeTableIndexes("table_name");
+        using(var exc = cn.Executer()) 
+			var indexes = exc.GeTableIndexes("table_name");
 	</pre>
 	<output>
 	</output>

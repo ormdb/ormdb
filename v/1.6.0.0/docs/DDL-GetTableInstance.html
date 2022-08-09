@@ -5,13 +5,13 @@
 Following section demonstrates generating the instance of the table.
 <sample>
 	<pre lang="c#">
-        // get provider for the connection
-		var cp = cn.Provider();
+		// by table type
+		var tb1 = exc.GetTableInstance&lt;Orders&gt;();
+		var tb2 = exc.GetTableInstance(typeof(Orders)());
 
-		// via provider
-		var tb1 = cp.GetTableInstance&lt;Orders&gt;();
-		var tb2 = cp.GetTableInstance(typeof(Orders)());
-		var tb3 = cp.GetTableInstance("Orders");
+		// by dynamic from database
+        using(var exc = cn.Executer()) 
+			var tb3 = exc.GetTableInstance("Orders");
 	</pre>
 	<output>
 	</output>

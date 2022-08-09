@@ -17,15 +17,15 @@
 Following section demonstrates creating a table.
 <sample>
     <pre lang="c#">
-        // get provider for the connection
-		var cp = cn.Provider();
+        using(var exc = cn.Executer()) 
+        {
+			// by table alias
+		    var t0 = new Orders().AsQueryable();
+            exc.CreateTable(t0);
 
-		// by table instance
-		var t0 = new Orders().AsQueryable();
-        cp.CreateTable(t0);
-
-		// by type
-        cp.CreateTable&lt;Orders&gt;();
+			// by table type
+            exc.CreateTable&lt;Orders&gt;();
+        }
     </pre>
     <output>
     </output>

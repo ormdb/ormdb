@@ -8,21 +8,21 @@
 Following section demonstrates <k>DROP</k> the table(s).
 <sample>
     <pre lang="c#">
-        // get provider for the connection
-		var cp = cn.Provider();
+        using(var exc = cn.Executer()) 
+        {
+			// by table alias
+		    var t0 = new Orders().AsQueryable();
+            var t1 = new OrderDetails().AsQueryable();
 
-		// by instance
-		var t0 = new Orders().AsQueryable();
-        var t1 = new OrderDetails().AsQueryable();
+		    exc.DropTable(t0);   // single
+		    exc.DropTable(new [] {t0, t1});  // multi
 
-		cp.DropTable(t0);   // single
-		cp.DropTable(new [] {t0, t1});  // multi
+			// by table type
+            exc.DropTable&lt;Orders&gt;();
 
-        // by type
-        cp.DropTable&lt;Orders&gt;();
-
-		// single table by name
-		cp.DropTable("table1");
+			// by table name
+		    exc.DropTable("table1");
+        }
 	</pre>
     <output>
         <i class="text-success">for all databases</i><br />
@@ -30,5 +30,5 @@ Following section demonstrates <k>DROP</k> the table(s).
         <br />
         <br />
     </output>
-    <fiddle></fiddle>
+    <fiddle>lYQxL5</fiddle>
 </sample>

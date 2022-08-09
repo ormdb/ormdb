@@ -6,14 +6,15 @@ which contains line that has value of quantity is lower 5 in [OrderDetails].
         var t0 = new Orders().AsQueryable();
         var t1 = new OrderDetails().AsQueryable();
 
-		var sql = Odb.SQL.Update(x =>
+		var query = Odb.SQL.Update(x =>
 						x.From(t0) 
 							.InnerJoin(t1, t1.OrderID == t0.OrderID) 
 							.Where(t1.Quantity < 5)
 							.Set(t0.EmployeeID, 3)
 					);
 
-		var affectedRows = sql.ExecuteNonQuery(connection);
+        using(var exc = cn.Executer()) 
+            var affected_rows = exc.Sql(query).NonQuery();
 	</pre>
 	<output>
 		<i class="text-success">

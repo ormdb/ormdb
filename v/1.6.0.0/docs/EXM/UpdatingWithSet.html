@@ -4,14 +4,16 @@
 		// Table Aliases
         var t0 = new Products().AsQueryable();
 
-		var sql = Odb.SQL.Update(x =>
+		var query = Odb.SQL.Update(x =>
 						x.From(t0)
 							.Where(t0.ProductID == 1)
 							.Set(t0.ProductName, "New ProductName")
 							.SetRaw(t0.Price, t0.Price * 10)
 							.SetNull(t0.ProductName)
 					);
-		var affectedRows = sql.ExecuteNonQuery(connection);
+
+        using(var exc = cn.Executer()) 
+            var affected_rows = exc.Sql(query).NonQuery();
     </pre>
 	<output>
 		In this sample; 2 different values are set into column "<k>ProductName</k>". Last value will be accepted for the column.

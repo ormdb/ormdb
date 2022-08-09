@@ -1,13 +1,14 @@
 ﻿Following section demonstrates insertion with <b>Value Array</b>.
 <sample>
     <pre lang="c#">
-        var sql = Odb.SQL.Insert();
+        var query = Odb.SQL.Insert();
 
         var dt = DateTime.Now;
-		sql.Add&lt;Orders&gt;(null, 90, 8, DateTime.Now, 1);
-		sql.Add&lt;Orders&gt;(null, 91, 8, DateTime.Now, 2);
+		query.Add&lt;Orders&gt;(null, 90, 8, DateTime.Now, 1);
+		query.Add&lt;Orders&gt;(null, 91, 8, DateTime.Now, 2);
 
-        var affectedRows = sql.ExecuteNonQuery(connection);
+        using(var exc = cn.Executer()) 
+            var affected_rows = exc.Sql(query).NonQuery();
     </pre>
     <output>
         In this sample; column "<k>OrderID</k>" is AutoIncrement field.

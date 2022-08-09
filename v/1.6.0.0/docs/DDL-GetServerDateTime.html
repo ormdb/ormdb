@@ -9,12 +9,8 @@
 Following section retrieves <k>DateTime</k> info from database server.
 <sample>
     <pre lang="c#">
-        // get provider for the connection
-		var cp = cn.Provider();
-
-        var dt = cp.GetServerDateTime();
-
-        Console.WriteLine("DateTime = " + dt);
+        using(var exc = cn.Executer()) 
+            Console.WriteLine("DateTime = " + exc.GetServerDateTime());
     </pre>
     <output>
         DateTime = 12/25/2020 8:09:06 AM

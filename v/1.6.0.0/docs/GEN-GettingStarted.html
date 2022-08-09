@@ -27,7 +27,7 @@ and also to build and run a simple console application using Visual Studio.
         Once the installation process is completed, the OrmDb package will be installed in the project.
     </li>
     <li class="mt-3">
-        Insert the line below for the AspNet.Core development. 
+        Insert the line below for the AspNet.Core development.
         <kbd class="bg-warning text-dark">This script provides for managing the connection pool for the client(s).</kbd>
         <pre lang="markup">
                 &lt;script type="text/javascript" src="https://ormdb.github.io/ormdb/ormdb.min.js" crossorigin="anonymous" async&gt;&lt;/script&gt;
@@ -56,28 +56,32 @@ and also to build and run a simple console application using Visual Studio.
         Test your connection.
         <sample>
             <pre lang="c#">
-                Console.WriteLine("OrmDb v." + Odb.Version.ToString());
-                Console.WriteLine(String.Empty);
+                using(var exc = cn.Executer()) {
+                    Console.WriteLine("OrmDb v." + Odb.Version.ToString());
+                    Console.WriteLine(String.Empty);
 
-                cn.OpenIf();
-                Console.WriteLine("Connection State = " + cn.State.ToString());
-                Console.WriteLine(String.Empty);
+                    cn.OpenIf();
+                    Console.WriteLine("Connection State = " + cn.State.ToString());
+                    Console.WriteLine(String.Empty);
 
-                var cp = cn.Provider();
-                Console.WriteLine("Provider Name = " + cp.FullName);
-                Console.WriteLine("Server DateTime = " + cp.GetServerDateTime());
+                    var cp = cn.Provider();
+                    Console.WriteLine("Provider Name = " + cp.FullName);
+                    Console.WriteLine("Server DateTime = " + cp.GetServerDateTime());
 
-                var si = cp.ServerInfo();
-                Console.WriteLine("Server Name = " + si.Name);
-                Console.WriteLine("Server Version = " + si.Version);
+                    var si = cp.ServerInfo();
+                    Console.WriteLine("Server Name = " + si.Name);
+                    Console.WriteLine("Server Version = " + si.Version);
+                }
             </pre>
             <output>
-                <div>OrmDb v.1.6.3.1</div>
-
-                <div class="mt-3">Connection State = Open</div>
-
-                <div class="mt-3">Provider Name = Odb.Providers.Sqlite</div>
+                <div>OrmDb v.1.6.3.6</div>
+                <br />
+                <div>Provider = Odb.Providers.Sqlite</div>
+                <div>Connector = System.Data.SqlClient.SqlConnection</div>
+                <br />
                 <div>Server DateTime = 10.12.2021 15:10:48</div>
+                <div>Ping = 2.2347ms</div>
+                <br />
                 <div>Server Name = sqlite</div>
                 <div>Server Version = 3.37.0</div>
             </output>
@@ -135,15 +139,17 @@ and also to build and run a simple console application using Visual Studio.
         If you want, tables can be created programmatically by Ormdb.
         You can skip this section if the tables are already exists in database.
         <sample>
-            <pre lang="c#">                
-                var cp = cn.Provider();
+            <pre lang="c#">
+                using(var exc = cn.Executer()) {
 
-                var tables = cp.GetTables();
-                foreach(var tb in new Odb.Table.Base[] {Models.Orders , Models.OrderDetails}){
-                    if (tables.Exists(x => x.Name.ToLower() == tb.GetName().ToLower()))
-                        continue;
+                    var tables = exc.GetTables();
+                    foreach(var tb in new Odb.Table.Base[] {Models.Orders , Models.OrderDetails}){
+                        if (tables.Exists(x => x.Name.ToLower() == tb.GetName().ToLower()))
+                            continue;
 
-                    cp.CreateTable(tb);
+                        exc.CreateTable(tb);
+                    }
+
                 }
             </pre>
             <output>
@@ -187,18 +193,21 @@ and also to build and run a simple console application using Visual Studio.
                     }
                     order_date = order_date.AddDays(1);
                 }
+
                 // ---------------------------------------------
 
+                using(var exc = cn.Executer()) {
 
-                var buff = Odb.SQL.Insert();
-                foreach (var order in Sample_Orders)
-                {
-                    buff.Add(ord);
-                    foreach (var detail in order.Details)
-                        buff.Add(det);
+                    var query = Odb.SQL.Insert();
+                    foreach (var order in Sample_Orders)
+                    {
+                        query.Add(ord);
+                        foreach (var detail in order.Details)
+                            query.Add(det);
+                    }
+
+                    var affected_rows = exc.Sql(query).NonQuery();
                 }
-
-                buff.ExecuteNonQuery(cn);
             </pre>
             <output>
             </output>
@@ -220,10 +229,16 @@ and also to build and run a simple console application using Visual Studio.
     <li class="mt-3">
         Selecting the records.
         <sample>
-            <pre lang="c#">                
-                var query = Odb.SQL.Select(x => x.From(t1));
+            <pre lang="c#">
+                using(var exc = cn.Executer()) {
 
-                var orders = query.ExecuteReader&lt;Orders&gt;(cn);
+                    var query = Odb.SQL.Select(x => x.From(t1));
+                    var compiledQuery = exc.Sql(query);
+
+                    var dt = compiledQuery.Read().ToDataTable();
+                    var orders = compiledQuery.Map&lt;Orders&gt;();
+
+                }
             </pre>
             <output>
             </output>
@@ -232,14 +247,18 @@ and also to build and run a simple console application using Visual Studio.
     <li class="mt-3">
         Updating the records.
         <sample>
-            <pre lang="c#">                
-                var query = Odb.SQL.Update(x =>
-                                  x.From(t1)
-                                   .Where(t1.OrderID == 1000)
-                                   .Set(t1.OrderID.OrderDate, DateTime.Now)
-                            );
+            <pre lang="c#">
+                using(var exc = cn.Executer()) {
 
-                query.ExecuteNonQuery(cn);
+                    var query = Odb.SQL.Update(x =>
+                                      x.From(t1)
+                                       .Where(t1.OrderID == 1000)
+                                       .Set(t1.OrderID.OrderDate, DateTime.Now)
+                                );
+
+                    var affected_rows = exc.Sql(query).NonQuery();
+
+                }
             </pre>
             <output>
             </output>
@@ -248,13 +267,17 @@ and also to build and run a simple console application using Visual Studio.
     <li class="mt-3">
         Deleting the records.
         <sample>
-            <pre lang="c#">                
-                var query = Odb.SQL.Delete(x =>
-                                  x.From(t1)
-                                   .Where(t1.OrderID == 1000)
-                            );
+            <pre lang="c#">
+                using(var exc = cn.Executer()) {
 
-                query.ExecuteNonQuery(cn);
+                    var query = Odb.SQL.Delete(x =>
+                                      x.From(t1)
+                                       .Where(t1.OrderID == 1000)
+                                );
+
+                    var affected_rows = exc.Sql(query).NonQuery();
+
+                }
             </pre>
             <output>
             </output>

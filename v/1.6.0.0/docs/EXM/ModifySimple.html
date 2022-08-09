@@ -1,24 +1,27 @@
 ﻿Following section demonstrates <b>insert/update</b> the record.
-<code-tab>
+<sample>
     <pre lang="c#">
 		// Table Aliases
         var t0 = new Orders().AsQueryable();
 
-        Odb.SQL.Modify&lt;Orders&gt;(x => 
+        var query = Odb.SQL.Modify<exm.Orders>(x =>
                                 x.From(t0)
-                                 .Where(t0.OrderID == 10248)
-        ).onInsert(Row => {
+                                 .Where(t0.OrderID == 10248))
+                    .onInsert(Row => {
                         Row.OrderDate = DateTime.Now;
-                        // ...
-                    }
-        ).onUpdate((Row, OldRow) => {
+                    })
+                    .onUpdate((Row, OldRow) => {
                         Row.OrderDate = OldRow.OrderDate.AddDays(1);
-                        // ...
-                    }
-        ).onAlways((Row, OldRow) => {
+                    })
+                    .onAlways((Row, OldRow) => {
                         var IsUpdate = (OldRow is object);
-                        // ...
-                    }
-        ).ExecuteNonQuery(connection);
+                    });
+
+ 
+        using(var exc = cn.Executer()) 
+            var affected_rows = exc.Sql(query).NonQuery();
     </pre>
-</code-tab>
+	<output>
+	</output>
+    <fiddle>NWyNJm</fiddle>
+</sample>
