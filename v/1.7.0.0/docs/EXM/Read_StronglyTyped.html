@@ -1,0 +1,34 @@
+﻿Following section demonstrates how to read record(s) as <b>StronglyTyped</b>.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+
+		// Query
+        var query = Odb.SQL.Select(x => 
+                            x.From(t0)
+                             .Where( t0.OrderID > 10260 )
+                             .Skip(5).Top(10)
+                             .ExcludeFields(t0.ShipperID)
+                        );
+
+        // Read
+        var result = connection.Sql(query).{{hl}}Map&lt;Orders&gt;(){{/hl}};
+    </pre>
+    <output type="secondary">
+        Server and Db (same machine)<br />
+        <span class="d-block ps-4">
+            Core I7-9750H @2.60GHz, 16GB RAM
+        </span>
+        <span class="d-block ps-4">
+            MsSQL Server 2019 Express
+        </span>
+        <br />
+        Results<br />
+        <span class="d-block ps-4">
+            <b>Record Count = 1.093.000</b><br />
+            <b>Time Elapsed = 1,6356077 seconds</b><br />
+        </span>
+    </output>
+    <fiddle>tkajjg</fiddle>
+</sample>

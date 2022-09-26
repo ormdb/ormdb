@@ -1,0 +1,31 @@
+﻿Following section demonstrates how to execute multiple commands in one batch-query with <b>ExecuteNonQuery</b>.
+<sample>
+	<pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+		var t1 = new Products().AsQueryable();
+		
+		{{hl}}var query = SQL.X.Batch();{{/hl}}
+		
+		// DELETE...
+		query.Delete(t0);
+		
+		// INSERT...
+		var ins = query.Insert();
+			ins.Add&lt;Orders&gt;(null, 90, 8, DateTime.Now, 1);
+			ins.Add&lt;Orders&gt;(null, 91, 8, DateTime.Now, 2);
+
+		// UPDATE...
+		query.Update(x =>
+					x.From(t1)
+						.Where(t1.ProductID == 1)
+						.SetRaw(t1.Price, t1.Price * 10)
+				);
+		
+		// Execution
+		var {{hl}}affected_rows{{/hl}} = connection.Sql(query).{{hl}}NonQuery(){{/hl}};
+    </pre>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>

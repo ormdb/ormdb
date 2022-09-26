@@ -1,0 +1,235 @@
+﻿Define an alias for the models, to use in queries.
+<co type="success">
+    <sample>
+        <pre lang="c#">
+            var t0 = new Orders().AsQueryable();
+		</pre>
+        <output>
+        </output>
+        <fiddle></fiddle>
+    </sample>
+</co>
+<br />
+
+
+"<b>Sql Commands</b>" (such as AS, AVG, DISTINCT etc.) can be used via helper parameter that comes with expression function.
+<co type="success">
+    <sample>
+        <pre lang="c#">
+			Odb.SQL.Select(x => ... x[table-field].SqlCommand ... );
+		</pre>
+        <output>
+        </output>
+        <fiddle></fiddle>
+    </sample>
+</co>
+<br />
+
+
+<st>CONSTANT</st>
+Selects a contant value.
+<sample>
+    <pre lang="c#">
+		Odb.SQL.Select(x =>
+			x.Fields(
+				{{hl}}5.60{{/hl}}, {{hl}}"str1"{{/hl}}, {{hl}}x[5.63].AS("C1"){{/hl}}
+			)
+		);
+	</pre>
+    <output>
+        SELECT <hl>5.60</hl>, <hl>'str1'</hl>, <hl>5.63 AS C1</hl></hl>
+    </output>
+    <fiddle></fiddle>
+</sample>
+
+
+<st>AS</st>
+Renames a column with an alias.
+<sample>
+    <pre lang="c#">
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .Fields(
+				x["X"].{{hl}}AS("C1"){{/hl}}, x[t0.OrderID].{{hl}}AS("OID"){{/hl}}
+			 )
+		);
+	</pre>
+    <output>
+        SELECT 'X' <hl>AS</hl> C1, t0.OrderID <hl>AS</hl> OID<br />
+        FROM [Orders] AS t0
+    </output>
+    <fiddle></fiddle>
+</sample>
+
+
+<st>IN / NOT IN</st>
+<k>IN</k> command allows you to specify multiple values in a <b>WHERE</b> clause.
+<sample>
+    <pre lang="c#">
+		var vals1 = new[] {1, 2};
+		var vals2 = new[] {"A", "B", "C"};
+
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .Where( x[t0.OrderID].{{hl}}IN(vals1){{/hl}} &amp; 
+					 x[t0.EmployeeID].{{hl}}NOT_IN(vals2){{/hl}}
+			)
+		);
+	</pre>
+    <output>
+        SELECT *<br />
+        FROM [Orders] AS t0 <br />
+        WHERE <br />
+        t0.OrderID <hl>IN</hl> (1, 2) AND<br />
+        t0.EmployeeID <hl>NOT IN</hl> ('A', 'B', 'C')
+    </output>
+    <fiddle></fiddle>
+</sample>
+
+
+<st>IS NULL / IS NOT NULL</st>
+<sample>
+    <pre lang="c#">
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .Where( (object)t0.OrderID {{hl}}== DBNull.Value{{/hl}} &amp; 
+					 (object)t0.EmployeeID {{hl}}!= DBNull.Value{{/hl}}
+			)
+		);
+	</pre>
+    <output>
+        SELECT *<br />
+        FROM [Orders] AS t0 <br />
+        WHERE <br />
+        t0.OrderID <hl>IS NULL</hl> AND<br />
+        t0.EmployeeID <hl>IS NOT NULL</hl>
+    </output>
+    <fiddle></fiddle>
+</sample>
+
+
+<st>LIKE</st>
+is used in a WHERE clause to search for a specified pattern in a column.
+<sample>
+    <pre lang="c#">
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .Where( x[t0.Country].{{hl}}STARTS_WITH("A"){{/hl}} | 
+					 x[t0.Country].{{hl}}ENDS_WITH("Z"){{/hl}} | 
+					 x[t0.Country].{{hl}}CONTAINS("M"){{/hl}}
+			 )
+		);
+	</pre>
+    <output>
+        SELECT *<br />
+        FROM [Customers] AS t0 <br />
+        WHERE <br />
+        t0.Country <hl>LIKE</hl> 'A<hl>%</hl>' OR<br />
+        t0.Country <hl>LIKE</hl> '<hl>%</hl>Z' OR<br />
+        t0.Country<hl>LIKE</hl> '<hl>%</hl>M<hl>%</hl>'
+    </output>
+    <fiddle></fiddle>
+</sample>
+
+<st>DISTINCT</st>
+Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
+The <k>DISTINCT</k> statement is used to return only distinct (different) values.
+<sample>
+    <pre lang="c#">
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .Fields(
+				{{hl}}x{{/hl}}[t0.Country].{{hl}}DISTINCT(){{/hl}}.AS("C")
+			)
+		);
+	</pre>
+    <output>
+        SELECT <br />
+        <hl>DISTINCT(th.year)</hl> AS 'C'<br />
+        FROM [Customers] AS t0 <br />
+    </output>
+    <fiddle></fiddle>
+</sample>
+
+
+<st>COALESCE</st>
+Return the first non-null value in a list.
+<sample>
+    <pre lang="c#">
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .Fields( 
+				{{hl}}x{{/hl}}[t0.CustomerName].{{hl}}COALESCE('???'){{/hl}}.AS("C")
+			)
+		);
+	</pre>
+    <output>
+        SELECT <br />
+        <hl>COALESCE(t0.CustomerName, '???')</hl> AS 'C'<br />
+        FROM [Customers] AS t0 <br />
+    </output>
+    <fiddle></fiddle>
+</sample>
+
+
+<st>Aggregate Functions</st>
+<sample>
+    <pre lang="c#">
+		Odb.SQL.Select(x => 
+			x.From(t0)
+			 .{{hl}}GroupBy(t0.Country){{/hl}}
+			 .Fields( th.Country, 
+					  {{hl}}x{{/hl}}[t0.CustomerID].{{hl}}AVG(){{/hl}}.AS("C1"), 
+					  {{hl}}x{{/hl}}[t0.CustomerID].{{hl}}MIN(){{/hl}}.AS("C2"), 
+					  {{hl}}x{{/hl}}[t0.CustomerID].{{hl}}MAX(){{/hl}}.AS("C3"), 
+					  {{hl}}x{{/hl}}[t0.CustomerID].{{hl}}SUM(){{/hl}}.AS("C4")
+			  )
+		);
+	</pre>
+    <output>
+        SELECT t0.Country,
+        <span class="d-block ps-4">
+            <hl>AVG(t0.CustomerID)</hl> AS 'C1',<br />
+            <hl>MIN(t0.CustomerID)</hl> AS 'C2',<br />
+            <hl>MAX(t0.CustomerID)</hl> AS 'C3',<br />
+            <hl>SUM(t0.CustomerID)</hl> AS 'C4'
+        </span>
+        FROM [Customers] AS t0 <br />
+        <hl>GROUP BY t0.Country</hl>
+    </output>
+    <fiddle></fiddle>
+</sample>
+
+
+<st>String Functions</st>
+<sample>
+    <pre lang="c#">
+		Odb.SQL.Select(x =>
+			x.From(t0)
+			 .Fields( {{hl}}x{{/hl}}[t0.City].{{hl}}SUBSTRING(2, 4){{/hl}}.AS("2_to_4"), 
+					  {{hl}}x{{/hl}}[t0.City].{{hl}}SUBSTRING(0, 1){{/hl}}.AS("left_1"), 
+					  {{hl}}x{{/hl}}[t0.City].{{hl}}SUBSTRING(-1, 2){{/hl}}.AS("right_2"), 
+					  {{hl}}x{{/hl}}[t0.City].{{hl}}UPPER(){{/hl}}.AS("C1"), 
+					  {{hl}}x{{/hl}}[t0.City].{{hl}}LOWER(){{/hl}}.AS("C2"), 
+					  {{hl}}x{{/hl}}[t0.City].{{hl}}TRIM(){{/hl}}.AS("C3"), 
+					  {{hl}}x{{/hl}}[t0.City].{{hl}}RTRIM().LTRIM(){{/hl}}.AS("C4"), 
+					  {{hl}}x{{/hl}}[t0.City].{{hl}}CONCAT(", ID=", t0.CustomerID){{/hl}}.AS("C5")
+			  )
+		);
+	</pre>
+    <output>
+        SELECT
+        <span class="d-block ps-4">
+            <hl>SUBSTRING(t0.City)</hl> AS '2_to_4',<br />
+            <hl>LEFT(t0.City, 1)</hl> AS 'left_1',<br />
+            <hl>RIGHT(t0.City, 2)</hl> AS 'right_2',<br />
+            <hl>UPPER(t0.City)</hl> AS 'C1',<br />
+            <hl>LOWER(t0.City)</hl> AS 'C2',<br />
+            <hl>TRIM(t0.City)</hl> AS 'C3',<br />
+            <hl>LTRIM(RTRIM(t0.City))</hl> AS 'C4',<br />
+            <hl>CONCAT(t0.City, ', ID=', t0.CustomerID)</hl> AS 'C5'
+        </span>
+        FROM [Customer] AS t0<br />
+    </output>
+    <fiddle></fiddle>
+</sample>

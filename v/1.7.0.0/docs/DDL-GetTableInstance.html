@@ -1,0 +1,20 @@
+﻿<k>GetTableInstance</k> is used to initialize the instance of <b>[Odb.Table.ITable]</b>, according to table-information in database.
+
+<st>Examples</st>
+
+Following section demonstrates generating the instance of the table.
+<sample>
+	<pre lang="c#">
+        {{hl}}var ddl = connection.DDL();{{/hl}}
+
+		// by table type
+		var tb1 = ddl.{{hl}}GetTableInstance&lt;Orders&gt;(){{/hl}};
+		var tb2 = ddl.{{hl}}GetTableInstance(typeof(Orders)()){{/hl}};
+
+		// by dynamic from database
+		var tb3 = ddl.{{hl}}GetTableInstance("Orders"){{/hl}};
+	</pre>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>

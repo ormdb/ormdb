@@ -1,0 +1,24 @@
+﻿Executes the <k>AnalyzeTable</k> on the database server. This method generates table statistics.
+<co type="warning">
+    This method may needs some privilege according to the database product and its version.
+</co>
+<br />
+
+<st>Examples</st>
+
+Following section demonstrates <k>ANALYZE</k> the table(s).
+<sample>
+    <pre lang="c#">
+        {{hl}}var ddl = connection.DDL();{{/hl}}
+
+		// by table alias
+		var t0 = new Orders().AsQueryable();
+        ddl.{{hl}}AnalyzeTable(t0){{/hl}};
+
+		// by table name
+        ddl.{{hl}}AnalyzeTable("table1"){{/hl}};
+    </pre>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>

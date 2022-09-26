@@ -1,0 +1,31 @@
+﻿Following section demonstrates how to update from [Order] records,
+which contains line that has value of quantity is lower 5 in [OrderDetails].
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+
+		var query = Odb.SQL.Update(x =>
+							x.From(t0) 
+							 {{hl}}.InnerJoin(t1, t1.OrderID == t0.OrderID){{/hl}}
+							 .Where(t1.Quantity < 5)
+							 {{hl}}.Set(t0.EmployeeID, 3){{/hl}}
+					);
+
+		var affected_rows = connection.Sql(query).NonQuery();
+	</pre>
+    <output>
+        <hl>UPDATE</hl> t0<br />
+        <hl>
+            SET t0.EmployeeID=3
+        </hl><br />
+        FROM [Orders] AS t0<br />
+        INNER JOIN [OrderDetails] AS t1<br />
+        <span class="d-block ps-5">
+            ON t1.OrderID = t0.OrderID
+        </span>
+        WHERE t1.Quantity < 5
+    </output>
+    <fiddle>ROYtZL</fiddle>
+</sample>

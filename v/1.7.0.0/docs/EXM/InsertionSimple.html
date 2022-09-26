@@ -1,0 +1,24 @@
+﻿Following section demonstrates insertion by <b>Model</b>.
+<br />
+<co type="warning">
+    In this sample; columns "<k>OrderID</k>" is AutoIncrement field, and "<k>ShipperID</k>" will be accepted as its default values.
+</co>
+<sample>
+    <pre lang="c#">
+		// the new model to be inserted
+        var order = new Orders();
+            // order.OrderID = AutoIncrement;
+            order.CustomerID = 90;
+            order.EmployeeID = 8;
+            order.OrderDate = DateTime.Now;
+            // order.ShipperID <= accepted its DefaultValue;
+		
+         {{hl}}var query = Odb.SQL.Insert();{{/hl}}
+         {{hl}}     query.Add(order);{{/hl}}
+
+		var affected_rows = connection.Sql(query).NonQuery();
+    </pre>
+    <output>
+    </output>
+    <fiddle>XDFx1Y</fiddle>
+</sample>

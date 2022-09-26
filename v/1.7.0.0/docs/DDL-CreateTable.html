@@ -1,0 +1,30 @@
+﻿<k>CreateTable</k> function is used to create a new table in a database.
+<co type="warning">
+    This method may needs some privilege according to the database product and its version.
+</co>
+<br />
+
+<co type="warning">
+    Tables are created according to the <k>SchemaPrefix</k> specified at connection's options.
+    <br />
+    (Exm. Name="table-name" , NameWithPrefix="[pfx]table-name").
+</co>
+
+<st>Examples</st>
+
+Following section demonstrates creating a table.
+<sample>
+    <pre lang="c#">
+        {{hl}}var ddl = connection.DDL();{{/hl}}
+
+		// by table alias
+		var t0 = new Orders().AsQueryable();
+        ddl.{{hl}}CreateTable(t0){{/hl}};
+
+		// by table type
+        ddl.{{hl}}CreateTable&lt;Orders&gt;(){{/hl}};
+    </pre>
+    <output>
+    </output>
+    <fiddle>lYQxL5</fiddle>
+</sample>

@@ -1,0 +1,78 @@
+﻿Following section demonstrates the dynamic creation of the <b>Where</b> clause by <b>depending on conditional</b>.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+		
+		// Query
+		var query = Odb.SQL.Select(x => 
+							x.From(t0)
+						    {{hl}}.Where( t0.OrderID == 123456 ){{/hl}}
+                    );
+
+		// [Where] clause is being extended depending on IF()
+		int _shipper_id = 998877;
+		if ( _shipper_id > 0 )
+			{{hl}}query.Add(x => x.Where(t0.ShipperID == _shipper_id)){{/hl}};
+    </pre>
+    <output>
+        SELECT * <br />
+        FROM [Orders] AS t0 <br />
+        WHERE t0.OrderID = 123456<br />
+        <hlb> AND t0.ShipperID = 998877</hlb>
+    </output>
+    <fiddle>qUsExL</fiddle>
+</sample>
+
+<br />
+
+<st>INLINE CONDITIONAL WHERE</st>
+Following section demonstrates the using of conditional <b>Where</b> clause with <b>external variable(s)</b>.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+
+		// [Where] clause is being executed depending on value test.
+		{{hl}}var typ = "C";{{/hl}}
+		
+		// Query
+        var query = Odb.SQL.Select(x => 
+						x.From(t0)
+							.Where( ({{hl}}typ == "C"{{/hl}} & t0.CustomerID == 11) |
+									({{hl}}typ == "E"{{/hl}} & t0.EmployeeID == 21)
+							)
+				);
+    </pre>
+    <output>
+        <b>Computing</b>
+        <ol class="d-block ps-4">
+            <li class="mt-3">
+                (<kbd class="bg-success">TRUE</kbd> AND t0.CustomerID = 11) OR
+                (<kbd class="bg-danger">FALSE</kbd> AND t0.EmployeeID = 21)
+            </li>
+
+            <li class="mt-3">
+                (<kbd class="bg-success">TRUE</kbd> AND t0.CustomerID = 11) OR <kbd class="bg-danger">FALSE</kbd>
+            </li>
+
+            <li class="mt-3">
+                (<kbd class="bg-success">TRUE</kbd> AND t0.CustomerID = 11)
+            </li>
+
+            <li class="mt-3">
+                <hl>t0.CustomerID = 11</hl>
+            </li>
+        </ol>
+
+        <br />
+        <br />
+        <b>Result</b>
+        <span class="d-block ps-4">
+            SELECT *<br />
+            FROM [Orders] AS t0 <br />
+            WHERE <hlb>(t0.CustomerID = 11)</hlb>
+        </span>
+    </output>
+    <fiddle>qUsExL</fiddle>
+</sample>

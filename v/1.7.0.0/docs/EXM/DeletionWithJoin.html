@@ -1,0 +1,24 @@
+﻿Following section demonstrates how to delete records
+which belongs to customer specified at [Order], from [OrderDetails].
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+
+		var query = Odb.SQL.{{hl}}Delete{{/hl}}(x =>
+							x.From(t1) 
+							{{hl}}.InnerJoin(t0, t0.OrderID == t1.OrderID) {{/hl}}
+							.Where(t0.CustomerID == 90)
+					);
+
+        var affected_rows = connection.Sql(query).NonQuery();
+	</pre>
+    <output>
+        <hl>DELETE t1</hl><br />
+        FROM [OrderDetails] AS t1<br />
+        <hl>INNER JOIN [Orders] AS t0 ON t0.OrderID = t1.OrderID</hl><br />
+        WHERE t0.CustomerID = 90
+    </output>
+    <fiddle>kOZ1kG</fiddle>
+</sample>

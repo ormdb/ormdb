@@ -1,0 +1,25 @@
+﻿Following section demonstrates <b>insert/update</b> the record.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+
+        var query = Odb.SQL.{{hl}}Modify&lt;exm.Orders&gt;{{/hl}}(x =>
+                                x.From(t0)
+                                 .Where(t0.OrderID == 10248))
+                    .onInsert(Row => {
+                        Row.OrderDate = DateTime.Now;
+                    })
+                    .onUpdate((Row, OldRow) => {
+                        Row.OrderDate = OldRow.OrderDate.AddDays(1);
+                    })
+                    .onAlways((Row, OldRow) => {
+                        var IsUpdate = (OldRow is object);
+                    });
+
+		var affected_rows = connection.Sql(query).NonQuery();
+    </pre>
+	<output>
+	</output>
+    <fiddle>NWyNJm</fiddle>
+</sample>

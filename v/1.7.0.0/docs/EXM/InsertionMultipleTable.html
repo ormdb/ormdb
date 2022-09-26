@@ -1,0 +1,26 @@
+﻿Following section demonstrates <b>multiple table insertion</b>.
+<sample>
+    <pre lang="c#">
+		// Header
+		var order = new Orders();
+			order.OrderID = 15;
+			order.CustomerID = 90;
+			order.EmployeeID = 8;
+			order.OrderDate = DateTime.Now;
+			order.ShipperID = 3;
+		query.Add(order);
+		
+        {{hl}}var query = Odb.SQL.Insert();{{/hl}}
+
+		// Details with inline-values
+		{{hl}}query.Add&lt;OrderDetails&gt;(1, order.OrderID, 999, 2.5);{{/hl}}
+		{{hl}}query.Add&lt;OrderDetails&gt;(2, order.OrderID, 888, 1000);{{/hl}}
+		{{hl}}query.Add&lt;OrderDetails&gt;(3, order.OrderID, 777, 3.5);{{/hl}}
+		{{hl}}query.Add&lt;OrderDetails&gt;(4, order.OrderID, 666, 25.83);{{/hl}}
+
+		var affected_rows = connection.Sql(query).NonQuery();
+    </pre>
+    <output>
+    </output>
+	<fiddle>3bU7ak</fiddle>
+</sample>

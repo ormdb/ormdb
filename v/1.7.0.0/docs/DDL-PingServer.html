@@ -1,0 +1,22 @@
+﻿Pings the server to test the network and response speed of database.
+<co type="warning" >
+	This method may needs some privilege according to the database product and its version.
+</co>
+
+
+<st>Examples</st>
+
+Following section demonstrates ping and calculate average time.
+<sample>
+	<pre lang="c#">
+        {{hl}}var ddl = connection.DDL();{{/hl}}
+
+		var ping = ddl.{{hl}}PingServer(){{/hl}};
+
+		Console.WriteLine("Ping = " + ping.TotalMilliseconds.ToString() + "ms.");
+	</pre>
+	<output>
+		Ping = 0ms.
+	</output>
+	<fiddle>jJ0DZ7</fiddle>
+</sample>

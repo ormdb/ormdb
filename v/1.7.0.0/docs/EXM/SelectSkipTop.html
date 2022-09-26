@@ -1,0 +1,22 @@
+﻿Following section demonstrates using <b>SKIP</b> and <b>TOP</b> clause.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+
+		// Query
+        var query = Odb.SQL.Select(x => 
+                        x.From(t0)
+                        {{hl}}.Skip(15).Top(5){{/hl}}
+                    );
+    </pre>
+    <output>
+        SELECT * <br />
+        FROM [Orders] AS t0 <br />
+        <hlb>
+            ORDER BY (SELECT NULL)<br />
+            OFFSET 15 ROWS FETCH NEXT 5 ROWS ONLY
+        </hlb>
+    </output>
+    <fiddle>wnsx9p</fiddle>
+</sample>

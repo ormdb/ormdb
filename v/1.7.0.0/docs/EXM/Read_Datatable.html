@@ -1,0 +1,16 @@
+﻿Following section demonstrates how to read record(s) as <b>Datatable</b>.
+<sample>
+	<pre lang="c#">
+		// Table Aliases
+		var t0 = new exm.Orders().AsQueryable();
+		var t1 = new exm.OrderDetails().AsQueryable();
+
+		// Query
+		var query = Odb.SQL.Select(x => x.From(t0).Top(10) );
+
+        // Read
+		var result = connection.Sql(query).{{hl}}Read().ToDataTable(){{/hl}};
+    </pre>
+    <output type="secondary"></output>
+    <fiddle>HiKlfk</fiddle>
+</sample>

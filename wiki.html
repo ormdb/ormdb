@@ -37,18 +37,31 @@
             color: red;
         }
         /* high-light the code */
-        hl {
+        hl, hl > * {
             background-color: #ffefa3 !important;
             border-radius: 3px;
             padding: 2px;
+            display: inline-block;
         }
 
-        hlb {
+        hlb, hlb > * {
             background-color: #ffefa3 !important;
             border-radius: 3px;
             padding: 2px;
+            display: inline-block;
             color: black !important;
         }
+
+        a {
+            text-decoration: none;
+            color: #0056b3;
+            cursor: pointer;
+        }
+
+            a:hover {
+                text-decoration: underline;
+                color: #0056b3;
+            }
 
         #wiki {
         }
@@ -103,23 +116,23 @@
                     padding: 10px 0 5px 20px;
                     color: rgba(0,0,0,0.7);
                     display: block;
-                    font-weight:500;
+                    font-weight: 500;
                 }
 
                 #wiki > #wiki-menu > #wiki-menu-content a {
                     display: block;
-                    text-decoration: none;
-                    color: #0056b3;
-                    cursor: pointer;
+                    /*text-decoration: none;*/
+                    /*color: #0056b3;*/
+                    /*cursor: pointer;*/
                     padding: 5px 10px 5px 20px;
                     padding: 5px 10px 5px 20px;
                     /*white-space: nowrap;*/
                 }
 
-                    #wiki > #wiki-menu > #wiki-menu-content a:hover {
+            /*                    #wiki > #wiki-menu > #wiki-menu-content a:hover {
                         text-decoration: underline;
                         color: #0056b3;
-                    }
+                    }*/
 
 
             #wiki > #wiki-menu .wiki-menu-active {
@@ -247,19 +260,14 @@
 
             <div id="wiki-mask" class="h-100 w-100 d-flex justify-content-center align-items-center" style="z-index:999;position: absolute;background-color: rgba(0,0,0,0.5);visibility:hidden">
                 <div class="spinner-grow text-primary" role="status">
-                    <span class="sr-only">Loading...</span>
                 </div>
                 <div class="spinner-grow text-success" role="status">
-                    <span class="sr-only">Loading...</span>
                 </div>
                 <div class="spinner-grow text-danger" role="status">
-                    <span class="sr-only">Loading...</span>
                 </div>
                 <div class="spinner-grow text-warning" role="status">
-                    <span class="sr-only">Loading...</span>
                 </div>
                 <div class="spinner-grow text-info" role="status">
-                    <span class="sr-only">Loading...</span>
                 </div>
             </div>
         </div>
@@ -335,7 +343,7 @@
                     var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
 
                     $.ajax({
-                        url: "https://globalcdn.nuget.org/packages/ormdb.1.6.3.1.nupkg",
+                        url: "https://globalcdn.nuget.org/packages/ormdb.1.7.0.0.nupkg",
                         method: "GET", async: true, cache: false,
                         headers: {
                             'X-Forwarded-For': ip/*,
@@ -373,6 +381,9 @@
                     if (_win.focus) { _win.focus(); }
                     return false;
                 }
+            },
+            capitalize: function (s) {
+                return s.toLowerCase().replace(/\b(\w)/g, x => x.toUpperCase())
             }
         };
 
@@ -396,7 +407,7 @@
         var _wiki_lang_button = $(".wiki-lang-button");
         //-------------------------------------------------------------------------------------
         //-- VERSION
-        var _wiki_vers = ["1.6.0.0", "1.5.0.7"];
+        var _wiki_vers = ["1.7.0.0"];
         var wiki_ver = {};
         wiki_ver.number = util.url_queryString("v") || _wiki_vers[0];
         wiki_ver.root_path = "/ormdb/v/" + wiki_ver.number + "/";
@@ -480,7 +491,7 @@
                         var t = _menu_group.items[i].text;
 
                         if (i.startsWith('-')) {
-                            t =  capitalize(t) ;
+                            t =  util.capitalize(t) ;
                         }
 
                         if (_filter) {
@@ -570,30 +581,6 @@
                     _content = util.ajax_get_sync(_menu_group.before, true) + _content + util.ajax_get_sync(_menu_group.after, true)
                 }
 
-                //  var _regex_cod = "/<\s*code(?:\s[^>]*|)>(.*?)<\s*\/\s*code>/gmis";
-                //  var _regex_cod_bgn = "/<\s*code(?:\s[^>]*|)>/gmis";
-                //  var _regex_cod_end = "/<\s*\/\s*code>/gmis";
-                //  var _regex_include = /<\s*include\s*src=".*?"\s\/>/gmis;
-                //
-                //  //--
-                //  //-- Replacing "<" and ">" characters with "&lt;" and "&gt;" .
-                //  //--
-                //
-                //  var _code_blocks = data.match(_regex_cod_bgn);
-                //  var _code_block_inx = -1;
-                //  var _blocks = data.split(_regex_cod);
-                //  data = "";
-                //  _blocks.forEach(function (block, index) {
-                //      if ((index % 2) == 0) {
-                //          data += block;
-                //      } else {
-                //          //-- The CODE block, is taken with its attributes such as  (lang="", data-xyz="" etc.)
-                //          _code_block_inx += 1;
-                //          data += _code_blocks[_code_block_inx] + block.replaceAll(_regex_cod_bgn, "").replaceAll(_regex_cod_end, "").replaceAll("<", "&lt;").replaceAll(">", "&gt;") + "</code>"
-                //      }
-                //  });
-
-
                 _wiki_body_content.html(_content + '<small class="copyright">' + site.copyright + '</small>');
                 _wiki_body_content.scrollTop(0);
                 if (is_small()) closeNav();
@@ -601,6 +588,7 @@
                 load_page_include_sync();
                 load_page_render();
 
+                document.querySelector("#wiki-body").scrollTop = 0;
                 maskHide();
             }, 300)
 
@@ -618,85 +606,81 @@
         }
         //-------------------------------------------------------------------------------------
         //-- Rendering
-        function capitalize(s) {
-            return s.toLowerCase().replace(/\b(\w)/g, x => x.toUpperCase())
-        }
-        function remove_trailing_spaces(s) {
-            // split lines and remove only empty rows from beginning...
-            var lines_orginal = s.split('\n');
-            var lines = new Array();
-            for (var i = 0; i < lines_orginal.length; i++) {
-                var l = lines_orginal[i];
-                if (l.trim().length == 0 && lines.length == 0) continue;
-
-                // replace all tabs at the beginning of the line with four spaces
-                l = l.replace(/\t|(.+)/gs, function (match, p1) {
-                    return p1 ? p1 : '    ';
-                });
-
-                lines.push(l);
-            }
-            if (lines.length == 0) return '';
-
-            // remove only empty rows from end...
-            while (true) {
-                var l = lines.pop();
-                if (l.trim().length > 0) {
-                    lines.push(l)
-                    break;
-                }
-            }
-
-            // find the first non-empty line and use its
-            // leading whitespace as the amount that needs to be removed
-            // using regex get the first capture group
-            var leadingWhiteSpace = lines[0].match(/^([ ]*)/);
-            //var leadingWhiteSpace = lines[0].match(/[\t\s]*/);
-
-            // if the capture group exists, then use that to
-            // replace all subsequent lines.
-            if (leadingWhiteSpace && leadingWhiteSpace[0]) {
-                var whiteSpace = leadingWhiteSpace[0];
-                var exp = new RegExp('^' + whiteSpace + '');
-
-                for (var i = 0; i < lines.length; i++) {
-                    lines[i] = lines[i].replace(exp, '');
-                }
-                // update the inner HTML with the edited code
-                s = lines.join('\n');
-            }
-            return s;
-        }
-
-        function load_page_render() {
-            load_page_render_SAMPLE();
-            load_page_code_render();
-            load_page_render_EW();
-            load_page_render_ST();
-            load_page_render_CO();
-            load_page_goto_fiddle();
-
-            //-- to remove left white-spaces from code block
-            //$("pre code").each(function () {
-            //    this.innerHTML = remove_trailing_spaces(this.innerHTML);
-            //});
-
-
-        }
-        function load_page_goto_fiddle() {
-            var _fiddles = $("#wiki-body fiddle");
-            for (n = 0; n < _fiddles.length; n++) {
-                var _fiddle = $(_fiddles[n]);
-
-                _fiddle.replaceWith('<a href="https://dotnetfiddle.net/' + _fiddle.text() + '" class="btn btn-secondary btn-sm" target="_blank">Try it Yourself</a>');
-            }
-        }
         {
+            function remove_trailing_spaces(s) {
+                // split lines and remove only empty rows from beginning...
+                var lines_orginal = s.split('\n');
+                var lines = new Array();
+                for (var i = 0; i < lines_orginal.length; i++) {
+                    var l = lines_orginal[i];
+                    if (l.trim().length == 0 && lines.length == 0) continue;
+
+                    // replace all tabs at the beginning of the line with four spaces
+                    l = l.replace(/\t|(.+)/gs, function (match, p1) {
+                        return p1 ? p1 : '    ';
+                    });
+
+                    lines.push(l);
+                }
+                if (lines.length == 0) return '';
+
+                // remove only empty rows from end...
+                while (true) {
+                    var l = lines.pop();
+                    if (l.trim().length > 0) {
+                        lines.push(l)
+                        break;
+                    }
+                }
+
+                // find the first non-empty line and use its
+                // leading whitespace as the amount that needs to be removed
+                // using regex get the first capture group
+                var leadingWhiteSpace = lines[0].match(/^([ ]*)/);
+                //var leadingWhiteSpace = lines[0].match(/[\t\s]*/);
+
+                // if the capture group exists, then use that to
+                // replace all subsequent lines.
+                if (leadingWhiteSpace && leadingWhiteSpace[0]) {
+                    var whiteSpace = leadingWhiteSpace[0];
+                    var exp = new RegExp('^' + whiteSpace + '');
+
+                    for (var i = 0; i < lines.length; i++) {
+                        lines[i] = lines[i].replace(exp, '');
+                    }
+                    // update the inner HTML with the edited code
+                    s = lines.join('\n');
+                }
+                return s;
+            }
+
+            function load_page_render() {
+                load_page_render_SAMPLE();
+                load_page_code_render();
+                load_page_render_EW();
+                load_page_render_ST();
+                load_page_render_CO();
+                load_page_goto_fiddle();
+
+                //-- to remove left white-spaces from code block
+                //$("pre code").each(function () {
+                //    this.innerHTML = remove_trailing_spaces(this.innerHTML);
+                //});
+            }
+            function load_page_goto_fiddle() {
+                var _fiddles = $("#wiki-body fiddle");
+                for (n = 0; n < _fiddles.length; n++) {
+                    var _fiddle = $(_fiddles[n]);
+
+                    _fiddle.replaceWith('<a href="https://dotnetfiddle.net/' + _fiddle.text() + '" class="btn btn-secondary btn-sm" target="_blank">Try it Yourself</a>');
+                }
+            }
             function load_page_render_SAMPLE() {
                 var _samples = $("#wiki-body sample");
 
                 for (n = 0; n < _samples.length; n++) {
                     var _sample = $(_samples[n]);
+
                     var _codes = _sample.find("pre");
                     var _code_html = "";
                     for (i = 0; i < _codes.length; n++) {
@@ -719,9 +703,9 @@
                     }
 
                     var _code_panel = '' +
-                        '<div class="' + (_output_html ? "col-md-12 col-lg-8" : "col-12") + ' mb-1">' +
+                        '<div class="sample-code ' + (_output_html ? "col-md-12 col-lg-8" : "col-12") + ' mb-1">' +
                         '    <div class="code-tab border rounded d-flex flex-column h-100">' +
-                        '        <pre lang="c#" style="">' + _code_html + '</pre>' +
+                        '        <pre lang="c#">' + _code_html + '</pre>' +
                         '    </div>' +
                         '</div>'
 
@@ -729,10 +713,19 @@
                     if (_output_html) {
                         var _type = _output.attr("type");
                         if (_type == undefined) _type = "success";
-                        _output_panel = '<div class="col-md-12 col-lg-4 mb-1" style="font-family: consolas"><div class="border-start rounded border-5 border-' + _type + ' h-100"><o class="border rounded h-100">' + _output_html + '</o></div></div>'
+                        _output_panel = '' +
+                            '<div class="sample-output col-md-12 col-lg-4 mb-1" style="font-family: consolas">' +
+                            '   <div class="border-start rounded border-5 border-' + _type + ' h-100">' +
+                            '       <o class="border rounded h-100 text-nowrap overflow-auto">' + _output_html + '</o>' +
+                            '   </div>' +
+                            '</div>'
                     }
 
-                    var html = '<div class="row py-1">' + _code_panel + _output_panel + '</div>' + _fiddle_html;
+                    var html = '' +
+                        '<div class="' + (_output_html ? "sample-splitted" : "") + ' row py-1">' +
+                        _code_panel + _output_panel +
+                        '</div>' +
+                        _fiddle_html;
 
                     _sample.replaceWith(html);
                 }
@@ -757,34 +750,6 @@
 
                 for (n = 0; n < _items.length; n++) {
                     var _item = $(_items[n]);
-                    var _lang = (_item.attr("lang") || "").toLowerCase();
-                    var _lang_obj = null;
-                    var _lang_nam = null;
-                    switch (_lang) {
-                        case "markup":
-                            _lang_obj = Prism.languages.html;
-                            _lang_nam = "markup";
-                            break
-                        case "sql":
-                            _lang_obj = Prism.languages.sql;
-                            _lang_nam = "sql";
-                            break
-                        case "c#":
-                        case "csharp":
-                            _lang_obj = Prism.languages.cs;
-                            _lang_nam = "csharp";
-                            break
-                        case "vb":
-                        case "visualbasic":
-                        case "visual-basic":
-                            _lang_obj = Prism.languages.vb;
-                            _lang_nam = "vb";
-                            break
-                        default:
-                            _lang_obj = Prism.languages.vb;
-                            _lang_nam = "vb";
-                            break
-                    }
 
                     var _attrbs = _items[n].attributes;
                     var _atrb_val = '';
@@ -793,7 +758,16 @@
                     }
 
                     var text = remove_trailing_spaces(_item.text());
-                    _item.replaceWith('<pre ' + _atrb_val + '><code>' + Prism.highlight(text, _lang_obj, _lang_nam) + '</code></pre>');
+                    var rendered_text = Prism.highlight(text, Prism.languages.dotnet, "mycsharp");
+                        rendered_text = rendered_text.replaceAll("{{", "<");
+                        rendered_text = rendered_text.replaceAll("}}", ">");
+
+                    //_item.replaceWith('<pre ' + _atrb_val + '>' + rendered_text + '</pre>');
+                    var html = '' +
+                        '<pre ' + _atrb_val + '>' +
+                        '<code style="white-space: pre !important;">' + rendered_text + '</code>' +
+                        '</pre>';
+                    _item.replaceWith(html);
                 }
             }
             var current_lang = 'c#';

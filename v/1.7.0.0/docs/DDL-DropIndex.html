@@ -1,0 +1,27 @@
+﻿<k>DropIndex</k> is used to drop an existing index of a table in a database.
+<co type="warning">
+	This method may needs some privilege according to the database product and its version.
+</co>
+
+
+<st>Examples</st>
+
+Following section demonstrates <k>DROP-INDEX</k> of the table(s).
+<sample>
+	<pre lang="c#">
+        {{hl}}var ddl = connection.DDL();{{/hl}}
+
+		// by table alias
+		var t0 = new Orders().AsQueryable();
+		ddl.{{hl}}DropIndex(t0, t0.Indexes.First()){{/hl}};
+
+		// by table type
+		ddl.{{hl}}DropIndex&lt;Orders&gt;("index_name"){{/hl}};
+
+		// by table name
+		ddl.{{hl}}DropIndex("table1", "index_name"){{/hl}};
+	</pre>
+	<output>
+	</output>
+	<fiddle>vFa43T</fiddle>
+</sample>

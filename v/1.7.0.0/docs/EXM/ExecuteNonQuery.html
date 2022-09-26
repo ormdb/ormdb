@@ -1,0 +1,16 @@
+﻿Following section demonstrates how to execute the <b>INonQueryable</b> expression.
+<sample>
+	<pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+
+		// Query
+		var query = Odb.SQL.Delete(x => x.From(t0).Where(th.OrderID == 10248) );
+
+		// Execution
+		var {{hl}}affected_rows{{/hl}} = connection.Sql(query).{{hl}}NonQuery(){{/hl}};
+	</pre>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>

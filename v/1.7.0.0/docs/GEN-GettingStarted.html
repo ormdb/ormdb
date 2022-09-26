@@ -1,0 +1,292 @@
+﻿<h5>Getting Started</h5>
+
+This article provides a step-by-step introduction to configure <kbd>OrmDb</kbd> setup,
+and also to build and run a simple console application using Visual Studio.
+
+<st>Creating simple console application</st>
+<ol>
+    <li>
+        Start Visual Studio and create new console application named <kbd class="bg-warning text-dark">MyApp</kbd>
+        <br />
+        <img src="/ormdb/resources/images/getting-startted/001.jpg" class="img-thumbnail" width="500" />
+        <br />
+        <img src="/ormdb/resources/images/getting-startted/002.jpg" class="img-thumbnail" width="500" />
+        <br />
+        <img src="/ormdb/resources/images/getting-startted/003.jpg" class="img-thumbnail" width="500" />
+        <br />
+    </li>
+    <li class="mt-3">
+        Now, install OrmDb NuGet package to the new application using the NuGet Package Manager.
+        <br />
+        <img src="/ormdb/resources/images/getting-startted/004.jpg" class="img-thumbnail" width="500" />
+        <br />
+        Type <kbd class="bg-warning text-dark">Ormdb</kbd> in search and press Enter, then install.
+        <br />
+        <img src="/ormdb/resources/images/getting-startted/005.jpg" class="img-thumbnail" width="500" />
+        <br />
+        Once the installation process is completed, the OrmDb package will be installed in the project.
+    </li>
+    <li class="mt-3">
+        Insert the line below for the AspNet.Core development.
+        <kbd class="bg-warning text-dark">This script injects the license information for the web/ajax requests.</kbd>
+        <pre lang="markup">
+                &lt;script type="text/javascript" src="https://ormdb.github.io/ormdb/ormdb.min.js" crossorigin="anonymous" async&gt;&lt;/script&gt;
+            </pre>
+    </li>
+</ol>
+
+<st>Start Coding</st>
+<ol>
+    <li>
+        Before you start, install the .Net connector for the database which you want to use.
+        Sqlite database is used in this article.
+    </li>
+    <li class="mt-3">
+        Create your connection.
+
+        <sample>
+            <pre lang="c#">
+                var cn = new System.Data.SQLite.SQLiteConnection("Data Source =.\\w3schools.sqlite; Version = 3;");
+            </pre>
+            <output></output>
+        </sample>
+
+    </li>
+    <li class="mt-3">
+        Test your connection.
+        <sample>
+            <pre lang="c#">
+                using( var cn = [YourConnection] )
+                    cn.OpenIf();
+
+                    Console.WriteLine("\tOrmDb v." + Odb.Version.ToString() + "\n");
+                    Console.WriteLine("Connection State = " + cn.State.ToString());
+                    Console.WriteLine(String.Empty);
+
+                    var prv = cn.GetProvider();
+                    Console.WriteLine("\tProvider = " + prv.Name);
+                    Console.WriteLine("\tConnector = " + prv.FullName + "\n");
+
+                    var ddl = cn.DDL();
+                    Console.WriteLine("\tServer DateTime = " + ddl.GetServerDateTime());
+                    Console.WriteLine("\tPing = " + ddl.PingServer().TotalMilliseconds + "ms\n");
+
+                    var si = ddl.ServerInfo();
+                    Console.WriteLine("\tServer Name = " + si.Name);
+                    Console.WriteLine("\tServer Version = " + si.Version);
+                }
+            </pre>
+            <output>
+                <div>
+                    <div>OrmDb v.1.7.0.0</div>
+                    <div>Connection State = Open</div>
+                    <br />
+                    <div>Provider = Odb.Providers.Sqlite</div>
+                    <div>Connector = System.Data.SqlClient.SqlConnection</div>
+                    <br />
+                    <div>Server DateTime = 10.07.2022 14:55:48</div>
+                    <div>Ping = 0.2347ms</div>
+                    <br />
+                    <div>Server Name = sqlite</div>
+                    <div>Server Version = 3.37.0</div>
+                </div>
+            </output>
+            <fiddle>jJ0DZ7</fiddle>
+        </sample>
+    </li>
+</ol>
+
+<st>Start to CRUD Operations</st>
+<ol>
+    <li>
+        Defining Models and Tables. The Models can be used also as table definition directly.
+        <sample>
+            <pre lang="c#">
+                using Odb;
+                using Odb.Table;
+                using System.Linq.Expressions;
+
+                namespace MyApp.Models {
+                    public class Orders : Base
+                    {
+                        [Column()] public int? OrderID { get; set; }
+                        [Column()] public int? CustomerID { get; set; }
+                        [Column()] public int? EmployeeID { get; set; }
+                        [Column()] public DateTime OrderDate { get; set; }
+                        [Column(DefaultValue = 1)] public int? ShipperID { get; set; }
+                        [Column(Length = 255)] public string Note { get; set; }
+
+                        public List&lt;OrderDetails&gt; Details { get; set; }
+
+                        protected override Expression&lt;TableConfig&gt; Config() =>
+                            (x) => x.SetPrimaryKey(OrderID);
+                    }
+
+
+                    public class OrderDetails : Base
+                    {
+                        [Column(AutoIncrement = true)] public int OrderDetailID { get; set; }
+                        [Column()] public int? OrderID { get; set; }
+                        [Column()] public int? ProductID { get; set; }
+                        [Column()] public decimal Quantity { get; set; }
+
+                        protected override Expression&lt;TableConfig&gt; Config() =>
+                             (x) => x.SetPrimaryKey(OrderDetailID);
+                    }
+                }
+            </pre>
+            <output>
+            </output>
+        </sample>
+
+    </li>
+    <li class="mt-3">
+        Create tables on database. The tables should be created before CRUD operations.
+        If you want, tables can be created programmatically by Ormdb.
+        You can skip this section if the tables are already exists in database.
+        <sample>
+            <pre lang="c#">
+                using( var cn = [YourConnection] )
+                {
+                    var prv = cn.GetProvider();
+
+                    var tables = prv.GetTables();
+                    foreach(var tb in new Odb.Table.Base[] {Models.Orders , Models.OrderDetails}){
+                        if (tables.Exists(x => x.Name.ToLower() == tb.GetName().ToLower()))
+                            continue;
+
+                        prv.CreateTable(tb);
+                    }
+                }
+            </pre>
+            <output>
+            </output>
+        </sample>
+    </li>
+    <li class="mt-3">
+        Insertion the records.
+        <sample>
+            <pre lang="c#">
+                // ---------------------------------------------
+                // sample data ,s being generated
+                var Sample_Orders = new List&lt;Models.Orders&gt;();
+
+                var id = 0;
+                var order_date = new DateTime(2000, 06, 1);
+                foreach (var customer_id in new[] { 11, 12, 13, 14, 15 })
+                {
+                    foreach (var employee_id in new[] { 21, 22, 23 })
+                    {
+                        foreach (var shipper_id in new[] { 31, 32 })
+                        {
+                            id++;
+
+                            var item = new Models.Orders();
+                            item.OrderID = 1000 + id;
+                            item.CustomerID = customer_id;
+                            item.EmployeeID = employee_id;
+                            item.ShipperID = shipper_id;
+                            item.OrderDate = order_date;
+                            item.Note = "Order Number = " + item.OrderID;
+
+                            item.Details = new List&lt;Models.OrderDetails&gt;();
+                            item.Details.Add(new OrderDetails() { OrderID = item.OrderID, ProductID = 41, Quantity = 10 });
+                            item.Details.Add(new OrderDetails() { OrderID = item.OrderID, ProductID = 42, Quantity = 15 });
+                            item.Details.Add(new OrderDetails() { OrderID = item.OrderID, ProductID = 43, Quantity = 5 });
+                            item.Details.Add(new OrderDetails() { OrderID = item.OrderID, ProductID = 44, Quantity = 30 });
+
+                            Sample_Orders.Add(item);
+                        }
+                    }
+                    order_date = order_date.AddDays(1);
+                }
+
+                // ---------------------------------------------
+
+                using( var cn = [YourConnection] )
+                {
+                    var query = Odb.SQL.Insert();
+                    foreach (var order in Sample_Orders)
+                    {
+                        query.Add(ord);
+                        foreach (var detail in order.Details)
+                            query.Add(det);
+                    }
+
+                    var affectedRows = cn.Sql(query).NonQuery();
+                }
+            </pre>
+            <output>
+            </output>
+        </sample>
+    </li>
+    <li class="mt-3">
+        Table Aliases
+        <sample>
+            <pre lang="c#">                
+                var t1 = new Models.Orders().AsQueryable();
+
+                // If the model will be use twice in a query, then you can define multiple alias for the same model.
+                var t2 = new Models.Orders().AsQueryable();
+            </pre>
+            <output>
+            </output>
+        </sample>
+    </li>
+    <li class="mt-3">
+        Selecting the records.
+        <sample>
+            <pre lang="c#">
+                using( var cn = [YourConnection] )
+                {
+                    var query = Odb.SQL.Select(x => x.From(t1));
+
+                    var result = cn.Sql(query).Read().ToDataTable();
+
+                    // or
+
+                    var result = cn.Sql(query).Map&lt;Orders&gt;();
+                }
+            </pre>
+            <output>
+            </output>
+        </sample>
+    </li>
+    <li class="mt-3">
+        Updating the records.
+        <sample>
+            <pre lang="c#">
+                using( var cn = [YourConnection] )
+                {
+                    var query = Odb.SQL.Update(x =>
+                                      x.From(t1)
+                                       .Where(t1.OrderID == 1000)
+                                       .Set(t1.OrderID.OrderDate, DateTime.Now)
+                                );
+
+                    var affected_rows = cn.Sql(query).NonQuery();
+                }
+            </pre>
+            <output>
+            </output>
+        </sample>
+    </li>
+    <li class="mt-3">
+        Deleting the records.
+        <sample>
+            <pre lang="c#">
+                using( var cn = [YourConnection] )
+                {
+                    var query = Odb.SQL.Delete(x =>
+                                      x.From(t1)
+                                       .Where(t1.OrderID == 1000)
+                                );
+
+                    var affected_rows = cn.Sql(query).NonQuery();
+                }
+            </pre>
+            <output>
+            </output>
+        </sample>
+    </li>
+</ol>

@@ -1,0 +1,129 @@
+﻿{
+  "home": "GEN--GEN-Home",
+  "items": {
+    "GEN": {
+      "title": "Home",
+      "path": "/",
+      "items": {
+        "GEN-Home": "Home",
+        "GEN-ChangeLog": "Change Log",
+        "GEN-GettingStarted": "Getting Started",
+        "GEN-ModelDefinition": "Model Definition",
+        "GEN-DataTypes": "Data Types"
+      }
+    },
+    "RED": {
+      "title": "Read",
+      "path": "/EXM",
+      "before": "Read__before",
+      "after": "Read__after",
+      "items": {
+        "Read_StronglyTyped": "Read StronglyTyped",
+        "Read_StronglyTypedMany": "Read StronglyTyped Many",
+
+        "Read_Anonymmous": "Read Anonymous",
+        "Read_ArrayList": "Read ArrayList",
+        "Read_Datatable": "Read Datatable",
+        "Read_DbCommand": "Read DbCommand"
+      }
+    },
+    "EXC": {
+      "title": "Execute",
+      "path": "/EXM",
+      "before": "Execute__before",
+      "after": "Execute__after",
+      "items": {
+        "ExecuteNonQuery": "Execute",
+        "Execute_Tsql": "Execute (TSql)",
+        "Execute_DbCommand": "Execute (DbCommand)",
+        "ExecuteNonQueryBatch": "Execute Batch",
+        "ExecuteNonQueryAsync": "Execute Async"
+      }
+    },
+    "SEL": {
+      "title": "Select",
+      "path": "/EXM",
+      "before": "Select__before",
+      "after": "Select__after",
+      "items": {
+        "SelectFields": "Select Fields - Exclude",
+        "SelectCondWhere": "Select Where",
+        "SelectOrderBy": "Select OrderBy",
+        "SelectCount": "Select Count",
+        "SelectWithJoin": "Select Join",
+        "SelectSkipTop": "Select Skip/Top",
+        "SelectGroupBy": "Select GroupBy",
+        "SelectUnion": "Select Union",
+        "SelectSubSelect": "Select Sub Select",
+        "SelectOperators": "Select Operators"
+      }
+    },
+    "DEL": {
+      "title": "Delete",
+      "path": "/EXM",
+      "before": "DelInsUpdMdf__before",
+      "after": "DelInsUpdMdf__after",
+      "items": {
+        "DeletionSimple": "Delete Generic",
+        "DeletionWithJoin": "Delete With Join",
+        "DeletionWithChunks": "Delete With Chunks"
+      }
+    },
+    "UPD": {
+      "title": "Update",
+      "path": "/EXM",
+      "before": "DelInsUpdMdf__before",
+      "after": "DelInsUpdMdf__after",
+      "items": {
+        "UpdatingSimple": "Update Generic",
+        "UpdatingWithSet": "Update With Set",
+        "UpdatingWithJoin": "Update With Join"
+      }
+    },
+    "INS": {
+      "title": "Insert",
+      "path": "/EXM",
+      "before": "DelInsUpdMdf__before",
+      "after": "DelInsUpdMdf__after",
+      "items": {
+        "InsertionSimple": "Insert Generic",
+        "InsertionWithValues": "Insert With Value Array",
+        "InsertionMultipleTable": "Insert Multiple",
+        "InsertionInto": "Insert Into",
+        "InsertionFromAnotherDb": "Insert From Another Db"
+      }
+    },
+    "MDF": {
+      "title": "Modify",
+      "path": "/EXM",
+      "before": "DelInsUpdMdf__before",
+      "after": "DelInsUpdMdf__after",
+      "items": {
+        "ModifySimple": "Modify Generic"
+      }
+    },
+    "DDL": {
+      "title": "DDL",
+      "path": "/",
+      "before": "DelInsUpdMdf__before",
+      "after": "DelInsUpdMdf__after",
+      "items": {
+        "DDL-AnalyzeTable": "AnalyzeTable",
+        "DDL-CreateIndex": "CreateIndex",
+        "DDL-CreateTable": "CreateTable",
+        "DDL-DropIndex": "DropIndex",
+        "DDL-DropTable": "DropTable",
+        "DDL-TruncateTable": "Truncate Table",
+        "-DDL_NFO": "Info",
+        "DDL-GetServerInfo": "GetServerInfo",
+        "DDL-GetServerDateTime": "GetServerDateTime",
+        "DDL-GetTableColumns": "GetTableColumns",
+        "DDL-GetTableIndexes": "GetTableIndexes",
+        "DDL-GetTableInstance": "GetTableInstance",
+        "DDL-GetTables": "GetTables",
+        "DDL-PingServer": "PingServer",
+        "DDL-TableExist": "TableExist"
+      }
+    }
+  }
+  }

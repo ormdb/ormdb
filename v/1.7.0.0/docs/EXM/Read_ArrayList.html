@@ -1,0 +1,24 @@
+﻿Following section demonstrates how to read record(s) as <b>ArrayList</b>.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+		var t0 = new exm.Orders().AsQueryable();
+		var t1 = new exm.OrderDetails().AsQueryable();
+
+		// Query
+		var query = Odb.SQL.Select(x => x.From(t0).Top(10) );
+
+        // Read
+		foreach (var row in connection.Sql(query).{{hl}}Read(){{/hl}}) 
+			Console.WriteLine(String.Join(", ", from x in row{{hl}}.ToArray(){{/hl}} select x.ToString() ));
+    </pre>
+    <output type="secondary">
+        10248, 90, 5, 07/04/1996 00:00:00, 3<br/>
+        10249, 81, 6, 07/05/1996 00:00:00, 1<br/>
+        10250, 34, 4, 07/08/1996 00:00:00, 2<br/>
+        10251, 84, 3, 07/08/1996 00:00:00, 1<br/>
+        ...<br />
+        ...
+    </output>
+    <fiddle>Jiderc</fiddle>
+</sample>

@@ -1,15 +1,14 @@
-﻿//var cn = your connection
-
+﻿// Table Aliases
 var t0 = new Orders().AsQueryable();
 var t1 = new OrderDetails().AsQueryable();
-	
-var sql = Odb.SQL.Select(x => 
-					x.From(t0)
-					 .LeftJoin(t1, t1.OrderID == t0.OrderID ) 
-					 .Where( t0.OrderDate > Datetime.Now.AddDays(-5) )
-			);	
 
-// reading data
-var result = sql.ExecuteReader<Orders>(cn);
+using( var cn = [YourConnection] )
+{
+	var query = Odb.SQL.Select(x => 
+						x.From(t0)
+						 .LeftJoin(t1, t1.OrderID == t0.OrderID ) 
+						 .Where( t0.OrderDate > Datetime.Now.AddDays(-5) )
+				);	
 
-
+	var result = cn.Sql(query).Map<Orders>();
+}

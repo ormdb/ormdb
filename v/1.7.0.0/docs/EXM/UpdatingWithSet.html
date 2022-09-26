@@ -1,0 +1,34 @@
+﻿Following section demonstrates to use <b>Set</b> method(s) for setting value(s).
+<br />
+<co type="warning">
+    In this sample; 2 different values are set into column "<k>ProductName</k>". Last value will be accepted for the column.
+</co>
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Products().AsQueryable();
+
+		var query = Odb.SQL.{{hl}}Update{{/hl}}(x =>
+							x.From(t0)
+							 .Where(t0.ProductID == 1)
+							 {{hl}}.Set(t0.ProductName, "New ProductName"){{/hl}}
+							 {{hl}}.SetRaw(t0.Price, t0.Price * 10){{/hl}}
+							 {{hl}}.SetNull(t0.ProductName){{/hl}}
+					);
+
+		var affected_rows = connection.Sql(query).NonQuery();
+    </pre>
+    <output>
+        <hl>UPDATE</hl> t0<br />
+        <hl>
+            SET <br />
+            <span class="d-block ps-4">
+                t0.ProductName = NULL, <br />
+                t0.Price = (t0.Price * 10)
+            </span>
+        </hl><br />
+        FROM [Products] AS t0<br />
+        WHERE (t0.ProductID = 1)
+    </output>
+    <fiddle>fZmCJJ</fiddle>
+</sample>

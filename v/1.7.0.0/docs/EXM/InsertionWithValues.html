@@ -1,0 +1,17 @@
+﻿Following section demonstrates insertion with <b>Value Array</b>.
+<sample>
+    <pre lang="c#">
+        var dt = DateTime.Now;
+
+        {{hl}}var query = Odb.SQL.Insert();{{/hl}}
+
+        // OrderID is not specified because it is an AutoIncrement field.
+		{{hl}}query.Add&lt;Orders&gt;(null, 90, 8, DateTime.Now, 1);{{/hl}}
+		{{hl}}query.Add&lt;Orders&gt;(null, 91, 8, DateTime.Now, 2);{{/hl}}
+
+		var affected_rows = connection.Sql(query).NonQuery();
+    </pre>
+    <output>
+    </output>
+    <fiddle>xTtFhb</fiddle>
+</sample>

@@ -1,0 +1,39 @@
+﻿Following section demonstrates <b>deletion with chunks</b>.
+<sample>
+	<pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+
+		// Ids are being obtained for the records to be deleted...
+		var sql = Odb.SQL.Select(x => x.Fields(x[t0.OrderID]).From(t0).Top(100));
+		var ids = connection.Sql(sql).Map&lt;string&gt;().ToList();
+
+		var tasks = new List&lt;Task&gt;();
+		var index = 0;
+		var chunk_size = 5;
+		int affected_rows = 0;
+
+		while (true)
+		{
+			var items = ids.Skip(index).Take(chunk_size);
+			if (items.Count() == 0) break;
+
+			var task = Task.Run(() => {
+				var query = Odb.SQL.Batch();
+					query.{{hl}}Delete{{/hl}}(x => x.From(t1).Where(x[t1.OrderID].IN(items)));
+					query.{{hl}}Delete{{/hl}}(x => x.From(t0).Where(x[t0.OrderID].IN(items)));
+
+				Interlocked.Add(ref affected_rows, cn.Sql(query).NonQuery());
+			});
+			tasks.Add(task);
+			index += items.Count;
+		}
+
+		Task.WaitAll(tasks.ToArray());
+		Console.WriteLine("\n\n" + affected_rows + " row(s) affected.\n\n");
+    </pre>
+    <output>
+    </output>
+	<fiddle>cTZXMe</fiddle>
+</sample>

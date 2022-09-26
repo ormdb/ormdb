@@ -1,0 +1,19 @@
+﻿Following section demonstrates how to read record(s) by using <b>dynamic sql</b>.
+<sample>
+    <pre lang="c#">
+		// Query
+        var query = " SELECT OrderID, OrderDate " +
+                    " FROM Orders WHERE EmployeeID=@EmployeeID;";
+        var param = new { EmployeeID = 22 };
+
+        // Read directly
+        var result = cn.Sql({{hl}}query, param{{/hl}}).{{hl}}Read(){{/hl}};
+
+        // Read with DbCommand
+        var cmd = cn.CreateCommand(query, param);
+        var result = connection.Sql({{hl}}cmd{{/hl}}).{{hl}}Read(){{/hl}};
+    </pre>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>

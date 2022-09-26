@@ -1,13 +1,13 @@
-﻿//var cn = your connection
+﻿using( var cn = [YourConnection] )
+{
+    var order = new Orders();
+        order.CustomerID = 90;
+        order.EmployeeID = 8;
+        order.OrderDate = DateTime.Now;
+        order.ShipperID = 1;
 
-var sql = Odb.SQL.Insert();
+    var query = Odb.SQL.Insert();
+        query.Add(order);
 
-var model = new Orders();
-    model.CustomerID = 90;
-    model.EmployeeID = 8;
-    model.OrderDate = DateTime.Now;
-    model.ShipperID = 1;
-
-sql.Add(model);
-
-var affectedRows = sql.ExecuteNonQuery(cn);
+	var affectedRows = cn.Sql(query).NonQuery();
+}

@@ -1,0 +1,83 @@
+﻿<co type="warning">
+    to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
+</co>
+<br />
+Following section demonstrates using <b>SUB SELECT</b> clause.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+		
+		// query for the max [OrderDetailId] grouped by [OrderId]
+		var sub_select = Odb.SQL.Select(x =>
+						    x.From(t1)
+						     .GroupBy(t1.OrderID)
+						     .Fields( 
+                                    x[t1.OrderID].AS("Id"), 
+                                    x[t1.OrderDetailID].MAX().AS("LastDetailId")
+                            )
+					    );
+
+		// Query (join [Orders] with [sub query])
+        var query = Odb.SQL.Select(x =>
+				x.From(t0).Top(5)
+				 .LeftJoin( {{hl}}sub_select, sub_select["Id"].ToInteger() == t0.OrderID{{/hl}} )
+				 .Fields( t0.OrderID, sub_select["LastDetailId"] )
+		);
+	</pre>
+    <output>
+        SELECT
+        <span class="d-block ps-4">
+            t2.OrderID,<br />
+            t1.LastDetailId
+        </span>
+        FROM [Orders] AS t2 <br />
+        LEFT JOIN (<br />
+        <span class="d-block ps-4">
+            <hl>
+                SELECT<br />
+                <span class="d-block ps-4">
+                    t0.OrderID AS Id, <br />
+                    MAX(t0.OrderDetailID) AS LastDetailId
+                </span>
+                FROM [OrderDetails] AS t0 <br />
+                GROUP BY t0.OrderID
+            </hl>
+        </span>
+        ) AS t1 ON t1.Id = t2.OrderID <br />
+        ORDER BY (SELECT NULL) <br />
+    </output>
+    <fiddle>QHUpM8</fiddle>
+</sample>
+<br />
+<br />
+
+Following section demonstrates using <b>SUB SELECT</b> in a <b>WHERE</b> block.
+<sample>
+    <pre lang="c#">
+		var sub_select = Odb.SQL.Select(x =>
+						x.From(t1).Fields( x[t1.OrderID].DISTINCT() )
+					);
+
+		Odb.SQL.Select(x => 
+                        x.From(t0)
+                         .Where( {{hl}}x[t0.OrderID].IN(sub_select)){{/hl}} );
+	</pre>
+    <output>
+        SELECT * <br />
+        FROM [Orders] AS t0<br />
+        WHERE t0.OrderID IN (
+        <span class="d-block ps-4">
+            <hl>
+                SELECT
+                <span class="d-block ps-4">
+                    DISTINCT(t1.OrderID)
+                </span>
+                FROM [OrderDetails] AS t1
+            </hl>
+        </span>
+        )
+    </output>
+    <fiddle>QHUpM8</fiddle>
+</sample>

@@ -1,0 +1,33 @@
+﻿<k>DropTable</k> is used to drop an existing table in a database.
+<co type="warning">
+    This method may needs some privilege according to the database product and its version.
+</co>
+
+<st>Examples</st>
+
+Following section demonstrates <k>DROP</k> the table(s).
+<sample>
+    <pre lang="c#">
+        {{hl}}var ddl = connection.DDL();{{/hl}}
+
+		// by table alias
+		var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+
+		ddl.{{hl}}DropTable(t0){{/hl}};   // single
+		ddl.{{hl}}DropTable(new [] {t0, t1}){{/hl}};  // multi
+
+		// by table type
+        ddl.{{hl}}DropTable&lt;Orders&gt;(){{/hl}};
+
+		// by table name
+		ddl.{{hl}}DropTable("table1"){{/hl}};
+	</pre>
+    <output>
+        <i class="text-success">for all databases</i><br />
+        DROP TABLE [Orders]
+        <br />
+        <br />
+    </output>
+    <fiddle>lYQxL5</fiddle>
+</sample>

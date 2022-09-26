@@ -1,12 +1,17 @@
-﻿//var cn = your connection
-
-var t0 = new Orders().AsQueryable();
+﻿var t0 = new Orders().AsQueryable();
 var t1 = new OrderDetails().AsQueryable();
 
-var sql = Odb.SQL.Select(x => 
+// Query
+var query = Odb.SQL.Select(x => 
 					x.From(t0)
 					 .LeftJoin(t1, t1.OrderID == t0.OrderID ) 
 					 .Where( t0.OrderDate > Datetime.Now.AddDays(-5) )
 			);	
 
-var rows = sql.ExecuteReader<Orders>(cn);
+
+// Executions
+CnMySql.Sql(query).Map<Orders>();
+CnMsSql.Sql(query).Map<Orders>();
+CnSQLite.Sql(query).Map<Orders>();
+
+...

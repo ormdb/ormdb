@@ -1,0 +1,38 @@
+﻿Following section demonstrates using <b>JOIN</b> clause.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+		
+		// Query
+        var query = Odb.SQL.Select(x => 
+			            x.From(t0)
+			             .ExcludeFields(t1.OrderID)
+			             {{hl}}.LeftJoin(t1, t1.OrderID == t0.OrderID){{/hl}}
+			             .Where( t0.OrderID > 1500 & 
+                                 ((object)t1.Note != DbNull.Value)
+                         )
+		        );
+    </pre>
+    <output>
+        SELECT
+        <span class="d-block ps-4">
+            t0.*, <br />
+            t1.OrderDetailID, <br />
+            t1.ProductID, <br />
+            t1.Quantity
+        </span>
+        FROM [Orders] AS t0 <br />
+        <hlb>
+            LEFT JOIN [OrderDetails] AS t1 <br />
+            ON (t1.OrderID = t0.OrderID)
+        </hlb> <br />
+        WHERE
+        <span class="d-block ps-4">
+            t0.OrderID > 1500 AND <br />
+            t1.Note IS NOT NULL
+        </span>
+    </output>
+    <fiddle>yC1v0t</fiddle>
+</sample>

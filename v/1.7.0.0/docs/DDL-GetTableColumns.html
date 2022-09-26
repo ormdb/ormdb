@@ -1,0 +1,56 @@
+﻿Obtains [TableColumnSchema-Information] according to provider for specified [Table] via [Database] connected.
+<co type="warning" >
+    This method may needs some privilege according to the database product and its version.
+</co>
+
+
+<st>Return</st>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>SchemaTableColumnInfo</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tr><td>Catalog			</td><td>Table qualifier</td></tr>
+        <tr><td>Schema			</td><td>Name of schema that contains the table.</td></tr>
+        <tr><td>Table			</td><td>Table name.</td></tr>
+        <tr><td>Name			</td><td>Column name.</td></tr>
+        <tr><td>Ordinal			</td><td>Column identification number.</td></tr>
+        <tr><td>Nullable        </td><td>Nullability of the column.</td></tr>
+        <tr><td>DefaultValue    </td><td>Default value of the column.</td></tr>
+        <tr><td>Length          </td><td>Precision of approximate numeric columns. This value is the Maximum length of characters, for types of binary, character, text and image.</td></tr>
+        <tr><td>Scale	        </td><td>Scale of approximate numeric data.</td></tr>
+        <tr><td>IsKey			</td><td>Is Column in primary-key.</td></tr>
+        <tr><td>DataTypeName	</td><td>Database type name of the column.</td></tr>
+        <tr><td>DataType		</td><td>.Net system type of the column.</td></tr>
+        <tr><td>ColumnType	    </td><td>Table definition type of the column.</td></tr>
+    </table>
+</div>
+
+<st>Examples</st>
+
+Following section demonstrates reading the columns a of table <b>by its name</b>.
+<sample>
+    <pre lang="c#">
+        {{hl}}var ddl = connection.DDL();{{/hl}}
+
+		var columns = ddl.{{hl}}GetTableColumns("table_name"){{/hl}};
+    </pre>
+    <output>
+    </output>
+    <fiddle>RLg7Jd</fiddle>
+</sample>
+
+<br />
+
+Following section demonstrates reading the columns of a table <b>by its instance</b>.
+<sample>
+    <pre lang="c#">
+		var columns = (new Orders()).GetTableColumns();
+    </pre>
+    <output>
+    </output>
+    <fiddle>RLg7Jd</fiddle>
+</sample>

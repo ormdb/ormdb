@@ -1,0 +1,31 @@
+﻿Following section demonstrates insertion from <b>Another Database</b>.
+<sample>
+    <pre lang="c#">
+        // Insertions are being executed each 5000 rows.
+        int batch_size = 5000;
+        
+        using(var SourceCn = [Connection]){
+            // source data is being read...
+            var dataRows = SourceCn.Sql("SELECT * FROM table").Read();
+
+            using(var TargetCn = [Connection]){
+
+                {{hl}}var query = Odb.SQL.Insert();{{/hl}}
+                foreach (var dataRow in dataRows)
+                {
+                    {{hl}}query.Add&lt;target_table&gt;(dataRow.ToArray());{{/hl}}
+
+                    if (query.Count >= batch_size) {
+                        {{hl}}TargetCn.Sql(query).NonQuery();{{/hl}}
+                        query.Clear();
+                    }
+                }
+                if (query.Count > 0)
+                    {{hl}}TargetCn.Sql(query).NonQuery();{{/hl}}
+            }
+        }
+    </pre>
+    <output>
+    </output>
+    <fiddle></fiddle>
+</sample>

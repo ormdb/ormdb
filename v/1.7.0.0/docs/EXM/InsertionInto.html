@@ -1,0 +1,32 @@
+﻿Following section demonstrates <b>insert-into with sub-select</b>.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Products().AsQueryable();
+		
+		var query = Odb.SQL.{{hl}}InsertInto{{/hl}}( t0, 
+						x => x.From(t0)
+							  .Where(t0.ProductID == 5)
+							  .Fields(x["new prod"],
+									t0.SupplierID,
+									t0.CategoryID,
+									t0.Unit,
+									t0.Price + 5)
+
+		var affected_rows = connection.Sql(query).NonQuery();
+    </pre>
+    <output>
+        <hl>INSERT INTO</hl> [Shippers]<br />
+        <span class="d-block ps-4">
+            SELECT<br />
+            <span class="d-block ps-4">
+                t0.ShipperID * 10<br />
+                t0.ShipperName<br />
+                t0.Phone
+            </span>
+            FROM [Shippers] AS t0;<br />
+            WHERE (t0.ShipperID = 5);
+        </span>
+    </output>
+    <fiddle>IpWzaZ</fiddle>
+</sample>

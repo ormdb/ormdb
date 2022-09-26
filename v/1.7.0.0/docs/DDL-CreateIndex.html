@@ -1,0 +1,28 @@
+﻿<k>CreateIndex</k> is used to create indexes in tables. Indexes are used to speed up searches/queries.
+<co type="warning">
+	This method may needs some privilege according to the database product and its version.
+</co>
+<br />
+
+<o>
+	<k>PRIMARY KEY</k> cannot be created independent from a table, it can only created during table creation or deletion.
+</o>
+
+<st>Examples</st>
+
+Following section demonstrates how to create index for a table.
+<sample>
+	<pre lang="c#">
+        {{hl}}var ddl = connection.DDL();{{/hl}}
+
+		// by table alias
+		var t0 = new Orders().AsQueryable();
+		ddl.{{hl}}CreateIndex{{/hl}}(t0, t0.Indexes.First(), "my_index");
+
+		// by table name
+		ddl.{{hl}}CreateIndex{{/hl}}("table1", true, new[] { "column1", "column2" }, "my_index");
+	</pre>
+	<output>
+	</output>
+	<fiddle>vFa43T</fiddle>
+</sample>

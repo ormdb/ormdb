@@ -1,0 +1,27 @@
+﻿Following section demonstrates using <b>GROUP BY</b> clause.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+
+		// Query
+        var query = Odb.SQL.Select(x => 
+                        x.From(t0)
+                        {{hl}}.GroupBy(t0.EmployeeID){{/hl}}
+                         .Fields(
+                                t0.EmployeeID, 
+                                 {{hl}}x[t0.OrderID].MAX().AS("LastOrderId"){{/hl}}
+                            )
+                    );
+    </pre>
+    <output>
+        SELECT <br />
+        <span class="d-block ps-5">
+            t0.EmployeeID,<br />
+            <hlb>MAX(t0.OrderID) AS LastOrderId</hlb>
+        </span>
+        FROM [Orders] AS t0 <br />
+        <hlb>GROUP BY t0.EmployeeID</hlb>
+    </output>
+    <fiddle>pWeo94</fiddle>
+</sample>

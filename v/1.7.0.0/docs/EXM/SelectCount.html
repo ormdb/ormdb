@@ -1,0 +1,57 @@
+﻿Following section demonstrates using <b>Count</b> extension, to get count of row(s).
+
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+
+		// Query
+        var query = Odb.SQL.Select(x => x.From(t0));
+
+		// Read
+        var result = cn.{{hl}}Count(query){{/hl}};
+	</pre>
+    <output>
+        SELECT <hl>COUNT(1)</hl> FROM [Orders] AS t0
+    </output>
+    <fiddle>dRfL97</fiddle>
+</sample>
+
+<co type="warning" class="mt-4">
+    <div class="text-danger">Limitations of <b>Count</b> extension.</div>
+    <ol>
+        <li class="mt-3">
+            All selection fields are ignored and only value of the COUNT() is returned.
+        </li>
+
+        <li class="mt-3">
+            All rows are counted regardless the field values.
+        </li>
+
+        <li class="mt-3">
+            Order clause is ingored, because it is not necessary.
+        </li>
+    </ol>
+</co>
+<br />
+<br />
+
+To counting the field values by excluding NULL values, you have to use <b>COUNT</b> with a column.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+
+        using(var exc = cn.Executer()) {
+
+            var query = Odb.SQL.Select(x => x.From(t0).Fields( {{hl}}x[t0.OrderID].COUNT(){{/hl}} ));
+
+            var result = (int?)(cn.Sql(query).Read().FirstOrDefault()?[0]) ?? 0;
+
+        }
+	</pre>
+    <output>
+        SELECT <hl>COUNT(t0.OrderID)</hl> FROM [Orders] AS t0
+    </output>
+    <fiddle>dRfL97</fiddle>
+</sample>

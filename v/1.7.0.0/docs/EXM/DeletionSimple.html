@@ -1,0 +1,25 @@
+﻿Following section demonstrates <b>simple deletion</b>.
+Following section demonstrates <b>deletion with chunks</b>.
+<sample>
+	<pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+		
+		var query = Odb.SQL.Query();
+			query.{{hl}}Delete{{/hl}}(x => x.From(t0).Where( t0.OrderID == 10248 ));
+			query.{{hl}}Delete{{/hl}}(x => x.From(t1).Where( t1.OrderID == 10248 ));
+
+		var affected_rows = connection.Sql(query).NonQuery();
+	</pre>
+	<output>
+		<hl>DELETE</hl> t0<br />
+		FROM [OrderDetails] AS t0<br />
+		WHERE t0.OrderID = 10248<br />
+		<br />
+		<hl>DELETE</hl> t1<br />
+		FROM [Orders] AS t1<br />
+		WHERE t1.OrderID = 10248<br />
+	</output>
+	<fiddle>F0CKaa</fiddle>
+</sample>

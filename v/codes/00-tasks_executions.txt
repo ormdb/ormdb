@@ -1,0 +1,21 @@
+﻿// Table Aliases
+var t0 = new Orders().AsQueryable();
+var t1 = new OrderDetails().AsQueryable();
+
+var tasks = new List<Task>();
+
+	task.Add( Task.Run(()=>{
+		var query =  Odb.SQL.Delete(x => x.From(t0).Where(t0.OrderID == 10001));
+
+		using( var cn = [YourConnection] )
+			cn.Sql(query).NonQuery();
+	}) );
+
+	task.Add( Task.Run(()=>{
+		var query =  Odb.SQL.Delete(x => x.From(t1).Where(t1.OrderID == 20001));
+			
+		using( var cn = [YourConnection] )
+			cn.Sql(query).NonQuery();
+	}) );
+
+Task.WaitAll(tasks.ToArray());

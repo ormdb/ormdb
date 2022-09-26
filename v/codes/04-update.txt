@@ -1,15 +1,15 @@
-﻿//var cn = your connection
-
+﻿// Table Aliases
 var t0 = new Orders().AsQueryable();
 
-var sql = Odb.SQL.Update(x =>
-				x.From(t0)
-				 .Where(t0.ProductID == 1)
-				 .Set(t0.ProductName, "New ProductName")
-				 .SetRaw(t0.Price, t0.Price * 10)
-				 .SetNull(t0.ProductName)
-			);
+using( var cn = [YourConnection] )
+{
+	var query = Odb.SQL.Update(x =>
+					x.From(t0)
+					 .Where(t0.ProductID == 1)
+					 .Set(t0.ProductName, "New ProductName")
+					 .SetRaw(t0.Price, t0.Price * 10)
+					 .SetNull(t0.ProductName)
+				);
 
-var affectedRows = sql.ExecuteNonQuery(cn);
-
-
+	var affectedRows = cn.Sql(query).NonQuery();
+}

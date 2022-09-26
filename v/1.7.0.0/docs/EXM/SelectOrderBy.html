@@ -1,0 +1,25 @@
+﻿Following section demonstrates how to sort the data returned in ascending/descending order.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+		
+		// Query
+        var query = Odb.SQL.Select(x => 
+                        x.From(t0)
+                        .Top(15)
+                        {{hl}}.OrderASC(t0.OrderID){{/hl}}
+                        {{hl}}.OrderDESC(t0.OrderDate){{/hl}}
+					);
+    </pre>
+    <output>
+        SELECT * <br />
+        FROM [Orders] AS t0 <br />
+        <hlb>
+        ORDER BY t0.OrderID ASC,<br />
+                 t0.OrderDate DESC
+        </hlb><br />
+        OFFSET 0 ROWS FETCH NEXT 15 ROWS ONLY
+    </output>
+    <fiddle>ou6uzm</fiddle>
+</sample>

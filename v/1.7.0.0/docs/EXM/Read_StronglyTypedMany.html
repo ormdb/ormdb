@@ -1,0 +1,33 @@
+﻿Following section demonstrates how to read record(s) as <b>StronglyTyped (One2Many)</b>.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+
+		// Query
+		var query = Odb.SQL.Select(x => 
+						    x.From(t0)
+						     .LeftJoin(t1, t1.OrderID == t0.OrderID)
+						     .Top(10)
+					    );
+		
+        // Read
+		var result = connection.Sql(query).{{hl}}MapMany&lt;Orders, OrderDetails&gt;{{/hl}}(
+                        // GroupBy => New row is returned since these key values are changed.
+                        {{hl}}(Order){{/hl}} => new[] { Order.OrderID.ToString() },
+
+                        // Combine
+                        {{hl}}(Order, OrderDetail){{/hl}} =>
+                        {
+                            if (Order.Details == null) Order.Details = new();
+                            Order.Details.Add( OrderDetail );
+                        },
+
+                        // Split => Start points of generic parameters except first. (.. T2...T3...Tn)
+                        {{hl}}new[] { "OrderDetailID" }{{/hl}}
+					);
+    </pre>
+	<output type="secondary"></output>
+	<fiddle>zejRst</fiddle>
+</sample>

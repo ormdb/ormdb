@@ -1,0 +1,19 @@
+﻿Following section demonstrates how to execute the <b>DbCommand</b>.
+<sample>
+    <pre lang="c#">
+		// Query
+        var query = "DELETE FROM table WHERE field1<>@p1 AND field2=@p2";
+        var param = new { p1 = 0, p2 = "X"};
+
+        // Execution directly
+        var affected_rows = cn.Sql({{hl}}query, param{{/hl}}).{{hl}}NonQuery(){{/hl}};
+
+        // Execution with DbCommand
+        var cmd = cn.CreateCommand(query, param);
+        var affected_rows = connection.Sql({{hl}}cmd{{/hl}}).{{hl}}NonQuery(){{/hl}};
+
+	</pre>
+	<output>
+	</output>
+	<fiddle></fiddle>
+</sample>

@@ -1,0 +1,66 @@
+﻿<co type="warning">
+    to use the result column(s) of sub-select in another query expression; <b>name</b> or <b>index</b> can be specified.
+</co>
+<br />
+Following section demonstrates using <b>UNION</b> clause.
+<sample>
+    <pre lang="c#">
+		// Table Aliases
+        var t0 = new Orders().AsQueryable();
+        var t1 = new OrderDetails().AsQueryable();
+		
+		var sql1 = Odb.SQL.Select(x =>
+						x.From(t0)
+							.GroupBy(t0.EmployeeID)
+							.Fields(x["T1"].AS("Type"), 
+									x[t0.EmployeeID].AS("Id"), 
+									x[t0.OrderID].MAX().AS("OrderID"))
+					);
+		var sql2 = Odb.SQL.Select(x =>
+						x.From(t1)
+						.GroupBy(t1.ProductID)
+						.Fields(x["T2"].AS("Type"), 
+								x[t1.ProductID].AS("Id"), 
+								x[t1.OrderID].MAX().AS("OrderID"))
+					);
+		
+		// Query
+        var query = Odb.SQL.{{hl}}Union{{/hl}}(x =>
+						{{hl}}x.RemoveDuplicates(){{/hl}}
+						{{hl}} .Add(sql1){{/hl}}
+						{{hl}} .Add(sql2){{/hl}}
+							.Top(5)
+							.OrderASC(sql1[0]).OrderASC(sql1[1]).OrderDESC(sql1["OrderID"])
+					);
+    </pre>
+    <output>
+        <hl>SELECT * FROM (</hl><br />
+        <span class="d-block ps-4">
+            SELECT<br />
+            <span class="d-block ps-4">
+                'T0' AS Type, <br />
+                t0.EmployeeID AS Id, <br />
+                MAX(t0.OrderID) AS OrderID
+            </span>
+            FROM [Orders] AS t0 <br />
+            GROUP BY t0.EmployeeID
+        </span>
+        <hlb>UNION</hlb><br />
+        <span class="d-block ps-4">
+            SELECT<br />
+            <span class="d-block ps-4">
+                'T1' AS Type,<br />
+                t1.ProductID AS Id,<br />
+                MAX(t1.OrderID) AS OrderID <br />
+            </span>
+            FROM [OrderDetails] AS t1<br />
+            GROUP BY t1.ProductID
+        </span>
+        <hl>
+            ) AS t<br />
+            ORDER BY Type ASC, Id ASC, OrderID DESC<br />
+            OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY
+        </hl>
+    </output>
+    <fiddle>R4nvtn</fiddle>
+</sample>

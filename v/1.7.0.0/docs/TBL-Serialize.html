@@ -1,0 +1,36 @@
+﻿All tables can be serialized and deserialized as shown below.
+
+
+
+<st>Examples</st>
+
+<code-tab>
+	<pre lang="c#">
+		// instance(s) created from definition(s)
+		//
+		// See [GetTableInstance] for more example about instance creation.
+		//
+		var t1 = new TableHeader();
+		
+
+		// Serialization
+		string serialize_data = Table.Base.Serialize(t1);
+		
+		// Deserialization
+		var new_instance = Table.Base.Deserialize(serialize_data);
+	</pre>
+	<pre lang="vb">
+		' instance(s) created from definition(s)
+		'
+		' See [GetTableInstance] for more example about instance creation.
+		'
+		Dim t1 = new TableHeader()
+
+		
+		' Serialization
+		Dim serialize_data = Table.Base.Serialize(t1)
+		
+		' Deserialization
+		Dim new_instance = Table.Base.Deserialize(serialize_data)
+	</pre>
+</code-tab>
